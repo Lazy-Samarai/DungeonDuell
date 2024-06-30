@@ -46,7 +46,7 @@ namespace dungeonduell
 
         private void GenerateRooms(List<RoomInfo> RoomsInfos)
         {
-            
+
             float xpos = 0;
             foreach (RoomInfo roomInfo in RoomsInfos) // spawing all rooms in 
             {
@@ -63,7 +63,7 @@ namespace dungeonduell
                 // it is relvant where the rooms actaully are as long the conncection are right
 
             }
-            foreach(RoomInfo roomInfo in RoomsInfos)
+            foreach (RoomInfo roomInfo in RoomsInfos)
             {
                 DoorConnectHandler RoomsConnectHandler = GetByIdDoorHandl(roomInfo.RoomID);
                 print(roomInfo.RoomID);
@@ -76,17 +76,30 @@ namespace dungeonduell
                         Tuple<DoorConnectHandler, ConnectionDir> doorInfo =
                             new Tuple<DoorConnectHandler, ConnectionDir>(doorTargetConnectHandler, roomConnection.connectionDir);
 
-                        print("for Room " + roomInfo.RoomID+ "Conncect to " + roomConnection.targetRoomId);
+                        print("for Room " + roomInfo.RoomID + "Conncect to " + roomConnection.targetRoomId);
 
                         RoomsConnectHandler.SetDoorConnectFull(doorInfo);
 
 
                     }
                 }
-                
-            }
 
+            }
+            DeativateUnsedDoors();
+            transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+            // for some Reason an Room already in the scene as to be used as Prefab otherwiese
+            // the virtual cam get scuffed
+            // part of the InilizeRoom are deactivate here
         }
+
+        private void DeativateUnsedDoors()
+        {
+            foreach (DoorConnectHandler handler in DoorCollect)
+            {
+                handler.DeactivateUnusedDoor();
+            }
+        }
+
         public DoorConnectHandler GetByIdDoorHandl(int id)
         {
             foreach(DoorConnectHandler doorConnect in DoorCollect)

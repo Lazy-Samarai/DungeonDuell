@@ -9,18 +9,15 @@ namespace dungeonduell
     {
         public int myId { get; set; }
         public GameObject Doors;
+        public HashSet<ConnectionDir> usedDoors = new HashSet<ConnectionDir>();
         
         public void SetDoorConnectFull(Tuple<DoorConnectHandler, ConnectionDir> roomConnection)
         {
             // To target
             SetDoorConncectSingle(roomConnection);
-            
-            
+            // From Target 
             Tuple<DoorConnectHandler, ConnectionDir> ConncectionFromTarget =
             new Tuple<DoorConnectHandler, ConnectionDir>(this, roomConnection.Item2.GetInvert());
-
-
-            // From Target 
             roomConnection.Item1.SetDoorConncectSingle(ConncectionFromTarget);
 
         }
@@ -36,6 +33,21 @@ namespace dungeonduell
 
             int targetDoorIndex = (int)((roomConnection.Item2).GetInvert());
             teleport.Destination = doorsTarget.Doors.transform.GetChild(targetDoorIndex).GetComponentInChildren<MoreMountains.TopDownEngine.Teleporter>();
+            usedDoors.Add(roomConnection.Item2);
         }
+        public void DeactivateUnusedDoor()
+        {
+            foreach(ConnectionDir door in ConnectionDir.GetValues(typeof(ConnectionDir)))
+            {
+                if (!usedDoors.Contains(door))
+                {
+                    Doors.transform.GetChild((int)door).gameObject.SetActive(false);
+                }
+                
+            }
+           
+        }
+
+
     }
 }
