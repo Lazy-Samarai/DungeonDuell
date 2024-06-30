@@ -87,6 +87,7 @@ namespace dungeonduell
             }
             DeativateUnsedDoors();
             transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+            transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
             // for some Reason an Room already in the scene as to be used as Prefab otherwiese
             // the virtual cam get scuffed
             // part of the InilizeRoom are deactivate here
