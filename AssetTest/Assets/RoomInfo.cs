@@ -7,10 +7,10 @@ public class RoomInfo {
     public int RoomID { get; set; }
     public List<RoomConnection> Conncection { get; set; }
     
-    public RoomInfo(int id, List<RoomConnection> Conncection)
+    public RoomInfo(int id, List<RoomConnection> newConncection)
     {
         RoomID = id;
-        Conncection = new List<RoomConnection>();
+        Conncection = newConncection;
     }
 
 }
@@ -26,14 +26,21 @@ public class RoomConnection
 
     }
 }
-public enum ConnectionDir // structed llike this so the list can be inverted and you have the other dir of a door  (top right conncet botton left of the conncected hexagon)
+public enum ConnectionDir // structed llike this so the list can be inverted and you have the other dir of a door  (top right conncet botton left of the  hexagon)
 {
     TopLeft,      // rev bottonright
     TopRight,     // rev bottonleft
     Left,         // rev right
     Right,        // rev left
     BottonLeft,   // rev TopRight
-    BottonRight,  // rev TopLeft
-
-
+    BottonRight // rev TopLeft
+}
+static class ConnectionDirExtension
+{
+    public static ConnectionDir GetInvert(this ConnectionDir s1)
+    {
+        ConnectionDir[] values = (ConnectionDir[])ConnectionDir.GetValues(typeof(ConnectionDir));
+        int invertedIndex = values.Length - 1 - (int)s1;
+        return values[invertedIndex];
+    }
 }
