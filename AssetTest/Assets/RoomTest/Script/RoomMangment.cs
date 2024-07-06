@@ -13,6 +13,9 @@ namespace dungeonduell
         void Start()
         {
             // Conncection will always be two sided, 
+            RoomsInfos = FindAnyObjectByType<ConnectionsCollector>().GetRoomList();
+
+            /*
             RoomsInfos.Add(
                 new RoomInfo(0,
                 new List<RoomConnection>
@@ -38,6 +41,8 @@ namespace dungeonduell
                 new RoomInfo(5,
                 new List<RoomConnection>
                 { new RoomConnection(1, ConnectionDir.Left)}));
+
+            */
 
 
             // Generate
