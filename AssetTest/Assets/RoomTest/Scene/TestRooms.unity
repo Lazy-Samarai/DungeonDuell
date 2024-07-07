@@ -432,6 +432,31 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 893691973}
+    - target: {fileID: 2691820628828861127, guid: e9162be97d2325a4793447b946749587,
+        type: 3}
+      propertyPath: TriggerFade
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2691820628828861127, guid: e9162be97d2325a4793447b946749587,
+        type: 3}
+      propertyPath: ShouldUpdateState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2691820628828861127, guid: e9162be97d2325a4793447b946749587,
+        type: 3}
+      propertyPath: FadeIgnoresTimescale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2691820628828861127, guid: e9162be97d2325a4793447b946749587,
+        type: 3}
+      propertyPath: MaintainZEntryPositionOnExit
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2691820628828861127, guid: e9162be97d2325a4793447b946749587,
+        type: 3}
+      propertyPath: RequiresButtonActivationAbility
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3538675380022621002, guid: e9162be97d2325a4793447b946749587,
         type: 3}
       propertyPath: m_LocalPosition.x

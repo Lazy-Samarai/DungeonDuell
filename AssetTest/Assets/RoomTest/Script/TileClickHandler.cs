@@ -86,7 +86,7 @@ namespace dungeonduell
             }
         }
 
-        public void CreateRoom(Vector3Int clickedTile)
+        private void CreateRoom(Vector3Int clickedTile)
         {
             Vector3Int[] aroundpos = new Vector3Int[6];
 
@@ -113,6 +113,10 @@ namespace dungeonduell
 
             connectCollector.AddRoom(clickedTile, Conncection);
 
+        }
+        public void ChangeSetTile(TileBase newTile)
+        {
+            setTile = newTile;
         }
     }
 }
