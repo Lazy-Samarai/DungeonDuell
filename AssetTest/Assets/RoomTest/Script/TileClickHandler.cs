@@ -11,10 +11,10 @@ namespace dungeonduell
         public Camera cam;
 
         public Tilemap tilemap; 
-        public TileBase setTile;
+        public Card currentCard;
         public TileBase resetTile;
 
-        public TileBase[] worldTiles;
+        public Card[] worldCard;
 
         public ConnectionsCollector connectCollector;
 
@@ -48,10 +48,10 @@ namespace dungeonduell
             
             foreach (Transform transform in StartTiles.transform.GetChild(0).GetComponentInChildren<Transform>())
             {
-                SpawnTile(transform.position, worldTiles[0]);
+                SpawnTile(transform.position, worldCard[0]);
             }
 
-            SpawnTile(StartTiles.transform.GetChild(1).GetChild(0).transform.position, worldTiles[1]);
+            SpawnTile(StartTiles.transform.GetChild(1).GetChild(0).transform.position, worldCard[1]);
             
         }
 
@@ -61,12 +61,12 @@ namespace dungeonduell
             {
 
                 Vector3 mouseWorldPos = cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -cam.transform.position.z));
-                SpawnTile(mouseWorldPos, setTile);
+                SpawnTile(mouseWorldPos, currentCard);
 
             }
         }
 
-        private void SpawnTile(Vector3 mouseWorldPos, TileBase tileToSet)
+        private void SpawnTile(Vector3 mouseWorldPos, Card card)
         {
             Vector3Int cellPosition = tilemap.WorldToCell(new Vector3(mouseWorldPos.x, mouseWorldPos.y, cam.transform.position.z));
 
@@ -75,8 +75,8 @@ namespace dungeonduell
             if (clickedTile == resetTile)
             {
                 Debug.Log("Tile clicked at position: " + cellPosition);
-                tilemap.SetTile(cellPosition, tileToSet);
-                CreateRoom(cellPosition);
+                tilemap.SetTile(cellPosition, card.Tile);
+                CreateRoom(cellPosition, card.roomtype);
 
 
             }
@@ -86,7 +86,7 @@ namespace dungeonduell
             }
         }
 
-        private void CreateRoom(Vector3Int clickedTile)
+        private void CreateRoom(Vector3Int clickedTile,RoomType type)
         {
             Vector3Int[] aroundpos = new Vector3Int[6];
 
@@ -111,12 +111,12 @@ namespace dungeonduell
                
             }
 
-            connectCollector.AddRoom(clickedTile, Conncection);
+            connectCollector.AddRoom(clickedTile, Conncection, type);
 
         }
-        public void ChangeSetTile(TileBase newTile)
+        public void ChangeCard(Card newTile)
         {
-            setTile = newTile;
+            currentCard = newTile;
         }
     }
 }

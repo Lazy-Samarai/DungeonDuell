@@ -6,11 +6,19 @@ public class RoomInfo {
 
     public int RoomID { get; set; }
     public List<RoomConnection> Conncection { get; set; }
-    
+
+    public RoomType roomtype = RoomType.Generic;
+
     public RoomInfo(int id, List<RoomConnection> newConncection)
     {
         RoomID = id;
         Conncection = newConncection;
+    }
+    public RoomInfo(int id, List<RoomConnection> newConncection, RoomType newRoomtype)
+    {
+        RoomID = id;
+        Conncection = newConncection;
+        roomtype = newRoomtype;
     }
 
 }
@@ -43,4 +51,13 @@ static class ConnectionDirExtension
         int invertedIndex = values.Length - 1 - (int)s1;
         return values[invertedIndex];
     }
+}
+public enum RoomType
+{
+    Generic,
+    CenterLoot,
+    NormalLott,
+    Enemy,
+    Spawn
+
 }

@@ -58,11 +58,13 @@ namespace dungeonduell
                 GameObject Nextroom = Instantiate(roomprefab, transform);
                 Nextroom.transform.localPosition = new Vector3(xpos, 0, 0);
 
+                Nextroom.GetComponentInChildren<InteriorSpawner>().SpawnInterior(roomInfo.roomtype);
+
                 DoorConnectHandler roomdoorHandler = Nextroom.GetComponent<DoorConnectHandler>();
                 roomdoorHandler.myId = roomInfo.RoomID;
                 DoorCollect.Add(roomdoorHandler);
 
-
+                
                 xpos = xpos + 20; // prevent room overlap,
                 // as only the current room can be ssen to player
                 // it is relvant where the rooms actaully are as long the conncection are right
