@@ -16,7 +16,10 @@ namespace dungeonduell
         [SerializeField] float stepCross;
         [SerializeField] float stepUpDown;
 
-        void Start()
+        [SerializeField] Transform spawnPoint_Player1;
+        [SerializeField] Transform spawnPoint_Player2; // Empty Until Mutiplayer is implented 
+
+        void Awake()
         {
             // Conncection will always be two sided, 
             RoomsInfos = FindAnyObjectByType<ConnectionsCollector>().GetRoomList();
@@ -59,7 +62,6 @@ namespace dungeonduell
         private void GenerateRooms(List<RoomInfo> RoomsInfos)
         {
 
-            float xpos = 0;
             foreach (Tuple<Vector3Int, RoomInfo> roomInfo in RoomsInfosWithPos) // spawing all rooms in 
             {
                 GameObject Nextroom = Instantiate(roomprefab, transform);
@@ -76,10 +78,11 @@ namespace dungeonduell
                 roomdoorHandler.myId = roomInfo.Item2.RoomID;
                 DoorCollect.Add(roomdoorHandler);
 
-                
-                xpos = xpos + 20; // prevent room overlap,
-                // as only the current room can be ssen to player
-                // it is relvant where the rooms actaully are as long the conncection are right
+                if(roomInfo.Item2.roomtype == RoomType.Spawn_Player1)
+                {
+                    // Some Player Check required later for Mutiplayer here 
+                    spawnPoint_Player1.transform.position = new Vector3(posX, posY, 0);
+                }
 
             }
             foreach (RoomInfo roomInfo in RoomsInfos)

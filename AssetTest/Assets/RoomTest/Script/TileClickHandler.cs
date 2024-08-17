@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using System;
+using System.Linq;
 
 namespace dungeonduell
 {
@@ -14,7 +15,9 @@ namespace dungeonduell
         public Card currentCard;
         public TileBase resetTile;
 
-        public Card[] worldCard;
+        public Card[] SpawnInfo;
+
+        public Card[] WorldCard;
 
         public ConnectionsCollector connectCollector;
 
@@ -45,14 +48,23 @@ namespace dungeonduell
         };
         private void Start()
         {
-            
-            foreach (Transform transform in StartTiles.transform.GetChild(0).GetComponentInChildren<Transform>())
+
+            Transform[] transformsSpwans = StartTiles.transform.GetChild(0).GetComponentsInChildren<Transform>().Skip(1).ToArray<Transform>(); // jump over parent
+     
+            for (int i = 0; i < transformsSpwans.Length; i++)
             {
-                SpawnTile(transform.position, worldCard[0]);
+                Transform transform = transformsSpwans[i]; 
+                SpawnTile(transform.position, SpawnInfo[i]);
             }
 
-            SpawnTile(StartTiles.transform.GetChild(1).GetChild(0).transform.position, worldCard[1]);
-            
+            Transform[] transformsWorld = StartTiles.transform.GetChild(1).GetComponentsInChildren<Transform>().Skip(1).ToArray<Transform>();
+            for (int i = 0; i < transformsWorld.Length; i++)
+            {
+                print(transformsWorld[i].name);
+                Transform transform = transformsWorld[i];
+                SpawnTile(transform.position, WorldCard[i]);
+            }
+
         }
 
         void Update()

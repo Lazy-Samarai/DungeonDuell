@@ -58,6 +58,7 @@ public enum RoomType
     CenterLoot,
     NormalLott,
     Enemy,
-    Spawn
+    Spawn_Player1,
+    Spawn_Player2
 
 }

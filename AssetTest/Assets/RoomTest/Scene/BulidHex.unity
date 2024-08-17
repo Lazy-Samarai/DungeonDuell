@@ -423,8 +423,10 @@ MonoBehaviour:
   tilemap: {fileID: 1763767974}
   currentCard: {fileID: 11400000, guid: b11375ef6b1171d4d98007cba7983a3a, type: 2}
   resetTile: {fileID: 11400000, guid: fbc5379f7e0fce94d806560aa6bfa827, type: 2}
-  worldCard:
+  SpawnInfo:
   - {fileID: 11400000, guid: 1cf934f802100af4782165e75dacd883, type: 2}
+  - {fileID: 11400000, guid: 01ca3b43f91b5924e85e2894708130ea, type: 2}
+  WorldCard:
   - {fileID: 11400000, guid: 987aa6efb8569d34fb1b74b7a9ce6372, type: 2}
   connectCollector: {fileID: 1945806930}
   StartTiles: {fileID: 1099633266}
@@ -619,7 +621,7 @@ GameObject:
   m_Component:
   - component: {fileID: 683869574}
   m_Layer: 9
-  m_Name: Spawn
+  m_Name: Spawn_1
   m_TagString: Untagged
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -681,7 +683,7 @@ GameObject:
   m_Component:
   - component: {fileID: 834832718}
   m_Layer: 9
-  m_Name: Spawn
+  m_Name: Spawn_2
   m_TagString: Untagged
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -791,7 +793,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1162489421}
   m_Layer: 0
-  m_Name: Center
+  m_Name: WorldCards
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
