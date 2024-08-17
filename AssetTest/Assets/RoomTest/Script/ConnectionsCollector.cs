@@ -53,10 +53,16 @@ namespace dungeonduell
             List<RoomInfo> RoomsInfos = new List<RoomInfo>();
             foreach (Tuple<Vector3Int, RoomInfo> roomInfo in roomsInfos)
             {
+                print("---ExPos:"+ roomInfo.Item1.ToString());
                 RoomsInfos.Add(roomInfo.Item2);
             }
             return RoomsInfos;
         }
+        public List<Tuple<Vector3Int, RoomInfo>> GetFullRoomList()
+        {
+            return roomsInfos;
+        }
+
         private void Update()
         {
             if (Input.GetMouseButtonDown(1))
