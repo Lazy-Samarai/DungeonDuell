@@ -7,6 +7,8 @@ namespace dungeonduell
 {
     public class DoorConnectHandler : MonoBehaviour
     {
+        // Door as System ist not used anymore (fully concted rooms) but i decied to keep this code until further noticed. To fully get back the system lock what was removed in corresponding commit in RoomMangment. 
+
         public int myId { get; set; }
         public GameObject Doors;
         public HashSet<ConnectionDir> usedDoors = new HashSet<ConnectionDir>();

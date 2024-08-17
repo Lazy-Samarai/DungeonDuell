@@ -85,29 +85,8 @@ namespace dungeonduell
                 }
 
             }
-            foreach (RoomInfo roomInfo in RoomsInfos)
-            {
-                DoorConnectHandler RoomsConnectHandler = GetByIdDoorHandl(roomInfo.RoomID);
-                print(roomInfo.RoomID);
-                foreach (RoomConnection roomConnection in roomInfo.Conncection)
-                {
-                    // refence to Target Room
-                    DoorConnectHandler doorTargetConnectHandler = GetByIdDoorHandl(roomConnection.targetRoomId);
-                    if (doorTargetConnectHandler != null)
-                    {
-                        Tuple<DoorConnectHandler, ConnectionDir> doorInfo =
-                            new Tuple<DoorConnectHandler, ConnectionDir>(doorTargetConnectHandler, roomConnection.connectionDir);
+            
 
-                        print("for Room " + roomInfo.RoomID + "Conncect to " + roomConnection.targetRoomId);
-
-                        RoomsConnectHandler.SetDoorConnectFull(doorInfo);
-
-
-                    }
-                }
-
-            }
-            DeativateUnsedDoors();
             transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
             transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
             // for some Reason an Room already in the scene as to be used as Prefab otherwiese
