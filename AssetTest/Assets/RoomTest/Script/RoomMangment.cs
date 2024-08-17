@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 namespace dungeonduell
 {
@@ -82,6 +83,8 @@ namespace dungeonduell
                 {
                     // Some Player Check required later for Mutiplayer here 
                     spawnPoint_Player1.transform.position = new Vector3(posX, posY, 0);
+                    Nextroom.GetComponentInChildren<CinemachineVirtualCamera>(true).gameObject.SetActive(true);
+
                 }
 
             }
