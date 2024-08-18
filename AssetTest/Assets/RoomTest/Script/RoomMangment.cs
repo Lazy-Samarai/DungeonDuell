@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using System.Linq;
 
 namespace dungeonduell
 {
@@ -26,35 +27,19 @@ namespace dungeonduell
             RoomsInfos = FindAnyObjectByType<ConnectionsCollector>().GetRoomList();
 
             RoomsInfosWithPos = FindAnyObjectByType<ConnectionsCollector>().GetFullRoomList();
-            /*
-            RoomsInfos.Add(
-                new RoomInfo(0,
-                new List<RoomConnection>
-                {new RoomConnection(1, ConnectionDir.TopRight),
-                 new RoomConnection(2, ConnectionDir.Right)}));
-            RoomsInfos.Add(
-                new RoomInfo(1,
-                new List<RoomConnection>
-                {new RoomConnection(3, ConnectionDir.TopLeft)}));
-            RoomsInfos.Add(
-                new RoomInfo(2,
-                new List<RoomConnection>
-                {new RoomConnection(5, ConnectionDir.TopRight) }));
-            RoomsInfos.Add(
-                new RoomInfo(3,
-                new List<RoomConnection>
-                {new RoomConnection(4, ConnectionDir.TopRight) }));
-            RoomsInfos.Add(
-                new RoomInfo(4,
-                new List<RoomConnection>
-                { }));
-            RoomsInfos.Add(
-                new RoomInfo(5,
-                new List<RoomConnection>
-                { new RoomConnection(1, ConnectionDir.Left)}));
+            
+            // Convert Both Side Connect | 
+            foreach (Tuple<Vector3Int, RoomInfo> roomInfo in RoomsInfosWithPos)
+            {
+                foreach (RoomConnection roomConnection in roomInfo.Item2.Conncection)
+                {
+                   RoomsInfosWithPos.FirstOrDefault(obj => obj.Item2.RoomID == roomConnection.targetRoomId)
+                        .Item2.Conncection.Add(
+                       new RoomConnection(roomInfo.Item2.RoomID, roomConnection.connectionDir.GetInvert()));
 
-            */
-
+                    
+                }
+            }
 
             // Generate
             GenerateRooms(RoomsInfos);
@@ -75,6 +60,14 @@ namespace dungeonduell
 
                 Nextroom.GetComponentInChildren<InteriorSpawner>().SpawnInterior(roomInfo.Item2.roomtype);
 
+                RoomPortHandler roomPortHandler = Nextroom.GetComponentInChildren<RoomPortHandler>();
+                
+                foreach (RoomConnection rc in roomInfo.Item2.Conncection)
+                {
+                    roomPortHandler.OpenPort(rc.connectionDir);
+                }
+
+
                 DoorConnectHandler roomdoorHandler = Nextroom.GetComponent<DoorConnectHandler>();
                 roomdoorHandler.myId = roomInfo.Item2.RoomID;
                 DoorCollect.Add(roomdoorHandler);
@@ -88,11 +81,9 @@ namespace dungeonduell
                 }
 
             }
-            
-
-            transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
-            transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
-            // for some Reason an Room already in the scene as to be used as Prefab otherwiese
+            Destroy(transform.GetChild(0).gameObject);
+            // Destroying Prefab in Scene. Prefab in Szene because it caused porblem with virtsula Cam. Curently virtsula Cam are not on by
+            // room to room basis but this will stay like this until a new Cam handling is implented
             // the virtual cam get scuffed
             // part of the InilizeRoom are deactivate here
         }
@@ -116,6 +107,7 @@ namespace dungeonduell
             }
             return null;
         }
+        
 
     }
 }
