@@ -10,11 +10,18 @@ namespace dungeonduell
         [SerializeField] CinemachineVirtualCamera cam;
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            cam.gameObject.SetActive(true);
+            if(collision.tag == "Player")
+            {
+                cam.gameObject.SetActive(true);
+            }
+           
         }
         private void OnTriggerExit2D(Collider2D collision)
         {
-            cam.gameObject.SetActive(false);
+            if (collision.tag == "Player")
+            {
+                cam.gameObject.SetActive(false);
+            }
         }
 
     }
