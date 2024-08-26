@@ -15,6 +15,7 @@ namespace dungeonduell
             {
                 cam.gameObject.SetActive(true);
                 coverCam.SetBool("InRoom", true);
+                cam.Follow = collision.transform;
             }
            
         }
