@@ -15,17 +15,34 @@ namespace dungeonduell
     
         public void OpenPort(ConnectionDir dir)
         {
-            foreach (Transform pos in GetRemovePostions(dir))
+            GameObject port = GetPort(dir);
+
+            foreach (Transform pos in GetRemovePostions(port))
             {
                 Vector3Int cellPosition = tilemap.WorldToCell(new Vector3(pos.position.x, pos.position.y, 0));
 
                 tilemap.SetTile(cellPosition, null);
             }
+
+            foreach(TileSetContainer container in GetSetPostions(port))
+            {
+                Vector3Int cellPosition = tilemap.WorldToCell(new Vector3(container.transform.position.x, container.transform.position.y, 0));
+
+                tilemap.SetTile(cellPosition, container.GetTile());
+            }
+        }
+        private GameObject GetPort(ConnectionDir dir)
+        {
+            return availablePort[(int)dir];
         }
 
-        private Transform[] GetRemovePostions(ConnectionDir dir)
+        private Transform[] GetRemovePostions(GameObject port)
         {
-            return availablePort[(int)dir].GetComponentsInChildren<Transform>().Skip(1).ToArray<Transform>();
+            return port.transform.GetChild(0).GetComponentsInChildren<Transform>().Skip(1).ToArray<Transform>();
+        }
+        private TileSetContainer[] GetSetPostions(GameObject port)
+        {
+            return port.transform.GetChild(1).GetComponentsInChildren<TileSetContainer>();
         }
 
 
