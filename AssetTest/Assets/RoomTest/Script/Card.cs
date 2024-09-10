@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Tilemaps;
 
 namespace dungeonduell
@@ -8,6 +9,11 @@ namespace dungeonduell
     [CreateAssetMenu]
     public class Card : ScriptableObject
     {
+        public int cardId;
+        public string cardName;
+        public string cardDescription;
+        public Image cardImage;
+
         public RoomType roomtype = RoomType.Generic;
         public TileBase Tile;
     }
