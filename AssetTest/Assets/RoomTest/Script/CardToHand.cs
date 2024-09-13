@@ -79,7 +79,7 @@ namespace dungeonduell
             if (cardPrefab != null && handPanel != null)
             {
                 GameObject cardObject = Instantiate(cardPrefab, handPanel);
-                CardDisplay cardDisplay = cardObject.GetComponent<CardDisplay>();
+                DisplayCard cardDisplay = cardObject.GetComponent<DisplayCard>();
 
                 if (cardDisplay != null)
                 {

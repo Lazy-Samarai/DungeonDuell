@@ -12,7 +12,7 @@ namespace dungeonduell
         public int cardId;
         public string cardName;
         public string cardDescription;
-        public Image cardImage;
+        public Sprite cardImage;
 
         public RoomType roomtype = RoomType.Generic;
         public TileBase Tile;
