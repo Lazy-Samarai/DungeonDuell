@@ -390,53 +390,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 297264526}
   m_CullTransparentMesh: 1
---- !u!1 &459680659
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 459680661}
-  - component: {fileID: 459680660}
-  m_Layer: 0
-  m_Name: ToolTipManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &459680660
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 459680659}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05346b51d14ccd947baf2c7047167637, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tooltipPrefab: {fileID: 1589777292390782846, guid: 3f060d46c49901f45a898314456e68ce,
-    type: 3}
-  cardCanvas: {fileID: 1885862859}
---- !u!4 &459680661
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 459680659}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1140.1293, y: 397.5418, z: 0.4521934}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &481254716
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,6 +430,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 987aa6efb8569d34fb1b74b7a9ce6372, type: 2}
   connectCollector: {fileID: 1945806930}
   StartTiles: {fileID: 1099633266}
+  discardPile: {fileID: 1190827255}
+  cardHolder: {fileID: 1611718013}
 --- !u!4 &481254718
 Transform:
   m_ObjectHideFlags: 0
@@ -949,6 +904,51 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.34, y: 0, z: -9.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1190827254
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1190827256}
+  - component: {fileID: 1190827255}
+  m_Layer: 0
+  m_Name: 'DiscardPile '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1190827255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1190827254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 894b7270c7abccd41904e0e2af787a62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  discardPile: []
+--- !u!4 &1190827256
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1190827254}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1031.7815, y: 490.99576, z: -8.375914}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15244,7 +15244,7 @@ MonoBehaviour:
   cardPrefab: {fileID: 2857499731240099392, guid: 21606d58a14cb8440b4524597cf1c564,
     type: 3}
   handPanel: {fileID: 2012748596}
-  handLimit: 5
+  handLimit: 3
   playerDeck: {fileID: 1494809202}
   spreadAngle: 30
   handRadius: 500
@@ -15259,6 +15259,6 @@ SceneRoots:
   - {fileID: 1621142889}
   - {fileID: 1363916251}
   - {fileID: 1682481816}
-  - {fileID: 459680661}
   - {fileID: 1494809203}
+  - {fileID: 1190827256}
   - {fileID: 1885862863}

@@ -23,6 +23,9 @@ namespace dungeonduell
 
         public GameObject StartTiles;
 
+        public DiscardPile discardPile; 
+        public GameObject cardHolder; 
+
 
         Vector3Int[] aroundHexDiffVectorEVEN = { 
             new Vector3Int(-1, 1), // TopLeft
@@ -90,11 +93,31 @@ namespace dungeonduell
                 tilemap.SetTile(cellPosition, card.Tile);
                 CreateRoom(cellPosition, card.roomtype);
 
-
+                // Karte zum Abwurfstapel hinzufügen und vom CardHolder entfernen
+                discardPile.AddCardToDiscardPile(card);
+                RemoveCardFromCardHolder();
             }
             else
             {
                 Debug.Log("Denied");
+            }
+        }
+
+        private void RemoveCardFromCardHolder()
+        {
+            if (cardHolder.transform.childCount > 0)
+            {
+                Transform cardOnHolder = cardHolder.transform.GetChild(0);
+                DisplayCard cardOnHolderScript = cardOnHolder.GetComponent<DisplayCard>();
+
+                if (cardOnHolderScript != null)
+                {
+                    Card cardToDiscard = cardOnHolderScript.card;
+                    discardPile.AddCardToDiscardPile(cardToDiscard);
+
+                    // Karte vom CardHolder entfernen
+                    Destroy(cardOnHolder.gameObject);
+                }
             }
         }
 
@@ -126,9 +149,10 @@ namespace dungeonduell
             connectCollector.AddRoom(clickedTile, Conncection, type);
 
         }
-        public void ChangeCard(Card newTile)
+        public void ChangeCard(Card newCard)
         {
-            currentCard = newTile;
+            currentCard = newCard;
         }
+
     }
 }

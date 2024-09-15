@@ -125,6 +125,13 @@ namespace dungeonduell
                 cardTransform.localScale = originalScale; // Setze die ursprüngliche Skalierung zurück
                 cardTransform.localRotation = originalRotation; // Setze die ursprüngliche Rotation zurück
                 transform.SetSiblingIndex(originalSiblingIndex); // Setze den ursprünglichen Sibling Index zurück
+
+                // Die Karte wurde vom CardHolder entfernt, daher currentCard auf null setzen
+                TileClickHandler tileClickHandler = FindObjectOfType<TileClickHandler>();
+                if (tileClickHandler != null)
+                {
+                    tileClickHandler.ChangeCard(null);
+                }
             }
             else
             {
@@ -151,8 +158,16 @@ namespace dungeonduell
                 cardTransform.position = cardHolder.transform.position; // Setze die Position auf die des CardHolders
                 cardTransform.localScale = Vector3.one; // Setze die Skalierung auf 1
                 cardTransform.localRotation = Quaternion.identity; // Setze die Rotation auf 0
+
+                // Die Karte auf dem CardHolder ist jetzt die aktuelle Karte
+                TileClickHandler tileClickHandler = FindObjectOfType<TileClickHandler>();
+                if (tileClickHandler != null)
+                {
+                    tileClickHandler.ChangeCard(card);
+                }
             }
         }
+
 
         public void UpdateCardDisplay()
         {
