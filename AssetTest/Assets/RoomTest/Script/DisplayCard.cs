@@ -25,6 +25,7 @@ namespace dungeonduell
 
         public Vector3 hoverScale = new Vector3(1.1f, 1.1f, 1f); // Skalierung der Karte bei Hover
         public Vector3 hoverOffset = new Vector3(0f, 20f, 0f); // Verschiebung der Karte bei Hover (Y-Achse)
+        public Vector3 sideOffset = new Vector3(30f, 0f, 0f); // Verschiebung der Nachbarkarten seitlich
 
         void Start()
         {
@@ -84,6 +85,9 @@ namespace dungeonduell
                             tooltipText.text = card.cardDescription;
                         }
                     }
+
+                    // Bewege die linke und rechte Nachbarkarte
+                    MoveAdjacentCards(true);
                 }
             }
         }
@@ -104,6 +108,9 @@ namespace dungeonduell
                     {
                         tooltip.SetActive(false);
                     }
+
+                    // Setze die linke und rechte Nachbarkarte zurück
+                    MoveAdjacentCards(false);
                 }
             }
         }
@@ -168,6 +175,38 @@ namespace dungeonduell
             }
         }
 
+        private void MoveAdjacentCards(bool isHovering)
+        {
+            int siblingIndex = transform.GetSiblingIndex();
+
+            // Verschiebe die linke Nachbarkarte
+            if (siblingIndex > 0)
+            {
+                Transform leftCard = handPanel.GetChild(siblingIndex - 1);
+                if (isHovering)
+                {
+                    leftCard.localPosition -= sideOffset; // Bewege nach links
+                }
+                else
+                {
+                    leftCard.localPosition += sideOffset; // Bewege zurück
+                }
+            }
+
+            // Verschiebe die rechte Nachbarkarte
+            if (siblingIndex < handPanel.childCount - 1)
+            {
+                Transform rightCard = handPanel.GetChild(siblingIndex + 1);
+                if (isHovering)
+                {
+                    rightCard.localPosition += sideOffset; // Bewege nach rechts
+                }
+                else
+                {
+                    rightCard.localPosition -= sideOffset; // Bewege zurück
+                }
+            }
+        }
 
         public void UpdateCardDisplay()
         {
