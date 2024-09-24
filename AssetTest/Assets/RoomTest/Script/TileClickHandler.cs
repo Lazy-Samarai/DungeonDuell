@@ -49,8 +49,14 @@ namespace dungeonduell
             new Vector3Int(0, -1), // BottonLeft
             new Vector3Int(1, -1), // BottonRight 
         };
+ 
         private void Start()
         {
+            /// So important Compentence of a return connectCollector (Round 2 and so On) are catched here
+            connectCollector = FindObjectOfType<ConnectionsCollector>();
+            StartTiles = FindObjectOfType<StartTilesGen>().gameObject;
+            tilemap = FindObjectOfType<Tilemap>();
+            ///
 
             Transform[] transformsSpwans = StartTiles.transform.GetChild(0).GetComponentsInChildren<Transform>().Skip(1).ToArray<Transform>(); // jump over parent
      
@@ -67,6 +73,8 @@ namespace dungeonduell
                 Transform transform = transformsWorld[i];
                 SpawnTile(transform.position, WorldCard[i]);
             }
+
+
 
         }
 
