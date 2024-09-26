@@ -21,10 +21,10 @@ namespace dungeonduell
             DontDestroyOnLoad(gameObject);
         }
 
-        public void AddRoom(Vector3Int pos, List<RoomConnection> Conncection,RoomType type)
+        public void AddRoom(Vector3Int pos, List<RoomConnection> Conncection,RoomType type, RoomElement element)
         {
             Tuple<Vector3Int, RoomInfo> newroomsInfos = 
-                new Tuple<Vector3Int, RoomInfo>(pos,new RoomInfo(roomsInfos.Count, Conncection, type));
+                new Tuple<Vector3Int, RoomInfo>(pos,new RoomInfo(roomsInfos.Count, Conncection, type, element));
 
              roomsInfos.Add(newroomsInfos);
         }
