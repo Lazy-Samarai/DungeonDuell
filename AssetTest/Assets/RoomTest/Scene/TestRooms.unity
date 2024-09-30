@@ -411,6 +411,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3613690297775969556, guid: d4d8335d9d79f8142a60155a765b9399,
+        type: 3}
+      propertyPath: PossibleInterior.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3613690297775969556, guid: d4d8335d9d79f8142a60155a765b9399,
+        type: 3}
+      propertyPath: PossibleInterior.Array.data[5]
+      value: 
+      objectReference: {fileID: 8597873190104347077, guid: 648e751ede27b444e983945d8398bbd4,
+        type: 3}
     - target: {fileID: 4887094845199197374, guid: d4d8335d9d79f8142a60155a765b9399,
         type: 3}
       propertyPath: m_Name
@@ -2034,6 +2045,7 @@ MonoBehaviour:
   - {fileID: 4887094845199197374, guid: c08c6711b25163c409b8580265463a69, type: 3}
   - {fileID: 4887094845199197374, guid: e9162be97d2325a4793447b946749587, type: 3}
   - {fileID: 2684374856022156650, guid: 710614fb351e1a6498b60e009050c5cf, type: 3}
+  - {fileID: 4887094845199197374, guid: f4f8aa56809546449ae0a43470871ffa, type: 3}
   stepCross: 22.75
   stepUpDown: 19.5
   spawnPoint_Player1: {fileID: 1475545979}

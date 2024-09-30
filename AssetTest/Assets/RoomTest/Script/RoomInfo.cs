@@ -63,13 +63,14 @@ public enum RoomType
     Enemy,
     Spawn_Player1,
     Spawn_Player2,
-
+    Trap
 }
 public enum RoomElement
 {
     Standard,
     Ice,
     Fire,
-    Water
+    Water,
+    Hole
 
 }

@@ -111,6 +111,8 @@ namespace dungeonduell
                     return roomPrefabs[2]; // Prefab für Feuerräume
                 case RoomElement.Water:
                     return roomPrefabs[3]; // Prefab für Heilungsräume
+                case RoomElement.Hole:
+                    return roomPrefabs[4]; // Prefab für Heilungsräume
                 default:
                     return roomPrefabs[0]; // Standard-Prefab, falls nichts passt
             }
