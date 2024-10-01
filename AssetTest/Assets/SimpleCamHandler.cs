@@ -7,25 +7,52 @@ namespace dungeonduell
 {
     public class SimpleCamHandler : MonoBehaviour
     {
-        [SerializeField] CinemachineVirtualCamera cam;
+        [SerializeField] List<CinemachineVirtualCamera> cams;
         [SerializeField] Animator coverCam;
+    
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if(collision.tag == "Player")
+            for (int index = 0; index < cams.Count; index++)
             {
-                cam.gameObject.SetActive(true);
-                coverCam.SetBool("InRoom", true);
-                cam.Follow = collision.transform;
-            }
+                if (collision.tag == "Player" + (index +1))
+                {
+                    cams[index].gameObject.SetActive(true);
+                    if (!coverCam.GetBool("InRoom"))
+                    {
+                        coverCam.SetBool("InRoom", true);
+                    }              
+                    cams[index].Follow = collision.transform;
+                }
+            }    
            
         }
         private void OnTriggerExit2D(Collider2D collision)
         {
-            if (collision.tag == "Player")
+            for (int index = 0; index < cams.Count; index++)
             {
-                cam.gameObject.SetActive(false);
-                coverCam.SetBool("InRoom",false);
+                if (collision.tag == "Player" + (index + 1))
+                {
+                    cams[index].gameObject.SetActive(false);
+                    if (AllCamsOff())
+                    {
+                        coverCam.SetBool("InRoom", false);
+                    }
+                   
+                }
             }
+       
+        }
+        private bool AllCamsOff()
+        {
+            foreach(CinemachineVirtualCamera cam in cams) 
+            {
+                if (cam.gameObject.activeSelf)
+                {
+                  
+                    return false;
+                }
+            }
+            return true;
         }
        
 

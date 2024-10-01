@@ -23,8 +23,17 @@ namespace dungeonduell
 
         public GameObject StartTiles;
 
-        public DiscardPile discardPile; 
-        public GameObject cardHolder; 
+        [Header("Player Objects")]
+
+        public CardToHand HandPlayer1;
+
+        public CardToHand HandPlayer2;
+
+        public DiscardPile discardPile;
+
+        public DiscardPile discardPile2;
+       
+        public bool Player_1Turn = true;
 
 
         Vector3Int[] aroundHexDiffVectorEVEN = { 
@@ -49,15 +58,21 @@ namespace dungeonduell
             new Vector3Int(0, -1), // BottonLeft
             new Vector3Int(1, -1), // BottonRight 
         };
+ 
         private void Start()
         {
+            /// So important Compentence of a return connectCollector (Round 2 and so On) are catched here
+            connectCollector = FindObjectOfType<ConnectionsCollector>();
+            StartTiles = FindObjectOfType<StartTilesGen>().gameObject;
+            tilemap = FindObjectOfType<Tilemap>();
+            ///
 
             Transform[] transformsSpwans = StartTiles.transform.GetChild(0).GetComponentsInChildren<Transform>().Skip(1).ToArray<Transform>(); // jump over parent
      
             for (int i = 0; i < transformsSpwans.Length; i++)
             {
                 Transform transform = transformsSpwans[i]; 
-                SpawnTile(transform.position, SpawnInfo[i]);
+                SpawnTile(transform.position, SpawnInfo[i],false);
             }
 
             Transform[] transformsWorld = StartTiles.transform.GetChild(1).GetComponentsInChildren<Transform>().Skip(1).ToArray<Transform>();
@@ -65,8 +80,10 @@ namespace dungeonduell
             {
                 print(transformsWorld[i].name);
                 Transform transform = transformsWorld[i];
-                SpawnTile(transform.position, WorldCard[i]);
+                SpawnTile(transform.position, WorldCard[i],false);
             }
+
+
 
         }
 
@@ -76,40 +93,59 @@ namespace dungeonduell
             {
 
                 Vector3 mouseWorldPos = cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -cam.transform.position.z));
-                SpawnTile(mouseWorldPos, currentCard);
+                SpawnTile(mouseWorldPos, currentCard,true);
 
             }
         }
 
-        private void SpawnTile(Vector3 mouseWorldPos, Card card)
+        private void SpawnTile(Vector3 mouseWorldPos, Card card,bool PlayerMove)
         {
             Vector3Int cellPosition = tilemap.WorldToCell(new Vector3(mouseWorldPos.x, mouseWorldPos.y, cam.transform.position.z));
 
             TileBase clickedTile = tilemap.GetTile(cellPosition);
 
-            if (clickedTile == resetTile)
+            if (clickedTile == resetTile & currentCard != null)
             {
                 Debug.Log("Tile clicked at position: " + cellPosition);
                 tilemap.SetTile(cellPosition, card.Tile);
                 CreateRoom(cellPosition, card.roomtype, card.roomElement);
 
-                // Karte zum Abwurfstapel hinzufügen und vom CardHolder entfernen
-                discardPile.AddCardToDiscardPile(card);
-                RemoveCardFromCardHolder();
+                if (PlayerMove)
+                {
+                    // Karte zum Abwurfstapel hinzufügen und vom CardHolder entfernen    
+                    discardPile.AddCardToDiscardPile(card);
+                    RemoveCardFromCardHolder(Player_1Turn);
+                    ChangePlayer(Player_1Turn);
+                    Player_1Turn = !Player_1Turn;
+                    currentCard = null;
+
+                }
             }
             else
             {
                 Debug.Log("Denied");
             }
         }
-
-        private void RemoveCardFromCardHolder()
+     
+        private void ChangePlayer(bool Player_1Turn)
         {
+
+            HandPlayer1.ShowHideDeck(Player_1Turn);
+            HandPlayer2.ShowHideDeck(!Player_1Turn);       
+        }
+
+        private void RemoveCardFromCardHolder(bool player1)
+        {
+            Transform cardHolder = ((player1) ? HandPlayer1.transform.GetChild(0) : HandPlayer2.transform.GetChild(0));
+
             if (cardHolder.transform.childCount > 0)
             {
                 Transform cardOnHolder = cardHolder.transform.GetChild(0);
                 DisplayCard cardOnHolderScript = cardOnHolder.GetComponent<DisplayCard>();
 
+                print("----------------");
+                print(cardOnHolderScript);
+                
                 if (cardOnHolderScript != null)
                 {
                     Card cardToDiscard = cardOnHolderScript.card;
@@ -119,6 +155,7 @@ namespace dungeonduell
                     Destroy(cardOnHolder.gameObject);
                 }
             }
+
         }
 
         private void CreateRoom(Vector3Int clickedTile,RoomType type, RoomElement element)

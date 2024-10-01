@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 namespace dungeonduell
 {
@@ -9,6 +10,11 @@ namespace dungeonduell
     {    
         public List<Tuple<Vector3Int, RoomInfo>> roomsInfos = new List<Tuple<Vector3Int, RoomInfo>>();
 
+        void OnEnable()
+        {
+            Debug.Log("OnEnable called");
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        }
         void Awake()
         {
             ConnectionsCollector[] objs = FindObjectsOfType<ConnectionsCollector>();
@@ -19,6 +25,19 @@ namespace dungeonduell
             }
 
             DontDestroyOnLoad(gameObject);
+        }
+        // called second
+        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            // So the map is not seen in Dunegeon Phase
+           if(scene.buildIndex == 0)
+           {
+                transform.GetChild(0).gameObject.SetActive(true);
+           }
+           else
+           {
+                transform.GetChild(0).gameObject.SetActive(false);
+           }
         }
 
         public void AddRoom(Vector3Int pos, List<RoomConnection> Conncection,RoomType type, RoomElement element)
@@ -77,6 +96,11 @@ namespace dungeonduell
 
                 }
             }
+        }
+        void OnDisable()
+        {
+            Debug.Log("OnDisable");
+            SceneManager.sceneLoaded -= OnSceneLoaded;
         }
     }
 }
