@@ -1,0 +1,1132 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8597873190104347077
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8103169475455598372}
+  m_Layer: 0
+  m_Name: SpikeTest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8103169475455598372
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8597873190104347077}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6882142840538027259}
+  - {fileID: 1751098401489580941}
+  - {fileID: 478673131276023535}
+  - {fileID: 7494749132480278886}
+  - {fileID: 222132782266153579}
+  - {fileID: 8887696080683221346}
+  - {fileID: 100643251319233973}
+  - {fileID: 3789561783905554942}
+  - {fileID: 3091953850721043131}
+  - {fileID: 3144668154880926293}
+  - {fileID: 1603280541059963647}
+  - {fileID: 7405984575699817216}
+  - {fileID: 3754601527727626812}
+  - {fileID: 6715678764904235688}
+  - {fileID: 896870906966515799}
+  - {fileID: 500902563320202270}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &102101287820527863
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8103169475455598372}
+    m_Modifications:
+    - target: {fileID: 1628495255947690, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_Name
+      value: KoalaDungeonSpikes (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114378751703296190, guid: 9f39435d4b02f8c4eac603b313e0fd1a,
+        type: 3}
+      propertyPath: TriggerFilter
+      value: 195
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+--- !u!4 &100643251319233973 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a,
+    type: 3}
+  m_PrefabInstance: {fileID: 102101287820527863}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &223524678956363561
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8103169475455598372}
+    m_Modifications:
+    - target: {fileID: 1628495255947690, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_Name
+      value: KoalaDungeonSpikes (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114378751703296190, guid: 9f39435d4b02f8c4eac603b313e0fd1a,
+        type: 3}
+      propertyPath: TriggerFilter
+      value: 195
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+--- !u!4 &222132782266153579 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a,
+    type: 3}
+  m_PrefabInstance: {fileID: 223524678956363561}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &480658900617552813
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8103169475455598372}
+    m_Modifications:
+    - target: {fileID: 1628495255947690, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_Name
+      value: KoalaDungeonSpikes (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114378751703296190, guid: 9f39435d4b02f8c4eac603b313e0fd1a,
+        type: 3}
+      propertyPath: TriggerFilter
+      value: 195
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+--- !u!4 &478673131276023535 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a,
+    type: 3}
+  m_PrefabInstance: {fileID: 480658900617552813}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &503455578111332700
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8103169475455598372}
+    m_Modifications:
+    - target: {fileID: 1628495255947690, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_Name
+      value: KoalaDungeonSpikes (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114378751703296190, guid: 9f39435d4b02f8c4eac603b313e0fd1a,
+        type: 3}
+      propertyPath: TriggerFilter
+      value: 195
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+--- !u!4 &500902563320202270 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a,
+    type: 3}
+  m_PrefabInstance: {fileID: 503455578111332700}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &899982440923428117
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8103169475455598372}
+    m_Modifications:
+    - target: {fileID: 1628495255947690, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_Name
+      value: KoalaDungeonSpikes (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114378751703296190, guid: 9f39435d4b02f8c4eac603b313e0fd1a,
+        type: 3}
+      propertyPath: TriggerFilter
+      value: 195
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+--- !u!4 &896870906966515799 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a,
+    type: 3}
+  m_PrefabInstance: {fileID: 899982440923428117}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1599003525858693053
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8103169475455598372}
+    m_Modifications:
+    - target: {fileID: 1628495255947690, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_Name
+      value: KoalaDungeonSpikes (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114378751703296190, guid: 9f39435d4b02f8c4eac603b313e0fd1a,
+        type: 3}
+      propertyPath: TriggerFilter
+      value: 195
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+--- !u!4 &1603280541059963647 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1599003525858693053}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1747982298365634255
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8103169475455598372}
+    m_Modifications:
+    - target: {fileID: 1628495255947690, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_Name
+      value: KoalaDungeonSpikes (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114378751703296190, guid: 9f39435d4b02f8c4eac603b313e0fd1a,
+        type: 3}
+      propertyPath: TriggerFilter
+      value: 195
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+--- !u!4 &1751098401489580941 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1747982298365634255}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3091687820652861433
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8103169475455598372}
+    m_Modifications:
+    - target: {fileID: 1628495255947690, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_Name
+      value: KoalaDungeonSpikes (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114378751703296190, guid: 9f39435d4b02f8c4eac603b313e0fd1a,
+        type: 3}
+      propertyPath: TriggerFilter
+      value: 195
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+--- !u!4 &3091953850721043131 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a,
+    type: 3}
+  m_PrefabInstance: {fileID: 3091687820652861433}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3146653925699122967
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8103169475455598372}
+    m_Modifications:
+    - target: {fileID: 1628495255947690, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_Name
+      value: KoalaDungeonSpikes (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114378751703296190, guid: 9f39435d4b02f8c4eac603b313e0fd1a,
+        type: 3}
+      propertyPath: TriggerFilter
+      value: 195
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+--- !u!4 &3144668154880926293 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a,
+    type: 3}
+  m_PrefabInstance: {fileID: 3146653925699122967}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3752681728008998782
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8103169475455598372}
+    m_Modifications:
+    - target: {fileID: 1628495255947690, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_Name
+      value: KoalaDungeonSpikes (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114378751703296190, guid: 9f39435d4b02f8c4eac603b313e0fd1a,
+        type: 3}
+      propertyPath: TriggerFilter
+      value: 195
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+--- !u!4 &3754601527727626812 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a,
+    type: 3}
+  m_PrefabInstance: {fileID: 3752681728008998782}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3789788196667999420
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8103169475455598372}
+    m_Modifications:
+    - target: {fileID: 1628495255947690, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_Name
+      value: KoalaDungeonSpikes (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114378751703296190, guid: 9f39435d4b02f8c4eac603b313e0fd1a,
+        type: 3}
+      propertyPath: TriggerFilter
+      value: 195
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+--- !u!4 &3789561783905554942 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a,
+    type: 3}
+  m_PrefabInstance: {fileID: 3789788196667999420}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6718755282925328362
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8103169475455598372}
+    m_Modifications:
+    - target: {fileID: 1628495255947690, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_Name
+      value: KoalaDungeonSpikes (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114378751703296190, guid: 9f39435d4b02f8c4eac603b313e0fd1a,
+        type: 3}
+      propertyPath: TriggerFilter
+      value: 195
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+--- !u!4 &6715678764904235688 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a,
+    type: 3}
+  m_PrefabInstance: {fileID: 6718755282925328362}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6885293988984586681
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8103169475455598372}
+    m_Modifications:
+    - target: {fileID: 1628495255947690, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_Name
+      value: KoalaDungeonSpikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+--- !u!4 &6882142840538027259 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a,
+    type: 3}
+  m_PrefabInstance: {fileID: 6885293988984586681}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7406281393041786434
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8103169475455598372}
+    m_Modifications:
+    - target: {fileID: 1628495255947690, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_Name
+      value: KoalaDungeonSpikes (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114378751703296190, guid: 9f39435d4b02f8c4eac603b313e0fd1a,
+        type: 3}
+      propertyPath: TriggerFilter
+      value: 195
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+--- !u!4 &7405984575699817216 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a,
+    type: 3}
+  m_PrefabInstance: {fileID: 7406281393041786434}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7497790469492712484
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8103169475455598372}
+    m_Modifications:
+    - target: {fileID: 1628495255947690, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_Name
+      value: KoalaDungeonSpikes (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114378751703296190, guid: 9f39435d4b02f8c4eac603b313e0fd1a,
+        type: 3}
+      propertyPath: TriggerFilter
+      value: 195
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+--- !u!4 &7494749132480278886 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a,
+    type: 3}
+  m_PrefabInstance: {fileID: 7497790469492712484}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8887926893631378464
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8103169475455598372}
+    m_Modifications:
+    - target: {fileID: 1628495255947690, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_Name
+      value: KoalaDungeonSpikes (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114378751703296190, guid: 9f39435d4b02f8c4eac603b313e0fd1a,
+        type: 3}
+      propertyPath: TriggerFilter
+      value: 195
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9f39435d4b02f8c4eac603b313e0fd1a, type: 3}
+--- !u!4 &8887696080683221346 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4277188082488642, guid: 9f39435d4b02f8c4eac603b313e0fd1a,
+    type: 3}
+  m_PrefabInstance: {fileID: 8887926893631378464}
+  m_PrefabAsset: {fileID: 0}

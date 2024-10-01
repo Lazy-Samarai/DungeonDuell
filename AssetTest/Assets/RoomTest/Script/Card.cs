@@ -15,6 +15,7 @@ namespace dungeonduell
         public Sprite cardImage;
 
         public RoomType roomtype = RoomType.Generic;
+        public RoomElement roomElement = RoomElement.Standard;
         public TileBase Tile;
     }
 }

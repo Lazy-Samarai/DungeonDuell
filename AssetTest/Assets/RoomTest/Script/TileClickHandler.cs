@@ -108,7 +108,7 @@ namespace dungeonduell
             {
                 Debug.Log("Tile clicked at position: " + cellPosition);
                 tilemap.SetTile(cellPosition, card.Tile);
-                CreateRoom(cellPosition, card.roomtype);
+                CreateRoom(cellPosition, card.roomtype, card.roomElement);
 
                 if (PlayerMove)
                 {
@@ -158,7 +158,7 @@ namespace dungeonduell
 
         }
 
-        private void CreateRoom(Vector3Int clickedTile,RoomType type)
+        private void CreateRoom(Vector3Int clickedTile,RoomType type, RoomElement element)
         {
             Vector3Int[] aroundpos = new Vector3Int[6];
 
@@ -183,7 +183,7 @@ namespace dungeonduell
                
             }
 
-            connectCollector.AddRoom(clickedTile, Conncection, type);
+            connectCollector.AddRoom(clickedTile, Conncection, type, element);
 
         }
         public void ChangeCard(Card newCard)

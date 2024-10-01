@@ -13,7 +13,7 @@ namespace dungeonduell
         public List<Tuple<Vector3Int, RoomInfo>> RoomsInfosWithPos = new List<Tuple<Vector3Int, RoomInfo>>();
 
         List<DoorConnectHandler> DoorCollect = new List<DoorConnectHandler>();
-        [SerializeField] GameObject roomprefab;
+        [SerializeField]  List<GameObject> roomPrefabs;
 
         [SerializeField] float stepCross;
         [SerializeField] float stepUpDown;
@@ -53,7 +53,9 @@ namespace dungeonduell
 
             foreach (Tuple<Vector3Int, RoomInfo> roomInfo in RoomsInfosWithPos) // spawing all rooms in 
             {
-                GameObject Nextroom = Instantiate(roomprefab, transform);
+                GameObject roomPrefabToUse = GetRoomPrefabByElement(roomInfo.Item2.roommElement);
+
+                GameObject Nextroom = Instantiate(roomPrefabToUse ?? roomPrefabs[0], transform);
 
                 // odd and even y pos diff in a Hex Grid  
                 float posX = (roomInfo.Item1.y % 2 == 0) ? roomInfo.Item1.x * stepCross : stepCross / 2 + roomInfo.Item1.x * stepCross;
@@ -100,6 +102,26 @@ namespace dungeonduell
             // room to room basis but this will stay like this until a new Cam handling is implented
             // the virtual cam get scuffed
             // part of the InilizeRoom are deactivate here
+        }
+
+        // Funktion zum Abrufen des Prefabs basierend auf dem Raumtyp
+        private GameObject GetRoomPrefabByElement(RoomElement roomElement)
+        {
+            switch (roomElement)
+            {
+                case RoomElement.Standard:
+                    return roomPrefabs[0]; // Prefab für Spawn-Raum
+                case RoomElement.Ice:
+                    return roomPrefabs[1]; // Prefab für Eisräume
+                case RoomElement.Fire:
+                    return roomPrefabs[2]; // Prefab für Feuerräume
+                case RoomElement.Water:
+                    return roomPrefabs[3]; // Prefab für Heilungsräume
+                case RoomElement.Hole:
+                    return roomPrefabs[4]; // Prefab für Heilungsräume
+                default:
+                    return roomPrefabs[0]; // Standard-Prefab, falls nichts passt
+            }
         }
 
         private void DeativateUnsedDoors()

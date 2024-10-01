@@ -9,16 +9,19 @@ public class RoomInfo {
 
     public RoomType roomtype = RoomType.Generic;
 
+    public RoomElement roommElement = RoomElement.Standard;
+
     public RoomInfo(int id, List<RoomConnection> newConncection)
     {
         RoomID = id;
         Conncection = newConncection;
     }
-    public RoomInfo(int id, List<RoomConnection> newConncection, RoomType newRoomtype)
+    public RoomInfo(int id, List<RoomConnection> newConncection, RoomType newRoomtype, RoomElement newRoomElement)
     {
         RoomID = id;
         Conncection = newConncection;
         roomtype = newRoomtype;
+        roommElement = newRoomElement;
     }
 
 }
@@ -59,6 +62,15 @@ public enum RoomType
     NormalLott,
     Enemy,
     Spawn_Player1,
-    Spawn_Player2
+    Spawn_Player2,
+    Trap
+}
+public enum RoomElement
+{
+    Standard,
+    Ice,
+    Fire,
+    Water,
+    Hole
 
 }
