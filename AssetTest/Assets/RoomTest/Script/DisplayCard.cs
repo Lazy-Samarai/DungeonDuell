@@ -36,6 +36,7 @@ namespace dungeonduell
             HideTooltip();
             UpdateCardDisplay();
 
+            
             // Versuche, das CardHolder- und HandPanel-GameObject zu finden
             if (cardHolder == null)
             {
@@ -45,6 +46,7 @@ namespace dungeonduell
                     Debug.LogError("CardHolder GameObject nicht gefunden.");
                 }
             }
+            
 
             if (handPanel == null)
             {

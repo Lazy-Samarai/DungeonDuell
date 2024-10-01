@@ -29,11 +29,11 @@ namespace dungeonduell
                     BackToCardPhase();
                 }
                 int totalSeconds = (int)Mathf.Floor(timeRound);
-                int minutes = totalSeconds / 60;
-                int seconds = totalSeconds % 60;
+                // int minutes = totalSeconds / 60;
+                // int seconds = totalSeconds % 60;
 
 
-                timerText.text = $"{minutes}:{seconds:D2}";
+                timerText.text = totalSeconds.ToString();
             }
             if (Input.GetKeyDown(KeyCode.X))
             {
@@ -45,6 +45,14 @@ namespace dungeonduell
         public void BackToCardPhase()
         {
             sceneLoading.ToTheHex();
+        }
+        public void Reseting()
+        {
+            ConnectionsCollector connectionsCollector = FindObjectOfType<ConnectionsCollector>();
+            LivesManager livesManager = FindObjectOfType<LivesManager>();
+            Destroy(connectionsCollector.gameObject);
+            Destroy(livesManager.gameObject);          
+            BackToCardPhase();
         }
         
     }

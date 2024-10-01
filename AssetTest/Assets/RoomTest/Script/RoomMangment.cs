@@ -21,7 +21,8 @@ namespace dungeonduell
         [SerializeField] Transform spawnPoint_Player1;
         GameObject StartRoomPlayer_1;
 
-        [SerializeField] Transform spawnPoint_Player2; // Empty Until Mutiplayer is implented 
+        [SerializeField] Transform spawnPoint_Player2;
+        GameObject StartRoomPlayer_2; 
 
         void Awake()
         {
@@ -82,6 +83,11 @@ namespace dungeonduell
                    // Nextroom.GetComponentInChildren<CinemachineVirtualCamera>(true).gameObject.SetActive(false); // force update
                     // Nextroom.GetComponentInChildren<CinemachineVirtualCamera>(true).gameObject.SetActive(true);
 
+                }
+                if(roomInfo.Item2.roomtype == RoomType.Spawn_Player2)
+                {
+                    StartRoomPlayer_2 = Nextroom;             
+                    spawnPoint_Player2.transform.position = new Vector3(posX, posY, 0);                    
                 }
 
             }
