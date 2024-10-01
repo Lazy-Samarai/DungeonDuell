@@ -15,6 +15,9 @@ namespace dungeonduell
         public float spreadAngle = 30f; // Maximaler Winkel für den Fächer
         public float handRadius = 200f; // Abstand der Karten zum Mittelpunkt
 
+        public CardToHand OtherPlayer;
+        public bool playing = false;
+
         void Start()
         {
             if (handPanel == null)
@@ -80,6 +83,7 @@ namespace dungeonduell
             {
                 GameObject cardObject = Instantiate(cardPrefab, handPanel);
                 DisplayCard cardDisplay = cardObject.GetComponent<DisplayCard>();
+                cardDisplay.cardHolder = transform.GetChild(0).gameObject;
 
                 if (cardDisplay != null)
                 {
@@ -112,6 +116,17 @@ namespace dungeonduell
             else
             {
                 Debug.LogWarning("Das Deck ist leer, keine Karte kann gezogen werden!");
+            }
+        }
+        public void ShowHideDeck(bool hide)
+        {
+            if (hide)
+            {
+                transform.position = new Vector3(transform.position.x, -300, transform.position.z);  
+            }
+            else
+            {
+                transform.position = new Vector3(transform.position.x, 0.25f, transform.position.z);
             }
         }
     }
