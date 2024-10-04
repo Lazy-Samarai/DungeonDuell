@@ -12,7 +12,11 @@ namespace dungeonduell
         public Camera cam;
 
         public Tilemap tilemap; 
+        
         public Card currentCard;
+        public bool[] currentDoorDir = new bool[] {true,true,true,true,true,true};
+        public GameObject indiactorDoor;
+
         public TileBase resetTile;
 
         public Card[] SpawnInfo;
@@ -96,6 +100,7 @@ namespace dungeonduell
                 SpawnTile(mouseWorldPos, currentCard,true);
 
             }
+           
         }
 
         private void SpawnTile(Vector3 mouseWorldPos, Card card,bool PlayerMove)
@@ -108,7 +113,7 @@ namespace dungeonduell
             {
                 Debug.Log("Tile clicked at position: " + cellPosition);
                 tilemap.SetTile(cellPosition, card.Tile);
-                CreateRoom(cellPosition, card.roomtype, card.roomElement);
+                CreateRoom(cellPosition, card.roomtype, card.roomElement, card.GetAllowedDirection()); // !!!!!!!
 
                 if (PlayerMove)
                 {
@@ -118,8 +123,15 @@ namespace dungeonduell
                     ChangePlayer(Player_1Turn);
                     Player_1Turn = !Player_1Turn;
                     currentCard = null;
+                   
 
                 }
+                GameObject indicator = Instantiate(indiactorDoor, tilemap.CellToWorld(cellPosition), Quaternion.identity);
+                indicator.transform.parent = transform;
+                indicator.GetComponent<DoorIndicator>().SetDoorIndiactor(currentDoorDir);
+                
+
+
             }
             else
             {
@@ -158,8 +170,9 @@ namespace dungeonduell
 
         }
 
-        private void CreateRoom(Vector3Int clickedTile,RoomType type, RoomElement element)
+        private void CreateRoom(Vector3Int clickedTile,RoomType type, RoomElement element, bool[] allowedDoors)
         {
+           
             Vector3Int[] aroundpos = new Vector3Int[6];
 
             var offsets = (clickedTile.y % 2 == 0) ? aroundHexDiffVectorEVEN : aroundHexDiffVectorODD;
@@ -170,26 +183,35 @@ namespace dungeonduell
             }
             
 
-            int[] establishConnection = connectCollector.GetPossibleConnects(aroundpos);
+            int[] establishConnection = connectCollector.GetPossibleConnects(aroundpos, allowedDoors);
 
             List<RoomConnection> Conncection = new List<RoomConnection>();
+            List<ConnectionDir> newConnectionDir = new List<ConnectionDir>(); ;
 
             for (int i = 0; i < establishConnection.Length; i++)
             {
-                if(establishConnection[i] != -1)
+                if(establishConnection[i] != -1) //All used
                 {
                     Conncection.Add(new RoomConnection(establishConnection[i], (ConnectionDir)i));
                 }
+                if (allowedDoors[i]) // all possible 
+                {
+                    newConnectionDir.Add((ConnectionDir)i);
+                    print(((ConnectionDir)i).ToString());
+                }
                
             }
-
-            connectCollector.AddRoom(clickedTile, Conncection, type, element);
+            connectCollector.AddRoom(clickedTile, Conncection, type, element, newConnectionDir);
 
         }
-        public void ChangeCard(Card newCard)
+        public void ChangeCard(Card newCard, bool[] newcurrentDoorDir)
         {
             currentCard = newCard;
+            currentDoorDir = newcurrentDoorDir;
         }
+
+
+    
 
     }
 }

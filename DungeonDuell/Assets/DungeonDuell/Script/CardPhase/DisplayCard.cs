@@ -8,6 +8,8 @@ namespace dungeonduell
     public class DisplayCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
     {
         public Card card;
+        public bool[] runtTimeCurrentDoorDir;
+
         public TextMeshProUGUI nameText;
         public TextMeshProUGUI descriptionText;
         public TextMeshProUGUI roomTypeText;
@@ -139,7 +141,7 @@ namespace dungeonduell
                 TileClickHandler tileClickHandler = FindObjectOfType<TileClickHandler>();
                 if (tileClickHandler != null)
                 {
-                    tileClickHandler.ChangeCard(null);
+                    tileClickHandler.ChangeCard(null,null);
                 }
             }
             else
@@ -172,7 +174,7 @@ namespace dungeonduell
                 TileClickHandler tileClickHandler = FindObjectOfType<TileClickHandler>();
                 if (tileClickHandler != null)
                 {
-                    tileClickHandler.ChangeCard(card);
+                    tileClickHandler.ChangeCard(card, card.GetAllowedDirection()); // working in Ui still has to be done 
                 }
             }
         }
