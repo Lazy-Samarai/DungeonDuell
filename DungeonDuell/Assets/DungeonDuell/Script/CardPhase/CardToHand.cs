@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 namespace dungeonduell
 {
@@ -74,8 +75,6 @@ namespace dungeonduell
             }
         }
 
-
-
         // Einzelne Karte anzeigen
         void DisplayCardInHand(Card card, Vector3 positionOffset, float angle)
         {
@@ -118,10 +117,23 @@ namespace dungeonduell
                 Debug.LogWarning("Das Deck ist leer, keine Karte kann gezogen werden!");
             }
         }
+
         public void ShowHideDeck(bool hide)
         {
-            gameObject.SetActive(!hide); // Setzt das HandPanel aktiv, wenn hide false ist, und inaktiv, wenn hide true ist.
+            if (hide)
+            {
+                // Fade Out und Slide Out
+                transform.DOMoveY(-300, 0.5f).OnComplete(() => gameObject.SetActive(false));
+            }
+            else
+            {
+                // Set Active, Slide In
+                gameObject.SetActive(true);
+                transform.position = new Vector3(transform.position.x, -300, transform.position.z);
+                transform.DOMoveY(0.25f, 0.5f); // Bewege die Y-Position nach oben
+            }
         }
+
 
     }
 }
