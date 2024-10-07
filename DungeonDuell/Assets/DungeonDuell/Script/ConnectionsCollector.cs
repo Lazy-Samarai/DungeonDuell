@@ -55,8 +55,7 @@ namespace dungeonduell
                 for (int i = 0; i < allArounds.Length; i++)
                 {
                     if (allowedDoors[i]) // Dont Tracking for Connection are not allowed 
-                    {
-                        print("FFIndex:" + i);
+                    {                       
                         foreach (Tuple<Vector3Int, RoomInfo> roomInfo in roomsInfos)
                         {
                             if ((roomInfo.Item1 == allArounds[i] && (roomInfo.Item2.allowedDoors.Contains(((ConnectionDir)i).GetInvert()))))                      

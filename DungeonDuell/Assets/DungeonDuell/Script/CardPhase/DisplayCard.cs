@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.Linq;
 
 namespace dungeonduell
 {
@@ -174,6 +175,7 @@ namespace dungeonduell
                 TileClickHandler tileClickHandler = FindObjectOfType<TileClickHandler>();
                 if (tileClickHandler != null)
                 {
+                  
                     tileClickHandler.ChangeCard(card, card.GetAllowedDirection()); // working in Ui still has to be done 
                 }
             }

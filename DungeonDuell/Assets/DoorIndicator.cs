@@ -11,6 +11,7 @@ namespace dungeonduell
         {
             for(int i = 0;i < allowedDoors.Length;i++)
             {
+                print("qwd" + allowedDoors[i]);
                 dirAnker.GetChild(i).transform.gameObject.SetActive(allowedDoors[i]);
             }
         }

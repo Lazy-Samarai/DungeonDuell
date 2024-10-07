@@ -100,7 +100,10 @@ namespace dungeonduell
                 SpawnTile(mouseWorldPos, currentCard,true);
 
             }
-           
+            if (Input.GetKeyDown(KeyCode.R)) // Test 
+            {       
+               currentDoorDir = ShiftRight(currentDoorDir);         
+            }
         }
 
         private void SpawnTile(Vector3 mouseWorldPos, Card card,bool PlayerMove)
@@ -113,11 +116,11 @@ namespace dungeonduell
             {
                 Debug.Log("Tile clicked at position: " + cellPosition);
                 tilemap.SetTile(cellPosition, card.Tile);
-                CreateRoom(cellPosition, card.roomtype, card.roomElement, card.GetAllowedDirection()); // !!!!!!!
+                CreateRoom(cellPosition, card.roomtype, card.roomElement, currentDoorDir); 
 
                 if (PlayerMove)
                 {
-                    // Karte zum Abwurfstapel hinzufügen und vom CardHolder entfernen    
+                    // Karte zum Abwurfstapel hinzufÃ¼gen und vom CardHolder entfernen    
                     discardPile.AddCardToDiscardPile(card);
                     RemoveCardFromCardHolder(Player_1Turn);
                     ChangePlayer(Player_1Turn);
@@ -127,7 +130,8 @@ namespace dungeonduell
 
                 }
                 GameObject indicator = Instantiate(indiactorDoor, tilemap.CellToWorld(cellPosition), Quaternion.identity);
-                indicator.transform.parent = transform;
+                indicator.transform.parent = transform;            
+                print("Set" + string.Join(", ", currentDoorDir.Select(b => b.ToString()).ToArray()));
                 indicator.GetComponent<DoorIndicator>().SetDoorIndiactor(currentDoorDir);
                 
 
@@ -211,7 +215,32 @@ namespace dungeonduell
         }
 
 
-    
+        //!
+        public bool[] ShiftRight(bool[] array)
+        {
+            print("------------------------------");
+            print(string.Join(", ", array.Select(b => b.ToString()).ToArray()));
+            bool[] coveredClockwiese = { array[1], array[3], array[5], array[4], array[2], array[0] };
+                  
+          
+            // Create a new array with the same size
+            bool[] shiftedArray = new bool[coveredClockwiese.Length];
+
+            // Shift the elements to the right
+            for (int i = 0; i < (coveredClockwiese.Length -1); i++)
+            {
+                shiftedArray[i + 1] = coveredClockwiese[i];
+            }
+
+            // Move the last element to the first position
+            shiftedArray[0] = coveredClockwiese[coveredClockwiese.Length-1];
+
+            shiftedArray = new bool[]{ shiftedArray[5], shiftedArray[0], shiftedArray[4], shiftedArray[1], shiftedArray[3], shiftedArray[2] };
+
+            print(string.Join(", ", shiftedArray.Select(b => b.ToString()).ToArray()));
+            print("------------------------------");
+            return shiftedArray;
+        }
 
     }
 }
