@@ -18,6 +18,7 @@ namespace dungeonduell
         public DisplayCard displayCardUi;
         
         public GameObject indiactorDoor;
+        public Transform indiactorDoorAnker;
 
         public TileBase resetTile;
 
@@ -135,7 +136,7 @@ namespace dungeonduell
 
                 }
                 GameObject indicator = Instantiate(indiactorDoor, tilemap.CellToWorld(cellPosition), Quaternion.identity);
-                indicator.transform.parent = transform;       
+                indicator.transform.parent = indiactorDoorAnker;       
                 indicator.GetComponent<DoorIndicator>().SetDoorIndiactor(currentDoorDir);
                 
 
