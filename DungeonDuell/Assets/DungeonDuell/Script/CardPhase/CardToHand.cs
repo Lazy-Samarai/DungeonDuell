@@ -120,14 +120,8 @@ namespace dungeonduell
         }
         public void ShowHideDeck(bool hide)
         {
-            if (hide)
-            {
-                transform.position = new Vector3(transform.position.x, -300, transform.position.z);  
-            }
-            else
-            {
-                transform.position = new Vector3(transform.position.x, 0.25f, transform.position.z);
-            }
+            gameObject.SetActive(!hide); // Setzt das HandPanel aktiv, wenn hide false ist, und inaktiv, wenn hide true ist.
         }
+
     }
 }
