@@ -10,8 +10,7 @@ namespace dungeonduell
         public void SetDoorIndiactor(bool[] allowedDoors)
         {
             for(int i = 0;i < allowedDoors.Length;i++)
-            {
-                print("qwd" + allowedDoors[i]);
+            {           
                 dirAnker.GetChild(i).transform.gameObject.SetActive(allowedDoors[i]);
             }
         }
