@@ -15,6 +15,8 @@ namespace dungeonduell
         
         public Card currentCard;
         public bool[] currentDoorDir = new bool[] {true,true,true,true,true,true};
+        public DisplayCard displayCardUi;
+        
         public GameObject indiactorDoor;
 
         public TileBase resetTile;
@@ -102,7 +104,10 @@ namespace dungeonduell
             }
             if (Input.GetKeyDown(KeyCode.R)) // Test 
             {       
-               currentDoorDir = ShiftRight(currentDoorDir);         
+               currentDoorDir = ShiftRight(currentDoorDir);
+               displayCardUi?.UpdateDirectionIndicator(currentDoorDir); // this might be better be resolved with an event later 
+
+              
             }
         }
 
@@ -130,8 +135,7 @@ namespace dungeonduell
 
                 }
                 GameObject indicator = Instantiate(indiactorDoor, tilemap.CellToWorld(cellPosition), Quaternion.identity);
-                indicator.transform.parent = transform;            
-                print("Set" + string.Join(", ", currentDoorDir.Select(b => b.ToString()).ToArray()));
+                indicator.transform.parent = transform;       
                 indicator.GetComponent<DoorIndicator>().SetDoorIndiactor(currentDoorDir);
                 
 
@@ -155,20 +159,14 @@ namespace dungeonduell
             Transform cardHolder = ((player1) ? HandPlayer1.transform.GetChild(0) : HandPlayer2.transform.GetChild(0));
 
             if (cardHolder.transform.childCount > 0)
-            {
-                Transform cardOnHolder = cardHolder.transform.GetChild(0);
-                DisplayCard cardOnHolderScript = cardOnHolder.GetComponent<DisplayCard>();
-
-                print("----------------");
-                print(cardOnHolderScript);
-                
-                if (cardOnHolderScript != null)
+            {        
+                if (displayCardUi != null)
                 {
-                    Card cardToDiscard = cardOnHolderScript.card;
+                    Card cardToDiscard = displayCardUi.card;
                     discardPile.AddCardToDiscardPile(cardToDiscard);
 
                     // Karte vom CardHolder entfernen
-                    Destroy(cardOnHolder.gameObject);
+                    Destroy(displayCardUi.gameObject);
                 }
             }
 
@@ -208,18 +206,18 @@ namespace dungeonduell
             connectCollector.AddRoom(clickedTile, Conncection, type, element, newConnectionDir);
 
         }
-        public void ChangeCard(Card newCard, bool[] newcurrentDoorDir)
+        public void ChangeCard(Card newCard, bool[] newcurrentDoorDir, DisplayCard newcurrentCardUi)
         {
             currentCard = newCard;
             currentDoorDir = newcurrentDoorDir;
+            displayCardUi = newcurrentCardUi;
         }
 
 
         //!
         public bool[] ShiftRight(bool[] array)
         {
-            print("------------------------------");
-            print(string.Join(", ", array.Select(b => b.ToString()).ToArray()));
+           
             bool[] coveredClockwiese = { array[1], array[3], array[5], array[4], array[2], array[0] };
                   
           
@@ -237,8 +235,7 @@ namespace dungeonduell
 
             shiftedArray = new bool[]{ shiftedArray[5], shiftedArray[0], shiftedArray[4], shiftedArray[1], shiftedArray[3], shiftedArray[2] };
 
-            print(string.Join(", ", shiftedArray.Select(b => b.ToString()).ToArray()));
-            print("------------------------------");
+           
             return shiftedArray;
         }
 

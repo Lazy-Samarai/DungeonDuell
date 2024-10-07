@@ -9,12 +9,12 @@ namespace dungeonduell
     public class DisplayCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
     {
         public Card card;
-        public bool[] runtTimeCurrentDoorDir;
-
+        
         public TextMeshProUGUI nameText;
         public TextMeshProUGUI descriptionText;
         public TextMeshProUGUI roomTypeText;
         public Image cardImage;
+        public DoorIndicator cardDirectionIndiactor;
 
         private Transform cardTransform;
         private Vector3 originalScale;
@@ -142,7 +142,7 @@ namespace dungeonduell
                 TileClickHandler tileClickHandler = FindObjectOfType<TileClickHandler>();
                 if (tileClickHandler != null)
                 {
-                    tileClickHandler.ChangeCard(null,null);
+                    tileClickHandler.ChangeCard(null,null,null);
                 }
             }
             else
@@ -156,6 +156,7 @@ namespace dungeonduell
                     DisplayCard cardOnHolderScript = cardOnHolder.GetComponent<DisplayCard>();
                     if (cardOnHolderScript != null)
                     {
+                        cardOnHolderScript.UpdateDirectionIndicator(card.GetAllowedDirection());
                         cardOnHolderScript.cardTransform.SetParent(handPanel);
                         cardOnHolderScript.cardTransform.position = cardOnHolderScript.handPanelOriginalPosition; // Setze die Karte an ihre ursprüngliche Position zurück
                         cardOnHolderScript.cardTransform.localScale = cardOnHolderScript.originalScale;
@@ -176,7 +177,7 @@ namespace dungeonduell
                 if (tileClickHandler != null)
                 {
                   
-                    tileClickHandler.ChangeCard(card, card.GetAllowedDirection()); // working in Ui still has to be done 
+                    tileClickHandler.ChangeCard(card, card.GetAllowedDirection(),this); // working in Ui still has to be done 
                 }
             }
         }
@@ -222,6 +223,8 @@ namespace dungeonduell
                 nameText.text = card.cardName;
                 descriptionText.text = card.cardDescription;
                 roomTypeText.text = "Room Type: " + card.roomtype.ToString();
+                UpdateDirectionIndicator(card.GetAllowedDirection());
+
 
                 if (card.cardImage != null)
                 {
@@ -236,6 +239,10 @@ namespace dungeonduell
             {
                 tooltip.SetActive(false); // Blendet den Tooltip aus
             }
+        }
+        public void UpdateDirectionIndicator(bool[] allowedDoors)
+        {
+            cardDirectionIndiactor.SetDoorIndiactor(allowedDoors);
         }
     }
 }

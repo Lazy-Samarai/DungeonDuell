@@ -84,7 +84,7 @@ namespace dungeonduell
                 GameObject cardObject = Instantiate(cardPrefab, handPanel);
                 DisplayCard cardDisplay = cardObject.GetComponent<DisplayCard>();
                 cardDisplay.cardHolder = transform.GetChild(0).gameObject;
-                cardDisplay.runtTimeCurrentDoorDir = card.GetAllowedDirection();
+          
 
                 if (cardDisplay != null)
                 {
@@ -130,5 +130,6 @@ namespace dungeonduell
                 transform.position = new Vector3(transform.position.x, 0.25f, transform.position.z);
             }
         }
+
     }
 }
