@@ -31,7 +31,7 @@ namespace MoreMountains.TopDownEngine
 
 		protected const string _runningAnimationParameterName = "Running";
 		protected int _runningAnimationParameter;
-		protected bool _runningStarted = false;
+		public bool _runningStarted = false;
 
 		/// <summary>
 		/// At the beginning of each cycle, we check if we've pressed or released the run button
@@ -162,7 +162,15 @@ namespace MoreMountains.TopDownEngine
 				// if the run button is released, we revert back to the walking speed.
 				if ((_characterMovement != null))
 				{
-					_characterMovement.ResetSpeed();
+					if (_characterMovement.inBlizzardZone)
+					{
+						// Weitere Reduktion der Geschwindigkeit, wenn der Spieler aufhört zu sprinten
+						_characterMovement.MovementSpeed = _characterMovement.WalkSpeed * 0.5f;  // Reduzierte Geschwindigkeit in der Blizzard-Zone
+					}
+					else
+					{
+						_characterMovement.ResetSpeed();  // Normale Geschwindigkeit außerhalb der Blizzard-Zone wiederherstellen
+					}
 					_movement.ChangeState(CharacterStates.MovementStates.Idle);
 				}
 				StopFeedbacks();

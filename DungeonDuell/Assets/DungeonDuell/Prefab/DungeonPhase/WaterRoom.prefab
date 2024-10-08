@@ -29634,7 +29634,7 @@ GameObject:
   - component: {fileID: 7661705331856841589}
   - component: {fileID: 4216791144275555704}
   - component: {fileID: 3715591230487304330}
-  - component: {fileID: 479949638551363106}
+  - component: {fileID: 504029252826752867}
   m_Layer: 0
   m_Name: HealingPool
   m_TagString: Untagged
@@ -31015,7 +31015,7 @@ MonoBehaviour:
   HealthPerSecond: 1
   HealthPerBurst: 5
   DurationBetweenBursts: 2
---- !u!114 &479949638551363106
+--- !u!114 &504029252826752867
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -31024,44 +31024,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 4990371930445852479}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76891b3b532f84acaaeed44c357bd00c, type: 3}
+  m_Script: {fileID: 11500000, guid: bd82ca62304d31748b59bc946c568bc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   TargetLayerMask:
     serializedVersion: 2
     m_Bits: 1024
   Owner: {fileID: 0}
-  TriggerFilter: 195
-  MinDamageCaused: -2
-  MaxDamageCaused: -1
-  TypedDamages: []
-  DamageDirectionMode: 1
-  DamageCausedKnockbackType: 0
-  DamageCausedKnockbackDirection: 0
-  DamageCausedKnockbackForce: {x: 10, y: 10, z: 10}
+  TriggerFilter: -1
+  HealAmount: 0.5
   InvincibilityDuration: 0.5
-  RepeatDamageOverTime: 1
-  AmountOfRepeats: 3
-  DurationBetweenRepeats: 1
-  DamageOverTimeInterruptible: 1
-  RepeatedDamageType: {fileID: 11400000, guid: 7d7dde4c4b81c1545b01082cf8f9adc2, type: 2}
-  DamageTakenHealth: {fileID: 0}
-  DamageTakenEveryTime: 0
-  DamageTakenDamageable: 0
-  DamageTakenNonDamageable: 0
-  DamageTakenKnockbackType: 0
-  DamageTakenKnockbackForce: {x: 0, y: 0, z: 0}
-  DamageTakenInvincibilityDuration: 0.5
-  HitDamageableFeedback: {fileID: 0}
-  HitNonDamageableFeedback: {fileID: 0}
-  HitAnythingFeedback: {fileID: 0}
-  HitDamageableEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  HitNonDamageableEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  HitAnythingEvent:
+  HealDamageableFeedback: {fileID: 0}
+  HealDamageableEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &5082787429074581341
