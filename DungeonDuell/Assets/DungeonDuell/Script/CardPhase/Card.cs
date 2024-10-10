@@ -17,5 +17,13 @@ namespace dungeonduell
         public RoomType roomtype = RoomType.Generic;
         public RoomElement roomElement = RoomElement.Standard;
         public TileBase Tile;
+
+        [System.Serializable]
+        public struct DirBarSet {  public bool TopLeft; public bool TopRight; public bool Left; public bool Right; public bool BottonLeft; public bool BottonRight; } // Going Around
+        public DirBarSet startDoorConcellation;
+        public bool[] GetAllowedDirection()
+        {
+            return new bool[]{ startDoorConcellation.TopLeft, startDoorConcellation.TopRight, startDoorConcellation.Left, startDoorConcellation.Right, startDoorConcellation.BottonLeft, startDoorConcellation.BottonRight, };
+        }
     }
 }

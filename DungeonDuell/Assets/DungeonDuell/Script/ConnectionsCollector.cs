@@ -40,26 +40,29 @@ namespace dungeonduell
            }
         }
 
-        public void AddRoom(Vector3Int pos, List<RoomConnection> Conncection,RoomType type, RoomElement element)
+        public void AddRoom(Vector3Int pos, List<RoomConnection> Conncection,RoomType type, RoomElement element, List<ConnectionDir> newAllowedDoors)
         {
             Tuple<Vector3Int, RoomInfo> newroomsInfos = 
-                new Tuple<Vector3Int, RoomInfo>(pos,new RoomInfo(roomsInfos.Count, Conncection, type, element));
+                new Tuple<Vector3Int, RoomInfo>(pos,new RoomInfo(roomsInfos.Count, Conncection, type, element, newAllowedDoors));
 
              roomsInfos.Add(newroomsInfos);
         }
 
-        public int[] GetPossibleConnects(Vector3Int[] allArounds)
-        {
+        public int[] GetPossibleConnects(Vector3Int[] allArounds,bool[] allowedDoors) // TODO Allround probaly not parll
+        {          
             int[] roomIdsConnect = { -1, -1, -1, -1, -1, -1 };
             
                 for (int i = 0; i < allArounds.Length; i++)
                 {
-                    foreach (Tuple<Vector3Int, RoomInfo> roomInfo in roomsInfos)
-                    {
-                        if (roomInfo.Item1 == allArounds[i])
+                    if (allowedDoors[i]) // Dont Tracking for Connection are not allowed 
+                    {                       
+                        foreach (Tuple<Vector3Int, RoomInfo> roomInfo in roomsInfos)
                         {
-                            roomIdsConnect[i] = roomInfo.Item2.RoomID;
-                            break;
+                            if ((roomInfo.Item1 == allArounds[i] && (roomInfo.Item2.allowedDoors.Contains(((ConnectionDir)i).GetInvert()))))                      
+                            {
+                                roomIdsConnect[i] = roomInfo.Item2.RoomID;
+                                break;
+                            }
                         }
                     }
                 }

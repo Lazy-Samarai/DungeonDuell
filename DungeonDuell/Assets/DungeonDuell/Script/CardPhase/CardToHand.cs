@@ -1,18 +1,19 @@
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 namespace dungeonduell
 {
     public class CardToHand : MonoBehaviour
     {
         public List<Card> handCards = new List<Card>(); // Liste der Karten in der Hand
-        public GameObject cardPrefab; // Prefab für die Handkarten (falls du ein UI-Element dafür hast)
+        public GameObject cardPrefab; // Prefab fÃ¼r die Handkarten (falls du ein UI-Element dafÃ¼r hast)
         public Transform handPanel; // UI-Panel, in dem die Handkarten angezeigt werden
 
         public int handLimit = 3;
         public PlayerDeck playerDeck;
 
-        public float spreadAngle = 30f; // Maximaler Winkel für den Fächer
+        public float spreadAngle = 30f; // Maximaler Winkel fÃ¼r den FÃ¤cher
         public float handRadius = 200f; // Abstand der Karten zum Mittelpunkt
 
         public CardToHand OtherPlayer;
@@ -63,7 +64,7 @@ namespace dungeonduell
 
             for (int i = 0; i < handCards.Count; i++)
             {
-                // Kartenposition und Rotation für den Fächer-Effekt
+                // Kartenposition und Rotation fÃ¼r den FÃ¤cher-Effekt
                 float angle = Mathf.Lerp(-spreadAngle, spreadAngle, i / cardCount);
                 Vector3 positionOffset = new Vector3(Mathf.Sin(angle * Mathf.Deg2Rad) * handRadius, 0, Mathf.Cos(angle * Mathf.Deg2Rad) * handRadius);
 
@@ -74,8 +75,6 @@ namespace dungeonduell
             }
         }
 
-
-
         // Einzelne Karte anzeigen
         void DisplayCardInHand(Card card, Vector3 positionOffset, float angle)
         {
@@ -84,6 +83,7 @@ namespace dungeonduell
                 GameObject cardObject = Instantiate(cardPrefab, handPanel);
                 DisplayCard cardDisplay = cardObject.GetComponent<DisplayCard>();
                 cardDisplay.cardHolder = transform.GetChild(0).gameObject;
+          
 
                 if (cardDisplay != null)
                 {
@@ -118,16 +118,22 @@ namespace dungeonduell
                 Debug.LogWarning("Das Deck ist leer, keine Karte kann gezogen werden!");
             }
         }
+
         public void ShowHideDeck(bool hide)
         {
             if (hide)
             {
-                transform.position = new Vector3(transform.position.x, -300, transform.position.z);  
+                // Fade Out und Slide Out
+                transform.DOMoveY(-300, 0.5f).OnComplete(() => gameObject.SetActive(false));
             }
             else
             {
-                transform.position = new Vector3(transform.position.x, 0.25f, transform.position.z);
+                // Set Active, Slide In
+                gameObject.SetActive(true);
+                transform.position = new Vector3(transform.position.x, -300, transform.position.z);
+                transform.DOMoveY(0.25f, 0.5f); // Bewege die Y-Position nach oben
             }
         }
+
     }
 }

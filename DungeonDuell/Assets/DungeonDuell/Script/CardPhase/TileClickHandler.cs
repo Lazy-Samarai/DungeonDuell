@@ -12,7 +12,14 @@ namespace dungeonduell
         public Camera cam;
 
         public Tilemap tilemap; 
+        
         public Card currentCard;
+        public bool[] currentDoorDir = new bool[] {true,true,true,true,true,true};
+        public DisplayCard displayCardUi;
+        
+        public GameObject indiactorDoor;
+        public Transform indiactorDoorAnker;
+
         public TileBase resetTile;
 
         public Card[] SpawnInfo;
@@ -96,6 +103,13 @@ namespace dungeonduell
                 SpawnTile(mouseWorldPos, currentCard,true);
 
             }
+            if (Input.GetKeyDown(KeyCode.R)) // Test 
+            {       
+               currentDoorDir = ShiftRight(currentDoorDir);
+               displayCardUi?.UpdateDirectionIndicator(currentDoorDir); // this might be better be resolved with an event later 
+
+              
+            }
         }
 
         private void SpawnTile(Vector3 mouseWorldPos, Card card,bool PlayerMove)
@@ -108,18 +122,25 @@ namespace dungeonduell
             {
                 Debug.Log("Tile clicked at position: " + cellPosition);
                 tilemap.SetTile(cellPosition, card.Tile);
-                CreateRoom(cellPosition, card.roomtype, card.roomElement);
+                CreateRoom(cellPosition, card.roomtype, card.roomElement, currentDoorDir); 
 
                 if (PlayerMove)
                 {
-                    // Karte zum Abwurfstapel hinzufügen und vom CardHolder entfernen    
+                    // Karte zum Abwurfstapel hinzufÃ¼gen und vom CardHolder entfernen    
                     discardPile.AddCardToDiscardPile(card);
                     RemoveCardFromCardHolder(Player_1Turn);
                     ChangePlayer(Player_1Turn);
                     Player_1Turn = !Player_1Turn;
                     currentCard = null;
+                   
 
                 }
+                GameObject indicator = Instantiate(indiactorDoor, tilemap.CellToWorld(cellPosition), Quaternion.identity);
+                indicator.transform.parent = indiactorDoorAnker;       
+                indicator.GetComponent<DoorIndicator>().SetDoorIndiactor(currentDoorDir);
+                
+
+
             }
             else
             {
@@ -139,27 +160,22 @@ namespace dungeonduell
             Transform cardHolder = ((player1) ? HandPlayer1.transform.GetChild(0) : HandPlayer2.transform.GetChild(0));
 
             if (cardHolder.transform.childCount > 0)
-            {
-                Transform cardOnHolder = cardHolder.transform.GetChild(0);
-                DisplayCard cardOnHolderScript = cardOnHolder.GetComponent<DisplayCard>();
-
-                print("----------------");
-                print(cardOnHolderScript);
-                
-                if (cardOnHolderScript != null)
+            {        
+                if (displayCardUi != null)
                 {
-                    Card cardToDiscard = cardOnHolderScript.card;
+                    Card cardToDiscard = displayCardUi.card;
                     discardPile.AddCardToDiscardPile(cardToDiscard);
 
                     // Karte vom CardHolder entfernen
-                    Destroy(cardOnHolder.gameObject);
+                    Destroy(displayCardUi.gameObject);
                 }
             }
 
         }
 
-        private void CreateRoom(Vector3Int clickedTile,RoomType type, RoomElement element)
+        private void CreateRoom(Vector3Int clickedTile,RoomType type, RoomElement element, bool[] allowedDoors)
         {
+           
             Vector3Int[] aroundpos = new Vector3Int[6];
 
             var offsets = (clickedTile.y % 2 == 0) ? aroundHexDiffVectorEVEN : aroundHexDiffVectorODD;
@@ -170,25 +186,58 @@ namespace dungeonduell
             }
             
 
-            int[] establishConnection = connectCollector.GetPossibleConnects(aroundpos);
+            int[] establishConnection = connectCollector.GetPossibleConnects(aroundpos, allowedDoors);
 
             List<RoomConnection> Conncection = new List<RoomConnection>();
+            List<ConnectionDir> newConnectionDir = new List<ConnectionDir>(); ;
 
             for (int i = 0; i < establishConnection.Length; i++)
             {
-                if(establishConnection[i] != -1)
+                if(establishConnection[i] != -1) //All used
                 {
                     Conncection.Add(new RoomConnection(establishConnection[i], (ConnectionDir)i));
                 }
+                if (allowedDoors[i]) // all possible 
+                {
+                    newConnectionDir.Add((ConnectionDir)i);
+                    print(((ConnectionDir)i).ToString());
+                }
                
             }
-
-            connectCollector.AddRoom(clickedTile, Conncection, type, element);
+            connectCollector.AddRoom(clickedTile, Conncection, type, element, newConnectionDir);
 
         }
-        public void ChangeCard(Card newCard)
+        public void ChangeCard(Card newCard, bool[] newcurrentDoorDir, DisplayCard newcurrentCardUi)
         {
             currentCard = newCard;
+            currentDoorDir = newcurrentDoorDir;
+            displayCardUi = newcurrentCardUi;
+        }
+
+
+        //!
+        public bool[] ShiftRight(bool[] array)
+        {
+           
+            bool[] coveredClockwiese = { array[1], array[3], array[5], array[4], array[2], array[0] };
+                  
+          
+            // Create a new array with the same size
+            bool[] shiftedArray = new bool[coveredClockwiese.Length];
+
+            // Shift the elements to the right
+            for (int i = 0; i < (coveredClockwiese.Length -1); i++)
+            {
+                shiftedArray[i + 1] = coveredClockwiese[i];
+            }
+
+            // Move the last element to the first position
+            shiftedArray[0] = coveredClockwiese[coveredClockwiese.Length-1];
+
+            shiftedArray = new bool[]{ shiftedArray[5], shiftedArray[0], shiftedArray[4], shiftedArray[1], shiftedArray[3], shiftedArray[2] };
+
+           
+            return shiftedArray;
         }
 
     }
