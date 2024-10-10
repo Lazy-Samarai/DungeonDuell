@@ -11,17 +11,20 @@ public class RoomInfo {
 
     public RoomElement roommElement = RoomElement.Standard;
 
+    public List<ConnectionDir> allowedDoors;
+
     public RoomInfo(int id, List<RoomConnection> newConncection)
     {
         RoomID = id;
         Conncection = newConncection;
     }
-    public RoomInfo(int id, List<RoomConnection> newConncection, RoomType newRoomtype, RoomElement newRoomElement)
+    public RoomInfo(int id, List<RoomConnection> newConncection, RoomType newRoomtype, RoomElement newRoomElement, List<ConnectionDir> newAllowedDoors)
     {
         RoomID = id;
         Conncection = newConncection;
         roomtype = newRoomtype;
         roommElement = newRoomElement;
+        allowedDoors = newAllowedDoors;
     }
 
 }
