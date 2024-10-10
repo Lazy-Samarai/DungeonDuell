@@ -177,6 +177,10 @@ namespace MoreMountains.TopDownEngine
 		public delegate void OnDeathDelegate();
 		public OnDeathDelegate OnDeath;
 
+		// Füge ein neues Event für die Heilung hinzu
+		public delegate void OnHealDelegate();
+		public OnHealDelegate OnHeal;
+
 		protected Vector3 _initialPosition;
 		protected Renderer _renderer;
 		protected Character _character;
@@ -416,6 +420,32 @@ namespace MoreMountains.TopDownEngine
 
 			return true;
 		}
+		/// <summary>
+		/// Returns true if this Health component can heal this frame, and false otherwise
+		/// </summary>
+		/// <returns></returns>
+		public virtual bool CanHealThisFrame()
+		{
+			// Wenn das Objekt invulnerabel ist oder immun gegen Heilung, kann es nicht geheilt werden
+			if (Invulnerable || ImmuneToDamage)
+			{
+				return false;
+			}
+
+			// Wenn das Objekt bereits die maximale Gesundheit hat, kann es nicht geheilt werden
+			if (CurrentHealth >= MaximumHealth)
+			{
+				return false;
+			}
+
+			// Wenn die Komponente nicht aktiviert ist, kann sie nicht geheilt werden
+			if (!this.enabled)
+			{
+				return false;
+			}
+
+			return true;
+		}
 
 		/// <summary>
 		/// Called when the object takes damage
@@ -601,6 +631,29 @@ namespace MoreMountains.TopDownEngine
 			{
 				Damage(damage, instigator, flickerDuration, invincibilityDuration, damageDirection, typedDamages);
 				yield return MMCoroutine.WaitFor(durationBetweenRepeats);
+			}
+		}
+
+		/// <summary>
+		/// Starts a healing process over time
+		/// </summary>
+		/// <param name="amount">The total amount of health to restore</param>
+		/// <param name="instigator">The object that initiates the healing</param>
+		/// <param name="duration">The total duration over which to heal</param>
+		/// <param name="interval">The time between each healing increment</param>
+		/// <returns></returns>
+		public virtual IEnumerator HealOverTime(float amount, GameObject instigator, float duration, float interval)
+		{
+			float healPerInterval = amount / (duration / interval);
+			float totalHealing = 0f;
+
+			while (totalHealing < amount)
+			{
+				float healingThisInterval = Mathf.Min(healPerInterval, amount - totalHealing);
+				ReceiveHealth(healingThisInterval, instigator);
+				totalHealing += healingThisInterval;
+
+				yield return new WaitForSeconds(interval);
 			}
 		}
 
@@ -986,6 +1039,8 @@ namespace MoreMountains.TopDownEngine
 			{
 				SetHealth(Mathf.Min (CurrentHealth + health,MaximumHealth));	
 			}
+			// Trigger das Heil-Event
+			OnHeal?.Invoke();
 			UpdateHealthBar(true);
 		}
 		

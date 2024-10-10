@@ -43,6 +43,10 @@ namespace MoreMountains.TopDownEngine
 		/// the speed of the character when it's walking
 		[Tooltip("the speed of the character when it's walking")]
 		public float WalkSpeed = 6f;
+
+		//checkt ob der Character im Blizzard ist
+		public bool inBlizzardZone = false;
+
 		/// whether or not this component should set the controller's movement
 		[Tooltip("whether or not this component should set the controller's movement")]
 		public bool ShouldSetMovement = true;
@@ -87,6 +91,7 @@ namespace MoreMountains.TopDownEngine
 		[Tooltip("the sfx to trigger when touching the ground")]
 		public AudioClip[] TouchTheGroundSfx;
 
+		protected float _baseMovementSpeed;
 		protected float _movementSpeed;
 		protected float _horizontalMovement;
 		protected float _verticalMovement;
@@ -537,9 +542,27 @@ namespace MoreMountains.TopDownEngine
 		/// </summary>
 		public virtual void ResetSpeed()
 		{
-			MovementSpeed = WalkSpeed;
+			if (!inBlizzardZone)  // Wenn nicht in Blizzardzone, dann Speed zurücksetzen
+			{
+				MovementSpeed = WalkSpeed;
+			}
+		}
+		public void EnterBlizzardZone(float blizzardMovementMultiplier)
+		{
+			if (!inBlizzardZone)
+			{
+				_baseMovementSpeed = MovementSpeed;  // Speichert den normalen Speed
+			}
+			SetContextSpeedMultiplier(blizzardMovementMultiplier);  // Setzt BlizzardSpeed
+			inBlizzardZone = true;
 		}
 
+		public void ExitBlizzardZone()
+		{
+			inBlizzardZone = false;
+			ResetContextSpeedMultiplier();  // Setzt Speed zurück
+			MovementSpeed = _baseMovementSpeed;  // Stellt normalen Speed wieder her
+		}
 		/// <summary>
 		/// On Respawn, resets the speed
 		/// </summary>
