@@ -148,7 +148,7 @@ namespace dungeonduell
             }
         }
      
-        private void ChangePlayer(bool Player_1Turn)
+        public void ChangePlayer(bool Player_1Turn)
         {
 
             HandPlayer1.ShowHideDeck(Player_1Turn);
