@@ -4,7 +4,6 @@ using UnityEngine;
 using TMPro;
 using Cinemachine;
 
-// TurnManager.cs
 namespace dungeonduell
 {
     public class TurnManager : MonoBehaviour
@@ -14,10 +13,10 @@ namespace dungeonduell
         public CinemachineVirtualCamera transitionCamera;
         public TextMeshProUGUI playerTurnText;
         public TextMeshProUGUI pressAnyKeyText;
-        public TileClickHandler tileClickHandler; // Hinzugefügt für Spielerwechsel-Logik
+        public TileClickHandler tileClickHandler;
 
         private bool awaitingKeyPress = false;
-        private bool isPlayer1Turn = true;
+        public bool isPlayer1Turn = true; // Öffentlich gemacht
 
         void Start()
         {
@@ -28,61 +27,23 @@ namespace dungeonduell
             UpdateCameras();
         }
 
-        public void EndPlayerTurn()
-        {
-            // Diese Methode wird aufgerufen, wenn der Spieler seine Runde abgeschlossen hat
-            ShowPlayerTurn(isPlayer1Turn ? "Player 1" : "Player 2");
-            StartCoroutine(SwitchToTransitionCamera());
-        }
-
-        private IEnumerator SwitchToTransitionCamera()
-        {
-            // Priorität auf die TransitionCamera setzen
-            transitionCamera.Priority = 20;
-            player1Camera.Priority = 10;
-            player2Camera.Priority = 10;
-
-            // Warten auf die Taste
-            awaitingKeyPress = true;
-            pressAnyKeyText.gameObject.SetActive(true);
-
-            while (awaitingKeyPress)
-            {
-                yield return null; // Warte auf die nächste Frame
-            }
-
-            SwitchToNextPlayer();
-        }
-
-        public void SwitchToNextPlayer()
-        {
-            // Zurücksetzen der Prioritäten
-            transitionCamera.Priority = 10;
-
-            // Spielerwechsel
-            isPlayer1Turn = !isPlayer1Turn;
-            UpdateCameras();
-
-            // Spielerwechsel im TileClickHandler
-            tileClickHandler.Player_1Turn = isPlayer1Turn;
-            tileClickHandler.ChangePlayer(isPlayer1Turn);
-        }
-
-        private void ShowPlayerTurn(string playerName)
-        {
-            playerTurnText.text = $"{playerName} ist dran";
-            playerTurnText.gameObject.SetActive(true);
-        }
-
         void Update()
         {
             if (awaitingKeyPress && Input.anyKeyDown)
             {
-                awaitingKeyPress = false;
-                playerTurnText.gameObject.SetActive(false);
-                pressAnyKeyText.gameObject.SetActive(false);
+                EndPlayerTurn();
             }
         }
+
+        public void EndPlayerTurn()
+        {
+            isPlayer1Turn = !isPlayer1Turn;
+            playerTurnText.text = "Current Turn: " + (isPlayer1Turn ? "Player 1" : "Player 2");
+            UpdateCameras();
+
+            tileClickHandler.ChangePlayer(); // Aktualisiere die Spieleransicht
+        }
+
 
         private void UpdateCameras()
         {
@@ -93,8 +54,8 @@ namespace dungeonduell
             }
             else
             {
-                player2Camera.Priority = 20;
                 player1Camera.Priority = 10;
+                player2Camera.Priority = 20;
             }
         }
     }
