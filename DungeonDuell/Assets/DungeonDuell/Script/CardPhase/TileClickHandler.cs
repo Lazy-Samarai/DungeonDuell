@@ -135,14 +135,6 @@ namespace dungeonduell
             }
         }
 
-        public void ChangePlayer()
-        {
-            bool Player_1Turn = turnManager.isPlayer1Turn;
-            HandPlayer1.ShowHideDeck(Player_1Turn);
-            HandPlayer2.ShowHideDeck(!Player_1Turn);
-        }
-
-
         private void RemoveCardFromCardHolder(bool player1)
         {
             Transform cardHolder = ((player1) ? HandPlayer1.transform.GetChild(0) : HandPlayer2.transform.GetChild(0));
@@ -185,7 +177,7 @@ namespace dungeonduell
                 if (allowedDoors[i]) // all possible 
                 {
                     newConnectionDir.Add((ConnectionDir)i);
-                    print(((ConnectionDir)i).ToString());
+                    //print(((ConnectionDir)i).ToString());
                 }
             }
             connectCollector.AddRoom(clickedTile, Conncection, type, element, newConnectionDir);

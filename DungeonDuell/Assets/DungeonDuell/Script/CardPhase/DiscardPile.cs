@@ -11,7 +11,7 @@ namespace dungeonduell
         public void AddCardToDiscardPile(Card card)
         {
             discardPile.Add(card);
-            Debug.Log($"Karte {card.cardName} zum Abwurfstapel hinzugefügt.");
+            //Debug.Log($"Karte {card.cardName} zum Abwurfstapel hinzugefügt.");
         }
     }
 }
