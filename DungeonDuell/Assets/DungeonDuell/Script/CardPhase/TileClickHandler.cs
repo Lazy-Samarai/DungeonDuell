@@ -69,6 +69,7 @@ namespace dungeonduell
             connectCollector = FindObjectOfType<ConnectionsCollector>();
             StartTiles = FindObjectOfType<StartTilesGen>().gameObject;
             tilemap = FindObjectOfType<Tilemap>();
+            turnManager = FindObjectOfType<TurnManager>(); // Finde den TurnManager
 
             Transform[] transformsSpwans = StartTiles.transform.GetChild(0).GetComponentsInChildren<Transform>().Skip(1).ToArray<Transform>(); // jump over parent
 
@@ -86,7 +87,6 @@ namespace dungeonduell
                 SpawnTile(transform.position, WorldCard[i], false);
             }
 
-            turnManager = FindObjectOfType<TurnManager>(); // Finde den TurnManager
         }
 
         void Update()

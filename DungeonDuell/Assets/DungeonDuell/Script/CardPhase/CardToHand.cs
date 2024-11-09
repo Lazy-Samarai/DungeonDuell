@@ -121,13 +121,10 @@ namespace dungeonduell
 
         public void ShowHideDeck(bool hide)
         {
-            Debug.Log($"ShowHideDeck aufgerufen für {gameObject.name}, hide: {hide}");
-
             if (hide)
             {
                 // Setze sofort auf deaktiviert und führe die Animation aus
                 gameObject.SetActive(false); // Deaktiviert das GameObject direkt
-                Debug.Log($"{gameObject.name} wurde sofort deaktiviert.");
 
                 // Fade Out und Slide Out Animation (falls das Objekt aktiviert ist)
                 transform.DOMoveY(-300, 0.5f).Play();
@@ -136,7 +133,6 @@ namespace dungeonduell
             {
                 // Set Active und Animation für Slide In
                 gameObject.SetActive(true); // Aktiviert das GameObject direkt
-                Debug.Log($"{gameObject.name} wurde aktiviert und wird eingeblendet.");
 
                 // Setze die Startposition und führe die Einblend-Animation aus
                 transform.position = new Vector3(transform.position.x, -300, transform.position.z);
