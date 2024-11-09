@@ -53,7 +53,7 @@ namespace dungeonduell
 
             foreach (Tuple<Vector3Int, RoomInfo> roomInfo in RoomsInfosWithPos) // spawing all rooms in 
             {
-                GameObject roomPrefabToUse = GetRoomPrefabByElement(roomInfo.Item2.roommElement);
+                GameObject roomPrefabToUse = GetRoomPrefabByType(roomInfo.Item2.roomtype);
 
                 GameObject Nextroom = Instantiate(roomPrefabToUse ?? roomPrefabs[0], transform);
 
@@ -105,22 +105,22 @@ namespace dungeonduell
         }
 
         // Funktion zum Abrufen des Prefabs basierend auf dem Raumtyp
-        private GameObject GetRoomPrefabByElement(RoomElement roomElement)
+        private GameObject GetRoomPrefabByType(RoomType roomType)
         {
-            switch (roomElement)
+            switch (roomType)
             {
-                case RoomElement.Standard:
-                    return roomPrefabs[0]; // Prefab für Spawn-Raum
-                case RoomElement.Ice:
-                    return roomPrefabs[1]; // Prefab für Eisräume
-                case RoomElement.Fire:
-                    return roomPrefabs[2]; // Prefab für Feuerräume
-                case RoomElement.Water:
-                    return roomPrefabs[3]; // Prefab für Heilungsräume
-                case RoomElement.Hole:
-                    return roomPrefabs[4]; // Prefab für Heilungsräume
+                case RoomType.Generic:
+                    return roomPrefabs[0]; 
+                case RoomType.Spawn_Player1:
+                    return roomPrefabs[1]; 
+                case RoomType.Spawn_Player2:
+                    return roomPrefabs[2]; 
+                case RoomType.NormalLott:
+                    return roomPrefabs[3]; 
+                case RoomType.Enemy:
+                    return roomPrefabs[4]; 
                 default:
-                    return roomPrefabs[0]; // Standard-Prefab, falls nichts passt
+                    return roomPrefabs[0]; 
             }
         }
 
