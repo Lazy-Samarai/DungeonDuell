@@ -9806,7 +9806,7 @@ SpriteRenderer:
   m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300002, guid: dc570d0b68875aa468baed8b33c5965b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.041995525, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -9864,8 +9864,8 @@ GameObject:
   - component: {fileID: 114171358364461030}
   - component: {fileID: 114499223069276626}
   m_Layer: 10
-  m_Name: Koala
-  m_TagString: Player
+  m_Name: PlayerNew_1
+  m_TagString: Player1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10090,6 +10090,7 @@ MonoBehaviour:
   AnalogInput: 0
   ScriptDrivenInput: 0
   WalkSpeed: 6
+  inBlizzardZone: 0
   ShouldSetMovement: 1
   IdleThreshold: 0.05
   Acceleration: 10
@@ -10124,6 +10125,7 @@ MonoBehaviour:
   RunSpeed: 10
   AutoRun: 0
   AutoRunThreshold: 0.6
+  _runningStarted: 0
 --- !u!114 &114495819129293066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10205,7 +10207,8 @@ MonoBehaviour:
   BlockingMovementStates: 
   BlockingConditionStates: 
   BlockingWeaponStates: 
-  InitialWeapon: {fileID: 0}
+  InitialWeapon: {fileID: 114317679573123918, guid: 991cb044f2a248f418806d2b3d221a35,
+    type: 3}
   CanPickupWeapons: 1
   WeaponUseFeedback: {fileID: 0}
   WeaponAttachment: {fileID: 4515663194721164}

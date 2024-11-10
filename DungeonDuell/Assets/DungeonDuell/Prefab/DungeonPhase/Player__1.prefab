@@ -16257,7 +16257,7 @@ MonoBehaviour:
   BlockingMovementStates: 
   BlockingConditionStates: 
   BlockingWeaponStates: 
-  FacingMode: 1
+  FacingMode: 3
   FacingBase: 0
   ModelShouldFlip: 0
   ModelFlipValueLeft: {x: -1, y: 1, z: 1}
@@ -16415,11 +16415,12 @@ MonoBehaviour:
   BlockingMovementStates: 
   BlockingConditionStates: 
   BlockingWeaponStates: 
-  InitialWeapon: {fileID: 114594623923584052, guid: dfb40995167d3fa44aecefc02ff16b8f,
+  InitialWeapon: {fileID: 114317679573123918, guid: ef7ca4ca5f5bb254990e81793fdf84df,
     type: 3}
   CanPickupWeapons: 1
   WeaponUseFeedback: {fileID: 0}
-  WeaponAttachment: {fileID: 6311937573262293285}
+  WeaponAttachment: {fileID: 4515663194721164, guid: d10f21fe58d61fe47892a784b3e8227d,
+    type: 3}
   ProjectileSpawn: {fileID: 0}
   AutomaticallyBindAnimator: 1
   AmmoDisplayID: 0
@@ -16430,7 +16431,7 @@ MonoBehaviour:
   ForceWeaponAimControl: 0
   ForcedWeaponAimControl: 1
   ForceAlwaysShoot: 0
-  BufferInput: 0
+  BufferInput: 1
   NewInputExtendsBuffer: 0
   MaximumBufferDuration: 0.25
   RequiresPerfectTile: 0
