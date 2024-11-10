@@ -123,17 +123,25 @@ namespace dungeonduell
         {
             if (hide)
             {
-                // Fade Out und Slide Out
-                transform.DOMoveY(-300, 0.5f).OnComplete(() => gameObject.SetActive(false));
+                // Setze sofort auf deaktiviert und führe die Animation aus
+                gameObject.SetActive(false); // Deaktiviert das GameObject direkt
+
+                // Fade Out und Slide Out Animation (falls das Objekt aktiviert ist)
+                transform.DOMoveY(-300, 0.5f).Play();
             }
             else
             {
-                // Set Active, Slide In
-                gameObject.SetActive(true);
+                // Set Active und Animation für Slide In
+                gameObject.SetActive(true); // Aktiviert das GameObject direkt
+
+                // Setze die Startposition und führe die Einblend-Animation aus
                 transform.position = new Vector3(transform.position.x, -300, transform.position.z);
-                transform.DOMoveY(0.25f, 0.5f); // Bewege die Y-Position nach oben
+                transform.DOMoveY(0.25f, 0.5f).Play();
             }
         }
+
+
+
 
     }
 }
