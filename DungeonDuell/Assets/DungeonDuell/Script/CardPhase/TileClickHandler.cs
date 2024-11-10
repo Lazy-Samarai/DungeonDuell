@@ -124,10 +124,10 @@ namespace dungeonduell
                     turnManager.EndPlayerTurn(); // Übergib die Verantwortung an den TurnManager
                     currentCard = null;
 
+                }
                     GameObject indicator = Instantiate(indiactorDoor, tilemap.CellToWorld(cellPosition), Quaternion.identity);
                     indicator.transform.parent = indiactorDoorAnker;
                     indicator.GetComponent<DoorIndicator>().SetDoorIndiactor(currentDoorDir);
-                }
             }
             else
             {
