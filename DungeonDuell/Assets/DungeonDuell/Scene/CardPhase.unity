@@ -148,13 +148,13 @@ Transform:
   m_GameObject: {fileID: 64682200}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -403.08047, y: -1451.5289, z: 21.314993}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1190827256}
   - {fileID: 1066758488}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1117561725}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &297264526
 GameObject:
@@ -1019,10 +1019,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f59f14b0cd7525648b2ff384931bf41c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useDistributorSystem: 1
+  firstTime: 1
+  cardDistributors:
+  - {fileID: 11400000, guid: 408774f5de3fb05428908e9c0892defc, type: 2}
+  - {fileID: 11400000, guid: 0776e2d63a5c8414f8d74ec81880c54f, type: 2}
+  - {fileID: 11400000, guid: 3b4a12cce42157c4489e70176962620c, type: 2}
+  - {fileID: 11400000, guid: c06abd45ac5fd1d4ab391904a8a167f4, type: 2}
+  - {fileID: 11400000, guid: 729fa808e1553564aa7b293eb5c0e9fe, type: 2}
+  - {fileID: 11400000, guid: 403934d1fa0db994582d6f66607dfc87, type: 2}
+  - {fileID: 11400000, guid: 51090c1dabd61504c888f0d31291ae42, type: 2}
+  - {fileID: 11400000, guid: 7866ce15b7cbf43428d7f46f1e8049e5, type: 2}
   availableCards:
-  - {fileID: 11400000, guid: b11375ef6b1171d4d98007cba7983a3a, type: 2}
-  - {fileID: 11400000, guid: 4f087b04952f9c34e9e59062310a9af1, type: 2}
-  - {fileID: 11400000, guid: 92fb081e2034b5c44817cd1537fce96b, type: 2}
+  - {fileID: 11400000, guid: 01b2ae3e79fbd2e4c847449f25fad382, type: 2}
+  - {fileID: 11400000, guid: 3a75c87f9a1510846b79236b090fa80c, type: 2}
   playerDeck: []
   deckSize: 10
 --- !u!1 &1066758487
@@ -1095,13 +1105,13 @@ Transform:
   m_GameObject: {fileID: 1091502658}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -403.08047, y: -1451.5289, z: 21.314993}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1494809203}
   - {fileID: 1010877894}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1117561725}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1099633266
 GameObject:
@@ -1147,6 +1157,39 @@ Transform:
   m_Children:
   - {fileID: 1009411791}
   - {fileID: 1162489421}
+  m_Father: {fileID: 1945806929}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1117561724
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1117561725}
+  m_Layer: 0
+  m_Name: DeckMangment
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1117561725
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1117561724}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 403.08047, y: 1451.5289, z: -21.314993}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1091502659}
+  - {fileID: 64682201}
   m_Father: {fileID: 1945806929}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1148792060
@@ -1815,12 +1858,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f59f14b0cd7525648b2ff384931bf41c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useDistributorSystem: 1
+  firstTime: 1
+  cardDistributors:
+  - {fileID: 11400000, guid: 408774f5de3fb05428908e9c0892defc, type: 2}
+  - {fileID: 11400000, guid: 0776e2d63a5c8414f8d74ec81880c54f, type: 2}
+  - {fileID: 11400000, guid: 3b4a12cce42157c4489e70176962620c, type: 2}
+  - {fileID: 11400000, guid: c06abd45ac5fd1d4ab391904a8a167f4, type: 2}
+  - {fileID: 11400000, guid: 729fa808e1553564aa7b293eb5c0e9fe, type: 2}
+  - {fileID: 11400000, guid: 005cae8624d43644da5ed42c8c7a0264, type: 2}
+  - {fileID: 11400000, guid: 403934d1fa0db994582d6f66607dfc87, type: 2}
+  - {fileID: 11400000, guid: 51090c1dabd61504c888f0d31291ae42, type: 2}
+  - {fileID: 11400000, guid: 7866ce15b7cbf43428d7f46f1e8049e5, type: 2}
   availableCards:
-  - {fileID: 11400000, guid: b11375ef6b1171d4d98007cba7983a3a, type: 2}
-  - {fileID: 11400000, guid: 4f087b04952f9c34e9e59062310a9af1, type: 2}
-  - {fileID: 11400000, guid: 92fb081e2034b5c44817cd1537fce96b, type: 2}
+  - {fileID: 11400000, guid: 01b2ae3e79fbd2e4c847449f25fad382, type: 2}
+  - {fileID: 11400000, guid: 3a75c87f9a1510846b79236b090fa80c, type: 2}
   playerDeck: []
-  deckSize: 10
+  deckSize: 3
 --- !u!4 &1494809203
 Transform:
   m_ObjectHideFlags: 0
@@ -15659,6 +15713,7 @@ Transform:
   - {fileID: 679876426}
   - {fileID: 1099633268}
   - {fileID: 1330985300}
+  - {fileID: 1117561725}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1945806930
@@ -16119,8 +16174,6 @@ SceneRoots:
   - {fileID: 1945806929}
   - {fileID: 1682481816}
   - {fileID: 481254718}
-  - {fileID: 1091502659}
-  - {fileID: 64682201}
   - {fileID: 517887069}
   - {fileID: 1363916251}
   - {fileID: 1557636385}
