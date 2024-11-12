@@ -78,6 +78,8 @@ namespace dungeonduell
                     cardTransform.localPosition += hoverOffset; // Verschiebe die Karte nach oben (Y-Achse)
                     cardTransform.localRotation = Quaternion.Euler(0f, 0f, 0f); // Setzt die Rotation temporär auf 0
 
+                    
+
                     // Tooltip anzeigen
                     if (tooltip != null)
                     {
@@ -108,6 +110,7 @@ namespace dungeonduell
                     cardTransform.localPosition -= hoverOffset; // Setzt die Y-Position zurück
                     cardTransform.localRotation = originalRotation;
 
+                    
                     // Tooltip ausblenden
                     if (tooltip != null)
                     {

@@ -8,10 +8,10 @@ namespace dungeonduell
     public class PlayerDeck : MonoBehaviour
     {
         // Liste der verfügbaren Karten. Mit allen ScriptableObjectCards im Editor füllen
-
-
         public bool useDistributorSystem = true;
+
         public bool firstTime = true;
+
         public List<CardDistributor> cardDistributors = new List<CardDistributor>();
 
         public List<Card> availableCards = new List<Card>();
