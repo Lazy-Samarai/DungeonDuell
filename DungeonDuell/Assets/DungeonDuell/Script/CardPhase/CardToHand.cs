@@ -6,6 +6,7 @@ namespace dungeonduell
 {
     public class CardToHand : MonoBehaviour
     {
+
         public List<Card> handCards = new List<Card>(); // Liste der Karten in der Hand
         public GameObject cardPrefab; // Prefab für die Handkarten (falls du ein UI-Element dafür hast)
         public Transform handPanel; // UI-Panel, in dem die Handkarten angezeigt werden
