@@ -126,7 +126,13 @@ namespace dungeonduell
 
                 }
                     GameObject indicator = Instantiate(indiactorDoor, tilemap.CellToWorld(cellPosition), Quaternion.identity);
-                    indicator.transform.parent = indiactorDoorAnker;
+                    if(indiactorDoorAnker == null)
+                    {
+                    indiactorDoorAnker = GameObject.Find("IndicatorsAnker").transform; // TODO HotFix ; Make better later
+
+                    }
+                
+                indicator.transform.parent = indiactorDoorAnker;
                     indicator.GetComponent<DoorIndicator>().SetDoorIndiactor(currentDoorDir);
             }
             else

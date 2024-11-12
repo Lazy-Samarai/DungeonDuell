@@ -18,7 +18,7 @@ namespace dungeonduell
 
         public List<Card> playerDeck = new List<Card>();
 
-        public int deckSize = 20;
+        public int deckSize = 3;
 
 
         void OnEnable()
@@ -32,25 +32,21 @@ namespace dungeonduell
             SceneManager.sceneLoaded -= OnSceneLoaded;
         }
 
-        void Awake()
-        {  
-            GenerateRandomDeck();
-        }
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            if (!firstTime)
+            
+            
+            if (scene.buildIndex == 0)
             {
-                if (scene.buildIndex == 0)
-                {
                     GenerateRandomDeck();
-                }
             }
+            
             
         }
 
         void GenerateRandomDeck()
         {
-            if (useDistributorSystem && firstTime)
+            if (firstTime)
             {
                 GetPerDistributer();
                 firstTime = false;
@@ -67,6 +63,7 @@ namespace dungeonduell
             // Zufällig Karten auswählen und dem Deck hinzufügen 
             for (int i = 0; i < deckSize; i++)
             {
+                print(i);
                 int randomIndex = Random.Range(0, availableCards.Count);             
                 playerDeck.Add(availableCards[randomIndex]);         
                 availableCards.RemoveAt(randomIndex);
