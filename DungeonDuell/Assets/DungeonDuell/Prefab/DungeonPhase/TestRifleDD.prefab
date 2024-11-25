@@ -5068,6 +5068,7 @@ GameObject:
   - component: {fileID: 114345180357598506}
   - component: {fileID: 114251315345146356}
   - component: {fileID: -1803590343298730861}
+  - component: {fileID: 6580491061123051137}
   m_Layer: 0
   m_Name: TestRifleDD
   m_TagString: Untagged
@@ -5110,7 +5111,7 @@ MonoBehaviour:
   TriggerMode: 1
   DelayBeforeUse: 0
   DelayBeforeUseReleaseInterruption: 1
-  TimeBetweenUses: 0.15
+  TimeBetweenUses: 1
   TimeBetweenUsesReleaseInterruption: 1
   UseBurstMode: 0
   BurstLength: 3
@@ -5260,6 +5261,20 @@ MonoBehaviour:
   CheckMouse: 1
   CheckPrimaryAxis: 1
   CheckSecondaryAxis: 1
+--- !u!114 &6580491061123051137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490220044263310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b57512bf94c7f842879ca85f5a3d6e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UpLevelKey: 111
+  DownLevelKey: 105
 --- !u!1 &1806446063217534
 GameObject:
   m_ObjectHideFlags: 0
@@ -5335,7 +5350,7 @@ SpriteRenderer:
   m_SortingLayer: 4
   m_SortingOrder: 5
   m_Sprite: {fileID: 21300002, guid: 75df1bb8b302ceb4a9230d70d1b2e97e, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.36320752, g: 0.40066594, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
