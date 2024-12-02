@@ -84,7 +84,7 @@ namespace dungeonduell
             {
                 print(transformsWorld[i].name);
                 Transform transform = transformsWorld[i];
-                SpawnTile(transform.position, WorldCard[i], false);
+                SpawnTile(transform.position, WorldCard[0], false);
             }
 
         }
