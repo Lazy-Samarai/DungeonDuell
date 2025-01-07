@@ -3,6 +3,7 @@ using MoreMountains.Tools;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 namespace MoreMountains.TopDownEngine
@@ -14,6 +15,8 @@ namespace MoreMountains.TopDownEngine
 		{
 			public string PlayerID;
 			public int Points;
+			public int Level;
+			public int CoinsForNextLevel;
 		}
 		
 
@@ -24,6 +27,9 @@ namespace MoreMountains.TopDownEngine
 		/// the list of countdowns we need to update
 		[Tooltip("the list of countdowns we need to update")]
 		public List<MMCountdown> Countdowns;
+
+		protected string _currentPlayerID;
+
 
 		public virtual string WinnerID { get; set; }
 
@@ -47,8 +53,11 @@ namespace MoreMountains.TopDownEngine
 			{
 				Points[i].PlayerID = player.PlayerID;
 				Points[i].Points = 0;
+				Points[i].Level = 1;
+				Points[i].CoinsForNextLevel = 10; // Startkosten
 				i++;
 			}
+			
 		}
 
 		/// <summary>
@@ -161,15 +170,122 @@ namespace MoreMountains.TopDownEngine
 				if (Points[i].PlayerID == _playerID)
 				{
 					Points[i].Points++;
+					if (Points[i].Points >= Points[i].CoinsForNextLevel)
+					{
+						TriggerLevelUp(i);
+					}
 					TopDownEngineEvent.Trigger(TopDownEngineEventTypes.Repaint, null);
 				}
 			}
 		}
 
-		/// <summary>
-		/// Starts listening for pickable item events
-		/// </summary>
-		protected override void OnEnable()
+		protected void TriggerLevelUp(int playerIndex)
+		{
+			Points[playerIndex].Points -= Points[playerIndex].CoinsForNextLevel;
+			Points[playerIndex].CoinsForNextLevel *= 2; // Kosten verdoppeln
+
+			_currentPlayerID = Points[playerIndex].PlayerID;
+
+		}
+
+
+		public void ApplyLevelUp(GameManager.LevelUpOptions option)
+		{
+			
+			for (int i = 0; i < Points.Length; i++)
+			{
+				if (Points[i].PlayerID == _currentPlayerID)
+				{
+					Points[i].Level++;
+					Debug.Log($"Spieler {_currentPlayerID} ist jetzt Level {Points[i].Level}");
+
+					switch (option)
+					{
+						case GameManager.LevelUpOptions.Speed:
+							ApplySpeedIncrease(_currentPlayerID);
+							break;
+						case GameManager.LevelUpOptions.Health:
+							ApplyHealthIncrease(_currentPlayerID);
+							break;
+						case GameManager.LevelUpOptions.AttackSpeed:
+							ApplyAttackSpeedIncrease(_currentPlayerID);
+							break;
+					}
+				}
+			}
+		}
+
+		private void ApplySpeedIncrease(string playerID)
+		{
+			CharacterMovement movement = GetPlayerMovement(playerID);
+			if (movement != null)
+			{
+				movement.WalkSpeed += 1.0f;
+				movement.MovementSpeed += 1.0f;
+			}
+		}
+
+		private void ApplyHealthIncrease(string playerID)
+		{
+			Character character = GetPlayerCharacter(playerID);
+			Health health = character?.GetComponent<Health>();
+			if (health != null)
+			{
+				health.MaximumHealth += 10;
+				health.SetHealth(Mathf.Min(health.CurrentHealth + 10, health.MaximumHealth));
+			}
+		}
+
+		private void ApplyAttackSpeedIncrease(string playerID)
+		{
+			ProjectileWeapon weapon = GetPlayerWeapon(playerID);
+			if (weapon != null)
+			{
+				weapon.TimeBetweenUses *= 0.9f; // Schnellere Angriffe
+			}
+		}
+
+		private CharacterMovement GetPlayerMovement(string playerID)
+		{
+			foreach (CharacterMovement movement in FindObjectsOfType<CharacterMovement>())
+			{
+				if (movement.GetComponent<Character>().PlayerID == playerID)
+				{
+					return movement;
+				}
+			}
+			return null;
+		}
+
+		private Character GetPlayerCharacter(string playerID)
+		{
+			foreach (Character character in FindObjectsOfType<Character>())
+			{
+				if (character.PlayerID == playerID)
+				{
+					return character;
+				}
+			}
+			return null;
+		}
+
+		private ProjectileWeapon GetPlayerWeapon(string playerID)
+		{
+			foreach (ProjectileWeapon weapon in FindObjectsOfType<ProjectileWeapon>())
+			{
+				if (weapon.GetComponent<Character>().PlayerID == playerID)
+				{
+					return weapon;
+				}
+			}
+			return null;
+		}
+	
+
+	/// <summary>
+	/// Starts listening for pickable item events
+	/// </summary>
+	protected override void OnEnable()
 		{
 			base.OnEnable();
 			this.MMEventStartListening<PickableItemEvent>();

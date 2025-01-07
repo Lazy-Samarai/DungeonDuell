@@ -112,7 +112,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5279826695300404299, guid: 006b6d17348e72c4ca0fe5dddc5400cf,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1369455869845209615}
   m_SourcePrefab: {fileID: 100100000, guid: 006b6d17348e72c4ca0fe5dddc5400cf, type: 3}
 --- !u!4 &2921335272686268624 stripped
 Transform:
@@ -120,6 +124,36 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3891480722564365214}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &9170709272801832917 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5279826695300404299, guid: 006b6d17348e72c4ca0fe5dddc5400cf,
+    type: 3}
+  m_PrefabInstance: {fileID: 3891480722564365214}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1369455869845209615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9170709272801832917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c704680c90181c648a0b5cb809aa40ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PickedMMFeedbacks: {fileID: 5951227242415138528}
+  DisableColliderOnPick: 0
+  DisableObjectOnPick: 1
+  DisableDelay: 0
+  DisableModelOnPick: 0
+  DisableTargetObjectOnPick: 0
+  TargetObjectToDisable: {fileID: 0}
+  TargetObjectDisableDelay: 1
+  Model: {fileID: 0}
+  RequireCharacterComponent: 1
+  RequirePlayerType: 1
+  PointsToAdd: 10
 --- !u!1001 &4520692878935084344
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -196,7 +230,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5279826695300404299, guid: 006b6d17348e72c4ca0fe5dddc5400cf,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3752092815373202146}
   m_SourcePrefab: {fileID: 100100000, guid: 006b6d17348e72c4ca0fe5dddc5400cf, type: 3}
 --- !u!4 &2321396505201755766 stripped
 Transform:
@@ -204,6 +242,36 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4520692878935084344}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8644954562321521011 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5279826695300404299, guid: 006b6d17348e72c4ca0fe5dddc5400cf,
+    type: 3}
+  m_PrefabInstance: {fileID: 4520692878935084344}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3752092815373202146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8644954562321521011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c704680c90181c648a0b5cb809aa40ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PickedMMFeedbacks: {fileID: 5951227242415138528}
+  DisableColliderOnPick: 0
+  DisableObjectOnPick: 1
+  DisableDelay: 0
+  DisableModelOnPick: 0
+  DisableTargetObjectOnPick: 0
+  TargetObjectToDisable: {fileID: 0}
+  TargetObjectDisableDelay: 1
+  Model: {fileID: 0}
+  RequireCharacterComponent: 1
+  RequirePlayerType: 1
+  PointsToAdd: 10
 --- !u!1001 &7081702752528536054
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -280,8 +348,42 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5279826695300404299, guid: 006b6d17348e72c4ca0fe5dddc5400cf,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3450261774075665695}
   m_SourcePrefab: {fileID: 100100000, guid: 006b6d17348e72c4ca0fe5dddc5400cf, type: 3}
+--- !u!1 &3099309173781808573 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5279826695300404299, guid: 006b6d17348e72c4ca0fe5dddc5400cf,
+    type: 3}
+  m_PrefabInstance: {fileID: 7081702752528536054}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3450261774075665695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3099309173781808573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c704680c90181c648a0b5cb809aa40ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PickedMMFeedbacks: {fileID: 5951227242415138528}
+  DisableColliderOnPick: 0
+  DisableObjectOnPick: 1
+  DisableDelay: 0
+  DisableModelOnPick: 0
+  DisableTargetObjectOnPick: 0
+  TargetObjectToDisable: {fileID: 0}
+  TargetObjectDisableDelay: 1
+  Model: {fileID: 0}
+  RequireCharacterComponent: 1
+  RequirePlayerType: 1
+  PointsToAdd: 10
 --- !u!4 &8992765728065886904 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2201129828444408654, guid: 006b6d17348e72c4ca0fe5dddc5400cf,
@@ -338,6 +440,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26615dc5bedcf8349b8dc80d84a1487b, type: 3}
+--- !u!114 &5951227242415138528 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4035032643149705303, guid: 26615dc5bedcf8349b8dc80d84a1487b,
+    type: 3}
+  m_PrefabInstance: {fileID: 7307179911549228727}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6da43522623d4704e979466dc7650b65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7311972963431581089 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4795800972071702, guid: 26615dc5bedcf8349b8dc80d84a1487b,
@@ -420,8 +534,42 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5279826695300404299, guid: 006b6d17348e72c4ca0fe5dddc5400cf,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6468204506027196023}
   m_SourcePrefab: {fileID: 100100000, guid: 006b6d17348e72c4ca0fe5dddc5400cf, type: 3}
+--- !u!1 &3918399602682831792 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5279826695300404299, guid: 006b6d17348e72c4ca0fe5dddc5400cf,
+    type: 3}
+  m_PrefabInstance: {fileID: 9161805752131680251}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6468204506027196023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3918399602682831792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c704680c90181c648a0b5cb809aa40ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PickedMMFeedbacks: {fileID: 5951227242415138528}
+  DisableColliderOnPick: 0
+  DisableObjectOnPick: 1
+  DisableDelay: 0
+  DisableModelOnPick: 0
+  DisableTargetObjectOnPick: 0
+  TargetObjectToDisable: {fileID: 0}
+  TargetObjectDisableDelay: 1
+  Model: {fileID: 0}
+  RequireCharacterComponent: 1
+  RequirePlayerType: 1
+  PointsToAdd: 10
 --- !u!4 &7038772316368698549 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2201129828444408654, guid: 006b6d17348e72c4ca0fe5dddc5400cf,

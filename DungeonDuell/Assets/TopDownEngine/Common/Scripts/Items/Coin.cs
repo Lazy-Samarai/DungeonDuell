@@ -20,8 +20,18 @@ namespace MoreMountains.TopDownEngine
 		/// <param name="collider">Other.</param>
 		protected override void Pick(GameObject picker) 
 		{
-			// we send a new points event for the GameManager to catch (and other classes that may listen to it too)
-			TopDownEnginePointEvent.Trigger(PointsMethods.Add, PointsToAdd);
+			Debug.Log("Münze aufgenommen");
+			Character character = picker.GetComponent<Character>();
+			if (character != null)
+			{
+				Debug.Log($"Player ID: {character.PlayerID}");
+				GameManager.Instance.AddCoins(character.PlayerID, 1);
+			}
+			else
+			{
+				Debug.LogError("Character konnte nicht gefunden werden.");
+			}
 		}
+		
 	}
 }
