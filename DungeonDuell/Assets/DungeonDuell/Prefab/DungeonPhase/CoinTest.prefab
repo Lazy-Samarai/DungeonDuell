@@ -124,6 +124,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3891480722564365214}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8449279233743519869 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4846031163684600803, guid: 006b6d17348e72c4ca0fe5dddc5400cf,
+    type: 3}
+  m_PrefabInstance: {fileID: 3891480722564365214}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6da43522623d4704e979466dc7650b65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9170709272801832917 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5279826695300404299, guid: 006b6d17348e72c4ca0fe5dddc5400cf,
@@ -142,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c704680c90181c648a0b5cb809aa40ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PickedMMFeedbacks: {fileID: 5951227242415138528}
+  PickedMMFeedbacks: {fileID: 8449279233743519869}
   DisableColliderOnPick: 0
   DisableObjectOnPick: 1
   DisableDelay: 0
@@ -260,7 +272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c704680c90181c648a0b5cb809aa40ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PickedMMFeedbacks: {fileID: 5951227242415138528}
+  PickedMMFeedbacks: {fileID: 9078189857610987227}
   DisableColliderOnPick: 0
   DisableObjectOnPick: 1
   DisableDelay: 0
@@ -272,6 +284,18 @@ MonoBehaviour:
   RequireCharacterComponent: 1
   RequirePlayerType: 1
   PointsToAdd: 10
+--- !u!114 &9078189857610987227 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4846031163684600803, guid: 006b6d17348e72c4ca0fe5dddc5400cf,
+    type: 3}
+  m_PrefabInstance: {fileID: 4520692878935084344}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6da43522623d4704e979466dc7650b65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7081702752528536054
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -558,7 +582,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c704680c90181c648a0b5cb809aa40ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PickedMMFeedbacks: {fileID: 5951227242415138528}
+  PickedMMFeedbacks: {fileID: 4352107134177299480}
   DisableColliderOnPick: 0
   DisableObjectOnPick: 1
   DisableDelay: 0
@@ -570,6 +594,18 @@ MonoBehaviour:
   RequireCharacterComponent: 1
   RequirePlayerType: 1
   PointsToAdd: 10
+--- !u!114 &4352107134177299480 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4846031163684600803, guid: 006b6d17348e72c4ca0fe5dddc5400cf,
+    type: 3}
+  m_PrefabInstance: {fileID: 9161805752131680251}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6da43522623d4704e979466dc7650b65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7038772316368698549 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2201129828444408654, guid: 006b6d17348e72c4ca0fe5dddc5400cf,

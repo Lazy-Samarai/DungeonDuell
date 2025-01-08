@@ -1,6 +1,9 @@
 using UnityEngine;
 using System.Collections;
 using MoreMountains.Tools;
+using MoreMountains.TopDownEngine;
+
+
 
 namespace MoreMountains.TopDownEngine
 {
@@ -25,7 +28,18 @@ namespace MoreMountains.TopDownEngine
 			if (character != null)
 			{
 				Debug.Log($"Player ID: {character.PlayerID}");
-				GameManager.Instance.AddCoins(character.PlayerID, 1);
+				// Rufe die AddCoins-Methode im Level-Manager auf
+				/*
+				var levelManager = FindObjectOfType<DungeonDuellMultiplayerLevelManager>();
+				if (levelManager != null)
+				{
+					levelManager.AddCoins(character.PlayerID, PointsToAdd);
+				}
+				else
+				{
+					Debug.LogError("DungeonDuellMultiplayerLevelManager konnte nicht gefunden werden.");
+				}
+				*/
 			}
 			else
 			{

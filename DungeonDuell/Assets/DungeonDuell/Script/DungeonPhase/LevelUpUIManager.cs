@@ -1,7 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
 using MoreMountains.Tools;
 using UnityEngine.EventSystems;
+
 
 namespace MoreMountains.TopDownEngine
 {
@@ -21,9 +24,9 @@ namespace MoreMountains.TopDownEngine
         {
             _levelManager = FindObjectOfType<DungeonDuellMultiplayerLevelManager>();
 
-            SpeedButton.onClick.AddListener(() => OnOptionSelected(GameManager.LevelUpOptions.Speed));
-            HealthButton.onClick.AddListener(() => OnOptionSelected(GameManager.LevelUpOptions.Health));
-            AttackSpeedButton.onClick.AddListener(() => OnOptionSelected(GameManager.LevelUpOptions.AttackSpeed));
+            SpeedButton.onClick.AddListener(() => OnOptionSelected(LevelUpOptions.Speed));
+            HealthButton.onClick.AddListener(() => OnOptionSelected(LevelUpOptions.Health));
+            AttackSpeedButton.onClick.AddListener(() => OnOptionSelected(LevelUpOptions.AttackSpeed));
 
             HideLevelUpMenu();
         }
@@ -39,7 +42,7 @@ namespace MoreMountains.TopDownEngine
             LevelUpMenu.SetActive(false);
         }
 
-        private void OnOptionSelected(GameManager.LevelUpOptions option)
+        private void OnOptionSelected(LevelUpOptions option)
         {
             if (_levelManager != null)
             {

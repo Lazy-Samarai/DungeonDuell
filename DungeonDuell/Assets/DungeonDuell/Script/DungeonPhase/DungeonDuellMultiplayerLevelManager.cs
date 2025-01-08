@@ -3,11 +3,17 @@ using MoreMountains.Tools;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 namespace MoreMountains.TopDownEngine
 {
+
+	public enum LevelUpOptions
+	{
+		Speed,
+		Health,
+		AttackSpeed
+    }
 	// Partically Copy from Grasslands
     public class DungeonDuellMultiplayerLevelManager : MultiplayerLevelManager, MMEventListener<PickableItemEvent>
     {
@@ -186,10 +192,13 @@ namespace MoreMountains.TopDownEngine
 
 			_currentPlayerID = Points[playerIndex].PlayerID;
 
+			// Zeige das Level-Up-Menü für den Spieler
+			FindObjectOfType<LevelUpUIManager>().ShowLevelUpMenu(_currentPlayerID);
+
 		}
 
 
-		public void ApplyLevelUp(GameManager.LevelUpOptions option)
+		public void ApplyLevelUp(LevelUpOptions option)
 		{
 			
 			for (int i = 0; i < Points.Length; i++)
@@ -201,13 +210,13 @@ namespace MoreMountains.TopDownEngine
 
 					switch (option)
 					{
-						case GameManager.LevelUpOptions.Speed:
+						case LevelUpOptions.Speed:
 							ApplySpeedIncrease(_currentPlayerID);
 							break;
-						case GameManager.LevelUpOptions.Health:
+						case LevelUpOptions.Health:
 							ApplyHealthIncrease(_currentPlayerID);
 							break;
-						case GameManager.LevelUpOptions.AttackSpeed:
+						case LevelUpOptions.AttackSpeed:
 							ApplyAttackSpeedIncrease(_currentPlayerID);
 							break;
 					}
@@ -242,6 +251,11 @@ namespace MoreMountains.TopDownEngine
 			if (weapon != null)
 			{
 				weapon.TimeBetweenUses *= 0.9f; // Schnellere Angriffe
+				Debug.Log($"Angriffsgeschwindigkeit für Spieler {playerID} verbessert.");
+			}
+			else
+			{
+				Debug.LogWarning($"Spieler {playerID}'s Waffe wurde nicht gefunden. Angriffsgeschwindigkeit kann nicht verbessert werden.");
 			}
 		}
 
