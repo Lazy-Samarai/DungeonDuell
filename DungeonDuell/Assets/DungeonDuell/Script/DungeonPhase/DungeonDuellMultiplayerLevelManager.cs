@@ -2,6 +2,7 @@ using MoreMountains.Feedbacks;
 using MoreMountains.Tools;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,7 +16,7 @@ namespace MoreMountains.TopDownEngine
 		AttackSpeed
     }
 	// Partically Copy from Grasslands
-    public class DungeonDuellMultiplayerLevelManager : MultiplayerLevelManager, MMEventListener<PickableItemEvent>
+    public class DungeonDuellMultiplayerLevelManager : MultiplayerLevelManager, MMEventListener<PointsMethods>
     {
 		public struct DDPoints
 		{
@@ -294,15 +295,28 @@ namespace MoreMountains.TopDownEngine
 			}
 			return null;
 		}
-	
 
-	/// <summary>
-	/// Starts listening for pickable item events
-	/// </summary>
-	protected override void OnEnable()
+
+        public virtual void OnMMEvent(PointsMethods engineEvent)
+        {
+            print("Event Trigeered");
+            switch (engineEvent)
+            {
+                case PointsMethods.Add:
+					print("*Coin Got Methid Insert Here");
+                    break;
+            
+            }
+        }
+
+
+        /// <summary>
+        /// Starts listening for pickable item events
+        /// </summary>
+        protected override void OnEnable()
 		{
 			base.OnEnable();
-			this.MMEventStartListening<PickableItemEvent>();
+			this.MMEventStartListening<PointsMethods>();
 		}
 
 		/// <summary>
@@ -311,7 +325,7 @@ namespace MoreMountains.TopDownEngine
 		protected override void OnDisable()
 		{
 			base.OnDisable();
-			this.MMEventStopListening<PickableItemEvent>();
+			this.MMEventStopListening<PointsMethods>();
 		}
 	}
 }

@@ -4,7 +4,6 @@ using MoreMountains.Tools;
 using MoreMountains.TopDownEngine;
 
 
-
 namespace MoreMountains.TopDownEngine
 {
 	/// <summary>
@@ -23,7 +22,11 @@ namespace MoreMountains.TopDownEngine
 		/// <param name="collider">Other.</param>
 		protected override void Pick(GameObject picker) 
 		{
-			Debug.Log("Münze aufgenommen");
+
+
+            TopDownEnginePointEvent.Trigger(PointsMethods.Add, PointsToAdd);
+
+            Debug.Log("Münze aufgenommen");
 			Character character = picker.GetComponent<Character>();
 			if (character != null)
 			{
