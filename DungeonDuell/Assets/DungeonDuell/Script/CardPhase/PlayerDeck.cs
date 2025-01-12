@@ -7,6 +7,7 @@ namespace dungeonduell
 {
     public class PlayerDeck : MonoBehaviour
     {
+        public int designatedCardScene = 0;
         // Liste der verfügbaren Karten. Mit allen ScriptableObjectCards im Editor füllen
         public bool useDistributorSystem = true;
 
@@ -36,7 +37,7 @@ namespace dungeonduell
         {
             
             
-            if (scene.buildIndex == 0)
+            if (scene.buildIndex == designatedCardScene)
             {
                     GenerateRandomDeck();
             }
