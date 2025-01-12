@@ -10,14 +10,20 @@ namespace dungeonduell
         GameObject StartTiles;
         TileClickHandler tileClickHandler;
         public Card[] SpawnInfo;
-        public Card[] WorldCard;
+        public Card[] WorldCard;  
 
         void Start()
         {
             StartTiles = FindObjectOfType<StartTilesGen>().gameObject;
             tileClickHandler = FindObjectOfType<TileClickHandler>();
             SpawnTiles();
-            Destroy(gameObject);
+            foreach (Card card in WorldCard)
+            {
+                if (card.SheelCard)
+                {
+                    tileClickHandler.AddShellCardTypeToCheck(card);
+                }
+            }          
 
         }
         public void SpawnTiles()
