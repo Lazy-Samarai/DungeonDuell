@@ -24,10 +24,6 @@ namespace dungeonduell
 
         public TileBase setAbleTile;
 
-        public Card[] SpawnInfo;
-
-        public Card[] WorldCard;
-
         public ConnectionsCollector connectCollector;
 
         public GameObject StartTiles;
@@ -66,29 +62,14 @@ namespace dungeonduell
             new Vector3Int(1, -1), // BottonRight 
         };
 
+
         private void Start()
         {
             connectCollector = FindObjectOfType<ConnectionsCollector>();
             StartTiles = FindObjectOfType<StartTilesGen>().gameObject;
             tilemap = FindObjectOfType<Tilemap>();
-            turnManager = FindObjectOfType<TurnManager>(); // Finde den TurnManager
-
-            Transform[] transformsSpwans = StartTiles.transform.GetChild(0).GetComponentsInChildren<Transform>().Skip(1).ToArray<Transform>(); // jump over parent
-
-            for (int i = 0; i < transformsSpwans.Length; i++)
-            {
-                Transform transform = transformsSpwans[i];
-                SpawnTile(transform.position, SpawnInfo[i], false,true);
-            }
-
-            Transform[] transformsWorld = StartTiles.transform.GetChild(1).GetComponentsInChildren<Transform>().Skip(1).ToArray<Transform>();
-            for (int i = 0; i < transformsWorld.Length; i++)
-            {
-                print(transformsWorld[i].name);
-                Transform transform = transformsWorld[i];
-                SpawnTile(transform.position, WorldCard[0], false, false);
-            }
-
+            turnManager = FindObjectOfType<TurnManager>(); // Finde den TurnManager          
+          
         }
 
         void Update()
@@ -105,7 +86,7 @@ namespace dungeonduell
             }
         }
 
-        private void SpawnTile(Vector3 mouseWorldPos, Card card, bool PlayerMove,bool spawnSourroundSetables)
+        public void SpawnTile(Vector3 mouseWorldPos, Card card, bool PlayerMove,bool spawnSourroundSetables)
         {
             Vector3Int cellPosition = tilemap.WorldToCell(new Vector3(mouseWorldPos.x, mouseWorldPos.y, cam.transform.position.z));
 
