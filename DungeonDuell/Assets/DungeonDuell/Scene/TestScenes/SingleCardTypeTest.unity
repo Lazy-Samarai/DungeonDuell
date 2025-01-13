@@ -423,7 +423,10 @@ MonoBehaviour:
     type: 3}
   indiactorDoorAnker: {fileID: 1330985300}
   resetTile: {fileID: 11400000, guid: fbc5379f7e0fce94d806560aa6bfa827, type: 2}
-  setAbleTile: {fileID: 11400000, guid: eac5b490d6d704242a7ba80fc84bbc61, type: 2}
+  setAbleTiles:
+  - {fileID: 11400000, guid: eac5b490d6d704242a7ba80fc84bbc61, type: 2}
+  - {fileID: 11400000, guid: bdab57df5882a954fb0231767ffdeb47, type: 2}
+  - {fileID: 11400000, guid: e66ef084925625d4fa69903d57ea23b3, type: 2}
   SpawnInfo:
   - {fileID: 11400000, guid: 1cf934f802100af4782165e75dacd883, type: 2}
   - {fileID: 11400000, guid: 01ca3b43f91b5924e85e2894708130ea, type: 2}
@@ -875,7 +878,7 @@ Transform:
   m_GameObject: {fileID: 683869573}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.87, y: 3.02, z: 9.949284}
+  m_LocalPosition: {x: -3.09, y: 3.02, z: 9.949284}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -906,7 +909,7 @@ Transform:
   m_GameObject: {fileID: 707251032}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.35, y: 3.08, z: 9.949284}
+  m_LocalPosition: {x: 0.35, y: 1.48, z: 9.949284}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -937,7 +940,7 @@ Transform:
   m_GameObject: {fileID: 834832717}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.66, y: 3.02, z: 9.95}
+  m_LocalPosition: {x: 1.24, y: 3.02, z: 9.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1024,7 +1027,7 @@ MonoBehaviour:
   useDistributorSystem: 1
   firstTime: 1
   cardDistributors:
-  - {fileID: 11400000, guid: d02bba101eb65734fa9c7c2a22c209a5, type: 2}
+  - {fileID: 11400000, guid: 3b4a12cce42157c4489e70176962620c, type: 2}
   - {fileID: 11400000, guid: bca55552436fab544ab0257e7ac3ca76, type: 2}
   availableCards: []
   playerDeck: []
@@ -1856,7 +1859,7 @@ MonoBehaviour:
   useDistributorSystem: 1
   firstTime: 1
   cardDistributors:
-  - {fileID: 11400000, guid: d02bba101eb65734fa9c7c2a22c209a5, type: 2}
+  - {fileID: 11400000, guid: 3b4a12cce42157c4489e70176962620c, type: 2}
   - {fileID: 11400000, guid: bca55552436fab544ab0257e7ac3ca76, type: 2}
   availableCards: []
   playerDeck: []

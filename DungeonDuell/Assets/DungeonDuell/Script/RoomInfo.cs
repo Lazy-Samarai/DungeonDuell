@@ -6,12 +6,14 @@ public class RoomInfo {
 
     public int RoomID { get; set; }
     public List<RoomConnection> Conncection { get; set; }
-
+ 
     public RoomType roomtype = RoomType.Generic;
 
     public RoomElement roommElement = RoomElement.Standard;
 
     public List<ConnectionDir> allowedDoors;
+
+    public int roomOwner = 0; // 0 - no One - else Player x
 
     public RoomInfo(int id, List<RoomConnection> newConncection)
     {
@@ -25,6 +27,15 @@ public class RoomInfo {
         roomtype = newRoomtype;
         roommElement = newRoomElement;
         allowedDoors = newAllowedDoors;
+    }
+    public RoomInfo(int id, List<RoomConnection> newConncection, RoomType newRoomtype, RoomElement newRoomElement, List<ConnectionDir> newAllowedDoors,int owner)
+    {
+        RoomID = id;
+        Conncection = newConncection;
+        roomtype = newRoomtype;
+        roommElement = newRoomElement;
+        allowedDoors = newAllowedDoors;
+        roomOwner = owner;
     }
 
 }

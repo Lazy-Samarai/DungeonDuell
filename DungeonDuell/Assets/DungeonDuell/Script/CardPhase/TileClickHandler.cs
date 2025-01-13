@@ -7,6 +7,7 @@ using System.Linq;
 
 namespace dungeonduell
 {
+
     public class TileClickHandler : MonoBehaviour
     {
         public Camera cam;
@@ -22,7 +23,7 @@ namespace dungeonduell
 
         public TileBase resetTile;
 
-        public TileBase setAbleTile;
+        public TileBase[] setAbleTiles;
 
         public ConnectionsCollector connectCollector;
 
@@ -68,8 +69,24 @@ namespace dungeonduell
             connectCollector = FindObjectOfType<ConnectionsCollector>();
             StartTiles = FindObjectOfType<StartTilesGen>().gameObject;
             tilemap = FindObjectOfType<Tilemap>();
-            turnManager = FindObjectOfType<TurnManager>(); // Finde den TurnManager          
-          
+            turnManager = FindObjectOfType<TurnManager>(); // Finde den TurnManager
+
+            Transform[] transformsSpwans = StartTiles.transform.GetChild(0).GetComponentsInChildren<Transform>().Skip(1).ToArray<Transform>(); // jump over parent
+
+            for (int i = 0; i < transformsSpwans.Length; i++)
+            {
+                Transform transform = transformsSpwans[i];
+                SpawnTile(transform.position, SpawnInfo[i], false,true,i+1);
+            }
+
+            Transform[] transformsWorld = StartTiles.transform.GetChild(1).GetComponentsInChildren<Transform>().Skip(1).ToArray<Transform>();
+            for (int i = 0; i < transformsWorld.Length; i++)
+            {
+                print(transformsWorld[i].name);
+                Transform transform = transformsWorld[i];
+                SpawnTile(transform.position, WorldCard[0], false, false,0);
+            }
+
         }
 
         void Update()
@@ -77,7 +94,7 @@ namespace dungeonduell
             if (Input.GetMouseButtonDown(0))
             {
                 Vector3 mouseWorldPos = cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -cam.transform.position.z));
-                SpawnTile(mouseWorldPos, currentCard, true,true);
+                SpawnTile(mouseWorldPos, currentCard, true,true, turnManager.isPlayer1Turn ? 1 : 2);
             }
             if (Input.GetKeyDown(KeyCode.R)) // Test 
             {
@@ -86,7 +103,7 @@ namespace dungeonduell
             }
         }
 
-        public void SpawnTile(Vector3 mouseWorldPos, Card card, bool PlayerMove,bool spawnSourroundSetables)
+        public void SpawnTile(Vector3 mouseWorldPos, Card card, bool PlayerMove,bool spawnSourroundSetables,int owner)
         {
             Vector3Int cellPosition = tilemap.WorldToCell(new Vector3(mouseWorldPos.x, mouseWorldPos.y, cam.transform.position.z));
 
@@ -94,10 +111,26 @@ namespace dungeonduell
 
             if(clickedTile != resetTile | !PlayerMove)
             {
-                if ((clickedTile == setAbleTile | !PlayerMove) && currentCard != null)
+                bool[] OverriteCurrentDoorDir =  new bool[] { false, false, false, false, false, false };
+                if ((setAbleTiles.Contains(clickedTile) | !PlayerMove) && currentCard != null)
                 {
+                    bool connectionForcing = false;
+                    if(clickedTile == setAbleTiles[setAbleTiles.Length - 1]) // Hited Contested
+                    {
+                        connectionForcing = true;
+                        Vector3Int[] offset = (cellPosition.y % 2 == 0) ? aroundHexDiffVectorEVEN : aroundHexDiffVectorODD;
+                        for (int i = 0; i < offset.Length; i++)
+                        {
+                            if (connectCollector.GetFullRoomList().Any(entry => entry.Item1 == cellPosition + offset[i]))
+                            {
+                                currentDoorDir[i] = true; // Connect to all rooms that are there
+                                OverriteCurrentDoorDir[i] = true;
+                            }
+                        }
+                    }
+
                     Tuple<Vector3Int, ConnectionDir>[] sourroundCorr = GetSouroundCorr(cellPosition, currentDoorDir);
-                    
+
                     if (CheckConnectAblity(sourroundCorr) | !PlayerMove)
                     {
                         Debug.Log("Tile clicked at position: " + cellPosition);
@@ -105,20 +138,45 @@ namespace dungeonduell
                         // Main Spawn
                         tilemap.SetTile(cellPosition, card.Tile);
 
-                        //Sourround 
+
+                        //Sourround
                         if (spawnSourroundSetables)
                         {
+                            foreach (Tuple<Vector3Int, ConnectionDir> SourrendTilePos in GetSouroundCorr(cellPosition, new bool[] { true, true, true, true, true, true }))
+                            {
+                                TileBase souroundTile = tilemap.GetTile(SourrendTilePos.Item1);
+                                if(setAbleTiles.Contains(souroundTile))
+                                {
+                                    if (clickedTile != souroundTile)
+                                    {
+                                        tilemap.SetTile(SourrendTilePos.Item1, setAbleTiles[setAbleTiles.Length - 1]);
+                                    }
+
+                                }
+                            }
+
                             foreach (Tuple<Vector3Int, ConnectionDir> SourrendTilePos in GetSouroundCorr(cellPosition, currentDoorDir))
                             {
-                                if (tilemap.GetTile(SourrendTilePos.Item1) == resetTile)
+                                TileBase souroundTile = tilemap.GetTile(SourrendTilePos.Item1);
+
+                                if(souroundTile == resetTile)
                                 {
-                                    tilemap.SetTile(SourrendTilePos.Item1, setAbleTile);
+                                    if(setAbleTiles.Contains(clickedTile))
+                                    {
+                                        tilemap.SetTile(SourrendTilePos.Item1, clickedTile);
+                                    }
+                                    else
+                                    {
+                                        tilemap.SetTile(SourrendTilePos.Item1,  setAbleTiles[owner - 1]);
+                                    }
                                 }
+
                             }
                         }
 
+
                         // Create Room Info
-                        CreateRoom(cellPosition, card.roomtype, card.roomElement, currentDoorDir);
+                        CreateRoom(cellPosition, card.roomtype, card.roomElement, currentDoorDir, owner,connectionForcing);
 
                         // Card Disposal
                         if (PlayerMove)
@@ -139,9 +197,14 @@ namespace dungeonduell
                             indiactorDoorAnker = GameObject.Find("IndicatorsAnker").transform; // TODO HotFix ; Make better later
 
                         }
-
                         indicator.transform.parent = indiactorDoorAnker;
                         indicator.GetComponent<DoorIndicator>().SetDoorIndiactor(currentDoorDir);
+                        if(connectionForcing)
+                        {
+                            indicator.GetComponent<DoorIndicator>().OverExtend(OverriteCurrentDoorDir);
+                        }
+
+
                     }
                     else
                     {
@@ -165,7 +228,6 @@ namespace dungeonduell
         private bool CheckConnectAblity(Tuple<Vector3Int, ConnectionDir>[] sourroundCorr)
         {
             // sourroundCorr Being an Tuple might overcomplicated , but tried solutation had edge cases where they failed
-
             // Reduce to relvant element so fewer opertion with find later 
             List<Tuple<Vector3Int, RoomInfo>> filteredList = connectCollector.GetFullRoomList().Where(item => sourroundCorr.Any(tuple => tuple.Item1 == item.Item1)).ToList();
 
@@ -205,11 +267,11 @@ namespace dungeonduell
             }
         }
 
-        private void CreateRoom(Vector3Int clickedTile, RoomType type, RoomElement element, bool[] allowedDoors)
+        private void CreateRoom(Vector3Int clickedTile, RoomType type, RoomElement element, bool[] allowedDoors,int owner,bool forceOnRoom)
         {
             Vector3Int[] aroundpos = GetSouroundCorr(clickedTile); // 
 
-            int[] establishConnection = connectCollector.GetPossibleConnects(aroundpos, allowedDoors);
+            int[] establishConnection = connectCollector.GetPossibleConnects(aroundpos, allowedDoors,forceOnRoom);
 
             List<RoomConnection> Conncection = new List<RoomConnection>();
             List<ConnectionDir> newConnectionDir = new List<ConnectionDir>();
@@ -226,14 +288,14 @@ namespace dungeonduell
                     //print(((ConnectionDir)i).ToString());
                 }
             }
-            connectCollector.AddRoom(clickedTile, Conncection, type, element, newConnectionDir);
+            connectCollector.AddRoom(clickedTile, Conncection, type, element, newConnectionDir, owner);
         }
 
         private Vector3Int[] GetSouroundCorr(Vector3Int clickedTile)
         {
             Vector3Int[] aroundpos = new Vector3Int[6];
 
-            var offsets = (clickedTile.y % 2 == 0) ? aroundHexDiffVectorEVEN : aroundHexDiffVectorODD;
+            Vector3Int[] offsets = GetOffsetsCorrd(ref clickedTile);
 
             for (int i = 0; i < offsets.Length; i++)
             {
@@ -242,11 +304,17 @@ namespace dungeonduell
 
             return aroundpos;
         }
+
+        private Vector3Int[] GetOffsetsCorrd(ref Vector3Int clickedTile)
+        {
+            return (clickedTile.y % 2 == 0) ? aroundHexDiffVectorEVEN : aroundHexDiffVectorODD;
+        }
+
         private Tuple<Vector3Int,ConnectionDir>[] GetSouroundCorr(Vector3Int clickedTile,bool[] setDirections)
         {
             List<Tuple<Vector3Int, ConnectionDir>> aroundpos = new List<Tuple<Vector3Int, ConnectionDir>>();
 
-            var offsets = (clickedTile.y % 2 == 0) ? aroundHexDiffVectorEVEN : aroundHexDiffVectorODD;
+            var offsets = GetOffsetsCorrd(ref clickedTile);
 
             for (int i = 0; i < offsets.Length; i++)
             {
