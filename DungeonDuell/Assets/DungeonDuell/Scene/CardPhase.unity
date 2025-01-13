@@ -702,7 +702,10 @@ MonoBehaviour:
     type: 3}
   indiactorDoorAnker: {fileID: 1330985300}
   resetTile: {fileID: 11400000, guid: fbc5379f7e0fce94d806560aa6bfa827, type: 2}
-  setAbleTile: {fileID: 11400000, guid: eac5b490d6d704242a7ba80fc84bbc61, type: 2}
+  setAbleTiles:
+  - {fileID: 11400000, guid: eac5b490d6d704242a7ba80fc84bbc61, type: 2}
+  - {fileID: 11400000, guid: bdab57df5882a954fb0231767ffdeb47, type: 2}
+  - {fileID: 11400000, guid: e66ef084925625d4fa69903d57ea23b3, type: 2}
   SpawnInfo:
   - {fileID: 11400000, guid: 1cf934f802100af4782165e75dacd883, type: 2}
   - {fileID: 11400000, guid: 01ca3b43f91b5924e85e2894708130ea, type: 2}
@@ -1454,6 +1457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f59f14b0cd7525648b2ff384931bf41c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  designatedCardScene: 0
   useDistributorSystem: 1
   firstTime: 1
   cardDistributors:
@@ -2519,6 +2523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f59f14b0cd7525648b2ff384931bf41c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  designatedCardScene: 0
   useDistributorSystem: 1
   firstTime: 1
   cardDistributors:
