@@ -304,6 +304,52 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6194596618792744889}
     m_Modifications:
+    - target: {fileID: 1111563993490490590, guid: 006b6d17348e72c4ca0fe5dddc5400cf,
+        type: 3}
+      propertyPath: Events.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1111563993490490590, guid: 006b6d17348e72c4ca0fe5dddc5400cf,
+        type: 3}
+      propertyPath: Events.Array.data[1].AutoExecuteOnDisable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1111563993490490590, guid: 006b6d17348e72c4ca0fe5dddc5400cf,
+        type: 3}
+      propertyPath: Events.Array.data[1].AutoExecuteOnInstantiate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1111563993490490590, guid: 006b6d17348e72c4ca0fe5dddc5400cf,
+        type: 3}
+      propertyPath: Events.Array.data[1].Event.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1111563993490490590, guid: 006b6d17348e72c4ca0fe5dddc5400cf,
+        type: 3}
+      propertyPath: Events.Array.data[1].Event.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1111563993490490590, guid: 006b6d17348e72c4ca0fe5dddc5400cf,
+        type: 3}
+      propertyPath: Events.Array.data[1].Event.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 11500000, guid: 4dfad200c8782a3449dfd49ea310c909,
+        type: 3}
+    - target: {fileID: 1111563993490490590, guid: 006b6d17348e72c4ca0fe5dddc5400cf,
+        type: 3}
+      propertyPath: Events.Array.data[1].Event.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1111563993490490590, guid: 006b6d17348e72c4ca0fe5dddc5400cf,
+        type: 3}
+      propertyPath: Events.Array.data[1].Event.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1111563993490490590, guid: 006b6d17348e72c4ca0fe5dddc5400cf,
+        type: 3}
+      propertyPath: Events.Array.data[1].Event.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2201129828444408654, guid: 006b6d17348e72c4ca0fe5dddc5400cf,
         type: 3}
       propertyPath: m_RootOrder

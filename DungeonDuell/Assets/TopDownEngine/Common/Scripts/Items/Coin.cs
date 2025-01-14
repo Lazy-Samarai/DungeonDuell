@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections;
 using MoreMountains.Tools;
 using MoreMountains.TopDownEngine;
+using UnityEngine.Events;
+
 
 
 namespace MoreMountains.TopDownEngine
@@ -15,12 +17,13 @@ namespace MoreMountains.TopDownEngine
 		/// The amount of points to add when collected
 		[Tooltip("The amount of points to add when collected")]
 		public int PointsToAdd = 10;
+       
 
-		/// <summary>
-		/// Triggered when something collides with the coin
-		/// </summary>
-		/// <param name="collider">Other.</param>
-		protected override void Pick(GameObject picker) 
+        /// <summary>
+        /// Triggered when something collides with the coin
+        /// </summary>
+        /// <param name="collider">Other.</param>
+        protected override void Pick(GameObject picker) 
 		{
 
 
@@ -31,19 +34,11 @@ namespace MoreMountains.TopDownEngine
 			if (character != null)
 			{
 				Debug.Log($"Player ID: {character.PlayerID}");
-				// Rufe die AddCoins-Methode im Level-Manager auf
-				/*
-				var levelManager = FindObjectOfType<DungeonDuellMultiplayerLevelManager>();
-				if (levelManager != null)
-				{
-					levelManager.AddCoins(character.PlayerID, PointsToAdd);
-				}
-				else
-				{
-					Debug.LogError("DungeonDuellMultiplayerLevelManager konnte nicht gefunden werden.");
-				}
-				*/
-			}
+                // Rufe die AddCoins-Methode im Level-Manager auf
+
+                TopDownEnginePointEvent.Trigger(PointsMethods.Add, PointsToAdd);
+                Debug.Log($"Coin Event + {character.PlayerID}");
+            }
 			else
 			{
 				Debug.LogError("Character konnte nicht gefunden werden.");

@@ -19,6 +19,14 @@ namespace MoreMountains.TopDownEngine
         private string _currentPlayerID;
         private DungeonDuellMultiplayerLevelManager _levelManager;
 
+
+        // Tastenzuweisungen
+        [Header("Key Bindings")]
+        public KeyCode SpeedKey = KeyCode.Alpha1;
+        public KeyCode HealthKey = KeyCode.Alpha2;
+        public KeyCode AttackSpeedKey = KeyCode.Alpha3;
+
+
         // Setup der Buttons und Registrierung der Klick-Events
         private void Start()
         {
@@ -29,6 +37,34 @@ namespace MoreMountains.TopDownEngine
             AttackSpeedButton.onClick.AddListener(() => OnOptionSelected(LevelUpOptions.AttackSpeed));
 
             HideLevelUpMenu();
+        }
+
+        private void Update()
+        {
+            // Überprüfen, ob das Menü aktiv ist
+            if (LevelUpMenu.activeSelf)
+            {
+                // Speed-Button aktivieren
+                if (Input.GetKeyDown(SpeedKey))
+                {
+                    Debug.Log("Speed Button aktiviert");
+                    SpeedButton.onClick.Invoke();
+                }
+
+                // Health-Button aktivieren
+                if (Input.GetKeyDown(HealthKey))
+                {
+                    Debug.Log("Health Button aktiviert");
+                    HealthButton.onClick.Invoke();
+                }
+
+                // AttackSpeed-Button aktivieren
+                if (Input.GetKeyDown(AttackSpeedKey))
+                {
+                    Debug.Log("Attack Speed Button aktiviert");
+                    AttackSpeedButton.onClick.Invoke();
+                }
+            }
         }
 
         public void ShowLevelUpMenu(string playerID)
