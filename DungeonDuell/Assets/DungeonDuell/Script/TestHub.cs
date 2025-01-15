@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MoreMountains.Tools;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 namespace MoreMountains.TopDownEngine
 {
@@ -29,6 +30,8 @@ namespace MoreMountains.TopDownEngine
 		/// the screen to display if the target player wins
 		[Tooltip("the screen to display if the target player wins")]
 		public CanvasGroup WinnerScreen;
+
+		public GameObject LevelUpPanel;
 
 		protected virtual void Start()
 		{
@@ -66,7 +69,15 @@ namespace MoreMountains.TopDownEngine
 						StartCoroutine(MMFade.FadeCanvasGroup(WinnerScreen, 0.5f, 0.8f, true));
 					}
 					break;
-			}
+
+				case TopDownEngineEventTypes.LevelUp:
+					if(PlayerID == (LevelManager.Instance as DungeonDuellMultiplayerLevelManager).LevelUPID)
+					{
+						LevelUpPanel.gameObject.SetActive(true);
+                    }
+					break;
+
+            }
 
 		}
 
