@@ -35,8 +35,8 @@ namespace MoreMountains.TopDownEngine
 			{
 				Debug.Log($"Player ID: {character.PlayerID}");
                 // Rufe die AddCoins-Methode im Level-Manager auf
-
-                TopDownEnginePointEvent.Trigger(PointsMethods.Add, PointsToAdd);
+				PointsMethods
+                DennisCoinEvent.Trigger(PointsMethods.Add, PointsToAdd, character.PlayerID);
                 Debug.Log($"Coin Event + {character.PlayerID}");
             }
 			else

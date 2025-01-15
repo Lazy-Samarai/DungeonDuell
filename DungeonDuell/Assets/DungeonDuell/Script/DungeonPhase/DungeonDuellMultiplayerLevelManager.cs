@@ -8,8 +8,25 @@ using UnityEngine.SceneManagement;
 
 namespace MoreMountains.TopDownEngine
 {
+    public struct DennisCoinEvent
+    {
+        public PointsMethods PointsMethod;
+        public int Points;
+        public string PlayerID; // Hinzugefügt für spielerbezogene Punkte
 
-	public enum LevelUpOptions
+        public DennisCoinEvent(PointsMethods method, int points, string playerID)
+        {
+            PointsMethod = method;
+            Points = points;
+            PlayerID = playerID;
+        }
+
+        public static void Trigger(PointsMethods method, int points, string playerID)
+        {
+            MMEventManager.TriggerEvent(new DennisCoinEvent(method, points, playerID));
+        }
+    }
+    public enum LevelUpOptions
 	{
 		Speed,
 		Health,
@@ -169,14 +186,14 @@ namespace MoreMountains.TopDownEngine
 		/// When a coin gets picked, we increase the amount of points of the character who picked it
 		/// </summary>
 		/// <param name="pickEvent"></param>
-		public virtual void OnMMEvent(PickableItemEvent pickEvent)
+		public virtual void OnMMEvent(DennisCoinEvent coinEvent)
 		{
-			_playerID = pickEvent.Picker.MMGetComponentNoAlloc<Character>()?.PlayerID;
+			
 			for (int i = 0; i < Points.Length; i++)
 			{
 				if (Points[i].PlayerID == _playerID)
 				{
-					Points[i].Points++;
+					Points[i].Points+= coinEvent.Points;
 					if (Points[i].Points >= Points[i].CoinsForNextLevel)
 					{
 						TriggerLevelUp(i);
@@ -195,8 +212,8 @@ namespace MoreMountains.TopDownEngine
 
 			// Zeige das Level-Up-Menü für den Spieler
 			FindObjectOfType<LevelUpUIManager>().ShowLevelUpMenu(_currentPlayerID);
-
-		}
+            TopDownEngineEvent.Trigger(TopDownEngineEventTypes.Repaint, null);
+        }
 
 
 		public void ApplyLevelUp(LevelUpOptions option)
@@ -303,7 +320,8 @@ namespace MoreMountains.TopDownEngine
             switch (engineEvent)
             {
                 case PointsMethods.Add:
-					print("*Coin Got Methid Insert Here");
+
+					print("*Coin Got Method Insert Here");
                     break;
             
             }
