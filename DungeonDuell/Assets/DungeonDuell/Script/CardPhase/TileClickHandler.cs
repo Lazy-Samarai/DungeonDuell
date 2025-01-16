@@ -67,26 +67,8 @@ namespace dungeonduell
         private void Start()
         {
             connectCollector = FindObjectOfType<ConnectionsCollector>();
-            StartTiles = FindObjectOfType<StartTilesGen>().gameObject;
             tilemap = FindObjectOfType<Tilemap>();
-            turnManager = FindObjectOfType<TurnManager>(); // Finde den TurnManager
-
-            Transform[] transformsSpwans = StartTiles.transform.GetChild(0).GetComponentsInChildren<Transform>().Skip(1).ToArray<Transform>(); // jump over parent
-
-            for (int i = 0; i < transformsSpwans.Length; i++)
-            {
-                Transform transform = transformsSpwans[i];
-                SpawnTile(transform.position, SpawnInfo[i], false,true,i+1);
-            }
-
-            Transform[] transformsWorld = StartTiles.transform.GetChild(1).GetComponentsInChildren<Transform>().Skip(1).ToArray<Transform>();
-            for (int i = 0; i < transformsWorld.Length; i++)
-            {
-                print(transformsWorld[i].name);
-                Transform transform = transformsWorld[i];
-                SpawnTile(transform.position, WorldCard[0], false, false,0);
-            }
-
+            turnManager = FindObjectOfType<TurnManager>(); // Finde den TurnManager         
         }
 
         void Update()
@@ -130,7 +112,6 @@ namespace dungeonduell
                     }
 
                     Tuple<Vector3Int, ConnectionDir>[] sourroundCorr = GetSouroundCorr(cellPosition, currentDoorDir);
-
                     if (CheckConnectAblity(sourroundCorr) | !PlayerMove)
                     {
                         Debug.Log("Tile clicked at position: " + cellPosition);
@@ -151,8 +132,8 @@ namespace dungeonduell
                                     {
                                         tilemap.SetTile(SourrendTilePos.Item1, setAbleTiles[setAbleTiles.Length - 1]);
                                     }
-
-                                }
+                              
+                                }                                                 
                             }
 
                             foreach (Tuple<Vector3Int, ConnectionDir> SourrendTilePos in GetSouroundCorr(cellPosition, currentDoorDir))
@@ -163,6 +144,7 @@ namespace dungeonduell
                                 {
                                     if(setAbleTiles.Contains(clickedTile))
                                     {
+                                        
                                         tilemap.SetTile(SourrendTilePos.Item1, clickedTile);
                                     }
                                     else
@@ -170,9 +152,9 @@ namespace dungeonduell
                                         tilemap.SetTile(SourrendTilePos.Item1,  setAbleTiles[owner - 1]);
                                     }
                                 }
-
                             }
                         }
+
 
 
                         // Create Room Info
@@ -228,6 +210,7 @@ namespace dungeonduell
         private bool CheckConnectAblity(Tuple<Vector3Int, ConnectionDir>[] sourroundCorr)
         {
             // sourroundCorr Being an Tuple might overcomplicated , but tried solutation had edge cases where they failed
+
             // Reduce to relvant element so fewer opertion with find later 
             List<Tuple<Vector3Int, RoomInfo>> filteredList = connectCollector.GetFullRoomList().Where(item => sourroundCorr.Any(tuple => tuple.Item1 == item.Item1)).ToList();
 

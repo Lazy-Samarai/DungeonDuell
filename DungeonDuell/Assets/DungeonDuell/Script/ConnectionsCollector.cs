@@ -45,13 +45,11 @@ namespace dungeonduell
             Tuple<Vector3Int, RoomInfo> newroomsInfos = 
                 new Tuple<Vector3Int, RoomInfo>(pos,new RoomInfo(roomsInfos.Count, Conncection, type, element, newAllowedDoors, owner));
 
-            print("New Room" + newroomsInfos);
-
              roomsInfos.Add(newroomsInfos);
         }
 
         public int[] GetPossibleConnects(Vector3Int[] allArounds,bool[] allowedDoors,bool forceOnRoom) // TODO Allround probaly not parll
-        {       
+        {
             // FocredRoom for scenario that player connecting tile is placed but connection is not two sided even after adding one from set tile to target
 
             int[] roomIdsConnect = { -1, -1, -1, -1, -1, -1 };
@@ -62,7 +60,7 @@ namespace dungeonduell
                     {                       
                         foreach (Tuple<Vector3Int, RoomInfo> roomInfo in roomsInfos)
                         {
-                            if (roomInfo.Item1 == allArounds[i] & (forceOnRoom | (roomInfo.Item2.allowedDoors.Contains(((ConnectionDir)i).GetInvert()))))                    
+                            if (roomInfo.Item1 == allArounds[i] & (forceOnRoom | (roomInfo.Item2.allowedDoors.Contains(((ConnectionDir)i).GetInvert()))))
                             {
                                 roomIdsConnect[i] = roomInfo.Item2.RoomID;
                                 break;
