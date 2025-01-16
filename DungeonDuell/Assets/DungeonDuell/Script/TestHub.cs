@@ -24,20 +24,28 @@ namespace MoreMountains.TopDownEngine
 		/// the counter used to display coin amounts
 		[Tooltip("the counter used to display coin amounts")]
 		public Text CoinCounter;
-		/// the mask to use when the target player dies
-		[Tooltip("the mask to use when the target player dies")]
+        [Tooltip("the counter used to display coin amounts needed for level Up")]
+        public Text CoinForNextLevelCounter;
+
+		public Text LevelUpNowText;
+		public bool canLevelUp;
+
+        /// the mask to use when the target player dies
+        [Tooltip("the mask to use when the target player dies")]
 		public CanvasGroup DeadMask;
 		/// the screen to display if the target player wins
 		[Tooltip("the screen to display if the target player wins")]
 		public CanvasGroup WinnerScreen;
-
-		public GameObject LevelUpPanel;
+        [Tooltip("the screen to display if the target levels up")]
+        public CanvasGroup LevelUpPanel;
 
 		protected virtual void Start()
 		{
 			CoinCounter.text = "0";
+			CoinForNextLevelCounter.text = "1";
 			DeadMask.gameObject.SetActive(false);
 			WinnerScreen.gameObject.SetActive(false);
+			LevelUpPanel.gameObject.SetActive(false);
 		}
 
 		public virtual void OnMMEvent(TopDownEngineEvent tdEvent)
@@ -58,6 +66,7 @@ namespace MoreMountains.TopDownEngine
 						if (points.PlayerID == PlayerID)
 						{
 							CoinCounter.text = points.Points.ToString();
+							CoinForNextLevelCounter.text = points.CoinsForNextLevel.ToString() + "  COINS";
 						}
 					}
 					break;
@@ -73,18 +82,65 @@ namespace MoreMountains.TopDownEngine
 				case TopDownEngineEventTypes.LevelUp:
 					if(PlayerID == (LevelManager.Instance as DungeonDuellMultiplayerLevelManager).LevelUPID)
 					{
-						LevelUpPanel.gameObject.SetActive(true);
+						canLevelUp = true;
+                        LevelUpNowText.gameObject.SetActive(canLevelUp);
                     }
 					break;
 
             }
 
 		}
+        private void Update()
+        {
+			// Zeigt die UI Sachen an, Knöpfe sind 4 und 0 wenn man genug Münzen hat
+			if (canLevelUp)
+			{
+				
+				if(PlayerID == "Player1" && Input.GetKeyDown(KeyCode.Alpha4))
+				{
+					if (!LevelUpPanel.gameObject.activeSelf)
+					{
+						LevelUpPanel.gameObject.SetActive(true);
+						//LevelUpPanel.alpha = 0f;
+						//StartCoroutine(MMFade.FadeCanvasGroup(LevelUpPanel, 0.5f, 0.8f, true));
+						LevelUpNowText.gameObject.SetActive(false);
+					}
+					else
+					{
+                        //LevelUpPanel.alpha = 0.8f;
+                        //StartCoroutine(MMFade.FadeCanvasGroup(LevelUpPanel, 0.5f, 0f, true));
+                        LevelUpNowText.gameObject.SetActive(canLevelUp);
+                        LevelUpPanel.gameObject.SetActive(false);
+                    }
+				}
 
-		/// <summary>
-		/// OnDisable, we start listening to events.
-		/// </summary>
-		protected virtual void OnEnable()
+				else if (PlayerID =="Player2" && Input.GetKeyDown(KeyCode.Alpha0))
+				{
+                    if (!LevelUpPanel.gameObject.activeInHierarchy)
+                    {
+                        LevelUpPanel.gameObject.SetActive(true);
+                        //LevelUpPanel.alpha = 0f;
+                        //StartCoroutine(MMFade.FadeCanvasGroup(LevelUpPanel, 0.5f, 0.8f, true));
+                        LevelUpNowText.gameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        //LevelUpPanel.alpha = 0.8f;
+                        //StartCoroutine(MMFade.FadeCanvasGroup(LevelUpPanel, 0.5f, 0f, true));
+                        LevelUpNowText.gameObject.SetActive(canLevelUp);
+                        LevelUpPanel.gameObject.SetActive(false);
+                    }
+                }
+			}
+			else
+			{
+                LevelUpPanel.gameObject.SetActive(false);
+            }
+        }
+        /// <summary>
+        /// OnDisable, we start listening to events.
+        /// </summary>
+        protected virtual void OnEnable()
 		{
 			this.MMEventStartListening<TopDownEngineEvent>();
 		}

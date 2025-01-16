@@ -9,7 +9,8 @@ namespace dungeonduell
     public class LevelUPPanel : MonoBehaviour
     {
         [Header("UI Elements")]
-        public GameObject LevelUpMenu; // Das Panel f�r das Level-Up
+        public GameObject LevelUpMenu; // Das Panel für das Level-Up
+        public TestHub TestHub;
         public Button SpeedButton;
         public Button HealthButton;
         public Button AttackSpeedButton;
@@ -22,6 +23,7 @@ namespace dungeonduell
         public KeyCode SpeedKey = KeyCode.Alpha1;
         public KeyCode HealthKey = KeyCode.Alpha2;
         public KeyCode AttackSpeedKey = KeyCode.Alpha3;
+        public KeyCode LevelUpUIKey = KeyCode.Alpha4;
 
         // Setup der Buttons und Registrierung der Klick-Events
         private void Start()
@@ -32,7 +34,7 @@ namespace dungeonduell
             HealthButton.onClick.AddListener(() => OnOptionSelected(LevelUpOptions.Health));
             AttackSpeedButton.onClick.AddListener(() => OnOptionSelected(LevelUpOptions.AttackSpeed));
 
-            HideLevelUpMenu();
+            //HideLevelUpMenu();
         }
 
         private void Update()
@@ -45,6 +47,7 @@ namespace dungeonduell
                 {
                     Debug.Log("Speed Button aktiviert");
                     SpeedButton.onClick.Invoke();
+                    OnOptionSelected(LevelUpOptions.Speed);
                 }
 
                 // Health-Button aktivieren
@@ -52,6 +55,7 @@ namespace dungeonduell
                 {
                     Debug.Log("Health Button aktiviert");
                     HealthButton.onClick.Invoke();
+                    OnOptionSelected(LevelUpOptions.Health);
                 }
 
                 // AttackSpeed-Button aktivieren
@@ -59,6 +63,7 @@ namespace dungeonduell
                 {
                     Debug.Log("Attack Speed Button aktiviert");
                     AttackSpeedButton.onClick.Invoke();
+                    OnOptionSelected(LevelUpOptions.AttackSpeed);
                 }
             }
         }
@@ -72,6 +77,7 @@ namespace dungeonduell
         public void HideLevelUpMenu()
         {
             LevelUpMenu.SetActive(false);
+
         }
 
         private void OnOptionSelected(LevelUpOptions option)
@@ -80,7 +86,10 @@ namespace dungeonduell
             {
                 _levelManager.ApplyLevelUp(option);
             }
-            HideLevelUpMenu();
+            TestHub.canLevelUp = false;
+            TopDownEngineEvent.Trigger(TopDownEngineEventTypes.Repaint, null);
+            //HideLevelUpMenu();
+
         }
     }
 }

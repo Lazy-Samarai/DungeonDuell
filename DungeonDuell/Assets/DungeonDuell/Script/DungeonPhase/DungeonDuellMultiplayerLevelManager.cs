@@ -64,16 +64,35 @@ namespace MoreMountains.TopDownEngine
         protected string _playerID;
 		protected bool _gameOver = false;
 
-		public dungeonduell.SequenceMang sequenceMang;
+        public CharacterMovement[] walking = new CharacterMovement[2];
+        public CharacterRun[] running = new CharacterRun[2];
+        public ProjectileWeapon[] weapon = new ProjectileWeapon[2];
+        public Health[] health = new Health[2];
+
+        float baseWalk;
+        float baseRun;
+
+        public dungeonduell.SequenceMang sequenceMang;
 
         /// <summary>
         /// On init, we initialize our points and countdowns
         /// </summary>
-
         protected override void Initialization()
 		{
 		
 			base.Initialization();
+
+            weapon[0] = GetPlayerWeapon("Player1");
+            weapon[1] = GetPlayerWeapon("Player2");
+            walking[0] = GetPlayerMovement("Player1");
+            walking[1] = GetPlayerMovement("Player2");
+            running[0] = GetPlayerRun("Player1");
+            running[1] = GetPlayerRun("Player2");
+            weapon[0] = GetPlayerWeapon("Player1");
+            weapon[1] = GetPlayerWeapon("Player2");
+            health[0] = GetPlayerHealth("Player1");
+            health[1] = GetPlayerHealth("Player2");
+
 			WinnerID = "";
             LevelUPID = "";
 			Points = new DDPoints[Players.Count];
@@ -83,7 +102,7 @@ namespace MoreMountains.TopDownEngine
 				Points[i].PlayerID = player.PlayerID;
 				Points[i].Points = 0;
                 Points[i].Level = 1;
-                Points[i].CoinsForNextLevel = 10; // Startkosten
+                Points[i].CoinsForNextLevel = 1; // Startkosten
                 i++;
 			}
 		}
@@ -202,6 +221,8 @@ namespace MoreMountains.TopDownEngine
                     if (Points[i].Points >= Points[i].CoinsForNextLevel)
                     {
                         TriggerLevelUp(i);
+                        LevelUPID = Points[i].PlayerID;
+                        TopDownEngineEvent.Trigger(TopDownEngineEventTypes.LevelUp, null);
                     }
 				}
 			}
@@ -209,13 +230,15 @@ namespace MoreMountains.TopDownEngine
 
         protected void TriggerLevelUp(int playerIndex)
         {
+
+            Debug.Log("Level Up von " + playerIndex);
+
+            /* Alte Logik, Zieht Münzen direkt ab, soll aber nicht so da es sonst mit der UI nicht so gut passt
             Points[playerIndex].Points -= Points[playerIndex].CoinsForNextLevel;
             Points[playerIndex].CoinsForNextLevel *= 2; // Kosten verdoppeln
-
-            LevelUPID = Points[playerIndex].PlayerID;
-
-            TopDownEngineEvent.Trigger(TopDownEngineEventTypes.LevelUp, null);
+            Points[playerIndex].Level++;
             TopDownEngineEvent.Trigger(TopDownEngineEventTypes.Repaint, null);
+            */
         }
 
 
@@ -226,7 +249,12 @@ namespace MoreMountains.TopDownEngine
             {
                 if (Points[i].PlayerID == _playerID)
                 {
+                    // das hier sollte die Münzen abziehen, macht aber nix! Level wird nicht angepasst
+                    Points[i].Points -= Points[i].CoinsForNextLevel;
+                    Points[i].CoinsForNextLevel *= 2; // Kosten verdoppeln
                     Points[i].Level++;
+                    //das Event sollte doch die CoinCounter anpassen, aber es wird nie richtig aufgerufen
+                    TopDownEngineEvent.Trigger(TopDownEngineEventTypes.Repaint, null);
                     Debug.Log($"Spieler {_playerID} ist jetzt Level {Points[i].Level}");
 
                     switch (option)
@@ -247,31 +275,58 @@ namespace MoreMountains.TopDownEngine
 
         private void ApplySpeedIncrease(string playerID)
         {
-            CharacterMovement movement = GetPlayerMovement(playerID);
-            if (movement != null)
+            //CharacterMovement movement = GetPlayerMovement(playerID);
+            if (walking != null)
             {
-                movement.WalkSpeed += 1.0f;
-                movement.MovementSpeed += 1.0f;
+                if(playerID == "Player1")
+                {
+                    walking[0].WalkSpeed += 1.0f;
+                    walking[0].MovementSpeed += 1.0f;
+                    running[0].RunSpeed += 1.0f;
+                }
+                else if(playerID == "Player2")
+                {
+                    walking[1].WalkSpeed += 1.0f;
+                    walking[1].MovementSpeed += 1.0f;
+                    running[1].RunSpeed += 1.0f;
+                }
+                //case switches für die Sachen
             }
         }
 
         private void ApplyHealthIncrease(string playerID)
         {
-            Character character = GetPlayerCharacter(playerID);
-            Health health = character?.GetComponent<Health>();
+            //Character character = GetPlayerCharacter(playerID);
+            //Health health = character?.GetComponent<Health>();
             if (health != null)
             {
-                health.MaximumHealth += 10;
-                health.SetHealth(Mathf.Min(health.CurrentHealth + 10, health.MaximumHealth));
+                if (playerID == "Player1")
+                {
+                    health[0].MaximumHealth += 10;
+                    health[0].SetHealth(Mathf.Min(health[0].CurrentHealth + 10, health[0].MaximumHealth));
+                }
+                else if (playerID == "Player2")
+                {
+                    health[1].MaximumHealth += 10;
+                    health[1].SetHealth(Mathf.Min(health[1].CurrentHealth + 10, health[1].MaximumHealth));
+                }
             }
         }
 
         private void ApplyAttackSpeedIncrease(string playerID)
         {
-            ProjectileWeapon weapon = GetPlayerWeapon(playerID);
+            //ProjectileWeapon weapon = GetPlayerWeapon(playerID);
             if (weapon != null)
             {
-                weapon.TimeBetweenUses *= 0.9f; // Schnellere Angriffe
+
+                if (playerID == "Player1")
+                {
+                    weapon[0].TimeBetweenUses *= 0.9f;
+                }
+                else if (playerID == "Player2")
+                {
+                    weapon[1].TimeBetweenUses *= 0.9f; // Schnellere Angriffe
+                }
             }
         }
 
@@ -287,6 +342,18 @@ namespace MoreMountains.TopDownEngine
             return null;
         }
 
+        private CharacterRun GetPlayerRun(string playerID)
+        {
+            foreach (CharacterRun run in FindObjectsOfType<CharacterRun>())
+            {
+                if (run.GetComponent<Character>().PlayerID == playerID)
+                {
+                    return run;
+                }
+            }
+            return null;
+        }
+
         private Character GetPlayerCharacter(string playerID)
         {
             foreach (Character character in FindObjectsOfType<Character>())
@@ -294,6 +361,18 @@ namespace MoreMountains.TopDownEngine
                 if (character.PlayerID == playerID)
                 {
                     return character;
+                }
+            }
+            return null;
+        }
+
+        private Health GetPlayerHealth(string playerID)
+        {
+            foreach (Health health in FindObjectsOfType<Health>())
+            {
+                if (health.GetComponent<Character>().PlayerID == playerID)
+                {
+                    return health;
                 }
             }
             return null;
