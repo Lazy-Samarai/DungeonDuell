@@ -1454,6 +1454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f59f14b0cd7525648b2ff384931bf41c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  designatedCardScene: 0
   useDistributorSystem: 1
   firstTime: 1
   cardDistributors:
@@ -2519,6 +2520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f59f14b0cd7525648b2ff384931bf41c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  designatedCardScene: 0
   useDistributorSystem: 1
   firstTime: 1
   cardDistributors:
@@ -18464,14 +18466,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 961b64fff8b0b5e48be5e2174994662a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handCards: []
+  handCards:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   cardPrefab: {fileID: 2857499731240099392, guid: 21606d58a14cb8440b4524597cf1c564,
     type: 3}
   handPanel: {fileID: 2012748596}
   handLimit: 3
   playerDeck: {fileID: 1494809202}
   spreadAngle: 20
-  handRadius: 300
+  handRadius: 500
   OtherPlayer: {fileID: 2077986323}
   playing: 0
 --- !u!1 &2034102533
