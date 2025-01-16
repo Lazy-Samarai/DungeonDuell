@@ -25,6 +25,8 @@ namespace dungeonduell
 
         public TileBase[] setAbleTiles;
 
+         public TileBase[] shadowSetAbleTiles;
+
         public ConnectionsCollector connectCollector;
 
         public GameObject StartTiles;
@@ -125,22 +127,43 @@ namespace dungeonduell
                         {
                             foreach (Tuple<Vector3Int, ConnectionDir> SourrendTilePos in GetSouroundCorr(cellPosition, new bool[] { true, true, true, true, true, true }))
                             {
-                                TileBase souroundTile = tilemap.GetTile(SourrendTilePos.Item1);
+                            
+                                TileBase souroundTile = tilemap.GetTile(SourrendTilePos.Item1);                              
+
                                 if(setAbleTiles.Contains(souroundTile))
                                 {
                                     if (clickedTile != souroundTile)
-                                    {
-                                        tilemap.SetTile(SourrendTilePos.Item1, setAbleTiles[setAbleTiles.Length - 1]);
+                                    {                                                                           
+                                        tilemap.SetTile(SourrendTilePos.Item1, setAbleTiles[setAbleTiles.Length - 1]);                                                                             
                                     }
                               
-                                }                                                 
+                                }
+                                else if(shadowSetAbleTiles.Contains(souroundTile))   
+                                {       
+                                    int i = Array.FindIndex(setAbleTiles, entity => entity == clickedTile);
+                                    if(i == setAbleTiles.Length -1) // Aka. Hitted Contest all Souround no Have to Contested Also 
+                                    {
+                                        tilemap.SetTile(SourrendTilePos.Item1, setAbleTiles[setAbleTiles.Length - 1]);        
+                                    }
+                                    else if (souroundTile != shadowSetAbleTiles[Array.FindIndex(setAbleTiles, entity => entity == clickedTile)])
+                                    {                                                                           
+                                        tilemap.SetTile(SourrendTilePos.Item1, setAbleTiles[setAbleTiles.Length - 1]);                                                                             
+                                    }
+
+                                }    
+
+                                if(souroundTile == resetTile & PlayerMove)
+                                {
+                                   tilemap.SetTile(SourrendTilePos.Item1,shadowSetAbleTiles[Array.FindIndex(setAbleTiles, entity => entity == clickedTile)]);                                   
+                                }
+                                      
                             }
 
                             foreach (Tuple<Vector3Int, ConnectionDir> SourrendTilePos in GetSouroundCorr(cellPosition, currentDoorDir))
                             {
                                 TileBase souroundTile = tilemap.GetTile(SourrendTilePos.Item1);
 
-                                if(souroundTile == resetTile)
+                                if(souroundTile == resetTile | shadowSetAbleTiles.Contains(souroundTile))
                                 {
                                     if(setAbleTiles.Contains(clickedTile))
                                     {
