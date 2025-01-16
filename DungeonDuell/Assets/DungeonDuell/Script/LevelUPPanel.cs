@@ -46,7 +46,7 @@ namespace dungeonduell
                 if (Input.GetKeyDown(SpeedKey))
                 {
                     Debug.Log("Speed Button aktiviert");
-                    SpeedButton.onClick.Invoke();
+                    //SpeedButton.onClick.Invoke();
                     OnOptionSelected(LevelUpOptions.Speed);
                 }
 
@@ -54,7 +54,7 @@ namespace dungeonduell
                 if (Input.GetKeyDown(HealthKey))
                 {
                     Debug.Log("Health Button aktiviert");
-                    HealthButton.onClick.Invoke();
+                    //HealthButton.onClick.Invoke();
                     OnOptionSelected(LevelUpOptions.Health);
                 }
 
@@ -62,7 +62,7 @@ namespace dungeonduell
                 if (Input.GetKeyDown(AttackSpeedKey))
                 {
                     Debug.Log("Attack Speed Button aktiviert");
-                    AttackSpeedButton.onClick.Invoke();
+                    //AttackSpeedButton.onClick.Invoke();
                     OnOptionSelected(LevelUpOptions.AttackSpeed);
                 }
             }

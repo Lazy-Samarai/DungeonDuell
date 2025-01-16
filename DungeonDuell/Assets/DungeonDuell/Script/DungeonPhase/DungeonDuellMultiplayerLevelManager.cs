@@ -247,9 +247,9 @@ namespace MoreMountains.TopDownEngine
 
             for (int i = 0; i < Points.Length; i++)
             {
-                if (Points[i].PlayerID == _playerID)
+                if (Points[i].PlayerID == LevelUPID)
                 {
-                    // das hier sollte die Münzen abziehen, macht aber nix! Level wird nicht angepasst
+                    
                     Points[i].Points -= Points[i].CoinsForNextLevel;
                     Points[i].CoinsForNextLevel *= 2; // Kosten verdoppeln
                     Points[i].Level++;
@@ -260,13 +260,13 @@ namespace MoreMountains.TopDownEngine
                     switch (option)
                     {
                         case LevelUpOptions.Speed:
-                            ApplySpeedIncrease(_playerID);
+                            ApplySpeedIncrease(LevelUPID);
                             break;
                         case LevelUpOptions.Health:
-                            ApplyHealthIncrease(_playerID);
+                            ApplyHealthIncrease(LevelUPID);
                             break;
                         case LevelUpOptions.AttackSpeed:
-                            ApplyAttackSpeedIncrease(_playerID);
+                            ApplyAttackSpeedIncrease(LevelUPID);
                             break;
                     }
                 }
