@@ -92,7 +92,7 @@ namespace MoreMountains.TopDownEngine
 		}
         private void Update()
         {
-			// Zeigt die UI Sachen an, Knöpfe sind 4 und 0 wenn man genug Münzen hat
+			// Zeigt die UI Sachen an, Knöpfe sind 4 und 0 wenn man genug Münzen hat. Außerdem ist das UI komisch. Ich habe unten Sachen rauskommentiert (eig auch nur Polish) aber iwie deantivert es die UI immer :')
 			if (canLevelUp)
 			{
 				
