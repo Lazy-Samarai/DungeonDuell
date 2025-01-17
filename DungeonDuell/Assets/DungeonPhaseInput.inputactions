@@ -1,8 +1,8 @@
 {
-    "name": "TopDownEngineInputActions",
+    "name": "DungeonPhaseInput",
     "maps": [
         {
-            "name": "PlayerControls",
+            "name": "DungeonPhase",
             "id": "aa0e1094-3ae9-4de6-877e-1fa7a26edd69",
             "actions": [
                 {
@@ -11,7 +11,8 @@
                     "id": "265ae792-b274-4758-9c3f-67c2f395c758",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "SecondaryMovement",
@@ -19,7 +20,8 @@
                     "id": "e4146e01-7578-46fe-b394-b240c2256b2c",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Jump",
@@ -27,7 +29,8 @@
                     "id": "314ace32-fb21-4bab-a569-ebe4e48f2102",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Run",
@@ -35,7 +38,8 @@
                     "id": "6b5c4b16-7607-4f0a-ad5b-62efd798065d",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Dash",
@@ -43,7 +47,8 @@
                     "id": "56a37787-c3be-4789-a219-0509391dc113",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Crouch",
@@ -51,7 +56,8 @@
                     "id": "5e6e408c-e79e-4f5c-87b7-8a6d181bd681",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Shoot",
@@ -59,7 +65,8 @@
                     "id": "7016cc32-6ee0-4d53-b08c-02cbe6eb2c0e",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "SecondaryShoot",
@@ -67,7 +74,8 @@
                     "id": "1b70a5ec-5da5-42ce-a7c0-8f54ff84052f",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Interact",
@@ -75,7 +83,8 @@
                     "id": "ae461515-11b0-4cc9-b221-92ed2df4118e",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Reload",
@@ -83,7 +92,8 @@
                     "id": "cf90ff3a-006b-4ae6-9594-cc2189d6f5f0",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Pause",
@@ -91,7 +101,8 @@
                     "id": "c01ffcc5-adff-4aa3-bb8d-e0139087e5ed",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "SwitchWeapon",
@@ -99,7 +110,8 @@
                     "id": "6e3febaf-dba5-4b43-b4f8-3b720e7ad1be",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "SwitchCharacter",
@@ -107,7 +119,8 @@
                     "id": "cde4a43f-3a08-47c8-afdf-2c5dca8d1241",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "TimeControl",
@@ -115,7 +128,8 @@
                     "id": "c71e92f2-77ca-4de6-98ad-64b961ed706e",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "CameraRotation",
@@ -123,7 +137,44 @@
                     "id": "239ee3ca-17ea-4fb2-85ef-91f8046dfddb",
                     "expectedControlType": "Axis",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "OpenUpgrade",
+                    "type": "Button",
+                    "id": "5f531d69-3a23-4c4c-a114-620394e39f56",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=1)",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DoUpgradeSpeed",
+                    "type": "Button",
+                    "id": "ccca69e4-51ba-415c-be90-1b1e6da5bc2b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DoUpgradeHealth",
+                    "type": "Button",
+                    "id": "13d851c4-efe0-4304-8dd8-2d24a140e047",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DoUpgradeAtk",
+                    "type": "Button",
+                    "id": "eecdb8dd-ec6c-4d14-aaf0-47a89e42d6bf",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -454,6 +505,50 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "CameraRotation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e14d5dca-5371-4a6f-afcd-8d21e75d509f",
+                    "path": "<Gamepad>/dpad/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenUpgrade",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "393eacc1-79ff-40aa-a7f9-371466861da5",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DoUpgradeSpeed",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e107ea95-f568-4587-a5ad-8e05ced5a085",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DoUpgradeHealth",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e80d36e5-1734-4e8a-856d-51106586db86",
+                    "path": "<Gamepad>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DoUpgradeAtk",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

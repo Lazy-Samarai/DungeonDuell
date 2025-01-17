@@ -37,7 +37,9 @@ namespace MoreMountains.TopDownEngine
 		[Tooltip("the screen to display if the target player wins")]
 		public CanvasGroup WinnerScreen;
         [Tooltip("the screen to display if the target levels up")]
-        public CanvasGroup LevelUpPanel;
+        public dungeonduell.LevelUPPanel LevelUpPanel;
+
+		bool menuShowing = false;
 
 		protected virtual void Start()
 		{
@@ -45,7 +47,6 @@ namespace MoreMountains.TopDownEngine
 			CoinForNextLevelCounter.text = "1";
 			DeadMask.gameObject.SetActive(false);
 			WinnerScreen.gameObject.SetActive(false);
-			LevelUpPanel.gameObject.SetActive(false);
 		}
 
 		public virtual void OnMMEvent(TopDownEngineEvent tdEvent)
@@ -90,53 +91,29 @@ namespace MoreMountains.TopDownEngine
             }
 
 		}
-        private void Update()
-        {
-			// Zeigt die UI Sachen an, Knöpfe sind 4 und 0 wenn man genug Münzen hat. Außerdem ist das UI komisch. Ich habe unten Sachen rauskommentiert (eig auch nur Polish) aber iwie deantivert es die UI immer :')
+		public void ShowMenuTry()
+		{
 			if (canLevelUp)
 			{
-				
-				if(PlayerID == "Player1" && Input.GetKeyDown(KeyCode.Alpha4))
-				{
-					if (!LevelUpPanel.gameObject.activeSelf)
+				if (!menuShowing)
 					{
-						LevelUpPanel.gameObject.SetActive(true);
+						
+						LevelUpPanel.ShowLevelUpMenu(true);
 						//LevelUpPanel.alpha = 0f;
 						//StartCoroutine(MMFade.FadeCanvasGroup(LevelUpPanel, 0.5f, 0.8f, true));
 						LevelUpNowText.gameObject.SetActive(false);
 					}
 					else
 					{
+					
                         //LevelUpPanel.alpha = 0.8f;
                         //StartCoroutine(MMFade.FadeCanvasGroup(LevelUpPanel, 0.5f, 0f, true));
                         LevelUpNowText.gameObject.SetActive(canLevelUp);
-                        LevelUpPanel.gameObject.SetActive(false);
+                        LevelUpPanel.ShowLevelUpMenu(false);
                     }
-				}
-
-				else if (PlayerID =="Player2" && Input.GetKeyDown(KeyCode.Alpha0))
-				{
-                    if (!LevelUpPanel.gameObject.activeInHierarchy)
-                    {
-                        LevelUpPanel.gameObject.SetActive(true);
-                        //LevelUpPanel.alpha = 0f;
-                        //StartCoroutine(MMFade.FadeCanvasGroup(LevelUpPanel, 0.5f, 0.8f, true));
-                        LevelUpNowText.gameObject.SetActive(false);
-                    }
-                    else
-                    {
-                        //LevelUpPanel.alpha = 0.8f;
-                        //StartCoroutine(MMFade.FadeCanvasGroup(LevelUpPanel, 0.5f, 0f, true));
-                        LevelUpNowText.gameObject.SetActive(canLevelUp);
-                        LevelUpPanel.gameObject.SetActive(false);
-                    }
-                }
+					menuShowing = !menuShowing;
 			}
-			else
-			{
-                LevelUpPanel.gameObject.SetActive(false);
-            }
-        }
+		}
         /// <summary>
         /// OnDisable, we start listening to events.
         /// </summary>

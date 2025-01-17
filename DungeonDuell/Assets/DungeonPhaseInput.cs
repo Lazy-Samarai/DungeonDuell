@@ -26,7 +26,7 @@ namespace MoreMountains.TopDownEngine
     ""name"": ""DungeonPhaseInput"",
     ""maps"": [
         {
-            ""name"": ""PlayerControls"",
+            ""name"": ""DungeonPhase"",
             ""id"": ""aa0e1094-3ae9-4de6-877e-1fa7a26edd69"",
             ""actions"": [
                 {
@@ -160,6 +160,42 @@ namespace MoreMountains.TopDownEngine
                     ""type"": ""PassThrough"",
                     ""id"": ""239ee3ca-17ea-4fb2-85ef-91f8046dfddb"",
                     ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenUpgrade"",
+                    ""type"": ""Button"",
+                    ""id"": ""5f531d69-3a23-4c4c-a114-620394e39f56"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DoUpgradeSpeed"",
+                    ""type"": ""Button"",
+                    ""id"": ""ccca69e4-51ba-415c-be90-1b1e6da5bc2b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DoUpgradeHealth"",
+                    ""type"": ""Button"",
+                    ""id"": ""13d851c4-efe0-4304-8dd8-2d24a140e047"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DoUpgradeAtk"",
+                    ""type"": ""Button"",
+                    ""id"": ""eecdb8dd-ec6c-4d14-aaf0-47a89e42d6bf"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -495,6 +531,50 @@ namespace MoreMountains.TopDownEngine
                     ""action"": ""CameraRotation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e14d5dca-5371-4a6f-afcd-8d21e75d509f"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenUpgrade"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""393eacc1-79ff-40aa-a7f9-371466861da5"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DoUpgradeSpeed"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e107ea95-f568-4587-a5ad-8e05ced5a085"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DoUpgradeHealth"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e80d36e5-1734-4e8a-856d-51106586db86"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DoUpgradeAtk"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -529,23 +609,27 @@ namespace MoreMountains.TopDownEngine
         }
     ]
 }");
-            // PlayerControls
-            m_PlayerControls = asset.FindActionMap("PlayerControls", throwIfNotFound: true);
-            m_PlayerControls_PrimaryMovement = m_PlayerControls.FindAction("PrimaryMovement", throwIfNotFound: true);
-            m_PlayerControls_SecondaryMovement = m_PlayerControls.FindAction("SecondaryMovement", throwIfNotFound: true);
-            m_PlayerControls_Jump = m_PlayerControls.FindAction("Jump", throwIfNotFound: true);
-            m_PlayerControls_Run = m_PlayerControls.FindAction("Run", throwIfNotFound: true);
-            m_PlayerControls_Dash = m_PlayerControls.FindAction("Dash", throwIfNotFound: true);
-            m_PlayerControls_Crouch = m_PlayerControls.FindAction("Crouch", throwIfNotFound: true);
-            m_PlayerControls_Shoot = m_PlayerControls.FindAction("Shoot", throwIfNotFound: true);
-            m_PlayerControls_SecondaryShoot = m_PlayerControls.FindAction("SecondaryShoot", throwIfNotFound: true);
-            m_PlayerControls_Interact = m_PlayerControls.FindAction("Interact", throwIfNotFound: true);
-            m_PlayerControls_Reload = m_PlayerControls.FindAction("Reload", throwIfNotFound: true);
-            m_PlayerControls_Pause = m_PlayerControls.FindAction("Pause", throwIfNotFound: true);
-            m_PlayerControls_SwitchWeapon = m_PlayerControls.FindAction("SwitchWeapon", throwIfNotFound: true);
-            m_PlayerControls_SwitchCharacter = m_PlayerControls.FindAction("SwitchCharacter", throwIfNotFound: true);
-            m_PlayerControls_TimeControl = m_PlayerControls.FindAction("TimeControl", throwIfNotFound: true);
-            m_PlayerControls_CameraRotation = m_PlayerControls.FindAction("CameraRotation", throwIfNotFound: true);
+            // DungeonPhase
+            m_DungeonPhase = asset.FindActionMap("DungeonPhase", throwIfNotFound: true);
+            m_DungeonPhase_PrimaryMovement = m_DungeonPhase.FindAction("PrimaryMovement", throwIfNotFound: true);
+            m_DungeonPhase_SecondaryMovement = m_DungeonPhase.FindAction("SecondaryMovement", throwIfNotFound: true);
+            m_DungeonPhase_Jump = m_DungeonPhase.FindAction("Jump", throwIfNotFound: true);
+            m_DungeonPhase_Run = m_DungeonPhase.FindAction("Run", throwIfNotFound: true);
+            m_DungeonPhase_Dash = m_DungeonPhase.FindAction("Dash", throwIfNotFound: true);
+            m_DungeonPhase_Crouch = m_DungeonPhase.FindAction("Crouch", throwIfNotFound: true);
+            m_DungeonPhase_Shoot = m_DungeonPhase.FindAction("Shoot", throwIfNotFound: true);
+            m_DungeonPhase_SecondaryShoot = m_DungeonPhase.FindAction("SecondaryShoot", throwIfNotFound: true);
+            m_DungeonPhase_Interact = m_DungeonPhase.FindAction("Interact", throwIfNotFound: true);
+            m_DungeonPhase_Reload = m_DungeonPhase.FindAction("Reload", throwIfNotFound: true);
+            m_DungeonPhase_Pause = m_DungeonPhase.FindAction("Pause", throwIfNotFound: true);
+            m_DungeonPhase_SwitchWeapon = m_DungeonPhase.FindAction("SwitchWeapon", throwIfNotFound: true);
+            m_DungeonPhase_SwitchCharacter = m_DungeonPhase.FindAction("SwitchCharacter", throwIfNotFound: true);
+            m_DungeonPhase_TimeControl = m_DungeonPhase.FindAction("TimeControl", throwIfNotFound: true);
+            m_DungeonPhase_CameraRotation = m_DungeonPhase.FindAction("CameraRotation", throwIfNotFound: true);
+            m_DungeonPhase_OpenUpgrade = m_DungeonPhase.FindAction("OpenUpgrade", throwIfNotFound: true);
+            m_DungeonPhase_DoUpgradeSpeed = m_DungeonPhase.FindAction("DoUpgradeSpeed", throwIfNotFound: true);
+            m_DungeonPhase_DoUpgradeHealth = m_DungeonPhase.FindAction("DoUpgradeHealth", throwIfNotFound: true);
+            m_DungeonPhase_DoUpgradeAtk = m_DungeonPhase.FindAction("DoUpgradeAtk", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -604,52 +688,60 @@ namespace MoreMountains.TopDownEngine
             return asset.FindBinding(bindingMask, out action);
         }
 
-        // PlayerControls
-        private readonly InputActionMap m_PlayerControls;
-        private List<IPlayerControlsActions> m_PlayerControlsActionsCallbackInterfaces = new List<IPlayerControlsActions>();
-        private readonly InputAction m_PlayerControls_PrimaryMovement;
-        private readonly InputAction m_PlayerControls_SecondaryMovement;
-        private readonly InputAction m_PlayerControls_Jump;
-        private readonly InputAction m_PlayerControls_Run;
-        private readonly InputAction m_PlayerControls_Dash;
-        private readonly InputAction m_PlayerControls_Crouch;
-        private readonly InputAction m_PlayerControls_Shoot;
-        private readonly InputAction m_PlayerControls_SecondaryShoot;
-        private readonly InputAction m_PlayerControls_Interact;
-        private readonly InputAction m_PlayerControls_Reload;
-        private readonly InputAction m_PlayerControls_Pause;
-        private readonly InputAction m_PlayerControls_SwitchWeapon;
-        private readonly InputAction m_PlayerControls_SwitchCharacter;
-        private readonly InputAction m_PlayerControls_TimeControl;
-        private readonly InputAction m_PlayerControls_CameraRotation;
-        public struct PlayerControlsActions
+        // DungeonPhase
+        private readonly InputActionMap m_DungeonPhase;
+        private List<IDungeonPhaseActions> m_DungeonPhaseActionsCallbackInterfaces = new List<IDungeonPhaseActions>();
+        private readonly InputAction m_DungeonPhase_PrimaryMovement;
+        private readonly InputAction m_DungeonPhase_SecondaryMovement;
+        private readonly InputAction m_DungeonPhase_Jump;
+        private readonly InputAction m_DungeonPhase_Run;
+        private readonly InputAction m_DungeonPhase_Dash;
+        private readonly InputAction m_DungeonPhase_Crouch;
+        private readonly InputAction m_DungeonPhase_Shoot;
+        private readonly InputAction m_DungeonPhase_SecondaryShoot;
+        private readonly InputAction m_DungeonPhase_Interact;
+        private readonly InputAction m_DungeonPhase_Reload;
+        private readonly InputAction m_DungeonPhase_Pause;
+        private readonly InputAction m_DungeonPhase_SwitchWeapon;
+        private readonly InputAction m_DungeonPhase_SwitchCharacter;
+        private readonly InputAction m_DungeonPhase_TimeControl;
+        private readonly InputAction m_DungeonPhase_CameraRotation;
+        private readonly InputAction m_DungeonPhase_OpenUpgrade;
+        private readonly InputAction m_DungeonPhase_DoUpgradeSpeed;
+        private readonly InputAction m_DungeonPhase_DoUpgradeHealth;
+        private readonly InputAction m_DungeonPhase_DoUpgradeAtk;
+        public struct DungeonPhaseActions
         {
             private @DungeonPhaseInput m_Wrapper;
-            public PlayerControlsActions(@DungeonPhaseInput wrapper) { m_Wrapper = wrapper; }
-            public InputAction @PrimaryMovement => m_Wrapper.m_PlayerControls_PrimaryMovement;
-            public InputAction @SecondaryMovement => m_Wrapper.m_PlayerControls_SecondaryMovement;
-            public InputAction @Jump => m_Wrapper.m_PlayerControls_Jump;
-            public InputAction @Run => m_Wrapper.m_PlayerControls_Run;
-            public InputAction @Dash => m_Wrapper.m_PlayerControls_Dash;
-            public InputAction @Crouch => m_Wrapper.m_PlayerControls_Crouch;
-            public InputAction @Shoot => m_Wrapper.m_PlayerControls_Shoot;
-            public InputAction @SecondaryShoot => m_Wrapper.m_PlayerControls_SecondaryShoot;
-            public InputAction @Interact => m_Wrapper.m_PlayerControls_Interact;
-            public InputAction @Reload => m_Wrapper.m_PlayerControls_Reload;
-            public InputAction @Pause => m_Wrapper.m_PlayerControls_Pause;
-            public InputAction @SwitchWeapon => m_Wrapper.m_PlayerControls_SwitchWeapon;
-            public InputAction @SwitchCharacter => m_Wrapper.m_PlayerControls_SwitchCharacter;
-            public InputAction @TimeControl => m_Wrapper.m_PlayerControls_TimeControl;
-            public InputAction @CameraRotation => m_Wrapper.m_PlayerControls_CameraRotation;
-            public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
+            public DungeonPhaseActions(@DungeonPhaseInput wrapper) { m_Wrapper = wrapper; }
+            public InputAction @PrimaryMovement => m_Wrapper.m_DungeonPhase_PrimaryMovement;
+            public InputAction @SecondaryMovement => m_Wrapper.m_DungeonPhase_SecondaryMovement;
+            public InputAction @Jump => m_Wrapper.m_DungeonPhase_Jump;
+            public InputAction @Run => m_Wrapper.m_DungeonPhase_Run;
+            public InputAction @Dash => m_Wrapper.m_DungeonPhase_Dash;
+            public InputAction @Crouch => m_Wrapper.m_DungeonPhase_Crouch;
+            public InputAction @Shoot => m_Wrapper.m_DungeonPhase_Shoot;
+            public InputAction @SecondaryShoot => m_Wrapper.m_DungeonPhase_SecondaryShoot;
+            public InputAction @Interact => m_Wrapper.m_DungeonPhase_Interact;
+            public InputAction @Reload => m_Wrapper.m_DungeonPhase_Reload;
+            public InputAction @Pause => m_Wrapper.m_DungeonPhase_Pause;
+            public InputAction @SwitchWeapon => m_Wrapper.m_DungeonPhase_SwitchWeapon;
+            public InputAction @SwitchCharacter => m_Wrapper.m_DungeonPhase_SwitchCharacter;
+            public InputAction @TimeControl => m_Wrapper.m_DungeonPhase_TimeControl;
+            public InputAction @CameraRotation => m_Wrapper.m_DungeonPhase_CameraRotation;
+            public InputAction @OpenUpgrade => m_Wrapper.m_DungeonPhase_OpenUpgrade;
+            public InputAction @DoUpgradeSpeed => m_Wrapper.m_DungeonPhase_DoUpgradeSpeed;
+            public InputAction @DoUpgradeHealth => m_Wrapper.m_DungeonPhase_DoUpgradeHealth;
+            public InputAction @DoUpgradeAtk => m_Wrapper.m_DungeonPhase_DoUpgradeAtk;
+            public InputActionMap Get() { return m_Wrapper.m_DungeonPhase; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
             public bool enabled => Get().enabled;
-            public static implicit operator InputActionMap(PlayerControlsActions set) { return set.Get(); }
-            public void AddCallbacks(IPlayerControlsActions instance)
+            public static implicit operator InputActionMap(DungeonPhaseActions set) { return set.Get(); }
+            public void AddCallbacks(IDungeonPhaseActions instance)
             {
-                if (instance == null || m_Wrapper.m_PlayerControlsActionsCallbackInterfaces.Contains(instance)) return;
-                m_Wrapper.m_PlayerControlsActionsCallbackInterfaces.Add(instance);
+                if (instance == null || m_Wrapper.m_DungeonPhaseActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_DungeonPhaseActionsCallbackInterfaces.Add(instance);
                 @PrimaryMovement.started += instance.OnPrimaryMovement;
                 @PrimaryMovement.performed += instance.OnPrimaryMovement;
                 @PrimaryMovement.canceled += instance.OnPrimaryMovement;
@@ -695,9 +787,21 @@ namespace MoreMountains.TopDownEngine
                 @CameraRotation.started += instance.OnCameraRotation;
                 @CameraRotation.performed += instance.OnCameraRotation;
                 @CameraRotation.canceled += instance.OnCameraRotation;
+                @OpenUpgrade.started += instance.OnOpenUpgrade;
+                @OpenUpgrade.performed += instance.OnOpenUpgrade;
+                @OpenUpgrade.canceled += instance.OnOpenUpgrade;
+                @DoUpgradeSpeed.started += instance.OnDoUpgradeSpeed;
+                @DoUpgradeSpeed.performed += instance.OnDoUpgradeSpeed;
+                @DoUpgradeSpeed.canceled += instance.OnDoUpgradeSpeed;
+                @DoUpgradeHealth.started += instance.OnDoUpgradeHealth;
+                @DoUpgradeHealth.performed += instance.OnDoUpgradeHealth;
+                @DoUpgradeHealth.canceled += instance.OnDoUpgradeHealth;
+                @DoUpgradeAtk.started += instance.OnDoUpgradeAtk;
+                @DoUpgradeAtk.performed += instance.OnDoUpgradeAtk;
+                @DoUpgradeAtk.canceled += instance.OnDoUpgradeAtk;
             }
 
-            private void UnregisterCallbacks(IPlayerControlsActions instance)
+            private void UnregisterCallbacks(IDungeonPhaseActions instance)
             {
                 @PrimaryMovement.started -= instance.OnPrimaryMovement;
                 @PrimaryMovement.performed -= instance.OnPrimaryMovement;
@@ -744,23 +848,35 @@ namespace MoreMountains.TopDownEngine
                 @CameraRotation.started -= instance.OnCameraRotation;
                 @CameraRotation.performed -= instance.OnCameraRotation;
                 @CameraRotation.canceled -= instance.OnCameraRotation;
+                @OpenUpgrade.started -= instance.OnOpenUpgrade;
+                @OpenUpgrade.performed -= instance.OnOpenUpgrade;
+                @OpenUpgrade.canceled -= instance.OnOpenUpgrade;
+                @DoUpgradeSpeed.started -= instance.OnDoUpgradeSpeed;
+                @DoUpgradeSpeed.performed -= instance.OnDoUpgradeSpeed;
+                @DoUpgradeSpeed.canceled -= instance.OnDoUpgradeSpeed;
+                @DoUpgradeHealth.started -= instance.OnDoUpgradeHealth;
+                @DoUpgradeHealth.performed -= instance.OnDoUpgradeHealth;
+                @DoUpgradeHealth.canceled -= instance.OnDoUpgradeHealth;
+                @DoUpgradeAtk.started -= instance.OnDoUpgradeAtk;
+                @DoUpgradeAtk.performed -= instance.OnDoUpgradeAtk;
+                @DoUpgradeAtk.canceled -= instance.OnDoUpgradeAtk;
             }
 
-            public void RemoveCallbacks(IPlayerControlsActions instance)
+            public void RemoveCallbacks(IDungeonPhaseActions instance)
             {
-                if (m_Wrapper.m_PlayerControlsActionsCallbackInterfaces.Remove(instance))
+                if (m_Wrapper.m_DungeonPhaseActionsCallbackInterfaces.Remove(instance))
                     UnregisterCallbacks(instance);
             }
 
-            public void SetCallbacks(IPlayerControlsActions instance)
+            public void SetCallbacks(IDungeonPhaseActions instance)
             {
-                foreach (var item in m_Wrapper.m_PlayerControlsActionsCallbackInterfaces)
+                foreach (var item in m_Wrapper.m_DungeonPhaseActionsCallbackInterfaces)
                     UnregisterCallbacks(item);
-                m_Wrapper.m_PlayerControlsActionsCallbackInterfaces.Clear();
+                m_Wrapper.m_DungeonPhaseActionsCallbackInterfaces.Clear();
                 AddCallbacks(instance);
             }
         }
-        public PlayerControlsActions @PlayerControls => new PlayerControlsActions(this);
+        public DungeonPhaseActions @DungeonPhase => new DungeonPhaseActions(this);
         private int m_KeyboardSchemeIndex = -1;
         public InputControlScheme KeyboardScheme
         {
@@ -779,7 +895,7 @@ namespace MoreMountains.TopDownEngine
                 return asset.controlSchemes[m_GamepadSchemeIndex];
             }
         }
-        public interface IPlayerControlsActions
+        public interface IDungeonPhaseActions
         {
             void OnPrimaryMovement(InputAction.CallbackContext context);
             void OnSecondaryMovement(InputAction.CallbackContext context);
@@ -796,6 +912,10 @@ namespace MoreMountains.TopDownEngine
             void OnSwitchCharacter(InputAction.CallbackContext context);
             void OnTimeControl(InputAction.CallbackContext context);
             void OnCameraRotation(InputAction.CallbackContext context);
+            void OnOpenUpgrade(InputAction.CallbackContext context);
+            void OnDoUpgradeSpeed(InputAction.CallbackContext context);
+            void OnDoUpgradeHealth(InputAction.CallbackContext context);
+            void OnDoUpgradeAtk(InputAction.CallbackContext context);
         }
     }
 }

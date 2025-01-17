@@ -25,70 +25,44 @@ namespace dungeonduell
         public KeyCode AttackSpeedKey = KeyCode.Alpha3;
         public KeyCode LevelUpUIKey = KeyCode.Alpha4;
 
-        // Setup der Buttons und Registrierung der Klick-Events
+        bool showMenu = false;
+        
         private void Start()
         {
             _levelManager = FindObjectOfType<DungeonDuellMultiplayerLevelManager>();
-
-            SpeedButton.onClick.AddListener(() => OnOptionSelected(LevelUpOptions.Speed));
-            HealthButton.onClick.AddListener(() => OnOptionSelected(LevelUpOptions.Health));
-            AttackSpeedButton.onClick.AddListener(() => OnOptionSelected(LevelUpOptions.AttackSpeed));
-
-            //HideLevelUpMenu();
         }
 
-        private void Update()
+        public void UpgradeAttackSpeed()
         {
-            // �berpr�fen, ob das Men� aktiv ist
-            if (LevelUpMenu.activeSelf)
-            {
-                // Speed-Button aktivieren
-                if (Input.GetKeyDown(SpeedKey))
-                {
-                    Debug.Log("Speed Button aktiviert");
-                    //SpeedButton.onClick.Invoke();
-                    OnOptionSelected(LevelUpOptions.Speed);
-                }
 
-                // Health-Button aktivieren
-                if (Input.GetKeyDown(HealthKey))
-                {
-                    Debug.Log("Health Button aktiviert");
-                    //HealthButton.onClick.Invoke();
-                    OnOptionSelected(LevelUpOptions.Health);
-                }
-
-                // AttackSpeed-Button aktivieren
-                if (Input.GetKeyDown(AttackSpeedKey))
-                {
-                    Debug.Log("Attack Speed Button aktiviert");
-                    //AttackSpeedButton.onClick.Invoke();
-                    OnOptionSelected(LevelUpOptions.AttackSpeed);
-                }
-            }
+            OnOptionSelected(LevelUpOptions.AttackSpeed);
+        }
+         public void UpgradeHealth()
+        {
+            OnOptionSelected(LevelUpOptions.Health);
+        }
+         public void UpgradeSpeedd()
+        {
+            OnOptionSelected(LevelUpOptions.Speed);
         }
 
-        public void ShowLevelUpMenu(string playerID)
+        public void ShowLevelUpMenu(bool on)
         {
-            _currentPlayerID = playerID;
-            LevelUpMenu.SetActive(true);
-        }
-
-        public void HideLevelUpMenu()
-        {
-            LevelUpMenu.SetActive(false);
-
+            LevelUpMenu.SetActive(on);
         }
 
         private void OnOptionSelected(LevelUpOptions option)
         {
-            if (_levelManager != null)
+            if (TestHub.canLevelUp)
             {
-                _levelManager.ApplyLevelUp(option);
+                if (_levelManager != null)
+                {
+                    _levelManager.ApplyLevelUp(option);
+                }
+                TestHub.canLevelUp = false;
+                ShowLevelUpMenu(false);
             }
-            TestHub.canLevelUp = false;
-            TopDownEngineEvent.Trigger(TopDownEngineEventTypes.Repaint, null);
-            //HideLevelUpMenu();
+            
 
         }
     }
