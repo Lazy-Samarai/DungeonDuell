@@ -233,7 +233,7 @@ namespace MoreMountains.TopDownEngine
 
             Debug.Log("Level Up von " + playerIndex);
 
-            /* Alte Logik, Zieht Münzen direkt ab, soll aber nicht so da es sonst mit der UI nicht so gut passt
+            /* Alte Logik, Zieht Mï¿½nzen direkt ab, soll aber nicht so da es sonst mit der UI nicht so gut passt
             Points[playerIndex].Points -= Points[playerIndex].CoinsForNextLevel;
             Points[playerIndex].CoinsForNextLevel *= 2; // Kosten verdoppeln
             Points[playerIndex].Level++;
@@ -290,7 +290,7 @@ namespace MoreMountains.TopDownEngine
                     walking[1].MovementSpeed += 1.0f;
                     running[1].RunSpeed += 1.0f;
                 }
-                //case switches für die Sachen
+                //case switches fï¿½r die Sachen
             }
         }
 
@@ -316,7 +316,7 @@ namespace MoreMountains.TopDownEngine
         private void ApplyAttackSpeedIncrease(string playerID)
         {
             //ProjectileWeapon weapon = GetPlayerWeapon(playerID);
-            if (weapon != null)
+            if (weapon[0] != null && weapon[1] != null)
             {
 
                 if (playerID == "Player1")
@@ -327,6 +327,12 @@ namespace MoreMountains.TopDownEngine
                 {
                     weapon[1].TimeBetweenUses *= 0.9f; // Schnellere Angriffe
                 }
+            }
+            else
+            {
+                weapon[0] = GetPlayerWeapon("Player1");
+                weapon[1] = GetPlayerWeapon("Player2");
+                ApplyAttackSpeedIncrease(playerID);
             }
         }
 
@@ -379,12 +385,12 @@ namespace MoreMountains.TopDownEngine
         }
 
         private ProjectileWeapon GetPlayerWeapon(string playerID)
-        {
-            foreach (ProjectileWeapon weapon in FindObjectsOfType<ProjectileWeapon>())
+        {           
+            foreach (Character character in FindObjectsOfType<Character>())
             {
-                if (weapon.GetComponent<Character>().PlayerID == playerID)
+                if (character.PlayerID == playerID)
                 {
-                    return weapon;
+                    return character.GetComponentInChildren<ProjectileWeapon>();
                 }
             }
             return null;
