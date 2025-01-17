@@ -1048,7 +1048,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -269.0244, y: 287}
+  m_AnchoredPosition: {x: -269.02444, y: 287}
   m_SizeDelta: {x: 0, y: -177.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &116879434
@@ -1494,7 +1494,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -162, y: 372}
+  m_AnchoredPosition: {x: -162.00003, y: 372}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &316834668
@@ -2271,7 +2271,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -269, y: 287}
+  m_AnchoredPosition: {x: -269.00003, y: 287}
   m_SizeDelta: {x: 0, y: -177.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &414652367
@@ -4637,9 +4637,9 @@ GameObject:
   - component: {fileID: 705329673}
   - component: {fileID: 705329674}
   - component: {fileID: 705329678}
-  - component: {fileID: 705329677}
-  - component: {fileID: 705329676}
   - component: {fileID: 705329675}
+  - component: {fileID: 705329680}
+  - component: {fileID: 705329679}
   m_Layer: 0
   m_Name: GrasslandsUICamera
   m_TagString: Untagged
@@ -4758,7 +4758,15 @@ MonoBehaviour:
   SplitHUD: {fileID: 759561615}
   GroupHUD: {fileID: 1347914438}
   SplittersGUI: {fileID: 113146809}
---- !u!114 &705329676
+--- !u!124 &705329678
+Behaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 705329672}
+  m_Enabled: 1
+--- !u!114 &705329679
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4767,7 +4775,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 705329672}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 281595ba54132634bbe48b336e62e2c7, type: 3}
+  m_Script: {fileID: 11500000, guid: 266fc2237c84669498e61feb6ee377f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   InputDetectionActive: 1
@@ -4785,7 +4793,7 @@ MonoBehaviour:
   SmoothMovement: 1
   Threshold: {x: 0.1, y: 0.4}
   RotateInputBasedOnCameraDirection: 0
---- !u!114 &705329677
+--- !u!114 &705329680
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4794,7 +4802,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 705329672}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 281595ba54132634bbe48b336e62e2c7, type: 3}
+  m_Script: {fileID: 11500000, guid: 266fc2237c84669498e61feb6ee377f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   InputDetectionActive: 1
@@ -4812,14 +4820,6 @@ MonoBehaviour:
   SmoothMovement: 1
   Threshold: {x: 0.1, y: 0.4}
   RotateInputBasedOnCameraDirection: 0
---- !u!124 &705329678
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 705329672}
-  m_Enabled: 1
 --- !u!1 &747842290
 GameObject:
   m_ObjectHideFlags: 0
@@ -6073,7 +6073,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -162, y: 372}
+  m_AnchoredPosition: {x: -162.00003, y: 372}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &970280382
