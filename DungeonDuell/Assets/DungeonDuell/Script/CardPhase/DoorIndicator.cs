@@ -20,8 +20,9 @@ namespace dungeonduell
             for(int i = 0;i < allowedDoors.Length;i++)
             {
                 if(allowedDoors[i]){
+                    
                 var scale = dirAnker.GetChild(i).transform.localScale;
-                dirAnker.GetChild(i).transform.localScale = new Vector3(scale.x * 3, scale.y, scale.z);
+                dirAnker.GetChild(i).transform.localScale = new Vector3(scale.x * 2, scale.y, scale.z);
                 }
               
             }

@@ -101,12 +101,14 @@ namespace dungeonduell
                     bool connectionForcing = false;
                     if(clickedTile == setAbleTiles[setAbleTiles.Length - 1]) // Hited Contested
                     {
+                        print("7777");
                         connectionForcing = true;
                         Vector3Int[] offset = (cellPosition.y % 2 == 0) ? aroundHexDiffVectorEVEN : aroundHexDiffVectorODD;
                         for (int i = 0; i < offset.Length; i++)
                         {
                             if (connectCollector.GetFullRoomList().Any(entry => entry.Item1 == cellPosition + offset[i]))
                             {
+                                print("777788");
                                 currentDoorDir[i] = true; // Connect to all rooms that are there
                                 OverriteCurrentDoorDir[i] = true;
                             }
@@ -154,7 +156,11 @@ namespace dungeonduell
 
                                 if(souroundTile == resetTile & PlayerMove)
                                 {
-                                   tilemap.SetTile(SourrendTilePos.Item1,shadowSetAbleTiles[Array.FindIndex(setAbleTiles, entity => entity == clickedTile)]);                                   
+                                    int i = Array.FindIndex(setAbleTiles, entity => entity == clickedTile);
+                                    if(i < shadowSetAbleTiles.Length)
+                                    {
+                                        tilemap.SetTile(SourrendTilePos.Item1,shadowSetAbleTiles[Array.FindIndex(setAbleTiles, entity => entity == clickedTile)]);       
+                                    }                                                            
                                 }
                                       
                             }
@@ -213,7 +219,7 @@ namespace dungeonduell
                     }
                     else
                     {
-                        // Some Visual Reaction here 
+                        Debug.Log("Denied_NotRightRoation");
                     }
 
                     
