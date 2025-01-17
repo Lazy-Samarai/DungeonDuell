@@ -31,13 +31,13 @@ namespace dungeonduell
         public Vector3 hoverScale = new Vector3(1.2f, 1.2f, 1f); // Größe der Karten beim Hover
         public Vector3 hoverOffset = new Vector3(0f, 20f, 0f);
         public Vector3 sideOffset = new Vector3(30f, 0f, 0f);
-        public float fanAngle = 10f; // Winkel für das Auffächern der Karten
 
         void Start()
         {
             cardTransform = GetComponent<Transform>();
             originalScale = cardTransform.localScale;
             originalRotation = cardTransform.localRotation;
+            handPanelOriginalPosition.y = 0;
 
             HideTooltip();
             UpdateCardDisplay();
@@ -114,6 +114,8 @@ namespace dungeonduell
                     cardTransform.localScale = hoverScale;
                     cardTransform.localPosition += hoverOffset;
                     cardTransform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+                    handPanelOriginalPosition.y = 0;
+                    handPanelOriginalPosition.y += 100;
 
                     if (tooltip != null)
                     {
@@ -140,6 +142,9 @@ namespace dungeonduell
                     cardTransform.localScale = originalScale;
                     cardTransform.localPosition -= hoverOffset;
                     cardTransform.localRotation = originalRotation;
+                    handPanelOriginalPosition.y = 0;
+                    handPanelOriginalPosition.y += 100;
+
 
                     if (tooltip != null)
                     {
@@ -167,6 +172,8 @@ namespace dungeonduell
                 cardTransform.localScale = originalScale;
                 cardTransform.localRotation = originalRotation;
                 transform.SetSiblingIndex(originalSiblingIndex);
+                handPanelOriginalPosition.y = 0;
+                handPanelOriginalPosition.y += 100;
 
                 TileClickHandler tileClickHandler = FindObjectOfType<TileClickHandler>();
                 if (tileClickHandler != null)
@@ -190,6 +197,8 @@ namespace dungeonduell
                         cardOnHolderScript.cardTransform.localRotation = cardOnHolderScript.originalRotation;
                         cardOnHolderScript.transform.SetSiblingIndex(cardOnHolderScript.originalSiblingIndex);
                         cardOnHolderScript.HideTooltip(); // Tooltip des alten CardHolder-Karte ausblenden
+                        handPanelOriginalPosition.y = 0;
+                        handPanelOriginalPosition.y += 100;
                     }
                 }
 
@@ -199,6 +208,8 @@ namespace dungeonduell
                 cardTransform.localRotation = Quaternion.identity;
 
                 HideTooltip(); // Tooltip für aktuelle Karte ausblenden
+                handPanelOriginalPosition.y = 0;
+                handPanelOriginalPosition.y += 100;
 
                 TileClickHandler tileClickHandler = FindObjectOfType<TileClickHandler>();
                 if (tileClickHandler != null)
@@ -213,8 +224,14 @@ namespace dungeonduell
             for (int i = 0; i < handPanel.childCount; i++)
             {
                 Transform card = handPanel.GetChild(i);
-                if (card == transform) continue;
 
+                // Ignoriere die aktuelle Karte und die Karte auf dem CardHolder
+                if (card == transform || (cardHolder.transform.childCount > 0 && card == cardHolder.transform.GetChild(0)))
+                {
+                    continue;
+                }
+
+                // Verschiebe die Karten
                 if (isHovering)
                 {
                     card.localPosition += sideOffset * (i < transform.GetSiblingIndex() ? -1 : 1);
@@ -225,6 +242,7 @@ namespace dungeonduell
                 }
             }
         }
+
 
         private void HideTooltip()
         {
