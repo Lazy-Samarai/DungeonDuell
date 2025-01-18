@@ -583,8 +583,8 @@ namespace MoreMountains.TopDownEngine
             ""id"": ""f2394d13-e7ce-448e-b625-28a9fa9c1928"",
             ""actions"": [
                 {
-                    ""name"": ""CursorNOTUSE"",
-                    ""type"": ""Value"",
+                    ""name"": ""Cursor"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""95f24a95-d445-4f14-b8c9-7789ea98fe7c"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
@@ -627,7 +627,7 @@ namespace MoreMountains.TopDownEngine
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""CursorNOTUSE"",
+                    ""action"": ""Cursor"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -731,7 +731,7 @@ namespace MoreMountains.TopDownEngine
             m_DungeonPhase_DoUpgradeAtk = m_DungeonPhase.FindAction("DoUpgradeAtk", throwIfNotFound: true);
             // CardPhase
             m_CardPhase = asset.FindActionMap("CardPhase", throwIfNotFound: true);
-            m_CardPhase_CursorNOTUSE = m_CardPhase.FindAction("CursorNOTUSE", throwIfNotFound: true);
+            m_CardPhase_Cursor = m_CardPhase.FindAction("Cursor", throwIfNotFound: true);
             m_CardPhase_RotateR = m_CardPhase.FindAction("RotateR", throwIfNotFound: true);
             m_CardPhase_RotateL = m_CardPhase.FindAction("RotateL", throwIfNotFound: true);
             m_CardPhase_Submit = m_CardPhase.FindAction("Submit", throwIfNotFound: true);
@@ -986,7 +986,7 @@ namespace MoreMountains.TopDownEngine
         // CardPhase
         private readonly InputActionMap m_CardPhase;
         private List<ICardPhaseActions> m_CardPhaseActionsCallbackInterfaces = new List<ICardPhaseActions>();
-        private readonly InputAction m_CardPhase_CursorNOTUSE;
+        private readonly InputAction m_CardPhase_Cursor;
         private readonly InputAction m_CardPhase_RotateR;
         private readonly InputAction m_CardPhase_RotateL;
         private readonly InputAction m_CardPhase_Submit;
@@ -994,7 +994,7 @@ namespace MoreMountains.TopDownEngine
         {
             private @DungeonPhaseInput m_Wrapper;
             public CardPhaseActions(@DungeonPhaseInput wrapper) { m_Wrapper = wrapper; }
-            public InputAction @CursorNOTUSE => m_Wrapper.m_CardPhase_CursorNOTUSE;
+            public InputAction @Cursor => m_Wrapper.m_CardPhase_Cursor;
             public InputAction @RotateR => m_Wrapper.m_CardPhase_RotateR;
             public InputAction @RotateL => m_Wrapper.m_CardPhase_RotateL;
             public InputAction @Submit => m_Wrapper.m_CardPhase_Submit;
@@ -1007,9 +1007,9 @@ namespace MoreMountains.TopDownEngine
             {
                 if (instance == null || m_Wrapper.m_CardPhaseActionsCallbackInterfaces.Contains(instance)) return;
                 m_Wrapper.m_CardPhaseActionsCallbackInterfaces.Add(instance);
-                @CursorNOTUSE.started += instance.OnCursorNOTUSE;
-                @CursorNOTUSE.performed += instance.OnCursorNOTUSE;
-                @CursorNOTUSE.canceled += instance.OnCursorNOTUSE;
+                @Cursor.started += instance.OnCursor;
+                @Cursor.performed += instance.OnCursor;
+                @Cursor.canceled += instance.OnCursor;
                 @RotateR.started += instance.OnRotateR;
                 @RotateR.performed += instance.OnRotateR;
                 @RotateR.canceled += instance.OnRotateR;
@@ -1023,9 +1023,9 @@ namespace MoreMountains.TopDownEngine
 
             private void UnregisterCallbacks(ICardPhaseActions instance)
             {
-                @CursorNOTUSE.started -= instance.OnCursorNOTUSE;
-                @CursorNOTUSE.performed -= instance.OnCursorNOTUSE;
-                @CursorNOTUSE.canceled -= instance.OnCursorNOTUSE;
+                @Cursor.started -= instance.OnCursor;
+                @Cursor.performed -= instance.OnCursor;
+                @Cursor.canceled -= instance.OnCursor;
                 @RotateR.started -= instance.OnRotateR;
                 @RotateR.performed -= instance.OnRotateR;
                 @RotateR.canceled -= instance.OnRotateR;
@@ -1094,7 +1094,7 @@ namespace MoreMountains.TopDownEngine
         }
         public interface ICardPhaseActions
         {
-            void OnCursorNOTUSE(InputAction.CallbackContext context);
+            void OnCursor(InputAction.CallbackContext context);
             void OnRotateR(InputAction.CallbackContext context);
             void OnRotateL(InputAction.CallbackContext context);
             void OnSubmit(InputAction.CallbackContext context);

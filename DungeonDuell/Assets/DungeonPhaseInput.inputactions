@@ -559,8 +559,8 @@
             "id": "f2394d13-e7ce-448e-b625-28a9fa9c1928",
             "actions": [
                 {
-                    "name": "CursorNOTUSE",
-                    "type": "Value",
+                    "name": "Cursor",
+                    "type": "PassThrough",
                     "id": "95f24a95-d445-4f14-b8c9-7789ea98fe7c",
                     "expectedControlType": "Vector2",
                     "processors": "",
@@ -603,7 +603,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "CursorNOTUSE",
+                    "action": "Cursor",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

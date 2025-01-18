@@ -104,7 +104,7 @@ namespace dungeonduell
                 Transform transform = transformsWorld[i];
                 SpawnTile(transform.position, WorldCard[0], false, false);
             }
-
+            currentCard = null;
         }
 
         void Update()
@@ -124,7 +124,11 @@ namespace dungeonduell
         {
             Vector3 mouseWorldPos = cam.ScreenToWorldPoint((new Vector3(cousors[turnManager.isPlayer1Turn ? 0 : 1].virtualMouse.position.x.value, cousors[turnManager.isPlayer1Turn ? 0 : 1].virtualMouse.position.y.value, -cam.transform.position.z)));
             print("PressedInput:" + mouseWorldPos);
-            SpawnTile(mouseWorldPos, currentCard, true, true);
+            if (currentCard != null)
+            {
+                SpawnTile(mouseWorldPos, currentCard, true, true);
+            }
+            
         }
 
         private void SpawnTile(Vector3 mouseWorldPos, Card card, bool PlayerMove,bool spawnSourroundSetables)
@@ -168,6 +172,8 @@ namespace dungeonduell
                             discardPile.AddCardToDiscardPile(card);
                             RemoveCardFromCardHolder(turnManager.isPlayer1Turn);
                             RemoveCardFromCardHolder(!turnManager.isPlayer1Turn);
+                            
+               
                             turnManager.EndPlayerTurn(); // Übergib die Verantwortung an den TurnManager
                             currentCard = null;
 

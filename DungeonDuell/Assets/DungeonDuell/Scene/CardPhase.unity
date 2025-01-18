@@ -323,6 +323,7 @@ GameObject:
   - component: {fileID: 169980105}
   - component: {fileID: 169980104}
   - component: {fileID: 169980103}
+  - component: {fileID: 169980106}
   m_Layer: 5
   m_Name: CursorPlayer2
   m_TagString: Player2
@@ -347,7 +348,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 818, y: 460.99997}
-  m_SizeDelta: {x: 40, y: 40}
+  m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &169980103
 MonoBehaviour:
@@ -375,15 +376,7 @@ MonoBehaviour:
       m_Id: b857e658-74b6-462e-b041-c8dd229fdaef
       m_Processors: 
       m_Interactions: 
-      m_SingletonActionBindings:
-      - m_Name: 
-        m_Id: 57c68b13-e2ae-4cf0-a132-517bbe6ee3b1
-        m_Path: <Gamepad>/leftStick
-        m_Interactions: 
-        m_Processors: 
-        m_Groups: 
-        m_Action: Stick
-        m_Flags: 0
+      m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 0}
   m_LeftButtonAction:
@@ -397,7 +390,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings:
       - m_Name: 
-        m_Id: 936b0056-57aa-4793-b8ef-c0796dec0de7
+        m_Id: 23e3b09e-9464-4c44-88cb-6a2df709de5d
         m_Path: <Gamepad>/buttonSouth
         m_Interactions: 
         m_Processors: 
@@ -529,20 +522,20 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 169980101}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.041511774, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c08500e75c1581d4daacd1a363ff46f6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b9eb1dec928eff544a400a95a2b8353f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -560,6 +553,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 169980101}
   m_CullTransparentMesh: 0
+--- !u!114 &169980106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169980101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8498603ff03a7ea4aa1882e3f29e7798, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInput: {fileID: 1130448083}
+  cursorVisual: {fileID: 169980102}
+  canvas: {fileID: 1148792063}
+  ON: 0
+  image: {fileID: 169980104}
 --- !u!1 &191519369
 GameObject:
   m_ObjectHideFlags: 0
@@ -799,6 +809,7 @@ GameObject:
   - component: {fileID: 393502163}
   - component: {fileID: 393502162}
   - component: {fileID: 393502161}
+  - component: {fileID: 393502164}
   m_Layer: 5
   m_Name: CursorPlayer1
   m_TagString: Player1
@@ -823,7 +834,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 818, y: 460.99997}
-  m_SizeDelta: {x: 40, y: 40}
+  m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &393502161
 MonoBehaviour:
@@ -851,17 +862,10 @@ MonoBehaviour:
       m_Id: b857e658-74b6-462e-b041-c8dd229fdaef
       m_Processors: 
       m_Interactions: 
-      m_SingletonActionBindings:
-      - m_Name: 
-        m_Id: 57c68b13-e2ae-4cf0-a132-517bbe6ee3b1
-        m_Path: <Gamepad>/leftStick
-        m_Interactions: 
-        m_Processors: 
-        m_Groups: 
-        m_Action: Stick
-        m_Flags: 0
+      m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 0}
+    m_Reference: {fileID: 795409599024973436, guid: 0cad7e50cc0a66a4d9ba264d314913d3,
+      type: 3}
   m_LeftButtonAction:
     m_UseReference: 0
     m_Action:
@@ -873,7 +877,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings:
       - m_Name: 
-        m_Id: 936b0056-57aa-4793-b8ef-c0796dec0de7
+        m_Id: 44e2c370-8578-48e4-8e43-4348847f876c
         m_Path: <Gamepad>/buttonSouth
         m_Interactions: 
         m_Processors: 
@@ -1011,14 +1015,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.14582491, g: 0, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c08500e75c1581d4daacd1a363ff46f6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b9eb1dec928eff544a400a95a2b8353f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1036,6 +1040,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 393502159}
   m_CullTransparentMesh: 0
+--- !u!114 &393502164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 393502159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8498603ff03a7ea4aa1882e3f29e7798, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInput: {fileID: 1961649892}
+  cursorVisual: {fileID: 393502160}
+  canvas: {fileID: 1885862862}
+  ON: 1
+  image: {fileID: 393502162}
 --- !u!1 &394553475
 GameObject:
   m_ObjectHideFlags: 0
@@ -2184,7 +2205,7 @@ GameObject:
   - component: {fileID: 1130448083}
   - component: {fileID: 1130448082}
   m_Layer: 0
-  m_Name: InputSystemManager_Player2
+  m_Name: InputSystemManager_Player1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2219,7 +2240,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InputDetectionActive: 1
   ResetButtonStatesOnFocusLoss: 1
-  PlayerID: Player2
+  PlayerID: Player1
   AutoMobileDetection: 1
   InputForcedMode: 0
   ForceWeaponMode: 0
@@ -2587,7 +2608,19 @@ MonoBehaviour:
     m_ActionId: eecdb8dd-ec6c-4d14-aaf0-47a89e42d6bf
     m_ActionName: DungeonPhase/DoUpgradeAtk[/DualShock4GamepadHID/dpad/up,/DualShock4GamepadHID1/dpad/up]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 393502164}
+        m_TargetAssemblyTypeName: dungeonduell.TestControllMouseOver, Assembly-CSharp
+        m_MethodName: OnCursorMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 95f24a95-d445-4f14-b8c9-7789ea98fe7c
     m_ActionName: CardPhase/New action
   - m_PersistentCalls:
@@ -2610,6 +2643,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 7237893a-8919-4366-b4a7-f69d3161e268
     m_ActionName: CardPhase/RotateL[/DualShock4GamepadHID/leftShoulder,/DualShock4GamepadHID1/leftShoulder]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 481254717}
+        m_TargetAssemblyTypeName: dungeonduell.TileClickHandler, Assembly-CSharp
+        m_MethodName: CursourInput
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 67024220-9a28-4b1a-89bc-10205b6cdabe
+    m_ActionName: CardPhase/Submit
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: CardPhase
@@ -3538,6 +3587,8 @@ MonoBehaviour:
   tileClickHandler: {fileID: 0}
   HandPlayer1: {fileID: 2012748599}
   HandPlayer2: {fileID: 2077986323}
+  CourserSour1: {fileID: 393502164}
+  CourserSour2: {fileID: 169980106}
   isPlayer1Turn: 1
 --- !u!4 &1557636385
 Transform:
@@ -19681,7 +19732,19 @@ MonoBehaviour:
     m_ActionId: eecdb8dd-ec6c-4d14-aaf0-47a89e42d6bf
     m_ActionName: DungeonPhase/DoUpgradeAtk[/DualShock4GamepadHID/dpad/up,/DualShock4GamepadHID1/dpad/up]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 169980106}
+        m_TargetAssemblyTypeName: dungeonduell.TestControllMouseOver, Assembly-CSharp
+        m_MethodName: OnCursorMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 95f24a95-d445-4f14-b8c9-7789ea98fe7c
     m_ActionName: CardPhase/New action
   - m_PersistentCalls:
