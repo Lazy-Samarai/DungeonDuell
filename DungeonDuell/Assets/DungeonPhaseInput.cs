@@ -577,6 +577,105 @@ namespace MoreMountains.TopDownEngine
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""CardPhase"",
+            ""id"": ""f2394d13-e7ce-448e-b625-28a9fa9c1928"",
+            ""actions"": [
+                {
+                    ""name"": ""CursorNOTUSE"",
+                    ""type"": ""Value"",
+                    ""id"": ""95f24a95-d445-4f14-b8c9-7789ea98fe7c"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""RotateR"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""5d894b6c-1123-4baf-b78c-1ea7d37abfaa"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(pressPoint=1.401298E-45,behavior=1)"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RotateL"",
+                    ""type"": ""Button"",
+                    ""id"": ""7237893a-8919-4366-b4a7-f69d3161e268"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Submit"",
+                    ""type"": ""Button"",
+                    ""id"": ""67024220-9a28-4b1a-89bc-10205b6cdabe"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""bbee681f-afc6-4197-9fc8-133b3749e858"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CursorNOTUSE"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""341b9b69-0074-47a9-b693-2b5e03c78bb6"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateR"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a3ef8e0b-7fe3-4b1d-9eac-7dbcc894c9b7"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateR"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a7c93fce-6953-4eb0-be17-4772584408e8"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateL"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8ff7275c-a5dd-434c-af50-4912f6e7934a"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Submit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -630,6 +729,12 @@ namespace MoreMountains.TopDownEngine
             m_DungeonPhase_DoUpgradeSpeed = m_DungeonPhase.FindAction("DoUpgradeSpeed", throwIfNotFound: true);
             m_DungeonPhase_DoUpgradeHealth = m_DungeonPhase.FindAction("DoUpgradeHealth", throwIfNotFound: true);
             m_DungeonPhase_DoUpgradeAtk = m_DungeonPhase.FindAction("DoUpgradeAtk", throwIfNotFound: true);
+            // CardPhase
+            m_CardPhase = asset.FindActionMap("CardPhase", throwIfNotFound: true);
+            m_CardPhase_CursorNOTUSE = m_CardPhase.FindAction("CursorNOTUSE", throwIfNotFound: true);
+            m_CardPhase_RotateR = m_CardPhase.FindAction("RotateR", throwIfNotFound: true);
+            m_CardPhase_RotateL = m_CardPhase.FindAction("RotateL", throwIfNotFound: true);
+            m_CardPhase_Submit = m_CardPhase.FindAction("Submit", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -877,6 +982,76 @@ namespace MoreMountains.TopDownEngine
             }
         }
         public DungeonPhaseActions @DungeonPhase => new DungeonPhaseActions(this);
+
+        // CardPhase
+        private readonly InputActionMap m_CardPhase;
+        private List<ICardPhaseActions> m_CardPhaseActionsCallbackInterfaces = new List<ICardPhaseActions>();
+        private readonly InputAction m_CardPhase_CursorNOTUSE;
+        private readonly InputAction m_CardPhase_RotateR;
+        private readonly InputAction m_CardPhase_RotateL;
+        private readonly InputAction m_CardPhase_Submit;
+        public struct CardPhaseActions
+        {
+            private @DungeonPhaseInput m_Wrapper;
+            public CardPhaseActions(@DungeonPhaseInput wrapper) { m_Wrapper = wrapper; }
+            public InputAction @CursorNOTUSE => m_Wrapper.m_CardPhase_CursorNOTUSE;
+            public InputAction @RotateR => m_Wrapper.m_CardPhase_RotateR;
+            public InputAction @RotateL => m_Wrapper.m_CardPhase_RotateL;
+            public InputAction @Submit => m_Wrapper.m_CardPhase_Submit;
+            public InputActionMap Get() { return m_Wrapper.m_CardPhase; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(CardPhaseActions set) { return set.Get(); }
+            public void AddCallbacks(ICardPhaseActions instance)
+            {
+                if (instance == null || m_Wrapper.m_CardPhaseActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_CardPhaseActionsCallbackInterfaces.Add(instance);
+                @CursorNOTUSE.started += instance.OnCursorNOTUSE;
+                @CursorNOTUSE.performed += instance.OnCursorNOTUSE;
+                @CursorNOTUSE.canceled += instance.OnCursorNOTUSE;
+                @RotateR.started += instance.OnRotateR;
+                @RotateR.performed += instance.OnRotateR;
+                @RotateR.canceled += instance.OnRotateR;
+                @RotateL.started += instance.OnRotateL;
+                @RotateL.performed += instance.OnRotateL;
+                @RotateL.canceled += instance.OnRotateL;
+                @Submit.started += instance.OnSubmit;
+                @Submit.performed += instance.OnSubmit;
+                @Submit.canceled += instance.OnSubmit;
+            }
+
+            private void UnregisterCallbacks(ICardPhaseActions instance)
+            {
+                @CursorNOTUSE.started -= instance.OnCursorNOTUSE;
+                @CursorNOTUSE.performed -= instance.OnCursorNOTUSE;
+                @CursorNOTUSE.canceled -= instance.OnCursorNOTUSE;
+                @RotateR.started -= instance.OnRotateR;
+                @RotateR.performed -= instance.OnRotateR;
+                @RotateR.canceled -= instance.OnRotateR;
+                @RotateL.started -= instance.OnRotateL;
+                @RotateL.performed -= instance.OnRotateL;
+                @RotateL.canceled -= instance.OnRotateL;
+                @Submit.started -= instance.OnSubmit;
+                @Submit.performed -= instance.OnSubmit;
+                @Submit.canceled -= instance.OnSubmit;
+            }
+
+            public void RemoveCallbacks(ICardPhaseActions instance)
+            {
+                if (m_Wrapper.m_CardPhaseActionsCallbackInterfaces.Remove(instance))
+                    UnregisterCallbacks(instance);
+            }
+
+            public void SetCallbacks(ICardPhaseActions instance)
+            {
+                foreach (var item in m_Wrapper.m_CardPhaseActionsCallbackInterfaces)
+                    UnregisterCallbacks(item);
+                m_Wrapper.m_CardPhaseActionsCallbackInterfaces.Clear();
+                AddCallbacks(instance);
+            }
+        }
+        public CardPhaseActions @CardPhase => new CardPhaseActions(this);
         private int m_KeyboardSchemeIndex = -1;
         public InputControlScheme KeyboardScheme
         {
@@ -916,6 +1091,13 @@ namespace MoreMountains.TopDownEngine
             void OnDoUpgradeSpeed(InputAction.CallbackContext context);
             void OnDoUpgradeHealth(InputAction.CallbackContext context);
             void OnDoUpgradeAtk(InputAction.CallbackContext context);
+        }
+        public interface ICardPhaseActions
+        {
+            void OnCursorNOTUSE(InputAction.CallbackContext context);
+            void OnRotateR(InputAction.CallbackContext context);
+            void OnRotateL(InputAction.CallbackContext context);
+            void OnSubmit(InputAction.CallbackContext context);
         }
     }
 }

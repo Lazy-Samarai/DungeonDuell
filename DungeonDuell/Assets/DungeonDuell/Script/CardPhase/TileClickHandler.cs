@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using System;
 using System.Linq;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 
 namespace dungeonduell
 {
@@ -44,6 +46,8 @@ namespace dungeonduell
 
         public TurnManager turnManager; // Referenz zum TurnManager
 
+        public VirtualMouseInput[] cousors = new VirtualMouseInput[2];
+
         Vector3Int[] aroundHexDiffVectorEVEN = {
             new Vector3Int(-1, 1), // TopLeft
             new Vector3Int(0, 1), // TopRight
@@ -72,6 +76,18 @@ namespace dungeonduell
             StartTiles = FindObjectOfType<StartTilesGen>().gameObject;
             tilemap = FindObjectOfType<Tilemap>();
             turnManager = FindObjectOfType<TurnManager>(); // Finde den TurnManager
+
+            foreach(VirtualMouseInput go in FindObjectsOfType<VirtualMouseInput>())
+            {
+                if(go.tag == "Player1")
+                {
+                    cousors[0] = go;
+                }
+                else
+                {
+                    cousors[1] = go;
+                }
+            }
 
             Transform[] transformsSpwans = StartTiles.transform.GetChild(0).GetComponentsInChildren<Transform>().Skip(1).ToArray<Transform>(); // jump over parent
 
@@ -103,6 +119,12 @@ namespace dungeonduell
                 currentDoorDir = ShiftRight(currentDoorDir);
                 displayCardUi?.UpdateDirectionIndicator(currentDoorDir); // this might be better be resolved with an event later 
             }
+        }
+        public void CursourInput()
+        {
+            Vector3 mouseWorldPos = cam.ScreenToWorldPoint((new Vector3(cousors[turnManager.isPlayer1Turn ? 0 : 1].virtualMouse.position.x.value, cousors[turnManager.isPlayer1Turn ? 0 : 1].virtualMouse.position.y.value, -cam.transform.position.z)));
+            print("PressedInput:" + mouseWorldPos);
+            SpawnTile(mouseWorldPos, currentCard, true, true);
         }
 
         private void SpawnTile(Vector3 mouseWorldPos, Card card, bool PlayerMove,bool spawnSourroundSetables)
@@ -308,5 +330,18 @@ namespace dungeonduell
 
             return shiftedArray;
         }
+            
+        public void ShiftRightInput(InputAction.CallbackContext context)
+        {
+            if (context.started == true) 
+            {
+                print("PressedShift");
+                currentDoorDir = ShiftRight(currentDoorDir);
+                displayCardUi?.UpdateDirectionIndicator(currentDoorDir); // this might be better be resolved with an event later 
+            }
+               
+        }
+
+            
     }
 }
