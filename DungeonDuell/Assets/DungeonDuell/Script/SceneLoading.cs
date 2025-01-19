@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using MoreMountains.Tools;
+using MoreMountains.TopDownEngine;
+
 
 
 namespace dungeonduell
@@ -14,6 +17,7 @@ namespace dungeonduell
         }
         public void ToTheHex()
         {
+            MMEventManager.TriggerEvent(new SavePlayerDataEvent());
             SceneManager.LoadScene(0);
         }
     }
