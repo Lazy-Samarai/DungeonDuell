@@ -72,7 +72,7 @@ static class ConnectionDirExtension
 public enum RoomType
 {
     Generic,
-    CenterLoot,
+    PreSetLoot,
     NormalLott,
     Enemy,
     Spawn_Player1,
