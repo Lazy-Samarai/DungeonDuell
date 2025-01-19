@@ -423,14 +423,15 @@ MonoBehaviour:
     type: 3}
   indiactorDoorAnker: {fileID: 1330985300}
   resetTile: {fileID: 11400000, guid: fbc5379f7e0fce94d806560aa6bfa827, type: 2}
-  setAbleTile: {fileID: 11400000, guid: eac5b490d6d704242a7ba80fc84bbc61, type: 2}
-  SpawnInfo:
-  - {fileID: 11400000, guid: 1cf934f802100af4782165e75dacd883, type: 2}
-  - {fileID: 11400000, guid: 01ca3b43f91b5924e85e2894708130ea, type: 2}
-  WorldCard:
-  - {fileID: 11400000, guid: 987aa6efb8569d34fb1b74b7a9ce6372, type: 2}
+  setAbleTiles:
+  - {fileID: 11400000, guid: eac5b490d6d704242a7ba80fc84bbc61, type: 2}
+  - {fileID: 11400000, guid: bdab57df5882a954fb0231767ffdeb47, type: 2}
+  - {fileID: 11400000, guid: e66ef084925625d4fa69903d57ea23b3, type: 2}
+  shadowSetAbleTiles:
+  - {fileID: 11400000, guid: eba97dcbfa65cce43b6e8898d2506f2d, type: 2}
+  - {fileID: 11400000, guid: 61d31bb1dc50f7b488ce49f1e12915e0, type: 2}
+  CardShelled: []
   connectCollector: {fileID: 1945806930}
-  StartTiles: {fileID: 1099633266}
   HandPlayer1: {fileID: 2012748599}
   HandPlayer2: {fileID: 2077986323}
   discardPile: {fileID: 1190827255}
@@ -875,7 +876,7 @@ Transform:
   m_GameObject: {fileID: 683869573}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.87, y: 3.02, z: 9.949284}
+  m_LocalPosition: {x: -3.09, y: 3.02, z: 9.949284}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -906,7 +907,7 @@ Transform:
   m_GameObject: {fileID: 707251032}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.35, y: 3.08, z: 9.949284}
+  m_LocalPosition: {x: -0.46, y: 3.04, z: 9.949284}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -937,12 +938,62 @@ Transform:
   m_GameObject: {fileID: 834832717}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.66, y: 3.02, z: 9.95}
+  m_LocalPosition: {x: 1.24, y: 3.02, z: 9.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1009411791}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &935718724
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 935718725}
+  - component: {fileID: 935718726}
+  m_Layer: 0
+  m_Name: SpawingWorldPreset
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &935718725
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935718724}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1099633268}
+  m_Father: {fileID: 1945806929}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &935718726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935718724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9be47df18adf9449885ab95f026e925, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpawnInfo:
+  - {fileID: 11400000, guid: 1cf934f802100af4782165e75dacd883, type: 2}
+  - {fileID: 11400000, guid: 01ca3b43f91b5924e85e2894708130ea, type: 2}
+  WorldCard:
+  - {fileID: 11400000, guid: 987aa6efb8569d34fb1b74b7a9ce6372, type: 2}
 --- !u!1 &1009411790
 GameObject:
   m_ObjectHideFlags: 0
@@ -1024,8 +1075,8 @@ MonoBehaviour:
   useDistributorSystem: 1
   firstTime: 1
   cardDistributors:
-  - {fileID: 11400000, guid: d02bba101eb65734fa9c7c2a22c209a5, type: 2}
-  - {fileID: 11400000, guid: bca55552436fab544ab0257e7ac3ca76, type: 2}
+  - {fileID: 11400000, guid: 3b4a12cce42157c4489e70176962620c, type: 2}
+  - {fileID: 11400000, guid: 408774f5de3fb05428908e9c0892defc, type: 2}
   availableCards: []
   playerDeck: []
   deckSize: 3
@@ -1116,7 +1167,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1099633268}
-  - component: {fileID: 1099633267}
   m_Layer: 0
   m_Name: InhilizeStartPostion
   m_TagString: Untagged
@@ -1124,18 +1174,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1099633267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1099633266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3601b5fff75be234aa2f7915db88027b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1099633268
 Transform:
   m_ObjectHideFlags: 0
@@ -1151,7 +1189,7 @@ Transform:
   m_Children:
   - {fileID: 1009411791}
   - {fileID: 1162489421}
-  m_Father: {fileID: 1945806929}
+  m_Father: {fileID: 935718725}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1117561724
 GameObject:
@@ -1856,8 +1894,8 @@ MonoBehaviour:
   useDistributorSystem: 1
   firstTime: 1
   cardDistributors:
-  - {fileID: 11400000, guid: d02bba101eb65734fa9c7c2a22c209a5, type: 2}
-  - {fileID: 11400000, guid: bca55552436fab544ab0257e7ac3ca76, type: 2}
+  - {fileID: 11400000, guid: 3b4a12cce42157c4489e70176962620c, type: 2}
+  - {fileID: 11400000, guid: 408774f5de3fb05428908e9c0892defc, type: 2}
   availableCards: []
   playerDeck: []
   deckSize: 3
@@ -9211,7 +9249,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 679876426}
-  - {fileID: 1099633268}
+  - {fileID: 935718725}
   - {fileID: 1330985300}
   - {fileID: 1117561725}
   m_Father: {fileID: 0}

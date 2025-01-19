@@ -671,7 +671,13 @@ MonoBehaviour:
     type: 3}
   indiactorDoorAnker: {fileID: 1330985300}
   resetTile: {fileID: 11400000, guid: fbc5379f7e0fce94d806560aa6bfa827, type: 2}
-  setAbleTile: {fileID: 11400000, guid: eac5b490d6d704242a7ba80fc84bbc61, type: 2}
+  setAbleTiles:
+  - {fileID: 11400000, guid: eac5b490d6d704242a7ba80fc84bbc61, type: 2}
+  - {fileID: 11400000, guid: bdab57df5882a954fb0231767ffdeb47, type: 2}
+  - {fileID: 11400000, guid: e66ef084925625d4fa69903d57ea23b3, type: 2}
+  shadowSetAbleTiles:
+  - {fileID: 11400000, guid: eba97dcbfa65cce43b6e8898d2506f2d, type: 2}
+  - {fileID: 11400000, guid: 61d31bb1dc50f7b488ce49f1e12915e0, type: 2}
   CardShelled: []
   connectCollector: {fileID: 1945806930}
   HandPlayer1: {fileID: 2012748599}
