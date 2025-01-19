@@ -116,7 +116,9 @@ namespace dungeonduell
                 case RoomType.Spawn_Player2:
                     return roomPrefabs[2]; 
                 case RoomType.NormalLott:
-                    return roomPrefabs[3]; 
+                    return roomPrefabs[3];
+                case RoomType.PreSetLoot:
+                    return roomPrefabs[3];
                 case RoomType.Enemy:
                     return roomPrefabs[4]; 
                 default:

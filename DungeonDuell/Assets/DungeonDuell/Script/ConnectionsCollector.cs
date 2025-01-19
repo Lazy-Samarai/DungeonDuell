@@ -45,6 +45,8 @@ namespace dungeonduell
             Tuple<Vector3Int, RoomInfo> newroomsInfos = 
                 new Tuple<Vector3Int, RoomInfo>(pos,new RoomInfo(roomsInfos.Count, Conncection, type, element, newAllowedDoors));
 
+            print("New Room" + newroomsInfos);
+
              roomsInfos.Add(newroomsInfos);
         }
 
