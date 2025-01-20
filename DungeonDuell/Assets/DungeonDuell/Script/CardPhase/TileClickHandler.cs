@@ -136,22 +136,23 @@ namespace dungeonduell
             if(clickedTile != resetTile | !PlayerMove)
             {
 
-                Card shelledTileCard = CardShelled.FirstOrDefault(x => x.Tile == clickedTile);
 
-                if (shelledTileCard != null)
-                {
-                    tilemap.SetTile(cellPosition, setAbleTiles[owner - 1]); // ! Not Ideal Solotions, make later System that checks sourround Tiles or make Contested Version of this tile
-                    clickedTile = setAbleTiles[owner - 1];
+               if ((setAbleTiles.Contains(clickedTile)  && currentCard != null) | !PlayerMove)
+               {
 
-                    shelledTileCard.startDoorConcellation = card.startDoorConcellation; // giving it direction of clicked card, other elements are preset of sheel card
-                    CardUsingHandling(shelledTileCard, PlayerMove, spawnSourroundSetables, cellPosition,clickedTile,owner);
-                }
-                else if ((setAbleTiles.Contains(clickedTile)  && currentCard != null) | !PlayerMove)
-                {
-                    print("CardUsingHandling");
+                    Card shelledTileCard = CardShelled.FirstOrDefault(x => x.Tile == clickedTile);
+
+                    if (shelledTileCard != null)
+                    {
+                        tilemap.SetTile(cellPosition, setAbleTiles[owner - 1]); // ! Not Ideal Solotions, make later System that checks sourround Tiles or make Contested Version of this tile
+                        clickedTile = setAbleTiles[owner - 1];
+
+                        shelledTileCard.startDoorConcellation = card.startDoorConcellation; // giving it direction of clicked card, other elements are preset of sheel card
+                        // CardUsingHandling(shelledTileCard, PlayerMove, spawnSourroundSetables, cellPosition, clickedTile, owner);
+                    }                 
                     CardUsingHandling(card, PlayerMove, spawnSourroundSetables, cellPosition,clickedTile,owner);
 
-                }
+               }
                 else
                 {
                     Debug.Log("Denied_SetOrNoCard");
@@ -166,6 +167,9 @@ namespace dungeonduell
 
         private void CardUsingHandling(Card card, bool PlayerMove, bool spawnSourroundSetables, Vector3Int cellPosition, TileBase clickedTile,int owner)
         {
+
+        
+
             bool[] OverriteCurrentDoorDir =  new bool[] { false, false, false, false, false, false };
             bool connectionForcing = false;
                                 if(clickedTile == setAbleTiles[setAbleTiles.Length - 1]) // Hited Contested
