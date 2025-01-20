@@ -16,15 +16,7 @@ namespace dungeonduell
         {
             StartTiles = transform.GetChild(0).gameObject;
             tileClickHandler = FindObjectOfType<TileClickHandler>();
-            SpawnTiles();
-            foreach (Card card in WorldCard)
-            {
-                if (card.SheelCard)
-                {
-                    tileClickHandler.AddShellCardTypeToCheck(card);
-                }
-            }          
-
+            SpawnTiles();                
         }
         public void SpawnTiles()
         {

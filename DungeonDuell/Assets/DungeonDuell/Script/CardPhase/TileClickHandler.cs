@@ -29,7 +29,7 @@ namespace dungeonduell
 
          public TileBase[] shadowSetAbleTiles;
 
-        public List<Card> CardShelled; // Includes every Shelled Card played on board so only SheelsCard on Board are checked
+        public List<Card> CardShelled; 
 
         public ConnectionsCollector connectCollector;
 
