@@ -135,24 +135,25 @@ namespace dungeonduell
 
             if(clickedTile != resetTile | !PlayerMove)
             {
+                Card shelledTileCard = CardShelled.FirstOrDefault(x => x.Tile == clickedTile);
 
+                if (shelledTileCard != null)
+                {
+                    // tilemap.SetTile(cellPosition, setAbleTiles[owner - 1]); // ! Not Ideal Solotions, make later System that checks sourround Tiles or make Contested Version of this tile
+                    clickedTile = setAbleTiles[owner - 1];
 
-               if ((setAbleTiles.Contains(clickedTile)  && currentCard != null) | !PlayerMove)
-               {
+                    shelledTileCard.startDoorConcellation = card.startDoorConcellation; // giving it direction of clicked card, other elements are preset of sheel card
+                                                                                        // CardUsingHandling(shelledTileCard, PlayerMove, spawnSourroundSetables, cellPosition, clickedTile, owner);
 
-                    Card shelledTileCard = CardShelled.FirstOrDefault(x => x.Tile == clickedTile);
+                    card = shelledTileCard;
 
-                    if (shelledTileCard != null)
-                    {
-                        tilemap.SetTile(cellPosition, setAbleTiles[owner - 1]); // ! Not Ideal Solotions, make later System that checks sourround Tiles or make Contested Version of this tile
-                        clickedTile = setAbleTiles[owner - 1];
+                }
 
-                        shelledTileCard.startDoorConcellation = card.startDoorConcellation; // giving it direction of clicked card, other elements are preset of sheel card
-                        // CardUsingHandling(shelledTileCard, PlayerMove, spawnSourroundSetables, cellPosition, clickedTile, owner);
-                    }                 
+                if (((setAbleTiles.Contains(clickedTile))  && currentCard != null) | !PlayerMove)
+                {                
                     CardUsingHandling(card, PlayerMove, spawnSourroundSetables, cellPosition,clickedTile,owner);
 
-               }
+                }
                 else
                 {
                     Debug.Log("Denied_SetOrNoCard");
