@@ -8,8 +8,6 @@ using UnityEngine.SceneManagement;
 
 namespace MoreMountains.TopDownEngine
 {
-    public struct SavePlayerDataEvent  { }
-    public struct LoadPlayerDataEvent { }
     public struct CoinEvent
     {
         public GameObject Picker;
@@ -107,78 +105,13 @@ namespace MoreMountains.TopDownEngine
                 Points[i].CoinsForNextLevel = 1; // Startkosten
                 i++;
 			}
-            MMEventManager.TriggerEvent(new LoadPlayerDataEvent());
-            SynchronizeFromPlayerDataManager();
-        }
+		}
 
-
-
-        private void OnApplicationQuit()
-        {
-            SavePlayerStates();
-        }
-
-        public void SavePlayerStates()
-        {
-            SynchronizeToPlayerDataManager();
-            // Löst das Speicher-Event aus
-            MMEventManager.TriggerEvent(new SavePlayerDataEvent());
-        }
-
-        private void SynchronizeToPlayerDataManager()
-        {
-            var playerDataList = PlayerDataManager.Instance.PlayerDataList;
-            for (int i = 0; i < Points.Length; i++)
-            {
-                foreach (var data in playerDataList)
-                {
-                    if (data.PlayerID == Points[i].PlayerID)
-                    {
-                        data.Points = Points[i].Points;
-                        data.Level = Points[i].Level;
-                        data.CoinsForNextLevel = Points[i].CoinsForNextLevel;
-
-                        data.WalkSpeed = walking[i].WalkSpeed;
-                        data.RunSpeed = running[i].RunSpeed;
-                        data.Health = health[i].MaximumHealth;
-                        //data.AttackSpeed = weapon[i].TimeBetweenUses;
-                    }
-                }
-            }
-            Debug.Log("Spielerdaten synchronisiert (LevelManager -> PlayerDataManager).");
-        }
-
-        private void SynchronizeFromPlayerDataManager()
-        {
-            var playerDataList = PlayerDataManager.Instance.PlayerDataList;
-            for (int i = 0; i < Points.Length; i++)
-            {
-                foreach (var data in playerDataList)
-                {
-                    if (data.PlayerID == Points[i].PlayerID)
-                    {
-                        Points[i].Points = data.Points;
-                        Points[i].Level = data.Level;
-                        Points[i].CoinsForNextLevel = data.CoinsForNextLevel;
-
-                        // Spielerattribute synchronisieren
-                        walking[i].WalkSpeed = data.WalkSpeed;
-                        running[i].RunSpeed = data.RunSpeed;
-                        health[i].MaximumHealth = data.Health;
-                        //weapon[i].TimeBetweenUses = data.AttackSpeed;
-                         
-                    }
-                }
-            }
-            Debug.Log("Spielerdaten synchronisiert (PlayerDataManager -> LevelManager).");
-        }
-
-
-        /// <summary>
-        /// Whenever a player dies, we check if we only have one left alive, in which case we trigger our game over routine
-        /// </summary>
-        /// <param name="playerCharacter"></param>
-        protected override void OnPlayerDeath(Character playerCharacter)
+		/// <summary>
+		/// Whenever a player dies, we check if we only have one left alive, in which case we trigger our game over routine
+		/// </summary>
+		/// <param name="playerCharacter"></param>
+		protected override void OnPlayerDeath(Character playerCharacter)
 		{
 			base.OnPlayerDeath(playerCharacter);
 			int aliveCharacters = 0;
@@ -345,8 +278,7 @@ namespace MoreMountains.TopDownEngine
             //CharacterMovement movement = GetPlayerMovement(playerID);
             if (walking != null)
             {
-                var playerData = PlayerDataManager.Instance.PlayerDataList.Find(p => p.PlayerID == playerID);
-                if (playerID == "Player1")
+                if(playerID == "Player1")
                 {
                     walking[0].WalkSpeed += 1.0f;
                     walking[0].MovementSpeed += 1.0f;
@@ -368,7 +300,6 @@ namespace MoreMountains.TopDownEngine
             //Health health = character?.GetComponent<Health>();
             if (health != null)
             {
-                var playerData = PlayerDataManager.Instance.PlayerDataList.Find(p => p.PlayerID == playerID);
                 if (playerID == "Player1")
                 {
                     health[0].MaximumHealth += 10;
@@ -387,7 +318,7 @@ namespace MoreMountains.TopDownEngine
             //ProjectileWeapon weapon = GetPlayerWeapon(playerID);
             if (weapon[0] != null && weapon[1] != null)
             {
-                var playerData = PlayerDataManager.Instance.PlayerDataList.Find(p => p.PlayerID == playerID);
+
                 if (playerID == "Player1")
                 {
                     weapon[0].TimeBetweenUses *= 0.9f;
