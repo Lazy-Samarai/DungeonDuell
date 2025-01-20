@@ -175,7 +175,7 @@ namespace dungeonduell
             bool connectionForcing = false;
                                 if(clickedTile == setAbleTiles[setAbleTiles.Length - 1]) // Hited Contested
                                 {
-                                    print("7777");
+                                    DDCodeEventHandler.Trigger_DungeonConnected();                                 
                                     connectionForcing = true;
                                     Vector3Int[] offset = (cellPosition.y % 2 == 0) ? aroundHexDiffVectorEVEN : aroundHexDiffVectorODD;
                                     for (int i = 0; i < offset.Length; i++)
@@ -215,7 +215,6 @@ namespace dungeonduell
                                     if (clickedTile != souroundTile)
                                     {
                                         tilemap.SetTile(SourrendTilePos.Item1, setAbleTiles[setAbleTiles.Length - 1]); // Hit Contest
-                                        DDCodeEventHandler.Trigger_DungeonConnected();
                                     }
 
                                 }

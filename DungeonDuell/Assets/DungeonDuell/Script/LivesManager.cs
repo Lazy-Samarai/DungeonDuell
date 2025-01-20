@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace dungeonduell
 {
@@ -10,7 +11,7 @@ namespace dungeonduell
         public int livesPlayer1 = 2;
         public int livesPlayer2 = 2;
 
-        bool nextRoundFinal = false;
+        public bool nextRoundFinal = false;
         void Awake()
         {
             ConnectionsCollector[] objs = FindObjectsOfType<ConnectionsCollector>();
@@ -28,23 +29,33 @@ namespace dungeonduell
             livesPlayer1 = 1;
             livesPlayer2 = 1;
         }
+        void OnSceneLoaded(Scene scene, LoadSceneMode mode){
+            if(scene.buildIndex == 1){
+                    if(nextRoundFinal){
+                
+                    SequenceMang sequenceMang; // A bit over simple but fine for now
+                    if(sequenceMang = FindAnyObjectByType<SequenceMang>())
+                    {
+                        sequenceMang.DisableTimer();
+                    }
+
+                }
+            }
+
+        }
+
 
         void OnEnable()
         {
-            if(nextRoundFinal){
-                
-                SequenceMang sequenceMang; // A bit over simple but fine for now
-                if(sequenceMang = FindAnyObjectByType<SequenceMang>())
-                {
-                    sequenceMang.DisableTimer();
-                }
-            }
+            
         
             DDCodeEventHandler.DungeonConnected+=FinalRound;
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
         void OnDisable()
         {
-             DDCodeEventHandler.DungeonConnected-=FinalRound;
+            DDCodeEventHandler.DungeonConnected-=FinalRound;
+            SceneManager.sceneLoaded -= OnSceneLoaded;
         }
     }
 }

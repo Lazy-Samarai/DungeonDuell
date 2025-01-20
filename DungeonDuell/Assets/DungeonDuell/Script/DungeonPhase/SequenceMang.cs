@@ -57,6 +57,7 @@ namespace dungeonduell
         public void DisableTimer()
         {
             finalRound = true;
+            timeRunning = false;
             timerText.text = "X";
 
         }
