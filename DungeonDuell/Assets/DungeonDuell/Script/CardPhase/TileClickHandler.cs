@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using System;
 using System.Linq;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 
 namespace dungeonduell
 {
@@ -43,6 +45,8 @@ namespace dungeonduell
 
         public TurnManager turnManager; // Referenz zum TurnManager
 
+        public VirtualMouseInput[] cousors = new VirtualMouseInput[2];
+
         Vector3Int[] aroundHexDiffVectorEVEN = {
             new Vector3Int(-1, 1), // TopLeft
             new Vector3Int(0, 1), // TopRight
@@ -71,6 +75,19 @@ namespace dungeonduell
             connectCollector = FindObjectOfType<ConnectionsCollector>();
             tilemap = FindObjectOfType<Tilemap>();
             turnManager = FindObjectOfType<TurnManager>(); // Finde den TurnManager         CardShelled = FindObjectOfType<SpawnWorldTiles>().WorldCard.ToList(); // Not ideal for cohesion but fine for now
+            turnManager = FindObjectOfType<TurnManager>(); // Finde den TurnManager
+
+            foreach(VirtualMouseInput go in FindObjectsOfType<VirtualMouseInput>())
+            {
+                if(go.tag == "Player1")
+                {
+                    cousors[0] = go;
+                }
+                else
+                {
+                    cousors[1] = go;
+                }
+            }
         }
 
         void Update()
@@ -88,6 +105,16 @@ namespace dungeonduell
                     displayCardUi?.UpdateDirectionIndicator(currentDoorDir); // this might be better be resolved with an event later
                 }
             }
+        }
+        public void CursourInput()
+        {
+            Vector3 mouseWorldPos = cam.ScreenToWorldPoint((new Vector3(cousors[turnManager.isPlayer1Turn ? 0 : 1].virtualMouse.position.x.value, cousors[turnManager.isPlayer1Turn ? 0 : 1].virtualMouse.position.y.value, -cam.transform.position.z)));
+            print("PressedInput:" + mouseWorldPos);
+            if (currentCard != null)
+            {
+                SpawnTile(mouseWorldPos, currentCard, true, true,turnManager.isPlayer1Turn ? 1 : 2);
+            }
+
         }
 
         public void SpawnTile(Vector3 mouseWorldPos, Card card, bool PlayerMove,bool spawnSourroundSetables,int owner)
@@ -108,20 +135,22 @@ namespace dungeonduell
 
             if(clickedTile != resetTile | !PlayerMove)
             {
-
-                Card shelledTileCard = CardShelled.FirstOrDefault(x => x.Tile == clickedTile);           
+                Card shelledTileCard = CardShelled.FirstOrDefault(x => x.Tile == clickedTile);
 
                 if (shelledTileCard != null)
                 {
-                    tilemap.SetTile(cellPosition, setAbleTiles[owner - 1]); // ! Not Ideal Solotions, make later System that checks sourround Tiles or make Contested Version of this tile 
+                    // tilemap.SetTile(cellPosition, setAbleTiles[owner - 1]); // ! Not Ideal Solotions, make later System that checks sourround Tiles or make Contested Version of this tile
                     clickedTile = setAbleTiles[owner - 1];
 
                     shelledTileCard.startDoorConcellation = card.startDoorConcellation; // giving it direction of clicked card, other elements are preset of sheel card
-                    CardUsingHandling(shelledTileCard, PlayerMove, spawnSourroundSetables, cellPosition,clickedTile,owner);
+                                                                                        // CardUsingHandling(shelledTileCard, PlayerMove, spawnSourroundSetables, cellPosition, clickedTile, owner);
+
+                    card = shelledTileCard;
+
                 }
-                else if ((setAbleTiles.Contains(clickedTile)  && currentCard != null) | !PlayerMove)
-                {
-                    print("CardUsingHandling");
+
+                if (((setAbleTiles.Contains(clickedTile))  && currentCard != null) | !PlayerMove)
+                {                
                     CardUsingHandling(card, PlayerMove, spawnSourroundSetables, cellPosition,clickedTile,owner);
 
                 }
@@ -139,6 +168,9 @@ namespace dungeonduell
 
         private void CardUsingHandling(Card card, bool PlayerMove, bool spawnSourroundSetables, Vector3Int cellPosition, TileBase clickedTile,int owner)
         {
+
+        
+
             bool[] OverriteCurrentDoorDir =  new bool[] { false, false, false, false, false, false };
             bool connectionForcing = false;
                                 if(clickedTile == setAbleTiles[setAbleTiles.Length - 1]) // Hited Contested
@@ -234,15 +266,15 @@ namespace dungeonduell
                 // Create Room Info
                 CreateRoom(cellPosition, card.roomtype, card.roomElement, currentDoorDir, owner,connectionForcing);
 
-                // Card Disposal
-                if (PlayerMove)
-                {
-                    // Karte zum Abwurfstapel hinzufügen und vom CardHolder entfernen
-                    discardPile.AddCardToDiscardPile(card);
-                    RemoveCardFromCardHolder(turnManager.isPlayer1Turn);
-                    RemoveCardFromCardHolder(!turnManager.isPlayer1Turn);
-                    turnManager.EndPlayerTurn(); // Übergib die Verantwortung an den TurnManager
-                    currentCard = null;
+                        // Card Disposal
+                        if (PlayerMove)
+                        {
+                            // Karte zum Abwurfstapel hinzufügen und vom CardHolder entfernen    
+                            discardPile.AddCardToDiscardPile(card);
+                            RemoveCardFromCardHolder(turnManager.isPlayer1Turn);
+                            RemoveCardFromCardHolder(!turnManager.isPlayer1Turn);
+                            turnManager.EndPlayerTurn(); // Übergib die Verantwortung an den TurnManager
+                            currentCard = null;
 
                 }
                 GameObject indicator = Instantiate(indiactorDoor, tilemap.CellToWorld(cellPosition), Quaternion.identity);
@@ -258,12 +290,12 @@ namespace dungeonduell
                         indicator.GetComponent<DoorIndicator>().OverExtend(OverriteCurrentDoorDir);
                     }
 
-                
+
             }
             else
             {
                 Debug.Log("Denied_NotRightRoation");
-            }         
+            }
         }
 
         private bool CheckConnectAblity(Tuple<Vector3Int, ConnectionDir>[] sourroundCorr)
@@ -399,6 +431,19 @@ namespace dungeonduell
 
             return shiftedArray;
         }
+
+        public void ShiftRightInput(InputAction.CallbackContext context)
+        {
+            if (context.started == true)
+            {
+                print("PressedShift");
+                currentDoorDir = ShiftRight(currentDoorDir);
+                displayCardUi?.UpdateDirectionIndicator(currentDoorDir); // this might be better be resolved with an event later
+            }
+
+        }
+
+
         public void AddShellCardTypeToCheck(Card card)
         {
             CardShelled.Add(card);

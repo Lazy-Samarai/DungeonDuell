@@ -1,3 +1,4 @@
+using dungeonduell;
 using MoreMountains.Feedbacks;
 using MoreMountains.Tools;
 using System.Collections;
@@ -7,17 +8,49 @@ using UnityEngine.SceneManagement;
 
 namespace MoreMountains.TopDownEngine
 {
-	// Partically Copy from Grasslands
-    public class DungeonDuellMultiplayerLevelManager : MultiplayerLevelManager, MMEventListener<PickableItemEvent>
+    public struct CoinEvent
+    {
+        public GameObject Picker;
+        public int PointsToAdd;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MoreMountains.TopDownEngine.PickableItemEvent"/> struct.
+        /// </summary>
+        /// <param name="pickedItem">Picked item.</param>
+        public CoinEvent(int pointsToAdd, GameObject picker)
+        {
+            Picker = picker;
+            PointsToAdd = pointsToAdd;
+        }
+        static CoinEvent c;
+        public static void Trigger(int pointsToAdd, GameObject picker)
+        {
+            c.Picker = picker;
+            c.PointsToAdd = pointsToAdd;
+            MMEventManager.TriggerEvent(c);
+        }
+    }
+
+        public enum LevelUpOptions
+        {
+            Speed,
+            Health,
+            AttackSpeed
+        }
+
+    // Partically Copy from Grasslands
+    public class DungeonDuellMultiplayerLevelManager : MultiplayerLevelManager, MMEventListener<CoinEvent>
     {
 		public struct DDPoints
 		{
 			public string PlayerID;
 			public int Points;
-		}
-		
+            public int Level;
+            public int CoinsForNextLevel;
+        }
 
-		[Header("Bindings")]
+
+        [Header("Bindings")]
 		/// An array to store each player's points
 		[Tooltip("an array to store each player's points")]
 		public DDPoints[] Points;
@@ -26,28 +59,51 @@ namespace MoreMountains.TopDownEngine
 		public List<MMCountdown> Countdowns;
 
 		public virtual string WinnerID { get; set; }
+        public virtual string LevelUPID { get; set; }
 
-		protected string _playerID;
+        protected string _playerID;
 		protected bool _gameOver = false;
 
-		public dungeonduell.SequenceMang sequenceMang;
+        public CharacterMovement[] walking = new CharacterMovement[2];
+        public CharacterRun[] running = new CharacterRun[2];
+        public ProjectileWeapon[] weapon = new ProjectileWeapon[2];
+        public Health[] health = new Health[2];
+
+        float baseWalk;
+        float baseRun;
+
+        public dungeonduell.SequenceMang sequenceMang;
 
         /// <summary>
         /// On init, we initialize our points and countdowns
         /// </summary>
-
         protected override void Initialization()
 		{
 		
 			base.Initialization();
+
+            weapon[0] = GetPlayerWeapon("Player1");
+            weapon[1] = GetPlayerWeapon("Player2");
+            walking[0] = GetPlayerMovement("Player1");
+            walking[1] = GetPlayerMovement("Player2");
+            running[0] = GetPlayerRun("Player1");
+            running[1] = GetPlayerRun("Player2");
+            weapon[0] = GetPlayerWeapon("Player1");
+            weapon[1] = GetPlayerWeapon("Player2");
+            health[0] = GetPlayerHealth("Player1");
+            health[1] = GetPlayerHealth("Player2");
+
 			WinnerID = "";
+            LevelUPID = "";
 			Points = new DDPoints[Players.Count];
 			int i = 0;
 			foreach (Character player in Players)
 			{
 				Points[i].PlayerID = player.PlayerID;
 				Points[i].Points = 0;
-				i++;
+                Points[i].Level = 1;
+                Points[i].CoinsForNextLevel = 1; // Startkosten
+                i++;
 			}
 		}
 
@@ -153,26 +209,201 @@ namespace MoreMountains.TopDownEngine
 		/// When a coin gets picked, we increase the amount of points of the character who picked it
 		/// </summary>
 		/// <param name="pickEvent"></param>
-		public virtual void OnMMEvent(PickableItemEvent pickEvent)
+		public virtual void OnMMEvent(CoinEvent coinEvent)
 		{
-			_playerID = pickEvent.Picker.MMGetComponentNoAlloc<Character>()?.PlayerID;
+			LevelUPID = coinEvent.Picker.MMGetComponentNoAlloc<Character>()?.PlayerID;
 			for (int i = 0; i < Points.Length; i++)
 			{
-				if (Points[i].PlayerID == _playerID)
+				if (Points[i].PlayerID == LevelUPID)
 				{
-					Points[i].Points++;
-					TopDownEngineEvent.Trigger(TopDownEngineEventTypes.Repaint, null);
+					Points[i].Points += coinEvent.PointsToAdd;
+                    TopDownEngineEvent.Trigger(TopDownEngineEventTypes.Repaint, null);
+                    if (Points[i].Points >= Points[i].CoinsForNextLevel)
+                    {
+                        TriggerLevelUp(i);
+                        LevelUPID = Points[i].PlayerID;
+                        TopDownEngineEvent.Trigger(TopDownEngineEventTypes.LevelUp, null);
+                    }
 				}
 			}
 		}
 
-		/// <summary>
-		/// Starts listening for pickable item events
-		/// </summary>
-		protected override void OnEnable()
+        protected void TriggerLevelUp(int playerIndex)
+        {
+
+            Debug.Log("Level Up von " + playerIndex);
+
+            /* Alte Logik, Zieht M�nzen direkt ab, soll aber nicht so da es sonst mit der UI nicht so gut passt
+            Points[playerIndex].Points -= Points[playerIndex].CoinsForNextLevel;
+            Points[playerIndex].CoinsForNextLevel *= 2; // Kosten verdoppeln
+            Points[playerIndex].Level++;
+            TopDownEngineEvent.Trigger(TopDownEngineEventTypes.Repaint, null);
+            */
+        }
+
+
+        public void ApplyLevelUp(LevelUpOptions option)
+        {
+
+            for (int i = 0; i < Points.Length; i++)
+            {
+                if (Points[i].PlayerID == LevelUPID)
+                {
+                    
+                    Points[i].Points -= Points[i].CoinsForNextLevel;
+                    Points[i].CoinsForNextLevel *= 2; // Kosten verdoppeln
+                    Points[i].Level++;
+                    //das Event sollte doch die CoinCounter anpassen, aber es wird nie richtig aufgerufen
+                    TopDownEngineEvent.Trigger(TopDownEngineEventTypes.Repaint, null);
+                    Debug.Log($"Spieler {_playerID} ist jetzt Level {Points[i].Level}");
+
+                    switch (option)
+                    {
+                        case LevelUpOptions.Speed:
+                            ApplySpeedIncrease(LevelUPID);
+                            break;
+                        case LevelUpOptions.Health:
+                            ApplyHealthIncrease(LevelUPID);
+                            break;
+                        case LevelUpOptions.AttackSpeed:
+                            ApplyAttackSpeedIncrease(LevelUPID);
+                            break;
+                    }
+                }
+            }
+        }
+
+        private void ApplySpeedIncrease(string playerID)
+        {
+            //CharacterMovement movement = GetPlayerMovement(playerID);
+            if (walking != null)
+            {
+                if(playerID == "Player1")
+                {
+                    walking[0].WalkSpeed += 1.0f;
+                    walking[0].MovementSpeed += 1.0f;
+                    running[0].RunSpeed += 1.0f;
+                }
+                else if(playerID == "Player2")
+                {
+                    walking[1].WalkSpeed += 1.0f;
+                    walking[1].MovementSpeed += 1.0f;
+                    running[1].RunSpeed += 1.0f;
+                }
+                //case switches f�r die Sachen
+            }
+        }
+
+        private void ApplyHealthIncrease(string playerID)
+        {
+            //Character character = GetPlayerCharacter(playerID);
+            //Health health = character?.GetComponent<Health>();
+            if (health != null)
+            {
+                if (playerID == "Player1")
+                {
+                    health[0].MaximumHealth += 10;
+                    health[0].SetHealth(Mathf.Min(health[0].CurrentHealth + 10, health[0].MaximumHealth));
+                }
+                else if (playerID == "Player2")
+                {
+                    health[1].MaximumHealth += 10;
+                    health[1].SetHealth(Mathf.Min(health[1].CurrentHealth + 10, health[1].MaximumHealth));
+                }
+            }
+        }
+
+        private void ApplyAttackSpeedIncrease(string playerID)
+        {
+            //ProjectileWeapon weapon = GetPlayerWeapon(playerID);
+            if (weapon[0] != null && weapon[1] != null)
+            {
+
+                if (playerID == "Player1")
+                {
+                    weapon[0].TimeBetweenUses *= 0.9f;
+                }
+                else if (playerID == "Player2")
+                {
+                    weapon[1].TimeBetweenUses *= 0.9f; // Schnellere Angriffe
+                }
+            }
+            else
+            {
+                weapon[0] = GetPlayerWeapon("Player1");
+                weapon[1] = GetPlayerWeapon("Player2");
+                ApplyAttackSpeedIncrease(playerID);
+            }
+        }
+
+        private CharacterMovement GetPlayerMovement(string playerID)
+        {
+            foreach (CharacterMovement movement in FindObjectsOfType<CharacterMovement>())
+            {
+                if (movement.GetComponent<Character>().PlayerID == playerID)
+                {
+                    return movement;
+                }
+            }
+            return null;
+        }
+
+        private CharacterRun GetPlayerRun(string playerID)
+        {
+            foreach (CharacterRun run in FindObjectsOfType<CharacterRun>())
+            {
+                if (run.GetComponent<Character>().PlayerID == playerID)
+                {
+                    return run;
+                }
+            }
+            return null;
+        }
+
+        private Character GetPlayerCharacter(string playerID)
+        {
+            foreach (Character character in FindObjectsOfType<Character>())
+            {
+                if (character.PlayerID == playerID)
+                {
+                    return character;
+                }
+            }
+            return null;
+        }
+
+        private Health GetPlayerHealth(string playerID)
+        {
+            foreach (Health health in FindObjectsOfType<Health>())
+            {
+                if (health.GetComponent<Character>().PlayerID == playerID)
+                {
+                    return health;
+                }
+            }
+            return null;
+        }
+
+        private ProjectileWeapon GetPlayerWeapon(string playerID)
+        {           
+            foreach (Character character in FindObjectsOfType<Character>())
+            {
+                if (character.PlayerID == playerID)
+                {
+                    return character.GetComponentInChildren<ProjectileWeapon>();
+                }
+            }
+            return null;
+        }
+
+
+        /// <summary>
+        /// Starts listening for pickable item events
+        /// </summary>
+        protected override void OnEnable()
 		{
 			base.OnEnable();
-			this.MMEventStartListening<PickableItemEvent>();
+			this.MMEventStartListening<CoinEvent>();
 		}
 
 		/// <summary>
@@ -181,7 +412,7 @@ namespace MoreMountains.TopDownEngine
 		protected override void OnDisable()
 		{
 			base.OnDisable();
-			this.MMEventStopListening<PickableItemEvent>();
+			this.MMEventStopListening<CoinEvent>();
 		}
 	}
 }
