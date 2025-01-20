@@ -214,7 +214,8 @@ namespace dungeonduell
                                 {
                                     if (clickedTile != souroundTile)
                                     {
-                                        tilemap.SetTile(SourrendTilePos.Item1, setAbleTiles[setAbleTiles.Length - 1]);
+                                        tilemap.SetTile(SourrendTilePos.Item1, setAbleTiles[setAbleTiles.Length - 1]); // Hit Contest
+                                        DDCodeEventHandler.Trigger_DungeonConnected();
                                     }
 
                                 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace dungeonduell
@@ -9,6 +10,7 @@ namespace dungeonduell
         public int livesPlayer1 = 2;
         public int livesPlayer2 = 2;
 
+        bool nextRoundFinal = false;
         void Awake()
         {
             ConnectionsCollector[] objs = FindObjectsOfType<ConnectionsCollector>();
@@ -19,6 +21,30 @@ namespace dungeonduell
             }
 
             DontDestroyOnLoad(gameObject);
+        }
+        public void FinalRound()
+        {
+            nextRoundFinal = true;
+            livesPlayer1 = 1;
+            livesPlayer2 = 1;
+        }
+
+        void OnEnable()
+        {
+            if(nextRoundFinal){
+                
+                SequenceMang sequenceMang; // A bit over simple but fine for now
+                if(sequenceMang = FindAnyObjectByType<SequenceMang>())
+                {
+                    sequenceMang.DisableTimer();
+                }
+            }
+        
+            DDCodeEventHandler.DungeonConnected+=FinalRound;
+        }
+        void OnDisable()
+        {
+             DDCodeEventHandler.DungeonConnected-=FinalRound;
         }
     }
 }
