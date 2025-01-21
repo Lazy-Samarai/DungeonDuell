@@ -71,8 +71,6 @@ namespace MoreMountains.TopDownEngine
         public ProjectileWeapon[] weapon = new ProjectileWeapon[2];
         public Health[] health = new Health[2];
 
-        float baseWalk;
-        float baseRun;
 
         public dungeonduell.SequenceMang sequenceMang;
 
@@ -84,14 +82,10 @@ namespace MoreMountains.TopDownEngine
 
             base.Initialization();
 
-            weapon[0] = GetPlayerWeapon("Player1");
-            weapon[1] = GetPlayerWeapon("Player2");
             walking[0] = GetPlayerMovement("Player1");
             walking[1] = GetPlayerMovement("Player2");
             running[0] = GetPlayerRun("Player1");
             running[1] = GetPlayerRun("Player2");
-            weapon[0] = GetPlayerWeapon("Player1");
-            weapon[1] = GetPlayerWeapon("Player2");
             health[0] = GetPlayerHealth("Player1");
             health[1] = GetPlayerHealth("Player2");
 
@@ -107,12 +101,7 @@ namespace MoreMountains.TopDownEngine
                 Points[i].CoinsForNextLevel = 1; // Startkosten 
                 i++;
             }
-            MMEventManager.TriggerEvent(new LoadPlayerDataEvent());
-            SynchronizeFromPlayerDataManager();
-            TopDownEngineEvent.Trigger(TopDownEngineEventTypes.Repaint, null);
         }
-
-
 
 
         public void SavePlayerStates()
@@ -138,7 +127,10 @@ namespace MoreMountains.TopDownEngine
                         data.WalkSpeed = walking[i].WalkSpeed;
                         data.RunSpeed = running[i].RunSpeed;
                         data.Health = health[i].MaximumHealth;
-                        //data.AttackSpeed = weapon[i].TimeBetweenUses; 
+                        if (weapon[i] != null)
+                        {
+                            data.AttackSpeed = weapon[i].TimeBetweenUses; 
+                        }
                     }
                 }
             }
@@ -162,7 +154,11 @@ namespace MoreMountains.TopDownEngine
                         walking[i].WalkSpeed = data.WalkSpeed;
                         running[i].RunSpeed = data.RunSpeed;
                         health[i].MaximumHealth = data.Health;
-                        //weapon[i].TimeBetweenUses = data.AttackSpeed; 
+
+                        if (weapon[i] != null)
+                        {
+                        weapon[i].TimeBetweenUses = data.AttackSpeed; 
+                        }
 
                     }
                 }
@@ -252,6 +248,15 @@ namespace MoreMountains.TopDownEngine
         public virtual void Update()
         {
             CheckForGameOver();
+            if (weapon[0] == null && weapon[1] == null)
+            {
+                weapon[0] = GetPlayerWeapon("Player1");
+                weapon[1] = GetPlayerWeapon("Player2");
+                MMEventManager.TriggerEvent(new LoadPlayerDataEvent());
+                SynchronizeFromPlayerDataManager();
+                TopDownEngineEvent.Trigger(TopDownEngineEventTypes.Repaint, null);
+            }
+
         }
 
         protected virtual void CheckForGameOver()
@@ -461,7 +466,7 @@ namespace MoreMountains.TopDownEngine
         {
             base.OnEnable();
             this.MMEventStartListening<CoinEvent>();
-            SynchronizeFromPlayerDataManager();
+            //SynchronizeFromPlayerDataManager();
         }
 
         /// <summary> 

@@ -56,9 +56,9 @@ namespace dungeonduell
 
         private void InitializePlayerData()
         {
+            PlayerPrefs.DeleteAll();
             PlayerDataList.Add(new PlayerData("Player1", 0, 1, 1, 6, 10, 30, 1));
             PlayerDataList.Add(new PlayerData("Player2", 0, 1, 1, 6, 10, 30, 1));
-            PlayerPrefs.DeleteAll();
         }
 
         public void OnMMEvent(SavePlayerDataEvent e)
