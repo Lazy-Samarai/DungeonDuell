@@ -88,6 +88,14 @@ namespace MoreMountains.TopDownEngine
                     }
 					break;
 
+                case TopDownEngineEventTypes.NoLevelUp:
+                    if (PlayerID == (LevelManager.Instance as DungeonDuellMultiplayerLevelManager).LevelUPID)
+                    {
+                        canLevelUp = false;
+                        LevelUpNowText.gameObject.SetActive(canLevelUp);
+                    }
+                    break;
+
             }
 
 		}
@@ -96,22 +104,22 @@ namespace MoreMountains.TopDownEngine
 			if (canLevelUp)
 			{
 				if (!menuShowing)
-					{
+				{
 						
-						LevelUpPanel.ShowLevelUpMenu(true);
-						//LevelUpPanel.alpha = 0f;
-						//StartCoroutine(MMFade.FadeCanvasGroup(LevelUpPanel, 0.5f, 0.8f, true));
-						LevelUpNowText.gameObject.SetActive(false);
-					}
-					else
-					{
+					LevelUpPanel.ShowLevelUpMenu(true);
+					//LevelUpPanel.alpha = 0f;
+					//StartCoroutine(MMFade.FadeCanvasGroup(LevelUpPanel, 0.5f, 0.8f, true));
+					LevelUpNowText.gameObject.SetActive(false);
+				}
+				else
+				{
 					
-                        //LevelUpPanel.alpha = 0.8f;
-                        //StartCoroutine(MMFade.FadeCanvasGroup(LevelUpPanel, 0.5f, 0f, true));
-                        LevelUpNowText.gameObject.SetActive(canLevelUp);
-                        LevelUpPanel.ShowLevelUpMenu(false);
-                    }
-					menuShowing = !menuShowing;
+                    //LevelUpPanel.alpha = 0.8f;
+                    //StartCoroutine(MMFade.FadeCanvasGroup(LevelUpPanel, 0.5f, 0f, true));
+                    LevelUpNowText.gameObject.SetActive(canLevelUp);
+                    LevelUpPanel.ShowLevelUpMenu(false);
+                }
+				menuShowing = !menuShowing;
 			}
 		}
         /// <summary>
