@@ -15,7 +15,6 @@ namespace dungeonduell
         public Button HealthButton;
         public Button AttackSpeedButton;
 
-        private string _currentPlayerID;
         private DungeonDuellMultiplayerLevelManager _levelManager;
 
         // Tastenzuweisungen
@@ -59,7 +58,7 @@ namespace dungeonduell
                 {
                     _levelManager.ApplyLevelUp(option);
                 }
-                TestHub.canLevelUp = false;
+                //TestHub.canLevelUp = false;
                 ShowLevelUpMenu(false);
             }
             

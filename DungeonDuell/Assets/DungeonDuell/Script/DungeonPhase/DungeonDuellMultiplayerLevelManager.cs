@@ -284,7 +284,6 @@ namespace MoreMountains.TopDownEngine
                     TopDownEngineEvent.Trigger(TopDownEngineEventTypes.Repaint, null);
                     if (Points[i].Points >= Points[i].CoinsForNextLevel)
                     {
-                        TriggerLevelUp(i);
                         LevelUPID = Points[i].PlayerID;
                         TopDownEngineEvent.Trigger(TopDownEngineEventTypes.LevelUp, null);
                     }
@@ -292,18 +291,6 @@ namespace MoreMountains.TopDownEngine
             }
         }
 
-        protected void TriggerLevelUp(int playerIndex)
-        {
-
-            Debug.Log("Level Up von " + playerIndex);
-
-            /* Alte Logik, Zieht M�nzen direkt ab, soll aber nicht so da es sonst mit der UI nicht so gut passt 
-            Points[playerIndex].Points -= Points[playerIndex].CoinsForNextLevel; 
-            Points[playerIndex].CoinsForNextLevel *= 2; // Kosten verdoppeln 
-            Points[playerIndex].Level++; 
-            TopDownEngineEvent.Trigger(TopDownEngineEventTypes.Repaint, null); 
-            */
-        }
 
 
         public void ApplyLevelUp(LevelUpOptions option)

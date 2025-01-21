@@ -360,7 +360,7 @@ namespace MoreMountains.TopDownEngine
                     ""name"": """",
                     ""id"": ""202fe3e6-b8da-4f61-9aa9-faaad6af7ebb"",
                     ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": ""Press(behavior=2)"",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
                     ""action"": ""Shoot"",
@@ -371,7 +371,7 @@ namespace MoreMountains.TopDownEngine
                     ""name"": """",
                     ""id"": ""f112453b-6f03-459b-a23e-70f29feb18bf"",
                     ""path"": ""<Gamepad>/rightTrigger"",
-                    ""interactions"": ""Press(behavior=2)"",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Shoot"",
@@ -571,7 +571,7 @@ namespace MoreMountains.TopDownEngine
                     ""path"": ""<Keyboard>/numpad1"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""DoUpgradeSpeed"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -593,7 +593,7 @@ namespace MoreMountains.TopDownEngine
                     ""path"": ""<Keyboard>/numpad2"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""DoUpgradeHealth"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -615,7 +615,7 @@ namespace MoreMountains.TopDownEngine
                     ""path"": ""<Keyboard>/numpad3"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""DoUpgradeAtk"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -670,7 +670,7 @@ namespace MoreMountains.TopDownEngine
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Cursor"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -681,7 +681,7 @@ namespace MoreMountains.TopDownEngine
                     ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""RotateR"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -692,7 +692,7 @@ namespace MoreMountains.TopDownEngine
                     ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""RotateR"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -703,7 +703,7 @@ namespace MoreMountains.TopDownEngine
                     ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""RotateL"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -714,7 +714,7 @@ namespace MoreMountains.TopDownEngine
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Submit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

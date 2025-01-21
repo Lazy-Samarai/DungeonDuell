@@ -5252,12 +5252,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1490220044263310}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e471cd75c6d63b444a011599dabb4f75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CheckMouse: 1
+  CheckMouse: 0
   CheckPrimaryAxis: 1
   CheckSecondaryAxis: 1
 --- !u!114 &5300996963003679561
@@ -20469,7 +20469,7 @@ MonoBehaviour:
         UniqueID: 1896230025
         Label: Chromatic Aberration
         ChannelMode: 0
-        Channel: 0
+        Channel: 1
         MMChannelDefinition: {fileID: 0}
         Chance: 100
         DisplayColor: {r: 0, g: 0, b: 0, a: 1}
@@ -20583,7 +20583,7 @@ MonoBehaviour:
         UniqueID: 1858357022
         Label: Flash
         ChannelMode: 0
-        Channel: 0
+        Channel: 1
         MMChannelDefinition: {fileID: 0}
         Chance: 100
         DisplayColor: {r: 0, g: 0, b: 0, a: 1}
@@ -20787,7 +20787,7 @@ MonoBehaviour:
         UniqueID: 1929100103
         Label: Camera Shake
         ChannelMode: 0
-        Channel: 0
+        Channel: 1
         MMChannelDefinition: {fileID: 0}
         Chance: 100
         DisplayColor: {r: 0, g: 0, b: 0, a: 1}
