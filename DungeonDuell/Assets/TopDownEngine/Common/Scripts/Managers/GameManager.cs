@@ -44,7 +44,8 @@ namespace MoreMountains.TopDownEngine
 		TogglePause,
 		LoadNextScene,
 		PauseNoMenu,
-		LevelUp
+		LevelUp,
+		NoLevelUp
 	}
 
 	/// <summary>

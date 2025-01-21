@@ -360,7 +360,7 @@ namespace MoreMountains.TopDownEngine
                     ""name"": """",
                     ""id"": ""202fe3e6-b8da-4f61-9aa9-faaad6af7ebb"",
                     ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": ""Press(behavior=2)"",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
                     ""action"": ""Shoot"",
@@ -371,7 +371,7 @@ namespace MoreMountains.TopDownEngine
                     ""name"": """",
                     ""id"": ""f112453b-6f03-459b-a23e-70f29feb18bf"",
                     ""path"": ""<Gamepad>/rightTrigger"",
-                    ""interactions"": ""Press(behavior=2)"",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Shoot"",
@@ -545,11 +545,33 @@ namespace MoreMountains.TopDownEngine
                 },
                 {
                     ""name"": """",
+                    ""id"": ""9b458c2a-51c4-465e-b2c9-bb7328832678"",
+                    ""path"": ""<Keyboard>/numpad0"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenUpgrade"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""393eacc1-79ff-40aa-a7f9-371466861da5"",
                     ""path"": ""<Gamepad>/dpad/left"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
+                    ""action"": ""DoUpgradeSpeed"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d1448d45-7f0a-49f1-9be4-087dab960505"",
+                    ""path"": ""<Keyboard>/numpad1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""DoUpgradeSpeed"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -567,11 +589,33 @@ namespace MoreMountains.TopDownEngine
                 },
                 {
                     ""name"": """",
+                    ""id"": ""0b960752-fdd1-4cc3-b22f-20eb68a65b59"",
+                    ""path"": ""<Keyboard>/numpad2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""DoUpgradeHealth"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""e80d36e5-1734-4e8a-856d-51106586db86"",
                     ""path"": ""<Gamepad>/dpad/down"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
+                    ""action"": ""DoUpgradeAtk"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5278a078-305c-44e8-8cea-aa55f6235d06"",
+                    ""path"": ""<Keyboard>/numpad3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""DoUpgradeAtk"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -626,7 +670,7 @@ namespace MoreMountains.TopDownEngine
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Cursor"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -637,7 +681,7 @@ namespace MoreMountains.TopDownEngine
                     ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""RotateR"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -648,7 +692,7 @@ namespace MoreMountains.TopDownEngine
                     ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""RotateR"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -659,7 +703,7 @@ namespace MoreMountains.TopDownEngine
                     ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""RotateL"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -670,7 +714,7 @@ namespace MoreMountains.TopDownEngine
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Submit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
