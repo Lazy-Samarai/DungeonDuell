@@ -628,7 +628,7 @@ namespace MoreMountains.TopDownEngine
             ""actions"": [
                 {
                     ""name"": ""Cursor"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Value"",
                     ""id"": ""95f24a95-d445-4f14-b8c9-7789ea98fe7c"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",

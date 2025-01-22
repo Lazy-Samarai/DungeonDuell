@@ -16,7 +16,7 @@ namespace dungeonduell
         public Canvas canvas; // Reference to the UI canvas
 
         private Vector2 cursorPosition;
-        public const float speed = 1500f;
+        public const float speed = 5000f;
         private VirtualMouseInput virtualMouse;
 
         public bool ON = false;
