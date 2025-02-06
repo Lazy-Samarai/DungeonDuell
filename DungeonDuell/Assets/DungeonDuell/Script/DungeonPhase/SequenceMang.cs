@@ -54,6 +54,13 @@ namespace dungeonduell
             Destroy(livesManager.gameObject);          
             BackToCardPhase();
         }
+        public void DisableTimer()
+        {
+            finalRound = true;
+            timeRunning = false;
+            timerText.text = "X";
+
+        }
         
     }
 }

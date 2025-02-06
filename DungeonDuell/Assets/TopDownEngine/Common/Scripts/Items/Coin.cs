@@ -12,7 +12,7 @@ namespace MoreMountains.TopDownEngine
 	{
 		/// The amount of points to add when collected
 		[Tooltip("The amount of points to add when collected")]
-		public int PointsToAdd = 10;
+		public int PointsToAdd = 1;
 
 		/// <summary>
 		/// Triggered when something collides with the coin

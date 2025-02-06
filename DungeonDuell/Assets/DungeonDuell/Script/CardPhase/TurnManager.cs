@@ -16,6 +16,9 @@ namespace dungeonduell
         public CardToHand HandPlayer1;
         public CardToHand HandPlayer2;
 
+        public TestControllMouseOver CourserSour1;
+        public TestControllMouseOver CourserSour2;
+
         private bool awaitingKeyPress = false;
         public bool isPlayer1Turn = true;
 
@@ -84,7 +87,9 @@ namespace dungeonduell
             Debug.Log($"Zug beendet für {(isPlayer1Turn ? "Spieler 1" : "Spieler 2")} - nächster Spieler ist dran");
 
             // Verzögere das Initialisieren des neuen Zuges, um sicherzustellen, dass awaitingKeyPress korrekt gesetzt ist
+            ToggleCursor(isPlayer1Turn);
             Invoke(nameof(InitializeTurn), 0.1f);
+           
         }
 
         private void UpdateCameras()
@@ -110,6 +115,12 @@ namespace dungeonduell
             HandPlayer2.ShowHideDeck(!showForPlayer2);
 
             Debug.Log($"Handkarten umgeschaltet: Spieler 1 sichtbar: {showForPlayer1}, Spieler 2 sichtbar: {showForPlayer2}");
+        }
+        private void ToggleCursor(bool player1)
+        {
+            CourserSour1.Set(player1);
+            CourserSour2.Set(!player1);
+           
         }
     }
 }

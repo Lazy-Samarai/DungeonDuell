@@ -9,38 +9,40 @@ namespace dungeonduell
     public class DisplayCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
     {
         public Card card;
-        
+
         public TextMeshProUGUI nameText;
-        public TextMeshProUGUI descriptionText;
-        public TextMeshProUGUI roomTypeText;
-        public Image cardImage;
+        public Image HexImage;
         public DoorIndicator cardDirectionIndiactor;
+
+        public GameObject MonsterRoomIcon;
+        public GameObject TreasureRoomIcon;
+        public GameObject Frame;
 
         private Transform cardTransform;
         private Vector3 originalScale;
-        private Quaternion originalRotation; // Speichert die ursprüngliche Rotation der Karte
-        private Vector3 handPanelOriginalPosition; // Speichert die Position der Karte im HandPanel in Weltkoordinaten
-        private int originalSiblingIndex; // Speichert den ursprünglichen Sibling Index der Karte im HandPanel
+        private Quaternion originalRotation;
+        private Vector3 handPanelOriginalPosition;
+        private int originalSiblingIndex;
 
         public GameObject tooltip;
-        public GameObject cardHolder; // Referenz zum CardHolder GameObject
-        public Transform handPanel;  // Referenz zum HandPanel
+        public GameObject cardHolder;
+        public Transform handPanel;
 
-        public Vector3 hoverScale = new Vector3(1.1f, 1.1f, 1f); // Skalierung der Karte bei Hover
-        public Vector3 hoverOffset = new Vector3(0f, 20f, 0f); // Verschiebung der Karte bei Hover (Y-Achse)
-        public Vector3 sideOffset = new Vector3(30f, 0f, 0f); // Verschiebung der Nachbarkarten seitlich
+        public Vector3 hoverScale = new Vector3(1.2f, 1.2f, 1f); // Größe der Karten beim Hover
+        public Vector3 hoverOffset = new Vector3(0f, 20f, 0f);
+        public Vector3 sideOffset = new Vector3(30f, 0f, 0f);
 
         void Start()
         {
             cardTransform = GetComponent<Transform>();
             originalScale = cardTransform.localScale;
-            originalRotation = cardTransform.localRotation; // Die ursprüngliche Rotation speichern
+            originalRotation = cardTransform.localRotation;
+            handPanelOriginalPosition.y = 0;
 
             HideTooltip();
             UpdateCardDisplay();
-
             
-            // Versuche, das CardHolder- und HandPanel-GameObject zu finden
+
             if (cardHolder == null)
             {
                 cardHolder = GameObject.Find("CardHolder");
@@ -49,7 +51,6 @@ namespace dungeonduell
                     Debug.LogError("CardHolder GameObject nicht gefunden.");
                 }
             }
-            
 
             if (handPanel == null)
             {
@@ -60,11 +61,49 @@ namespace dungeonduell
                 }
             }
 
-            // Speichere die Position im HandPanel und den ursprünglichen Sibling Index, wenn die Karte Teil des HandPanels ist
             if (cardTransform.parent == handPanel)
             {
-                handPanelOriginalPosition = cardTransform.position; // Speichert die Position in Weltkoordinaten
-                originalSiblingIndex = transform.GetSiblingIndex(); // Speichert den ursprünglichen Sibling Index
+                handPanelOriginalPosition = cardTransform.position;
+                originalSiblingIndex = transform.GetSiblingIndex();
+            }
+        }
+
+        public void UpdateCardDisplay()
+        {
+            if (card != null)
+            {
+                nameText.text = card.cardName;
+                UpdateDirectionIndicator(card.GetAllowedDirection());
+
+                if (HexImage != null)
+                {
+                    switch (card.roomtype)
+                    {
+                        case RoomType.Enemy:
+                            HexImage.color = Color.red;
+                            Frame.GetComponent<Image>().color = Color.red;
+                            MonsterRoomIcon.SetActive(true);
+                            TreasureRoomIcon.SetActive(false);
+                            MonsterRoomIcon.GetComponent<Image>().color = Color.red;
+                            nameText.color = Color.red;
+                            break;
+                        case RoomType.NormalLott:
+                            HexImage.color = Color.yellow;
+                            Frame.GetComponent<Image>().color = Color.yellow;
+                            TreasureRoomIcon.SetActive(true);
+                            MonsterRoomIcon.SetActive(false);
+                            TreasureRoomIcon.GetComponent<Image>().color = Color.yellow;
+                            nameText.color = Color.yellow;
+                            break;
+                        default:
+                            HexImage.color = new Color(0.3f, 0.3f, 0.3f);
+                            Frame.GetComponent<Image>().color = new Color(0.3f, 0.3f, 0.3f);
+                            MonsterRoomIcon.SetActive(false);
+                            TreasureRoomIcon.SetActive(false);
+                            nameText.color = new Color(0.3f, 0.3f, 0.3f);
+                            break;
+                    }
+                }
             }
         }
 
@@ -72,20 +111,18 @@ namespace dungeonduell
         {
             if (cardTransform != null && cardHolder != null)
             {
-                if (cardTransform.parent != cardHolder.transform) // Hover-Effekt nur anwenden, wenn die Karte nicht auf dem CardHolder ist
+                if (cardTransform.parent != cardHolder.transform)
                 {
-                    cardTransform.localScale = hoverScale; // Skalierung der Karte bei Hover
-                    cardTransform.localPosition += hoverOffset; // Verschiebe die Karte nach oben (Y-Achse)
-                    cardTransform.localRotation = Quaternion.Euler(0f, 0f, 0f); // Setzt die Rotation temporär auf 0
+                    cardTransform.localScale = hoverScale;
+                    cardTransform.localPosition += hoverOffset;
+                    cardTransform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+                    handPanelOriginalPosition.y = 0;
+                    handPanelOriginalPosition.y += 100;
 
-                    
-
-                    // Tooltip anzeigen
                     if (tooltip != null)
                     {
                         tooltip.SetActive(true);
 
-                        // Aktualisiere den Tooltip-Text mit der Beschreibung der Karte
                         TextMeshProUGUI tooltipText = tooltip.GetComponentInChildren<TextMeshProUGUI>();
                         if (tooltipText != null)
                         {
@@ -93,8 +130,7 @@ namespace dungeonduell
                         }
                     }
 
-                    // Bewege die linke und rechte Nachbarkarte
-                    MoveAdjacentCards(true);
+                    AdjustNeighborCards(true);
                 }
             }
         }
@@ -103,30 +139,49 @@ namespace dungeonduell
         {
             if (cardTransform != null && cardHolder != null)
             {
-                if (cardTransform.parent != cardHolder.transform) // Hover-Effekt nur anwenden, wenn die Karte nicht auf dem CardHolder ist
+                if (cardTransform.parent != cardHolder.transform)
                 {
-                    // Setze die Skalierung, Position und Rotation der Karte auf die ursprünglichen Werte zurück
                     cardTransform.localScale = originalScale;
-                    cardTransform.localPosition -= hoverOffset; // Setzt die Y-Position zurück
+                    cardTransform.localPosition -= hoverOffset;
                     cardTransform.localRotation = originalRotation;
+                    handPanelOriginalPosition.y = 0;
+                    handPanelOriginalPosition.y += 100;
 
-                    
-                    // Tooltip ausblenden
+
                     if (tooltip != null)
                     {
                         tooltip.SetActive(false);
                     }
 
-                    // Setze die linke und rechte Nachbarkarte zurück
-                    MoveAdjacentCards(false);
+                    AdjustNeighborCards(false);
                 }
             }
         }
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            HandleCardClick(); // Verarbeite den Klick auf die Karte
+            if (cardTransform != null && cardHolder != null)
+            {
+                if (cardTransform.parent != cardHolder.transform)
+                {
+                    cardTransform.localScale = originalScale; // Setzt die Karte auf ihre ursprüngliche Größe zurück
+                    cardTransform.localPosition -= hoverOffset; // Verschiebt die Karte zurück an ihre ursprüngliche Position
+                    cardTransform.localRotation = originalRotation; // Stellt die ursprüngliche Rotation wieder her
+                    handPanelOriginalPosition.y = 0; // Setzt die Y-Position der HandPanel-Position zurück
+                    handPanelOriginalPosition.y += 100; // Anpassung für eine Basis-Höhe
+
+                    if (tooltip != null)
+                    {
+                        tooltip.SetActive(false); // Versteckt den Tooltip
+                    }
+
+                    AdjustNeighborCards(false); // Bringt benachbarte Karten zurück in ihre ursprüngliche Position
+                }
+            }
+
+            HandleCardClick();
         }
+
 
         private void HandleCardClick()
         {
@@ -134,115 +189,127 @@ namespace dungeonduell
 
             if (cardTransform.parent == cardHolder.transform)
             {
-                // Wenn die Karte bereits auf dem CardHolder ist, bewege sie zurück ins HandPanel
-                cardTransform.SetParent(handPanel); // Setze den Parent auf das HandPanel
-                cardTransform.position = new Vector3(handPanelOriginalPosition.x, handPanelOriginalPosition.y + 250f, handPanelOriginalPosition.z); // Bewege die Karte an ihre ursprüngliche Position
-                cardTransform.localScale = originalScale; // Setze die ursprüngliche Skalierung zurück
-                cardTransform.localRotation = originalRotation; // Setze die ursprüngliche Rotation zurück
-                transform.SetSiblingIndex(originalSiblingIndex); // Setze den ursprünglichen Sibling Index zurück
+                cardTransform.SetParent(handPanel);
+                cardTransform.position = new Vector3(handPanelOriginalPosition.x, handPanelOriginalPosition.y + 250, handPanelOriginalPosition.z);
+                cardTransform.localScale = originalScale;
+                cardTransform.localRotation = originalRotation;
+                transform.SetSiblingIndex(originalSiblingIndex);
 
-                // Die Karte wurde vom CardHolder entfernt, daher currentCard auf null setzen
                 TileClickHandler tileClickHandler = FindObjectOfType<TileClickHandler>();
                 if (tileClickHandler != null)
                 {
-                    tileClickHandler.ChangeCard(null,null,null);
+                    tileClickHandler.ChangeCard(null, null, null);
                 }
             }
             else
             {
-                // Überprüfe, ob bereits eine Karte auf dem CardHolder ist
                 if (cardHolder.transform.childCount > 0)
                 {
-                    Transform cardOnHolder = cardHolder.transform.GetChild(0); // Die Karte, die sich aktuell auf dem CardHolder befindet
+                    Transform cardOnHolder = cardHolder.transform.GetChild(0);
 
-                    // Bewege die Karte vom CardHolder zurück zur Hand
                     DisplayCard cardOnHolderScript = cardOnHolder.GetComponent<DisplayCard>();
                     if (cardOnHolderScript != null)
                     {
-                        cardOnHolderScript.UpdateDirectionIndicator(card.GetAllowedDirection());
                         cardOnHolderScript.cardTransform.SetParent(handPanel);
-                        cardOnHolderScript.cardTransform.position = cardOnHolderScript.handPanelOriginalPosition; // Setze die Karte an ihre ursprüngliche Position zurück
+                        cardOnHolderScript.cardTransform.position = new Vector3(cardOnHolderScript.handPanelOriginalPosition.x, cardOnHolderScript.handPanelOriginalPosition.y -100, cardOnHolderScript.handPanelOriginalPosition.z);
                         cardOnHolderScript.cardTransform.localScale = cardOnHolderScript.originalScale;
                         cardOnHolderScript.cardTransform.localRotation = cardOnHolderScript.originalRotation;
-                        cardOnHolderScript.transform.SetSiblingIndex(cardOnHolderScript.originalSiblingIndex); // Setze den ursprünglichen Sibling Index zurück
-                        tooltip.SetActive(false); // Blende den Tooltip aus
+                        cardOnHolderScript.transform.SetSiblingIndex(cardOnHolderScript.originalSiblingIndex);
+
+
+                        cardOnHolderScript.HideTooltip(); // Tooltip des alten CardHolder-Karte ausblenden
                     }
                 }
 
-                // Bewege die aktuell geklickte Karte auf den CardHolder
-                cardTransform.SetParent(cardHolder.transform); // Setze den Parent auf den CardHolder
-                cardTransform.position = cardHolder.transform.position; // Setze die Position auf die des CardHolders
-                cardTransform.localScale = Vector3.one; // Setze die Skalierung auf 1
-                cardTransform.localRotation = Quaternion.identity; // Setze die Rotation auf 0
+                
+                cardTransform.SetParent(cardHolder.transform);
+                cardTransform.position = cardHolder.transform.position;
+                cardTransform.localScale = Vector3.one;
+                cardTransform.localRotation = Quaternion.identity;
+                
+                HideTooltip(); // Tooltip für aktuelle Karte ausblenden
 
-                // Die Karte auf dem CardHolder ist jetzt die aktuelle Karte
                 TileClickHandler tileClickHandler = FindObjectOfType<TileClickHandler>();
                 if (tileClickHandler != null)
                 {
-                  
-                    tileClickHandler.ChangeCard(card, card.GetAllowedDirection(),this); // working in Ui still has to be done 
+                    tileClickHandler.ChangeCard(card, card.GetAllowedDirection(), this);
                 }
             }
+
         }
 
-        private void MoveAdjacentCards(bool isHovering)
+        private void AdjustNeighborCards(bool isHovering)
         {
-            int siblingIndex = transform.GetSiblingIndex();
-
-            // Verschiebe die linke Nachbarkarte
-            if (siblingIndex > 0)
+            // Sicherstellen, dass das HandPanel korrekt referenziert ist und Kinder hat
+            if (handPanel == null || handPanel.childCount <= 1)
             {
-                Transform leftCard = handPanel.GetChild(siblingIndex - 1);
-                if (isHovering)
+                Debug.LogWarning("HandPanel ist leer oder hat zu wenige Karten.");
+                return;
+            }
+
+            // Den aktuellen Index der Karte im HandPanel erhalten
+            int currentIndex = transform.GetSiblingIndex();
+
+            // Linke Nachbarkarte verschieben
+            if (currentIndex > 0)
+            {
+                Transform leftNeighbor = handPanel.GetChild(currentIndex - 1);
+
+                // Überprüfen, ob die linke Nachbarkarte ein DisplayCard-Skript hat
+                DisplayCard leftCardScript = leftNeighbor.GetComponent<DisplayCard>();
+                if (leftCardScript == null)
                 {
-                    leftCard.localPosition -= sideOffset; // Bewege nach links
+                    Debug.Log("Linke Nachbarkarte ist kein gültiges Kartenobjekt, wird ignoriert.");
+                }
+                else if (cardHolder.transform.childCount > 0 && cardHolder.transform.GetChild(0) == leftNeighbor)
+                {
+                    Debug.Log("Linke Nachbarkarte liegt im CardHolder, wird ignoriert.");
                 }
                 else
                 {
-                    leftCard.localPosition += sideOffset; // Bewege zurück
+                    Vector3 offset = isHovering ? sideOffset * -1 : sideOffset;
+                    leftNeighbor.localPosition += offset;
+
+                    Debug.Log($"Linke Nachbarkarte verschoben: {leftNeighbor.name}, Offset: {offset}");
                 }
             }
 
-            // Verschiebe die rechte Nachbarkarte
-            if (siblingIndex < handPanel.childCount - 1)
+            // Rechte Nachbarkarte verschieben
+            if (currentIndex < handPanel.childCount - 1)
             {
-                Transform rightCard = handPanel.GetChild(siblingIndex + 1);
-                if (isHovering)
+                Transform rightNeighbor = handPanel.GetChild(currentIndex + 1);
+
+                // Überprüfen, ob die rechte Nachbarkarte ein DisplayCard-Skript hat
+                DisplayCard rightCardScript = rightNeighbor.GetComponent<DisplayCard>();
+                if (rightCardScript == null)
                 {
-                    rightCard.localPosition += sideOffset; // Bewege nach rechts
+                    Debug.Log("Rechte Nachbarkarte ist kein gültiges Kartenobjekt, wird ignoriert.");
+                }
+                else if (cardHolder.transform.childCount > 0 && cardHolder.transform.GetChild(0) == rightNeighbor)
+                {
+                    Debug.Log("Rechte Nachbarkarte liegt im CardHolder, wird ignoriert.");
                 }
                 else
                 {
-                    rightCard.localPosition -= sideOffset; // Bewege zurück
+                    Vector3 offset = isHovering ? sideOffset : sideOffset * -1;
+                    rightNeighbor.localPosition += offset;
+
+                    Debug.Log($"Rechte Nachbarkarte verschoben: {rightNeighbor.name}, Offset: {offset}");
                 }
             }
         }
 
-        public void UpdateCardDisplay()
-        {
-            if (card != null)
-            {
-                // Aktualisiere die Text- und Bildkomponenten basierend auf den Daten der Karte
-                nameText.text = card.cardName;
-                descriptionText.text = card.cardDescription;
-                roomTypeText.text = "Room Type: " + card.roomtype.ToString();
-                UpdateDirectionIndicator(card.GetAllowedDirection());
 
 
-                if (card.cardImage != null)
-                {
-                    cardImage.sprite = card.cardImage;
-                }
-            }
-        }
 
         private void HideTooltip()
         {
             if (tooltip != null)
             {
-                tooltip.SetActive(false); // Blendet den Tooltip aus
+                tooltip.SetActive(false);
             }
         }
+
         public void UpdateDirectionIndicator(bool[] allowedDoors)
         {
             cardDirectionIndiactor.SetDoorIndiactor(allowedDoors);
