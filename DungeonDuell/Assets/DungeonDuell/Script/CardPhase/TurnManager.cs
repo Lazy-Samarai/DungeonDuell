@@ -6,13 +6,12 @@ using Cinemachine;
 
 namespace dungeonduell
 {
-    public class TurnManager : MonoBehaviour
+    public class TurnManager : MonoBehaviour,IObserver
     {
         public CinemachineVirtualCamera player1Camera;
         public CinemachineVirtualCamera player2Camera;
         public TextMeshProUGUI playerTurnText;
         public TextMeshProUGUI pressAnyKeyText;
-        public TileClickHandler tileClickHandler;
         public CardToHand HandPlayer1;
         public CardToHand HandPlayer2;
 
@@ -20,13 +19,11 @@ namespace dungeonduell
         public TestControllMouseOver CourserSour2;
 
         private bool awaitingKeyPress = false;
+
         public bool isPlayer1Turn = true;
 
         void Start()
-        {
-            if (tileClickHandler == null)
-                tileClickHandler = FindObjectOfType<TileClickHandler>();
-
+        {          
             UpdateCameras();
             InitializeTurn(); // Startet den ersten Spielzug
         }
@@ -44,10 +41,10 @@ namespace dungeonduell
         {
             Debug.Log("InitializeTurn aufgerufen");
 
-            awaitingKeyPress = true; // Setzt den Tastendruck für jeden neuen Zug voraus
-            Debug.Log($"Neuer Zug beginnt für {(isPlayer1Turn ? "Spieler 1" : "Spieler 2")} - awaitingKeyPress: {awaitingKeyPress}");
+            awaitingKeyPress = true; // Setzt den Tastendruck fï¿½r jeden neuen Zug voraus
+            Debug.Log($"Neuer Zug beginnt fï¿½r {(isPlayer1Turn ? "Spieler 1" : "Spieler 2")} - awaitingKeyPress: {awaitingKeyPress}");
 
-            // Setze die Anzeige für den Zugbeginn
+            // Setze die Anzeige fï¿½r den Zugbeginn
             playerTurnText.text = "Current Turn: " + (isPlayer1Turn ? "Player 1" : "Player 2");
             playerTurnText.gameObject.SetActive(true);
             pressAnyKeyText.gameObject.SetActive(true);
@@ -64,18 +61,18 @@ namespace dungeonduell
             if (!awaitingKeyPress)
             {
                 Debug.LogWarning("BeginPlayerActionPhase wurde aufgerufen, obwohl awaitingKeyPress false ist.");
-                return; // Verhindert, dass die Methode ungewollt ausgeführt wird
+                return; // Verhindert, dass die Methode ungewollt ausgefï¿½hrt wird
             }
 
             awaitingKeyPress = false; // Nach Tastendruck setzen wir auf false
-            Debug.Log($"BeginPlayerActionPhase aufgerufen für {(isPlayer1Turn ? "Spieler 1" : "Spieler 2")} - awaitingKeyPress: {awaitingKeyPress}");
+            Debug.Log($"BeginPlayerActionPhase aufgerufen fï¿½r {(isPlayer1Turn ? "Spieler 1" : "Spieler 2")} - awaitingKeyPress: {awaitingKeyPress}");
 
             // Verberge den Schriftzug und die Aufforderung
             playerTurnText.gameObject.SetActive(false);
             pressAnyKeyText.gameObject.SetActive(false);
             Debug.Log("Schriftzug und Tastentext deaktiviert.");
 
-            // Zeigt die Handkarten für den aktuellen Spieler an
+            // Zeigt die Handkarten fï¿½r den aktuellen Spieler an
             ToggleHandVisibility(isPlayer1Turn, !isPlayer1Turn);
         }
 
@@ -84,9 +81,9 @@ namespace dungeonduell
             Debug.Log("EndPlayerTurn aufgerufen");
 
             isPlayer1Turn = !isPlayer1Turn;
-            Debug.Log($"Zug beendet für {(isPlayer1Turn ? "Spieler 1" : "Spieler 2")} - nächster Spieler ist dran");
+            Debug.Log($"Zug beendet fï¿½r {(isPlayer1Turn ? "Spieler 1" : "Spieler 2")} - nï¿½chster Spieler ist dran");
 
-            // Verzögere das Initialisieren des neuen Zuges, um sicherzustellen, dass awaitingKeyPress korrekt gesetzt ist
+            // Verzï¿½gere das Initialisieren des neuen Zuges, um sicherzustellen, dass awaitingKeyPress korrekt gesetzt ist
             ToggleCursor(isPlayer1Turn);
             Invoke(nameof(InitializeTurn), 0.1f);
            
@@ -94,7 +91,7 @@ namespace dungeonduell
 
         private void UpdateCameras()
         {
-            Debug.Log($"Kameras für {(isPlayer1Turn ? "Spieler 1" : "Spieler 2")} aktualisiert");
+            Debug.Log($"Kameras fï¿½r {(isPlayer1Turn ? "Spieler 1" : "Spieler 2")} aktualisiert");
 
             if (isPlayer1Turn)
             {
@@ -119,8 +116,25 @@ namespace dungeonduell
         private void ToggleCursor(bool player1)
         {
             CourserSour1.Set(player1);
-            CourserSour2.Set(!player1);
-           
+            CourserSour2.Set(!player1); 
+        }
+
+        void OnEnable()
+        {      
+            SubscribeToEvents();
+        }
+        void OnDisable()
+        {
+           UnsubscribeToAllEvents();
+        }   
+        public void SubscribeToEvents()
+        {
+            DDCodeEventHandler.NextPlayerTurn += EndPlayerTurn;
+        }
+
+        public void UnsubscribeToAllEvents()
+        {
+            DDCodeEventHandler.NextPlayerTurn -= EndPlayerTurn;
         }
     }
 }

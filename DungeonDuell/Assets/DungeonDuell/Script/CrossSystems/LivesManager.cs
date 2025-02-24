@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 namespace dungeonduell
 {
-    public class LivesManager : MonoBehaviour
+    public class LivesManager : MonoBehaviour, IObserver
     {
         public int livesPlayer1 = 2;
         public int livesPlayer2 = 2;
@@ -29,32 +29,38 @@ namespace dungeonduell
             livesPlayer1 = 1;
             livesPlayer2 = 1;
         }
-        void OnSceneLoaded(Scene scene, LoadSceneMode mode){
-            if(scene.buildIndex == 1){
-                    if(nextRoundFinal){
-                
-                    SequenceMang sequenceMang; // A bit over simple but fine for now
-                    if(sequenceMang = FindAnyObjectByType<SequenceMang>())
+        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            if (scene.buildIndex == 1)
+            {
+                if (nextRoundFinal)
+                {
+                    SequenceMang sequenceMang;
+                    if (sequenceMang = FindAnyObjectByType<SequenceMang>())
                     {
                         sequenceMang.DisableTimer();
                     }
-
                 }
             }
 
         }
-
-
         void OnEnable()
         {
-            
-        
-            DDCodeEventHandler.DungeonConnected+=FinalRound;
-            SceneManager.sceneLoaded += OnSceneLoaded;
+            SubscribeToEvents();
         }
         void OnDisable()
         {
-            DDCodeEventHandler.DungeonConnected-=FinalRound;
+            UnsubscribeToAllEvents();
+        }
+        public void SubscribeToEvents()
+        {
+            DDCodeEventHandler.DungeonConnected += FinalRound;
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        }
+
+        public void UnsubscribeToAllEvents()
+        {
+            DDCodeEventHandler.DungeonConnected -= FinalRound;
             SceneManager.sceneLoaded -= OnSceneLoaded;
         }
     }

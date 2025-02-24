@@ -613,11 +613,11 @@
                 },
                 {
                     "name": "RotateR",
-                    "type": "PassThrough",
+                    "type": "Button",
                     "id": "5d894b6c-1123-4baf-b78c-1ea7d37abfaa",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press(pressPoint=1.401298E-45,behavior=1)",
+                    "interactions": "",
                     "initialStateCheck": false
                 },
                 {
@@ -669,6 +669,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
+                    "action": "RotateR",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "03268f61-bb1c-48bc-924a-fc885b6f930e",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "RotateR",
                     "isComposite": false,
                     "isPartOfComposite": false

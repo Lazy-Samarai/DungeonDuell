@@ -16,6 +16,7 @@ namespace dungeonduell
         void Start()
         {
             sceneLoading = GetComponentInChildren<SceneLoading>();
+    
         }
 
         // Update is called once per frame

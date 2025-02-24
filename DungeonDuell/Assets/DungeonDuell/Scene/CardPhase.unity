@@ -990,6 +990,7 @@ MonoBehaviour:
   discardPile: {fileID: 1190827255}
   discardPile2: {fileID: 1066758489}
   turnManager: {fileID: 0}
+  isPlayer1Turn: 1
   cousors:
   - {fileID: 393502161}
   - {fileID: 169980103}
@@ -1778,6 +1779,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   discardPile: []
+  belongPlayer1: 0
 --- !u!1 &1091502658
 GameObject:
   m_ObjectHideFlags: 0
@@ -2658,6 +2660,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   discardPile: []
+  belongPlayer1: 1
 --- !u!4 &1190827256
 Transform:
   m_ObjectHideFlags: 0
@@ -3134,7 +3137,6 @@ MonoBehaviour:
   player2Camera: {fileID: 1851639167}
   playerTurnText: {fileID: 511666258}
   pressAnyKeyText: {fileID: 2034102534}
-  tileClickHandler: {fileID: 0}
   HandPlayer1: {fileID: 2012748599}
   HandPlayer2: {fileID: 2077986323}
   CourserSour1: {fileID: 393502164}
@@ -10530,8 +10532,6 @@ MonoBehaviour:
   playerDeck: {fileID: 1494809202}
   spreadAngle: 20
   handRadius: 500
-  OtherPlayer: {fileID: 2077986323}
-  playing: 0
 --- !u!1 &2034102533
 GameObject:
   m_ObjectHideFlags: 0
@@ -10759,8 +10759,6 @@ MonoBehaviour:
   playerDeck: {fileID: 1010877895}
   spreadAngle: 20
   handRadius: 300
-  OtherPlayer: {fileID: 2012748599}
-  playing: 0
 --- !u!114 &2077986324
 MonoBehaviour:
   m_ObjectHideFlags: 0

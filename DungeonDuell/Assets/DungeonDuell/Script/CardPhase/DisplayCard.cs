@@ -28,7 +28,7 @@ namespace dungeonduell
         public GameObject cardHolder;
         public Transform handPanel;
 
-        public Vector3 hoverScale = new Vector3(1.2f, 1.2f, 1f); // Größe der Karten beim Hover
+        public Vector3 hoverScale = new Vector3(1.2f, 1.2f, 1f); // Grï¿½ï¿½e der Karten beim Hover
         public Vector3 hoverOffset = new Vector3(0f, 20f, 0f);
         public Vector3 sideOffset = new Vector3(30f, 0f, 0f);
 
@@ -164,18 +164,18 @@ namespace dungeonduell
             {
                 if (cardTransform.parent != cardHolder.transform)
                 {
-                    cardTransform.localScale = originalScale; // Setzt die Karte auf ihre ursprüngliche Größe zurück
-                    cardTransform.localPosition -= hoverOffset; // Verschiebt die Karte zurück an ihre ursprüngliche Position
-                    cardTransform.localRotation = originalRotation; // Stellt die ursprüngliche Rotation wieder her
-                    handPanelOriginalPosition.y = 0; // Setzt die Y-Position der HandPanel-Position zurück
-                    handPanelOriginalPosition.y += 100; // Anpassung für eine Basis-Höhe
+                    cardTransform.localScale = originalScale; // Setzt die Karte auf ihre ursprï¿½ngliche Grï¿½ï¿½e zurï¿½ck
+                    cardTransform.localPosition -= hoverOffset; // Verschiebt die Karte zurï¿½ck an ihre ursprï¿½ngliche Position
+                    cardTransform.localRotation = originalRotation; // Stellt die ursprï¿½ngliche Rotation wieder her
+                    handPanelOriginalPosition.y = 0; // Setzt die Y-Position der HandPanel-Position zurï¿½ck
+                    handPanelOriginalPosition.y += 100; // Anpassung fï¿½r eine Basis-Hï¿½he
 
                     if (tooltip != null)
                     {
                         tooltip.SetActive(false); // Versteckt den Tooltip
                     }
 
-                    AdjustNeighborCards(false); // Bringt benachbarte Karten zurück in ihre ursprüngliche Position
+                    AdjustNeighborCards(false); // Bringt benachbarte Karten zurï¿½ck in ihre ursprï¿½ngliche Position
                 }
             }
 
@@ -198,7 +198,8 @@ namespace dungeonduell
                 TileClickHandler tileClickHandler = FindObjectOfType<TileClickHandler>();
                 if (tileClickHandler != null)
                 {
-                    tileClickHandler.ChangeCard(null, null, null);
+                    print("ThatFunction");
+                   DDCodeEventHandler.Trigger_CardSelected(null);
                 }
             }
             else
@@ -227,12 +228,12 @@ namespace dungeonduell
                 cardTransform.localScale = Vector3.one;
                 cardTransform.localRotation = Quaternion.identity;
                 
-                HideTooltip(); // Tooltip für aktuelle Karte ausblenden
+                HideTooltip(); // Tooltip fï¿½r aktuelle Karte ausblenden
 
                 TileClickHandler tileClickHandler = FindObjectOfType<TileClickHandler>();
                 if (tileClickHandler != null)
                 {
-                    tileClickHandler.ChangeCard(card, card.GetAllowedDirection(), this);
+                    DDCodeEventHandler.Trigger_CardSelected(this);
                 }
             }
 
@@ -255,11 +256,11 @@ namespace dungeonduell
             {
                 Transform leftNeighbor = handPanel.GetChild(currentIndex - 1);
 
-                // Überprüfen, ob die linke Nachbarkarte ein DisplayCard-Skript hat
+                // ï¿½berprï¿½fen, ob die linke Nachbarkarte ein DisplayCard-Skript hat
                 DisplayCard leftCardScript = leftNeighbor.GetComponent<DisplayCard>();
                 if (leftCardScript == null)
                 {
-                    Debug.Log("Linke Nachbarkarte ist kein gültiges Kartenobjekt, wird ignoriert.");
+                    Debug.Log("Linke Nachbarkarte ist kein gï¿½ltiges Kartenobjekt, wird ignoriert.");
                 }
                 else if (cardHolder.transform.childCount > 0 && cardHolder.transform.GetChild(0) == leftNeighbor)
                 {
@@ -279,11 +280,11 @@ namespace dungeonduell
             {
                 Transform rightNeighbor = handPanel.GetChild(currentIndex + 1);
 
-                // Überprüfen, ob die rechte Nachbarkarte ein DisplayCard-Skript hat
+                // ï¿½berprï¿½fen, ob die rechte Nachbarkarte ein DisplayCard-Skript hat
                 DisplayCard rightCardScript = rightNeighbor.GetComponent<DisplayCard>();
                 if (rightCardScript == null)
                 {
-                    Debug.Log("Rechte Nachbarkarte ist kein gültiges Kartenobjekt, wird ignoriert.");
+                    Debug.Log("Rechte Nachbarkarte ist kein gï¿½ltiges Kartenobjekt, wird ignoriert.");
                 }
                 else if (cardHolder.transform.childCount > 0 && cardHolder.transform.GetChild(0) == rightNeighbor)
                 {
@@ -299,9 +300,6 @@ namespace dungeonduell
             }
         }
 
-
-
-
         private void HideTooltip()
         {
             if (tooltip != null)
@@ -314,5 +312,7 @@ namespace dungeonduell
         {
             cardDirectionIndiactor.SetDoorIndiactor(allowedDoors);
         }
+
+     
     }
 }
