@@ -43,7 +43,7 @@ namespace dungeonduell
             {
                 Vector2 input = context.ReadValue<Vector2>();
                 cursorPosition += input * Time.deltaTime * speed;
-                print(input);
+                //print(input);
 
                 /*
                 // Clamp to screen bounds

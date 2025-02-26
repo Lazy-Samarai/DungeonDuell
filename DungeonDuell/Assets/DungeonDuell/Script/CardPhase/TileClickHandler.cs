@@ -182,7 +182,7 @@ namespace dungeonduell
                                     {
                                         if (connectCollector.GetFullRoomList().Any(entry => entry.Item1 == cellPosition + offset[i]))
                                         {
-                                            print("777788");
+                                            //print("777788");
                                             currentDoorDir[i] = true; // Connect to all rooms that are there
                                             OverriteCurrentDoorDir[i] = true;
                                         }
@@ -196,7 +196,7 @@ namespace dungeonduell
 
             if (CheckConnectAblity(sourroundCorr) | !PlayerMove)
             {
-                Debug.Log("Tile clicked at position: " + cellPosition);
+                //Debug.Log("Tile clicked at position: " + cellPosition);
                 // Set Tiles
                 // Main Spawn
 
