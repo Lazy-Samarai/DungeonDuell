@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Cinemachine;
+using UnityEngine.EventSystems;
 
 namespace dungeonduell
 {
@@ -63,23 +64,43 @@ namespace dungeonduell
         {
             if (!awaitingKeyPress)
             {
-                Debug.LogWarning("BeginPlayerActionPhase wurde aufgerufen, obwohl awaitingKeyPress false ist.");
                 return; // Verhindert, dass die Methode ungewollt ausgeführt wird
             }
 
             awaitingKeyPress = false; // Nach Tastendruck setzen wir auf false
-            Debug.Log($"BeginPlayerActionPhase aufgerufen für {(isPlayer1Turn ? "Spieler 1" : "Spieler 2")} - awaitingKeyPress: {awaitingKeyPress}");
+          
 
             // Verberge den Schriftzug und die Aufforderung
             playerTurnText.gameObject.SetActive(false);
             pressAnyKeyText.gameObject.SetActive(false);
-            Debug.Log("Schriftzug und Tastentext deaktiviert.");
 
             // Zeigt die Handkarten für den aktuellen Spieler an
             ToggleHandVisibility(isPlayer1Turn, !isPlayer1Turn);
+            Invoke(nameof(SelectFirstCard), 0.2f);
         }
 
-        public void EndPlayerTurn()
+        private void SelectFirstCard()
+        {
+            Transform activeHandPanel = isPlayer1Turn ? HandPlayer1.handPanel : HandPlayer2.handPanel;
+
+            if (activeHandPanel.childCount > 0)
+            {
+                GameObject firstCard = activeHandPanel.GetChild(0).gameObject;
+                EventSystem.current.SetSelectedGameObject(firstCard);
+
+                DisplayCard firstCardScript = firstCard.GetComponent<DisplayCard>();
+                if (firstCardScript != null)
+                {
+                    firstCardScript.SetHighlight(true);
+                    Debug.Log($"Erste Karte {firstCardScript.card.cardName} hervorgehoben!");
+                }
+            }
+            else
+            {
+                Debug.LogError(" Auch nach Wartezeit KEINE Karten gefunden!");
+            }
+        }
+            public void EndPlayerTurn()
         {
             Debug.Log("EndPlayerTurn aufgerufen");
 
@@ -94,7 +115,7 @@ namespace dungeonduell
 
         private void UpdateCameras()
         {
-            Debug.Log($"Kameras für {(isPlayer1Turn ? "Spieler 1" : "Spieler 2")} aktualisiert");
+            //Debug.Log($"Kameras für {(isPlayer1Turn ? "Spieler 1" : "Spieler 2")} aktualisiert");
 
             if (isPlayer1Turn)
             {

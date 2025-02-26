@@ -546,7 +546,7 @@ namespace MoreMountains.TopDownEngine
                 {
                     ""name"": """",
                     ""id"": ""9b458c2a-51c4-465e-b2c9-bb7328832678"",
-                    ""path"": ""<Keyboard>/numpad0"",
+                    ""path"": ""<Keyboard>/l"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -568,7 +568,7 @@ namespace MoreMountains.TopDownEngine
                 {
                     ""name"": """",
                     ""id"": ""d1448d45-7f0a-49f1-9be4-087dab960505"",
-                    ""path"": ""<Keyboard>/numpad1"",
+                    ""path"": ""<Keyboard>/1"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -590,7 +590,7 @@ namespace MoreMountains.TopDownEngine
                 {
                     ""name"": """",
                     ""id"": ""0b960752-fdd1-4cc3-b22f-20eb68a65b59"",
-                    ""path"": ""<Keyboard>/numpad2"",
+                    ""path"": ""<Keyboard>/2"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -612,7 +612,7 @@ namespace MoreMountains.TopDownEngine
                 {
                     ""name"": """",
                     ""id"": ""5278a078-305c-44e8-8cea-aa55f6235d06"",
-                    ""path"": ""<Keyboard>/numpad3"",
+                    ""path"": ""<Keyboard>/3"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -661,6 +661,15 @@ namespace MoreMountains.TopDownEngine
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Navigation"",
+                    ""type"": ""Value"",
+                    ""id"": ""3c914630-d9c6-47d1-8648-7b8d5a22c551"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -716,6 +725,28 @@ namespace MoreMountains.TopDownEngine
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Submit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""93af95a5-653e-4321-83ae-8d4a00481d88"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Navigation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""04ee87c1-7784-451c-afe0-e14b74947f59"",
+                    ""path"": ""<Gamepad>/dpad"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Navigation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -779,6 +810,7 @@ namespace MoreMountains.TopDownEngine
             m_CardPhase_RotateR = m_CardPhase.FindAction("RotateR", throwIfNotFound: true);
             m_CardPhase_RotateL = m_CardPhase.FindAction("RotateL", throwIfNotFound: true);
             m_CardPhase_Submit = m_CardPhase.FindAction("Submit", throwIfNotFound: true);
+            m_CardPhase_Navigation = m_CardPhase.FindAction("Navigation", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -1034,6 +1066,7 @@ namespace MoreMountains.TopDownEngine
         private readonly InputAction m_CardPhase_RotateR;
         private readonly InputAction m_CardPhase_RotateL;
         private readonly InputAction m_CardPhase_Submit;
+        private readonly InputAction m_CardPhase_Navigation;
         public struct CardPhaseActions
         {
             private @DungeonPhaseInput m_Wrapper;
@@ -1042,6 +1075,7 @@ namespace MoreMountains.TopDownEngine
             public InputAction @RotateR => m_Wrapper.m_CardPhase_RotateR;
             public InputAction @RotateL => m_Wrapper.m_CardPhase_RotateL;
             public InputAction @Submit => m_Wrapper.m_CardPhase_Submit;
+            public InputAction @Navigation => m_Wrapper.m_CardPhase_Navigation;
             public InputActionMap Get() { return m_Wrapper.m_CardPhase; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -1063,6 +1097,9 @@ namespace MoreMountains.TopDownEngine
                 @Submit.started += instance.OnSubmit;
                 @Submit.performed += instance.OnSubmit;
                 @Submit.canceled += instance.OnSubmit;
+                @Navigation.started += instance.OnNavigation;
+                @Navigation.performed += instance.OnNavigation;
+                @Navigation.canceled += instance.OnNavigation;
             }
 
             private void UnregisterCallbacks(ICardPhaseActions instance)
@@ -1079,6 +1116,9 @@ namespace MoreMountains.TopDownEngine
                 @Submit.started -= instance.OnSubmit;
                 @Submit.performed -= instance.OnSubmit;
                 @Submit.canceled -= instance.OnSubmit;
+                @Navigation.started -= instance.OnNavigation;
+                @Navigation.performed -= instance.OnNavigation;
+                @Navigation.canceled -= instance.OnNavigation;
             }
 
             public void RemoveCallbacks(ICardPhaseActions instance)
@@ -1142,6 +1182,7 @@ namespace MoreMountains.TopDownEngine
             void OnRotateR(InputAction.CallbackContext context);
             void OnRotateL(InputAction.CallbackContext context);
             void OnSubmit(InputAction.CallbackContext context);
+            void OnNavigation(InputAction.CallbackContext context);
         }
     }
 }

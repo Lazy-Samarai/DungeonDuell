@@ -300,7 +300,19 @@ namespace dungeonduell
         }
 
 
-
+        public void SetHighlight(bool isHighlighted)
+        {
+            if (isHighlighted)
+            {
+                cardTransform.localScale = hoverScale; // Vergrößert die Karte
+                Frame.GetComponent<Image>().color = Color.cyan; // Hebt den Rand hervor
+            }
+            else
+            {
+                cardTransform.localScale = originalScale; // Setzt die Größe zurück
+                Frame.GetComponent<Image>().color = Color.white; // Setzt den Rand zurück
+            }
+        }
 
         private void HideTooltip()
         {
