@@ -3079,7 +3079,6 @@ GameObject:
   - component: {fileID: 1148792063}
   - component: {fileID: 1148792062}
   - component: {fileID: 1148792061}
-  - component: {fileID: 1148792065}
   m_Layer: 5
   m_Name: CanvasPlayer_2
   m_TagString: Untagged
@@ -3171,24 +3170,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1148792065
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1148792060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 417d45e382ae8cc40b14992db2270e35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  handPanel: {fileID: 2077986322}
-  currentSelectedCard: {fileID: 0}
-  navigateAction: {fileID: 8800371597162477539, guid: 0cad7e50cc0a66a4d9ba264d314913d3,
-    type: 3}
-  selectAction: {fileID: -3121155424896286413, guid: 0cad7e50cc0a66a4d9ba264d314913d3,
-    type: 3}
 --- !u!1 &1162489420
 GameObject:
   m_ObjectHideFlags: 0
@@ -12413,6 +12394,7 @@ GameObject:
   - component: {fileID: 2077986325}
   - component: {fileID: 2077986324}
   - component: {fileID: 2077986323}
+  - component: {fileID: 2077986326}
   m_Layer: 5
   m_Name: HandPanel
   m_TagString: Untagged
@@ -12503,6 +12485,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2077986321}
   m_CullTransparentMesh: 1
+--- !u!114 &2077986326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2077986321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 417d45e382ae8cc40b14992db2270e35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handPanel: {fileID: 2077986322}
+  currentSelectedCard: {fileID: 0}
+  navigateAction: {fileID: 8800371597162477539, guid: 0cad7e50cc0a66a4d9ba264d314913d3,
+    type: 3}
+  selectAction: {fileID: -3121155424896286413, guid: 0cad7e50cc0a66a4d9ba264d314913d3,
+    type: 3}
 --- !u!1 &2118570741
 GameObject:
   m_ObjectHideFlags: 0
