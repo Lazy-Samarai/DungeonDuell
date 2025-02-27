@@ -1,8 +1,9 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Linq;
+using UnityEngine.InputSystem;
 
 namespace dungeonduell
 {
@@ -28,9 +29,11 @@ namespace dungeonduell
         public GameObject cardHolder;
         public Transform handPanel;
 
-        public Vector3 hoverScale = new Vector3(1.2f, 1.2f, 1f); // Größe der Karten beim Hover
+        public Vector3 hoverScale = new Vector3(1.2f, 1.2f, 1f); // GrÃ¶ÃŸe der Karten beim Hover
         public Vector3 hoverOffset = new Vector3(0f, 20f, 0f);
         public Vector3 sideOffset = new Vector3(30f, 0f, 0f);
+
+        public InputActionReference selectAction;
 
         void Start()
         {
@@ -164,18 +167,18 @@ namespace dungeonduell
             {
                 if (cardTransform.parent != cardHolder.transform)
                 {
-                    cardTransform.localScale = originalScale; // Setzt die Karte auf ihre ursprüngliche Größe zurück
-                    cardTransform.localPosition -= hoverOffset; // Verschiebt die Karte zurück an ihre ursprüngliche Position
-                    cardTransform.localRotation = originalRotation; // Stellt die ursprüngliche Rotation wieder her
-                    handPanelOriginalPosition.y = 0; // Setzt die Y-Position der HandPanel-Position zurück
-                    handPanelOriginalPosition.y += 100; // Anpassung für eine Basis-Höhe
+                    cardTransform.localScale = originalScale; // Setzt die Karte auf ihre ursprÃ¼ngliche GrÃ¶ÃŸe zurÃ¼ck
+                    cardTransform.localPosition -= hoverOffset; // Verschiebt die Karte zurÃ¼ck an ihre ursprÃ¼ngliche Position
+                    cardTransform.localRotation = originalRotation; // Stellt die ursprÃ¼ngliche Rotation wieder her
+                    handPanelOriginalPosition.y = 0; // Setzt die Y-Position der HandPanel-Position zurÃ¼ck
+                    handPanelOriginalPosition.y += 100; // Anpassung fÃ¼r eine Basis-HÃ¶he
 
                     if (tooltip != null)
                     {
                         tooltip.SetActive(false); // Versteckt den Tooltip
                     }
 
-                    AdjustNeighborCards(false); // Bringt benachbarte Karten zurück in ihre ursprüngliche Position
+                    AdjustNeighborCards(false); // Bringt benachbarte Karten zurÃ¼ck in ihre ursprÃ¼ngliche Position
                 }
             }
 
@@ -183,7 +186,7 @@ namespace dungeonduell
         }
 
 
-        private void HandleCardClick()
+        public void HandleCardClick()
         {
             Debug.Log($"Karte geklickt: {card.cardName}");
 
@@ -227,7 +230,7 @@ namespace dungeonduell
                 cardTransform.localScale = Vector3.one;
                 cardTransform.localRotation = Quaternion.identity;
                 
-                HideTooltip(); // Tooltip für aktuelle Karte ausblenden
+                HideTooltip(); // Tooltip fÃ¼r aktuelle Karte ausblenden
 
                 TileClickHandler tileClickHandler = FindObjectOfType<TileClickHandler>();
                 if (tileClickHandler != null)
@@ -255,11 +258,11 @@ namespace dungeonduell
             {
                 Transform leftNeighbor = handPanel.GetChild(currentIndex - 1);
 
-                // Überprüfen, ob die linke Nachbarkarte ein DisplayCard-Skript hat
+                // ÃœberprÃ¼fen, ob die linke Nachbarkarte ein DisplayCard-Skript hat
                 DisplayCard leftCardScript = leftNeighbor.GetComponent<DisplayCard>();
                 if (leftCardScript == null)
                 {
-                    Debug.Log("Linke Nachbarkarte ist kein gültiges Kartenobjekt, wird ignoriert.");
+                    Debug.Log("Linke Nachbarkarte ist kein gÃ¼ltiges Kartenobjekt, wird ignoriert.");
                 }
                 else if (cardHolder.transform.childCount > 0 && cardHolder.transform.GetChild(0) == leftNeighbor)
                 {
@@ -279,11 +282,11 @@ namespace dungeonduell
             {
                 Transform rightNeighbor = handPanel.GetChild(currentIndex + 1);
 
-                // Überprüfen, ob die rechte Nachbarkarte ein DisplayCard-Skript hat
+                // ÃœberprÃ¼fen, ob die rechte Nachbarkarte ein DisplayCard-Skript hat
                 DisplayCard rightCardScript = rightNeighbor.GetComponent<DisplayCard>();
                 if (rightCardScript == null)
                 {
-                    Debug.Log("Rechte Nachbarkarte ist kein gültiges Kartenobjekt, wird ignoriert.");
+                    Debug.Log("Rechte Nachbarkarte ist kein gÃ¼ltiges Kartenobjekt, wird ignoriert.");
                 }
                 else if (cardHolder.transform.childCount > 0 && cardHolder.transform.GetChild(0) == rightNeighbor)
                 {
@@ -304,13 +307,13 @@ namespace dungeonduell
         {
             if (isHighlighted)
             {
-                cardTransform.localScale = hoverScale; // Vergrößert die Karte
+                cardTransform.localScale = hoverScale; // VergrÃ¶ÃŸert die Karte
                 Frame.GetComponent<Image>().color = Color.cyan; // Hebt den Rand hervor
             }
             else
             {
-                cardTransform.localScale = originalScale; // Setzt die Größe zurück
-                Frame.GetComponent<Image>().color = Color.white; // Setzt den Rand zurück
+                cardTransform.localScale = originalScale; // Setzt die GrÃ¶ÃŸe zurÃ¼ck
+                Frame.GetComponent<Image>().color = Color.white; // Setzt den Rand zurÃ¼ck
             }
         }
 
@@ -325,6 +328,22 @@ namespace dungeonduell
         public void UpdateDirectionIndicator(bool[] allowedDoors)
         {
             cardDirectionIndiactor.SetDoorIndiactor(allowedDoors);
+        }
+
+        public void SelectCard()
+        {
+            Debug.Log($"ðŸƒ Karte mit Controller ausgewÃ¤hlt: {card.cardName}");
+            HandleCardClick();
+        }
+
+        private void OnEnable()
+        {
+            selectAction.action.performed += ctx => SelectCard();
+        }
+
+        private void OnDisable()
+        {
+            selectAction.action.performed -= ctx => SelectCard();
         }
     }
 }

@@ -1,4 +1,4 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -45,10 +45,10 @@ namespace dungeonduell
         {
             Debug.Log("InitializeTurn aufgerufen");
 
-            awaitingKeyPress = true; // Setzt den Tastendruck f¸r jeden neuen Zug voraus
-            Debug.Log($"Neuer Zug beginnt f¸r {(isPlayer1Turn ? "Spieler 1" : "Spieler 2")} - awaitingKeyPress: {awaitingKeyPress}");
+            awaitingKeyPress = true; // Setzt den Tastendruck f√ºr jeden neuen Zug voraus
+            Debug.Log($"Neuer Zug beginnt f√ºr {(isPlayer1Turn ? "Spieler 1" : "Spieler 2")} - awaitingKeyPress: {awaitingKeyPress}");
 
-            // Setze die Anzeige f¸r den Zugbeginn
+            // Setze die Anzeige f√ºr den Zugbeginn
             playerTurnText.text = "Current Turn: " + (isPlayer1Turn ? "Player 1" : "Player 2");
             playerTurnText.gameObject.SetActive(true);
             pressAnyKeyText.gameObject.SetActive(true);
@@ -64,7 +64,7 @@ namespace dungeonduell
         {
             if (!awaitingKeyPress)
             {
-                return; // Verhindert, dass die Methode ungewollt ausgef¸hrt wird
+                return; // Verhindert, dass die Methode ungewollt ausgef√ºhrt wird
             }
 
             awaitingKeyPress = false; // Nach Tastendruck setzen wir auf false
@@ -74,7 +74,7 @@ namespace dungeonduell
             playerTurnText.gameObject.SetActive(false);
             pressAnyKeyText.gameObject.SetActive(false);
 
-            // Zeigt die Handkarten f¸r den aktuellen Spieler an
+            // Zeigt die Handkarten f√ºr den aktuellen Spieler an
             ToggleHandVisibility(isPlayer1Turn, !isPlayer1Turn);
             Invoke(nameof(SelectFirstCard), 0.2f);
         }
@@ -83,31 +83,44 @@ namespace dungeonduell
         {
             Transform activeHandPanel = isPlayer1Turn ? HandPlayer1.handPanel : HandPlayer2.handPanel;
 
-            if (activeHandPanel.childCount > 0)
+            int firstValidIndex = GetFirstValidCardIndex(activeHandPanel);
+            if (firstValidIndex != -1)
             {
-                GameObject firstCard = activeHandPanel.GetChild(0).gameObject;
+                GameObject firstCard = activeHandPanel.GetChild(firstValidIndex).gameObject;
                 EventSystem.current.SetSelectedGameObject(firstCard);
 
                 DisplayCard firstCardScript = firstCard.GetComponent<DisplayCard>();
                 if (firstCardScript != null)
                 {
                     firstCardScript.SetHighlight(true);
-                    Debug.Log($"Erste Karte {firstCardScript.card.cardName} hervorgehoben!");
+                    Debug.Log($"‚ú® Erste Karte {firstCardScript.card.cardName} hervorgehoben!");
                 }
             }
             else
             {
-                Debug.LogError(" Auch nach Wartezeit KEINE Karten gefunden!");
+                Debug.LogError("‚ùå Auch nach Wartezeit KEINE Karten gefunden!");
             }
         }
-            public void EndPlayerTurn()
+
+        private int GetFirstValidCardIndex(Transform panel)
+        {
+            for (int i = 0; i < panel.childCount; i++)
+            {
+                if (panel.GetChild(i).GetComponent<DisplayCard>() != null)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+        public void EndPlayerTurn()
         {
             Debug.Log("EndPlayerTurn aufgerufen");
 
             isPlayer1Turn = !isPlayer1Turn;
-            Debug.Log($"Zug beendet f¸r {(isPlayer1Turn ? "Spieler 1" : "Spieler 2")} - n‰chster Spieler ist dran");
+            Debug.Log($"Zug beendet f√ºr {(isPlayer1Turn ? "Spieler 1" : "Spieler 2")} - n√§chster Spieler ist dran");
 
-            // Verzˆgere das Initialisieren des neuen Zuges, um sicherzustellen, dass awaitingKeyPress korrekt gesetzt ist
+            // Verz√∂gere das Initialisieren des neuen Zuges, um sicherzustellen, dass awaitingKeyPress korrekt gesetzt ist
             ToggleCursor(isPlayer1Turn);
             Invoke(nameof(InitializeTurn), 0.1f);
            
@@ -115,7 +128,7 @@ namespace dungeonduell
 
         private void UpdateCameras()
         {
-            //Debug.Log($"Kameras f¸r {(isPlayer1Turn ? "Spieler 1" : "Spieler 2")} aktualisiert");
+            //Debug.Log($"Kameras f√ºr {(isPlayer1Turn ? "Spieler 1" : "Spieler 2")} aktualisiert");
 
             if (isPlayer1Turn)
             {
