@@ -15,9 +15,7 @@ namespace dungeonduell
         [SerializeField] float stepCross;
         [SerializeField] float stepUpDown;
         [SerializeField] Transform spawnPoint_Player1;
-        GameObject StartRoomPlayer_1;
         [SerializeField] Transform spawnPoint_Player2;
-        GameObject StartRoomPlayer_2;
 
         void Awake()
         {
@@ -69,24 +67,19 @@ namespace dungeonduell
 
                 if (roomInfo.Item2.roomtype == RoomType.Spawn_Player1)
                 {
-                    StartRoomPlayer_1 = Nextroom;
                     // Some Player Check required later for Mutiplayer here 
                     spawnPoint_Player1.transform.position = new Vector3(posX, posY, 0);
-                    // Nextroom.GetComponentInChildren<CinemachineVirtualCamera>(true).gameObject.SetActive(false); // force update
-                    // Nextroom.GetComponentInChildren<CinemachineVirtualCamera>(true).gameObject.SetActive(true);
 
                 }
                 if (roomInfo.Item2.roomtype == RoomType.Spawn_Player2)
                 {
-                    StartRoomPlayer_2 = Nextroom;
                     spawnPoint_Player2.transform.position = new Vector3(posX, posY, 0);
                 }
 
             }
             Destroy(transform.GetChild(0).gameObject);
 
-            StartRoomPlayer_1.GetComponentInChildren<CinemachineVirtualCamera>(true).gameObject.SetActive(false); // force update
-            StartRoomPlayer_1.GetComponentInChildren<CinemachineVirtualCamera>(true).gameObject.SetActive(true);
+            // If wered decide to have no speical virtsul Cam Work when remove this old commend: 
 
             // Destroying Prefab in Scene. Prefab in Szene because it caused porblem with virtsula Cam. Curently virtsula Cam are not on by
             // room to room basis but this will stay like this until a new Cam handling is implented
