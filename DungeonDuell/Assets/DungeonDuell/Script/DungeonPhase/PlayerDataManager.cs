@@ -79,6 +79,8 @@ namespace dungeonduell
             {
                 if (nextRoundFinal)
                 {
+                    DDCodeEventHandler.Trigger_FinalRoundInDungeon();
+                    
                     SequenceMang sequenceMang;
                     if (sequenceMang = FindAnyObjectByType<SequenceMang>())
                     {
