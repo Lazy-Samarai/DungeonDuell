@@ -50,9 +50,9 @@ namespace dungeonduell
         public void Reseting()
         {
             ConnectionsCollector connectionsCollector = FindObjectOfType<ConnectionsCollector>();
-            LivesManager livesManager = FindObjectOfType<LivesManager>();
-            Destroy(connectionsCollector.gameObject);
-            Destroy(livesManager.gameObject);          
+            PlayerDataManager playerMang = FindObjectOfType<PlayerDataManager>();
+            Destroy(playerMang.gameObject);        
+            Destroy(connectionsCollector.gameObject);        
             BackToCardPhase();
         }
         public void DisableTimer()
