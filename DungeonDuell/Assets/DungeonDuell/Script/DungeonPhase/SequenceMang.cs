@@ -5,7 +5,7 @@ using TMPro;
 
 namespace dungeonduell
 {
-    public class SequenceMang : MonoBehaviour
+    public class SequenceMang : MonoBehaviour, IObserver
     {
         [SerializeField] float timeRound = 150.0f;
         [SerializeField] bool timeRunning = false;
@@ -21,10 +21,10 @@ namespace dungeonduell
         // Update is called once per frame
         void Update()
         {
-            if(timeRunning & !finalRound)
+            if (timeRunning & !finalRound)
             {
                 timeRound -= Time.deltaTime;
-                if(timeRound < 0)
+                if (timeRound < 0)
                 {
                     BackToCardPhase();
                 }
@@ -40,7 +40,7 @@ namespace dungeonduell
                 BackToCardPhase();
             }
 
-          
+
         }
         public void BackToCardPhase()
         {
@@ -49,9 +49,9 @@ namespace dungeonduell
         public void Reseting()
         {
             ConnectionsCollector connectionsCollector = FindObjectOfType<ConnectionsCollector>();
-            LivesManager livesManager = FindObjectOfType<LivesManager>();
+            PlayerDataManager playerMang = FindObjectOfType<PlayerDataManager>();
+            Destroy(playerMang.gameObject);
             Destroy(connectionsCollector.gameObject);
-            Destroy(livesManager.gameObject);          
             BackToCardPhase();
         }
         public void DisableTimer()
@@ -61,6 +61,24 @@ namespace dungeonduell
             timerText.text = "X";
 
         }
-        
+        void OnEnable()
+        {
+            SubscribeToEvents();
+        }
+        void OnDisable()
+        {
+            UnsubscribeToAllEvents();
+        }
+        public void SubscribeToEvents()
+        {
+            DDCodeEventHandler.FinalRoundInDungeon += DisableTimer;
+        }
+
+        public void UnsubscribeToAllEvents()
+        {
+            DDCodeEventHandler.FinalRoundInDungeon -= DisableTimer;
+        }
+
+
     }
 }

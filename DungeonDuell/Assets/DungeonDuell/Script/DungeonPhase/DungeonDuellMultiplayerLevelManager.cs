@@ -1,6 +1,7 @@
 using dungeonduell;
 using MoreMountains.Feedbacks;
 using MoreMountains.Tools;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,8 +9,6 @@ using UnityEngine.SceneManagement;
 
 namespace MoreMountains.TopDownEngine
 {
-    public struct SavePlayerDataEvent { }
-    public struct LoadPlayerDataEvent { }
     public struct CoinEvent
     {
         public GameObject Picker;
@@ -71,8 +70,11 @@ namespace MoreMountains.TopDownEngine
         public ProjectileWeapon[] weapon = new ProjectileWeapon[2];
         public Health[] health = new Health[2];
 
-
         public dungeonduell.SequenceMang sequenceMang;
+
+        const string playerNamebase = "Player";
+
+        PlayerDataManager playerDataManager;
 
         /// <summary> 
         /// On init, we initialize our points and countdowns 
@@ -82,15 +84,18 @@ namespace MoreMountains.TopDownEngine
 
             base.Initialization();
 
-            walking[0] = GetPlayerMovement("Player1");
-            walking[1] = GetPlayerMovement("Player2");
-            running[0] = GetPlayerRun("Player1");
-            running[1] = GetPlayerRun("Player2");
-            health[0] = GetPlayerHealth("Player1");
-            health[1] = GetPlayerHealth("Player2");
+            walking[0] = GetPlayerMovement(1);
+            walking[1] = GetPlayerMovement(2);
+
+            running[0] = GetPlayerRun(1);
+            running[1] = GetPlayerRun(2);
+
+            health[0] = GetPlayerHealth(1);
+            health[1] = GetPlayerHealth(2);
 
             WinnerID = "";
             LevelUPID = "";
+
             Points = new DDPoints[Players.Count];
             int i = 0;
             foreach (Character player in Players)
@@ -101,19 +106,23 @@ namespace MoreMountains.TopDownEngine
                 Points[i].CoinsForNextLevel = 1; // Startkosten 
                 i++;
             }
+            playerDataManager = FindAnyObjectByType<PlayerDataManager>();
+
+            // Apply 
+            SynchronizeFromPlayerDataManager();
+            TopDownEngineEvent.Trigger(TopDownEngineEventTypes.Repaint, null);
+
         }
 
 
         public void SavePlayerStates()
         {
             SynchronizeToPlayerDataManager();
-            // Löst das Speicher-Event aus 
-            MMEventManager.TriggerEvent(new SavePlayerDataEvent());
         }
 
         private void SynchronizeToPlayerDataManager()
         {
-            var playerDataList = PlayerDataManager.Instance.PlayerDataList;
+            var playerDataList = playerDataManager.PlayerDataList;
             for (int i = 0; i < Points.Length; i++)
             {
                 foreach (var data in playerDataList)
@@ -129,17 +138,16 @@ namespace MoreMountains.TopDownEngine
                         data.Health = health[i].MaximumHealth;
                         if (weapon[i] != null)
                         {
-                            data.AttackSpeed = weapon[i].TimeBetweenUses; 
+                            data.AttackSpeed = weapon[i].TimeBetweenUses;
                         }
                     }
                 }
             }
-            Debug.Log("Spielerdaten synchronisiert (LevelManager -> PlayerDataManager).");
         }
 
         private void SynchronizeFromPlayerDataManager()
         {
-            var playerDataList = PlayerDataManager.Instance.PlayerDataList;
+            var playerDataList = playerDataManager.PlayerDataList;
             for (int i = 0; i < Points.Length; i++)
             {
                 foreach (var data in playerDataList)
@@ -157,13 +165,14 @@ namespace MoreMountains.TopDownEngine
 
                         if (weapon[i] != null)
                         {
-                        weapon[i].TimeBetweenUses = data.AttackSpeed; 
+                            weapon[i].TimeBetweenUses = data.AttackSpeed;
                         }
-
                     }
+
                 }
+
             }
-            Debug.Log("Spielerdaten synchronisiert (PlayerDataManager -> LevelManager).");
+
         }
 
 
@@ -177,13 +186,10 @@ namespace MoreMountains.TopDownEngine
             int aliveCharacters = 0;
             int i = 0;
 
-            dungeonduell.LivesManager livesManager = FindObjectOfType<dungeonduell.LivesManager>();
-
-
             if (playerCharacter.PlayerID == "Player1")
             {
-                livesManager.livesPlayer1--;
-                if (livesManager.livesPlayer1 <= 0)
+                playerDataManager.PlayerDataList[0].RemainingLive--;
+                if (playerDataManager.PlayerDataList[0].RemainingLive <= 0)
                 {
                     WinnerID = "Player2";
                     StartCoroutine(GameOver());
@@ -191,8 +197,8 @@ namespace MoreMountains.TopDownEngine
             }
             if (playerCharacter.PlayerID == "Player2")
             {
-                livesManager.livesPlayer2--;
-                if (livesManager.livesPlayer2 <= 0)
+                playerDataManager.PlayerDataList[1].RemainingLive--;
+                if (playerDataManager.PlayerDataList[1].RemainingLive <= 0)
                 {
                     WinnerID = "Player1";
                     StartCoroutine(GameOver());
@@ -213,13 +219,6 @@ namespace MoreMountains.TopDownEngine
                 sequenceMang.BackToCardPhase();
 
             }
-            /* 
- 
-			if (aliveCharacters <= 1) 
-			{ 
-				StartCoroutine(GameOver()); 
-			} 
-			*/
         }
 
         /// <summary> 
@@ -250,9 +249,8 @@ namespace MoreMountains.TopDownEngine
             CheckForGameOver();
             if (weapon[0] == null && weapon[1] == null)
             {
-                weapon[0] = GetPlayerWeapon("Player1");
-                weapon[1] = GetPlayerWeapon("Player2");
-                MMEventManager.TriggerEvent(new LoadPlayerDataEvent());
+                weapon[0] = GetPlayerWeapon(1);
+                weapon[1] = GetPlayerWeapon(2);
                 SynchronizeFromPlayerDataManager();
                 TopDownEngineEvent.Trigger(TopDownEngineEventTypes.Repaint, null);
             }
@@ -296,8 +294,6 @@ namespace MoreMountains.TopDownEngine
             }
         }
 
-
-
         public void ApplyLevelUp(LevelUpOptions option)
         {
 
@@ -310,7 +306,6 @@ namespace MoreMountains.TopDownEngine
                     Points[i].CoinsForNextLevel *= 2; // Kosten verdoppeln 
                     Points[i].Level++;
                     TopDownEngineEvent.Trigger(TopDownEngineEventTypes.Repaint, null);
-                    Debug.Log($"Spieler {_playerID} ist jetzt Level {Points[i].Level}");
 
                     switch (option)
                     {
@@ -338,7 +333,6 @@ namespace MoreMountains.TopDownEngine
             //CharacterMovement movement = GetPlayerMovement(playerID); 
             if (walking != null)
             {
-                var playerData = PlayerDataManager.Instance.PlayerDataList.Find(p => p.PlayerID == playerID);
                 if (playerID == "Player1")
                 {
                     walking[0].WalkSpeed += 1.0f;
@@ -361,7 +355,6 @@ namespace MoreMountains.TopDownEngine
             //Health health = character?.GetComponent<Health>(); 
             if (health != null)
             {
-                var playerData = PlayerDataManager.Instance.PlayerDataList.Find(p => p.PlayerID == playerID);
                 if (playerID == "Player1")
                 {
                     health[0].MaximumHealth += 10;
@@ -380,7 +373,6 @@ namespace MoreMountains.TopDownEngine
             //ProjectileWeapon weapon = GetPlayerWeapon(playerID); 
             if (weapon[0] != null && weapon[1] != null)
             {
-                var playerData = PlayerDataManager.Instance.PlayerDataList.Find(p => p.PlayerID == playerID);
                 if (playerID == "Player1")
                 {
                     weapon[0].TimeBetweenUses *= 0.9f;
@@ -392,17 +384,17 @@ namespace MoreMountains.TopDownEngine
             }
             else
             {
-                weapon[0] = GetPlayerWeapon("Player1");
-                weapon[1] = GetPlayerWeapon("Player2");
+                weapon[0] = GetPlayerWeapon(1);
+                weapon[1] = GetPlayerWeapon(2);
                 ApplyAttackSpeedIncrease(playerID);
             }
         }
 
-        private CharacterMovement GetPlayerMovement(string playerID)
+        private CharacterMovement GetPlayerMovement(int i)
         {
             foreach (CharacterMovement movement in FindObjectsOfType<CharacterMovement>())
             {
-                if (movement.GetComponent<Character>().PlayerID == playerID)
+                if (movement.GetComponent<Character>().PlayerID == (playerNamebase + i))
                 {
                     return movement;
                 }
@@ -410,11 +402,11 @@ namespace MoreMountains.TopDownEngine
             return null;
         }
 
-        private CharacterRun GetPlayerRun(string playerID)
+        private CharacterRun GetPlayerRun(int i)
         {
             foreach (CharacterRun run in FindObjectsOfType<CharacterRun>())
             {
-                if (run.GetComponent<Character>().PlayerID == playerID)
+                if (run.GetComponent<Character>().PlayerID == (playerNamebase + i))
                 {
                     return run;
                 }
@@ -422,11 +414,11 @@ namespace MoreMountains.TopDownEngine
             return null;
         }
 
-        private Character GetPlayerCharacter(string playerID)
+        private Character GetPlayerCharacter(int i)
         {
             foreach (Character character in FindObjectsOfType<Character>())
             {
-                if (character.PlayerID == playerID)
+                if (character.PlayerID == (playerNamebase + i))
                 {
                     return character;
                 }
@@ -434,11 +426,11 @@ namespace MoreMountains.TopDownEngine
             return null;
         }
 
-        private Health GetPlayerHealth(string playerID)
+        private Health GetPlayerHealth(int i)
         {
             foreach (Health health in FindObjectsOfType<Health>())
             {
-                if (health.GetComponent<Character>().PlayerID == playerID)
+                if (health.GetComponent<Character>().PlayerID == (playerNamebase + i))
                 {
                     return health;
                 }
@@ -446,11 +438,11 @@ namespace MoreMountains.TopDownEngine
             return null;
         }
 
-        private ProjectileWeapon GetPlayerWeapon(string playerID)
+        private ProjectileWeapon GetPlayerWeapon(int i)
         {
             foreach (Character character in FindObjectsOfType<Character>())
             {
-                if (character.PlayerID == playerID)
+                if (character.PlayerID == (playerNamebase + i))
                 {
                     return character.GetComponentInChildren<ProjectileWeapon>();
                 }
@@ -466,7 +458,6 @@ namespace MoreMountains.TopDownEngine
         {
             base.OnEnable();
             this.MMEventStartListening<CoinEvent>();
-            //SynchronizeFromPlayerDataManager();
         }
 
         /// <summary> 
@@ -474,9 +465,9 @@ namespace MoreMountains.TopDownEngine
         /// </summary> 
         protected override void OnDisable()
         {
+            SavePlayerStates();
             base.OnDisable();
             this.MMEventStopListening<CoinEvent>();
-            SavePlayerStates();
         }
     }
 }

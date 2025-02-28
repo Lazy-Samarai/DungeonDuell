@@ -19,9 +19,6 @@ namespace dungeonduell
                 tooltipInstance = Instantiate(tooltipPrefab, cardCanvas.transform);
                 tooltipText = tooltipInstance.GetComponentInChildren<TextMeshProUGUI>();
                 tooltipRectTransform = tooltipInstance.GetComponent<RectTransform>();
-
-            
-
                 HideTooltip();
             }
             else
