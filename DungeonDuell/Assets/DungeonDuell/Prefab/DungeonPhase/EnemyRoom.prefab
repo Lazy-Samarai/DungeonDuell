@@ -1168,7 +1168,6 @@ GameObject:
   - component: {fileID: 3538675380022621002}
   - component: {fileID: 4161317412935644158}
   - component: {fileID: 6732033716994811259}
-  - component: {fileID: 890259514740863753}
   m_Layer: 2
   m_Name: EnemyRoom
   m_TagString: Untagged
@@ -1275,19 +1274,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   ActivationList: []
---- !u!114 &890259514740863753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4887094845199197374}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f31209f62c061b74f998706be218d209, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Doors: {fileID: 0}
 --- !u!1 &5132049929226029370
 GameObject:
   m_ObjectHideFlags: 0

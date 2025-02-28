@@ -79,7 +79,6 @@ namespace dungeonduell
         public void CursourInput()
         {
             Vector3 mouseWorldPos = cam.ScreenToWorldPoint(new Vector3(cousors[isPlayer1Turn ? 0 : 1].virtualMouse.position.x.value, cousors[isPlayer1Turn ? 0 : 1].virtualMouse.position.y.value, -cam.transform.position.z));
-            print("PressedInput:" + mouseWorldPos);
             if (currentCard != null)
             {
                 SpawnTile(mouseWorldPos, currentCard, true, true, isPlayer1Turn ? 1 : 2);
@@ -157,10 +156,8 @@ namespace dungeonduell
 
             if (CheckConnectAblity(sourroundCorr) | !PlayerMove)
             {
-                Debug.Log("Tile clicked at position: " + cellPosition);
                 // Set Tiles
                 // Main Spawn
-
                 tilemap.SetTile(cellPosition, card.Tile);
 
                 //Sourround
@@ -307,7 +304,6 @@ namespace dungeonduell
                 if (allowedDoors[i]) // all possible 
                 {
                     newConnectionDir.Add((ConnectionDir)i);
-                    //print(((ConnectionDir)i).ToString());
                 }
             }
             connectCollector.AddRoom(clickedTile, Conncection, type, element, newConnectionDir, owner);
@@ -382,7 +378,6 @@ namespace dungeonduell
         {
             if (context.phase == InputActionPhase.Started)
             {
-                print("Shifted");
                 currentDoorDir = ShiftRight(currentDoorDir);
                 displayCardUi?.UpdateDirectionIndicator(currentDoorDir); // see comment in DDCodeEventHandler
             }

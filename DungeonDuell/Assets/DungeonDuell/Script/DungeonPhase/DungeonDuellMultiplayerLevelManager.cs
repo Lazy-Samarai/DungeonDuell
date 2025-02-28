@@ -167,8 +167,6 @@ namespace MoreMountains.TopDownEngine
                         {
                             weapon[i].TimeBetweenUses = data.AttackSpeed;
                         }
-
-                        print("PlayerData:" + i + " " + walking[i].WalkSpeed);
                     }
 
                 }
@@ -308,7 +306,6 @@ namespace MoreMountains.TopDownEngine
                     Points[i].CoinsForNextLevel *= 2; // Kosten verdoppeln 
                     Points[i].Level++;
                     TopDownEngineEvent.Trigger(TopDownEngineEventTypes.Repaint, null);
-                    Debug.Log($"Spieler {_playerID} ist jetzt Level {Points[i].Level}");
 
                     switch (option)
                     {

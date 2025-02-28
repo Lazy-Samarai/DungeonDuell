@@ -14,7 +14,7 @@ namespace dungeonduell
         public static event Action NextPlayerTurn;
         public static void Trigger_NextPlayerTurn() { NextPlayerTurn.Invoke(); }
 
-        public static event Action<DisplayCard> CardSelected; // this might not be ideal but seems based for visual update and destroying later  
+        public static event Action<DisplayCard> CardSelected; // this might not be ideal but seems best for visual update and destroying later  
 
         public static void Trigger_CardSelected(DisplayCard card) { CardSelected.Invoke(card); }
 

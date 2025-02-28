@@ -22,19 +22,15 @@ namespace dungeonduell
         {
             Transform[] transformsSpwans = StartTiles.transform.GetChild(0).GetComponentsInChildren<Transform>().Skip(1).ToArray<Transform>(); // jump over parent
 
-            print("code" + transformsSpwans.Length);
-
             for (int i = 0; i < transformsSpwans.Length; i++)
             {
                 Transform transform = transformsSpwans[i];
-                print(transform.gameObject.name);
                 tileClickHandler.SpawnTile(transform.position, SpawnInfo[i], false, true,i+1);
             }
 
             Transform[] transformsWorld = StartTiles.transform.GetChild(1).GetComponentsInChildren<Transform>().Skip(1).ToArray<Transform>();
             for (int i = 0; i < transformsWorld.Length; i++)
             {
-                print(transformsWorld[i].name);
                 Transform transform = transformsWorld[i];
                 tileClickHandler.SpawnTile(transform.position, WorldCard[0], false, false,0);
             }

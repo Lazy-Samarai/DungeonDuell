@@ -23,13 +23,11 @@ namespace dungeonduell
 
 
         void OnEnable()
-        {
-            Debug.Log("OnEnable called");
+        {        
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
         void OnDisable()
         {
-            Debug.Log("OnDisable");
             SceneManager.sceneLoaded -= OnSceneLoaded;
         }
 
@@ -60,7 +58,6 @@ namespace dungeonduell
             // Zuf�llig Karten ausw�hlen und dem Deck hinzuf�gen 
             for (int i = 0; i < deckSize; i++)
             {
-                print(i);
                 int randomIndex = Random.Range(0, availableCards.Count);
                 playerDeck.Add(availableCards[randomIndex]);
                 availableCards.RemoveAt(randomIndex);
@@ -72,8 +69,6 @@ namespace dungeonduell
                 }
 
             }
-
-            Debug.Log("Deck erfolgreich generiert mit " + playerDeck.Count + " Karten.");
         }
 
         private void GetPerDistributer()

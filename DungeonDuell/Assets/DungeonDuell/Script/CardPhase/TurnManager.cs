@@ -32,23 +32,18 @@ namespace dungeonduell
         {
             if (awaitingKeyPress && Input.anyKeyDown)
             {
-                Debug.Log("Tastendruck erkannt, BeginPlayerActionPhase wird aufgerufen");
                 BeginPlayerActionPhase();
             }
         }
 
         void InitializeTurn()
         {
-            Debug.Log("InitializeTurn aufgerufen");
 
             awaitingKeyPress = true; // Setzt den Tastendruck f�r jeden neuen Zug voraus
-            Debug.Log($"Neuer Zug beginnt f�r {(isPlayer1Turn ? "Spieler 1" : "Spieler 2")} - awaitingKeyPress: {awaitingKeyPress}");
-
             // Setze die Anzeige f�r den Zugbeginn
             playerTurnText.text = "Current Turn: " + (isPlayer1Turn ? "Player 1" : "Player 2");
             playerTurnText.gameObject.SetActive(true);
             pressAnyKeyText.gameObject.SetActive(true);
-            Debug.Log("Spielzug-Text und Tastendruck-Text aktiviert.");
 
             // Versteckt beide Handkarten zu Beginn des Zuges
             ToggleHandVisibility(false, false);
@@ -65,12 +60,10 @@ namespace dungeonduell
             }
 
             awaitingKeyPress = false; // Nach Tastendruck setzen wir auf false
-            Debug.Log($"BeginPlayerActionPhase aufgerufen f�r {(isPlayer1Turn ? "Spieler 1" : "Spieler 2")} - awaitingKeyPress: {awaitingKeyPress}");
 
             // Verberge den Schriftzug und die Aufforderung
             playerTurnText.gameObject.SetActive(false);
             pressAnyKeyText.gameObject.SetActive(false);
-            Debug.Log("Schriftzug und Tastentext deaktiviert.");
 
             // Zeigt die Handkarten f�r den aktuellen Spieler an
             ToggleHandVisibility(isPlayer1Turn, !isPlayer1Turn);
@@ -78,21 +71,15 @@ namespace dungeonduell
 
         public void EndPlayerTurn()
         {
-            Debug.Log("EndPlayerTurn aufgerufen");
-
             isPlayer1Turn = !isPlayer1Turn;
-            Debug.Log($"Zug beendet f�r {(isPlayer1Turn ? "Spieler 1" : "Spieler 2")} - n�chster Spieler ist dran");
 
             // Verz�gere das Initialisieren des neuen Zuges, um sicherzustellen, dass awaitingKeyPress korrekt gesetzt ist
             ToggleCursor(isPlayer1Turn);
-            Invoke(nameof(InitializeTurn), 0.1f);
-           
+            Invoke(nameof(InitializeTurn), 0.1f);          
         }
 
         private void UpdateCameras()
         {
-            Debug.Log($"Kameras f�r {(isPlayer1Turn ? "Spieler 1" : "Spieler 2")} aktualisiert");
-
             if (isPlayer1Turn)
             {
                 player1Camera.Priority = 20;
@@ -110,8 +97,6 @@ namespace dungeonduell
         {
             HandPlayer1.ShowHideDeck(!showForPlayer1);
             HandPlayer2.ShowHideDeck(!showForPlayer2);
-
-            Debug.Log($"Handkarten umgeschaltet: Spieler 1 sichtbar: {showForPlayer1}, Spieler 2 sichtbar: {showForPlayer2}");
         }
         private void ToggleCursor(bool player1)
         {
