@@ -113,8 +113,6 @@ namespace MoreMountains.TopDownEngine
             TopDownEngineEvent.Trigger(TopDownEngineEventTypes.Repaint, null);
 
         }
-
-
         public void SavePlayerStates()
         {
             SynchronizeToPlayerDataManager();
@@ -182,28 +180,25 @@ namespace MoreMountains.TopDownEngine
         /// <param name="playerCharacter"></param> 
         protected override void OnPlayerDeath(Character playerCharacter)
         {
+            int playerIndex = Int32.Parse(playerCharacter.PlayerID[playerCharacter.PlayerID.Length - 1].ToString()) - 1;
             base.OnPlayerDeath(playerCharacter);
             int aliveCharacters = 0;
             int i = 0;
 
-            if (playerCharacter.PlayerID == "Player1")
+            playerDataManager.PlayerDataList[playerIndex].RemainingLive--;
+            if (playerDataManager.PlayerDataList[playerIndex].RemainingLive <= 0)
             {
-                playerDataManager.PlayerDataList[0].RemainingLive--;
-                if (playerDataManager.PlayerDataList[0].RemainingLive <= 0)
+                if (playerCharacter.PlayerID == "Player1")
                 {
                     WinnerID = "Player2";
-                    StartCoroutine(GameOver());
                 }
-            }
-            if (playerCharacter.PlayerID == "Player2")
-            {
-                playerDataManager.PlayerDataList[1].RemainingLive--;
-                if (playerDataManager.PlayerDataList[1].RemainingLive <= 0)
+                else
                 {
                     WinnerID = "Player1";
-                    StartCoroutine(GameOver());
                 }
+                StartCoroutine(GameOver());
             }
+
 
             foreach (Character character in LevelManager.Instance.Players)
             {
@@ -330,57 +325,31 @@ namespace MoreMountains.TopDownEngine
 
         private void ApplySpeedIncrease(string playerID)
         {
-            //CharacterMovement movement = GetPlayerMovement(playerID); 
+            int playerIndex = Int32.Parse(playerID[playerID.Length - 1].ToString()) - 1;
             if (walking != null)
             {
-                if (playerID == "Player1")
-                {
-                    walking[0].WalkSpeed += 1.0f;
-                    walking[0].MovementSpeed += 1.0f;
-                    running[0].RunSpeed += 1.0f;
-                }
-                else if (playerID == "Player2")
-                {
-                    walking[1].WalkSpeed += 1.0f;
-                    walking[1].MovementSpeed += 1.0f;
-                    running[1].RunSpeed += 1.0f;
-                }
-                //case switches f�r die Sachen 
+                walking[playerIndex].WalkSpeed += 1.0f;
+                walking[playerIndex].MovementSpeed += 1.0f;
+                running[playerIndex].RunSpeed += 1.0f;
             }
         }
 
         private void ApplyHealthIncrease(string playerID)
         {
-            //Character character = GetPlayerCharacter(playerID); 
-            //Health health = character?.GetComponent<Health>(); 
+            int playerIndex = Int32.Parse(playerID[playerID.Length - 1].ToString()) - 1;
             if (health != null)
             {
-                if (playerID == "Player1")
-                {
-                    health[0].MaximumHealth += 10;
-                    health[0].SetHealth(Mathf.Min(health[0].CurrentHealth + 10, health[0].MaximumHealth));
-                }
-                else if (playerID == "Player2")
-                {
-                    health[1].MaximumHealth += 10;
-                    health[1].SetHealth(Mathf.Min(health[1].CurrentHealth + 10, health[1].MaximumHealth));
-                }
+                health[playerIndex].MaximumHealth += 10;
+                health[playerIndex].SetHealth(Mathf.Min(health[playerIndex].CurrentHealth + 10, health[playerIndex].MaximumHealth));
             }
         }
 
         private void ApplyAttackSpeedIncrease(string playerID)
         {
-            //ProjectileWeapon weapon = GetPlayerWeapon(playerID); 
+            int playerIndex = Int32.Parse(playerID[playerID.Length - 1].ToString()) - 1;
             if (weapon[0] != null && weapon[1] != null)
             {
-                if (playerID == "Player1")
-                {
-                    weapon[0].TimeBetweenUses *= 0.9f;
-                }
-                else if (playerID == "Player2")
-                {
-                    weapon[1].TimeBetweenUses *= 0.9f; // Schnellere Angriffe 
-                }
+                weapon[playerIndex].TimeBetweenUses *= 0.9f;
             }
             else
             {
