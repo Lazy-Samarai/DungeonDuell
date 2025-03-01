@@ -11,21 +11,8 @@ namespace dungeonduell
         [Header("UI Elements")]
         public GameObject LevelUpMenu; // Das Panel für das Level-Up
         public TestHub TestHub;
-        public Button SpeedButton;
-        public Button HealthButton;
-        public Button AttackSpeedButton;
-
         private DungeonDuellMultiplayerLevelManager _levelManager;
-
-        // Tastenzuweisungen
-        [Header("Key Bindings")]
-        public KeyCode SpeedKey = KeyCode.Alpha1;
-        public KeyCode HealthKey = KeyCode.Alpha2;
-        public KeyCode AttackSpeedKey = KeyCode.Alpha3;
-        public KeyCode LevelUpUIKey = KeyCode.Alpha4;
-
-        bool showMenu = false;
-        
+              
         private void Start()
         {
             _levelManager = FindObjectOfType<DungeonDuellMultiplayerLevelManager>();
@@ -33,7 +20,6 @@ namespace dungeonduell
 
         public void UpgradeAttackSpeed()
         {
-
             OnOptionSelected(LevelUpOptions.AttackSpeed);
         }
          public void UpgradeHealth()

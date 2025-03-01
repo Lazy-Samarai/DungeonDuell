@@ -624,6 +624,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 297264526}
   m_CullTransparentMesh: 1
+--- !u!1 &376974903
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 376974905}
+  - component: {fileID: 376974904}
+  m_Layer: 0
+  m_Name: PlayerDataManger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &376974904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376974903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d61e7a32d2ee3844dada35717334f7bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerDataList: []
+  nextRoundFinal: 0
+--- !u!4 &376974905
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376974903}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &393502159
 GameObject:
   m_ObjectHideFlags: 0
@@ -1060,11 +1106,7 @@ MonoBehaviour:
   CardShelled:
   - {fileID: 11400000, guid: 987aa6efb8569d34fb1b74b7a9ce6372, type: 2}
   connectCollector: {fileID: 1945806930}
-  HandPlayer1: {fileID: 2012748599}
-  HandPlayer2: {fileID: 2077986323}
-  discardPile: {fileID: 1190827255}
-  discardPile2: {fileID: 1066758489}
-  turnManager: {fileID: 0}
+  isPlayer1Turn: 1
   cousors:
   - {fileID: 393502161}
   - {fileID: 169980103}
@@ -2103,11 +2145,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 950774723}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da19b9eb05a155d46a970148e1c8c58c, type: 3}
+  m_Script: {fileID: 11500000, guid: d61e7a32d2ee3844dada35717334f7bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  livesPlayer1: 2
-  livesPlayer2: 2
+  PlayerDataList: []
   nextRoundFinal: 0
 --- !u!4 &950774725
 Transform:
@@ -2350,6 +2391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   discardPile: []
+  belongPlayer1: 0
 --- !u!1 &1091502658
 GameObject:
   m_ObjectHideFlags: 0
@@ -2526,7 +2568,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1099633268}
-  - component: {fileID: 1099633267}
   m_Layer: 0
   m_Name: InhilizeStartPostion
   m_TagString: Untagged
@@ -2534,18 +2575,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1099633267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1099633266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3601b5fff75be234aa2f7915db88027b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1099633268
 Transform:
   m_ObjectHideFlags: 0
@@ -3364,6 +3393,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   discardPile: []
+  belongPlayer1: 1
 --- !u!4 &1190827256
 Transform:
   m_ObjectHideFlags: 0
@@ -4147,7 +4177,6 @@ MonoBehaviour:
   player2Camera: {fileID: 1851639167}
   playerTurnText: {fileID: 511666258}
   pressAnyKeyText: {fileID: 2034102534}
-  tileClickHandler: {fileID: 0}
   HandPlayer1: {fileID: 2012748599}
   HandPlayer2: {fileID: 2077986323}
   CourserSour1: {fileID: 393502164}
@@ -12194,8 +12223,6 @@ MonoBehaviour:
   playerDeck: {fileID: 1494809202}
   spreadAngle: 20
   handRadius: 500
-  OtherPlayer: {fileID: 2077986323}
-  playing: 0
 --- !u!114 &2012748600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12445,8 +12472,6 @@ MonoBehaviour:
   playerDeck: {fileID: 1010877895}
   spreadAngle: 20
   handRadius: 300
-  OtherPlayer: {fileID: 2012748599}
-  playing: 0
 --- !u!114 &2077986324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12649,4 +12674,5 @@ SceneRoots:
   - {fileID: 1557636385}
   - {fileID: 394553476}
   - {fileID: 1669154799}
+  - {fileID: 376974905}
   - {fileID: 950774725}

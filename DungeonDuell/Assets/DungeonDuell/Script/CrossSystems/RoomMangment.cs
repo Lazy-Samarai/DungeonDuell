@@ -11,18 +11,11 @@ namespace dungeonduell
     {
         public List<RoomInfo> RoomsInfos = new List<RoomInfo>();
         public List<Tuple<Vector3Int, RoomInfo>> RoomsInfosWithPos = new List<Tuple<Vector3Int, RoomInfo>>();
-
-        List<DoorConnectHandler> DoorCollect = new List<DoorConnectHandler>();
-        [SerializeField]  List<GameObject> roomPrefabs;
-
+        [SerializeField] List<GameObject> roomPrefabs;
         [SerializeField] float stepCross;
         [SerializeField] float stepUpDown;
-
         [SerializeField] Transform spawnPoint_Player1;
-        GameObject StartRoomPlayer_1;
-
         [SerializeField] Transform spawnPoint_Player2;
-        GameObject StartRoomPlayer_2; 
 
         void Awake()
         {
@@ -30,17 +23,17 @@ namespace dungeonduell
             RoomsInfos = FindAnyObjectByType<ConnectionsCollector>().GetRoomList();
 
             RoomsInfosWithPos = FindAnyObjectByType<ConnectionsCollector>().GetFullRoomList();
-            
+
             // Convert Both Side Connect | 
             foreach (Tuple<Vector3Int, RoomInfo> roomInfo in RoomsInfosWithPos)
             {
                 foreach (RoomConnection roomConnection in roomInfo.Item2.Conncection)
                 {
-                   RoomsInfosWithPos.FirstOrDefault(obj => obj.Item2.RoomID == roomConnection.targetRoomId)
-                        .Item2.Conncection.Add(
-                       new RoomConnection(roomInfo.Item2.RoomID, roomConnection.connectionDir.GetInvert()));
+                    RoomsInfosWithPos.FirstOrDefault(obj => obj.Item2.RoomID == roomConnection.targetRoomId)
+                         .Item2.Conncection.Add(
+                        new RoomConnection(roomInfo.Item2.RoomID, roomConnection.connectionDir.GetInvert()));
 
-                    
+
                 }
             }
 
@@ -66,37 +59,27 @@ namespace dungeonduell
                 Nextroom.GetComponentInChildren<InteriorSpawner>().SpawnInterior(roomInfo.Item2.roomtype);
 
                 RoomPortHandler roomPortHandler = Nextroom.GetComponentInChildren<RoomPortHandler>();
-                
+
                 foreach (RoomConnection rc in roomInfo.Item2.Conncection)
                 {
                     roomPortHandler.OpenPort(rc.connectionDir);
                 }
 
-
-                DoorConnectHandler roomdoorHandler = Nextroom.GetComponent<DoorConnectHandler>();
-                roomdoorHandler.myId = roomInfo.Item2.RoomID;
-                DoorCollect.Add(roomdoorHandler);
-
-                if(roomInfo.Item2.roomtype == RoomType.Spawn_Player1)
+                if (roomInfo.Item2.roomtype == RoomType.Spawn_Player1)
                 {
-                    StartRoomPlayer_1 = Nextroom;
                     // Some Player Check required later for Mutiplayer here 
                     spawnPoint_Player1.transform.position = new Vector3(posX, posY, 0);
-                   // Nextroom.GetComponentInChildren<CinemachineVirtualCamera>(true).gameObject.SetActive(false); // force update
-                    // Nextroom.GetComponentInChildren<CinemachineVirtualCamera>(true).gameObject.SetActive(true);
 
                 }
-                if(roomInfo.Item2.roomtype == RoomType.Spawn_Player2)
+                if (roomInfo.Item2.roomtype == RoomType.Spawn_Player2)
                 {
-                    StartRoomPlayer_2 = Nextroom;             
-                    spawnPoint_Player2.transform.position = new Vector3(posX, posY, 0);                    
+                    spawnPoint_Player2.transform.position = new Vector3(posX, posY, 0);
                 }
 
             }
             Destroy(transform.GetChild(0).gameObject);
 
-            StartRoomPlayer_1.GetComponentInChildren<CinemachineVirtualCamera>(true).gameObject.SetActive(false); // force update
-            StartRoomPlayer_1.GetComponentInChildren<CinemachineVirtualCamera>(true).gameObject.SetActive(true);
+            // If wered decide to have no speical virtsul Cam Work when remove this old commend: 
 
             // Destroying Prefab in Scene. Prefab in Szene because it caused porblem with virtsula Cam. Curently virtsula Cam are not on by
             // room to room basis but this will stay like this until a new Cam handling is implented
@@ -110,42 +93,20 @@ namespace dungeonduell
             switch (roomType)
             {
                 case RoomType.Generic:
-                    return roomPrefabs[0]; 
+                    return roomPrefabs[0];
                 case RoomType.Spawn_Player1:
-                    return roomPrefabs[1]; 
+                    return roomPrefabs[1];
                 case RoomType.Spawn_Player2:
-                    return roomPrefabs[2]; 
+                    return roomPrefabs[2];
                 case RoomType.NormalLott:
                     return roomPrefabs[3];
                 case RoomType.PreSetLoot:
                     return roomPrefabs[3];
                 case RoomType.Enemy:
-                    return roomPrefabs[4]; 
+                    return roomPrefabs[4];
                 default:
-                    return roomPrefabs[0]; 
+                    return roomPrefabs[0];
             }
         }
-
-        private void DeativateUnsedDoors()
-        {
-            foreach (DoorConnectHandler handler in DoorCollect)
-            {
-                handler.DeactivateUnusedDoor();
-            }
-        }
-
-        public DoorConnectHandler GetByIdDoorHandl(int id)
-        {
-            foreach(DoorConnectHandler doorConnect in DoorCollect)
-            {
-                if(doorConnect.myId == id)
-                {
-                    return doorConnect;
-                }
-            }
-            return null;
-        }
-        
-
     }
 }

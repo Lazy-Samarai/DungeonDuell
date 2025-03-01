@@ -43,19 +43,6 @@ namespace dungeonduell
             {
                 Vector2 input = context.ReadValue<Vector2>();
                 cursorPosition += input * Time.deltaTime * speed;
-                //print(input);
-
-                /*
-                // Clamp to screen bounds
-                RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                    canvas.transform as RectTransform,
-                    cursorPosition,
-                    canvas.worldCamera,
-                    out var clampedPosition
-                );
-                */
-
-                // cursorPosition = clampedPosition;
 
                 if (cursorVisual != null) { cursorVisual.anchoredPosition = cursorPosition; }
 

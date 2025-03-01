@@ -77,7 +77,6 @@ namespace dungeonduell
             List<RoomInfo> RoomsInfos = new List<RoomInfo>();
             foreach (Tuple<Vector3Int, RoomInfo> roomInfo in roomsInfos)
             {
-                print("---ExPos:"+ roomInfo.Item1.ToString());
                 RoomsInfos.Add(roomInfo.Item2);
             }
             return RoomsInfos;
@@ -87,24 +86,8 @@ namespace dungeonduell
             return roomsInfos;
         }
 
-        private void Update()
-        {
-            if (Input.GetMouseButtonDown(1))
-            {
-                foreach(Tuple<Vector3Int, RoomInfo> roomInfo in roomsInfos)
-                {
-                    foreach (RoomConnection roomConnection in roomInfo.Item2.Conncection)
-                    {
-                        print("Vector:"+ roomInfo.Item1 + "Room:" + roomInfo.Item2.RoomID + "RoomConnection id:" + roomConnection.targetRoomId + " Dir: " + roomConnection.connectionDir);
-                    }
-                    print("------");
-
-                }
-            }
-        }
         void OnDisable()
         {
-            //Debug.Log("OnDisable");
             SceneManager.sceneLoaded -= OnSceneLoaded;
         }
     }

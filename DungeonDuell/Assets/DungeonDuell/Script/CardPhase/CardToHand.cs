@@ -11,15 +11,10 @@ namespace dungeonduell
         public List<Card> handCards = new List<Card>(); // Liste der Karten in der Hand
         public GameObject cardPrefab; // Prefab für die Handkarten (falls du ein UI-Element dafür hast)
         public Transform handPanel; // UI-Panel, in dem die Handkarten angezeigt werden
-
         public int handLimit = 3;
         public PlayerDeck playerDeck;
-
         public float spreadAngle = 30f; // Maximaler Winkel für den Fächer
         public float handRadius = 200f; // Abstand der Karten zum Mittelpunkt
-
-        public CardToHand OtherPlayer;
-        public bool playing = false;
 
         void Start()
         {
