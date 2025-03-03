@@ -23,7 +23,7 @@ namespace dungeonduell
 
 
         void OnEnable()
-        {        
+        {
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
         void OnDisable()

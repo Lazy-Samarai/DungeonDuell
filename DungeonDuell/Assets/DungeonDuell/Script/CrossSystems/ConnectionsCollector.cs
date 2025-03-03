@@ -12,6 +12,7 @@ namespace dungeonduell
 
         void OnEnable()
         {
+            //Debug.Log("OnEnable called");
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
         void Awake()

@@ -288,6 +288,21 @@ namespace dungeonduell
             }
         }
 
+
+        public void SetHighlight(bool isHighlighted)
+        {
+            if (isHighlighted)
+            {
+                cardTransform.localScale = hoverScale; // Vergr��ert die Karte
+                Frame.GetComponent<Image>().color = Color.cyan; // Hebt den Rand hervor
+            }
+            else
+            {
+                cardTransform.localScale = originalScale; // Setzt die Gr��e zur�ck
+                Frame.GetComponent<Image>().color = Color.white; // Setzt den Rand zur�ck
+            }
+        }
+
         private void HideTooltip()
         {
             if (tooltip != null)

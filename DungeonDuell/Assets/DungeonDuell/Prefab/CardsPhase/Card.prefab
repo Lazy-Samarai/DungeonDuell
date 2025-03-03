@@ -414,6 +414,7 @@ GameObject:
   - component: {fileID: 6046079449453443734}
   - component: {fileID: 2142039463352513299}
   - component: {fileID: 3965081866900206462}
+  - component: {fileID: 6267629603540758013}
   m_Layer: 5
   m_Name: Card
   m_TagString: Untagged
@@ -507,8 +508,8 @@ MonoBehaviour:
   tooltip: {fileID: 5073031546352774458}
   cardHolder: {fileID: 0}
   handPanel: {fileID: 0}
-  hoverScale: {x: 1.5, y: 1.5, z: 1}
-  hoverOffset: {x: 0, y: 350, z: 0}
+  hoverScale: {x: 1.1, y: 1.1, z: 1}
+  hoverOffset: {x: 0, y: 200, z: 0}
   sideOffset: {x: 100, y: 0, z: 0}
 --- !u!50 &2142039463352513299
 Rigidbody2D:
@@ -582,6 +583,50 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 199.80249, y: 299.78214}
   m_EdgeRadius: 0
+--- !u!114 &6267629603540758013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2857499731240099392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0, g: 1, b: 0.26586103, a: 1}
+    m_PressedColor: {r: 1, g: 0, b: 0, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 460119431478739677}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3448330194302316404
 GameObject:
   m_ObjectHideFlags: 0
@@ -958,7 +1003,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3715386724671151831
 RectTransform:
   m_ObjectHideFlags: 0

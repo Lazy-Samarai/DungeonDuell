@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Cinemachine;
+using UnityEngine.EventSystems;
 
 namespace dungeonduell
 {
@@ -23,7 +24,7 @@ namespace dungeonduell
         public bool isPlayer1Turn = true;
 
         void Start()
-        {          
+        {
             UpdateCameras();
             InitializeTurn(); // Startet den ersten Spielzug
         }
@@ -48,18 +49,18 @@ namespace dungeonduell
             // Versteckt beide Handkarten zu Beginn des Zuges
             ToggleHandVisibility(false, false);
 
-            UpdateCameras();
+          //  UpdateCameras();
         }
 
         void BeginPlayerActionPhase()
         {
             if (!awaitingKeyPress)
             {
-                Debug.LogWarning("BeginPlayerActionPhase wurde aufgerufen, obwohl awaitingKeyPress false ist.");
                 return; // Verhindert, dass die Methode ungewollt ausgef�hrt wird
             }
 
             awaitingKeyPress = false; // Nach Tastendruck setzen wir auf false
+
 
             // Verberge den Schriftzug und die Aufforderung
             playerTurnText.gameObject.SetActive(false);
@@ -67,15 +68,37 @@ namespace dungeonduell
 
             // Zeigt die Handkarten f�r den aktuellen Spieler an
             ToggleHandVisibility(isPlayer1Turn, !isPlayer1Turn);
+            Invoke(nameof(SelectFirstCard), 0.2f);
         }
 
-        public void EndPlayerTurn()
+        private void SelectFirstCard()
+        {
+            Transform activeHandPanel = isPlayer1Turn ? HandPlayer1.handPanel : HandPlayer2.handPanel;
+
+            if (activeHandPanel.childCount > 0)
+            {
+                GameObject firstCard = activeHandPanel.GetChild(0).gameObject;
+                EventSystem.current.SetSelectedGameObject(firstCard);
+
+                DisplayCard firstCardScript = firstCard.GetComponent<DisplayCard>();
+                if (firstCardScript != null)
+                {
+                    firstCardScript.SetHighlight(true);
+                    Debug.Log($"Erste Karte {firstCardScript.card.cardName} hervorgehoben!");
+                }
+            }
+            else
+            {
+                Debug.LogError(" Auch nach Wartezeit KEINE Karten gefunden!");
+            }
+        }
+            public void EndPlayerTurn()
         {
             isPlayer1Turn = !isPlayer1Turn;
 
             // Verz�gere das Initialisieren des neuen Zuges, um sicherzustellen, dass awaitingKeyPress korrekt gesetzt ist
             ToggleCursor(isPlayer1Turn);
-            Invoke(nameof(InitializeTurn), 0.1f);          
+            Invoke(nameof(InitializeTurn), 0.1f);
         }
 
         private void UpdateCameras()
@@ -101,17 +124,17 @@ namespace dungeonduell
         private void ToggleCursor(bool player1)
         {
             CourserSour1.Set(player1);
-            CourserSour2.Set(!player1); 
+            CourserSour2.Set(!player1);
         }
 
         void OnEnable()
-        {      
+        {
             SubscribeToEvents();
         }
         void OnDisable()
         {
            UnsubscribeToAllEvents();
-        }   
+        }
         public void SubscribeToEvents()
         {
             DDCodeEventHandler.NextPlayerTurn += EndPlayerTurn;

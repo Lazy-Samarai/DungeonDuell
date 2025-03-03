@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.EventSystems;
 
 namespace dungeonduell
 {
@@ -135,9 +136,6 @@ namespace dungeonduell
                 transform.DOMoveY(0.25f, 0.5f).Play();
             }
         }
-
-
-
 
     }
 }

@@ -108,10 +108,10 @@ namespace dungeonduell
 
                 if (shelledTileCard != null)
                 {
-                    // Not Ideal Solotions, make later System that checks sourround Tiles as it cause a bug in certain sitaution 
+                    // Not Ideal Solotions, make later System that checks sourround Tiles as it cause a bug in certain sitaution
                     clickedTile = setAbleTiles[owner - 1];
 
-                    shelledTileCard.startDoorConcellation = card.startDoorConcellation; // giving it direction of clicked card, other elements are preset of sheel card                                                                      
+                    shelledTileCard.startDoorConcellation = card.startDoorConcellation; // giving it direction of clicked card, other elements are preset of sheel card
 
                     card = shelledTileCard;
 
@@ -225,7 +225,7 @@ namespace dungeonduell
                 // Card Disposal
                 if (PlayerMove)
                 {
-                    // Karte zum Abwurfstapel hinzufügen    
+                    // Karte zum Abwurfstapel hinzufügen
                     DDCodeEventHandler.Trigger_CardPlayed(card, isPlayer1Turn);
                     RemoveCardFromCardHolder();
                     DDCodeEventHandler.Trigger_NextPlayerTurn(); // Übergib die Verantwortung an den TurnManager
