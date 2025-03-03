@@ -70,6 +70,8 @@ namespace MoreMountains.TopDownEngine
         public ProjectileWeapon[] weapon = new ProjectileWeapon[2];
         public Health[] health = new Health[2];
 
+        public PlayerSpineAnimationHandling[] playerSpineAnimationHandlings = new PlayerSpineAnimationHandling[2];
+
         public dungeonduell.SequenceMang sequenceMang;
 
         const string playerNamebase = "Player";
@@ -92,6 +94,9 @@ namespace MoreMountains.TopDownEngine
 
             health[0] = GetPlayerHealth(1);
             health[1] = GetPlayerHealth(2);
+
+            playerSpineAnimationHandlings[0] = GetPlayerSpineAnimationHandling(1);
+            playerSpineAnimationHandlings[1] = GetPlayerSpineAnimationHandling(2);
 
             WinnerID = "";
             LevelUPID = "";
@@ -328,9 +333,16 @@ namespace MoreMountains.TopDownEngine
             int playerIndex = Int32.Parse(playerID[playerID.Length - 1].ToString()) - 1;
             if (walking != null)
             {
+                float defaultWalking = walking[playerIndex].WalkSpeed / playerSpineAnimationHandlings[playerIndex].walkMultiply;
+                float defaultRunning = running[playerIndex].RunSpeed / playerSpineAnimationHandlings[playerIndex].runningMultiply;
+
                 walking[playerIndex].WalkSpeed += 1.0f;
                 walking[playerIndex].MovementSpeed += 1.0f;
                 running[playerIndex].RunSpeed += 1.0f;
+
+                playerSpineAnimationHandlings[playerIndex].walkMultiply = walking[playerIndex].WalkSpeed / defaultWalking;
+                playerSpineAnimationHandlings[playerIndex].runningMultiply = running[playerIndex].RunSpeed / defaultRunning;
+
             }
         }
 
@@ -414,6 +426,17 @@ namespace MoreMountains.TopDownEngine
                 if (character.PlayerID == (playerNamebase + i))
                 {
                     return character.GetComponentInChildren<ProjectileWeapon>();
+                }
+            }
+            return null;
+        }
+        private PlayerSpineAnimationHandling GetPlayerSpineAnimationHandling(int i)
+        {
+            foreach (Character character in FindObjectsOfType<Character>())
+            {
+                if (character.PlayerID == (playerNamebase + i))
+                {
+                    return character.GetComponentInChildren<PlayerSpineAnimationHandling>();
                 }
             }
             return null;
