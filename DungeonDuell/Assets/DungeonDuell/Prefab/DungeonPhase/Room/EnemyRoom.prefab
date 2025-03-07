@@ -591,6 +591,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8685141252984007569, guid: d4d8335d9d79f8142a60155a765b9399,
         type: 3}
+      propertyPath: onPlayerRoomInnerEnter.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8685141252984007569, guid: d4d8335d9d79f8142a60155a765b9399,
+        type: 3}
       propertyPath: onPlayerRoomEnter.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: LockingDown
       objectReference: {fileID: 0}
@@ -601,13 +606,28 @@ PrefabInstance:
       objectReference: {fileID: 8910317849417596550}
     - target: {fileID: 8685141252984007569, guid: d4d8335d9d79f8142a60155a765b9399,
         type: 3}
+      propertyPath: onPlayerRoomInnerEnter.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 6134790555348859420}
+    - target: {fileID: 8685141252984007569, guid: d4d8335d9d79f8142a60155a765b9399,
+        type: 3}
       propertyPath: onPlayerRoomInnerEnter.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8685141252984007569, guid: d4d8335d9d79f8142a60155a765b9399,
+        type: 3}
+      propertyPath: onPlayerRoomInnerEnter.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8685141252984007569, guid: d4d8335d9d79f8142a60155a765b9399,
         type: 3}
       propertyPath: onPlayerRoomInnerEnter.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: LockingDown
+      objectReference: {fileID: 0}
+    - target: {fileID: 8685141252984007569, guid: d4d8335d9d79f8142a60155a765b9399,
+        type: 3}
+      propertyPath: onPlayerRoomInnerEnter.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: set_tag
       objectReference: {fileID: 0}
     - target: {fileID: 8685141252984007569, guid: d4d8335d9d79f8142a60155a765b9399,
         type: 3}
@@ -626,7 +646,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8685141252984007569, guid: d4d8335d9d79f8142a60155a765b9399,
         type: 3}
+      propertyPath: onPlayerRoomInnerEnter.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UnityEngine.Component, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8685141252984007569, guid: d4d8335d9d79f8142a60155a765b9399,
+        type: 3}
       propertyPath: onPlayerRoomInnerEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8685141252984007569, guid: d4d8335d9d79f8142a60155a765b9399,
+        type: 3}
+      propertyPath: onPlayerRoomInnerEnter.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8685141252984007569, guid: d4d8335d9d79f8142a60155a765b9399,
@@ -637,6 +667,11 @@ PrefabInstance:
     - target: {fileID: 8685141252984007569, guid: d4d8335d9d79f8142a60155a765b9399,
         type: 3}
       propertyPath: onPlayerRoomInnerEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8685141252984007569, guid: d4d8335d9d79f8142a60155a765b9399,
+        type: 3}
+      propertyPath: onPlayerRoomInnerEnter.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8783638609731793365, guid: d4d8335d9d79f8142a60155a765b9399,
@@ -672,6 +707,10 @@ PrefabInstance:
       insertIndex: 0
       addedObject: {fileID: 4616599571142791311}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4887094845199197374, guid: d4d8335d9d79f8142a60155a765b9399,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8102653032256399229}
     - targetCorrespondingSourceObject: {fileID: 6264401107834495829, guid: d4d8335d9d79f8142a60155a765b9399,
         type: 3}
       insertIndex: -1
@@ -683,6 +722,52 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7826376139832576482}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3408852718116007260 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4887094845199197374, guid: d4d8335d9d79f8142a60155a765b9399,
+    type: 3}
+  m_PrefabInstance: {fileID: 7826376139832576482}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8102653032256399229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3408852718116007260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bdfa8802b73b1e4ea727df9b175000a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onAllEnemyDead:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8910317849417596550}
+        m_TargetAssemblyTypeName: dungeonduell.LockDown, Assembly-CSharp
+        m_MethodName: LockingDown
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8910317849417596550}
+        m_TargetAssemblyTypeName: dungeonduell.LockDown, Assembly-CSharp
+        m_MethodName: SetLockDownSystem
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  enemyCount: 0
 --- !u!1 &4211780703338736311 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6264401107834495829, guid: d4d8335d9d79f8142a60155a765b9399,
@@ -711,6 +796,12 @@ MonoBehaviour:
 --- !u!4 &4252883511853408427 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6312244197616462153, guid: d4d8335d9d79f8142a60155a765b9399,
+    type: 3}
+  m_PrefabInstance: {fileID: 7826376139832576482}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &6134790555348859420 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 4161317412935644158, guid: d4d8335d9d79f8142a60155a765b9399,
     type: 3}
   m_PrefabInstance: {fileID: 7826376139832576482}
   m_PrefabAsset: {fileID: 0}
@@ -754,7 +845,7 @@ PrefabInstance:
     - target: {fileID: 291124403196733854, guid: e09afafa58e0cba4989cb89857740f6b,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6862936118470457974, guid: e09afafa58e0cba4989cb89857740f6b,
         type: 3}

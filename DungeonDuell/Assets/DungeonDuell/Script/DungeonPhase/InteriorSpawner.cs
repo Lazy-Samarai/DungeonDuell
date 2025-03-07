@@ -17,7 +17,7 @@ namespace dungeonduell
         {
             if(Interior != null)
             {
-                Instantiate(Interior,transform.position,Quaternion.identity);
+                Instantiate(Interior,transform.position,Quaternion.identity,transform);
             }
         }
     }
