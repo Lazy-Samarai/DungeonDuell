@@ -7,13 +7,17 @@ namespace dungeonduell
    
     public class InteriorSpawner : MonoBehaviour
     {
-        [SerializeField] GameObject[] PossibleInterior;
+        [SerializeField] GameObject Interior;
         // Start is called before the first frame update
-        public void SpawnInterior(RoomType roomtype)
+        void Start()
         {
-            if(roomtype != RoomType.Generic)
+            SpawnInterior();
+        }
+        public void SpawnInterior()
+        {
+            if(Interior != null)
             {
-                Instantiate(PossibleInterior[(int)roomtype - 1],transform.position,Quaternion.identity);
+                Instantiate(Interior,transform.position,Quaternion.identity);
             }
         }
     }
