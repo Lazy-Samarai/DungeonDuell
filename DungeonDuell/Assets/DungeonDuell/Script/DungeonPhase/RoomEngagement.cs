@@ -9,6 +9,9 @@ namespace dungeonduell
     {
         [SerializeField] private UnityEvent<Collider2D> onPlayerRoomEnter;
         [SerializeField] private UnityEvent<Collider2D> onPlayerRoomExit;
+        
+        [SerializeField] public UnityEvent<Collider2D> onPlayerRoomInnerEnter;
+        [SerializeField] public UnityEvent<Collider2D> onPlayerRoomInnerExit;
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
