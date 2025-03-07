@@ -56,8 +56,6 @@ namespace dungeonduell
 
                 Nextroom.transform.localPosition = new Vector3(posX, posY, 0);
 
-                Nextroom.GetComponentInChildren<InteriorSpawner>().SpawnInterior(roomInfo.Item2.roomtype);
-
                 RoomPortHandler roomPortHandler = Nextroom.GetComponentInChildren<RoomPortHandler>();
 
                 foreach (RoomConnection rc in roomInfo.Item2.Conncection)
@@ -101,9 +99,9 @@ namespace dungeonduell
                 case RoomType.NormalLott:
                     return roomPrefabs[3];
                 case RoomType.PreSetLoot:
-                    return roomPrefabs[3];
-                case RoomType.Enemy:
                     return roomPrefabs[4];
+                case RoomType.Enemy:
+                    return roomPrefabs[5];
                 default:
                     return roomPrefabs[0];
             }
