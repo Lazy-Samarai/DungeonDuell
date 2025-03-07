@@ -6,9 +6,14 @@ namespace dungeonduell
 {
     public class LockDown : MonoBehaviour
     {
-       public void LockDownTest()
+        [SerializeField] List<GameObject> allBarriers;
+       public void GoinginLockDown(bool lockingDown)
        {
-            print("LockDown");
+            print("Lock");
+            foreach(GameObject obj in allBarriers)
+            {
+                obj.SetActive(lockingDown);
+            }
        }
     }
 }

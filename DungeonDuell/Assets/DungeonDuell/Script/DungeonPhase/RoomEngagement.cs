@@ -7,17 +7,25 @@ namespace dungeonduell
 {
     public class RoomEngagement : MonoBehaviour
     {
-        [SerializeField] private UnityEvent<Collider2D> onRoomEnter;
-        [SerializeField] private UnityEvent<Collider2D> onRoomExit;
+        [SerializeField] private UnityEvent<Collider2D> onPlayerRoomEnter;
+        [SerializeField] private UnityEvent<Collider2D> onPlayerRoomExit;
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            onRoomEnter.Invoke(collision);
+            if (collision.gameObject.layer == 10)
+            {
+                onPlayerRoomEnter.Invoke(collision);
+            }
+
 
         }
         private void OnTriggerExit2D(Collider2D collision)
         {
-            onRoomExit.Invoke(collision);
+            if (collision.gameObject.layer == 10)
+            {
+                onPlayerRoomExit.Invoke(collision);
+            }
+
         }
     }
 }
