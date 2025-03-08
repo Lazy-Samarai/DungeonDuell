@@ -68,30 +68,10 @@ namespace dungeonduell
 
             // Zeigt die Handkarten f�r den aktuellen Spieler an
             ToggleHandVisibility(isPlayer1Turn, !isPlayer1Turn);
-            Invoke(nameof(SelectFirstCard), 0.2f);
+            
         }
 
-        private void SelectFirstCard()
-        {
-            Transform activeHandPanel = isPlayer1Turn ? HandPlayer1.handPanel : HandPlayer2.handPanel;
-
-            if (activeHandPanel.childCount > 0)
-            {
-                GameObject firstCard = activeHandPanel.GetChild(0).gameObject;
-                EventSystem.current.SetSelectedGameObject(firstCard);
-
-                DisplayCard firstCardScript = firstCard.GetComponent<DisplayCard>();
-                if (firstCardScript != null)
-                {
-                    firstCardScript.SetHighlight(true);
-                    Debug.Log($"Erste Karte {firstCardScript.card.cardName} hervorgehoben!");
-                }
-            }
-            else
-            {
-                Debug.LogError(" Auch nach Wartezeit KEINE Karten gefunden!");
-            }
-        }
+        
             public void EndPlayerTurn()
         {
             isPlayer1Turn = !isPlayer1Turn;

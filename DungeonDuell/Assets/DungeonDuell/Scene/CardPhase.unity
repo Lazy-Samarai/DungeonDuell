@@ -4002,7 +4002,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0, g: 1, b: 0.1308515, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -12134,7 +12134,6 @@ GameObject:
   - component: {fileID: 2012748598}
   - component: {fileID: 2012748597}
   - component: {fileID: 2012748599}
-  - component: {fileID: 2012748600}
   m_Layer: 5
   m_Name: HandPanel
   m_TagString: Untagged
@@ -12216,31 +12215,15 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   cardPrefab: {fileID: 2857499731240099392, guid: 21606d58a14cb8440b4524597cf1c564,
     type: 3}
   handPanel: {fileID: 2012748596}
-  handLimit: 3
+  handLimit: 5
   playerDeck: {fileID: 1494809202}
-  spreadAngle: 20
+  spreadAngle: 25
   handRadius: 500
---- !u!114 &2012748600
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2012748595}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 417d45e382ae8cc40b14992db2270e35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  handPanel: {fileID: 2012748596}
-  currentSelectedCard: {fileID: 0}
-  navigateAction: {fileID: 8800371597162477539, guid: 0cad7e50cc0a66a4d9ba264d314913d3,
-    type: 3}
-  selectAction: {fileID: -3121155424896286413, guid: 0cad7e50cc0a66a4d9ba264d314913d3,
-    type: 3}
 --- !u!1 &2034102533
 GameObject:
   m_ObjectHideFlags: 0
@@ -12421,7 +12404,6 @@ GameObject:
   - component: {fileID: 2077986325}
   - component: {fileID: 2077986324}
   - component: {fileID: 2077986323}
-  - component: {fileID: 2077986326}
   m_Layer: 5
   m_Name: HandPanel
   m_TagString: Untagged
@@ -12510,24 +12492,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2077986321}
   m_CullTransparentMesh: 1
---- !u!114 &2077986326
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2077986321}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 417d45e382ae8cc40b14992db2270e35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  handPanel: {fileID: 2077986322}
-  currentSelectedCard: {fileID: 0}
-  navigateAction: {fileID: 8800371597162477539, guid: 0cad7e50cc0a66a4d9ba264d314913d3,
-    type: 3}
-  selectAction: {fileID: -3121155424896286413, guid: 0cad7e50cc0a66a4d9ba264d314913d3,
-    type: 3}
 --- !u!1 &2118570741
 GameObject:
   m_ObjectHideFlags: 0
@@ -12672,7 +12636,7 @@ SceneRoots:
   - {fileID: 481254718}
   - {fileID: 517887069}
   - {fileID: 1557636385}
-  - {fileID: 394553476}
   - {fileID: 1669154799}
   - {fileID: 376974905}
+  - {fileID: 394553476}
   - {fileID: 950774725}

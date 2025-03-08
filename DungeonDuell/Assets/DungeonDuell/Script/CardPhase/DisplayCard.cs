@@ -170,10 +170,7 @@ namespace dungeonduell
                     handPanelOriginalPosition.y = 0; // Setzt die Y-Position der HandPanel-Position zur�ck
                     handPanelOriginalPosition.y += 100; // Anpassung f�r eine Basis-H�he
 
-                    if (tooltip != null)
-                    {
-                        tooltip.SetActive(false); // Versteckt den Tooltip
-                    }
+                    HideTooltip();
 
                     AdjustNeighborCards(false); // Bringt benachbarte Karten zur�ck in ihre urspr�ngliche Position
                 }
@@ -189,7 +186,7 @@ namespace dungeonduell
             if (cardTransform.parent == cardHolder.transform)
             {
                 cardTransform.SetParent(handPanel);
-                cardTransform.position = new Vector3(handPanelOriginalPosition.x, handPanelOriginalPosition.y + 250, handPanelOriginalPosition.z);
+                cardTransform.position = new Vector3(handPanelOriginalPosition.x, handPanelOriginalPosition.y +100, handPanelOriginalPosition.z);
                 cardTransform.localScale = originalScale;
                 cardTransform.localRotation = originalRotation;
                 transform.SetSiblingIndex(originalSiblingIndex);
@@ -285,21 +282,6 @@ namespace dungeonduell
                     rightNeighbor.localPosition += offset;
 
                 }
-            }
-        }
-
-
-        public void SetHighlight(bool isHighlighted)
-        {
-            if (isHighlighted)
-            {
-                cardTransform.localScale = hoverScale; // Vergr��ert die Karte
-                Frame.GetComponent<Image>().color = Color.cyan; // Hebt den Rand hervor
-            }
-            else
-            {
-                cardTransform.localScale = originalScale; // Setzt die Gr��e zur�ck
-                Frame.GetComponent<Image>().color = Color.white; // Setzt den Rand zur�ck
             }
         }
 
