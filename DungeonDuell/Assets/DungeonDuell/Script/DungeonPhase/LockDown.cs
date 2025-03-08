@@ -14,7 +14,10 @@ namespace dungeonduell
             {
                 foreach (GameObject g in availableBarrier)
                 {
-                    g.SetActive(down);
+                    if(g != null){
+                        g.SetActive(down);
+                    }
+                   
                 }
             }
         }

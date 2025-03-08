@@ -5098,6 +5098,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2747238714311011414, guid: 40a24f6f31a55df40a711d109befc09e,
+        type: 3}
+      propertyPath: availablePort.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3408852718116007260, guid: 40a24f6f31a55df40a711d109befc09e,
         type: 3}
       propertyPath: m_Name
@@ -10260,6 +10265,7 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 7488333890875319537, guid: 26dc36b995fe49a49bf9e83581f22987, type: 3}
     - {fileID: 3954777556346740155, guid: 26dc36b995fe49a49bf9e83581f22987, type: 3}
+    - {fileID: 4640586616391500435, guid: 26dc36b995fe49a49bf9e83581f22987, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26dc36b995fe49a49bf9e83581f22987, type: 3}
@@ -14496,10 +14502,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2747238714311011414, guid: 40a24f6f31a55df40a711d109befc09e,
+        type: 3}
+      propertyPath: availablePort.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009437098596842150, guid: 40a24f6f31a55df40a711d109befc09e,
+        type: 3}
+      propertyPath: m_BodyType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3408852718116007260, guid: 40a24f6f31a55df40a711d109befc09e,
         type: 3}
       propertyPath: m_Name
       value: EnemyRoom
+      objectReference: {fileID: 0}
+    - target: {fileID: 6460351863977067272, guid: 40a24f6f31a55df40a711d109befc09e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6739418178947611304, guid: 40a24f6f31a55df40a711d109befc09e,
         type: 3}
