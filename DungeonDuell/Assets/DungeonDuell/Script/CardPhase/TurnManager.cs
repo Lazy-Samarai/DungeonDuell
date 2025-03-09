@@ -9,8 +9,6 @@ namespace dungeonduell
 {
     public class TurnManager : MonoBehaviour,IObserver
     {
-        public CinemachineVirtualCamera player1Camera;
-        public CinemachineVirtualCamera player2Camera;
         public TextMeshProUGUI playerTurnText;
         public TextMeshProUGUI pressAnyKeyText;
         public CardToHand HandPlayer1;
@@ -25,7 +23,6 @@ namespace dungeonduell
 
         void Start()
         {
-            UpdateCameras();
             InitializeTurn(); // Startet den ersten Spielzug
         }
 
@@ -39,7 +36,6 @@ namespace dungeonduell
 
         void InitializeTurn()
         {
-
             awaitingKeyPress = true; // Setzt den Tastendruck f�r jeden neuen Zug voraus
             // Setze die Anzeige f�r den Zugbeginn
             playerTurnText.text = "Current Turn: " + (isPlayer1Turn ? "Player 1" : "Player 2");
@@ -48,8 +44,6 @@ namespace dungeonduell
 
             // Versteckt beide Handkarten zu Beginn des Zuges
             ToggleHandVisibility(false, false);
-
-          //  UpdateCameras();
         }
 
         void BeginPlayerActionPhase()
@@ -70,30 +64,15 @@ namespace dungeonduell
             ToggleHandVisibility(isPlayer1Turn, !isPlayer1Turn);
             
         }
-
         
-            public void EndPlayerTurn()
+        public void EndPlayerTurn()
         {
             isPlayer1Turn = !isPlayer1Turn;
 
             // Verz�gere das Initialisieren des neuen Zuges, um sicherzustellen, dass awaitingKeyPress korrekt gesetzt ist
             ToggleCursor(isPlayer1Turn);
             Invoke(nameof(InitializeTurn), 0.1f);
-        }
-
-        private void UpdateCameras()
-        {
-            if (isPlayer1Turn)
-            {
-                player1Camera.Priority = 20;
-                player2Camera.Priority = 10;
-            }
-            else
-            {
-                player1Camera.Priority = 10;
-                player2Camera.Priority = 20;
-            }
-        }
+        } 
 
         // Neue Methode zum Umschalten der Handkartenanzeige
         private void ToggleHandVisibility(bool showForPlayer1, bool showForPlayer2)

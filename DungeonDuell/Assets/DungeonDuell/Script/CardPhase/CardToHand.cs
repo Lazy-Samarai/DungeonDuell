@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.EventSystems;
 
@@ -7,125 +8,194 @@ namespace dungeonduell
 {
     public class CardToHand : MonoBehaviour
     {
-        public List<Card> handCards = new List<Card>(); // Liste der Karten in der Hand
-        public GameObject cardPrefab; // Prefab für die Handkarten (muss ein Selectable besitzen, z.B. Button)
-        public Transform handPanel; // UI-Panel, in dem die Handkarten angezeigt werden
-        public int handLimit = 3;
+        [Header("Deck / Player")]
         public PlayerDeck playerDeck;
-        public float spreadAngle = 30f; // Maximaler Winkel für den Fächer
-        public float handRadius = 200f; // Abstand der Karten zum Mittelpunkt
+        public int handLimit = 3;
+        public bool isPlayerOne;
+
+        [Header("UI References")]
+        public GameObject cardPrefab;
+        public Transform handPanel;
+        public Transform cardHolder;
+
+        [Header("Fächer-Einstellungen")]
+        public float spacing = 40f;
+        public float maxRotation = 20f;
+
+        // Karten, die der Spieler gerade in der Hand hält
+        private List<Card> handCards = new List<Card>();
+
+        // Verweise auf die DisplayCard-Objekte in der Hand
+        private List<DisplayCard> displayCards = new List<DisplayCard>();
 
         void Start()
         {
-            if (handPanel == null)
-            {
-                Debug.LogError("HandPanel ist nicht zugewiesen!");
-                return;
-            }
-
-            if (cardPrefab == null)
-            {
-                Debug.LogError("CardPrefab ist nicht zugewiesen!");
-                return;
-            }
-
+            // Beispiel: Wir ziehen direkt am Start "handLimit" Karten aus playerDeck
             DrawInitialCards();
         }
 
-        void DrawInitialCards()
+        /// <summary>
+        /// Zieht anfänglich bis zu "handLimit" Karten aus dem "playerDeck.playerDeck"
+        /// und zeigt sie in der Hand an.
+        /// </summary>
+        private void DrawInitialCards()
         {
+            // Safety-Check
+            if (playerDeck == null)
+            {
+                Debug.LogWarning("Kein PlayerDeck zugewiesen!");
+                return;
+            }
+
             handCards.Clear();
 
+            // Ziehe so viele Karten aus "playerDeck.playerDeck", wie handLimit erlaubt
             for (int i = 0; i < handLimit; i++)
             {
                 if (playerDeck.playerDeck.Count > 0)
                 {
+                    // Nimm die erste Karte (oder zufällige Karte, je nach Wunsch)
                     Card cardToDraw = playerDeck.playerDeck[0];
+                    // Entferne sie aus dem Deck
                     playerDeck.playerDeck.RemoveAt(0);
+                    // Füge sie der Hand hinzu
                     handCards.Add(cardToDraw);
                 }
                 else
                 {
-                    Debug.LogWarning("Nicht genug Karten im Deck!");
+                    Debug.Log("Das Deck ist leer, keine weitere Karte kann gezogen werden!");
                     break;
                 }
             }
 
+            // Zeige die Karten in der Hand
             DisplayHand();
         }
 
-        void DisplayHand()
+        /// <summary>
+        /// Zeigt alle Karten in der Hand an (erzeugt DisplayCard-Objekte und positioniert sie).
+        /// </summary>
+        public void DisplayHand()
         {
-            float cardCount = Mathf.Max(handCards.Count - 1, 1);
+            // 1) Alte Hand-Karten löschen
+            for (int i = handPanel.childCount - 1; i >= 0; i--)
+            {
+                Transform child = handPanel.GetChild(i);
 
-            // (1) Erzeuge die Karten in einem Schleifendurchlauf
+                // --- Skip, wenn es der cardHolder selbst ist ---
+                if (child == cardHolder)
+                {
+                    // cardHolder NICHT löschen!
+                    continue;
+                }
+
+                // Sonst: Das ist eine alte Karte => weg damit
+                Destroy(child.gameObject);
+            }
+
+            // Clear-Logik für displayCards-Liste
+            displayCards.Clear();
+
+            // 2) Neue UI-Karten erzeugen
             for (int i = 0; i < handCards.Count; i++)
             {
-                float angle = Mathf.Lerp(-spreadAngle, spreadAngle, i / cardCount);
-                Vector3 positionOffset = new Vector3(
-                    Mathf.Sin(angle * Mathf.Deg2Rad) * handRadius,
-                    0,
-                    Mathf.Cos(angle * Mathf.Deg2Rad) * handRadius
-                );
-                float rotationAngle = -angle;
+                Card cardData = handCards[i];
+                GameObject cardObj = Instantiate(cardPrefab, handPanel);
+                DisplayCard dc = cardObj.GetComponent<DisplayCard>();
 
-                DisplayCardInHand(handCards[i], positionOffset, rotationAngle);
+                dc.cardToHand = this;
+                dc.card = cardData;
+                dc.UpdateCardDisplay();
+
+                displayCards.Add(dc);
             }
 
-            // (2) Suche im HandPanel nach dem ersten Child mit DisplayCard
-            for (int i = 0; i < handPanel.childCount; i++)
+
+            // Fächer-Layout (simple lineare Anordnung)
+            int n = displayCards.Count;
+            float middleIndex = (n - 1) / 2f;
+            for (int i = 0; i < n; i++)
             {
-                DisplayCard cardScript = handPanel.GetChild(i).GetComponent<DisplayCard>();
-                if (cardScript != null)  // => Ja, wir haben eine Karte
-                {
-                    // EventSystem-Fokus setzen
-                    EventSystem.current.SetSelectedGameObject(handPanel.GetChild(i).gameObject);
-                    break; // Erstes gefundenes Child fokussieren und abbrechen
-                }
+                DisplayCard dc = displayCards[i];
+                float offsetFromCenter = i - middleIndex;
+                float xPos = offsetFromCenter * spacing;
+                float zRot = -offsetFromCenter * maxRotation;
+
+                dc.transform.localPosition = new Vector2(xPos, 0f);
+                dc.transform.localRotation = Quaternion.Euler(0f, 0f, zRot);
+                dc.transform.localScale = Vector3.one;
             }
-        }
 
-
-        // Einzelne Karte anzeigen
-        void DisplayCardInHand(Card card, Vector3 positionOffset, float angle)
-        {
-            if (cardPrefab != null && handPanel != null)
+            // Wähle die erste Karte in der Hand aus
+            if (displayCards.Count > 0)
             {
-                GameObject cardObject = Instantiate(cardPrefab, handPanel);
-                DisplayCard cardDisplay = cardObject.GetComponent<DisplayCard>();
-                cardDisplay.cardHolder = transform.GetChild(0).gameObject;
-
-                if (cardDisplay != null)
-                {
-                    cardDisplay.card = card;
-                    cardDisplay.UpdateCardDisplay();
-
-                    // Position und Rotation setzen
-                    cardObject.transform.localPosition = positionOffset;
-                    cardObject.transform.localRotation = Quaternion.Euler(0, 0, angle);
-                    cardObject.transform.localScale = Vector3.one;
-                }
-            }
-            else
-            {
-                Debug.LogError("cardPrefab oder handPanel ist nicht zugewiesen!");
+                EventSystem.current.SetSelectedGameObject(displayCards[0].gameObject);
             }
         }
 
-        // Methode zum Ziehen einer Karte
-        public void DrawCard()
+        /// <summary>
+        /// Aufruf von DisplayCard, wenn geklickt wird. 
+        /// Verschiebt die Karte zwischen Hand und CardHolder und feuert ggf. Events.
+        /// </summary>
+        public void OnCardClicked(DisplayCard clickedCard)
         {
-            if (playerDeck.playerDeck.Count > 0)
+            // Liegt Karte schon im Holder? => Zurück in die Hand
+            if (clickedCard.transform.parent == cardHolder)
             {
-                Card cardToDraw = playerDeck.playerDeck[0];
-                playerDeck.playerDeck.RemoveAt(0);
-                handCards.Add(cardToDraw);
+                if (!handCards.Contains(clickedCard.card))
+                    handCards.Add(clickedCard.card);
+
+                clickedCard.transform.SetParent(handPanel, false);
+
+                // Event: Keine Karte mehr ausgewählt
+                DDCodeEventHandler.Trigger_CardSelected(null);
 
                 DisplayHand();
             }
             else
             {
-                Debug.LogWarning("Das Deck ist leer, keine Karte kann gezogen werden!");
+                // Karte liegt in der Hand => in den Holder verschieben
+                handCards.Remove(clickedCard.card);
+
+                // Wenn dort schon eine Karte liegt, schieb sie zurück
+                if (cardHolder.childCount > 0)
+                {
+                    Transform oldCard = cardHolder.GetChild(0);
+                    DisplayCard oldDc = oldCard.GetComponent<DisplayCard>();
+                    if (oldDc != null)
+                    {
+                        if (!handCards.Contains(oldDc.card))
+                            handCards.Add(oldDc.card);
+
+                        oldDc.transform.SetParent(handPanel, false);
+                    }
+                }
+
+                clickedCard.transform.SetParent(cardHolder, false);
+                clickedCard.transform.localPosition = Vector3.zero;
+                clickedCard.transform.localRotation = Quaternion.identity; 
+                clickedCard.transform.localScale = Vector3.one;
+
+                // Event: Neue Karte ausgewählt
+                DDCodeEventHandler.Trigger_CardSelected(clickedCard);
+
+                DisplayHand();
+            }
+        }
+
+        public void DrawCard()
+        {
+            if (playerDeck != null && playerDeck.playerDeck.Count > 0)
+            {
+                // Nur ziehen, wenn Platz
+                if (handCards.Count < handLimit)
+                {
+                    Card cardToDraw = playerDeck.playerDeck[0];
+                    playerDeck.playerDeck.RemoveAt(0);
+                    handCards.Add(cardToDraw);
+
+                    DisplayHand();
+                }
             }
         }
 
@@ -133,20 +203,25 @@ namespace dungeonduell
         {
             if (hide)
             {
-                // Setze sofort auf deaktiviert und führe die Animation aus
-                gameObject.SetActive(false); // Deaktiviert das GameObject direkt
-
-                // Fade Out und Slide Out Animation (falls das Objekt aktiviert ist)
-                transform.DOMoveY(-300, 0.5f).Play();
+                // 1) Fahre das Objekt nach unten (Y=-300) in 0.5s.
+                //    Wenn Animation fertig ist, deaktiviere das Objekt.
+                transform.DOMoveY(-300, 0.5f).OnComplete(() =>
+                {
+                    gameObject.SetActive(false);
+                });
             }
             else
             {
-                // Set Active und Animation für Slide In
-                gameObject.SetActive(true); // Aktiviert das GameObject direkt
+                // 2) Aktiviere das Objekt zuerst
+                gameObject.SetActive(true);
 
-                // Setze die Startposition und führe die Einblend-Animation aus
-                transform.position = new Vector3(transform.position.x, -300, transform.position.z);
-                transform.DOMoveY(0.25f, 0.5f).Play();
+                //    Setze die Startposition auf Y=-300 (z. B. außerhalb des Sichtbereichs)
+                //    und fahre es hoch auf Y=0 in 0.5s.
+                Vector3 startPos = transform.position;
+                startPos.y = -300; // oder irgendein Wert, wo es „unsichtbar“ ist
+                transform.position = startPos;
+
+                transform.DOMoveY(0, 0.5f);
             }
         }
     }
