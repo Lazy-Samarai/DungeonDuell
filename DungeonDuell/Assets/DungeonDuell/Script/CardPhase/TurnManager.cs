@@ -38,7 +38,7 @@ namespace dungeonduell
         {
             awaitingKeyPress = true; // Setzt den Tastendruck f�r jeden neuen Zug voraus
             // Setze die Anzeige f�r den Zugbeginn
-            playerTurnText.text = "Current Turn: " + (isPlayer1Turn ? "Player 1" : "Player 2");
+            playerTurnText.text = "Next Turn: " + (isPlayer1Turn ? "Player 1" : "Player 2");
             playerTurnText.gameObject.SetActive(true);
             pressAnyKeyText.gameObject.SetActive(true);
 
@@ -50,21 +50,53 @@ namespace dungeonduell
         {
             if (!awaitingKeyPress)
             {
-                return; // Verhindert, dass die Methode ungewollt ausgef�hrt wird
+                return;
             }
 
-            awaitingKeyPress = false; // Nach Tastendruck setzen wir auf false
+            awaitingKeyPress = false;
+            UpdatePlayerTurnText();
 
-
-            // Verberge den Schriftzug und die Aufforderung
-            playerTurnText.gameObject.SetActive(false);
             pressAnyKeyText.gameObject.SetActive(false);
 
-            // Zeigt die Handkarten f�r den aktuellen Spieler an
+            // Zeigt die Handkarten für den aktuellen Spieler an
             ToggleHandVisibility(isPlayer1Turn, !isPlayer1Turn);
-            
+
+            // Prüfe, ob der erste Input von einem Controller kam
+            if (IsUsingController())
+            {
+                if (isPlayer1Turn)
+                    HandPlayer1.SelectFirstCard();
+                else
+                    HandPlayer2.SelectFirstCard();
+            }
         }
-        
+
+        void UpdatePlayerTurnText()
+        {
+            if (playerTurnText != null)
+            {
+                playerTurnText.text = "Current Turn: " + (isPlayer1Turn ? "Player 1" : "Player 2");
+            }
+        }
+
+
+
+        bool IsUsingController()
+        {
+            string[] controllers = Input.GetJoystickNames();
+            if (controllers.Length > 0) // Prüfen, ob Controller angeschlossen ist
+            {
+                bool stickMoved = Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0;
+                bool buttonPressed = Input.GetKey(KeyCode.JoystickButton0) || Input.GetKey(KeyCode.JoystickButton1);
+                bool mouseMoved = Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0;
+
+                return (stickMoved || buttonPressed) && !mouseMoved; // Verhindert Controller-Erkennung, wenn die Maus bewegt wurde
+            }
+            return false;
+        }
+
+
+
         public void EndPlayerTurn()
         {
             isPlayer1Turn = !isPlayer1Turn;

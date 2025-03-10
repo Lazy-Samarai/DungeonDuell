@@ -5,12 +5,11 @@ using UnityEngine.EventSystems;
 
 namespace dungeonduell
 {
-    public class DisplayCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+    public class DisplayCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, ISelectHandler, IDeselectHandler
     {
         public Card card;
-        // Referenz auf das CardToHand, zu dem diese Karte gehört
         public CardToHand cardToHand;
-        public Transform handPanel;     
+        public Transform handPanel;
 
         [Header("UI References")]
         public TextMeshProUGUI nameText;
@@ -32,10 +31,8 @@ namespace dungeonduell
 
         void Start()
         {
-            
             if (handPanel == null)
             {
-                // Suche in den übergeordneten Objekten nach einem CardToHand
                 CardToHand cth = GetComponentInParent<CardToHand>();
                 if (cth != null)
                 {
@@ -58,21 +55,18 @@ namespace dungeonduell
         {
             if (card != null)
             {
-                // Name
                 if (nameText != null)
                     nameText.text = card.cardName;
 
-                // Allowed Doors / Direction
                 if (cardDirectionIndicator != null)
                 {
                     bool[] allowedDoors = card.GetAllowedDirection();
                     cardDirectionIndicator.SetDoorIndiactor(allowedDoors);
                 }
 
-                // Farbe/Icons je nach roomtype
                 if (HexImage != null && Frame != null)
                 {
-                    Color currentColor = new Color(0.3f, 0.3f, 0.3f); // Default
+                    Color currentColor = new Color(0.3f, 0.3f, 0.3f);
 
                     switch (card.roomtype)
                     {
@@ -94,16 +88,14 @@ namespace dungeonduell
                             break;
                     }
 
-                    // Frame und HexImage färben
                     if (Frame.GetComponent<Image>() != null)
                         Frame.GetComponent<Image>().color = currentColor;
                     HexImage.color = currentColor;
 
-                    // NEU: nameText und Icons einfärben
                     if (nameText != null)
                         nameText.color = currentColor;
-                        MonsterRoomIcon.GetComponent<Image>().color = currentColor;
-                        TreasureRoomIcon.GetComponent<Image>().color = currentColor;
+                    MonsterRoomIcon.GetComponent<Image>().color = currentColor;
+                    TreasureRoomIcon.GetComponent<Image>().color = currentColor;
                 }
             }
         }
@@ -114,8 +106,44 @@ namespace dungeonduell
                 cardDirectionIndicator.SetDoorIndiactor(allowedDoors);
         }
 
-        // Hover
+        // **Hover mit Maus**
         public void OnPointerEnter(PointerEventData eventData)
+        {
+            ActivateHoverEffect();
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            DeactivateHoverEffect();
+        }
+
+        // **Hover aktivieren, wenn Karte mit Controller ausgewählt wird**
+        public void OnSelect(BaseEventData eventData)
+        {
+            ActivateHoverEffect();
+        }
+
+        // **NEU: Hover deaktivieren, wenn Karte mit Controller abgewählt wird**
+        public void OnDeselect(BaseEventData eventData)
+        {
+            DeactivateHoverEffect();
+        }
+
+        // **Klick-Verhalten**
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            DeactivateHoverEffect();
+            if (cardToHand != null)
+            {
+                cardToHand.OnCardClicked(this);
+            }
+            else
+            {
+                Debug.LogWarning("Keine cardToHand-Referenz in DisplayCard vorhanden!");
+            }
+        }
+
+        private void ActivateHoverEffect()
         {
             if (transform.parent == handPanel)
             {
@@ -125,7 +153,6 @@ namespace dungeonduell
 
                 if (tooltip != null)
                 {
-                    //tooltip.SetActive(true);
                     var tmp = tooltip.GetComponentInChildren<TextMeshProUGUI>();
                     if (tmp != null && card != null)
                     {
@@ -137,7 +164,7 @@ namespace dungeonduell
             }
         }
 
-        public void OnPointerExit(PointerEventData eventData)
+        private void DeactivateHoverEffect()
         {
             if (transform.parent == handPanel)
             {
@@ -150,36 +177,13 @@ namespace dungeonduell
             }
         }
 
-        // Klick
-        public void OnPointerClick(PointerEventData eventData)
-        {
-            // Hover rücksetzen
-            transform.localScale = originalScale;
-            transform.localPosition = originalPosition;
-            transform.localRotation = originalRotation;
-            HideTooltip();
-            AdjustNeighborCards(false);
-
-                     
-            if (cardToHand != null)
-            {
-                cardToHand.OnCardClicked(this);
-            }
-            else
-            {
-                Debug.LogWarning("Keine cardToHand-Referenz in DisplayCard vorhanden!");
-            }
-        }
-
         private void AdjustNeighborCards(bool isHovering)
         {
-            
             Transform parent = transform.parent;
             if (parent == null) return;
 
             int currentIndex = transform.GetSiblingIndex();
 
-            // Linker Nachbar
             if (currentIndex > 0)
             {
                 Transform leftNeighbor = parent.GetChild(currentIndex - 1);
@@ -190,7 +194,6 @@ namespace dungeonduell
                 }
             }
 
-            // Rechter Nachbar
             if (currentIndex < parent.childCount - 1)
             {
                 Transform rightNeighbor = parent.GetChild(currentIndex + 1);

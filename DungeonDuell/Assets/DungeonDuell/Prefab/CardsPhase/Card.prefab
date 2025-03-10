@@ -499,6 +499,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   card: {fileID: 0}
+  cardToHand: {fileID: 0}
+  handPanel: {fileID: 0}
   nameText: {fileID: 7166610361230754541}
   HexImage: {fileID: 454160740221597805}
   cardDirectionIndicator: {fileID: 7602000285557204153}
@@ -594,7 +596,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}

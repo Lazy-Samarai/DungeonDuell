@@ -17,6 +17,7 @@ namespace dungeonduell
         public GameObject cardPrefab;
         public Transform handPanel;
         public Transform cardHolder;
+        public Selectable skipButton;
 
         [Header("Fächer-Einstellungen")]
         public float spacing = 40f;
@@ -126,11 +127,7 @@ namespace dungeonduell
                 dc.transform.localScale = Vector3.one;
             }
 
-            // Wähle die erste Karte in der Hand aus
-            if (displayCards.Count > 0)
-            {
-                EventSystem.current.SetSelectedGameObject(displayCards[0].gameObject);
-            }
+            SetupNavigation(skipButton);
         }
 
         /// <summary>
@@ -182,6 +179,91 @@ namespace dungeonduell
                 DisplayHand();
             }
         }
+
+        public void SelectFirstCard()
+        {
+            List<Selectable> selectables = new List<Selectable>();
+
+            // Handkarten in richtiger Reihenfolge durchgehen
+            foreach (Card card in handCards)
+            {
+                DisplayCard displayCard = displayCards.Find(dc => dc.card == card);
+
+                if (displayCard != null)
+                {
+                    Selectable selectable = displayCard.GetComponent<Selectable>();
+                    if (selectable != null)
+                    {
+                        selectables.Add(selectable);
+                    }
+                }
+            }
+
+            // Falls keine Handkarten da sind → Skip-Button auswählen
+            if (selectables.Count == 0 && skipButton != null)
+            {
+                EventSystem.current.SetSelectedGameObject(skipButton.gameObject);
+                return;
+            }
+
+            // Erste Karte auswählen, wenn vorhanden
+            if (selectables.Count > 0)
+            {
+                EventSystem.current.SetSelectedGameObject(selectables[0].gameObject);
+            }
+
+            SetupNavigation(skipButton);
+        }
+
+        public void SetupNavigation(Selectable skipButton)
+        {
+            List<Selectable> selectables = new List<Selectable>();
+
+            // Handkarten in richtiger Reihenfolge durchgehen
+            foreach (Card card in handCards)
+            {
+                DisplayCard displayCard = displayCards.Find(dc => dc.card == card);
+
+                if (displayCard != null)
+                {
+                    Selectable selectable = displayCard.GetComponent<Selectable>();
+                    if (selectable != null)
+                    {
+                        selectables.Add(selectable);
+                    }
+                }
+            }
+
+            // Skip-Button am Ende hinzufügen
+            if (skipButton != null)
+            {
+                selectables.Add(skipButton);
+            }
+
+            // Setze die Navigation explizit für alle Karten
+            for (int i = 0; i < selectables.Count; i++)
+            {
+                Navigation nav = new Navigation
+                {
+                    mode = Navigation.Mode.Explicit,
+                    selectOnLeft = (i > 0) ? selectables[i - 1] : null,
+                    selectOnRight = (i < selectables.Count - 1) ? selectables[i + 1] : skipButton
+                };
+
+                selectables[i].navigation = nav;
+
+                // DEBUGGING: Zeigt an, welche Karte wohin navigiert
+                Debug.Log($"Navigation für {selectables[i].gameObject.name}: Links -> {(nav.selectOnLeft != null ? nav.selectOnLeft.gameObject.name : "None")}, Rechts -> {(nav.selectOnRight != null ? nav.selectOnRight.gameObject.name : "None")}");
+            }
+
+            // Erste Karte oder Skip-Button auswählen
+            if (selectables.Count > 0)
+            {
+                EventSystem.current.SetSelectedGameObject(selectables[0].gameObject);
+            }
+        }
+
+
 
         public void DrawCard()
         {
