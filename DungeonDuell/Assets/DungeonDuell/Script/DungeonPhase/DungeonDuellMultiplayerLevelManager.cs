@@ -299,6 +299,7 @@ namespace MoreMountains.TopDownEngine
 
                     if (Points[i].Points < Points[i].CoinsForNextLevel)
                     {
+                        print("Cause here");
                         TopDownEngineEvent.Trigger(TopDownEngineEventTypes.NoLevelUp, null);
                     }
                 }

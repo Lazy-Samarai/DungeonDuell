@@ -46,7 +46,7 @@ namespace dungeonduell
                 {
                     _levelManager.ApplyLevelUp(option);
                 }
-                //TestHub.canLevelUp = false;
+                TestHub.menuShowing = false;
                 ShowLevelUpMenu(false);
             }
         }

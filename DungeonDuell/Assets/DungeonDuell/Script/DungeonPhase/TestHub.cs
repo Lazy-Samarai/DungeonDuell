@@ -37,7 +37,7 @@ namespace MoreMountains.TopDownEngine
 		[Tooltip("the screen to display if the target levels up")]
 		public dungeonduell.LevelUPPanel LevelUpPanel;
 
-		bool menuShowing = false;
+		public bool menuShowing = false;
 
 		protected virtual void Start()
 		{
@@ -104,11 +104,9 @@ namespace MoreMountains.TopDownEngine
 				if (!menuShowing)
 				{
 					LevelUpPanel.ShowLevelUpMenu(true);
-					LevelUpNowText.gameObject.SetActive(false);
 				}
 				else
 				{
-					LevelUpNowText.gameObject.SetActive(canLevelUp);
 					LevelUpPanel.ShowLevelUpMenu(false);
 				}
 				menuShowing = !menuShowing;
