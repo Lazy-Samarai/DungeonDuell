@@ -1638,6 +1638,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 67024220-9a28-4b1a-89bc-10205b6cdabe
     m_ActionName: CardPhase/Submit
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3c914630-d9c6-47d1-8648-7b8d5a22c551
+    m_ActionName: CardPhase/Navigation[/DualShock4GamepadHID/leftStick,/DualShock4GamepadHID/dpad]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard
   m_DefaultActionMap: DungeonPhase
@@ -6060,6 +6064,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 67024220-9a28-4b1a-89bc-10205b6cdabe
     m_ActionName: CardPhase/Submit
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3c914630-d9c6-47d1-8648-7b8d5a22c551
+    m_ActionName: CardPhase/Navigation[/DualShock4GamepadHID/leftStick,/DualShock4GamepadHID/dpad]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: DungeonPhase
@@ -7945,9 +7953,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   weapon:
-  - {fileID: 114317679573123918, guid: 991cb044f2a248f418806d2b3d221a35, type: 3}
-  - {fileID: 114317679573123918, guid: 5a0774024b2f86147ae271ec1011aa8d, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
   health:
+  - {fileID: 0}
+  - {fileID: 0}
+  playerSpineAnimationHandlings:
   - {fileID: 0}
   - {fileID: 0}
   sequenceMang: {fileID: 839105398}

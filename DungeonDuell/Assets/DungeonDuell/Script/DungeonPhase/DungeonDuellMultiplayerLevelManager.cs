@@ -4,6 +4,7 @@ using MoreMountains.Tools;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -139,10 +140,7 @@ namespace MoreMountains.TopDownEngine
                         data.WalkSpeed = walking[i].WalkSpeed;
                         data.RunSpeed = running[i].RunSpeed;
                         data.Health = health[i].MaximumHealth;
-                        if (weapon[i] != null)
-                        {
-                            data.AttackSpeed = weapon[i].TimeBetweenUses;
-                        }
+                        data.AttackSpeed = weapon[i].TimeBetweenUses;
                     }
                 }
             }
@@ -165,11 +163,7 @@ namespace MoreMountains.TopDownEngine
                         walking[i].WalkSpeed = data.WalkSpeed;
                         running[i].RunSpeed = data.RunSpeed;
                         health[i].MaximumHealth = data.Health;
-
-                        if (weapon[i] != null)
-                        {
-                            weapon[i].TimeBetweenUses = data.AttackSpeed;
-                        }
+                        // weapon[i].TimeBetweenUses = data.AttackSpeed;
                     }
 
                 }
@@ -240,31 +234,14 @@ namespace MoreMountains.TopDownEngine
             sequenceMang.Reseting();
 
         }
-
-        /// <summary> 
-        /// On update, we update our countdowns and check for input if we're in game over state 
-        /// </summary> 
-        public virtual void Update()
-        {
-            CheckForGameOver();
-            if (weapon[0] == null && weapon[1] == null)
-            {
-                weapon[0] = GetPlayerWeapon(1);
-                weapon[1] = GetPlayerWeapon(2);
-                SynchronizeFromPlayerDataManager();
-                TopDownEngineEvent.Trigger(TopDownEngineEventTypes.Repaint, null);
-            }
-
-        }
-
         protected virtual void CheckForGameOver()
         {
             if (_gameOver)
             {
-                if ((Input.GetButton("Player1_Jump"))
-                     || (Input.GetButton("Player2_Jump"))
-                     || (Input.GetButton("Player3_Jump"))
-                     || (Input.GetButton("Player4_Jump")))
+                if (Input.GetButton("Player1_Jump")
+                     || Input.GetButton("Player2_Jump")
+                     || Input.GetButton("Player3_Jump")
+                     || Input.GetButton("Player4_Jump"))
                 {
                     MMTimeScaleEvent.Trigger(MMTimeScaleMethods.Reset, 1f, 0f, false, 0f, true);
                     // MMSceneLoadingManager.LoadScene(SceneManager.GetActiveScene().name); 
@@ -359,17 +336,9 @@ namespace MoreMountains.TopDownEngine
         private void ApplyAttackSpeedIncrease(string playerID)
         {
             int playerIndex = Int32.Parse(playerID[playerID.Length - 1].ToString()) - 1;
-            if (weapon[0] != null && weapon[1] != null)
-            {
-                weapon[playerIndex].TimeBetweenUses *= 0.9f;
-            }
-            else
-            {
-                weapon[0] = GetPlayerWeapon(1);
-                weapon[1] = GetPlayerWeapon(2);
-                ApplyAttackSpeedIncrease(playerID);
-            }
+            weapon[playerIndex].TimeBetweenUses *= 0.85f;
         }
+
 
         private CharacterMovement GetPlayerMovement(int i)
         {
@@ -418,18 +387,6 @@ namespace MoreMountains.TopDownEngine
             }
             return null;
         }
-
-        private ProjectileWeapon GetPlayerWeapon(int i)
-        {
-            foreach (Character character in FindObjectsOfType<Character>())
-            {
-                if (character.PlayerID == (playerNamebase + i))
-                {
-                    return character.GetComponentInChildren<ProjectileWeapon>();
-                }
-            }
-            return null;
-        }
         private PlayerSpineAnimationHandling GetPlayerSpineAnimationHandling(int i)
         {
             foreach (Character character in FindObjectsOfType<Character>())
@@ -440,6 +397,14 @@ namespace MoreMountains.TopDownEngine
                 }
             }
             return null;
+        }
+
+
+        public void RegisterAndUpdateWeapon(ProjectileWeapon weap, string id)
+        {// Weapons is later Inhilaizes so its updates it self by calling this Function ist self
+            int playerIndex = Int32.Parse(id[id.Length - 1].ToString()) - 1;
+            weapon[playerIndex] = weap;
+            weapon[playerIndex].TimeBetweenUses = playerDataManager.PlayerDataList[playerIndex].AttackSpeed;
         }
 
 
