@@ -8634,9 +8634,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   weapon:
-  - {fileID: 114317679573123918, guid: 991cb044f2a248f418806d2b3d221a35, type: 3}
-  - {fileID: 114317679573123918, guid: 5a0774024b2f86147ae271ec1011aa8d, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
   health:
+  - {fileID: 0}
+  - {fileID: 0}
+  playerSpineAnimationHandlings:
   - {fileID: 0}
   - {fileID: 0}
   sequenceMang: {fileID: 839105398}
@@ -10803,6 +10806,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6740568025359378812, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6873214922828897842, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: m_Text
+      value: X
       objectReference: {fileID: 0}
     - target: {fileID: 7277498198348813292, guid: e738a2ac7ae5bcc4894527f901d1007f,
         type: 3}
@@ -15013,6 +15026,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6873214922828897842, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: m_Text
+      value: X
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

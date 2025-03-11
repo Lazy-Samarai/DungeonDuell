@@ -5068,8 +5068,10 @@ GameObject:
   - component: {fileID: 114251315345146356}
   - component: {fileID: -1803590343298730861}
   - component: {fileID: 6580491061123051137}
+  - component: {fileID: 2965726219822037401}
+  - component: {fileID: 6032885677554127453}
   m_Layer: 0
-  m_Name: TestRifleDD
+  m_Name: RiflePlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5171,10 +5173,10 @@ MonoBehaviour:
   ProjectilesPerShot: 1
   SpawnTransforms: []
   SpawnTransformsMode: 1
-  Spread: {x: 0, y: 0, z: 10}
+  Spread: {x: 0, y: 0, z: 5}
   RotateWeaponOnSpread: 1
   RandomSpread: 1
-  SpawnPosition: {x: 0.831, y: 0.073, z: 0}
+  SpawnPosition: {x: 0.85, y: 0.073, z: 0}
   ObjectPooler: {fileID: 0}
   SpawnFeedbacks: []
   TestShootButton: 0
@@ -5274,6 +5276,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UpLevelKey: 111
   DownLevelKey: 105
+--- !u!114 &6032885677554127453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490220044263310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03aaf62627f364a7d92d307729fe738d, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  Mode: 0
+  PerformRaycast: 1
+  DrawLaser: 1
+  RaycastOriginOffset: {x: 0, y: 0, z: 0}
+  LaserOriginOffset: {x: 0, y: 0, z: 0}
+  LaserMaxDistance: 50
+  LaserCollisionMask:
+    serializedVersion: 2
+    m_Bits: 8386930
+  LaserWidth: {x: 0.05, y: 0.05}
+  LaserMaterial: {fileID: 2100000, guid: 421ea2e7b588af74c8232eecbd7b5b46, type: 2}
+  DownLevelKey: 112
+--- !u!114 &2965726219822037401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490220044263310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00336782bd0314a4e98d685fd63ce7be, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!1 &1806446063217534
 GameObject:
   m_ObjectHideFlags: 0
@@ -5349,7 +5387,7 @@ SpriteRenderer:
   m_SortingLayer: 4
   m_SortingOrder: 5
   m_Sprite: {fileID: 21300002, guid: 75df1bb8b302ceb4a9230d70d1b2e97e, type: 3}
-  m_Color: {r: 0.36320752, g: 0.40066594, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
