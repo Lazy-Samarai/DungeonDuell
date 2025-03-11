@@ -5067,11 +5067,13 @@ GameObject:
   - component: {fileID: 114345180357598506}
   - component: {fileID: 114251315345146356}
   - component: {fileID: -1803590343298730861}
-  - component: {fileID: 5300996963003679561}
-  - component: {fileID: 4008837654617038452}
-  - component: {fileID: 5711037192045914571}
+  - component: {fileID: 6580491061123051137}
+  - component: {fileID: 5763638078498895120}
+  - component: {fileID: 1867951725043699587}
+  - component: {fileID: 2965726219822037401}
+  - component: {fileID: 6032885677554127453}
   m_Layer: 0
-  m_Name: TestRifleDD_P2
+  m_Name: RiflePlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5086,7 +5088,7 @@ Transform:
   m_GameObject: {fileID: 1490220044263310}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.019, y: 0.003, z: 0}
+  m_LocalPosition: {x: -1, y: 0.003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5173,10 +5175,10 @@ MonoBehaviour:
   ProjectilesPerShot: 1
   SpawnTransforms: []
   SpawnTransformsMode: 1
-  Spread: {x: 0, y: 0, z: 10}
+  Spread: {x: 0, y: 0, z: 5}
   RotateWeaponOnSpread: 1
   RandomSpread: 1
-  SpawnPosition: {x: 0.38099992, y: 0.103, z: 0}
+  SpawnPosition: {x: 0.39999998, y: 0.103, z: 0}
   ObjectPooler: {fileID: 0}
   SpawnFeedbacks: []
   TestShootButton: 0
@@ -5254,15 +5256,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1490220044263310}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e471cd75c6d63b444a011599dabb4f75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CheckMouse: 0
+  CheckMouse: 1
   CheckPrimaryAxis: 1
   CheckSecondaryAxis: 1
---- !u!114 &5300996963003679561
+--- !u!114 &6580491061123051137
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5274,9 +5276,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b57512bf94c7f842879ca85f5a3d6e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UpLevelKey: 108
-  DownLevelKey: 107
---- !u!61 &4008837654617038452
+  UpLevelKey: 111
+  DownLevelKey: 105
+--- !u!114 &6032885677554127453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490220044263310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03aaf62627f364a7d92d307729fe738d, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  Mode: 0
+  PerformRaycast: 1
+  DrawLaser: 1
+  RaycastOriginOffset: {x: 0, y: 0, z: 0}
+  LaserOriginOffset: {x: 0, y: 0, z: 0}
+  LaserMaxDistance: 50
+  LaserCollisionMask:
+    serializedVersion: 2
+    m_Bits: 8386930
+  LaserWidth: {x: 0.05, y: 0.05}
+  LaserMaterial: {fileID: 2100000, guid: 421ea2e7b588af74c8232eecbd7b5b46, type: 2}
+  DownLevelKey: 112
+--- !u!114 &2965726219822037401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490220044263310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00336782bd0314a4e98d685fd63ce7be, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+--- !u!61 &5763638078498895120
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5321,7 +5359,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.35084033, y: 0.41294733}
   m_EdgeRadius: 0
---- !u!114 &5711037192045914571
+--- !u!114 &1867951725043699587
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5331,8 +5369,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b8cfc487f3d503241bc43c1960c3aa5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!1 &1806446063217534
 GameObject:
   m_ObjectHideFlags: 0
@@ -5408,7 +5446,7 @@ SpriteRenderer:
   m_SortingLayer: 4
   m_SortingOrder: 5
   m_Sprite: {fileID: 21300002, guid: 75df1bb8b302ceb4a9230d70d1b2e97e, type: 3}
-  m_Color: {r: 1, g: 0.514151, b: 0.514151, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -20528,7 +20566,7 @@ MonoBehaviour:
         UniqueID: 1896230025
         Label: Chromatic Aberration
         ChannelMode: 0
-        Channel: 1
+        Channel: 0
         MMChannelDefinition: {fileID: 0}
         Chance: 100
         DisplayColor: {r: 0, g: 0, b: 0, a: 1}
@@ -20642,7 +20680,7 @@ MonoBehaviour:
         UniqueID: 1858357022
         Label: Flash
         ChannelMode: 0
-        Channel: 1
+        Channel: 0
         MMChannelDefinition: {fileID: 0}
         Chance: 100
         DisplayColor: {r: 0, g: 0, b: 0, a: 1}
@@ -20846,7 +20884,7 @@ MonoBehaviour:
         UniqueID: 1929100103
         Label: Camera Shake
         ChannelMode: 0
-        Channel: 1
+        Channel: 0
         MMChannelDefinition: {fileID: 0}
         Chance: 100
         DisplayColor: {r: 0, g: 0, b: 0, a: 1}

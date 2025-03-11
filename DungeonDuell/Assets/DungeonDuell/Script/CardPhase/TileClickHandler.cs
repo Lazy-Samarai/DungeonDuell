@@ -6,6 +6,7 @@ using System;
 using System.Linq;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
+using Unity.VisualScripting;
 
 namespace dungeonduell
 {
@@ -21,7 +22,7 @@ namespace dungeonduell
         public TileBase resetTile;
         public TileBase[] setAbleTiles;
         public TileBase[] shadowSetAbleTiles;
-        public List<Card> CardShelled;
+        public List<ShellCard> CardShelled;
         public ConnectionsCollector connectCollector;
         public bool isPlayer1Turn = true;
         public VirtualMouseInput[] cousors = new VirtualMouseInput[2];
@@ -92,7 +93,7 @@ namespace dungeonduell
 
             TileBase clickedTile = tilemap.GetTile(cellPosition);
 
-            if (card.SheelCard)
+            if (card is ShellCard)
             {
                 if (card.Tile is AnimatedTile) // for Some reason Animated Tile need to be set on a free Tile to Work ;
                 {
@@ -104,18 +105,20 @@ namespace dungeonduell
 
             if (clickedTile != resetTile | !PlayerMove)
             {
-                Card shelledTileCard = CardShelled.FirstOrDefault(x => x.Tile == clickedTile);
+                ShellCard shelledTileCard = CardShelled.FirstOrDefault(x => x.InPlayerRangeTile.Contains(clickedTile));
 
                 if (shelledTileCard != null)
                 {
-                    // Not Ideal Solotions, make later System that checks sourround Tiles as it cause a bug in certain sitaution
-                    clickedTile = setAbleTiles[owner - 1];
+                    int index = Array.FindIndex(shelledTileCard.InPlayerRangeTile, tile => clickedTile == tile);
+                    clickedTile = setAbleTiles[index];
 
                     shelledTileCard.startDoorConcellation = card.startDoorConcellation; // giving it direction of clicked card, other elements are preset of sheel card
 
-                    card = shelledTileCard;
+                    card = (Card)shelledTileCard.Clone();
+                    card.Tile = shelledTileCard.CompleteTile;
 
                 }
+
 
                 if (((setAbleTiles.Contains(clickedTile)) && currentCard != null) | !PlayerMove)
                 {
@@ -163,6 +166,7 @@ namespace dungeonduell
                 //Sourround
                 if (spawnSourroundSetables)
                 {
+                    // Shadow Tile Handling
                     foreach (Tuple<Vector3Int, ConnectionDir> SourrendTilePos in GetSouroundCorr(cellPosition, new bool[] { true, true, true, true, true, true }))
                     {
 
@@ -189,7 +193,6 @@ namespace dungeonduell
                             }
 
                         }
-
                         if (souroundTile == resetTile & PlayerMove)
                         {
                             int i = Array.FindIndex(setAbleTiles, entity => entity == clickedTile);
@@ -200,6 +203,8 @@ namespace dungeonduell
                         }
 
                     }
+
+                    //Tile Handling on DoorDir
                     foreach (Tuple<Vector3Int, ConnectionDir> SourrendTilePos in GetSouroundCorr(cellPosition, currentDoorDir))
                     {
                         TileBase souroundTile = tilemap.GetTile(SourrendTilePos.Item1);
@@ -208,7 +213,6 @@ namespace dungeonduell
                         {
                             if (setAbleTiles.Contains(clickedTile))
                             {
-
                                 tilemap.SetTile(SourrendTilePos.Item1, clickedTile);
                             }
                             else
@@ -216,6 +220,31 @@ namespace dungeonduell
                                 tilemap.SetTile(SourrendTilePos.Item1, setAbleTiles[owner - 1]);
                             }
                         }
+                        else
+                        {
+                            ShellCard shelledTileCard = CardShelled.FirstOrDefault(x => x.Tile == souroundTile);
+                            if (shelledTileCard != null && setAbleTiles.Contains(clickedTile))
+                            {
+
+                                tilemap.SetTile(SourrendTilePos.Item1, shelledTileCard.InPlayerRangeTile[Array.IndexOf(setAbleTiles, clickedTile)]);
+
+                            }
+                            ShellCard shelledTileCardModif = CardShelled.FirstOrDefault(x => x.InPlayerRangeTile.Contains(souroundTile));
+                            if (shelledTileCardModif != null && setAbleTiles.Contains(clickedTile))
+                            {
+                                if (Array.IndexOf(setAbleTiles, clickedTile) != Array.IndexOf(shelledTileCardModif.InPlayerRangeTile, souroundTile)) // cause Contested
+                                {
+                                    tilemap.SetTile(SourrendTilePos.Item1, shelledTileCardModif.InPlayerRangeTile[2]);
+                                }
+                            }
+
+
+
+
+                        }
+
+
+
                     }
                 }
 
@@ -383,12 +412,6 @@ namespace dungeonduell
             }
 
         }
-
-        public void AddShellCardTypeToCheck(Card card)
-        {
-            CardShelled.Add(card);
-        }
-
         void OnEnable()
         {
             SubscribeToEvents();
