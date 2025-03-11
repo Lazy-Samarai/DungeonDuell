@@ -5068,6 +5068,8 @@ GameObject:
   - component: {fileID: 114251315345146356}
   - component: {fileID: -1803590343298730861}
   - component: {fileID: 6580491061123051137}
+  - component: {fileID: 5763638078498895120}
+  - component: {fileID: 1867951725043699587}
   - component: {fileID: 2965726219822037401}
   - component: {fileID: 6032885677554127453}
   m_Layer: 0
@@ -5168,7 +5170,7 @@ MonoBehaviour:
   InitializeOnStart: 1
   Interruptable: 0
   Flipped: 0
-  ProjectileSpawnOffset: {x: 1.85, y: 0.07, z: 0}
+  ProjectileSpawnOffset: {x: 1.4, y: 0.1, z: 0}
   DefaultProjectileDirection: {x: 0, y: 0, z: 1}
   ProjectilesPerShot: 1
   SpawnTransforms: []
@@ -5176,7 +5178,7 @@ MonoBehaviour:
   Spread: {x: 0, y: 0, z: 5}
   RotateWeaponOnSpread: 1
   RandomSpread: 1
-  SpawnPosition: {x: 0.85, y: 0.073, z: 0}
+  SpawnPosition: {x: 0.39999998, y: 0.103, z: 0}
   ObjectPooler: {fileID: 0}
   SpawnFeedbacks: []
   TestShootButton: 0
@@ -5310,6 +5312,63 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 00336782bd0314a4e98d685fd63ce7be, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+--- !u!61 &5763638078498895120
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490220044263310}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 1.5386437, y: 0.098687544}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.35084033, y: 0.41294733}
+  m_EdgeRadius: 0
+--- !u!114 &1867951725043699587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490220044263310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8cfc487f3d503241bc43c1960c3aa5a, type: 3}
   m_Name:
   m_EditorClassIdentifier:
 --- !u!1 &1806446063217534

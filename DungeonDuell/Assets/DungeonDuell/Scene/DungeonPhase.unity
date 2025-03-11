@@ -6151,6 +6151,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StandardRoom
       objectReference: {fileID: 0}
+    - target: {fileID: 4887094845199197374, guid: d4d8335d9d79f8142a60155a765b9399,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9433,10 +9438,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomPrefabs:
   - {fileID: 4887094845199197374, guid: d4d8335d9d79f8142a60155a765b9399, type: 3}
-  - {fileID: 4887094845199197374, guid: d4d8335d9d79f8142a60155a765b9399, type: 3}
-  - {fileID: 4887094845199197374, guid: d4d8335d9d79f8142a60155a765b9399, type: 3}
-  - {fileID: 4887094845199197374, guid: 3e32e2a664d20534b87634a927a0f8a8, type: 3}
-  - {fileID: 4887094845199197374, guid: 0498fef431ebcc447aea5b9bf6aac32f, type: 3}
+  - {fileID: 6748325540295184480, guid: 4adefe314e111bd46af820c02d2f2a24, type: 3}
+  - {fileID: 8763560437703668058, guid: 4f4381fbe4ab6334984f31caec7fb7cb, type: 3}
+  - {fileID: 9198191083504193589, guid: e1773865f062990429bba8e7678cc01e, type: 3}
+  - {fileID: 3212908775836021500, guid: 9dda4f2a2dfc68b4b8b16f9a13a94b3c, type: 3}
+  - {fileID: 3408852718116007260, guid: 40a24f6f31a55df40a711d109befc09e, type: 3}
   stepCross: 22.75
   stepUpDown: 19.5
   spawnPoint_Player1: {fileID: 686585495}
