@@ -76,6 +76,7 @@ namespace dungeonduell
                 }
             }
         }
+        /*
         public void CursourInput()
         {
             Vector3 mouseWorldPos = cam.ScreenToWorldPoint(new Vector3(cousors[isPlayer1Turn ? 0 : 1].virtualMouse.position.x.value, cousors[isPlayer1Turn ? 0 : 1].virtualMouse.position.y.value, -cam.transform.position.z));
@@ -85,6 +86,7 @@ namespace dungeonduell
             }
 
         }
+        */
 
         public void SpawnTile(Vector3 mouseWorldPos, Card card, bool PlayerMove, bool spawnSourroundSetables, int owner)
         {

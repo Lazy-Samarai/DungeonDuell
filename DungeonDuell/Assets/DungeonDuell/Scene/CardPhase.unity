@@ -250,7 +250,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &169980102
 RectTransform:
   m_ObjectHideFlags: 0
@@ -689,7 +689,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &393502160
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2901,6 +2901,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 67024220-9a28-4b1a-89bc-10205b6cdabe
     m_ActionName: CardPhase/Submit
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3c914630-d9c6-47d1-8648-7b8d5a22c551
+    m_ActionName: CardPhase/Navigation
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: CardPhase
@@ -11746,6 +11750,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 67024220-9a28-4b1a-89bc-10205b6cdabe
     m_ActionName: CardPhase/Submit
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3c914630-d9c6-47d1-8648-7b8d5a22c551
+    m_ActionName: CardPhase/Navigation
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: CardPhase

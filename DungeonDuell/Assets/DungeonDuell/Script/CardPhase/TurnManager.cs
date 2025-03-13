@@ -102,7 +102,7 @@ namespace dungeonduell
             isPlayer1Turn = !isPlayer1Turn;
 
             // Verz�gere das Initialisieren des neuen Zuges, um sicherzustellen, dass awaitingKeyPress korrekt gesetzt ist
-            ToggleCursor(isPlayer1Turn);
+            //ToggleCursor(isPlayer1Turn);
             Invoke(nameof(InitializeTurn), 0.1f);
         } 
 
@@ -112,12 +112,13 @@ namespace dungeonduell
             HandPlayer1.ShowHideDeck(!showForPlayer1);
             HandPlayer2.ShowHideDeck(!showForPlayer2);
         }
+        /*
         private void ToggleCursor(bool player1)
         {
             CourserSour1.Set(player1);
             CourserSour2.Set(!player1);
         }
-
+        */
         void OnEnable()
         {
             SubscribeToEvents();
