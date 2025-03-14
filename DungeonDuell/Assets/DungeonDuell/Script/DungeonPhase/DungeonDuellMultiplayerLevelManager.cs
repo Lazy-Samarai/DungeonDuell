@@ -139,8 +139,13 @@ namespace MoreMountains.TopDownEngine
 
                         data.WalkSpeed = walking[i].WalkSpeed;
                         data.RunSpeed = running[i].RunSpeed;
-                        data.Health = health[i].MaximumHealth;
+                        data.MaxHealth = health[i].MaximumHealth;
                         data.AttackSpeed = weapon[i].TimeBetweenUses;
+
+
+                        // Give remain Hp back to meta 
+                        data.MetaHp += (int)health[i].CurrentHealth;
+
                     }
                 }
             }
@@ -162,8 +167,14 @@ namespace MoreMountains.TopDownEngine
                         // Spielerattribute synchronisieren 
                         walking[i].WalkSpeed = data.WalkSpeed;
                         running[i].RunSpeed = data.RunSpeed;
-                        health[i].MaximumHealth = data.Health;
-                        // weapon[i].TimeBetweenUses = data.AttackSpeed;
+                        health[i].MaximumHealth = data.MaxHealth;
+
+
+                        // Set Heath
+                        health[i].InitialHealth = Math.Min(data.MetaHp, health[i].MaximumHealth);
+                        // Upate Player MetaHp
+                        data.MetaHp = (int)Math.Max(data.MetaHp - health[i].MaximumHealth, 0);
+
                     }
 
                 }
@@ -171,7 +182,6 @@ namespace MoreMountains.TopDownEngine
             }
 
         }
-
 
         /// <summary> 
         /// Whenever a player dies, we check if we only have one left alive, in which case we trigger our game over routine 
@@ -184,8 +194,7 @@ namespace MoreMountains.TopDownEngine
             int aliveCharacters = 0;
             int i = 0;
 
-            playerDataManager.PlayerDataList[playerIndex].RemainingLive--;
-            if (playerDataManager.PlayerDataList[playerIndex].RemainingLive <= 0)
+            if (playerDataManager.PlayerDataList[playerIndex].MetaHp <= 0)
             {
                 if (playerCharacter.PlayerID == "Player1")
                 {
