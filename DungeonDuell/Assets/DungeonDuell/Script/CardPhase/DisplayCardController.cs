@@ -51,6 +51,7 @@ namespace dungeonduell
             if (EventSystem.current.currentSelectedGameObject == gameObject)
             {
                 displayCard.OnPointerClick(null); // Simuliert Mausklick auf die Karte
+                DDCodeEventHandler.Trigger_CardSelected(displayCard);
             }
         }
 
@@ -59,7 +60,6 @@ namespace dungeonduell
             // Prüft, ob diese Karte im CardHolder liegt
             if (displayCard.transform.parent == cardToHand.cardHolder)
             {
-                Debug.Log($"Back gedrückt: Karte {displayCard.card.cardName} zurück in Hand verschieben.");
                 cardToHand.OnCardClicked(displayCard); // Führt den Rücktransfer aus
             }
         }

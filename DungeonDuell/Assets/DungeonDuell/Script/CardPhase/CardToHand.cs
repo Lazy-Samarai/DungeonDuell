@@ -136,7 +136,6 @@ namespace dungeonduell
         /// </summary>
         public void OnCardClicked(DisplayCard clickedCard)
         {
-            // Liegt Karte schon im Holder? => Zurück in die Hand
             if (clickedCard.transform.parent == cardHolder)
             {
                 if (!handCards.Contains(clickedCard.card))
@@ -147,14 +146,20 @@ namespace dungeonduell
                 // Event: Keine Karte mehr ausgewählt
                 DDCodeEventHandler.Trigger_CardSelected(null);
 
+                // 💡 Handkarten wieder aktivieren, wenn eine Karte zurück in die Hand geht
+                if (clickedCard.transform.parent == handPanel)
+                {
+                    EnableHandCardsForNavigation();
+                }
+
+
                 DisplayHand();
             }
             else
             {
-                // Karte liegt in der Hand => in den Holder verschieben
                 handCards.Remove(clickedCard.card);
 
-                // Wenn dort schon eine Karte liegt, schieb sie zurück
+                // Falls bereits eine Karte im CardHolder liegt, verschiebe sie zurück in die Hand
                 if (cardHolder.childCount > 0)
                 {
                     Transform oldCard = cardHolder.GetChild(0);
@@ -170,15 +175,59 @@ namespace dungeonduell
 
                 clickedCard.transform.SetParent(cardHolder, false);
                 clickedCard.transform.localPosition = Vector3.zero;
-                clickedCard.transform.localRotation = Quaternion.identity; 
+                clickedCard.transform.localRotation = Quaternion.identity;
                 clickedCard.transform.localScale = Vector3.one;
+
+                if (clickedCard.transform.parent == cardHolder)
+                {
+                    DisableHandCardsForNavigation();
+                }
 
                 // Event: Neue Karte ausgewählt
                 DDCodeEventHandler.Trigger_CardSelected(clickedCard);
 
+                // 💡 Automatisches Umschalten zur Hexgrid-Steuerung
+                HexgridControllerNavigation hexgridController = FindObjectOfType<HexgridControllerNavigation>();
+                if (hexgridController != null)
+                {
+                    hexgridController.ActivateNavigation();
+                }
+
                 DisplayHand();
             }
         }
+
+        private void DisableHandCardsForNavigation()
+        {
+            foreach (DisplayCard dc in displayCards)
+            {
+                if (dc.transform.parent != cardHolder) 
+                {
+                    dc.GetComponent<Selectable>().interactable = false;
+                }
+            }
+        }
+
+        public void EnableHandCardsForNavigation()
+        {
+            foreach (DisplayCard dc in displayCards)
+            {
+                if (dc != null)
+                {
+                    Selectable selectable = dc.GetComponent<Selectable>();
+                    if (selectable != null)
+                    {
+                        selectable.interactable = true;
+                    }
+                }
+            }
+        }
+
+        public bool HasCardOnHolder()
+        {
+            return cardHolder.childCount > 0; // Gibt true zurück, wenn mindestens eine Karte im CardHolder liegt
+        }
+
 
         public void SelectFirstCard()
         {
@@ -262,8 +311,6 @@ namespace dungeonduell
                 EventSystem.current.SetSelectedGameObject(selectables[0].gameObject);
             }
         }
-
-
 
         public void DrawCard()
         {
