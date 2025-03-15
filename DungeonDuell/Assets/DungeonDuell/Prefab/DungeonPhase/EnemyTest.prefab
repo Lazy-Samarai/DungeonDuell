@@ -29,11 +29,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3956695301216615419}
   - {fileID: 7485219723012031153}
+  - {fileID: 4642539013066433747}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &3955877685502362645
+--- !u!1001 &813600573831654983
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -41,110 +41,58 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7497275843562502924}
     m_Modifications:
-    - target: {fileID: 1170912388798894, guid: 3d2a551cb5b32194898fd8fb30716e53, type: 3}
-      propertyPath: m_Name
-      value: KoalaNinjaSwordMaster (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4249208751816686, guid: 3d2a551cb5b32194898fd8fb30716e53, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2.55
-      objectReference: {fileID: 0}
-    - target: {fileID: 4249208751816686, guid: 3d2a551cb5b32194898fd8fb30716e53, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.19
-      objectReference: {fileID: 0}
-    - target: {fileID: 4249208751816686, guid: 3d2a551cb5b32194898fd8fb30716e53, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4249208751816686, guid: 3d2a551cb5b32194898fd8fb30716e53, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4249208751816686, guid: 3d2a551cb5b32194898fd8fb30716e53, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4249208751816686, guid: 3d2a551cb5b32194898fd8fb30716e53, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4249208751816686, guid: 3d2a551cb5b32194898fd8fb30716e53, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4249208751816686, guid: 3d2a551cb5b32194898fd8fb30716e53, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4249208751816686, guid: 3d2a551cb5b32194898fd8fb30716e53, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4249208751816686, guid: 3d2a551cb5b32194898fd8fb30716e53, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 3d2a551cb5b32194898fd8fb30716e53, type: 3}
---- !u!4 &3956695301216615419 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4249208751816686, guid: 3d2a551cb5b32194898fd8fb30716e53,
-    type: 3}
-  m_PrefabInstance: {fileID: 3955877685502362645}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &7489432372930887007
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 7497275843562502924}
-    m_Modifications:
-    - target: {fileID: 1170912388798894, guid: 3d2a551cb5b32194898fd8fb30716e53, type: 3}
+    - target: {fileID: 7827707600634268342, guid: 7d0279d9159d28849b4c3f90b7ca4f6e,
+        type: 3}
       propertyPath: m_Name
       value: KoalaNinjaSwordMaster
       objectReference: {fileID: 0}
-    - target: {fileID: 4249208751816686, guid: 3d2a551cb5b32194898fd8fb30716e53, type: 3}
+    - target: {fileID: 7830258664008805622, guid: 7d0279d9159d28849b4c3f90b7ca4f6e,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.8
       objectReference: {fileID: 0}
-    - target: {fileID: 4249208751816686, guid: 3d2a551cb5b32194898fd8fb30716e53, type: 3}
+    - target: {fileID: 7830258664008805622, guid: 7d0279d9159d28849b4c3f90b7ca4f6e,
+        type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.19
       objectReference: {fileID: 0}
-    - target: {fileID: 4249208751816686, guid: 3d2a551cb5b32194898fd8fb30716e53, type: 3}
+    - target: {fileID: 7830258664008805622, guid: 7d0279d9159d28849b4c3f90b7ca4f6e,
+        type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4249208751816686, guid: 3d2a551cb5b32194898fd8fb30716e53, type: 3}
+    - target: {fileID: 7830258664008805622, guid: 7d0279d9159d28849b4c3f90b7ca4f6e,
+        type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4249208751816686, guid: 3d2a551cb5b32194898fd8fb30716e53, type: 3}
+    - target: {fileID: 7830258664008805622, guid: 7d0279d9159d28849b4c3f90b7ca4f6e,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4249208751816686, guid: 3d2a551cb5b32194898fd8fb30716e53, type: 3}
+    - target: {fileID: 7830258664008805622, guid: 7d0279d9159d28849b4c3f90b7ca4f6e,
+        type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4249208751816686, guid: 3d2a551cb5b32194898fd8fb30716e53, type: 3}
+    - target: {fileID: 7830258664008805622, guid: 7d0279d9159d28849b4c3f90b7ca4f6e,
+        type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4249208751816686, guid: 3d2a551cb5b32194898fd8fb30716e53, type: 3}
+    - target: {fileID: 7830258664008805622, guid: 7d0279d9159d28849b4c3f90b7ca4f6e,
+        type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4249208751816686, guid: 3d2a551cb5b32194898fd8fb30716e53, type: 3}
+    - target: {fileID: 7830258664008805622, guid: 7d0279d9159d28849b4c3f90b7ca4f6e,
+        type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4249208751816686, guid: 3d2a551cb5b32194898fd8fb30716e53, type: 3}
+    - target: {fileID: 7830258664008805622, guid: 7d0279d9159d28849b4c3f90b7ca4f6e,
+        type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
@@ -152,10 +100,84 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 3d2a551cb5b32194898fd8fb30716e53, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 7d0279d9159d28849b4c3f90b7ca4f6e, type: 3}
 --- !u!4 &7485219723012031153 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 4249208751816686, guid: 3d2a551cb5b32194898fd8fb30716e53,
+  m_CorrespondingSourceObject: {fileID: 7830258664008805622, guid: 7d0279d9159d28849b4c3f90b7ca4f6e,
     type: 3}
-  m_PrefabInstance: {fileID: 7489432372930887007}
+  m_PrefabInstance: {fileID: 813600573831654983}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3226607470522452005
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7497275843562502924}
+    m_Modifications:
+    - target: {fileID: 7827707600634268342, guid: 7d0279d9159d28849b4c3f90b7ca4f6e,
+        type: 3}
+      propertyPath: m_Name
+      value: KoalaNinjaSwordMaster (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7830258664008805622, guid: 7d0279d9159d28849b4c3f90b7ca4f6e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.282
+      objectReference: {fileID: 0}
+    - target: {fileID: 7830258664008805622, guid: 7d0279d9159d28849b4c3f90b7ca4f6e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 7830258664008805622, guid: 7d0279d9159d28849b4c3f90b7ca4f6e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7830258664008805622, guid: 7d0279d9159d28849b4c3f90b7ca4f6e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7830258664008805622, guid: 7d0279d9159d28849b4c3f90b7ca4f6e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7830258664008805622, guid: 7d0279d9159d28849b4c3f90b7ca4f6e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7830258664008805622, guid: 7d0279d9159d28849b4c3f90b7ca4f6e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7830258664008805622, guid: 7d0279d9159d28849b4c3f90b7ca4f6e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7830258664008805622, guid: 7d0279d9159d28849b4c3f90b7ca4f6e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7830258664008805622, guid: 7d0279d9159d28849b4c3f90b7ca4f6e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7d0279d9159d28849b4c3f90b7ca4f6e, type: 3}
+--- !u!4 &4642539013066433747 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7830258664008805622, guid: 7d0279d9159d28849b4c3f90b7ca4f6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 3226607470522452005}
   m_PrefabAsset: {fileID: 0}

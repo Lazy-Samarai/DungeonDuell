@@ -24,22 +24,20 @@ namespace MoreMountains.TopDownEngine
 		/// the counter used to display coin amounts
 		[Tooltip("the counter used to display coin amounts")]
 		public Text CoinCounter;
-        [Tooltip("the counter used to display coin amounts needed for level Up")]
-        public Text CoinForNextLevelCounter;
-
+		[Tooltip("the counter used to display coin amounts needed for level Up")]
+		public Text CoinForNextLevelCounter;
 		public Text LevelUpNowText;
 		public bool canLevelUp;
-
-        /// the mask to use when the target player dies
-        [Tooltip("the mask to use when the target player dies")]
+		/// the mask to use when the target player dies
+		[Tooltip("the mask to use when the target player dies")]
 		public CanvasGroup DeadMask;
 		/// the screen to display if the target player wins
 		[Tooltip("the screen to display if the target player wins")]
 		public CanvasGroup WinnerScreen;
-        [Tooltip("the screen to display if the target levels up")]
-        public dungeonduell.LevelUPPanel LevelUpPanel;
+		[Tooltip("the screen to display if the target levels up")]
+		public dungeonduell.LevelUPPanel LevelUpPanel;
 
-		bool menuShowing = false;
+		public bool menuShowing = false;
 
 		protected virtual void Start()
 		{
@@ -81,22 +79,22 @@ namespace MoreMountains.TopDownEngine
 					break;
 
 				case TopDownEngineEventTypes.LevelUp:
-					if(PlayerID == (LevelManager.Instance as DungeonDuellMultiplayerLevelManager).LevelUPID)
+					if (PlayerID == (LevelManager.Instance as DungeonDuellMultiplayerLevelManager).LevelUPID)
 					{
 						canLevelUp = true;
-                        LevelUpNowText.gameObject.SetActive(canLevelUp);
-                    }
+						LevelUpNowText.gameObject.SetActive(canLevelUp);
+					}
 					break;
 
-                case TopDownEngineEventTypes.NoLevelUp:
-                    if (PlayerID == (LevelManager.Instance as DungeonDuellMultiplayerLevelManager).LevelUPID)
-                    {
-                        canLevelUp = false;
-                        LevelUpNowText.gameObject.SetActive(canLevelUp);
-                    }
-                    break;
+				case TopDownEngineEventTypes.NoLevelUp:
+					if (PlayerID == (LevelManager.Instance as DungeonDuellMultiplayerLevelManager).LevelUPID)
+					{
+						canLevelUp = false;
+						LevelUpNowText.gameObject.SetActive(canLevelUp);
+					}
+					break;
 
-            }
+			}
 
 		}
 		public void ShowMenuTry()
@@ -105,27 +103,19 @@ namespace MoreMountains.TopDownEngine
 			{
 				if (!menuShowing)
 				{
-						
 					LevelUpPanel.ShowLevelUpMenu(true);
-					//LevelUpPanel.alpha = 0f;
-					//StartCoroutine(MMFade.FadeCanvasGroup(LevelUpPanel, 0.5f, 0.8f, true));
-					LevelUpNowText.gameObject.SetActive(false);
 				}
 				else
 				{
-					
-                    //LevelUpPanel.alpha = 0.8f;
-                    //StartCoroutine(MMFade.FadeCanvasGroup(LevelUpPanel, 0.5f, 0f, true));
-                    LevelUpNowText.gameObject.SetActive(canLevelUp);
-                    LevelUpPanel.ShowLevelUpMenu(false);
-                }
+					LevelUpPanel.ShowLevelUpMenu(false);
+				}
 				menuShowing = !menuShowing;
 			}
 		}
-        /// <summary>
-        /// OnDisable, we start listening to events.
-        /// </summary>
-        protected virtual void OnEnable()
+		/// <summary>
+		/// OnDisable, we start listening to events.
+		/// </summary>
+		protected virtual void OnEnable()
 		{
 			this.MMEventStartListening<TopDownEngineEvent>();
 		}

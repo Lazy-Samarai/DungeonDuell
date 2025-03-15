@@ -10,7 +10,9 @@ namespace dungeonduell
     {
         // Card Phase
         public static event Action DungeonConnected;
-        public static void Trigger_DungeonConnected() { DungeonConnected.Invoke(); }
+        public static void Trigger_DungeonConnected() { 
+            print("guorejinsoduijrfg");
+            DungeonConnected.Invoke(); }
         public static event Action NextPlayerTurn;
         public static void Trigger_NextPlayerTurn() { NextPlayerTurn.Invoke(); }
         public static event Action<DisplayCard> CardSelected; // this might not be ideal but seems best for visual update and destroying later  

@@ -17,8 +17,6 @@ namespace dungeonduell
         public RoomElement roomElement = RoomElement.Standard;
         public TileBase Tile;
 
-        public bool SheelCard = false; // world card that can be overwritten, shell card should have a unique Tile!
-
         [System.Serializable]
         public struct DirBarSet { public bool TopLeft; public bool TopRight; public bool Left; public bool Right; public bool BottonLeft; public bool BottonRight; } // Going Around
         public DirBarSet startDoorConcellation;
@@ -56,6 +54,10 @@ namespace dungeonduell
             hash.Add(Tile);
             hash.Add(startDoorConcellation);
             return hash.ToHashCode();
+        }
+        public object Clone()
+        {
+            return this.MemberwiseClone();
         }
     }
 }
