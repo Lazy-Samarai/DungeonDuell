@@ -19,6 +19,9 @@ namespace dungeonduell
         public static void Trigger_CardPlayed(Card card, bool Player1Played) { CardPlayed.Invoke(card, Player1Played); }
         public static event Action FinalRoundInDungeon;
         public static void Trigger_FinalRoundInDungeon() { FinalRoundInDungeon.Invoke(); }
+        public static event Action<List<PlayerData>> PlayerDataExposed;
+        public static void Trigger_PlayerDataExposed(List<PlayerData> playerdatas) { PlayerDataExposed.Invoke(playerdatas); }
+
 
     }
 }

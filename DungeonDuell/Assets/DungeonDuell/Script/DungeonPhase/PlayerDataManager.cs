@@ -25,7 +25,9 @@ namespace dungeonduell
 
         public int MetaHp = 100;
 
-        public PlayerData(string playerID, int points, int level, int coinsForNextLevel, float walkSpeed, float runSpeed, float health, float attackSpeed,int metaHp)
+        public int MaxMetaHp = 100;
+
+        public PlayerData(string playerID, int points, int level, int coinsForNextLevel, float walkSpeed, float runSpeed, float health, float attackSpeed, int maxMetaHp)
         {
             PlayerID = playerID;
             Points = points;
@@ -36,7 +38,8 @@ namespace dungeonduell
             RunSpeed = runSpeed;
             MaxHealth = health;
             AttackSpeed = attackSpeed;
-            MetaHp = metaHp;
+            MaxMetaHp = maxMetaHp;
+            MetaHp = MaxMetaHp;
         }
     }
 
@@ -74,7 +77,7 @@ namespace dungeonduell
                 if (nextRoundFinal)
                 {
                     DDCodeEventHandler.Trigger_FinalRoundInDungeon();
-                    
+
                     SequenceMang sequenceMang;
                     if (sequenceMang = FindAnyObjectByType<SequenceMang>())
                     {
@@ -82,6 +85,7 @@ namespace dungeonduell
                     }
                 }
             }
+            DDCodeEventHandler.Trigger_PlayerDataExposed(PlayerDataList);
 
         }
         void OnEnable()
