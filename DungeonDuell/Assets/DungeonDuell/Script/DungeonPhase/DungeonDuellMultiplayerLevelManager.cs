@@ -36,7 +36,7 @@ namespace MoreMountains.TopDownEngine
     public enum LevelUpOptions
     {
         Speed,
-        Health,
+       // Health,
         AttackSpeed
     }
 
@@ -93,11 +93,11 @@ namespace MoreMountains.TopDownEngine
             running[0] = GetPlayerRun(1);
             running[1] = GetPlayerRun(2);
 
-            health[0] = GetPlayerHealth(1);
-            health[1] = GetPlayerHealth(2);
-
             playerSpineAnimationHandlings[0] = GetPlayerSpineAnimationHandling(1);
             playerSpineAnimationHandlings[1] = GetPlayerSpineAnimationHandling(2);
+
+            health[0] = GetPlayerHealth(1);
+            health[1] = GetPlayerHealth(2);
 
             WinnerID = "";
             LevelUPID = "";
@@ -298,9 +298,6 @@ namespace MoreMountains.TopDownEngine
                         case LevelUpOptions.Speed:
                             ApplySpeedIncrease(LevelUPID);
                             break;
-                        case LevelUpOptions.Health:
-                            ApplyHealthIncrease(LevelUPID);
-                            break;
                         case LevelUpOptions.AttackSpeed:
                             ApplyAttackSpeedIncrease(LevelUPID);
                             break;
@@ -308,7 +305,6 @@ namespace MoreMountains.TopDownEngine
 
                     if (Points[i].Points < Points[i].CoinsForNextLevel)
                     {
-                        print("Cause here");
                         TopDownEngineEvent.Trigger(TopDownEngineEventTypes.NoLevelUp, null);
                     }
                 }
@@ -332,15 +328,16 @@ namespace MoreMountains.TopDownEngine
 
             }
         }
-
-        private void ApplyHealthIncrease(string playerID)
+        private Health GetPlayerHealth(int i)
         {
-            int playerIndex = Int32.Parse(playerID[playerID.Length - 1].ToString()) - 1;
-            if (health != null)
+            foreach (Health health in FindObjectsOfType<Health>())
             {
-                health[playerIndex].MaximumHealth += 10;
-                health[playerIndex].SetHealth(Mathf.Min(health[playerIndex].CurrentHealth + 10, health[playerIndex].MaximumHealth));
+                if (health.GetComponent<Character>().PlayerID == (playerNamebase + i))
+                {
+                    return health;
+                }
             }
+            return null;
         }
 
         private void ApplyAttackSpeedIncrease(string playerID)
@@ -381,18 +378,6 @@ namespace MoreMountains.TopDownEngine
                 if (character.PlayerID == (playerNamebase + i))
                 {
                     return character;
-                }
-            }
-            return null;
-        }
-
-        private Health GetPlayerHealth(int i)
-        {
-            foreach (Health health in FindObjectsOfType<Health>())
-            {
-                if (health.GetComponent<Character>().PlayerID == (playerNamebase + i))
-                {
-                    return health;
                 }
             }
             return null;
