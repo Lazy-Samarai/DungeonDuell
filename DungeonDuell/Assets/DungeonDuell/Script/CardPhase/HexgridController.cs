@@ -1,27 +1,29 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 using UnityEngine.EventSystems;
 using MoreMountains.TopDownEngine;
+using System.Linq;
 
 namespace dungeonduell
 {
-    public class HexgridControllerNavigation : MonoBehaviour
+    public class HexgridController : MonoBehaviour
     {
         private Dictionary<Vector3Int, GameObject> tilePositions = new Dictionary<Vector3Int, GameObject>();
         private Vector3Int selectedTilePos;
-        public GameObject cursor; 
-        public Tilemap tilemap;
+        public GameObject cursor;
+        private Tilemap tilemap;
         private PlayerInput playerInput;
-        public TileClickHandler tileClickHandler;
-        private CardToHand cardToHand; 
+        private TileClickHandler tileClickHandler;
+        private CardToHand cardToHand;
+        private bool isPlayer1Turn;
 
         void Start()
         {
             tilemap = FindObjectOfType<Tilemap>();
             tileClickHandler = FindObjectOfType<TileClickHandler>();
-            playerInput = FindCorrectPlayerInput(); 
+            playerInput = FindCorrectPlayerInput();
 
             if (playerInput != null)
             {
@@ -31,19 +33,12 @@ namespace dungeonduell
             }
             else
             {
-                Debug.LogError($"Kein passendes PlayerInput-Objekt für {gameObject.name} gefunden!");
+                Debug.LogError($"Kein passendes PlayerInput-Objekt f�r {gameObject.name} gefunden!");
             }
 
             InitializeTilePositions();
-
-            if (cursor != null)
-            {
-                cursor.SetActive(false);
-            }
-            else
-            {
-                Debug.LogError("Cursor-GameObject ist nicht zugewiesen!");
-            }
+            if (cursor != null) cursor.SetActive(false);
+            else Debug.LogError("Cursor-GameObject ist nicht zugewiesen!");
         }
 
         void OnDestroy()
@@ -59,12 +54,10 @@ namespace dungeonduell
         private void InitializeTilePositions()
         {
             tilePositions.Clear();
-            if (tileClickHandler != null)
+            TileBase[] setAbleTiles = GetSetAbleTileBases();
+            foreach (Vector3Int tilePos in GetSetAbleTiles(setAbleTiles))
             {
-                foreach (Vector3Int tilePos in tileClickHandler.GetSetAbleTiles())
-                {
-                    tilePositions[tilePos] = null;
-                }
+                tilePositions[tilePos] = null;
             }
 
             if (tilePositions.Count > 0)
@@ -75,6 +68,27 @@ namespace dungeonduell
 
             UpdateCursorVisibility();
         }
+
+        /// <summary>
+        /// Aktiviert das Hexgrid-Navigations-Interface (wie zuvor in HexgridControllerNavigation).
+        /// </summary>
+        public void ActivateNavigation()
+        {
+            if (tilePositions.Count > 0)
+            {
+                // Falls noch kein Tile ausgew�hlt ist, w�hle das erste aus
+                selectedTilePos = new List<Vector3Int>(tilePositions.Keys)[0];
+                UpdateCursor(selectedTilePos);
+                cursor.SetActive(true);
+            }
+
+            // Fokus auf das Hexgrid (bzw. den Cursor) setzen
+            if (cursor != null)
+            {
+                EventSystem.current.SetSelectedGameObject(cursor);
+            }
+        }
+
 
         private void OnNavigate(InputAction.CallbackContext context)
         {
@@ -88,14 +102,13 @@ namespace dungeonduell
         private void NavigateTiles(Vector2 input)
         {
             Vector3Int currentPos = selectedTilePos;
-            Vector3Int[] directions = new Vector3Int[]
-            {
-                new Vector3Int(1, 0, 0),  // Rechts
-                new Vector3Int(-1, 0, 0), // Links
-                new Vector3Int(0, 1, 0),  // Oben
-                new Vector3Int(0, -1, 0), // Unten
-                new Vector3Int(1, -1, 0), // Diagonal oben-rechts
-                new Vector3Int(-1, 1, 0)  // Diagonal oben-links
+            Vector3Int[] directions = {
+                new Vector3Int(1, 0, 0),
+                new Vector3Int(-1, 0, 0),
+                new Vector3Int(0, 1, 0),
+                new Vector3Int(0, -1, 0),
+                new Vector3Int(1, -1, 0),
+                new Vector3Int(-1, 1, 0)
             };
 
             Vector3Int targetPos = currentPos;
@@ -110,19 +123,6 @@ namespace dungeonduell
                 UpdateCursor(selectedTilePos);
             }
         }
-
-        public void ActivateNavigation()
-        {
-            if (tilePositions.Count > 0)
-            {
-                selectedTilePos = new List<Vector3Int>(tilePositions.Keys)[0];
-                UpdateCursor(selectedTilePos);
-                cursor.SetActive(true);
-            }
-
-            EventSystem.current.SetSelectedGameObject(cursor); // Fokus auf das Hexgrid setzen
-        }
-
 
         private void UpdateCursor(Vector3Int position)
         {
@@ -144,31 +144,19 @@ namespace dungeonduell
         private void OnSubmit(InputAction.CallbackContext context)
         {
             if (!HasCardInCardHolder()) return;
-
-            if (tileClickHandler != null)
-            {
-                Debug.Log($"Tile bestätigt: {selectedTilePos}");
-                tileClickHandler.SpawnTileWithController(selectedTilePos);
-                ResetNavigation();
-            }
+            SpawnTileWithController(selectedTilePos);
+            ResetNavigation();
         }
 
         private void OnBack(InputAction.CallbackContext context)
         {
-            Debug.Log("Zurück zur Hand!");
             cursor.SetActive(false);
             ResetNavigation();
         }
 
         public void ResetNavigation()
         {
-            if (tilePositions.Count > 0)
-            {
-                selectedTilePos = new List<Vector3Int>(tilePositions.Keys)[0];
-                UpdateCursor(selectedTilePos);
-            }
-
-            UpdateCursorVisibility();
+            cursor.SetActive(false);
         }
 
         private bool HasCardInCardHolder()
@@ -176,36 +164,51 @@ namespace dungeonduell
             return cardToHand != null && cardToHand.HasCardOnHolder();
         }
 
-        /// <summary>
-        /// Holt das richtige PlayerInput-Objekt basierend auf der PlayerID (Player1 oder Player2)
-        /// </summary>
+        private TileBase[] GetSetAbleTileBases()
+        {
+            return tilemap.GetTilesBlock(tilemap.cellBounds);
+        }
+
+        private List<Vector3Int> GetSetAbleTiles(TileBase[] setAbleTiles)
+        {
+            List<Vector3Int> tilePositions = new List<Vector3Int>();
+            foreach (Vector3Int pos in tilemap.cellBounds.allPositionsWithin)
+            {
+                if (setAbleTiles.Contains(tilemap.GetTile(pos)))
+                {
+                    tilePositions.Add(pos);
+                }
+            }
+            return tilePositions;
+        }
+
+        private void SpawnTileWithController(Vector3Int tilePosition)
+        {
+            if (!HasCardInCardHolder() || tileClickHandler == null) return;
+
+            Vector3 worldPosition = tilemap.GetCellCenterWorld(tilePosition);
+            tileClickHandler.SpawnTile(worldPosition, tileClickHandler.currentCard, true, true, isPlayer1Turn ? 1 : 2);
+        }
+
         private PlayerInput FindCorrectPlayerInput()
         {
             string neededPlayerID = IsPlayer1Controller() ? "Player1" : "Player2";
-
             foreach (var player in FindObjectsOfType<PlayerInput>())
             {
                 var playerManager = player.GetComponent<InputSystemManagerEventsBased>();
                 if (playerManager != null && playerManager.PlayerID == neededPlayerID)
                 {
-                    return player; // Richtige PlayerInput-Instanz gefunden
+                    return player;
                 }
             }
             return null;
         }
 
-        /// <summary>
-        /// Wird vom TurnManager aufgerufen, um das richtige CardToHand-Objekt zu setzen.
-        /// </summary>
         public void AssignCardToHand(CardToHand newCardToHand)
         {
             cardToHand = newCardToHand;
         }
 
-
-        /// <summary>
-        /// Prüft, ob dieser Controller zu Player1 oder Player2 gehört.
-        /// </summary>
         private bool IsPlayer1Controller()
         {
             Transform parent = transform;

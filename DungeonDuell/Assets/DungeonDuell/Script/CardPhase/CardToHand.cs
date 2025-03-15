@@ -146,7 +146,7 @@ namespace dungeonduell
                 // Event: Keine Karte mehr ausgewählt
                 DDCodeEventHandler.Trigger_CardSelected(null);
 
-                // 💡 Handkarten wieder aktivieren, wenn eine Karte zurück in die Hand geht
+                // Handkarten wieder aktivieren, wenn eine Karte zurück in die Hand geht
                 if (clickedCard.transform.parent == handPanel)
                 {
                     EnableHandCardsForNavigation();
@@ -186,8 +186,7 @@ namespace dungeonduell
                 // Event: Neue Karte ausgewählt
                 DDCodeEventHandler.Trigger_CardSelected(clickedCard);
 
-                // 💡 Automatisches Umschalten zur Hexgrid-Steuerung
-                HexgridControllerNavigation hexgridController = FindObjectOfType<HexgridControllerNavigation>();
+                HexgridController hexgridController = FindObjectOfType<HexgridController>();
                 if (hexgridController != null)
                 {
                     hexgridController.ActivateNavigation();
@@ -300,9 +299,6 @@ namespace dungeonduell
                 };
 
                 selectables[i].navigation = nav;
-
-                // DEBUGGING: Zeigt an, welche Karte wohin navigiert
-                Debug.Log($"Navigation für {selectables[i].gameObject.name}: Links -> {(nav.selectOnLeft != null ? nav.selectOnLeft.gameObject.name : "None")}, Rechts -> {(nav.selectOnRight != null ? nav.selectOnRight.gameObject.name : "None")}");
             }
 
             // Erste Karte oder Skip-Button auswählen

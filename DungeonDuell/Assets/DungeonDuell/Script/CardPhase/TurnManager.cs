@@ -59,7 +59,7 @@ namespace dungeonduell
             ToggleHandVisibility(isPlayer1Turn, !isPlayer1Turn);
 
             // **HEXGRID-CONTROLLER ERHÄLT DAS RICHTIGE CardToHand**
-            HexgridControllerNavigation hexgridController = FindObjectOfType<HexgridControllerNavigation>();
+            HexgridController hexgridController = FindObjectOfType<HexgridController>();
             if (hexgridController != null)
             {
                 hexgridController.AssignCardToHand(isPlayer1Turn ? HandPlayer1 : HandPlayer2);

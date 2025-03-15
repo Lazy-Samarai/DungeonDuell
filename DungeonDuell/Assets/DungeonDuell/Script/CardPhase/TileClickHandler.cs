@@ -24,7 +24,6 @@ namespace dungeonduell
         public List<Card> CardShelled;
         public ConnectionsCollector connectCollector;
         public bool isPlayer1Turn = true;
-        private HexgridControllerNavigation controllerNavigation;
 
         Vector3Int[] aroundHexDiffVectorEVEN = {
             new Vector3Int(-1, 1), // TopLeft
@@ -52,10 +51,9 @@ namespace dungeonduell
         {
             connectCollector = FindObjectOfType<ConnectionsCollector>();
             tilemap = FindObjectOfType<Tilemap>();
-            controllerNavigation = FindObjectOfType<HexgridControllerNavigation>(); // NEU
         }
 
-        public void Update()
+        void Update()
         {
             if (currentCard != null)
             {
@@ -66,37 +64,7 @@ namespace dungeonduell
                 }
             }
         }
-
-        public List<Vector3Int> GetSetAbleTiles()
-        {
-            List<Vector3Int> tilePositions = new List<Vector3Int>();
-            foreach (TileBase tile in setAbleTiles)
-            {
-                Vector3Int tilePos = tilemap.WorldToCell(tilemap.GetCellCenterWorld(tilemap.WorldToCell(Vector3.zero))); // Platzhalter für Tile-Position
-                tilePositions.Add(tilePos);
-            }
-            return tilePositions;
-        }
-
-        public void SpawnTileWithController(Vector3Int tilePosition)
-        {
-            if (!setAbleTiles.Contains(tilemap.GetTile(tilePosition)))
-            {
-                Debug.Log("Ungültiges Tile für Platzierung: " + tilePosition);
-                return;
-            }
-
-            Vector3 worldPosition = tilemap.GetCellCenterWorld(tilePosition);
-            SpawnTile(worldPosition, currentCard, true, true, isPlayer1Turn ? 1 : 2);
-
-            CardToHand cardToHand = FindObjectOfType<CardToHand>();
-            if (cardToHand != null)
-            {
-                cardToHand.EnableHandCardsForNavigation();
-            }
-        }
-
-
+        
 
         public void SpawnTile(Vector3 mouseWorldPos, Card card, bool PlayerMove, bool spawnSourroundSetables, int owner)
         {
@@ -296,12 +264,6 @@ namespace dungeonduell
         private void RemoveCardFromCardHolder()
         {
             Destroy(displayCardUi.gameObject);
-
-            // NEU: Informiere `HexgridControllerNavigation`, dass die Karte entfernt wurde.
-            if (controllerNavigation != null)
-            {
-                controllerNavigation.ResetNavigation();
-            }
         }
 
         private void CreateRoom(Vector3Int clickedTile, RoomType type, RoomElement element, bool[] allowedDoors, int owner, bool forceOnRoom)
@@ -369,8 +331,6 @@ namespace dungeonduell
 
             currentCard = (newcurrentCardUi is not null) ? newcurrentCardUi.card : null;
             currentDoorDir = (newcurrentCardUi is not null) ? currentCard.GetAllowedDirection() : null;
-
-            Debug.Log($"[TileClickHandler] Neue Karte gesetzt: {currentCard?.cardName}");
         }
 
         public bool[] ShiftRight(bool[] array)
