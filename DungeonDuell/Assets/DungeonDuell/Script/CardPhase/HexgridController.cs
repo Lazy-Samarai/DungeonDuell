@@ -1,48 +1,77 @@
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
-using UnityEngine.EventSystems;
-using MoreMountains.TopDownEngine;
-using System.Linq;
+using UnityEngine.InputSystem;
+using MoreMountains.TopDownEngine; 
 
 namespace dungeonduell
 {
     public class HexgridController : MonoBehaviour
     {
-        private Dictionary<Vector3Int, GameObject> tilePositions = new Dictionary<Vector3Int, GameObject>();
-        private Vector3Int selectedTilePos;
-        public GameObject cursor;
-        private Tilemap tilemap;
-        private PlayerInput playerInput;
-        private TileClickHandler tileClickHandler;
-        private CardToHand cardToHand;
-        private bool isPlayer1Turn;
+        [Header("Player Settings")]
+        public bool isPlayerOne;  // oder eine Methode IsPlayer1Card() unten
 
-        void Start()
+        [Header("References")]
+        public Tilemap tilemap;
+        public GameObject cursor;                // Highlighter
+        public TileClickHandler tileClickHandler; 
+        public CardToHand cardToHand;           
+
+        // Die Karte, die aktuell im CardHolder liegt
+        public DisplayCard currentDisplayCard;    
+
+        private PlayerInput playerInput;         
+        private Vector3Int selectedTilePos;      
+
+        // Even-/Odd-Offsets, wie gehabt:
+        private static readonly Vector3Int[] OffsetsEven =
         {
-            tilemap = FindObjectOfType<Tilemap>();
-            tileClickHandler = FindObjectOfType<TileClickHandler>();
-            playerInput = FindCorrectPlayerInput();
+            new Vector3Int(0, 1, 0),   // Oben links
+            new Vector3Int(1, 1, 0),   // Oben rechts
+            new Vector3Int(-1, 0, 0),  // Links
+            new Vector3Int(1, 0, 0),   // Rechts
+            new Vector3Int(0, -1, 0),  // Unten links
+            new Vector3Int(1, -1, 0)   // Unten rechts
+        };
 
+        private static readonly Vector3Int[] OffsetsOdd =
+        {
+            new Vector3Int(-1, 1, 0),  // Oben links
+            new Vector3Int(0, 1, 0),   // Oben rechts
+            new Vector3Int(-1, 0, 0),  // Links
+            new Vector3Int(1, 0, 0),   // Rechts
+            new Vector3Int(-1, -1, 0), // Unten links
+            new Vector3Int(0, -1, 0)   // Unten rechts
+        };
+
+        private void Start()
+        {
+            // Sucht  den PlayerInput:
+            if (playerInput == null)
+            {
+                playerInput = FindCorrectPlayerInput();
+            }
+
+            // Dann das passende CardToHand holen
+            if (cardToHand == null)
+            {
+                cardToHand = FindCorrectCardToHand();
+            }
+
+            // Cursor vorerst aus:
+            if (cursor) cursor.SetActive(false);
+
+            // Input-Hooks setzen:
             if (playerInput != null)
             {
                 playerInput.actions["Navigation"].performed += OnNavigate;
                 playerInput.actions["Submit"].performed += OnSubmit;
                 playerInput.actions["Back"].performed += OnBack;
             }
-            else
-            {
-                Debug.LogError($"Kein passendes PlayerInput-Objekt für {gameObject.name} gefunden!");
-            }
-
-            InitializeTilePositions();
-            if (cursor != null) cursor.SetActive(false);
-            else Debug.LogError("Cursor-GameObject ist nicht zugewiesen!");
         }
 
-        void OnDestroy()
+        private void OnDestroy()
         {
+            // Abos lösen
             if (playerInput != null)
             {
                 playerInput.actions["Navigation"].performed -= OnNavigate;
@@ -51,174 +80,143 @@ namespace dungeonduell
             }
         }
 
-        private void InitializeTilePositions()
-        {
-            tilePositions.Clear();
-            TileBase[] setAbleTiles = GetSetAbleTileBases();
-            foreach (Vector3Int tilePos in GetSetAbleTiles(setAbleTiles))
-            {
-                tilePositions[tilePos] = null;
-            }
-
-            if (tilePositions.Count > 0)
-            {
-                selectedTilePos = new List<Vector3Int>(tilePositions.Keys)[0];
-                UpdateCursor(selectedTilePos);
-            }
-
-            UpdateCursorVisibility();
-        }
-
         /// <summary>
-        /// Aktiviert das Hexgrid-Navigations-Interface (wie zuvor in HexgridControllerNavigation).
+        /// Aktiviert die Hex-Navigation, 
+        /// z.B. aufgerufen wenn Spieler eine Karte in den CardHolder legt.
         /// </summary>
         public void ActivateNavigation()
         {
-            if (tilePositions.Count > 0)
+            // Lade die Grenzen (Bounds) der Tilemap
+            BoundsInt bounds = tilemap.cellBounds;
+            bool foundValid = false;
+
+            // Durchlaufe jede Position innerhalb dieser Bounds
+            foreach (var cellPos in bounds.allPositionsWithin)
             {
-                // Falls noch kein Tile ausgewählt ist, wähle das erste aus
-                selectedTilePos = new List<Vector3Int>(tilePositions.Keys)[0];
-                UpdateCursor(selectedTilePos);
-                cursor.SetActive(true);
-            }
-
-            // Fokus auf das Hexgrid (bzw. den Cursor) setzen
-            if (cursor != null)
-            {
-                EventSystem.current.SetSelectedGameObject(cursor);
-            }
-        }
-
-
-        private void OnNavigate(InputAction.CallbackContext context)
-        {
-            if (!HasCardInCardHolder()) return;
-            cursor.SetActive(true);
-
-            Vector2 input = context.ReadValue<Vector2>();
-            NavigateTiles(input);
-        }
-
-        private void NavigateTiles(Vector2 input)
-        {
-            Vector3Int currentPos = selectedTilePos;
-            Vector3Int[] directions = {
-                new Vector3Int(1, 0, 0),
-                new Vector3Int(-1, 0, 0),
-                new Vector3Int(0, 1, 0),
-                new Vector3Int(0, -1, 0),
-                new Vector3Int(1, -1, 0),
-                new Vector3Int(-1, 1, 0)
-            };
-
-            Vector3Int targetPos = currentPos;
-            if (input.y > 0) targetPos += directions[2];
-            if (input.y < 0) targetPos += directions[3];
-            if (input.x > 0) targetPos += directions[0];
-            if (input.x < 0) targetPos += directions[1];
-
-            if (tilePositions.ContainsKey(targetPos))
-            {
-                selectedTilePos = targetPos;
-                UpdateCursor(selectedTilePos);
-            }
-        }
-
-        private void UpdateCursor(Vector3Int position)
-        {
-            if (cursor != null)
-            {
-                cursor.transform.position = tilemap.GetCellCenterWorld(position);
-                UpdateCursorVisibility();
-            }
-        }
-
-        private void UpdateCursorVisibility()
-        {
-            if (cursor != null)
-            {
-                cursor.SetActive(HasCardInCardHolder());
-            }
-        }
-
-        private void OnSubmit(InputAction.CallbackContext context)
-        {
-            if (!HasCardInCardHolder()) return;
-            SpawnTileWithController(selectedTilePos);
-            ResetNavigation();
-        }
-
-        private void OnBack(InputAction.CallbackContext context)
-        {
-            cursor.SetActive(false);
-            ResetNavigation();
-        }
-
-        public void ResetNavigation()
-        {
-            cursor.SetActive(false);
-        }
-
-        private bool HasCardInCardHolder()
-        {
-            return cardToHand != null && cardToHand.HasCardOnHolder();
-        }
-
-        private TileBase[] GetSetAbleTileBases()
-        {
-            return tilemap.GetTilesBlock(tilemap.cellBounds);
-        }
-
-        private List<Vector3Int> GetSetAbleTiles(TileBase[] setAbleTiles)
-        {
-            List<Vector3Int> tilePositions = new List<Vector3Int>();
-            foreach (Vector3Int pos in tilemap.cellBounds.allPositionsWithin)
-            {
-                if (setAbleTiles.Contains(tilemap.GetTile(pos)))
+                // Prüfe: Ist das ein setzbares Feld?
+                if (tileClickHandler.IsSetablePosition(cellPos))
                 {
-                    tilePositions.Add(pos);
+                    // Falls ja, setze das als selectedTilePos und brich die Schleife ab
+                    selectedTilePos = cellPos;
+                    foundValid = true;
+                    break;
                 }
             }
-            return tilePositions;
+
+            // Wenn man nichts gefunden hat, kann man z. B. warnen:
+            if (!foundValid)
+            {
+                Debug.LogWarning("Kein setzbares Feld in der Tilemap gefunden!");
+                return;
+            }
+
+            // Cursor sichtbar & positionieren:
+            if (cursor)
+            {
+                cursor.SetActive(true);
+                cursor.transform.position = tilemap.GetCellCenterWorld(selectedTilePos);
+            }
         }
 
-        private void SpawnTileWithController(Vector3Int tilePosition)
-        {
-            if (!HasCardInCardHolder() || tileClickHandler == null) return;
 
-            Vector3 worldPosition = tilemap.GetCellCenterWorld(tilePosition);
-            tileClickHandler.SpawnTile(worldPosition, tileClickHandler.currentCard, true, true, isPlayer1Turn ? 1 : 2);
+        /// <summary>
+        /// Cursor/Navigation aus.
+        /// </summary>
+        public void ResetNavigation()
+        {
+            if (cursor) cursor.SetActive(false);
+        }
+
+        private void OnNavigate(InputAction.CallbackContext ctx)
+        {
+            if (!cursor || !cursor.activeSelf) return;
+
+            Vector2 input = ctx.ReadValue<Vector2>();
+            // Deadzone
+            if (input.sqrMagnitude < 0.3f) return;
+
+            float angle = Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg;
+            if (angle < 0) angle += 360f;
+
+            int sector = Mathf.RoundToInt(angle / 60f) % 6;
+            Vector3Int[] offsets = (selectedTilePos.y % 2 == 0) ? OffsetsEven : OffsetsOdd;
+            Vector3Int neighborPos = selectedTilePos + offsets[sector];
+
+            // **Jetzt fragst du tileClickHandler**:
+            if (tileClickHandler.IsSetablePosition(neighborPos))
+            {
+                selectedTilePos = neighborPos;
+                cursor.transform.position = tilemap.GetCellCenterWorld(selectedTilePos);
+            }
+        }
+
+        private void OnSubmit(InputAction.CallbackContext ctx)
+        {
+            if (!cursor || !cursor.activeSelf) return;
+
+            Vector3 worldPos = tilemap.GetCellCenterWorld(selectedTilePos);
+
+            // Karte mit tileClickHandler.SpawnTile(...) platzieren:
+            tileClickHandler.SpawnTile(
+                worldPos,
+                tileClickHandler.currentCard, // oder was immer du dort hast
+                true, 
+                true,
+                tileClickHandler.isPlayer1Turn ? 1 : 2
+            );
+
+            // Danach beenden wir die Navigation:
+            ResetNavigation();
+
+            // Evtl. "NextTurn" etc.
+        }
+
+        private void OnBack(InputAction.CallbackContext ctx)
+        {
+            if (!cursor || !cursor.activeSelf) return;
+
+            // Karte zurück auf die Hand legen:
+            if (cardToHand != null && currentDisplayCard != null)
+            {
+                cardToHand.OnCardClicked(currentDisplayCard);
+            }
+            ResetNavigation();
+        }
+
+        private bool IsPlayer1Card()
+        {
+            return isPlayerOne;
         }
 
         private PlayerInput FindCorrectPlayerInput()
         {
-            string neededPlayerID = IsPlayer1Controller() ? "Player1" : "Player2";
+            // Geh alle PlayerInputs durch und guck, 
+            // wer "Player1" oder "Player2" ist:
+            string neededPlayerID = IsPlayer1Card() ? "Player1" : "Player2";
+
             foreach (var player in FindObjectsOfType<PlayerInput>())
             {
-                var playerManager = player.GetComponent<InputSystemManagerEventsBased>();
-                if (playerManager != null && playerManager.PlayerID == neededPlayerID)
+                var manager = player.GetComponent<InputSystemManagerEventsBased>();
+                if (manager != null && manager.PlayerID == neededPlayerID)
                 {
-                    return player;
+                    return player; 
+                }
+            }
+            return null; 
+        }
+
+        private CardToHand FindCorrectCardToHand()
+        {
+            // Durchsuche alle CardToHand-Skripte in der Szene
+            foreach (var cth in FindObjectsOfType<CardToHand>())
+            {
+                // Wenn sie denselben isPlayerOne-Wert haben, ist es die richtige Hand
+                if (cth.isPlayerOne == this.isPlayerOne)
+                {
+                    return cth;
                 }
             }
             return null;
-        }
-
-        public void AssignCardToHand(CardToHand newCardToHand)
-        {
-            cardToHand = newCardToHand;
-        }
-
-        private bool IsPlayer1Controller()
-        {
-            Transform parent = transform;
-            while (parent != null)
-            {
-                if (parent.name == "CanvasPlayer_1") return true;
-                if (parent.name == "CanvasPlayer_2") return false;
-                parent = parent.parent;
-            }
-            return true;
         }
     }
 }

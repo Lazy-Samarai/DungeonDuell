@@ -152,6 +152,16 @@ namespace dungeonduell
                     EnableHandCardsForNavigation();
                 }
 
+                // Fokus sofort auf die erste Karte (oder Skip-Button) legen
+                if (displayCards.Count > 0)
+                {
+                    Selectable firstCardSel = displayCards[0].GetComponent<Selectable>();
+                    if (firstCardSel != null)
+                    {
+                        EventSystem.current.SetSelectedGameObject(firstCardSel.gameObject);
+                    }
+                }
+
 
                 DisplayHand();
             }
@@ -181,6 +191,7 @@ namespace dungeonduell
                 if (clickedCard.transform.parent == cardHolder)
                 {
                     DisableHandCardsForNavigation();
+                    EventSystem.current.SetSelectedGameObject(null);
                 }
 
                 // Event: Neue Karte ausgewählt

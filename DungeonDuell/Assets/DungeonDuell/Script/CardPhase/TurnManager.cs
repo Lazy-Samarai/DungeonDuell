@@ -58,13 +58,6 @@ namespace dungeonduell
             // Zeigt die Handkarten für den aktuellen Spieler an
             ToggleHandVisibility(isPlayer1Turn, !isPlayer1Turn);
 
-            // **HEXGRID-CONTROLLER ERHÄLT DAS RICHTIGE CardToHand**
-            HexgridController hexgridController = FindObjectOfType<HexgridController>();
-            if (hexgridController != null)
-            {
-                hexgridController.AssignCardToHand(isPlayer1Turn ? HandPlayer1 : HandPlayer2);
-            }
-
             // Prüfe, ob der erste Input von einem Controller kam
             if (IsUsingController())
             {
