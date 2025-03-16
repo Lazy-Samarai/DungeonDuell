@@ -51,7 +51,6 @@ namespace dungeonduell
         private void Start()
         {
             connectCollector = FindObjectOfType<ConnectionsCollector>();
-            tilemap = FindObjectOfType<Tilemap>();
 
             foreach (VirtualMouseInput go in FindObjectsOfType<VirtualMouseInput>())
             {
@@ -262,6 +261,9 @@ namespace dungeonduell
                     isPlayer1Turn = !isPlayer1Turn;
 
                     currentCard = null;
+                }
+                else{
+                    DDCodeEventHandler.Trigger_PreSetCardSetOnTilemap(card,cellPosition);
                 }
 
                 GameObject indicator = Instantiate(indiactorDoor, tilemap.CellToWorld(cellPosition), Quaternion.identity);

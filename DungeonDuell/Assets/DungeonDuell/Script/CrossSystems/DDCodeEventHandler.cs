@@ -10,15 +10,16 @@ namespace dungeonduell
     {
         // Card Phase
         public static event Action DungeonConnected;
-        public static void Trigger_DungeonConnected() { 
-            print("guorejinsoduijrfg");
-            DungeonConnected.Invoke(); }
+        public static void Trigger_DungeonConnected() { DungeonConnected.Invoke(); }
         public static event Action NextPlayerTurn;
         public static void Trigger_NextPlayerTurn() { NextPlayerTurn.Invoke(); }
         public static event Action<DisplayCard> CardSelected; // this might not be ideal but seems best for visual update and destroying later  
         public static void Trigger_CardSelected(DisplayCard card) { CardSelected.Invoke(card); }
         public static event Action<Card, bool> CardPlayed;
         public static void Trigger_CardPlayed(Card card, bool Player1Played) { CardPlayed.Invoke(card, Player1Played); }
+        public static event Action<Card,Vector3Int> PreSetCardSetOnTilemap;
+        public static void Trigger_PreSetCardSetOnTilemap(Card card,Vector3Int point) { PreSetCardSetOnTilemap.Invoke(card,point); }
+
         public static event Action FinalRoundInDungeon;
         public static void Trigger_FinalRoundInDungeon() { FinalRoundInDungeon.Invoke(); }
 
