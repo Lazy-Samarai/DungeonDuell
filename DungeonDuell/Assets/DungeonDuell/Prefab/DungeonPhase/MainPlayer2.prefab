@@ -10188,7 +10188,7 @@ MonoBehaviour:
   BlockingMovementStates: 
   BlockingConditionStates: 
   BlockingWeaponStates: 
-  InitialWeapon: {fileID: 114317679573123918, guid: 5a0774024b2f86147ae271ec1011aa8d,
+  InitialWeapon: {fileID: 114317679573123918, guid: cc2c651a7e523074789a548bdb6127b2,
     type: 3}
   CanPickupWeapons: 1
   WeaponUseFeedback: {fileID: 0}
@@ -18251,8 +18251,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   running: Run
+  runningMultiply: 1
   idle: Idle2
   walk: Walk
+  walkMultiply: 1
 --- !u!1 &6808776468769401931
 GameObject:
   m_ObjectHideFlags: 0

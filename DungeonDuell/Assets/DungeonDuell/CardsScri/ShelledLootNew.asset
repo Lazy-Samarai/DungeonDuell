@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2770c822190c8db4f87c9952737a3ede, type: 3}
+  m_Name: ShelledLootNew
+  m_EditorClassIdentifier: 
+  cardId: 0
+  cardName: 
+  cardDescription: 
+  roomtype: 1
+  roomElement: 0
+  Tile: {fileID: 11400000, guid: b7cbeb18acedfe049b0ef219fc81de93, type: 2}
+  startDoorConcellation:
+    TopLeft: 1
+    TopRight: 0
+    Left: 1
+    Right: 1
+    BottonLeft: 0
+    BottonRight: 0
+  InPlayerRangeTile:
+  - {fileID: 11400000, guid: 688f6a489090c83459db8d30e352dd60, type: 2}
+  - {fileID: 11400000, guid: 5cbc7f8310cf5604fa4ee1a2b8b74bac, type: 2}
+  - {fileID: 11400000, guid: b45967f171c6ef94b80b33e8dc5f99e8, type: 2}
+  CompleteTile: {fileID: 11400000, guid: b31a967af84d14141811119f6db69609, type: 2}
