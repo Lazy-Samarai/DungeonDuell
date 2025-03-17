@@ -29,12 +29,10 @@ namespace dungeonduell
 
             //TopDownEnginePointEvent.Trigger(PointsMethods.Add, PointsToAdd);
 
-            Debug.Log("M�nze aufgenommen");
             Character character = picker.GetComponent<Character>();
             if (character != null)
             {
-                CoinEvent.Trigger(PointsToAdd, picker);
-                Debug.Log($"Coin Event + {character.PlayerID}");
+                CoinEvent.Trigger(PointsToAdd, picker);            
             }
             else
             {

@@ -8,7 +8,7 @@ namespace dungeonduell
     public class PlayerDeck : MonoBehaviour
     {
         public int designatedCardScene = 0;
-        // Liste der verfügbaren Karten. Mit allen ScriptableObjectCards im Editor füllen
+        // Liste der verfï¿½gbaren Karten. Mit allen ScriptableObjectCards im Editor fï¿½llen
         public bool useDistributorSystem = true;
 
         public bool firstTime = true;
@@ -24,25 +24,19 @@ namespace dungeonduell
 
         void OnEnable()
         {
-            Debug.Log("OnEnable called");
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
         void OnDisable()
         {
-            Debug.Log("OnDisable");
             SceneManager.sceneLoaded -= OnSceneLoaded;
         }
 
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            
-            
             if (scene.buildIndex == designatedCardScene)
             {
-                    GenerateRandomDeck();
+                GenerateRandomDeck();
             }
-            
-            
         }
 
         void GenerateRandomDeck()
@@ -55,29 +49,26 @@ namespace dungeonduell
 
             if (availableCards.Count == 0)
             {
-                Debug.LogError("Die Liste der verfügbaren Karten ist leer!");
+                Debug.LogError("Die Liste der verfï¿½gbaren Karten ist leer!");
                 return;
             }
 
             playerDeck.Clear();
 
-            // Zufällig Karten auswählen und dem Deck hinzufügen 
+            // Zufï¿½llig Karten auswï¿½hlen und dem Deck hinzufï¿½gen 
             for (int i = 0; i < deckSize; i++)
             {
-                print(i);
-                int randomIndex = Random.Range(0, availableCards.Count);             
-                playerDeck.Add(availableCards[randomIndex]);         
+                int randomIndex = Random.Range(0, availableCards.Count);
+                playerDeck.Add(availableCards[randomIndex]);
                 availableCards.RemoveAt(randomIndex);
 
 
-                if(availableCards.Count <= 0)
+                if (availableCards.Count <= 0)
                 {
                     GetPerDistributer();
                 }
 
             }
-
-            Debug.Log("Deck erfolgreich generiert mit " + playerDeck.Count + " Karten.");
         }
 
         private void GetPerDistributer()

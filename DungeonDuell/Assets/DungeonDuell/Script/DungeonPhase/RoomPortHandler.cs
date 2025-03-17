@@ -22,18 +22,5 @@ namespace dungeonduell
         {
             return availablePort[(int)dir];
         }
-
-        /*
-        private Transform[] GetRemovePostions(GameObject port)
-        {
-            return port.transform.GetChild(0).GetComponentsInChildren<Transform>().Skip(1).ToArray<Transform>();
-        }
-        private TileSetContainer[] GetSetPostions(GameObject port)
-        {
-            return port.transform.GetChild(1).GetComponentsInChildren<TileSetContainer>();
-        }
-        */
-
-
     }
 }

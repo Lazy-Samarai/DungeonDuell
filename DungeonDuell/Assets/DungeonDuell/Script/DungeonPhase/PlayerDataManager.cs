@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MoreMountains.Tools;
 using MoreMountains.TopDownEngine;
+using UnityEngine.SceneManagement;
 
 namespace dungeonduell
 {
@@ -20,6 +21,8 @@ namespace dungeonduell
         public float Health;
         public float AttackSpeed;
 
+        public int RemainingLive = 2;
+
         public PlayerData(string playerID, int points, int level, int coinsForNextLevel, float walkSpeed, float runSpeed, float health, float attackSpeed)
         {
             PlayerID = playerID;
@@ -34,76 +37,78 @@ namespace dungeonduell
         }
     }
 
-    public class PlayerDataManager : MonoBehaviour, MMEventListener<SavePlayerDataEvent>, MMEventListener<LoadPlayerDataEvent>
+    public class PlayerDataManager : MonoBehaviour, IObserver
     {
-        public static PlayerDataManager Instance;
 
         public List<PlayerData> PlayerDataList = new List<PlayerData>();
 
-        private void Awake()
+        public bool nextRoundFinal = false;
+
+        void Awake()
         {
-            if (Instance != null && Instance != this)
+            PlayerDataManager[] objs = FindObjectsOfType<PlayerDataManager>();
+
+            if (objs.Length > 1)
             {
-                Destroy(gameObject);
-                return;
+                Destroy(this.gameObject);
             }
 
-            Instance = this;
             DontDestroyOnLoad(gameObject);
-
             InitializePlayerData();
         }
 
         private void InitializePlayerData()
         {
-            PlayerPrefs.DeleteAll();
             PlayerDataList.Add(new PlayerData("Player1", 0, 1, 1, 6, 10, 30, 1));
             PlayerDataList.Add(new PlayerData("Player2", 0, 1, 1, 6, 10, 30, 1));
         }
 
-        public void OnMMEvent(SavePlayerDataEvent e)
+
+        public void FinalRound()
         {
-            foreach (var data in PlayerDataList)
+            nextRoundFinal = true;
+            for (int i = 0; i < PlayerDataList.Count; i++)
             {
-                PlayerPrefs.SetInt($"{data.PlayerID}_Points", data.Points);
-                PlayerPrefs.SetInt($"{data.PlayerID}_Level", data.Level);
-                PlayerPrefs.SetInt($"{data.PlayerID}_CoinsForNextLevel", data.CoinsForNextLevel);
-
-                PlayerPrefs.SetFloat($"{data.PlayerID}_WalkSpeed", data.WalkSpeed);
-                PlayerPrefs.SetFloat($"{data.PlayerID}_RunSpeed", data.RunSpeed);
-                PlayerPrefs.SetFloat($"{data.PlayerID}_Health", data.Health);
-                PlayerPrefs.SetFloat($"{data.PlayerID}_AttackSpeed", data.AttackSpeed);
+                PlayerDataList[i].RemainingLive = 1;
             }
-            PlayerPrefs.Save();
-            Debug.Log("Spielerdaten gespeichert (Event).");
         }
 
-        public void OnMMEvent(LoadPlayerDataEvent e)
+        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            foreach (var data in PlayerDataList)
+            if (scene.buildIndex == 1)
             {
-                data.Points = PlayerPrefs.GetInt($"{data.PlayerID}_Points", 0);
-                data.Level = PlayerPrefs.GetInt($"{data.PlayerID}_Level", 1);
-                data.CoinsForNextLevel = PlayerPrefs.GetInt($"{data.PlayerID}_CoinsForNextLevel", 1);
-
-                data.WalkSpeed = PlayerPrefs.GetFloat($"{data.PlayerID}_WalkSpeed", 5.0f);  // Standardwerte anpassen
-                data.RunSpeed = PlayerPrefs.GetFloat($"{data.PlayerID}_RunSpeed", 7.0f);
-                data.Health = PlayerPrefs.GetFloat($"{data.PlayerID}_Health", 100.0f);
-                data.AttackSpeed = PlayerPrefs.GetFloat($"{data.PlayerID}_AttackSpeed", 1.0f);
+                if (nextRoundFinal)
+                {
+                    DDCodeEventHandler.Trigger_FinalRoundInDungeon();
+                    
+                    SequenceMang sequenceMang;
+                    if (sequenceMang = FindAnyObjectByType<SequenceMang>())
+                    {
+                        sequenceMang.DisableTimer();
+                    }
+                }
             }
-            Debug.Log("Spielerdaten geladen (Event).");
+
+        }
+        void OnEnable()
+        {
+            SubscribeToEvents();
+        }
+        void OnDisable()
+        {
+            UnsubscribeToAllEvents();
+        }
+        public void SubscribeToEvents()
+        {
+            DDCodeEventHandler.DungeonConnected += FinalRound;
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
-        private void OnEnable()
+        public void UnsubscribeToAllEvents()
         {
-            this.MMEventStartListening<SavePlayerDataEvent>();
-            this.MMEventStartListening<LoadPlayerDataEvent>();
+            DDCodeEventHandler.DungeonConnected -= FinalRound;
+            SceneManager.sceneLoaded -= OnSceneLoaded;
         }
 
-        private void OnDisable()
-        {
-            this.MMEventStopListening<SavePlayerDataEvent>();
-            this.MMEventStopListening<LoadPlayerDataEvent>();
-        }
     }
 }

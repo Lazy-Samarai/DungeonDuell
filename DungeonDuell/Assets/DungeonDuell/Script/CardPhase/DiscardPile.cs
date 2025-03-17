@@ -3,15 +3,37 @@ using UnityEngine;
 
 namespace dungeonduell
 {
-    public class DiscardPile : MonoBehaviour
+    public class DiscardPile : MonoBehaviour,IObserver
     {
         public List<Card> discardPile = new List<Card>();
 
-        // Methode zum Hinzufügen einer Karte zum Abwurfstapel
-        public void AddCardToDiscardPile(Card card)
+        public bool belongPlayer1;
+
+        // Methode zum Hinzufï¿½gen einer Karte zum Abwurfstapel
+        public void AddCardToDiscardPile(Card card,bool Player1played)
         {
-            discardPile.Add(card);
-            //Debug.Log($"Karte {card.cardName} zum Abwurfstapel hinzugefügt.");
+            if(Player1played == belongPlayer1)
+            {
+                discardPile.Add(card);
+            }
+        }
+
+        void OnEnable()
+        {      
+            SubscribeToEvents();
+        }
+        void OnDisable()
+        {
+           UnsubscribeToAllEvents();
+        }   
+        public void SubscribeToEvents()
+        {
+            DDCodeEventHandler.CardPlayed += AddCardToDiscardPile;
+        }
+
+        public void UnsubscribeToAllEvents()
+        {
+            DDCodeEventHandler.CardPlayed -= AddCardToDiscardPile;
         }
     }
 }

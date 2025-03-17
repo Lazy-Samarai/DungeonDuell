@@ -522,7 +522,7 @@
                 {
                     "name": "",
                     "id": "9b458c2a-51c4-465e-b2c9-bb7328832678",
-                    "path": "<Keyboard>/numpad0",
+                    "path": "<Keyboard>/l",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -544,7 +544,7 @@
                 {
                     "name": "",
                     "id": "d1448d45-7f0a-49f1-9be4-087dab960505",
-                    "path": "<Keyboard>/numpad1",
+                    "path": "<Keyboard>/1",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -566,7 +566,7 @@
                 {
                     "name": "",
                     "id": "0b960752-fdd1-4cc3-b22f-20eb68a65b59",
-                    "path": "<Keyboard>/numpad2",
+                    "path": "<Keyboard>/2",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -588,7 +588,7 @@
                 {
                     "name": "",
                     "id": "5278a078-305c-44e8-8cea-aa55f6235d06",
-                    "path": "<Keyboard>/numpad3",
+                    "path": "<Keyboard>/3",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -613,11 +613,11 @@
                 },
                 {
                     "name": "RotateR",
-                    "type": "PassThrough",
+                    "type": "Button",
                     "id": "5d894b6c-1123-4baf-b78c-1ea7d37abfaa",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press(pressPoint=1.401298E-45,behavior=1)",
+                    "interactions": "",
                     "initialStateCheck": false
                 },
                 {
@@ -637,6 +637,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Navigation",
+                    "type": "Value",
+                    "id": "3c914630-d9c6-47d1-8648-7b8d5a22c551",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -675,6 +684,17 @@
                 },
                 {
                     "name": "",
+                    "id": "03268f61-bb1c-48bc-924a-fc885b6f930e",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateR",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "a7c93fce-6953-4eb0-be17-4772584408e8",
                     "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
@@ -692,6 +712,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Submit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "93af95a5-653e-4321-83ae-8d4a00481d88",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Navigation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "04ee87c1-7784-451c-afe0-e14b74947f59",
+                    "path": "<Gamepad>/dpad",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Navigation",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
