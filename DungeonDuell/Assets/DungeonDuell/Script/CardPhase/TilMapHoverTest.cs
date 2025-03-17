@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.InputSystem.UI;
 
 namespace dungeonduell
 {
+
     public class TilMapHoverTest : MonoBehaviour, IObserver
     {
+        const string visualAniNameRef = "Visible";
         public Camera cam;
-        public TileBase testTile;
+        public TileBase hoverTile;
 
         public TileBase blockTile;
 
@@ -17,33 +20,65 @@ namespace dungeonduell
 
         public Vector3Int currentCellPosition;
 
-        // Update is called once per frame
+        public DoorIndicator indiactorDoorPrefab;
+        public DoorIndicator runTimeIndicatorDoor;
+
+        bool Currentlyvisble = false;
+
+        Animator animator;
+
+        void Awake()
+        {
+            runTimeIndicatorDoor = Instantiate(indiactorDoorPrefab, transform.position, Quaternion.identity);
+            runTimeIndicatorDoor.transform.parent = transform;
+            runTimeIndicatorDoor.transform.gameObject.SetActive(false);
+            animator = GetComponent<Animator>();
+            tilemap = GetComponent<Tilemap>();
+        }
         void Update()
         {
-            Vector3 mouseWorldPos = cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -cam.transform.position.z));
+            if (Currentlyvisble)
+            {
+                Vector3 mouseWorldPos = cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -cam.transform.position.z));
+                HandleHover(mouseWorldPos);
+            }
 
+        }
+        private void HandleHover(Vector3 mouseWorldPos)
+        {
             Vector3Int cellPosition = tilemap.WorldToCell(new Vector3(mouseWorldPos.x, mouseWorldPos.y, cam.transform.position.z));
 
             if (cellPosition != currentCellPosition)
             {
                 if (tilemap.GetTile(cellPosition) != blockTile)
                 {
-                    if (tilemap.GetTile(currentCellPosition) != blockTile)
-                    {
-                        tilemap.SetTile(currentCellPosition, null);
-                    }
-                    currentCellPosition = cellPosition;
-                    tilemap.SetTile(currentCellPosition, testTile);
+                    ResetTileCheck();
+                    tilemap.SetTile(cellPosition, hoverTile);
+                    runTimeIndicatorDoor.transform.position = tilemap.CellToWorld(cellPosition);
+                    runTimeIndicatorDoor.transform.gameObject.SetActive(Currentlyvisble ? true : false);
                 }
                 else
                 {
-                    tilemap.SetTile(currentCellPosition, null);
+                    ResetTileCheck();
+                    runTimeIndicatorDoor.transform.gameObject.SetActive(false);
                 }
+                currentCellPosition = cellPosition;
             }
         }
+
+        private void ResetTileCheck()
+        {
+            if (tilemap.GetTile(currentCellPosition) != blockTile)
+            {
+                tilemap.SetTile(currentCellPosition, null);
+            }
+        }
+
         public void SetHoverMapVisable(bool visual)
         {
-            tilemap.color = visual ? tilemap.color.WithAlpha(255) : tilemap.color.WithAlpha(0);
+            runTimeIndicatorDoor.transform.gameObject.SetActive(visual);
+            animator.SetBool(visualAniNameRef, visual);
+            Currentlyvisble = visual;
         }
 
         public void OnCardPlayed(Card card, bool p)
@@ -51,10 +86,18 @@ namespace dungeonduell
             SetBlockOnTile(currentCellPosition);
             SetHoverMapVisable(false);
         }
-        public void OnCardSelected(DisplayCard displayCard){
+        public void OnCardSelected(DisplayCard displayCard)
+        {
+            hoverTile = displayCard.card.Tile;
             SetHoverMapVisable(true);
+
+            UpdateIndicator(displayCard.card.GetAllowedDirection());
         }
-        public void OnPreSetCardSetOnTilemap(Card card,Vector3Int point)
+        public void UpdateIndicator(bool[] allowedDoors)
+        {
+            runTimeIndicatorDoor.SetDoorIndiactor(allowedDoors);
+        }
+        public void OnPreSetCardSetOnTilemap(Card card, Vector3Int point)
         {
             SetBlockOnTile(point);
         }
@@ -65,6 +108,8 @@ namespace dungeonduell
         }
         void OnEnable()
         {
+            cam = FindAnyObjectByType<Camera>();
+
             SubscribeToEvents();
         }
         void OnDisable()
@@ -76,13 +121,15 @@ namespace dungeonduell
             DDCodeEventHandler.CardPlayed += OnCardPlayed;
             DDCodeEventHandler.PreSetCardSetOnTilemap += OnPreSetCardSetOnTilemap;
             DDCodeEventHandler.CardSelected += OnCardSelected;
+            DDCodeEventHandler.CardRotating += UpdateIndicator;
         }
 
         public void UnsubscribeToAllEvents()
         {
             DDCodeEventHandler.CardPlayed -= OnCardPlayed;
             DDCodeEventHandler.PreSetCardSetOnTilemap -= OnPreSetCardSetOnTilemap;
-            DDCodeEventHandler.CardSelected += OnCardSelected;
+            DDCodeEventHandler.CardSelected -= OnCardSelected;
+            DDCodeEventHandler.CardRotating -= UpdateIndicator;
         }
     }
 }
