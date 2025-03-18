@@ -136,23 +136,32 @@ namespace dungeonduell
         /// </summary>
         public void OnCardClicked(DisplayCard clickedCard)
         {
+            // **1) Karte war schon im CardHolder** → Spieler legt sie zurück in die Hand
             if (clickedCard.transform.parent == cardHolder)
             {
+                // Füge die Karte wieder den Handkarten hinzu (falls sie fehlt)
                 if (!handCards.Contains(clickedCard.card))
+                {
                     handCards.Add(clickedCard.card);
+                }
 
+                // Verschiebe sie optisch ins HandPanel
                 clickedCard.transform.SetParent(handPanel, false);
 
                 // Event: Keine Karte mehr ausgewählt
                 DDCodeEventHandler.Trigger_CardSelected(null);
 
-                // Handkarten wieder aktivieren, wenn eine Karte zurück in die Hand geht
-                if (clickedCard.transform.parent == handPanel)
-                {
-                    EnableHandCardsForNavigation();
-                }
+                // **Handkarten wieder aktivieren** (Selectables true)
+                EnableHandCardsForNavigation();
 
-                // Fokus sofort auf die erste Karte (oder Skip-Button) legen
+                // Hand-Layout aktualisieren
+                DisplayHand();
+
+                // Da wir jetzt wieder in der Hand sind, 
+                // Navigation für UI-Karten neu aufbauen (explizit links/rechts)
+                SetupNavigation(skipButton);
+
+                // **Fokus sofort setzen** – z. B. auf die erste Karte
                 if (displayCards.Count > 0)
                 {
                     Selectable firstCardSel = displayCards[0].GetComponent<Selectable>();
@@ -161,19 +170,19 @@ namespace dungeonduell
                         EventSystem.current.SetSelectedGameObject(firstCardSel.gameObject);
                     }
                 }
-
-
-                DisplayHand();
             }
+            // **2) Karte lag in der Hand** → Spieler legt sie in den CardHolder
             else
             {
+                // Entferne die Karte aus der Handliste
                 handCards.Remove(clickedCard.card);
 
-                // Falls bereits eine Karte im CardHolder liegt, verschiebe sie zurück in die Hand
+                // OPTIONAL: Falls bereits eine andere Karte im Holder liegt, 
+                // verschiebe die alte zurück in die Hand
                 if (cardHolder.childCount > 0)
                 {
-                    Transform oldCard = cardHolder.GetChild(0);
-                    DisplayCard oldDc = oldCard.GetComponent<DisplayCard>();
+                    Transform oldCardTransform = cardHolder.GetChild(0);
+                    DisplayCard oldDc = oldCardTransform.GetComponent<DisplayCard>();
                     if (oldDc != null)
                     {
                         if (!handCards.Contains(oldDc.card))
@@ -183,29 +192,35 @@ namespace dungeonduell
                     }
                 }
 
+                // **Verschiebe die geklickte Karte in den CardHolder**
                 clickedCard.transform.SetParent(cardHolder, false);
                 clickedCard.transform.localPosition = Vector3.zero;
                 clickedCard.transform.localRotation = Quaternion.identity;
                 clickedCard.transform.localScale = Vector3.one;
 
-                if (clickedCard.transform.parent == cardHolder)
-                {
-                    DisableHandCardsForNavigation();
-                    EventSystem.current.SetSelectedGameObject(null);
-                }
+                // **Handkarten‐Selectables deaktivieren**, damit man nicht mehr 
+                // gleichzeitig in Hand & Hex navigieren kann
+                DisableHandCardsForNavigation();
+
+                // **UI‐Fokus rausnehmen**, damit nicht versehentlich noch eine Karte selektiert ist
+                EventSystem.current.SetSelectedGameObject(null);
 
                 // Event: Neue Karte ausgewählt
                 DDCodeEventHandler.Trigger_CardSelected(clickedCard);
 
+                // Hexgrid‐Navigation aktivieren
                 HexgridController hexgridController = FindObjectOfType<HexgridController>();
                 if (hexgridController != null)
                 {
+                    hexgridController.currentDisplayCard = clickedCard; // merk dir, welche Karte platziert werden soll
                     hexgridController.ActivateNavigation();
                 }
 
+                // Hand-Layout aktualisieren (damit die Karte nicht mehr in der Hand angezeigt wird)
                 DisplayHand();
             }
         }
+
 
         private void DisableHandCardsForNavigation()
         {

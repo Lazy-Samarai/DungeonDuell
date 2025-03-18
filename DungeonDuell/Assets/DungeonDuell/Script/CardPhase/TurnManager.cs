@@ -17,15 +17,17 @@ namespace dungeonduell
         private bool awaitingKeyPress = false;
 
         public bool isPlayer1Turn = true;
+        private float timeStart;
 
         void Start()
         {
+            timeStart = Time.time;
             InitializeTurn(); // Startet den ersten Spielzug
         }
 
         void Update()
         {
-            if (awaitingKeyPress && Input.anyKeyDown)
+            if (awaitingKeyPress && (Time.time - timeStart > 0.5f) && Input.anyKeyDown)
             {
                 BeginPlayerActionPhase();
             }
