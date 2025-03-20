@@ -1424,7 +1424,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2118469197}
+      objectReference: {fileID: 2118469198}
     - target: {fileID: 1690111847243631282, guid: 04e4d2f394825a14abf407fe31800c21,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -1433,12 +1433,12 @@ PrefabInstance:
     - target: {fileID: 1690111847243631282, guid: 04e4d2f394825a14abf407fe31800c21,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ToggleOptions
+      value: OpenOptions
       objectReference: {fileID: 0}
     - target: {fileID: 1690111847243631282, guid: 04e4d2f394825a14abf407fe31800c21,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: dungeonduell.UIManager, Assembly-CSharp
+      value: dungeonduell.OptionsMenu, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 1690111847243631282, guid: 04e4d2f394825a14abf407fe31800c21,
         type: 3}
@@ -1738,7 +1738,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1282732026}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: dungeonduell.OptionsMenu, Assembly-CSharp
         m_MethodName: SetVolume
         m_Mode: 0
@@ -2908,7 +2908,6 @@ GameObject:
   - component: {fileID: 1282732023}
   - component: {fileID: 1282732025}
   - component: {fileID: 1282732024}
-  - component: {fileID: 1282732026}
   m_Layer: 5
   m_Name: Options Panel
   m_TagString: Untagged
@@ -2978,23 +2977,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1282732022}
   m_CullTransparentMesh: 1
---- !u!114 &1282732026
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1282732022}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71b76412d20f21a47ad8b89e190f3169, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  optionsPanel: {fileID: 1282732022}
-  volumeSlider: {fileID: 845037473}
-  audioMixer: {fileID: 0}
-  fullscreenToggle: {fileID: 1618608138}
-  resolutionDropdown: {fileID: 697868294}
 --- !u!1 &1347565868
 GameObject:
   m_ObjectHideFlags: 0
@@ -3507,7 +3489,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1282732026}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: dungeonduell.OptionsMenu, Assembly-CSharp
         m_MethodName: SetFullscreen
         m_Mode: 0
@@ -3767,7 +3749,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2118469197}
+      objectReference: {fileID: 2118469198}
     - target: {fileID: 1690111847243631282, guid: 04e4d2f394825a14abf407fe31800c21,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -3776,12 +3758,12 @@ PrefabInstance:
     - target: {fileID: 1690111847243631282, guid: 04e4d2f394825a14abf407fe31800c21,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ToggleOptions
+      value: CloseOptions
       objectReference: {fileID: 0}
     - target: {fileID: 1690111847243631282, guid: 04e4d2f394825a14abf407fe31800c21,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UIManager, Assembly-CSharp
+      value: dungeonduell.OptionsMenu, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 1690111847243631282, guid: 04e4d2f394825a14abf407fe31800c21,
         type: 3}
@@ -5007,6 +4989,7 @@ GameObject:
   - component: {fileID: 2118469194}
   - component: {fileID: 2118469193}
   - component: {fileID: 2118469197}
+  - component: {fileID: 2118469198}
   m_Layer: 5
   m_Name: TS Canvas
   m_TagString: Untagged
@@ -5119,6 +5102,23 @@ MonoBehaviour:
   creditsPanel: {fileID: 531485021}
   optionsPanel: {fileID: 1282732022}
   fadeCanvas: {fileID: 0}
+--- !u!114 &2118469198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2118469192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71b76412d20f21a47ad8b89e190f3169, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  optionsPanel: {fileID: 1282732022}
+  volumeSlider: {fileID: 845037473}
+  audioMixer: {fileID: 24100000, guid: 7e984f512e89b60468e829489e8883e3, type: 2}
+  fullscreenToggle: {fileID: 1618608138}
+  resolutionDropdown: {fileID: 697868294}
 --- !u!1 &2120015596
 GameObject:
   m_ObjectHideFlags: 0
