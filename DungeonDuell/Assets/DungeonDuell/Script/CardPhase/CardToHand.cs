@@ -151,6 +151,12 @@ namespace dungeonduell
                 // Event: Keine Karte mehr ausgewählt
                 DDCodeEventHandler.Trigger_CardSelected(null);
 
+                HexgridController hexgridController = FindObjectOfType<HexgridController>();
+                if (hexgridController != null)
+                {
+                    hexgridController.ResetNavigation();
+                }
+
                 // **Handkarten wieder aktivieren** (Selectables true)
                 EnableHandCardsForNavigation();
 
@@ -250,7 +256,7 @@ namespace dungeonduell
 
         public bool HasCardOnHolder()
         {
-            return cardHolder.childCount > 0; // Gibt true zurück, wenn mindestens eine Karte im CardHolder liegt
+            return cardHolder.childCount > 0; 
         }
 
 
@@ -354,8 +360,6 @@ namespace dungeonduell
         {
             if (hide)
             {
-                // 1) Fahre das Objekt nach unten (Y=-300) in 0.5s.
-                //    Wenn Animation fertig ist, deaktiviere das Objekt.
                 transform.DOMoveY(-300, 0.5f).OnComplete(() =>
                 {
                     gameObject.SetActive(false);
@@ -366,10 +370,8 @@ namespace dungeonduell
                 // 2) Aktiviere das Objekt zuerst
                 gameObject.SetActive(true);
 
-                //    Setze die Startposition auf Y=-300 (z. B. außerhalb des Sichtbereichs)
-                //    und fahre es hoch auf Y=0 in 0.5s.
                 Vector3 startPos = transform.position;
-                startPos.y = -300; // oder irgendein Wert, wo es „unsichtbar“ ist
+                startPos.y = -300; 
                 transform.position = startPos;
 
                 transform.DOMoveY(0, 0.5f);

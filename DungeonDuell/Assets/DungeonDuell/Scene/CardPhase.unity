@@ -519,13 +519,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6fd9cdf09f6719445984cc19df434a57, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   isPlayerOne: 1
   tilemap: {fileID: 1763767974}
   cursor: {fileID: 887889882}
   tileClickHandler: {fileID: 481254717}
-  cardToHand: {fileID: 0}
+  turnManager: {fileID: 1557636384}
   currentDisplayCard: {fileID: 0}
 --- !u!1 &511666256
 GameObject:
@@ -1511,7 +1511,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 01ca3b43f91b5924e85e2894708130ea, type: 2}
   WorldCard:
   - {fileID: 11400000, guid: 27af0542bdc0ff742b14a1d7620896cb, type: 2}
-  - {fileID: 11400000, guid: 987aa6efb8569d34fb1b74b7a9ce6372, type: 2}
+  - {fileID: 0}
 --- !u!1 &952181107
 GameObject:
   m_ObjectHideFlags: 0
@@ -3491,7 +3491,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 385310870bca89243a9f10841d4ee16c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   playerTurnText: {fileID: 511666258}
   pressAnyKeyText: {fileID: 2034102534}
   HandPlayer1: {fileID: 2012748599}

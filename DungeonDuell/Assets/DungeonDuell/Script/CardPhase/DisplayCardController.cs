@@ -28,7 +28,6 @@ namespace dungeonduell
             if (playerInput != null)
             {
                 playerInput.actions["Submit"].performed += OnSubmitPressed;
-                playerInput.actions["Back"].performed += OnBackPressed; // `Back` Action für Zurücksetzen
             }
             else
             {
@@ -41,7 +40,6 @@ namespace dungeonduell
             if (playerInput != null)
             {
                 playerInput.actions["Submit"].performed -= OnSubmitPressed;
-                playerInput.actions["Back"].performed -= OnBackPressed;
             }
         }
 
@@ -55,6 +53,7 @@ namespace dungeonduell
             }
         }
 
+        /*
         private void OnBackPressed(InputAction.CallbackContext context)
         {
             // Prüft, ob diese Karte im CardHolder liegt
@@ -63,6 +62,7 @@ namespace dungeonduell
                 cardToHand.OnCardClicked(displayCard); // Führt den Rücktransfer aus
             }
         }
+        */
 
         private PlayerInput FindCorrectPlayerInput()
         {

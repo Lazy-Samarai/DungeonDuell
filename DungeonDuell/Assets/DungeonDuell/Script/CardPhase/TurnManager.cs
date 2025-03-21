@@ -95,7 +95,6 @@ namespace dungeonduell
         }
 
 
-
         public void EndPlayerTurn()
         {
             isPlayer1Turn = !isPlayer1Turn;
