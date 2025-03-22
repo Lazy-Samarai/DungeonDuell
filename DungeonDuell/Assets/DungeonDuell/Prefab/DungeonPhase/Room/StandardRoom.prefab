@@ -249,8 +249,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da45a6de3ca7f7f4a907da521c7fbbb0, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   cams:
   - {fileID: 8019536725731882737}
   - {fileID: 4954732209658398120}
@@ -402,7 +402,6 @@ Transform:
   - {fileID: 8821394770570412905}
   - {fileID: 6781719013486278975}
   - {fileID: 1652160458167822916}
-  - {fileID: 1495191332649845172}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &4161317412935644158
@@ -460,7 +459,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1652160458167822916}
   - component: {fileID: 7888182897765933087}
-  m_Layer: 0
+  m_Layer: 23
   m_Name: RoomFloor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -744,8 +743,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 75be154096db0094fbaa5ad0c3a2fceb, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6264401107834495829
 GameObject:
   m_ObjectHideFlags: 0
@@ -1116,7 +1115,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument:
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
   onPlayerRoomExit:
@@ -1131,7 +1130,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument:
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
   onPlayerRoomInnerEnter:
