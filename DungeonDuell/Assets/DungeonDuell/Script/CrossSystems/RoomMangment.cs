@@ -75,7 +75,6 @@ namespace dungeonduell
                 }
 
             }
-
             Destroy(transform.GetChild(0).gameObject);
 
             // If wered decide to have no speical virtsul Cam Work when remove this old commend: 
