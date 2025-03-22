@@ -11,14 +11,15 @@ namespace dungeonduell
     public class OptionsMenu : MonoBehaviour
     {
         public GameObject optionsPanel;
-        public Slider volumeSlider;
         public AudioMixer audioMixer;
+        public Slider audioSlider;
+        public Toggle muteToggle;
         public Toggle fullscreenToggle;
         public TMP_Dropdown resolutionDropdown;
 
         private CanvasGroup canvasGroup;
         private Resolution[] resolutions;
-        private PlayerDataManager dataManager;
+        private OptionDataManager dataManager;
 
 
         void Start()
@@ -31,7 +32,7 @@ namespace dungeonduell
             canvasGroup.alpha = 0;
             optionsPanel.SetActive(false);
 
-            dataManager = FindObjectOfType<PlayerDataManager>();
+            dataManager = FindObjectOfType<OptionDataManager>();
             SetupResolutionDropdown();
             LoadSettings();
         }
@@ -47,6 +48,43 @@ namespace dungeonduell
             canvasGroup.DOFade(0, 0.5f).SetEase(Ease.InQuad).OnComplete(() => optionsPanel.SetActive(false));
         }
 
+
+        public void SetMasterVolume(float volume)
+        {
+
+            if (dataManager != null)
+            {
+                dataManager.SetVolume(volume);
+            }
+            else
+            {
+                Debug.Log("Datamanager fehlt");
+            }
+        }
+
+        public void SetMusicVolume(float volume)
+        {
+            if (dataManager != null)
+            {
+                dataManager.SetMusicVolume(volume);
+            }
+        }
+        public void SetSFXVolume(float volume)
+        {
+            if (dataManager != null)
+            {
+                dataManager.SetSFXVolume(volume);
+            }
+        }
+
+        public void MuteToggle(bool muted)
+        {
+            if (dataManager != null)
+            {
+                dataManager.MuteToggle(muted);
+            }
+        }
+
         void SetupResolutionDropdown()
         {
             resolutions = Screen.resolutions;
@@ -59,6 +97,7 @@ namespace dungeonduell
                 if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
                 {
                     currentResolutionIndex = i;
+                    Debug.Log(currentResolutionIndex);
                 }
             }
 
@@ -68,15 +107,6 @@ namespace dungeonduell
                 resolutionDropdown.value = dataManager.ResolutionIndex;
             }
             resolutionDropdown.RefreshShownValue();
-        }
-
-        public void SetMasterVolume(float volume)
-        {
-            
-            if (dataManager != null)
-            {
-                dataManager.SetVolume(volume);
-            }
         }
 
         public void SetFullscreen(bool isFullscreen)
@@ -102,9 +132,10 @@ namespace dungeonduell
             
             if (dataManager != null)
             {
-                volumeSlider.value = dataManager.Volume;
+                audioSlider.value = dataManager.Volume;
                 fullscreenToggle.isOn = dataManager.IsFullscreen;
                 resolutionDropdown.value = dataManager.ResolutionIndex;
+                muteToggle.isOn = dataManager.isMuted;
             }
         }
     }

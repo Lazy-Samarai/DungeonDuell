@@ -4,8 +4,7 @@ using UnityEngine;
 using MoreMountains.Tools;
 using MoreMountains.TopDownEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Rendering;
-using UnityEngine.Audio;
+
 
 namespace dungeonduell
 {
@@ -42,12 +41,6 @@ namespace dungeonduell
 
     public class PlayerDataManager : MonoBehaviour, IObserver
     {
-        // Neue Settings für das Optionsmenü
-        public float Volume = 1f;
-        public AudioMixer audioMixer;
-
-        public bool IsFullscreen = true;
-        public int ResolutionIndex = 0;
 
         public List<PlayerData> PlayerDataList = new List<PlayerData>();
 
@@ -71,28 +64,6 @@ namespace dungeonduell
             PlayerDataList.Add(new PlayerData("Player1", 0, 1, 1, 6, 10, 30, 1));
             PlayerDataList.Add(new PlayerData("Player2", 0, 1, 1, 6, 10, 30, 1));
 
-        }
-
-        public void SetVolume(float volume)
-        {
-            Volume = volume;
-            if (audioMixer != null)
-            {
-                audioMixer.SetFloat("MasterVolume", Mathf.Log10(volume) * 20);
-            }
-        }
-
-        public void SetFullscreen(bool isFullscreen)
-        {
-            IsFullscreen = isFullscreen;
-            Screen.fullScreen = isFullscreen;
-        }
-
-        public void SetResolution(int resolutionIndex)
-        {
-            ResolutionIndex = resolutionIndex;
-            Resolution resolution = Screen.resolutions[resolutionIndex];
-            Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
         }
 
         public void FinalRound()
