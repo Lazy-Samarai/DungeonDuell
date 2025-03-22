@@ -5548,6 +5548,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   sequenceMang: {fileID: 1148161116}
+  coastMultiply: 2
+  startCoast: 1
 --- !u!65 &956792195
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7873,7 +7875,7 @@ PrefabInstance:
     - target: {fileID: 6617670104504817573, guid: e738a2ac7ae5bcc4894527f901d1007f,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6740568025359378812, guid: e738a2ac7ae5bcc4894527f901d1007f,
         type: 3}
@@ -7890,6 +7892,11 @@ PrefabInstance:
       propertyPath: LevelUpNowText
       value: 
       objectReference: {fileID: 1107887450}
+    - target: {fileID: 9046572475424930884, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: m_Text
+      value: 'LEVEL UP IS AVAILIBLE '
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 665260212809221728, guid: e738a2ac7ae5bcc4894527f901d1007f, type: 3}
@@ -9689,12 +9696,12 @@ PrefabInstance:
     - target: {fileID: 594451571744507654, guid: e738a2ac7ae5bcc4894527f901d1007f,
         type: 3}
       propertyPath: m_Text
-      value: "LEVEL UP IS AVAILIBLE \u2191"
+      value: 'LEVEL UP IS AVAILIBLE '
       objectReference: {fileID: 0}
     - target: {fileID: 665260212809221728, guid: e738a2ac7ae5bcc4894527f901d1007f,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1850257811505082439, guid: e738a2ac7ae5bcc4894527f901d1007f,
         type: 3}
