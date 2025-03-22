@@ -9,7 +9,6 @@ namespace dungeonduell
 {
     public class RoomMangment : MonoBehaviour
     {
-        public List<RoomInfo> RoomsInfos = new List<RoomInfo>();
         public List<Tuple<Vector3Int, RoomInfo>> RoomsInfosWithPos = new List<Tuple<Vector3Int, RoomInfo>>();
         [SerializeField] List<GameObject> roomPrefabs;
         [SerializeField] float stepCross;
@@ -19,9 +18,6 @@ namespace dungeonduell
 
         void Awake()
         {
-            // Conncection will always be two sided, 
-            RoomsInfos = FindAnyObjectByType<ConnectionsCollector>().GetRoomList();
-
             RoomsInfosWithPos = FindAnyObjectByType<ConnectionsCollector>().GetFullRoomList();
 
             // Convert Both Side Connect | 
@@ -36,19 +32,23 @@ namespace dungeonduell
 
                 }
             }
-
             // Generate
-            GenerateRooms(RoomsInfos);
+            GenerateRooms();
         }
 
-        private void GenerateRooms(List<RoomInfo> RoomsInfos)
+        private void GenerateRooms()
         {
-
             foreach (Tuple<Vector3Int, RoomInfo> roomInfo in RoomsInfosWithPos) // spawing all rooms in 
             {
                 GameObject roomPrefabToUse = GetRoomPrefabByType(roomInfo.Item2.roomtype);
 
                 GameObject Nextroom = Instantiate(roomPrefabToUse ?? roomPrefabs[0], transform);
+
+                if(roomInfo.Item2.FirstTimeSpawn)
+                {
+                    roomInfo.Item2.FirstTimeSpawn = false;
+                    Nextroom.GetComponentInChildren<RewardSpawner>()?.SpawnReward();
+                }
 
                 // odd and even y pos diff in a Hex Grid  
                 float posX = (roomInfo.Item1.y % 2 == 0) ? roomInfo.Item1.x * stepCross : stepCross / 2 + roomInfo.Item1.x * stepCross;
@@ -75,6 +75,7 @@ namespace dungeonduell
                 }
 
             }
+
             Destroy(transform.GetChild(0).gameObject);
 
             // If wered decide to have no speical virtsul Cam Work when remove this old commend: 
