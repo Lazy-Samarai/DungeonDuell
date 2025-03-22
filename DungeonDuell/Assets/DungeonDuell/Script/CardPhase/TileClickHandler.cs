@@ -25,6 +25,8 @@ namespace dungeonduell
         public List<ShellCard> CardShelled;
         public ConnectionsCollector connectCollector;
         public bool isPlayer1Turn = true;
+        private TurnManager turnManager;
+        private HexgridController hexgridController;
 
         Vector3Int[] aroundHexDiffVectorEVEN = {
             new Vector3Int(-1, 1), // TopLeft
@@ -52,6 +54,8 @@ namespace dungeonduell
         {
             connectCollector = FindObjectOfType<ConnectionsCollector>();
             tilemap = FindObjectOfType<Tilemap>();
+            turnManager = FindObjectOfType<TurnManager>();
+            hexgridController = FindObjectOfType<HexgridController>();
         }
 
         void Update()
@@ -117,7 +121,21 @@ namespace dungeonduell
                 if (((setAbleTiles.Contains(clickedTile)) && currentCard != null) | !PlayerMove)
                 {
                     CardUsingHandling(card, PlayerMove, spawnSourroundSetables, cellPosition, clickedTile, owner);
+                    
+                    if (turnManager != null)
+                    {
+                        CardToHand cardToHand = turnManager.isPlayer1Turn ? turnManager.HandPlayer1 : turnManager.HandPlayer2;
+                        if (cardToHand != null)
+                        {
+                            cardToHand.ReactivateHandCards();
+                        }
 
+                        if (hexgridController != null)
+                        {
+                            hexgridController.ResetNavigation();
+                        }
+
+                    }
                 }
                 else
                 {

@@ -23,25 +23,16 @@ namespace dungeonduell
         public float spacing = 40f;
         public float maxRotation = 20f;
 
-        // Karten, die der Spieler gerade in der Hand hält
         private List<Card> handCards = new List<Card>();
-
-        // Verweise auf die DisplayCard-Objekte in der Hand
         private List<DisplayCard> displayCards = new List<DisplayCard>();
 
         void Start()
         {
-            // Beispiel: Wir ziehen direkt am Start "handLimit" Karten aus playerDeck
             DrawInitialCards();
         }
 
-        /// <summary>
-        /// Zieht anfänglich bis zu "handLimit" Karten aus dem "playerDeck.playerDeck"
-        /// und zeigt sie in der Hand an.
-        /// </summary>
         private void DrawInitialCards()
         {
-            // Safety-Check
             if (playerDeck == null)
             {
                 Debug.LogWarning("Kein PlayerDeck zugewiesen!");
@@ -50,16 +41,12 @@ namespace dungeonduell
 
             handCards.Clear();
 
-            // Ziehe so viele Karten aus "playerDeck.playerDeck", wie handLimit erlaubt
             for (int i = 0; i < handLimit; i++)
             {
                 if (playerDeck.playerDeck.Count > 0)
                 {
-                    // Nimm die erste Karte (oder zufällige Karte, je nach Wunsch)
                     Card cardToDraw = playerDeck.playerDeck[0];
-                    // Entferne sie aus dem Deck
                     playerDeck.playerDeck.RemoveAt(0);
-                    // Füge sie der Hand hinzu
                     handCards.Add(cardToDraw);
                 }
                 else
@@ -69,35 +56,20 @@ namespace dungeonduell
                 }
             }
 
-            // Zeige die Karten in der Hand
             DisplayHand();
         }
 
-        /// <summary>
-        /// Zeigt alle Karten in der Hand an (erzeugt DisplayCard-Objekte und positioniert sie).
-        /// </summary>
         public void DisplayHand()
         {
-            // 1) Alte Hand-Karten löschen
             for (int i = handPanel.childCount - 1; i >= 0; i--)
             {
                 Transform child = handPanel.GetChild(i);
-
-                // --- Skip, wenn es der cardHolder selbst ist ---
-                if (child == cardHolder)
-                {
-                    // cardHolder NICHT löschen!
-                    continue;
-                }
-
-                // Sonst: Das ist eine alte Karte => weg damit
+                if (child == cardHolder) continue;
                 Destroy(child.gameObject);
             }
 
-            // Clear-Logik für displayCards-Liste
             displayCards.Clear();
 
-            // 2) Neue UI-Karten erzeugen
             for (int i = 0; i < handCards.Count; i++)
             {
                 Card cardData = handCards[i];
@@ -111,8 +83,6 @@ namespace dungeonduell
                 displayCards.Add(dc);
             }
 
-
-            // Fächer-Layout (simple lineare Anordnung)
             int n = displayCards.Count;
             float middleIndex = (n - 1) / 2f;
             for (int i = 0; i < n; i++)
@@ -130,25 +100,16 @@ namespace dungeonduell
             SetupNavigation(skipButton);
         }
 
-        /// <summary>
-        /// Aufruf von DisplayCard, wenn geklickt wird. 
-        /// Verschiebt die Karte zwischen Hand und CardHolder und feuert ggf. Events.
-        /// </summary>
         public void OnCardClicked(DisplayCard clickedCard)
         {
-            // **1) Karte war schon im CardHolder** → Spieler legt sie zurück in die Hand
             if (clickedCard.transform.parent == cardHolder)
             {
-                // Füge die Karte wieder den Handkarten hinzu (falls sie fehlt)
                 if (!handCards.Contains(clickedCard.card))
                 {
                     handCards.Add(clickedCard.card);
                 }
 
-                // Verschiebe sie optisch ins HandPanel
                 clickedCard.transform.SetParent(handPanel, false);
-
-                // Event: Keine Karte mehr ausgewählt
                 DDCodeEventHandler.Trigger_CardSelected(null);
 
                 HexgridController hexgridController = FindObjectOfType<HexgridController>();
@@ -157,17 +118,10 @@ namespace dungeonduell
                     hexgridController.ResetNavigation();
                 }
 
-                // **Handkarten wieder aktivieren** (Selectables true)
-                EnableHandCardsForNavigation();
-
-                // Hand-Layout aktualisieren
+                ReactivateHandCards();
                 DisplayHand();
-
-                // Da wir jetzt wieder in der Hand sind, 
-                // Navigation für UI-Karten neu aufbauen (explizit links/rechts)
                 SetupNavigation(skipButton);
 
-                // **Fokus sofort setzen** – z. B. auf die erste Karte
                 if (displayCards.Count > 0)
                 {
                     Selectable firstCardSel = displayCards[0].GetComponent<Selectable>();
@@ -177,14 +131,10 @@ namespace dungeonduell
                     }
                 }
             }
-            // **2) Karte lag in der Hand** → Spieler legt sie in den CardHolder
             else
             {
-                // Entferne die Karte aus der Handliste
                 handCards.Remove(clickedCard.card);
 
-                // OPTIONAL: Falls bereits eine andere Karte im Holder liegt, 
-                // verschiebe die alte zurück in die Hand
                 if (cardHolder.childCount > 0)
                 {
                     Transform oldCardTransform = cardHolder.GetChild(0);
@@ -198,44 +148,43 @@ namespace dungeonduell
                     }
                 }
 
-                // **Verschiebe die geklickte Karte in den CardHolder**
                 clickedCard.transform.SetParent(cardHolder, false);
                 clickedCard.transform.localPosition = Vector3.zero;
                 clickedCard.transform.localRotation = Quaternion.identity;
                 clickedCard.transform.localScale = Vector3.one;
 
-                // **Handkarten‐Selectables deaktivieren**, damit man nicht mehr 
-                // gleichzeitig in Hand & Hex navigieren kann
                 DisableHandCardsForNavigation();
-
-                // **UI‐Fokus rausnehmen**, damit nicht versehentlich noch eine Karte selektiert ist
+                DeactivateHandCards();
                 EventSystem.current.SetSelectedGameObject(null);
 
-                // Event: Neue Karte ausgewählt
                 DDCodeEventHandler.Trigger_CardSelected(clickedCard);
 
-                // Hexgrid‐Navigation aktivieren
                 HexgridController hexgridController = FindObjectOfType<HexgridController>();
                 if (hexgridController != null)
                 {
-                    hexgridController.currentDisplayCard = clickedCard; // merk dir, welche Karte platziert werden soll
+                    hexgridController.currentDisplayCard = clickedCard;
                     hexgridController.ActivateNavigation();
                 }
 
-                // Hand-Layout aktualisieren (damit die Karte nicht mehr in der Hand angezeigt wird)
                 DisplayHand();
+                DeactivateHandCards(); // Jetzt auf die NEUEN Karten anwenden
+
             }
         }
 
-
-        private void DisableHandCardsForNavigation()
+        public void DisableHandCardsForNavigation()
         {
             foreach (DisplayCard dc in displayCards)
             {
-                if (dc.transform.parent != cardHolder) 
+                if (dc.transform.parent != cardHolder)
                 {
                     dc.GetComponent<Selectable>().interactable = false;
                 }
+            }
+
+            if (skipButton != null)
+            {
+                skipButton.interactable = false;
             }
         }
 
@@ -252,19 +201,47 @@ namespace dungeonduell
                     }
                 }
             }
+
+            if (skipButton != null)
+            {
+                skipButton.interactable = true;
+            }
+        }
+
+        public void DeactivateHandCards()
+        {
+            foreach (Transform child in handPanel)
+            {
+                if (child == cardHolder) continue;
+                child.gameObject.SetActive(false);
+                Debug.Log("DeactivateHandCards");
+                Debug.Log(child.name);
+            }
+        }
+
+        public void ReactivateHandCards()
+        {
+            foreach (Transform child in handPanel)
+            {
+                if (child == cardHolder) continue;
+                child.gameObject.SetActive(true);
+                Debug.Log("ReactivateHandCards");
+                Debug.Log(child.name);
+            }
+
+            EnableHandCardsForNavigation();
+            SetupNavigation(skipButton);
         }
 
         public bool HasCardOnHolder()
         {
-            return cardHolder.childCount > 0; 
+            return cardHolder.childCount > 0;
         }
-
 
         public void SelectFirstCard()
         {
             List<Selectable> selectables = new List<Selectable>();
 
-            // Handkarten in richtiger Reihenfolge durchgehen
             foreach (Card card in handCards)
             {
                 DisplayCard displayCard = displayCards.Find(dc => dc.card == card);
@@ -279,14 +256,12 @@ namespace dungeonduell
                 }
             }
 
-            // Falls keine Handkarten da sind → Skip-Button auswählen
             if (selectables.Count == 0 && skipButton != null)
             {
                 EventSystem.current.SetSelectedGameObject(skipButton.gameObject);
                 return;
             }
 
-            // Erste Karte auswählen, wenn vorhanden
             if (selectables.Count > 0)
             {
                 EventSystem.current.SetSelectedGameObject(selectables[0].gameObject);
@@ -299,7 +274,6 @@ namespace dungeonduell
         {
             List<Selectable> selectables = new List<Selectable>();
 
-            // Handkarten in richtiger Reihenfolge durchgehen
             foreach (Card card in handCards)
             {
                 DisplayCard displayCard = displayCards.Find(dc => dc.card == card);
@@ -314,13 +288,11 @@ namespace dungeonduell
                 }
             }
 
-            // Skip-Button am Ende hinzufügen
             if (skipButton != null)
             {
                 selectables.Add(skipButton);
             }
 
-            // Setze die Navigation explizit für alle Karten
             for (int i = 0; i < selectables.Count; i++)
             {
                 Navigation nav = new Navigation
@@ -333,7 +305,6 @@ namespace dungeonduell
                 selectables[i].navigation = nav;
             }
 
-            // Erste Karte oder Skip-Button auswählen
             if (selectables.Count > 0)
             {
                 EventSystem.current.SetSelectedGameObject(selectables[0].gameObject);
@@ -344,7 +315,6 @@ namespace dungeonduell
         {
             if (playerDeck != null && playerDeck.playerDeck.Count > 0)
             {
-                // Nur ziehen, wenn Platz
                 if (handCards.Count < handLimit)
                 {
                     Card cardToDraw = playerDeck.playerDeck[0];
@@ -367,11 +337,10 @@ namespace dungeonduell
             }
             else
             {
-                // 2) Aktiviere das Objekt zuerst
                 gameObject.SetActive(true);
 
                 Vector3 startPos = transform.position;
-                startPos.y = -300; 
+                startPos.y = -300;
                 transform.position = startPos;
 
                 transform.DOMoveY(0, 0.5f);

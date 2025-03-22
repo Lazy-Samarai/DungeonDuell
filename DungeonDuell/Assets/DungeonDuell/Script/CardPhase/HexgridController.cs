@@ -1,7 +1,11 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.InputSystem;
 using MoreMountains.TopDownEngine;
+using UnityEngine.EventSystems;
+using System.Linq;
 
 namespace dungeonduell
 {
@@ -19,25 +23,20 @@ namespace dungeonduell
         public DisplayCard currentDisplayCard;
 
         private Vector3Int selectedTilePos;
+        private List<Vector3Int> setAbleTiles = new List<Vector3Int>();
+        private PlayerInput playerInput;
 
-        private static readonly Vector3Int[] OffsetsEven =
-        {
-            new Vector3Int(0, 1, 0),
-            new Vector3Int(1, 1, 0),
-            new Vector3Int(-1, 0, 0),
-            new Vector3Int(1, 0, 0),
-            new Vector3Int(0, -1, 0),
-            new Vector3Int(1, -1, 0)
-        };
+        private float lastNavigateTime = 0f;
+        private float navigateCooldown = 0.15f; // 150ms Pause zwischen Bewegungen
 
-        private static readonly Vector3Int[] OffsetsOdd =
+        private static readonly Vector2[] HexDirections = new Vector2[]
         {
-            new Vector3Int(-1, 1, 0),
-            new Vector3Int(0, 1, 0),
-            new Vector3Int(-1, 0, 0),
-            new Vector3Int(1, 0, 0),
-            new Vector3Int(-1, -1, 0),
-            new Vector3Int(0, -1, 0)
+            new Vector2(1f, 0f).normalized,           // Rechts
+            new Vector2(0.5f, 0.866f).normalized,     // Oben rechts
+            new Vector2(-0.5f, 0.866f).normalized,    // Oben links
+            new Vector2(-1f, 0f).normalized,          // Links
+            new Vector2(-0.5f, -0.866f).normalized,   // Unten links
+            new Vector2(0.5f, -0.866f).normalized     // Unten rechts
         };
 
         private void Start()
@@ -47,7 +46,7 @@ namespace dungeonduell
                 turnManager = FindObjectOfType<TurnManager>();
             }
 
-            PlayerInput playerInput = GetCurrentPlayerInput();
+            playerInput = GetCurrentPlayerInput();
 
             if (cursor) cursor.SetActive(false);
 
@@ -61,8 +60,6 @@ namespace dungeonduell
 
         private void OnDestroy()
         {
-            PlayerInput playerInput = GetCurrentPlayerInput();
-
             if (playerInput != null)
             {
                 playerInput.actions["Navigation"].performed -= OnNavigate;
@@ -73,61 +70,109 @@ namespace dungeonduell
 
         public void ActivateNavigation()
         {
+            setAbleTiles.Clear();
             BoundsInt bounds = tilemap.cellBounds;
-            bool foundValid = false;
 
             foreach (var cellPos in bounds.allPositionsWithin)
             {
                 if (tileClickHandler.IsSetablePosition(cellPos))
                 {
-                    selectedTilePos = cellPos;
-                    foundValid = true;
-                    break;
+                    setAbleTiles.Add(cellPos);
                 }
             }
 
-            if (!foundValid)
+            if (setAbleTiles.Count == 0)
             {
-                Debug.LogWarning("Kein setzbares Feld in der Tilemap gefunden!");
+                Debug.LogWarning("Keine setzbaren Felder gefunden!");
                 return;
             }
+
+            selectedTilePos = setAbleTiles[0];
 
             if (cursor)
             {
                 cursor.SetActive(true);
                 cursor.transform.position = tilemap.GetCellCenterWorld(selectedTilePos);
             }
+
+            DisableAllHandSelectables();
+
+            if (EventSystem.current != null)
+            {
+                EventSystem.current.SetSelectedGameObject(null);
+            }
         }
 
         public void ResetNavigation()
         {
             if (cursor) cursor.SetActive(false);
+            EnableAllHandSelectables();
         }
 
         private void OnNavigate(InputAction.CallbackContext ctx)
         {
-            if (!cursor || !cursor.activeSelf) return;
+            if (!cursor || !cursor.activeSelf || setAbleTiles.Count == 0) return;
+            if (Time.time - lastNavigateTime < navigateCooldown) return;
 
             Vector2 input = ctx.ReadValue<Vector2>();
-            if (input.sqrMagnitude < 0.3f) return;
+            if (input.sqrMagnitude < 0.5f) return; // höhere Deadzone
 
-            float angle = Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg;
-            if (angle < 0) angle += 360f;
+            Vector2 snappedInput = SnapToHexDirection(input.normalized);
 
-            int sector = Mathf.RoundToInt(angle / 60f) % 6;
-            Vector3Int[] offsets = (selectedTilePos.y % 2 == 0) ? OffsetsEven : OffsetsOdd;
-            Vector3Int neighborPos = selectedTilePos + offsets[sector];
+            Vector3Int bestTarget = selectedTilePos;
+            float bestScore = -1f;
 
-            if (tileClickHandler.IsSetablePosition(neighborPos))
+            foreach (var tile in setAbleTiles)
             {
-                selectedTilePos = neighborPos;
-                cursor.transform.position = tilemap.GetCellCenterWorld(selectedTilePos);
+                if (tile == selectedTilePos) continue;
+
+                Vector2 dirToTile = new Vector2(tile.x - selectedTilePos.x, tile.y - selectedTilePos.y);
+                float distance = dirToTile.magnitude;
+                if (distance < 0.1f) continue;
+
+                dirToTile.Normalize();
+                float dot = Vector2.Dot(snappedInput, dirToTile);
+
+                if (dot > 0.65f)
+                {
+                    float score = (dot * 1.5f) - (distance * 0.25f);
+                    if (score > bestScore)
+                    {
+                        bestScore = score;
+                        bestTarget = tile;
+                    }
+                }
             }
+
+            if (bestTarget != selectedTilePos)
+            {
+                selectedTilePos = bestTarget;
+                cursor.transform.position = tilemap.GetCellCenterWorld(selectedTilePos);
+                lastNavigateTime = Time.time;
+            }
+        }
+
+        private Vector2 SnapToHexDirection(Vector2 input)
+        {
+            float bestDot = -1f;
+            Vector2 bestDir = HexDirections[0];
+
+            foreach (var dir in HexDirections)
+            {
+                float dot = Vector2.Dot(input, dir);
+                if (dot > bestDot)
+                {
+                    bestDot = dot;
+                    bestDir = dir;
+                }
+            }
+
+            return bestDir;
         }
 
         private void OnSubmit(InputAction.CallbackContext ctx)
         {
-            if (!cursor || !cursor.activeSelf) return;
+            if (!cursor || !cursor.activeSelf || setAbleTiles.Count == 0) return;
 
             Vector3 worldPos = tilemap.GetCellCenterWorld(selectedTilePos);
 
@@ -140,6 +185,12 @@ namespace dungeonduell
             );
 
             ResetNavigation();
+
+            CardToHand cardToHand = GetCurrentCardToHand();
+            if (cardToHand != null)
+            {
+                cardToHand.ReactivateHandCards();
+            }
         }
 
         private void OnBack(InputAction.CallbackContext ctx)
@@ -181,6 +232,27 @@ namespace dungeonduell
             }
 
             return null;
+        }
+
+        private void DisableAllHandSelectables()
+        {
+            var cardToHand = GetCurrentCardToHand();
+            if (cardToHand != null)
+            {
+                cardToHand.DisableHandCardsForNavigation();
+                cardToHand.DeactivateHandCards();
+                Debug.Log("Alle Hand-Selectables deaktiviert.");
+            }
+        }
+
+        private void EnableAllHandSelectables()
+        {
+            var cardToHand = GetCurrentCardToHand();
+            if (cardToHand != null)
+            {
+                cardToHand.ReactivateHandCards();
+                Debug.Log("Alle Hand-Selectables aktiviert.");
+            }
         }
     }
 }
