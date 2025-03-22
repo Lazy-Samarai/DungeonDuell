@@ -40,12 +40,12 @@ namespace dungeonduell
         public void OpenOptions()
         {
             optionsPanel.SetActive(true);
-            canvasGroup.DOFade(1, 0.5f).SetEase(Ease.OutQuad);
+            canvasGroup.DOFade(1, 0.5f).SetUpdate(true).SetEase(Ease.OutQuad);
         }
 
         public void CloseOptions()
         {
-            canvasGroup.DOFade(0, 0.5f).SetEase(Ease.InQuad).OnComplete(() => optionsPanel.SetActive(false));
+            canvasGroup.DOFade(0, 0.5f).SetUpdate(true).SetEase(Ease.InQuad).OnComplete(() => optionsPanel.SetActive(false));
         }
 
 
