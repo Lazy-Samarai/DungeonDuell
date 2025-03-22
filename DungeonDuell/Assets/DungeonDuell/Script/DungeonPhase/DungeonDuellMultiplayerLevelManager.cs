@@ -79,6 +79,9 @@ namespace MoreMountains.TopDownEngine
 
         PlayerDataManager playerDataManager;
 
+        [SerializeField] float coastMultiply = 2;
+        [SerializeField] int startCoast = 1;
+
         /// <summary> 
         /// On init, we initialize our points and countdowns 
         /// </summary> 
@@ -109,7 +112,7 @@ namespace MoreMountains.TopDownEngine
                 Points[i].PlayerID = player.PlayerID;
                 Points[i].Points = 0;
                 Points[i].Level = 1;
-                Points[i].CoinsForNextLevel = 1; // Startkosten 
+                Points[i].CoinsForNextLevel = startCoast; // Startkosten 
                 i++;
             }
             playerDataManager = FindAnyObjectByType<PlayerDataManager>();
@@ -264,11 +267,17 @@ namespace MoreMountains.TopDownEngine
                     TopDownEngineEvent.Trigger(TopDownEngineEventTypes.Repaint, null);
                     if (Points[i].Points >= Points[i].CoinsForNextLevel)
                     {
-                        LevelUPID = Points[i].PlayerID;
-                        TopDownEngineEvent.Trigger(TopDownEngineEventTypes.LevelUp, null);
+                        HandleUpgradable(i);
                     }
                 }
             }
+        }
+
+        private void HandleUpgradable(int playerID)
+        {
+            int upgradableCount = (int)Math.Floor(Math.Log(1 + ((coastMultiply - 1) * Points[playerID].Points / Points[playerID].CoinsForNextLevel), coastMultiply));
+            print(upgradableCount);
+            DDCodeEventHandler.Trigger_LevelUpAvailable(playerID, upgradableCount);
         }
 
         public void ApplyLevelUp(LevelUpOptions option)
@@ -280,8 +289,10 @@ namespace MoreMountains.TopDownEngine
                 {
 
                     Points[i].Points -= Points[i].CoinsForNextLevel;
-                    Points[i].CoinsForNextLevel *= 2; // Kosten verdoppeln 
+                    Points[i].CoinsForNextLevel = (int)(Points[i].CoinsForNextLevel * coastMultiply); // Kosten erhöhen per Mutiply 
                     Points[i].Level++;
+                    
+                    HandleUpgradable(i);
                     TopDownEngineEvent.Trigger(TopDownEngineEventTypes.Repaint, null);
 
                     switch (option)
@@ -299,9 +310,10 @@ namespace MoreMountains.TopDownEngine
 
                     if (Points[i].Points < Points[i].CoinsForNextLevel)
                     {
-                        print("Cause here");
-                        TopDownEngineEvent.Trigger(TopDownEngineEventTypes.NoLevelUp, null);
+                        DDCodeEventHandler.Trigger_LevelUpAvailable(i, 0);
+                        TopDownEngineEvent.Trigger(TopDownEngineEventTypes.Repaint, null);
                     }
+                  
                 }
             }
         }
