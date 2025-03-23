@@ -96,7 +96,7 @@ namespace dungeonduell
         public void GiveUpConfirmed()
         {
             Time.timeScale = 1f; // Wichtiger Reset!
-            SceneManager.LoadScene("TitleScreen"); // Passe den Szenennamen ggf. an
+            SceneManager.LoadScene("Titlescreen"); // Passe den Szenennamen ggf. an
         }
     }
 }

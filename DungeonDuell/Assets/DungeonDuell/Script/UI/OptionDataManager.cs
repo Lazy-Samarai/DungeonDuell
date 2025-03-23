@@ -17,6 +17,10 @@ namespace dungeonduell
         public bool IsFullscreen = true;
         public bool isMuted = true;
         public int ResolutionIndex = 0;
+        const string masterVolume = "MasterVolume";
+        const string musicVolume = "MusicVolume";
+        const string sfxVolume = "SFXVolume";
+        private int volumeMultiplier = 20;
 
         private void Awake()
         {
@@ -40,19 +44,19 @@ namespace dungeonduell
             Volume = volume;
             if (audioMixer != null)
             {
-                audioMixer.SetFloat("MasterVolume", Mathf.Log10(volume) * 20);
+                audioMixer.SetFloat(masterVolume, Mathf.Log10(volume) * volumeMultiplier);
             }
         }
 
         public void SetMusicVolume(float volume)
         {
             Volume = volume;
-            audioMixer.SetFloat("MusicVolume", Mathf.Log10(volume) * 20);
+            audioMixer.SetFloat(musicVolume, Mathf.Log10(volume) * volumeMultiplier);
         }
         public void SetSFXVolume(float volume)
         {
             Volume = volume;
-            audioMixer.SetFloat("SFXVolume", Mathf.Log10(volume) * 20);
+            audioMixer.SetFloat(sfxVolume, Mathf.Log10(volume) * volumeMultiplier);
         }
         public void MuteToggle(bool muted)
         {
