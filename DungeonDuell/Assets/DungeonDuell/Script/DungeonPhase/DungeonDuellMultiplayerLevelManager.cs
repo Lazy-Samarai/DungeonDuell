@@ -36,7 +36,7 @@ namespace MoreMountains.TopDownEngine
     public enum LevelUpOptions
     {
         Speed,
-        Health,
+       // Health,
         AttackSpeed
     }
 
@@ -79,6 +79,9 @@ namespace MoreMountains.TopDownEngine
 
         PlayerDataManager playerDataManager;
 
+        [SerializeField] float coastMultiply = 2;
+        [SerializeField] int startCoast = 1;
+
         /// <summary> 
         /// On init, we initialize our points and countdowns 
         /// </summary> 
@@ -93,11 +96,11 @@ namespace MoreMountains.TopDownEngine
             running[0] = GetPlayerRun(1);
             running[1] = GetPlayerRun(2);
 
-            health[0] = GetPlayerHealth(1);
-            health[1] = GetPlayerHealth(2);
-
             playerSpineAnimationHandlings[0] = GetPlayerSpineAnimationHandling(1);
             playerSpineAnimationHandlings[1] = GetPlayerSpineAnimationHandling(2);
+
+            health[0] = GetPlayerHealth(1);
+            health[1] = GetPlayerHealth(2);
 
             WinnerID = "";
             LevelUPID = "";
@@ -109,7 +112,7 @@ namespace MoreMountains.TopDownEngine
                 Points[i].PlayerID = player.PlayerID;
                 Points[i].Points = 0;
                 Points[i].Level = 1;
-                Points[i].CoinsForNextLevel = 1; // Startkosten 
+                Points[i].CoinsForNextLevel = startCoast; // Startkosten 
                 i++;
             }
             playerDataManager = FindAnyObjectByType<PlayerDataManager>();
@@ -139,8 +142,13 @@ namespace MoreMountains.TopDownEngine
 
                         data.WalkSpeed = walking[i].WalkSpeed;
                         data.RunSpeed = running[i].RunSpeed;
-                        data.Health = health[i].MaximumHealth;
+                        data.MaxHealth = health[i].MaximumHealth;
                         data.AttackSpeed = weapon[i].TimeBetweenUses;
+
+
+                        // Give remain Hp back to meta 
+                        data.MetaHp += (int)health[i].CurrentHealth;
+
                     }
                 }
             }
@@ -162,8 +170,14 @@ namespace MoreMountains.TopDownEngine
                         // Spielerattribute synchronisieren 
                         walking[i].WalkSpeed = data.WalkSpeed;
                         running[i].RunSpeed = data.RunSpeed;
-                        health[i].MaximumHealth = data.Health;
-                        // weapon[i].TimeBetweenUses = data.AttackSpeed;
+                        health[i].MaximumHealth = data.MaxHealth;
+
+
+                        // Set Heath
+                        health[i].InitialHealth = Math.Min(data.MetaHp, health[i].MaximumHealth);
+                        // Upate Player MetaHp
+                        data.MetaHp = (int)Math.Max(data.MetaHp - health[i].MaximumHealth, 0);
+
                     }
 
                 }
@@ -171,7 +185,6 @@ namespace MoreMountains.TopDownEngine
             }
 
         }
-
 
         /// <summary> 
         /// Whenever a player dies, we check if we only have one left alive, in which case we trigger our game over routine 
@@ -184,8 +197,7 @@ namespace MoreMountains.TopDownEngine
             int aliveCharacters = 0;
             int i = 0;
 
-            playerDataManager.PlayerDataList[playerIndex].RemainingLive--;
-            if (playerDataManager.PlayerDataList[playerIndex].RemainingLive <= 0)
+            if (playerDataManager.PlayerDataList[playerIndex].MetaHp <= 0)
             {
                 if (playerCharacter.PlayerID == "Player1")
                 {
@@ -264,11 +276,17 @@ namespace MoreMountains.TopDownEngine
                     TopDownEngineEvent.Trigger(TopDownEngineEventTypes.Repaint, null);
                     if (Points[i].Points >= Points[i].CoinsForNextLevel)
                     {
-                        LevelUPID = Points[i].PlayerID;
-                        TopDownEngineEvent.Trigger(TopDownEngineEventTypes.LevelUp, null);
+                        HandleUpgradable(i);
                     }
                 }
             }
+        }
+
+        private void HandleUpgradable(int playerID)
+        {
+            int upgradableCount = (int)Math.Floor(Math.Log(1 + ((coastMultiply - 1) * Points[playerID].Points / Points[playerID].CoinsForNextLevel), coastMultiply));
+            print(upgradableCount);
+            DDCodeEventHandler.Trigger_LevelUpAvailable(playerID, upgradableCount);
         }
 
         public void ApplyLevelUp(LevelUpOptions option)
@@ -280,17 +298,16 @@ namespace MoreMountains.TopDownEngine
                 {
 
                     Points[i].Points -= Points[i].CoinsForNextLevel;
-                    Points[i].CoinsForNextLevel *= 2; // Kosten verdoppeln 
+                    Points[i].CoinsForNextLevel = (int)(Points[i].CoinsForNextLevel * coastMultiply); // Kosten erhöhen per Mutiply 
                     Points[i].Level++;
+                    
+                    HandleUpgradable(i);
                     TopDownEngineEvent.Trigger(TopDownEngineEventTypes.Repaint, null);
 
                     switch (option)
                     {
                         case LevelUpOptions.Speed:
                             ApplySpeedIncrease(LevelUPID);
-                            break;
-                        case LevelUpOptions.Health:
-                            ApplyHealthIncrease(LevelUPID);
                             break;
                         case LevelUpOptions.AttackSpeed:
                             ApplyAttackSpeedIncrease(LevelUPID);
@@ -299,9 +316,10 @@ namespace MoreMountains.TopDownEngine
 
                     if (Points[i].Points < Points[i].CoinsForNextLevel)
                     {
-                        print("Cause here");
-                        TopDownEngineEvent.Trigger(TopDownEngineEventTypes.NoLevelUp, null);
+                        DDCodeEventHandler.Trigger_LevelUpAvailable(i, 0);
+                        TopDownEngineEvent.Trigger(TopDownEngineEventTypes.Repaint, null);
                     }
+                  
                 }
             }
         }
@@ -323,15 +341,16 @@ namespace MoreMountains.TopDownEngine
 
             }
         }
-
-        private void ApplyHealthIncrease(string playerID)
+        private Health GetPlayerHealth(int i)
         {
-            int playerIndex = Int32.Parse(playerID[playerID.Length - 1].ToString()) - 1;
-            if (health != null)
+            foreach (Health health in FindObjectsOfType<Health>())
             {
-                health[playerIndex].MaximumHealth += 10;
-                health[playerIndex].SetHealth(Mathf.Min(health[playerIndex].CurrentHealth + 10, health[playerIndex].MaximumHealth));
+                if (health.GetComponent<Character>().PlayerID == (playerNamebase + i))
+                {
+                    return health;
+                }
             }
+            return null;
         }
 
         private void ApplyAttackSpeedIncrease(string playerID)
@@ -372,18 +391,6 @@ namespace MoreMountains.TopDownEngine
                 if (character.PlayerID == (playerNamebase + i))
                 {
                     return character;
-                }
-            }
-            return null;
-        }
-
-        private Health GetPlayerHealth(int i)
-        {
-            foreach (Health health in FindObjectsOfType<Health>())
-            {
-                if (health.GetComponent<Character>().PlayerID == (playerNamebase + i))
-                {
-                    return health;
                 }
             }
             return null;
