@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -115,7 +115,7 @@ namespace dungeonduell
             if (Time.time - lastNavigateTime < navigateCooldown) return;
 
             Vector2 input = ctx.ReadValue<Vector2>();
-            if (input.sqrMagnitude < 0.5f) return; // h�here Deadzone
+            if (input.sqrMagnitude < 0.5f) return; // höhere Deadzone
 
             Vector2 snappedInput = SnapToHexDirection(input.normalized);
 
@@ -172,18 +172,30 @@ namespace dungeonduell
 
         private void OnSubmit(InputAction.CallbackContext ctx)
         {
-            if (!cursor || !cursor.activeSelf || setAbleTiles.Count == 0) return;
+            if (!cursor || !cursor.activeSelf || setAbleTiles.Count == 0)
+                return;
 
             Vector3 worldPos = tilemap.GetCellCenterWorld(selectedTilePos);
 
-            tileClickHandler.SpawnTile(
-                worldPos,
-                tileClickHandler.currentCard,
-                true,
-                true,
-                turnManager.isPlayer1Turn ? 1 : 2
-            );
+            var displayCard = tileClickHandler.displayCardUi;
+            var card = tileClickHandler.currentCard;
+            if (displayCard == null || card == null)
+            {
+                Debug.LogWarning("[HexgridController] Keine aktive Karte gefunden.");
+                return;
+            }
 
+            int playerID = turnManager.isPlayer1Turn ? 1 : 2;
+
+            bool wasPlaced = tileClickHandler.SpawnTile(worldPos, card, true, true, playerID);
+
+            if (!wasPlaced)
+            {
+                Debug.Log("Karte konnte nicht platziert werden – kein Reset.");
+                return;
+            }
+
+            // Nur wenn Karte platziert wurde:
             ResetNavigation();
 
             CardToHand cardToHand = GetCurrentCardToHand();
@@ -193,19 +205,18 @@ namespace dungeonduell
             }
         }
 
+
         private void OnBack(InputAction.CallbackContext ctx)
         {
-            Debug.Log("OnBack called!");
 
             CardToHand cardToHand = GetCurrentCardToHand();
             if (cardToHand.cardHolder.childCount > 0)
             {
                 Transform child = cardToHand.cardHolder.GetChild(0);
                 DisplayCard dc = child.GetComponent<DisplayCard>();
-                Debug.Log(child.name);
+
                 if (dc != null)
                 {
-                    Debug.Log("OnBack works!");
                     cardToHand.OnCardClicked(dc);
                 }
             }
@@ -240,8 +251,7 @@ namespace dungeonduell
             if (cardToHand != null)
             {
                 cardToHand.DisableHandCardsForNavigation();
-                cardToHand.DeactivateHandCards();
-                Debug.Log("Alle Hand-Selectables deaktiviert.");
+                cardToHand.DeactivateHandCards();  
             }
         }
 
@@ -251,7 +261,6 @@ namespace dungeonduell
             if (cardToHand != null)
             {
                 cardToHand.ReactivateHandCards();
-                Debug.Log("Alle Hand-Selectables aktiviert.");
             }
         }
     }

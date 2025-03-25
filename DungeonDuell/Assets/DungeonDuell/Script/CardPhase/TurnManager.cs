@@ -13,6 +13,8 @@ namespace dungeonduell
         public TextMeshProUGUI pressAnyKeyText;
         public CardToHand HandPlayer1;
         public CardToHand HandPlayer2;
+        public GameObject canvasEndTurn;
+
 
         private bool awaitingKeyPress = false;
 
@@ -41,6 +43,8 @@ namespace dungeonduell
             playerTurnText.gameObject.SetActive(true);
             pressAnyKeyText.gameObject.SetActive(true);
 
+            canvasEndTurn.SetActive(false); // <-- Canvas deaktivieren
+
             // Versteckt beide Handkarten zu Beginn des Zuges
             ToggleHandVisibility(false, false);
         }
@@ -59,6 +63,8 @@ namespace dungeonduell
 
             // Zeigt die Handkarten für den aktuellen Spieler an
             ToggleHandVisibility(isPlayer1Turn, !isPlayer1Turn);
+            
+            canvasEndTurn.SetActive(true); // <-- Canvas aktivieren
 
             // Prüfe, ob der erste Input von einem Controller kam
             if (IsUsingController())

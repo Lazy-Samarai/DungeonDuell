@@ -455,6 +455,7 @@ GameObject:
   - component: {fileID: 481254718}
   - component: {fileID: 481254717}
   - component: {fileID: 481254719}
+  - component: {fileID: 481254720}
   m_Layer: 0
   m_Name: ClickHandler
   m_TagString: Untagged
@@ -527,6 +528,18 @@ MonoBehaviour:
   tileClickHandler: {fileID: 481254717}
   turnManager: {fileID: 1557636384}
   currentDisplayCard: {fileID: 0}
+--- !u!114 &481254720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481254716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2a6d77e8d7257842b1b122b2ce59ddb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &511666256
 GameObject:
   m_ObjectHideFlags: 0
@@ -1692,7 +1705,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 537ed65d3de296e4dab57fd852281994, type: 2}
   availableCards: []
   playerDeck: []
-  deckSize: 3
+  deckSize: 10
+  isPlayerOne: 0
 --- !u!1 &1066758487
 GameObject:
   m_ObjectHideFlags: 0
@@ -3276,7 +3290,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1493604814
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3447,7 +3461,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 537ed65d3de296e4dab57fd852281994, type: 2}
   availableCards: []
   playerDeck: []
-  deckSize: 5
+  deckSize: 10
+  isPlayerOne: 1
 --- !u!4 &1494809203
 Transform:
   m_ObjectHideFlags: 0
@@ -3496,6 +3511,7 @@ MonoBehaviour:
   pressAnyKeyText: {fileID: 2034102534}
   HandPlayer1: {fileID: 2012748599}
   HandPlayer2: {fileID: 2077986323}
+  canvasEndTurn: {fileID: 1621142885}
   isPlayer1Turn: 1
 --- !u!4 &1557636385
 Transform:
@@ -11391,7 +11407,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerDeck: {fileID: 1494809202}
   handLimit: 3
-  isPlayerOne: 0
+  isPlayerOne: 1
   cardPrefab: {fileID: 2857499731240099392, guid: 21606d58a14cb8440b4524597cf1c564,
     type: 3}
   handPanel: {fileID: 2012748596}

@@ -85,74 +85,75 @@ namespace dungeonduell
 
 
 
-        public void SpawnTile(Vector3 mouseWorldPos, Card card, bool PlayerMove, bool spawnSourroundSetables, int owner)
+        public bool SpawnTile(Vector3 mouseWorldPos, Card card, bool PlayerMove, bool spawnSourroundSetables, int owner)
         {
             Vector3Int cellPosition = tilemap.WorldToCell(new Vector3(mouseWorldPos.x, mouseWorldPos.y, cam.transform.position.z));
-
             TileBase clickedTile = tilemap.GetTile(cellPosition);
 
+            // Sonderfall: ShellCard
             if (card is ShellCard)
             {
-                if (card.Tile is AnimatedTile) // for Some reason Animated Tile need to be set on a free Tile to Work ;
+                if (card.Tile is AnimatedTile)
                 {
                     tilemap.SetTile(cellPosition, null);
                 }
                 tilemap.SetTile(cellPosition, card.Tile);
-                return; // Rest is Handled when the Tile is clicked by the player , so no further action needed
+
+                FinalizePlacement();
+                return true;
             }
 
-            if (clickedTile != resetTile | !PlayerMove)
+            if (clickedTile != resetTile || !PlayerMove)
             {
+                // ShellCard-Verarbeitung
                 ShellCard shelledTileCard = CardShelled.FirstOrDefault(x => x.InPlayerRangeTile.Contains(clickedTile));
-
                 if (shelledTileCard != null)
                 {
                     int index = Array.FindIndex(shelledTileCard.InPlayerRangeTile, tile => clickedTile == tile);
                     clickedTile = setAbleTiles[index];
-
-                    shelledTileCard.startDoorConcellation = card.startDoorConcellation; // giving it direction of clicked card, other elements are preset of sheel card
+                    shelledTileCard.startDoorConcellation = card.startDoorConcellation;
 
                     card = (Card)shelledTileCard.Clone();
                     card.Tile = shelledTileCard.CompleteTile;
-
                 }
 
-
-                if (((setAbleTiles.Contains(clickedTile)) && currentCard != null) | !PlayerMove)
+                // Nur fortfahren, wenn gültig
+                if ((setAbleTiles.Contains(clickedTile) && currentCard != null) || !PlayerMove)
                 {
-                    CardUsingHandling(card, PlayerMove, spawnSourroundSetables, cellPosition, clickedTile, owner);
-                    
-                    if (turnManager != null)
+                    bool wasHandled = CardUsingHandling(card, PlayerMove, spawnSourroundSetables, cellPosition, clickedTile, owner);
+
+                    if (wasHandled)
                     {
-                        CardToHand cardToHand = turnManager.isPlayer1Turn ? turnManager.HandPlayer1 : turnManager.HandPlayer2;
-                        if (cardToHand != null)
-                        {
-                            cardToHand.ReactivateHandCards();
-                        }
-
-                        if (hexgridController != null)
-                        {
-                            hexgridController.ResetNavigation();
-                        }
-
+                        FinalizePlacement();
+                        return true;
+                    }
+                    else
+                    {
+                        Debug.Log("[SpawnTile] Platzierung durch CardUsingHandling abgelehnt");
+                        return false;
                     }
                 }
                 else
                 {
-                    Debug.Log("Denied_SetOrNoCard");
+                    Debug.Log("[TileClickHandler] Denied_SetOrNoCard");
+                    return false;
                 }
             }
             else
             {
-                Debug.Log("OutOfReachTile");
+                Debug.Log("[TileClickHandler] OutOfReachTile");
+                return false;
             }
-
         }
 
-        private void CardUsingHandling(Card card, bool PlayerMove, bool spawnSourroundSetables, Vector3Int cellPosition, TileBase clickedTile, int owner)
+
+
+
+        private bool CardUsingHandling(Card card, bool PlayerMove, bool spawnSourroundSetables, Vector3Int cellPosition, TileBase clickedTile, int owner)
         {
             bool[] OverriteCurrentDoorDir = new bool[] { false, false, false, false, false, false };
             bool connectionForcing = false;
+
             if (clickedTile == setAbleTiles[setAbleTiles.Length - 1]) // Hited Contested
             {
                 DDCodeEventHandler.Trigger_DungeonConnected();
@@ -162,66 +163,60 @@ namespace dungeonduell
                 {
                     if (connectCollector.GetFullRoomList().Any(entry => entry.Item1 == cellPosition + offset[i]))
                     {
-                        currentDoorDir[i] = true; // Connect to all rooms that are there
+                        currentDoorDir[i] = true;
                         OverriteCurrentDoorDir[i] = true;
                     }
                 }
             }
+
             Tuple<Vector3Int, ConnectionDir>[] sourroundCorr = GetSouroundCorr(cellPosition, currentDoorDir);
 
-            if (CheckConnectAblity(sourroundCorr) | !PlayerMove)
+            if (CheckConnectAblity(sourroundCorr) || !PlayerMove)
             {
-                // Set Tiles
-                // Main Spawn
+                // --- HIER bleibt alles wie im Original ---
                 tilemap.SetTile(cellPosition, card.Tile);
 
-                //Sourround
                 if (spawnSourroundSetables)
                 {
-                    // Shadow Tile Handling
                     foreach (Tuple<Vector3Int, ConnectionDir> SourrendTilePos in GetSouroundCorr(cellPosition, new bool[] { true, true, true, true, true, true }))
                     {
-
                         TileBase souroundTile = tilemap.GetTile(SourrendTilePos.Item1);
 
                         if (setAbleTiles.Contains(souroundTile))
                         {
                             if (clickedTile != souroundTile)
                             {
-                                tilemap.SetTile(SourrendTilePos.Item1, setAbleTiles[setAbleTiles.Length - 1]); // Hit Contest
+                                tilemap.SetTile(SourrendTilePos.Item1, setAbleTiles[setAbleTiles.Length - 1]);
                             }
-
                         }
                         else if (shadowSetAbleTiles.Contains(souroundTile))
                         {
                             int i = Array.FindIndex(setAbleTiles, entity => entity == clickedTile);
-                            if (i == setAbleTiles.Length - 1) // Aka. Hitted Contest all Souround no Have to Contested Also
+                            if (i == setAbleTiles.Length - 1)
                             {
                                 tilemap.SetTile(SourrendTilePos.Item1, setAbleTiles[setAbleTiles.Length - 1]);
                             }
-                            else if (souroundTile != shadowSetAbleTiles[Array.FindIndex(setAbleTiles, entity => entity == clickedTile)])
+                            else if (souroundTile != shadowSetAbleTiles[i])
                             {
                                 tilemap.SetTile(SourrendTilePos.Item1, setAbleTiles[setAbleTiles.Length - 1]);
                             }
-
                         }
-                        if (souroundTile == resetTile & PlayerMove)
+
+                        if (souroundTile == resetTile && PlayerMove)
                         {
                             int i = Array.FindIndex(setAbleTiles, entity => entity == clickedTile);
                             if (i < shadowSetAbleTiles.Length)
                             {
-                                tilemap.SetTile(SourrendTilePos.Item1, shadowSetAbleTiles[Array.FindIndex(setAbleTiles, entity => entity == clickedTile)]);
+                                tilemap.SetTile(SourrendTilePos.Item1, shadowSetAbleTiles[i]);
                             }
                         }
-
                     }
 
-                    //Tile Handling on DoorDir
                     foreach (Tuple<Vector3Int, ConnectionDir> SourrendTilePos in GetSouroundCorr(cellPosition, currentDoorDir))
                     {
                         TileBase souroundTile = tilemap.GetTile(SourrendTilePos.Item1);
 
-                        if (souroundTile == resetTile | shadowSetAbleTiles.Contains(souroundTile))
+                        if (souroundTile == resetTile || shadowSetAbleTiles.Contains(souroundTile))
                         {
                             if (setAbleTiles.Contains(clickedTile))
                             {
@@ -237,50 +232,36 @@ namespace dungeonduell
                             ShellCard shelledTileCard = CardShelled.FirstOrDefault(x => x.Tile == souroundTile);
                             if (shelledTileCard != null && setAbleTiles.Contains(clickedTile))
                             {
-
                                 tilemap.SetTile(SourrendTilePos.Item1, shelledTileCard.InPlayerRangeTile[Array.IndexOf(setAbleTiles, clickedTile)]);
-
                             }
+
                             ShellCard shelledTileCardModif = CardShelled.FirstOrDefault(x => x.InPlayerRangeTile.Contains(souroundTile));
                             if (shelledTileCardModif != null && setAbleTiles.Contains(clickedTile))
                             {
-                                if (Array.IndexOf(setAbleTiles, clickedTile) != Array.IndexOf(shelledTileCardModif.InPlayerRangeTile, souroundTile)) // cause Contested
+                                if (Array.IndexOf(setAbleTiles, clickedTile) != Array.IndexOf(shelledTileCardModif.InPlayerRangeTile, souroundTile))
                                 {
                                     tilemap.SetTile(SourrendTilePos.Item1, shelledTileCardModif.InPlayerRangeTile[2]);
                                 }
                             }
-
-
-
-
                         }
-
-
-
                     }
                 }
 
-                // Create Room Info
                 CreateRoom(cellPosition, card.roomtype, card.roomElement, currentDoorDir, owner, connectionForcing);
 
-                // Card Disposal
                 if (PlayerMove)
                 {
-                    // Karte zum Abwurfstapel hinzufügen
                     DDCodeEventHandler.Trigger_CardPlayed(card, isPlayer1Turn);
                     RemoveCardFromCardHolder();
-                    DDCodeEventHandler.Trigger_NextPlayerTurn(); // Übergib die Verantwortung an den TurnManager
-
+                    DDCodeEventHandler.Trigger_NextPlayerTurn();
                     isPlayer1Turn = !isPlayer1Turn;
-
                     currentCard = null;
                 }
 
                 GameObject indicator = Instantiate(indiactorDoor, tilemap.CellToWorld(cellPosition), Quaternion.identity);
                 if (indiactorDoorAnker == null)
                 {
-                    indiactorDoorAnker = GameObject.Find("IndicatorsAnker").transform; // TODO HotFix ; Make better later
-
+                    indiactorDoorAnker = GameObject.Find("IndicatorsAnker").transform;
                 }
                 indicator.transform.parent = indiactorDoorAnker;
                 indicator.GetComponent<DoorIndicator>().SetDoorIndiactor(currentDoorDir);
@@ -289,13 +270,15 @@ namespace dungeonduell
                     indicator.GetComponent<DoorIndicator>().OverExtend(OverriteCurrentDoorDir);
                 }
 
-
+                return true;
             }
             else
             {
                 Debug.Log("Denied_NotRightRoation");
+                return false;
             }
         }
+
 
         private bool CheckConnectAblity(Tuple<Vector3Int, ConnectionDir>[] sourroundCorr)
         {
@@ -424,6 +407,32 @@ namespace dungeonduell
             }
 
         }
+
+        public bool CheckConnectAblity(Card card, Vector3Int cellPosition)
+        {
+            var directions = card.GetAllowedDirection();
+            var sourroundCorr = GetSouroundCorr(cellPosition, directions);
+            return CheckConnectAblity(sourroundCorr);
+        }
+
+        private void FinalizePlacement()
+        {
+            if (turnManager != null)
+            {
+                CardToHand cardToHand = turnManager.isPlayer1Turn ? turnManager.HandPlayer1 : turnManager.HandPlayer2;
+                if (cardToHand != null)
+                {
+                    cardToHand.ReactivateHandCards();
+                }
+
+                if (hexgridController != null)
+                {
+                    hexgridController.ResetNavigation();
+                }
+            }
+        }
+
+
         void OnEnable()
         {
             SubscribeToEvents();

@@ -172,6 +172,12 @@ namespace dungeonduell
             }
         }
 
+        public void SetPlayerDeck(PlayerDeck deck)
+        {
+            playerDeck = deck;
+        }
+
+
         public void DisableHandCardsForNavigation()
         {
             foreach (DisplayCard dc in displayCards)
@@ -214,8 +220,7 @@ namespace dungeonduell
             {
                 if (child == cardHolder) continue;
                 child.gameObject.SetActive(false);
-                Debug.Log("DeactivateHandCards");
-                Debug.Log(child.name);
+
             }
         }
 
@@ -225,8 +230,7 @@ namespace dungeonduell
             {
                 if (child == cardHolder) continue;
                 child.gameObject.SetActive(true);
-                Debug.Log("ReactivateHandCards");
-                Debug.Log(child.name);
+
             }
 
             EnableHandCardsForNavigation();
