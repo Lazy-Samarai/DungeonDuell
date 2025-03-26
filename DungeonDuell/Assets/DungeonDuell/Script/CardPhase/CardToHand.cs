@@ -207,11 +207,6 @@ namespace dungeonduell
                     }
                 }
             }
-
-            if (skipButton != null)
-            {
-                skipButton.interactable = true;
-            }
         }
 
         public void DeactivateHandCards()
@@ -314,6 +309,8 @@ namespace dungeonduell
                 EventSystem.current.SetSelectedGameObject(selectables[0].gameObject);
             }
         }
+
+        
 
         public void DrawCard()
         {

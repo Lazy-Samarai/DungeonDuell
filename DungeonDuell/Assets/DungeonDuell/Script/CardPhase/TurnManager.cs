@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using Cinemachine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace dungeonduell
 {
@@ -65,6 +66,12 @@ namespace dungeonduell
             ToggleHandVisibility(isPlayer1Turn, !isPlayer1Turn);
             
             canvasEndTurn.SetActive(true); // <-- Canvas aktivieren
+
+            Button skipButton = canvasEndTurn.GetComponentInChildren<Button>();
+            if (skipButton != null)
+            {
+                skipButton.interactable = true;
+            }
 
             // Prüfe, ob der erste Input von einem Controller kam
             if (IsUsingController())

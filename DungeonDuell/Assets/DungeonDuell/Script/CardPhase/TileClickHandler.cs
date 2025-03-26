@@ -129,7 +129,7 @@ namespace dungeonduell
                     }
                     else
                     {
-                        Debug.Log("[SpawnTile] Platzierung durch CardUsingHandling abgelehnt");
+                        Debug.Log("[TileClickHandler] Platzierung durch CardUsingHandling abgelehnt");
                         return false;
                     }
                 }
@@ -422,7 +422,7 @@ namespace dungeonduell
                 CardToHand cardToHand = turnManager.isPlayer1Turn ? turnManager.HandPlayer1 : turnManager.HandPlayer2;
                 if (cardToHand != null)
                 {
-                    cardToHand.ReactivateHandCards();
+                    //cardToHand.ReactivateHandCards();
                 }
 
                 if (hexgridController != null)
