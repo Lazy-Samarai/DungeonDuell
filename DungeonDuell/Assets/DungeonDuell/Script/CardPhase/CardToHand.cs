@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.EventSystems;
+using System.Collections;
+
 
 namespace dungeonduell
 {
@@ -122,12 +124,13 @@ namespace dungeonduell
                 DisplayHand();
                 SetupNavigation(skipButton);
 
+                //Select wieder aktiv setzen
                 if (displayCards.Count > 0)
                 {
-                    Selectable firstCardSel = displayCards[0].GetComponent<Selectable>();
-                    if (firstCardSel != null)
+                    DisplayCard firstCard = displayCards[displayCards.Count - 1]; // ganz rechts
+                    if (firstCard != null && firstCard.GetComponent<Selectable>() is Selectable firstSel)
                     {
-                        EventSystem.current.SetSelectedGameObject(firstCardSel.gameObject);
+                        StartCoroutine(SetSelectableNextFrame(firstSel));
                     }
                 }
             }
@@ -237,36 +240,23 @@ namespace dungeonduell
             return cardHolder.childCount > 0;
         }
 
-        public void SelectFirstCard()
+        public void FirstSelectable()
         {
-            List<Selectable> selectables = new List<Selectable>();
-
-            foreach (Card card in handCards)
+            foreach (Transform child in handPanel)
             {
-                DisplayCard displayCard = displayCards.Find(dc => dc.card == card);
-
-                if (displayCard != null)
+                if (child.TryGetComponent<Selectable>(out var sel) && sel.interactable && sel.gameObject.activeInHierarchy)
                 {
-                    Selectable selectable = displayCard.GetComponent<Selectable>();
-                    if (selectable != null)
-                    {
-                        selectables.Add(selectable);
-                    }
+                    EventSystem.current.SetSelectedGameObject(null); // Reset vorheriger Fokus
+                    StartCoroutine(SetSelectableNextFrame(sel));
+                    break; // Nur das erste gültige Objekt selektieren
                 }
             }
+        }
 
-            if (selectables.Count == 0 && skipButton != null)
-            {
-                EventSystem.current.SetSelectedGameObject(skipButton.gameObject);
-                return;
-            }
-
-            if (selectables.Count > 0)
-            {
-                EventSystem.current.SetSelectedGameObject(selectables[0].gameObject);
-            }
-
-            SetupNavigation(skipButton);
+        private IEnumerator SetSelectableNextFrame(Selectable sel)
+        {
+            yield return null; // Einen Frame warten
+            sel.Select(); // Jetzt wird das Event korrekt ausgelöst
         }
 
         public void SetupNavigation(Selectable skipButton)
@@ -307,10 +297,9 @@ namespace dungeonduell
             if (selectables.Count > 0)
             {
                 EventSystem.current.SetSelectedGameObject(selectables[0].gameObject);
+                
             }
         }
-
-        
 
         public void DrawCard()
         {

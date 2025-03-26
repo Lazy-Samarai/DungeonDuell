@@ -143,7 +143,7 @@ namespace dungeonduell
             }
         }
 
-        private void ActivateHoverEffect()
+        public void ActivateHoverEffect()
         {
             if (transform.parent == handPanel)
             {

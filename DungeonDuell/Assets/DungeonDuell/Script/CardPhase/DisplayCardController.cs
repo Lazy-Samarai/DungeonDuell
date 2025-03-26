@@ -50,19 +50,9 @@ namespace dungeonduell
             {
                 displayCard.OnPointerClick(null); // Simuliert Mausklick auf die Karte
                 DDCodeEventHandler.Trigger_CardSelected(displayCard);
+                Debug.Log("klick auf karte und das player 1 oder player 2");
             }
         }
-
-        /*
-        private void OnBackPressed(InputAction.CallbackContext context)
-        {
-            // Prüft, ob diese Karte im CardHolder liegt
-            if (displayCard.transform.parent == cardToHand.cardHolder)
-            {
-                cardToHand.OnCardClicked(displayCard); // Führt den Rücktransfer aus
-            }
-        }
-        */
 
         private PlayerInput FindCorrectPlayerInput()
         {

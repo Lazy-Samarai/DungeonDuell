@@ -73,15 +73,25 @@ namespace dungeonduell
                 skipButton.interactable = true;
             }
 
-            // Prüfe, ob der erste Input von einem Controller kam
-            if (IsUsingController())
+            StartCoroutine(DelayedFirstSelectable());
+
+        }
+
+        private IEnumerator DelayedFirstSelectable()
+        {
+            yield return null; // 1 Frame warten – kann auch 2 oder mehr sein, je nach Timing
+            if (isPlayer1Turn)
             {
-                if (isPlayer1Turn)
-                    HandPlayer1.SelectFirstCard();
-                else
-                    HandPlayer2.SelectFirstCard();
+                HandPlayer1.FirstSelectable();
+                Debug.Log("TurnManager: FirstSelectable (Delayed)");
+            }
+            else
+            {
+                HandPlayer2.FirstSelectable();
+                Debug.Log("TurnManager: FirstSelectable2 (Delayed)");
             }
         }
+
 
         void UpdatePlayerTurnText()
         {
@@ -101,12 +111,13 @@ namespace dungeonduell
                 bool stickMoved = Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0;
                 bool buttonPressed = Input.GetKey(KeyCode.JoystickButton0) || Input.GetKey(KeyCode.JoystickButton1);
                 bool mouseMoved = Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0;
-
+                
+                Debug.Log("[InputCheck] IsUsingController: true");
                 return (stickMoved || buttonPressed) && !mouseMoved; // Verhindert Controller-Erkennung, wenn die Maus bewegt wurde
             }
+            Debug.Log("[InputCheck] IsUsingController: false");
             return false;
         }
-
 
         public void EndPlayerTurn()
         {
