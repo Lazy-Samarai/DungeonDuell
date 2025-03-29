@@ -5,12 +5,12 @@ using UnityEngine;
 namespace dungeonduell
 {
    
-    public class InteriorSpawner : BaseSpawner
+    public class InteriorSpawner : BaseSingleSpawner
     {
-        // Start is called before the first frame update
+      
         void Start()
         {
-            SpawnObject();
+            SpawnSingleObject(objectToSpawn);
         }
     }
 }

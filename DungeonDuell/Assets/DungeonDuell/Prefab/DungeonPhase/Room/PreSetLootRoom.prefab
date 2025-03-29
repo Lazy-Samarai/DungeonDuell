@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1110255222330070716}
   - component: {fileID: 6225520509385832180}
   m_Layer: 0
-  m_Name: FTCoinSpawner (1)
+  m_Name: MaskSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,6 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 907a9b48e1681ee4ea4d98206f2b1614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectsToSpawn:
+  - {fileID: 4919082811168700742, guid: 916db807891bdef4d9d2c86a550e3b9e, type: 3}
+  - {fileID: 6787643065935835065, guid: 11ec615685e4f1f468da74bf9524beab, type: 3}
+  nothingChange: 0.5
 --- !u!1001 &5994292805560574665
 PrefabInstance:
   m_ObjectHideFlags: 0

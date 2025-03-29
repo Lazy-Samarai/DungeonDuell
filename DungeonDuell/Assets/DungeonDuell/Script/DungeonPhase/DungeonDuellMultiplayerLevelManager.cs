@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using MoreMountains.InventoryEngine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -149,6 +150,13 @@ namespace MoreMountains.TopDownEngine
                         // Give remain Hp back to meta 
                         data.MetaHp += (int)health[i].CurrentHealth;
 
+                        Inventory inventory = MoreMountains.InventoryEngine.Inventory.FindInventory("KoalaMainInventory",
+                            playerNamebase + i + 1);
+
+                        List<Inventory> x = MoreMountains.InventoryEngine.Inventory.RegisteredInventories;
+                        
+                        data.CurrentMask = MoreMountains.InventoryEngine.Inventory.FindInventory("KoalaMainInventory", playerNamebase + i+1).Content.FirstOrDefault(item => item is MaskBase) as MaskBase;;
+
                     }
                 }
             }
@@ -177,7 +185,12 @@ namespace MoreMountains.TopDownEngine
                         health[i].InitialHealth = Math.Min(data.MetaHp, health[i].MaximumHealth);
                         // Upate Player MetaHp
                         data.MetaHp = (int)Math.Max(data.MetaHp - health[i].MaximumHealth, 0);
-
+                        if (data.CurrentMask != null)
+                        {
+                            InventoryEngine.Inventory.FindInventory("KoalaMainInventory", playerNamebase + i+1)
+                                .AddItem(data.CurrentMask, 1);
+                        }
+                        
                     }
 
                 }

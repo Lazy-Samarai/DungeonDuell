@@ -70,7 +70,6 @@ namespace dungeonduell
 
         public override bool Pick(string playerID)
         {
-            Debug.Log("Pick" );
             return Equip(playerID);;
         }
 
