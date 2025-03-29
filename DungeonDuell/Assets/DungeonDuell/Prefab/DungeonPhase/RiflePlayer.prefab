@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4595760819738216}
   - component: {fileID: 198636575736016878}
   - component: {fileID: 199223044668829694}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Shells
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5009,7 +5009,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4322627176265138}
   - component: {fileID: 95036209968351816}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5072,7 +5072,7 @@ GameObject:
   - component: {fileID: 1867951725043699587}
   - component: {fileID: 2965726219822037401}
   - component: {fileID: 6032885677554127453}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: RiflePlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5278,42 +5278,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UpLevelKey: 111
   DownLevelKey: 105
---- !u!114 &6032885677554127453
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1490220044263310}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03aaf62627f364a7d92d307729fe738d, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  Mode: 0
-  PerformRaycast: 1
-  DrawLaser: 1
-  RaycastOriginOffset: {x: 0, y: 0, z: 0}
-  LaserOriginOffset: {x: 0, y: 0, z: 0}
-  LaserMaxDistance: 50
-  LaserCollisionMask:
-    serializedVersion: 2
-    m_Bits: 8386930
-  LaserWidth: {x: 0.05, y: 0.05}
-  LaserMaterial: {fileID: 2100000, guid: 421ea2e7b588af74c8232eecbd7b5b46, type: 2}
-  DownLevelKey: 112
---- !u!114 &2965726219822037401
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1490220044263310}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00336782bd0314a4e98d685fd63ce7be, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
 --- !u!61 &5763638078498895120
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5369,8 +5333,43 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b8cfc487f3d503241bc43c1960c3aa5a, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2965726219822037401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490220044263310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00336782bd0314a4e98d685fd63ce7be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6032885677554127453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490220044263310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03aaf62627f364a7d92d307729fe738d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Mode: 0
+  PerformRaycast: 1
+  DrawLaser: 1
+  RaycastOriginOffset: {x: 0, y: 0, z: 0}
+  LaserOriginOffset: {x: 0, y: 0, z: 0}
+  LaserMaxDistance: 50
+  LaserCollisionMask:
+    serializedVersion: 2
+    m_Bits: 8386930
+  LaserWidth: {x: 0.05, y: 0.05}
+  LaserMaterial: {fileID: 2100000, guid: 421ea2e7b588af74c8232eecbd7b5b46, type: 2}
 --- !u!1 &1806446063217534
 GameObject:
   m_ObjectHideFlags: 0
@@ -5381,7 +5380,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4616784861444994}
   - component: {fileID: 212409535536248356}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: ModelContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5467,7 +5466,7 @@ GameObject:
   - component: {fileID: 4921664011988614}
   - component: {fileID: 198651910794900294}
   - component: {fileID: 199282671691671708}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: MuzzleFlare
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10379,7 +10378,7 @@ GameObject:
   - component: {fileID: 4906529262087276}
   - component: {fileID: 198432269183031748}
   - component: {fileID: 199641244418259880}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: ForwardParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15230,7 +15229,7 @@ GameObject:
   - component: {fileID: 4284800662257128}
   - component: {fileID: 198521305498382852}
   - component: {fileID: 199121392646810776}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: SideParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20188,7 +20187,7 @@ GameObject:
   m_Component:
   - component: {fileID: 967536956088114629}
   - component: {fileID: 1710523558594538418}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: WeaponUsedMMFeedback
   m_TagString: Untagged
   m_Icon: {fileID: 0}

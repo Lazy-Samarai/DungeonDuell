@@ -13,6 +13,7 @@ namespace dungeonduell
         public GameObject LevelUpMenu; // Das Panel für das Level-Up
         public TestHub TestHub;
         private DungeonDuellMultiplayerLevelManager _levelManager;
+        const int AmountPerUpgrade = 1;
 
         private void Start()
         {
@@ -40,7 +41,7 @@ namespace dungeonduell
             {
                 if (_levelManager != null)
                 {
-                    _levelManager.ApplyLevelUp(option);
+                    _levelManager.ApplyLevelUpPerCoins(option,AmountPerUpgrade);
                 }
                 TestHub.menuShowing = false;
                 ShowLevelUpMenu(false);

@@ -42,7 +42,8 @@ namespace MoreMountains.InventoryEngine
 		/// </summary>
 		protected virtual void Start()
 		{
-			Initialization ();
+			Initialization();
+			
 		}
 
 		/// <summary>

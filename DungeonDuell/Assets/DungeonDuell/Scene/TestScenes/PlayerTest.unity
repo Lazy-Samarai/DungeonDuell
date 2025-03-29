@@ -3828,6 +3828,74 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 630513040}
   m_CullTransparentMesh: 0
+--- !u!1 &639944717
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 639944719}
+  - component: {fileID: 639944718}
+  m_Layer: 0
+  m_Name: PlayerDataManger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &639944718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639944717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d61e7a32d2ee3844dada35717334f7bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerDataList:
+  - PlayerID: Player1
+    Points: 0
+    Level: 1
+    CoinsForNextLevel: 1
+    WalkSpeed: 6
+    RunSpeed: 10
+    MaxHealth: 50
+    AttackSpeed: 1
+    RemainingLive: 2
+    MetaHp: 200
+    MaxMetaHp: 200
+  - PlayerID: Player2
+    Points: 0
+    Level: 1
+    CoinsForNextLevel: 1
+    WalkSpeed: 6
+    RunSpeed: 10
+    MaxHealth: 50
+    AttackSpeed: 1
+    RemainingLive: 2
+    MetaHp: 200
+    MaxMetaHp: 200
+  nextRoundFinal: 0
+--- !u!4 &639944719
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639944717}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &642524690
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8150,9 +8218,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3153dfa2a366c194691e38fcd1d55532, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeRound: 65
+  timeRound: 9999
   timeRunning: 1
-  finalRound: 0
+  finalRound: 1
   timerText: {fileID: 433397265}
 --- !u!4 &1165921908 stripped
 Transform:
@@ -10707,52 +10775,6 @@ MonoBehaviour:
   CurrentTimeScale: 1
   TargetTimeScale: 1
   TestButton: 0
---- !u!1 &1555664229
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1555664231}
-  - component: {fileID: 1555664230}
-  m_Layer: 0
-  m_Name: PlayerDataManger
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1555664230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1555664229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d61e7a32d2ee3844dada35717334f7bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerDataList: []
-  nextRoundFinal: 0
---- !u!4 &1555664231
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1555664229}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1556328234
 GameObject:
   m_ObjectHideFlags: 0
@@ -15594,4 +15616,4 @@ SceneRoots:
   - {fileID: 1189755522}
   - {fileID: 2135597610}
   - {fileID: 253516227}
-  - {fileID: 1555664231}
+  - {fileID: 639944719}
