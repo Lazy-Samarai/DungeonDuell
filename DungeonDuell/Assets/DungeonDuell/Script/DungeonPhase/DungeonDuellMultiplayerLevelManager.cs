@@ -345,8 +345,8 @@ namespace MoreMountains.TopDownEngine
             running[playerID].RunSpeed += 1.0f * amount;
             
 
-     //       playerSpineAnimationHandlings[playerID].walkMultiply = walking[playerID].WalkSpeed / defaultWalking;
-     //       playerSpineAnimationHandlings[playerID].runningMultiply = running[playerID].RunSpeed / defaultRunning;
+            playerSpineAnimationHandlings[playerID].walkMultiply = walking[playerID].WalkSpeed / defaultWalking;
+            playerSpineAnimationHandlings[playerID].runningMultiply = running[playerID].RunSpeed / defaultRunning;
         }
         private void UpgradeWeaponSpeed(int playerID, int amount)
         {

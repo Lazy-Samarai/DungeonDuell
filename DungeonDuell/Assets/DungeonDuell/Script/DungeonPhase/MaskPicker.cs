@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using MoreMountains.Feedbacks;
 using MoreMountains.InventoryEngine;
 using MoreMountains.TopDownEngine;
 using Unity.VisualScripting;
@@ -10,9 +11,11 @@ namespace dungeonduell
 {
     public class MaskPicker : ItemPicker
     {
+        public MMFeedbacks PickedMMFeedbacks;
         protected override void Start()
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+            PickedMMFeedbacks?.Initialization(this.gameObject);
         }
         public override void OnTriggerEnter2D(Collider2D collider)
         {
@@ -49,6 +52,7 @@ namespace dungeonduell
             _targetInventory.AddItem(Item,1);
             
             Item.Pick(playerID);
+            PickedMMFeedbacks?.PlayFeedbacks();
         }
     }
 }
