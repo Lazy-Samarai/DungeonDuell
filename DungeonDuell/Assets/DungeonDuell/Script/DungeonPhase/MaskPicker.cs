@@ -12,7 +12,6 @@ namespace dungeonduell
     {
         protected override void Start()
         {
-            base.Start();
             transform.position = new Vector3(transform.position.x, transform.position.y, 0);
         }
         public override void OnTriggerEnter2D(Collider2D collider)
@@ -20,8 +19,9 @@ namespace dungeonduell
             if (collider.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
                 string playerID = collider.gameObject.GetComponent<Character>().PlayerID;
-                
-                Pick(Item.TargetInventoryName, playerID);
+
+                Item.TargetInventoryName = collider.gameObject.GetComponent<CharacterInventory>().MainInventoryName;
+                Pick(collider.gameObject.GetComponent<CharacterInventory>().MainInventoryName, playerID);
                 Destroy(gameObject);
                
             }
@@ -40,6 +40,7 @@ namespace dungeonduell
                 {
                     if (item is MaskBase)
                     {
+                        item.UnEquip(playerID);
                         _targetInventory.DropItem(item,item.TargetIndex);
                     }
                 }

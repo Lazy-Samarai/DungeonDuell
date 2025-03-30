@@ -20,7 +20,7 @@ namespace dungeonduell
 
         private void SpawnRandomObject()
         {
-            SpawnSingleObject(objectsToSpawn[Random.Range(0, objectsToSpawn.Length-1)]);
+            SpawnSingleObject(objectsToSpawn[Random.Range(0, objectsToSpawn.Length)]);
         }
     }
 }

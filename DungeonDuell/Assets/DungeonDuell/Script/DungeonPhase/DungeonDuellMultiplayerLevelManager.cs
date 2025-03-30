@@ -150,13 +150,6 @@ namespace MoreMountains.TopDownEngine
                         // Give remain Hp back to meta 
                         data.MetaHp += (int)health[i].CurrentHealth;
 
-                        Inventory inventory = MoreMountains.InventoryEngine.Inventory.FindInventory("KoalaMainInventory",
-                            playerNamebase + i + 1);
-
-                        List<Inventory> x = MoreMountains.InventoryEngine.Inventory.RegisteredInventories;
-                        
-                        data.CurrentMask = MoreMountains.InventoryEngine.Inventory.FindInventory("KoalaMainInventory", playerNamebase + i+1).Content.FirstOrDefault(item => item is MaskBase) as MaskBase;;
-
                     }
                 }
             }
@@ -185,11 +178,6 @@ namespace MoreMountains.TopDownEngine
                         health[i].InitialHealth = Math.Min(data.MetaHp, health[i].MaximumHealth);
                         // Upate Player MetaHp
                         data.MetaHp = (int)Math.Max(data.MetaHp - health[i].MaximumHealth, 0);
-                        if (data.CurrentMask != null)
-                        {
-                            InventoryEngine.Inventory.FindInventory("KoalaMainInventory", playerNamebase + i+1)
-                                .AddItem(data.CurrentMask, 1);
-                        }
                         
                     }
 
@@ -280,11 +268,13 @@ namespace MoreMountains.TopDownEngine
         /// <param name="pickEvent"></param> 
         public virtual void OnMMEvent(CoinEvent coinEvent)
         {
+            print("lol");
             LevelUPID = coinEvent.Picker.MMGetComponentNoAlloc<Character>()?.PlayerID;
             for (int i = 0; i < Points.Length; i++)
             {
                 if (Points[i].PlayerID == LevelUPID)
                 {
+                    print("lol?");
                     Points[i].Points += coinEvent.PointsToAdd;
                     TopDownEngineEvent.Trigger(TopDownEngineEventTypes.Repaint, null);
                     if (Points[i].Points >= Points[i].CoinsForNextLevel)
@@ -302,12 +292,12 @@ namespace MoreMountains.TopDownEngine
             DDCodeEventHandler.Trigger_LevelUpAvailable(playerID, upgradableCount);
         }
 
-        public void ApplyLevelUpPerCoins(LevelUpOptions option,int amount)
+        public void ApplyLevelUpPerCoins(LevelUpOptions option,int amount,int playerId)
         {
-
+            string fullPlayerId = (playerNamebase + playerId);
             for (int i = 0; i < Points.Length; i++)
             {
-                if (Points[i].PlayerID == LevelUPID)
+                if (Points[i].PlayerID == fullPlayerId)
                 {
 
                     Points[i].Points -= Points[i].CoinsForNextLevel;
@@ -317,7 +307,7 @@ namespace MoreMountains.TopDownEngine
                     HandleUpgradable(i);
                     TopDownEngineEvent.Trigger(TopDownEngineEventTypes.Repaint, null);
                     
-                    HandleUpgrade(option,LevelUPID, amount);
+                    HandleUpgrade(option,fullPlayerId, amount);
 
                     if (Points[i].Points < Points[i].CoinsForNextLevel)
                     {
