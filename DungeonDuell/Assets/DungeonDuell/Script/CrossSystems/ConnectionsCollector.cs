@@ -9,6 +9,7 @@ namespace dungeonduell
     public class ConnectionsCollector : MonoBehaviour
     {    
         public List<Tuple<Vector3Int, RoomInfo>> roomsInfos = new List<Tuple<Vector3Int, RoomInfo>>();
+        [SerializeField] List<RoomType> filteredRoomTypeFromFirstCoin;
 
         void OnEnable()
         {
@@ -43,9 +44,9 @@ namespace dungeonduell
         public void AddRoom(Vector3Int pos, List<RoomConnection> Conncection,RoomType type, RoomElement element, List<ConnectionDir> newAllowedDoors,int owner)
         {
             Tuple<Vector3Int, RoomInfo> newroomsInfos = 
-                new Tuple<Vector3Int, RoomInfo>(pos,new RoomInfo(roomsInfos.Count, Conncection, type, element, newAllowedDoors, owner));
+                new Tuple<Vector3Int, RoomInfo>(pos,new RoomInfo(roomsInfos.Count, Conncection, type, element, newAllowedDoors, owner, !filteredRoomTypeFromFirstCoin.Contains(type)));
 
-             roomsInfos.Add(newroomsInfos);
+            roomsInfos.Add(newroomsInfos);
         }
 
         public int[] GetPossibleConnects(Vector3Int[] allArounds,bool[] allowedDoors,bool forceOnRoom) // TODO Allround probaly not parll
@@ -85,6 +86,7 @@ namespace dungeonduell
         {
             return roomsInfos;
         }
+        
 
         void OnDisable()
         {
