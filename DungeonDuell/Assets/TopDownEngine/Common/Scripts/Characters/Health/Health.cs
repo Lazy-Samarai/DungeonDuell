@@ -177,7 +177,7 @@ namespace MoreMountains.TopDownEngine
 		public delegate void OnDeathDelegate();
 		public OnDeathDelegate OnDeath;
 
-		// Füge ein neues Event für die Heilung hinzu
+		// FÃ¼ge ein neues Event fÃ¼r die Heilung hinzu
 		public delegate void OnHealDelegate();
 		public OnHealDelegate OnHeal;
 

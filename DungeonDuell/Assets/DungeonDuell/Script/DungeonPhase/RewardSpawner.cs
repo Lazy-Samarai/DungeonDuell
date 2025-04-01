@@ -4,11 +4,10 @@ using UnityEngine;
 
 namespace dungeonduell
 {
-    public class RewardSpawner : BaseSpawner
+    public class RewardSpawner : BaseSingleSpawner
     {
         public void SpawnReward(){
-            SpawnObject();
-    
+            SpawnSingleObject(objectToSpawn);
         }
     }
 }

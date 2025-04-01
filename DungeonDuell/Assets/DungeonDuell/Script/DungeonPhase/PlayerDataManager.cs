@@ -27,8 +27,10 @@ namespace dungeonduell
         public int MetaHp = 100;
 
         public int MaxMetaHp = 100;
+        
+        public MaskBase CurrentMask = null;
 
-        public PlayerData(string playerID, int points, int level, int coinsForNextLevel, float walkSpeed, float runSpeed, float health, float attackSpeed, int maxMetaHp)
+        public PlayerData(string playerID, int points, int level, int coinsForNextLevel, float walkSpeed, float runSpeed, float health, float attackSpeed, int maxMetaHp,MaskBase currentMask)
         {
             PlayerID = playerID;
             Points = points;
@@ -41,6 +43,7 @@ namespace dungeonduell
             AttackSpeed = attackSpeed;
             MaxMetaHp = maxMetaHp;
             MetaHp = MaxMetaHp;
+            CurrentMask = currentMask;
         }
     }
 
