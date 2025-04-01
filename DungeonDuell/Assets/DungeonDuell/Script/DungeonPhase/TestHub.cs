@@ -4,6 +4,9 @@ using UnityEngine;
 using MoreMountains.Tools;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using System.Text.RegularExpressions;
+using dungeonduell;
+using System;
 
 namespace MoreMountains.TopDownEngine
 {
@@ -77,26 +80,22 @@ namespace MoreMountains.TopDownEngine
 						StartCoroutine(MMFade.FadeCanvasGroup(WinnerScreen, 0.5f, 0.8f, true));
 					}
 					break;
-
-				case TopDownEngineEventTypes.LevelUp:
-					if (PlayerID == (LevelManager.Instance as DungeonDuellMultiplayerLevelManager).LevelUPID)
-					{
-						canLevelUp = true;
-						LevelUpNowText.gameObject.SetActive(canLevelUp);
-					}
-					break;
-
-				case TopDownEngineEventTypes.NoLevelUp:
-					if (PlayerID == (LevelManager.Instance as DungeonDuellMultiplayerLevelManager).LevelUPID)
-					{
-						canLevelUp = false;
-						LevelUpNowText.gameObject.SetActive(canLevelUp);
-					}
-					break;
-
 			}
 
 		}
+		public void LevelPossible(int id, int count)
+		{
+			int myPlayerIndex = Int32.Parse(PlayerID[PlayerID.Length - 1].ToString()) - 1;
+			if (myPlayerIndex == id)
+			{
+				canLevelUp = count > 0;
+				LevelUpNowText.gameObject.SetActive(canLevelUp);
+				LevelUpNowText.text = Regex.Replace(LevelUpNowText.text, "\\s*\\(.*?\\)", "").Trim(); // remove old "(X)"
+				LevelUpNowText.text += $"({count})";
+			}
+
+		}
+
 		public void ShowMenuTry()
 		{
 			if (canLevelUp)
@@ -117,6 +116,7 @@ namespace MoreMountains.TopDownEngine
 		/// </summary>
 		protected virtual void OnEnable()
 		{
+			DDCodeEventHandler.LevelUpAvailable += LevelPossible;
 			this.MMEventStartListening<TopDownEngineEvent>();
 		}
 
@@ -125,6 +125,7 @@ namespace MoreMountains.TopDownEngine
 		/// </summary>
 		protected virtual void OnDisable()
 		{
+			DDCodeEventHandler.LevelUpAvailable -= LevelPossible;
 			this.MMEventStopListening<TopDownEngineEvent>();
 		}
 	}

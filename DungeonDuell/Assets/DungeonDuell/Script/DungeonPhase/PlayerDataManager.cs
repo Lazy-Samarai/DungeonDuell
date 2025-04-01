@@ -5,6 +5,7 @@ using MoreMountains.Tools;
 using MoreMountains.TopDownEngine;
 using UnityEngine.SceneManagement;
 
+
 namespace dungeonduell
 {
 
@@ -18,12 +19,16 @@ namespace dungeonduell
 
         public float WalkSpeed;
         public float RunSpeed;
-        public float Health;
+        public float MaxHealth;
         public float AttackSpeed;
 
         public int RemainingLive = 2;
 
-        public PlayerData(string playerID, int points, int level, int coinsForNextLevel, float walkSpeed, float runSpeed, float health, float attackSpeed)
+        public int MetaHp = 100;
+
+        public int MaxMetaHp = 100;
+
+        public PlayerData(string playerID, int points, int level, int coinsForNextLevel, float walkSpeed, float runSpeed, float health, float attackSpeed, int maxMetaHp)
         {
             PlayerID = playerID;
             Points = points;
@@ -32,8 +37,10 @@ namespace dungeonduell
 
             WalkSpeed = walkSpeed;
             RunSpeed = runSpeed;
-            Health = health;
+            MaxHealth = health;
             AttackSpeed = attackSpeed;
+            MaxMetaHp = maxMetaHp;
+            MetaHp = MaxMetaHp;
         }
     }
 
@@ -54,22 +61,13 @@ namespace dungeonduell
             }
 
             DontDestroyOnLoad(gameObject);
-            InitializePlayerData();
         }
-
-        private void InitializePlayerData()
-        {
-            PlayerDataList.Add(new PlayerData("Player1", 0, 1, 1, 6, 10, 30, 1));
-            PlayerDataList.Add(new PlayerData("Player2", 0, 1, 1, 6, 10, 30, 1));
-        }
-
-
         public void FinalRound()
         {
             nextRoundFinal = true;
             for (int i = 0; i < PlayerDataList.Count; i++)
             {
-                PlayerDataList[i].RemainingLive = 1;
+                PlayerDataList[i].MaxHealth = PlayerDataList[i].MetaHp;
             }
         }
 
@@ -80,7 +78,7 @@ namespace dungeonduell
                 if (nextRoundFinal)
                 {
                     DDCodeEventHandler.Trigger_FinalRoundInDungeon();
-                    
+
                     SequenceMang sequenceMang;
                     if (sequenceMang = FindAnyObjectByType<SequenceMang>())
                     {
@@ -88,6 +86,7 @@ namespace dungeonduell
                     }
                 }
             }
+            DDCodeEventHandler.Trigger_PlayerDataExposed(PlayerDataList);
 
         }
         void OnEnable()

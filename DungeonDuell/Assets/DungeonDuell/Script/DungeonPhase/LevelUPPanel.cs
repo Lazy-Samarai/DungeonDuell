@@ -23,10 +23,6 @@ namespace dungeonduell
         {
             OnOptionSelected(LevelUpOptions.AttackSpeed);
         }
-        public void UpgradeHealth()
-        {
-            OnOptionSelected(LevelUpOptions.Health);
-        }
         public void UpgradeSpeedd()
         {
             OnOptionSelected(LevelUpOptions.Speed);

@@ -1,51 +1,133 @@
-using System.Collections;
-using System.Collections.Generic;
-using MoreMountains.Tools;
+using MoreMountains.TopDownEngine;
 using Spine;
 using Spine.Unity;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace dungeonduell
 {
     public class PlayerSpineAnimationHandling : MonoBehaviour
     {
-        SkeletonAnimation skeletonAnimation;
-        [SpineAnimation]
-        public string running;
+        const string TargetBoneName = "Target"; 
+        private Bone _ikTargetBone;
+        SkeletonAnimation _skeletonAnimation;
+        [SpineAnimation] public string running;
+        [SpineAnimation] public string runningBackward;
+        [SpineAnimation] public string idle;
+        [SpineAnimation] public string walk;
+        [SpineAnimation] public string death;
+        [SpineAnimation] public string shoot;
+        [SpineAnimation] public string dash;
+
         public float runningMultiply = 1f;
-        [SpineAnimation]
-        public string idle;
-        [SpineAnimation]
-        public string walk;
         public float walkMultiply = 1f;
 
-        // Start is called before the first frame update
-        void Start()
-        {
-            skeletonAnimation = GetComponent<SkeletonAnimation>();
-            SetToIdle();
+        public bool facingEastRunning = false;
+        public bool runningEast = false;
+        [FormerlySerializedAs("_rigidbody2D")] public CharacterMovement _characterMovement;
 
-        }
-        public void SetAnimation(string name)
+
+        // Start is called before the first frame update
+        void Awake()
         {
-            skeletonAnimation.AnimationState.SetAnimation(0, name, true);
+            _characterMovement = GetComponentInParent<CharacterMovement>();
+         //   _characterOrientation2D  = GetComponentInParent<CharacterOrientation2D>();
+            _skeletonAnimation = GetComponent<SkeletonAnimation>();
+            _ikTargetBone = _skeletonAnimation.Skeleton.FindBone(TargetBoneName); 
+            SetToIdle();
         }
-        public void SetAnimation(string name, float scale)
+
+        private void Update()
         {
-            TrackEntry trackEntry = skeletonAnimation.AnimationState.SetAnimation(0, name, true);
+            Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mouseWorldPosition.z = 0;
+            
+            if (transform.parent.transform.rotation.y <= 0)
+            {
+                mouseWorldPosition.x *= -1;
+            }
+
+            CheckRunningDirection();
+
+            _ikTargetBone.SetLocalPosition(mouseWorldPosition);
+            
+            
+            _skeletonAnimation.skeleton.UpdateWorldTransform(Skeleton.Physics.Update);
+            
+        }
+
+        private void CheckRunningDirection()
+        {
+            if (transform.parent.transform.rotation.y <= 0 != facingEastRunning)
+            {
+                facingEastRunning = transform.parent.transform.rotation.y <= 0;
+                UpdateFacing();
+            }
+
+            if (_characterMovement.GetMovement().x >= 0 != runningEast)
+            {
+             
+                runningEast =_characterMovement.GetMovement().x >= 0;
+                UpdateFacing();
+            }
+        }
+
+        public void SetAnimation(string aniName)
+        {
+            _skeletonAnimation.AnimationState.SetAnimation(0, aniName, true);
+        }
+
+        public void SetAnimation(string aniName, bool loop)
+        {
+            _skeletonAnimation.AnimationState.SetAnimation(0, aniName, loop);
+        }
+
+        public void SetAnimation(string aniName, float scale)
+        {
+            TrackEntry trackEntry = _skeletonAnimation.AnimationState.SetAnimation(0, aniName, true);
             trackEntry.TimeScale = scale;
         }
+
+        public void UpdateFacing()
+        {
+            if (_skeletonAnimation.state.GetCurrent(0).ToString() == running | _skeletonAnimation.state.GetCurrent(0).ToString() == runningBackward)
+            {
+                SetToRunning();
+            }
+        }
+
+        // Done like this to avoid String reference
         public void SetToIdle()
         {
             SetAnimation(idle);
         }
+
         public void SetToRunning()
         {
-            SetAnimation(running, runningMultiply);
+           bool backwards = facingEastRunning != runningEast;
+           SetAnimation(!backwards ? running : runningBackward, runningMultiply);
         }
+
         public void SetToWalk()
         {
             SetAnimation(walk, walkMultiply);
         }
+        public void SetToDeath()
+        {
+            print("Deeeeeeeeeeeaddddd");
+            SetAnimation(death, false);
+        }
+        public void SetToDash()
+        {
+            SetAnimation(dash);
+        }
+
+        public void SetToShoot()
+        {
+            _skeletonAnimation.AnimationState.AddAnimation(1,shoot,false,0f);
+            _skeletonAnimation.AnimationState.AddEmptyAnimation(1, 0.25f, 0f);
+        }
+
+     
     }
 }

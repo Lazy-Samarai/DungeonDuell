@@ -6,7 +6,7 @@ public class RoomInfo {
 
     public int RoomID { get; set; }
     public List<RoomConnection> Conncection { get; set; }
- 
+
     public RoomType roomtype = RoomType.Generic;
 
     public RoomElement roommElement = RoomElement.Standard;
@@ -14,6 +14,8 @@ public class RoomInfo {
     public List<ConnectionDir> allowedDoors;
 
     public int roomOwner = 0; // 0 - no One - else Player x
+
+    private bool firstTimeSpawn = true;
 
     public RoomInfo(int id, List<RoomConnection> newConncection)
     {
@@ -28,7 +30,7 @@ public class RoomInfo {
         roommElement = newRoomElement;
         allowedDoors = newAllowedDoors;
     }
-    public RoomInfo(int id, List<RoomConnection> newConncection, RoomType newRoomtype, RoomElement newRoomElement, List<ConnectionDir> newAllowedDoors,int owner)
+    public RoomInfo(int id, List<RoomConnection> newConncection, RoomType newRoomtype, RoomElement newRoomElement, List<ConnectionDir> newAllowedDoors,int owner,bool newfirstTimeSpawn)
     {
         RoomID = id;
         Conncection = newConncection;
@@ -36,7 +38,9 @@ public class RoomInfo {
         roommElement = newRoomElement;
         allowedDoors = newAllowedDoors;
         roomOwner = owner;
+        firstTimeSpawn = newfirstTimeSpawn;
     }
+    public global::System.Boolean FirstTimeSpawn { get => firstTimeSpawn; set => firstTimeSpawn = value; }
 
 }
 public class RoomConnection

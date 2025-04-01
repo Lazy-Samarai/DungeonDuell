@@ -23,6 +23,11 @@ namespace dungeonduell
         public static void Trigger_CardRotating(bool[] newRot) { CardRotating.Invoke(newRot); }
         public static event Action FinalRoundInDungeon;
         public static void Trigger_FinalRoundInDungeon() { FinalRoundInDungeon.Invoke(); }
+        public static event Action<int, int> LevelUpAvailable;
+        public static void Trigger_LevelUpAvailable(int playerId, int upgradableCount) { LevelUpAvailable.Invoke(playerId, upgradableCount); }
+        public static event Action<List<PlayerData>> PlayerDataExposed;
+        public static void Trigger_PlayerDataExposed(List<PlayerData> playerdatas) { PlayerDataExposed.Invoke(playerdatas); }
+
 
     }
 }
