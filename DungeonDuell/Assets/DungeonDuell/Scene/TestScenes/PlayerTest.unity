@@ -10781,7 +10781,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d61e7a32d2ee3844dada35717334f7bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerDataList: []
+  PlayerDataList:
+  - PlayerID: Player1
+    Points: 0
+    Level: 1
+    CoinsForNextLevel: 1
+    WalkSpeed: 6
+    RunSpeed: 10
+    MaxHealth: 50
+    AttackSpeed: 1
+    RemainingLive: 2
+    MetaHp: 200
+    MaxMetaHp: 200
+  - PlayerID: Player2
+    Points: 0
+    Level: 1
+    CoinsForNextLevel: 1
+    WalkSpeed: 6
+    RunSpeed: 10
+    MaxHealth: 50
+    AttackSpeed: 1
+    RemainingLive: 2
+    MetaHp: 200
+    MaxMetaHp: 200
   nextRoundFinal: 0
 --- !u!4 &1555664231
 Transform:
