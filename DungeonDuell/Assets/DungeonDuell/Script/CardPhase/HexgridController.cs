@@ -11,74 +11,46 @@ namespace dungeonduell
 {
     public class HexgridController : MonoBehaviour
     {
-        [Header("Player Settings")]
-        public bool isPlayerOne;
-
         [Header("References")]
         public Tilemap tilemap;
         public GameObject cursor;
         public TileClickHandler tileClickHandler;
         public TurnManager turnManager;
-
         public DisplayCard currentDisplayCard;
 
         private Vector3Int selectedTilePos;
         private List<Vector3Int> setAbleTiles = new List<Vector3Int>();
         private PlayerInput playerInput;
-
         private float lastNavigateTime = 0f;
-        private float navigateCooldown = 0.15f; // 150ms Pause zwischen Bewegungen
+        private float navigateCooldown = 0.15f;
 
         private static readonly Vector2[] HexDirections = new Vector2[]
         {
-            new Vector2(1f, 0f).normalized,           // Rechts
-            new Vector2(0.5f, 0.866f).normalized,     // Oben rechts
-            new Vector2(-0.5f, 0.866f).normalized,    // Oben links
-            new Vector2(-1f, 0f).normalized,          // Links
-            new Vector2(-0.5f, -0.866f).normalized,   // Unten links
-            new Vector2(0.5f, -0.866f).normalized     // Unten rechts
+            new Vector2(1f, 0f).normalized,
+            new Vector2(0.5f, 0.866f).normalized,
+            new Vector2(-0.5f, 0.866f).normalized,
+            new Vector2(-1f, 0f).normalized,
+            new Vector2(-0.5f, -0.866f).normalized,
+            new Vector2(0.5f, -0.866f).normalized
         };
 
         private void Start()
         {
             if (turnManager == null)
-            {
                 turnManager = FindObjectOfType<TurnManager>();
-            }
 
-            playerInput = GetCurrentPlayerInput();
+            playerInput = null;
 
             if (cursor) cursor.SetActive(false);
-
-            if (playerInput != null)
-            {
-                playerInput.actions["Navigation"].performed += OnNavigate;
-                playerInput.actions["Submit"].performed += OnSubmit;
-                playerInput.actions["Back"].performed += OnBack;
-            }
-        }
-
-        private void OnDestroy()
-        {
-            if (playerInput != null)
-            {
-                playerInput.actions["Navigation"].performed -= OnNavigate;
-                playerInput.actions["Submit"].performed -= OnSubmit;
-                playerInput.actions["Back"].performed -= OnBack;
-            }
         }
 
         public void ActivateNavigation()
         {
             setAbleTiles.Clear();
-            BoundsInt bounds = tilemap.cellBounds;
-
-            foreach (var cellPos in bounds.allPositionsWithin)
+            foreach (var cellPos in tilemap.cellBounds.allPositionsWithin)
             {
                 if (tileClickHandler.IsSetablePosition(cellPos))
-                {
                     setAbleTiles.Add(cellPos);
-                }
             }
 
             if (setAbleTiles.Count == 0)
@@ -88,7 +60,6 @@ namespace dungeonduell
             }
 
             selectedTilePos = setAbleTiles[0];
-
             if (cursor)
             {
                 cursor.SetActive(true);
@@ -96,10 +67,14 @@ namespace dungeonduell
             }
 
             DisableAllHandSelectables();
+            if (EventSystem.current) EventSystem.current.SetSelectedGameObject(null);
 
-            if (EventSystem.current != null)
+            playerInput = GetCurrentPlayerInput();
+            if (playerInput != null)
             {
-                EventSystem.current.SetSelectedGameObject(null);
+                playerInput.actions["Navigation"].performed += OnNavigate;
+                playerInput.actions["Submit"].performed += OnSubmit;
+                playerInput.actions["Back"].performed += OnBack;
             }
         }
 
@@ -107,6 +82,14 @@ namespace dungeonduell
         {
             if (cursor) cursor.SetActive(false);
             EnableAllHandSelectables();
+
+            if (playerInput != null)
+            {
+                playerInput.actions["Navigation"].performed -= OnNavigate;
+                playerInput.actions["Submit"].performed -= OnSubmit;
+                playerInput.actions["Back"].performed -= OnBack;
+                playerInput = null;
+            }
         }
 
         private void OnNavigate(InputAction.CallbackContext ctx)
@@ -115,10 +98,9 @@ namespace dungeonduell
             if (Time.time - lastNavigateTime < navigateCooldown) return;
 
             Vector2 input = ctx.ReadValue<Vector2>();
-            if (input.sqrMagnitude < 0.5f) return; // höhere Deadzone
+            if (input.sqrMagnitude < 0.5f) return;
 
             Vector2 snappedInput = SnapToHexDirection(input.normalized);
-
             Vector3Int bestTarget = selectedTilePos;
             float bestScore = -1f;
 
@@ -186,7 +168,6 @@ namespace dungeonduell
             }
 
             int playerID = turnManager.isPlayer1Turn ? 1 : 2;
-
             bool wasPlaced = tileClickHandler.SpawnTile(worldPos, card, true, true, playerID);
 
             if (!wasPlaced)
@@ -195,26 +176,18 @@ namespace dungeonduell
                 return;
             }
 
-            // Nur wenn Karte platziert wurde:
             ResetNavigation();
-
             CardToHand cardToHand = GetCurrentCardToHand();
-            if (cardToHand != null)
-            {
-                cardToHand.ReactivateHandCards();
-            }
+            if (cardToHand != null) cardToHand.ReactivateHandCards();
         }
-
 
         private void OnBack(InputAction.CallbackContext ctx)
         {
-
             CardToHand cardToHand = GetCurrentCardToHand();
             if (cardToHand.cardHolder.childCount > 0)
             {
                 Transform child = cardToHand.cardHolder.GetChild(0);
                 DisplayCard dc = child.GetComponent<DisplayCard>();
-
                 if (dc != null)
                 {
                     cardToHand.OnCardClicked(dc);
@@ -251,7 +224,7 @@ namespace dungeonduell
             if (cardToHand != null)
             {
                 cardToHand.DisableHandCardsForNavigation();
-                cardToHand.DeactivateHandCards();  
+                cardToHand.DeactivateHandCards();
             }
         }
 

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
-using MoreMountains.TopDownEngine; // Für InputSystemManagerEventsBased
+using MoreMountains.TopDownEngine;
 
 namespace dungeonduell
 {
@@ -14,7 +14,7 @@ namespace dungeonduell
         void Start()
         {
             displayCard = GetComponent<DisplayCard>();
-            cardToHand = GetComponentInParent<CardToHand>(); // Holt das CardToHand-Skript
+            cardToHand = GetComponentInParent<CardToHand>();
 
             if (displayCard == null || cardToHand == null)
             {
@@ -22,7 +22,6 @@ namespace dungeonduell
                 return;
             }
 
-            // Finde das passende PlayerInput-Objekt basierend auf Canvas
             playerInput = FindCorrectPlayerInput();
 
             if (playerInput != null)
@@ -45,12 +44,10 @@ namespace dungeonduell
 
         private void OnSubmitPressed(InputAction.CallbackContext context)
         {
-            // Prüft, ob diese Karte aktuell selektiert ist
-            if (EventSystem.current.currentSelectedGameObject == gameObject)
+            if (EventSystem.current.currentSelectedGameObject == gameObject && IsActivePlayer())
             {
-                displayCard.OnPointerClick(null); // Simuliert Mausklick auf die Karte
+                displayCard.OnPointerClick(null);
                 DDCodeEventHandler.Trigger_CardSelected(displayCard);
-                Debug.Log("klick auf karte und das player 1 oder player 2");
             }
         }
 
@@ -63,7 +60,7 @@ namespace dungeonduell
                 var playerManager = player.GetComponent<InputSystemManagerEventsBased>();
                 if (playerManager != null && playerManager.PlayerID == neededPlayerID)
                 {
-                    return player; // Richtige PlayerInput-Instanz gefunden
+                    return player;
                 }
             }
             return null;
@@ -79,6 +76,12 @@ namespace dungeonduell
                 parent = parent.parent;
             }
             return true;
+        }
+
+        private bool IsActivePlayer()
+        {
+            var turnManager = FindObjectOfType<TurnManager>();
+            return (turnManager.isPlayer1Turn && IsPlayer1Card()) || (!turnManager.isPlayer1Turn && !IsPlayer1Card());
         }
     }
 }

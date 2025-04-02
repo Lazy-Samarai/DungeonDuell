@@ -5,10 +5,13 @@ using TMPro;
 using Cinemachine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using MoreMountains.TopDownEngine;
+using UnityEngine.InputSystem;
+
 
 namespace dungeonduell
 {
-    public class TurnManager : MonoBehaviour,IObserver
+    public class TurnManager : MonoBehaviour, IObserver
     {
         public TextMeshProUGUI playerTurnText;
         public TextMeshProUGUI pressAnyKeyText;
@@ -16,21 +19,19 @@ namespace dungeonduell
         public CardToHand HandPlayer2;
         public GameObject canvasEndTurn;
 
-
         private bool awaitingKeyPress = false;
-
         public bool isPlayer1Turn = true;
         private float timeStart;
 
         void Start()
         {
             timeStart = Time.time;
-            InitializeTurn(); // Startet den ersten Spielzug
+            InitializeTurn();
         }
 
         void Update()
         {
-            if (awaitingKeyPress && (Time.time - timeStart > 0.5f) && Input.anyKeyDown)
+            if (awaitingKeyPress && (Time.time - timeStart > 0.5f) && GetActivePlayerInput().actions["Submit"].WasPressedThisFrame())
             {
                 BeginPlayerActionPhase();
             }
@@ -38,34 +39,23 @@ namespace dungeonduell
 
         void InitializeTurn()
         {
-            awaitingKeyPress = true; // Setzt den Tastendruck f�r jeden neuen Zug voraus
-            // Setze die Anzeige f�r den Zugbeginn
+            awaitingKeyPress = true;
             playerTurnText.text = "Next Turn: " + (isPlayer1Turn ? "Player 1" : "Player 2");
             playerTurnText.gameObject.SetActive(true);
             pressAnyKeyText.gameObject.SetActive(true);
-
-            canvasEndTurn.SetActive(false); // <-- Canvas deaktivieren
-
-            // Versteckt beide Handkarten zu Beginn des Zuges
+            canvasEndTurn.SetActive(false);
             ToggleHandVisibility(false, false);
         }
 
         void BeginPlayerActionPhase()
         {
-            if (!awaitingKeyPress)
-            {
-                return;
-            }
+            if (!awaitingKeyPress) return;
 
             awaitingKeyPress = false;
             UpdatePlayerTurnText();
-
             pressAnyKeyText.gameObject.SetActive(false);
-
-            // Zeigt die Handkarten für den aktuellen Spieler an
             ToggleHandVisibility(isPlayer1Turn, !isPlayer1Turn);
-            
-            canvasEndTurn.SetActive(true); // <-- Canvas aktivieren
+            canvasEndTurn.SetActive(true);
 
             Button skipButton = canvasEndTurn.GetComponentInChildren<Button>();
             if (skipButton != null)
@@ -74,74 +64,37 @@ namespace dungeonduell
             }
 
             StartCoroutine(DelayedFirstSelectable());
-
         }
+
 
         private IEnumerator DelayedFirstSelectable()
         {
-            yield return null; // 1 Frame warten – kann auch 2 oder mehr sein, je nach Timing
-            if (isPlayer1Turn)
-            {
-                HandPlayer1.FirstSelectable();
-                Debug.Log("TurnManager: FirstSelectable (Delayed)");
-            }
-            else
-            {
-                HandPlayer2.FirstSelectable();
-                Debug.Log("TurnManager: FirstSelectable2 (Delayed)");
-            }
+            yield return null;
+            if (isPlayer1Turn) HandPlayer1.FirstSelectable();
+            else HandPlayer2.FirstSelectable();
         }
-
 
         void UpdatePlayerTurnText()
         {
             if (playerTurnText != null)
-            {
                 playerTurnText.text = "Current Turn: " + (isPlayer1Turn ? "Player 1" : "Player 2");
-            }
-        }
-
-
-
-        bool IsUsingController()
-        {
-            string[] controllers = Input.GetJoystickNames();
-            if (controllers.Length > 0) // Prüfen, ob Controller angeschlossen ist
-            {
-                bool stickMoved = Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0;
-                bool buttonPressed = Input.GetKey(KeyCode.JoystickButton0) || Input.GetKey(KeyCode.JoystickButton1);
-                bool mouseMoved = Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0;
-                
-                Debug.Log("[InputCheck] IsUsingController: true");
-                return (stickMoved || buttonPressed) && !mouseMoved; // Verhindert Controller-Erkennung, wenn die Maus bewegt wurde
-            }
-            Debug.Log("[InputCheck] IsUsingController: false");
-            return false;
         }
 
         public void EndPlayerTurn()
         {
             isPlayer1Turn = !isPlayer1Turn;
-
-            // Verz�gere das Initialisieren des neuen Zuges, um sicherzustellen, dass awaitingKeyPress korrekt gesetzt ist
             Invoke(nameof(InitializeTurn), 0.1f);
-        } 
+        }
 
-        // Neue Methode zum Umschalten der Handkartenanzeige
         private void ToggleHandVisibility(bool showForPlayer1, bool showForPlayer2)
         {
             HandPlayer1.ShowHideDeck(!showForPlayer1);
             HandPlayer2.ShowHideDeck(!showForPlayer2);
         }
-        
-        void OnEnable()
-        {
-            SubscribeToEvents();
-        }
-        void OnDisable()
-        {
-           UnsubscribeToAllEvents();
-        }
+
+        void OnEnable() => SubscribeToEvents();
+        void OnDisable() => UnsubscribeToAllEvents();
+
         public void SubscribeToEvents()
         {
             DDCodeEventHandler.NextPlayerTurn += EndPlayerTurn;
@@ -150,6 +103,18 @@ namespace dungeonduell
         public void UnsubscribeToAllEvents()
         {
             DDCodeEventHandler.NextPlayerTurn -= EndPlayerTurn;
+        }
+
+        private PlayerInput GetActivePlayerInput()
+        {
+            string neededID = isPlayer1Turn ? "Player1" : "Player2";
+            foreach (var input in FindObjectsOfType<PlayerInput>())
+            {
+                var manager = input.GetComponent<InputSystemManagerEventsBased>();
+                if (manager != null && manager.PlayerID == neededID)
+                    return input;
+            }
+            return null;
         }
     }
 }
