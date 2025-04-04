@@ -30,6 +30,11 @@ namespace dungeonduell
             OnOptionSelected(LevelUpOptions.Speed);
         }
 
+        public void UpgradeHealth()
+        {
+            OnOptionSelected(LevelUpOptions.HealingInstead);
+        }
+
         public void ShowLevelUpMenu(bool on)
         {
             menuOpen = on;

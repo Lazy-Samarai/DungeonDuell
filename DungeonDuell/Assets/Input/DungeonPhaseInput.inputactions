@@ -159,7 +159,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "DoUpgradeHealth",
+                    "name": "DoHealthUp",
                     "type": "Button",
                     "id": "13d851c4-efe0-4304-8dd8-2d24a140e047",
                     "expectedControlType": "Button",
@@ -555,11 +555,11 @@
                 {
                     "name": "",
                     "id": "e107ea95-f568-4587-a5ad-8e05ced5a085",
-                    "path": "<Gamepad>/dpad/right",
+                    "path": "<Gamepad>/dpad/up",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "DoUpgradeHealth",
+                    "action": "DoHealthUp",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -570,7 +570,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "DoUpgradeHealth",
+                    "action": "DoHealthUp",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
