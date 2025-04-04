@@ -35,10 +35,7 @@ namespace dungeonduell
 
                 timerText.text = totalSeconds.ToString();
             }
-            if (Input.GetKeyDown(KeyCode.X))
-            {
-                BackToCardPhase();
-            }
+           
 
 
         }

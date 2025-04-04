@@ -5067,7 +5067,6 @@ GameObject:
   - component: {fileID: 114345180357598506}
   - component: {fileID: 114251315345146356}
   - component: {fileID: -1803590343298730861}
-  - component: {fileID: 6580491061123051137}
   - component: {fileID: 6032885677554127453}
   - component: {fileID: 941323431325580120}
   - component: {fileID: 4008837654617038452}
@@ -5265,20 +5264,6 @@ MonoBehaviour:
   CheckMouse: 1
   CheckPrimaryAxis: 1
   CheckSecondaryAxis: 1
---- !u!114 &6580491061123051137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1490220044263310}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b57512bf94c7f842879ca85f5a3d6e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UpLevelKey: 106
-  DownLevelKey: 107
 --- !u!114 &6032885677554127453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5289,8 +5274,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 03aaf62627f364a7d92d307729fe738d, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   Mode: 0
   PerformRaycast: 1
   DrawLaser: 1
@@ -5312,8 +5297,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 00336782bd0314a4e98d685fd63ce7be, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!61 &4008837654617038452
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5369,8 +5354,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b8cfc487f3d503241bc43c1960c3aa5a, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1770532992283947980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5381,8 +5366,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5a821b8b0d5a9d43ada4964fbe31165, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1806446063217534
 GameObject:
   m_ObjectHideFlags: 0
@@ -21043,7 +21028,7 @@ MonoBehaviour:
           m_RotationOrder: 4
         RemapRangeFalloff: {x: 0, y: 1}
         AutomaticShakerSetupButton:
-          ButtonText:
+          ButtonText: 
         Owner: {fileID: 1710523558594538418}
         DebugActive: 0
         PlayEvents:
@@ -21059,7 +21044,7 @@ MonoBehaviour:
                 m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
                 m_IntArgument: 0
                 m_FloatArgument: 0
-                m_StringArgument:
+                m_StringArgument: 
                 m_BoolArgument: 0
               m_CallState: 2
         StopEvents:
