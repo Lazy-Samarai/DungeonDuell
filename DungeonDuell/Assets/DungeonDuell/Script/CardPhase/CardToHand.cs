@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine.EventSystems;
+using UnityEngine.XR;
 
 namespace dungeonduell
 {
-    public class CardToHand : MonoBehaviour
+    public class CardToHand : MonoBehaviour,IObserver
     {
 
         public List<Card> handCards = new List<Card>(); // Liste der Karten in der Hand
@@ -15,6 +17,8 @@ namespace dungeonduell
         public PlayerDeck playerDeck;
         public float spreadAngle = 30f; // Maximaler Winkel für den Fächer
         public float handRadius = 200f; // Abstand der Karten zum Mittelpunkt
+
+        public bool isPlayer1;
 
         void Start()
         {
@@ -116,6 +120,18 @@ namespace dungeonduell
             }
         }
 
+        private void UpdateCardDeck(Card card, bool player1Played)
+        {
+            if (player1Played == isPlayer1)
+            {
+                handCards.Remove(card);
+                if (handCards.Count == 0)
+                {
+                    DDCodeEventHandler.Trigger_PlayedAllCards(isPlayer1);
+                }
+            }
+        }
+
         public void ShowHideDeck(bool hide)
         {
             if (hide)
@@ -137,5 +153,26 @@ namespace dungeonduell
             }
         }
 
+        void OnEnable()
+        {
+            SubscribeToEvents();
+        }
+
+        void OnDisable()
+        {
+            UnsubscribeToAllEvents();
+        }
+
+        public void SubscribeToEvents()
+        {
+            DDCodeEventHandler.CardPlayed += UpdateCardDeck;
+            DDCodeEventHandler.CardToBeShelled += UpdateCardDeck; // When shell card played is modified (and .remove(card) will do nothing) so extra call before that happens
+        }
+
+        public void UnsubscribeToAllEvents()
+        {
+            DDCodeEventHandler.CardPlayed -= UpdateCardDeck;
+            DDCodeEventHandler.CardToBeShelled -= UpdateCardDeck;
+        }
     }
 }

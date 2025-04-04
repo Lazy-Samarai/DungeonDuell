@@ -113,14 +113,16 @@ namespace dungeonduell
 
                 if (shelledTileCard != null)
                 {
+                    DDCodeEventHandler.Trigger_CardToShelled(card,isPlayer1Turn);
+                    
+                    
                     int index = Array.FindIndex(shelledTileCard.InPlayerRangeTile, tile => clickedTile == tile);
                     clickedTile = setAbleTiles[index];
 
                     shelledTileCard.startDoorConcellation = card.startDoorConcellation; // giving it direction of clicked card, other elements are preset of sheel card
-
+                    
                     card = (Card)shelledTileCard.Clone();
                     card.Tile = shelledTileCard.CompleteTile;
-
                 }
 
 

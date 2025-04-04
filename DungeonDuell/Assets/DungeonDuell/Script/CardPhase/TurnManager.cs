@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using TMPro;
 using Cinemachine;
@@ -22,6 +23,10 @@ namespace dungeonduell
         private bool awaitingKeyPress = false;
 
         public bool isPlayer1Turn = true;
+
+        private const int SecondsToStart = 3;
+
+        private bool[] _playerPlayedAllCards = {false, false};
 
         void Start()
         {
@@ -92,13 +97,21 @@ namespace dungeonduell
                 Debug.LogError(" Auch nach Wartezeit KEINE Karten gefunden!");
             }
         }
-            public void EndPlayerTurn()
+        public void EndPlayerTurn()
         {
             isPlayer1Turn = !isPlayer1Turn;
+            if (_playerPlayedAllCards.All(played => played == true))
+            {
+                InnitGameCountDown();
+            }
+            else
+            {
+                // Verz�gere das Initialisieren des neuen Zuges, um sicherzustellen, dass awaitingKeyPress korrekt gesetzt ist
+                ToggleCursor(isPlayer1Turn);
+                Invoke(nameof(InitializeTurn), 0.1f);
+            }
 
-            // Verz�gere das Initialisieren des neuen Zuges, um sicherzustellen, dass awaitingKeyPress korrekt gesetzt ist
-            ToggleCursor(isPlayer1Turn);
-            Invoke(nameof(InitializeTurn), 0.1f);
+           
         }
 
         private void UpdateCameras()
@@ -127,6 +140,31 @@ namespace dungeonduell
             CourserSour2.Set(!player1);
         }
 
+        public void InnitGameCountDown()
+        {
+            StartCoroutine(StartCountDown());
+        }
+
+        IEnumerator StartCountDown()
+        {
+            pressAnyKeyText.gameObject.SetActive(true);
+            pressAnyKeyText.fontSize *= 2;
+            pressAnyKeyText.text = "Make Ready";
+            for (int i = SecondsToStart ; i > 0; i--)
+            {
+                yield return new WaitForSeconds(1f);
+                pressAnyKeyText.text = "Start in " + i;
+            }
+            yield return new WaitForSeconds(1f);
+            pressAnyKeyText.text = "Loading...";
+            FindObjectOfType<SceneLoading>().ToTheDungeon();
+        }
+
+        private void SetPlayerCardsPlayed(bool player1)
+        {
+            _playerPlayedAllCards[player1 ? 0 : 1] = true;
+        }
+
         void OnEnable()
         {
             SubscribeToEvents();
@@ -138,11 +176,13 @@ namespace dungeonduell
         public void SubscribeToEvents()
         {
             DDCodeEventHandler.NextPlayerTurn += EndPlayerTurn;
+            DDCodeEventHandler.PlayedAllCards += SetPlayerCardsPlayed;
         }
 
         public void UnsubscribeToAllEvents()
         {
             DDCodeEventHandler.NextPlayerTurn -= EndPlayerTurn;
+            DDCodeEventHandler.PlayedAllCards -= SetPlayerCardsPlayed;
         }
     }
 }
