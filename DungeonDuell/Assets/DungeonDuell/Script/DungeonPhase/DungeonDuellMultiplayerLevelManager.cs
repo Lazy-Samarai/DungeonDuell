@@ -80,7 +80,11 @@ namespace MoreMountains.TopDownEngine
         [SerializeField] float coastMultiply = 2;
         [SerializeField] int startCoast = 1;
 
-        private const int HealthOnUpgrade = 40;
+        private int _healthOnUpgrade = HealingPreFinal;
+        
+        const int HealingPreFinal = 40;
+        const int HealingInFinal = 80;
+        
 
         /// <summary> 
         /// On init, we initialize our points and countdowns 
@@ -334,7 +338,7 @@ namespace MoreMountains.TopDownEngine
 
         private void Healing(int playerID, int amount)
         {
-            health[playerID].ReceiveHealth(HealthOnUpgrade*amount, health[playerID].gameObject);
+            health[playerID].ReceiveHealth(_healthOnUpgrade*amount, health[playerID].gameObject);
         }
 
         private void UpgradeSpeed(int playerID, int amount)
@@ -425,6 +429,11 @@ namespace MoreMountains.TopDownEngine
             weapon[playerIndex].TimeBetweenUses = playerDataManager.PlayerDataList[playerIndex].AttackSpeed;
         }
 
+        private void HealingIncreased()
+        {
+            _healthOnUpgrade = HealingInFinal;
+        }
+
 
         /// <summary> 
         /// Starts listening for pickable item events 
@@ -450,11 +459,13 @@ namespace MoreMountains.TopDownEngine
         public void SubscribeToEvents()
         {
             DDCodeEventHandler.PlayerUpgrade += HandleUpgrade;
+            DDCodeEventHandler.FinalRoundInDungeon += HealingIncreased;
         }
 
         public void UnsubscribeToAllEvents()
         {
             DDCodeEventHandler.PlayerUpgrade -= HandleUpgrade;
+            DDCodeEventHandler.FinalRoundInDungeon -= HealingIncreased;
         }
     }
 }
