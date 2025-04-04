@@ -183,18 +183,18 @@ namespace MoreMountains.TopDownEngine
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""DoHealthUp"",
+                    ""name"": ""DoUpgradeAtk"",
                     ""type"": ""Button"",
-                    ""id"": ""13d851c4-efe0-4304-8dd8-2d24a140e047"",
+                    ""id"": ""eecdb8dd-ec6c-4d14-aaf0-47a89e42d6bf"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""DoUpgradeAtk"",
+                    ""name"": ""DoHealthUp"",
                     ""type"": ""Button"",
-                    ""id"": ""eecdb8dd-ec6c-4d14-aaf0-47a89e42d6bf"",
+                    ""id"": ""13d851c4-efe0-4304-8dd8-2d24a140e047"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -557,7 +557,7 @@ namespace MoreMountains.TopDownEngine
                 {
                     ""name"": """",
                     ""id"": ""393eacc1-79ff-40aa-a7f9-371466861da5"",
-                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""path"": ""<Gamepad>/dpad/right"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -579,7 +579,7 @@ namespace MoreMountains.TopDownEngine
                 {
                     ""name"": """",
                     ""id"": ""e107ea95-f568-4587-a5ad-8e05ced5a085"",
-                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""path"": ""<Gamepad>/dpad/down"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -590,7 +590,7 @@ namespace MoreMountains.TopDownEngine
                 {
                     ""name"": """",
                     ""id"": ""0b960752-fdd1-4cc3-b22f-20eb68a65b59"",
-                    ""path"": ""<Keyboard>/2"",
+                    ""path"": ""<Keyboard>/3"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -601,7 +601,7 @@ namespace MoreMountains.TopDownEngine
                 {
                     ""name"": """",
                     ""id"": ""e80d36e5-1734-4e8a-856d-51106586db86"",
-                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""path"": ""<Gamepad>/dpad/left"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -612,7 +612,7 @@ namespace MoreMountains.TopDownEngine
                 {
                     ""name"": """",
                     ""id"": ""5278a078-305c-44e8-8cea-aa55f6235d06"",
-                    ""path"": ""<Keyboard>/3"",
+                    ""path"": ""<Keyboard>/2"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -813,8 +813,8 @@ namespace MoreMountains.TopDownEngine
             m_DungeonPhase_CameraRotation = m_DungeonPhase.FindAction("CameraRotation", throwIfNotFound: true);
             m_DungeonPhase_OpenUpgrade = m_DungeonPhase.FindAction("OpenUpgrade", throwIfNotFound: true);
             m_DungeonPhase_DoUpgradeSpeed = m_DungeonPhase.FindAction("DoUpgradeSpeed", throwIfNotFound: true);
-            m_DungeonPhase_DoHealthUp = m_DungeonPhase.FindAction("DoHealthUp", throwIfNotFound: true);
             m_DungeonPhase_DoUpgradeAtk = m_DungeonPhase.FindAction("DoUpgradeAtk", throwIfNotFound: true);
+            m_DungeonPhase_DoHealthUp = m_DungeonPhase.FindAction("DoHealthUp", throwIfNotFound: true);
             // CardPhase
             m_CardPhase = asset.FindActionMap("CardPhase", throwIfNotFound: true);
             m_CardPhase_Cursor = m_CardPhase.FindAction("Cursor", throwIfNotFound: true);
@@ -900,8 +900,8 @@ namespace MoreMountains.TopDownEngine
         private readonly InputAction m_DungeonPhase_CameraRotation;
         private readonly InputAction m_DungeonPhase_OpenUpgrade;
         private readonly InputAction m_DungeonPhase_DoUpgradeSpeed;
-        private readonly InputAction m_DungeonPhase_DoHealthUp;
         private readonly InputAction m_DungeonPhase_DoUpgradeAtk;
+        private readonly InputAction m_DungeonPhase_DoHealthUp;
         public struct DungeonPhaseActions
         {
             private @DungeonPhaseInput m_Wrapper;
@@ -923,8 +923,8 @@ namespace MoreMountains.TopDownEngine
             public InputAction @CameraRotation => m_Wrapper.m_DungeonPhase_CameraRotation;
             public InputAction @OpenUpgrade => m_Wrapper.m_DungeonPhase_OpenUpgrade;
             public InputAction @DoUpgradeSpeed => m_Wrapper.m_DungeonPhase_DoUpgradeSpeed;
-            public InputAction @DoHealthUp => m_Wrapper.m_DungeonPhase_DoHealthUp;
             public InputAction @DoUpgradeAtk => m_Wrapper.m_DungeonPhase_DoUpgradeAtk;
+            public InputAction @DoHealthUp => m_Wrapper.m_DungeonPhase_DoHealthUp;
             public InputActionMap Get() { return m_Wrapper.m_DungeonPhase; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -985,12 +985,12 @@ namespace MoreMountains.TopDownEngine
                 @DoUpgradeSpeed.started += instance.OnDoUpgradeSpeed;
                 @DoUpgradeSpeed.performed += instance.OnDoUpgradeSpeed;
                 @DoUpgradeSpeed.canceled += instance.OnDoUpgradeSpeed;
-                @DoHealthUp.started += instance.OnDoHealthUp;
-                @DoHealthUp.performed += instance.OnDoHealthUp;
-                @DoHealthUp.canceled += instance.OnDoHealthUp;
                 @DoUpgradeAtk.started += instance.OnDoUpgradeAtk;
                 @DoUpgradeAtk.performed += instance.OnDoUpgradeAtk;
                 @DoUpgradeAtk.canceled += instance.OnDoUpgradeAtk;
+                @DoHealthUp.started += instance.OnDoHealthUp;
+                @DoHealthUp.performed += instance.OnDoHealthUp;
+                @DoHealthUp.canceled += instance.OnDoHealthUp;
             }
 
             private void UnregisterCallbacks(IDungeonPhaseActions instance)
@@ -1046,12 +1046,12 @@ namespace MoreMountains.TopDownEngine
                 @DoUpgradeSpeed.started -= instance.OnDoUpgradeSpeed;
                 @DoUpgradeSpeed.performed -= instance.OnDoUpgradeSpeed;
                 @DoUpgradeSpeed.canceled -= instance.OnDoUpgradeSpeed;
-                @DoHealthUp.started -= instance.OnDoHealthUp;
-                @DoHealthUp.performed -= instance.OnDoHealthUp;
-                @DoHealthUp.canceled -= instance.OnDoHealthUp;
                 @DoUpgradeAtk.started -= instance.OnDoUpgradeAtk;
                 @DoUpgradeAtk.performed -= instance.OnDoUpgradeAtk;
                 @DoUpgradeAtk.canceled -= instance.OnDoUpgradeAtk;
+                @DoHealthUp.started -= instance.OnDoHealthUp;
+                @DoHealthUp.performed -= instance.OnDoHealthUp;
+                @DoHealthUp.canceled -= instance.OnDoHealthUp;
             }
 
             public void RemoveCallbacks(IDungeonPhaseActions instance)
@@ -1184,8 +1184,8 @@ namespace MoreMountains.TopDownEngine
             void OnCameraRotation(InputAction.CallbackContext context);
             void OnOpenUpgrade(InputAction.CallbackContext context);
             void OnDoUpgradeSpeed(InputAction.CallbackContext context);
-            void OnDoHealthUp(InputAction.CallbackContext context);
             void OnDoUpgradeAtk(InputAction.CallbackContext context);
+            void OnDoHealthUp(InputAction.CallbackContext context);
         }
         public interface ICardPhaseActions
         {
