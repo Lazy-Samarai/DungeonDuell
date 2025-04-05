@@ -10204,7 +10204,7 @@ MonoBehaviour:
   ForceWeaponAimControl: 0
   ForcedWeaponAimControl: 1
   ForceAlwaysShoot: 0
-  BufferInput: 1
+  BufferInput: 0
   NewInputExtendsBuffer: 0
   MaximumBufferDuration: 0.25
   RequiresPerfectTile: 0
@@ -18352,6 +18352,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   running: Run
+  runningBackward: RunBackwards
   idle: Idle2
   walk: Walk
   death: Dead
@@ -18359,6 +18360,9 @@ MonoBehaviour:
   dash: Dash
   runningMultiply: 1
   walkMultiply: 1
+  facingEastRunning: 0
+  runningEast: 0
+  _characterMovement: {fileID: 0}
 --- !u!1 &6808776468769401931
 GameObject:
   m_ObjectHideFlags: 0

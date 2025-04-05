@@ -390,7 +390,7 @@ MonoBehaviour:
   ForceWeaponAimControl: 0
   ForcedWeaponAimControl: 1
   ForceAlwaysShoot: 0
-  BufferInput: 1
+  BufferInput: 0
   NewInputExtendsBuffer: 0
   MaximumBufferDuration: 0.25
   RequiresPerfectTile: 0
@@ -1621,7 +1621,7 @@ MonoBehaviour:
           m_RotationOrder: 4
         RemapRangeFalloff: {x: 0, y: 1}
         AutomaticShakerSetupButton:
-          ButtonText:
+          ButtonText: 
         Owner: {fileID: 3921267636700132063}
         DebugActive: 0
         PlayEvents:
@@ -1637,7 +1637,7 @@ MonoBehaviour:
                 m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
                 m_IntArgument: 0
                 m_FloatArgument: 0
-                m_StringArgument:
+                m_StringArgument: 
                 m_BoolArgument: 0
               m_CallState: 2
         StopEvents:
@@ -1822,7 +1822,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   running: Run
   runningBackward: RunBackwards
-  runningMultiply: 1
   idle: Idle2
   walk: Walk
   death: Dead
@@ -1831,7 +1830,8 @@ MonoBehaviour:
   runningMultiply: 1
   walkMultiply: 1
   facingEastRunning: 0
-  _rigidbody2D: {fileID: 0}
+  runningEast: 0
+  _characterMovement: {fileID: 0}
 --- !u!1 &1899941585429488189
 GameObject:
   m_ObjectHideFlags: 0
@@ -13858,7 +13858,7 @@ MonoBehaviour:
           m_RotationOrder: 4
         RemapRangeFalloff: {x: 0, y: 1}
         AutomaticShakerSetupButton:
-          ButtonText:
+          ButtonText: 
         Owner: {fileID: 8147680259493336532}
         DebugActive: 0
         PlayEvents:
@@ -13874,7 +13874,7 @@ MonoBehaviour:
                 m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
                 m_IntArgument: 0
                 m_FloatArgument: 0
-                m_StringArgument:
+                m_StringArgument: 
                 m_BoolArgument: 0
               m_CallState: 2
             - m_Target: {fileID: 3641043158486298760}
@@ -13886,7 +13886,7 @@ MonoBehaviour:
                 m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
                 m_IntArgument: 0
                 m_FloatArgument: 0
-                m_StringArgument:
+                m_StringArgument: 
                 m_BoolArgument: 0
               m_CallState: 2
         StopEvents:
