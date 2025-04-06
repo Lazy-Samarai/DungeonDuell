@@ -21,7 +21,7 @@ namespace dungeonduell
             {
                 foreach (var deck in allDecks)
                 {
-                    if (hand.isPlayerOne == deck.isPlayerOne)
+                    if (hand.isPlayer1 == deck.isPlayerOne)
                     {
                         hand.SetPlayerDeck(deck);
                     }

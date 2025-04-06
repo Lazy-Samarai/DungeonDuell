@@ -113,10 +113,13 @@ namespace dungeonduell
                 ShellCard shelledTileCard = CardShelled.FirstOrDefault(x => x.InPlayerRangeTile.Contains(clickedTile));
                 if (shelledTileCard != null)
                 {
+                    DDCodeEventHandler.Trigger_CardToShelled(card,isPlayer1Turn);
+                    
+                    
                     int index = Array.FindIndex(shelledTileCard.InPlayerRangeTile, tile => clickedTile == tile);
                     clickedTile = setAbleTiles[index];
                     shelledTileCard.startDoorConcellation = card.startDoorConcellation;
-
+                    
                     card = (Card)shelledTileCard.Clone();
                     card.Tile = shelledTileCard.CompleteTile;
                 }

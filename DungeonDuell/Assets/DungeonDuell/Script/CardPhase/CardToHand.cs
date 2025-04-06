@@ -2,18 +2,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine.EventSystems;
 using System.Collections;
-
+using UnityEngine.XR;
 
 namespace dungeonduell
 {
-    public class CardToHand : MonoBehaviour
+    public class CardToHand : MonoBehaviour,IObserver
     {
         [Header("Deck / Player")]
         public PlayerDeck playerDeck;
         public int handLimit = 3;
-        public bool isPlayerOne;
 
         [Header("UI References")]
         public GameObject cardPrefab;
@@ -25,8 +25,10 @@ namespace dungeonduell
         public float spacing = 40f;
         public float maxRotation = 20f;
 
-        private List<Card> handCards = new List<Card>();
+        public List<Card> handCards = new List<Card>();
         private List<DisplayCard> displayCards = new List<DisplayCard>();
+
+        public bool isPlayer1;
 
         void Start()
         {
@@ -316,6 +318,18 @@ namespace dungeonduell
             }
         }
 
+        private void UpdateCardDeck(Card card, bool player1Played)
+        {
+            if (player1Played == isPlayer1)
+            {
+                handCards.Remove(card);
+                if (handCards.Count == 0)
+                {
+                    DDCodeEventHandler.Trigger_PlayedAllCards(isPlayer1);
+                }
+            }
+        }
+
         public void ShowHideDeck(bool hide)
         {
             if (hide)
@@ -335,6 +349,28 @@ namespace dungeonduell
 
                 transform.DOMoveY(0, 0.5f);
             }
+        }
+
+        void OnEnable()
+        {
+            SubscribeToEvents();
+        }
+
+        void OnDisable()
+        {
+            UnsubscribeToAllEvents();
+        }
+
+        public void SubscribeToEvents()
+        {
+            DDCodeEventHandler.CardPlayed += UpdateCardDeck;
+            DDCodeEventHandler.CardToBeShelled += UpdateCardDeck; // When shell card played is modified (and .remove(card) will do nothing) so extra call before that happens
+        }
+
+        public void UnsubscribeToAllEvents()
+        {
+            DDCodeEventHandler.CardPlayed -= UpdateCardDeck;
+            DDCodeEventHandler.CardToBeShelled -= UpdateCardDeck;
         }
     }
 }
