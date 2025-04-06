@@ -9840,7 +9840,6 @@ GameObject:
   - component: {fileID: 114104414726605804}
   - component: {fileID: 114171358364461030}
   - component: {fileID: 114499223069276626}
-  - component: {fileID: 3008336604184723397}
   m_Layer: 10
   m_Name: MainPlayer2
   m_TagString: Player2
@@ -10204,7 +10203,7 @@ MonoBehaviour:
   ForceWeaponAimControl: 0
   ForcedWeaponAimControl: 1
   ForceAlwaysShoot: 0
-  BufferInput: 1
+  BufferInput: 0
   NewInputExtendsBuffer: 0
   MaximumBufferDuration: 0.25
   RequiresPerfectTile: 0
@@ -10421,20 +10420,6 @@ MonoBehaviour:
   EdgePrecision: 3
   EdgeThreshold: 0.5
   VisionMeshFilter: {fileID: 33599144827507420}
---- !u!114 &3008336604184723397
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1498750440386690}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b16523dedec55cb46beb24778fce02fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UpLevelKey: 106
-  DownLevelKey: 104
 --- !u!1 &1561075265052736
 GameObject:
   m_ObjectHideFlags: 0
@@ -18352,6 +18337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   running: Run
+  runningBackward: RunBackwards
   idle: Idle2
   walk: Walk
   death: Dead
@@ -18359,6 +18345,9 @@ MonoBehaviour:
   dash: Dash
   runningMultiply: 1
   walkMultiply: 1
+  facingEastRunning: 0
+  runningEast: 0
+  _characterMovement: {fileID: 0}
 --- !u!1 &6808776468769401931
 GameObject:
   m_ObjectHideFlags: 0
