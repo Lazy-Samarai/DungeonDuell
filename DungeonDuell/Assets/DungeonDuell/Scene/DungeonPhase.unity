@@ -9744,7 +9744,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Combat is ranged. \nEach room contains a Coin. Collect it to upgrade:
-    Speed, Defense or Attack\nEnemy Rooms will lock once entered. Defeat all enemies
+    Speed, Defense or Heal.\nEnemy Rooms will lock once entered. Defeat all enemies
     to unlock the room and move forward."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -16388,7 +16388,7 @@ PrefabInstance:
     - target: {fileID: 2790051231608372198, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3824081700285593561, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
         type: 3}
