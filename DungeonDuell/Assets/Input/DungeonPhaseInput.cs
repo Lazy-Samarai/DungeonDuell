@@ -670,6 +670,15 @@ namespace MoreMountains.TopDownEngine
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Back"",
+                    ""type"": ""Button"",
+                    ""id"": ""d858d18f-1581-4499-88be-9325a3bb9b38"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -688,17 +697,6 @@ namespace MoreMountains.TopDownEngine
                     ""name"": """",
                     ""id"": ""341b9b69-0074-47a9-b693-2b5e03c78bb6"",
                     ""path"": ""<Gamepad>/rightShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""RotateR"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a3ef8e0b-7fe3-4b1d-9eac-7dbcc894c9b7"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -758,6 +756,17 @@ namespace MoreMountains.TopDownEngine
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Navigation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2c74360d-c83b-44ae-80ce-1d94c5460874"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Back"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -822,6 +831,7 @@ namespace MoreMountains.TopDownEngine
             m_CardPhase_RotateL = m_CardPhase.FindAction("RotateL", throwIfNotFound: true);
             m_CardPhase_Submit = m_CardPhase.FindAction("Submit", throwIfNotFound: true);
             m_CardPhase_Navigation = m_CardPhase.FindAction("Navigation", throwIfNotFound: true);
+            m_CardPhase_Back = m_CardPhase.FindAction("Back", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -1078,6 +1088,7 @@ namespace MoreMountains.TopDownEngine
         private readonly InputAction m_CardPhase_RotateL;
         private readonly InputAction m_CardPhase_Submit;
         private readonly InputAction m_CardPhase_Navigation;
+        private readonly InputAction m_CardPhase_Back;
         public struct CardPhaseActions
         {
             private @DungeonPhaseInput m_Wrapper;
@@ -1087,6 +1098,7 @@ namespace MoreMountains.TopDownEngine
             public InputAction @RotateL => m_Wrapper.m_CardPhase_RotateL;
             public InputAction @Submit => m_Wrapper.m_CardPhase_Submit;
             public InputAction @Navigation => m_Wrapper.m_CardPhase_Navigation;
+            public InputAction @Back => m_Wrapper.m_CardPhase_Back;
             public InputActionMap Get() { return m_Wrapper.m_CardPhase; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -1111,6 +1123,9 @@ namespace MoreMountains.TopDownEngine
                 @Navigation.started += instance.OnNavigation;
                 @Navigation.performed += instance.OnNavigation;
                 @Navigation.canceled += instance.OnNavigation;
+                @Back.started += instance.OnBack;
+                @Back.performed += instance.OnBack;
+                @Back.canceled += instance.OnBack;
             }
 
             private void UnregisterCallbacks(ICardPhaseActions instance)
@@ -1130,6 +1145,9 @@ namespace MoreMountains.TopDownEngine
                 @Navigation.started -= instance.OnNavigation;
                 @Navigation.performed -= instance.OnNavigation;
                 @Navigation.canceled -= instance.OnNavigation;
+                @Back.started -= instance.OnBack;
+                @Back.performed -= instance.OnBack;
+                @Back.canceled -= instance.OnBack;
             }
 
             public void RemoveCallbacks(ICardPhaseActions instance)
@@ -1194,6 +1212,7 @@ namespace MoreMountains.TopDownEngine
             void OnRotateL(InputAction.CallbackContext context);
             void OnSubmit(InputAction.CallbackContext context);
             void OnNavigation(InputAction.CallbackContext context);
+            void OnBack(InputAction.CallbackContext context);
         }
     }
 }
