@@ -1452,6 +1452,7 @@ MonoBehaviour:
   indiactorDoorPrefab: {fileID: 2437991209678005845, guid: 54575de20ace43943ab151cd4098d20e,
     type: 3}
   runTimeIndicatorDoor: {fileID: 0}
+  controllerCursor: {fileID: 887889882}
 --- !u!66 &756542406
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -43496,7 +43497,7 @@ Tilemap:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: 0, y: 0, z: 0}
   m_Size: {x: 0, y: 0, z: 1}
-  m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
+  m_TileAnchor: {x: 0, y: 0, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
     e00: 1
@@ -43674,7 +43675,7 @@ SpriteRenderer:
   m_SortingOrder: 100
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b,
     type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.49019608}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -53282,7 +53283,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerDeck: {fileID: 1494809202}
   handLimit: 3
-  isPlayerOne: 1
   cardPrefab: {fileID: 2857499731240099392, guid: 21606d58a14cb8440b4524597cf1c564,
     type: 3}
   handPanel: {fileID: 2012748596}
@@ -53479,7 +53479,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerDeck: {fileID: 1010877895}
   handLimit: 3
-  isPlayerOne: 0
   cardPrefab: {fileID: 2857499731240099392, guid: 21606d58a14cb8440b4524597cf1c564,
     type: 3}
   handPanel: {fileID: 2077986322}
