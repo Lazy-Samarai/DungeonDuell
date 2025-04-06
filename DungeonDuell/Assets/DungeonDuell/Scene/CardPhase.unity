@@ -1004,6 +1004,7 @@ Transform:
   - {fileID: 1885862863}
   - {fileID: 1148792064}
   - {fileID: 802409283}
+  - {fileID: 802409283}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &545183251
@@ -1328,8 +1329,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_EditorClassIdentifier: m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -46316,6 +46316,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1682481816}
   - component: {fileID: 1682481815}
+  - component: {fileID: 1682481817}
   m_Layer: 0
   m_Name: SceneLoader
   m_TagString: Untagged
@@ -46350,6 +46351,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1682481817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1682481814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd311746f11bf8941a0415ac3c499b4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  switchSceneKey: 277
+  targetSceneIndex: 1
 --- !u!1 &1702099985
 GameObject:
   m_ObjectHideFlags: 0
@@ -53849,6 +53864,7 @@ MonoBehaviour:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 802409284}
   - {fileID: 802409284}
   - {fileID: 1181958481}
   - {fileID: 1945806929}
