@@ -882,8 +882,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 286d1c3722a3a0749afb21ea8728d132, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   PlayerID: Player1
   Content:
   - {fileID: 0}
@@ -5381,8 +5381,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d61e7a32d2ee3844dada35717334f7bf, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   PlayerDataList:
   - PlayerID: Player1
     Points: 0
@@ -7993,6 +7993,7 @@ GameObject:
   - component: {fileID: 1045919789}
   - component: {fileID: 1045919788}
   - component: {fileID: 1045919787}
+  - component: {fileID: 1048225395}
   m_Layer: 5
   m_Name: GroupHudContainerPlayer3
   m_TagString: Untagged
@@ -8066,11 +8067,403 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1045919785}
   m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
---- !u!1 &1089210969
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 0cad7e50cc0a66a4d9ba264d314913d3,
+    type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1048225393}
+        m_TargetAssemblyTypeName: UnityEngine.MonoBehaviour, UnityEngine
+        m_MethodName: StopAllCoroutines
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1048225391}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1048225391}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1048225393}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: OnPrimaryMovement
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 265ae792-b274-4758-9c3f-67c2f395c758
+    m_ActionName: PlayerControls/PrimaryMovement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1048225393}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: OnSecondaryMovement
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e4146e01-7578-46fe-b394-b240c2256b2c
+    m_ActionName: PlayerControls/SecondaryMovement
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1048225393}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: OnJump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 314ace32-fb21-4bab-a569-ebe4e48f2102
+    m_ActionName: PlayerControls/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1048225393}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: OnRun
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 6b5c4b16-7607-4f0a-ad5b-62efd798065d
+    m_ActionName: PlayerControls/Run[/Keyboard/leftShift]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1048225393}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: OnDash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 56a37787-c3be-4789-a219-0509391dc113
+    m_ActionName: PlayerControls/Dash[/Keyboard/f]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1048225393}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: OnCrouch
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 5e6e408c-e79e-4f5c-87b7-8a6d181bd681
+    m_ActionName: PlayerControls/Crouch[/Keyboard/c]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1048225393}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: OnShoot
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1048225395}
+        m_TargetAssemblyTypeName: dungeonduell.Debug_ShowShoot, Assembly-CSharp
+        m_MethodName: OverrideWeponStop
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 7016cc32-6ee0-4d53-b08c-02cbe6eb2c0e
+    m_ActionName: PlayerControls/Shoot[/Keyboard/e,/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1048225393}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: OnSecondaryShoot
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 1b70a5ec-5da5-42ce-a7c0-8f54ff84052f
+    m_ActionName: PlayerControls/SecondaryShoot[/Keyboard/leftAlt]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1048225393}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: OnInteract
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ae461515-11b0-4cc9-b221-92ed2df4118e
+    m_ActionName: PlayerControls/Interact[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1048225393}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: OnReload
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: cf90ff3a-006b-4ae6-9594-cc2189d6f5f0
+    m_ActionName: PlayerControls/Reload[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1048225393}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: OnPause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c01ffcc5-adff-4aa3-bb8d-e0139087e5ed
+    m_ActionName: PlayerControls/Pause[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1048225393}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: OnSwitchWeapon
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 6e3febaf-dba5-4b43-b4f8-3b720e7ad1be
+    m_ActionName: PlayerControls/SwitchWeapon[/Keyboard/t]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1048225393}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: OnSwitchCharacter
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: cde4a43f-3a08-47c8-afdf-2c5dca8d1241
+    m_ActionName: PlayerControls/SwitchCharacter[/Keyboard/p]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1048225393}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: OnTimeControl
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c71e92f2-77ca-4de6-98ad-64b961ed706e
+    m_ActionName: PlayerControls/TimeControl[/Keyboard/k]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 239ee3ca-17ea-4fb2-85ef-91f8046dfddb
+    m_ActionName: PlayerControls/CameraRotation
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1468327003}
+        m_TargetAssemblyTypeName: MoreMountains.TopDownEngine.TestHub, Assembly-CSharp
+        m_MethodName: ShowMenuTry
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 5f531d69-3a23-4c4c-a114-620394e39f56
+    m_ActionName: DungeonPhase/OpenUpgrade[/DualShock4GamepadHID/dpad/up,/DualShock4GamepadHID1/dpad/up]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1468327002}
+        m_TargetAssemblyTypeName: dungeonduell.LevelUPPanel, Assembly-CSharp
+        m_MethodName: UpgradeSpeedd
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ccca69e4-51ba-415c-be90-1b1e6da5bc2b
+    m_ActionName: DungeonPhase/DoUpgradeSpeed[/DualShock4GamepadHID/dpad/left,/DualShock4GamepadHID1/dpad/left]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1468327002}
+        m_TargetAssemblyTypeName: dungeonduell.LevelUPPanel, Assembly-CSharp
+        m_MethodName: UpgradeHealth
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 13d851c4-efe0-4304-8dd8-2d24a140e047
+    m_ActionName: DungeonPhase/DoUpgradeHealth[/DualShock4GamepadHID/dpad/right,/DualShock4GamepadHID1/dpad/right]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1468327002}
+        m_TargetAssemblyTypeName: dungeonduell.LevelUPPanel, Assembly-CSharp
+        m_MethodName: UpgradeAttackSpeed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: eecdb8dd-ec6c-4d14-aaf0-47a89e42d6bf
+    m_ActionName: DungeonPhase/DoUpgradeAtk[/DualShock4GamepadHID/dpad/up,/DualShock4GamepadHID1/dpad/up]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 95f24a95-d445-4f14-b8c9-7789ea98fe7c
+    m_ActionName: CardPhase/Cursor
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5d894b6c-1123-4baf-b78c-1ea7d37abfaa
+    m_ActionName: CardPhase/RotateR
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7237893a-8919-4366-b4a7-f69d3161e268
+    m_ActionName: CardPhase/RotateL
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 67024220-9a28-4b1a-89bc-10205b6cdabe
+    m_ActionName: CardPhase/Submit
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3c914630-d9c6-47d1-8648-7b8d5a22c551
+    m_ActionName: CardPhase/Navigation[/DualShock4GamepadHID/leftStick,/DualShock4GamepadHID/dpad]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: Keyboard
+  m_DefaultActionMap: DungeonPhase
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &1048225395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048225391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0db5e781cc44cf4d8b0a702b3cb4087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerName: Player1
+--- !u!1 &1075921423
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9800,8 +10193,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 286d1c3722a3a0749afb21ea8728d132, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   PlayerID: Player2
   Content:
   - {fileID: 0}
@@ -16139,13 +16532,516 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1971940988}
-  - component: {fileID: 1971940994}
-  - component: {fileID: 1971940993}
-  - component: {fileID: 1971940992}
-  - component: {fileID: 1971940991}
-  - component: {fileID: 1971940990}
-  - component: {fileID: 1971940989}
+  - component: {fileID: 1969435449}
+  - component: {fileID: 1969435451}
+  - component: {fileID: 1969435450}
+  - component: {fileID: 1969435452}
+  m_Layer: 0
+  m_Name: InputSystemManager_Player2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1969435449
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1969435448}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 4896.398, y: 1030.793, z: 88.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2135597610}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1969435450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1969435448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce788749c8497bc438c5d3bf65be8a6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InputDetectionActive: 1
+  ResetButtonStatesOnFocusLoss: 1
+  PlayerID: Player2
+  AutoMobileDetection: 0
+  InputForcedMode: 0
+  ForceWeaponMode: 0
+  WeaponForcedMode: 0
+  HideMobileControlsInEditor: 0
+  MovementControl: 0
+  ForceDesktopIfPrimaryAxisActive: 0
+  AutoRevertToMobileIfPrimaryAxisInactive: 0
+  AutoRevertToMobileIfPrimaryAxisInactiveDuration: 10
+  SmoothMovement: 1
+  Threshold: {x: 0.1, y: 0.4}
+  RotateInputBasedOnCameraDirection: 0
+--- !u!114 &1969435451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1969435448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 0cad7e50cc0a66a4d9ba264d314913d3,
+    type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1969435450}
+        m_TargetAssemblyTypeName: UnityEngine.MonoBehaviour, UnityEngine
+        m_MethodName: StopAllCoroutines
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1969435448}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1969435448}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1969435450}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: OnPrimaryMovement
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 265ae792-b274-4758-9c3f-67c2f395c758
+    m_ActionName: PlayerControls/PrimaryMovement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1969435450}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: OnSecondaryMovement
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e4146e01-7578-46fe-b394-b240c2256b2c
+    m_ActionName: PlayerControls/SecondaryMovement
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1969435450}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: OnJump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 314ace32-fb21-4bab-a569-ebe4e48f2102
+    m_ActionName: PlayerControls/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1969435450}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: OnRun
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 6b5c4b16-7607-4f0a-ad5b-62efd798065d
+    m_ActionName: PlayerControls/Run[/Keyboard/leftShift]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1969435450}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: OnDash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 56a37787-c3be-4789-a219-0509391dc113
+    m_ActionName: PlayerControls/Dash[/Keyboard/f]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1969435450}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: OnCrouch
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 5e6e408c-e79e-4f5c-87b7-8a6d181bd681
+    m_ActionName: PlayerControls/Crouch[/Keyboard/c]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1969435450}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: OnShoot
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1969435452}
+        m_TargetAssemblyTypeName: dungeonduell.Debug_ShowShoot, Assembly-CSharp
+        m_MethodName: OverrideWeponStop
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 7016cc32-6ee0-4d53-b08c-02cbe6eb2c0e
+    m_ActionName: PlayerControls/Shoot[/Keyboard/e,/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1969435450}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: OnSecondaryShoot
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 1b70a5ec-5da5-42ce-a7c0-8f54ff84052f
+    m_ActionName: PlayerControls/SecondaryShoot[/Keyboard/leftAlt]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1969435450}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: OnInteract
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ae461515-11b0-4cc9-b221-92ed2df4118e
+    m_ActionName: PlayerControls/Interact[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1969435450}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: OnReload
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: cf90ff3a-006b-4ae6-9594-cc2189d6f5f0
+    m_ActionName: PlayerControls/Reload[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1969435450}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: OnPause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c01ffcc5-adff-4aa3-bb8d-e0139087e5ed
+    m_ActionName: PlayerControls/Pause[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1969435450}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: OnSwitchWeapon
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 6e3febaf-dba5-4b43-b4f8-3b720e7ad1be
+    m_ActionName: PlayerControls/SwitchWeapon[/Keyboard/t]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1969435450}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: OnSwitchCharacter
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: cde4a43f-3a08-47c8-afdf-2c5dca8d1241
+    m_ActionName: PlayerControls/SwitchCharacter[/Keyboard/p]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1969435450}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: OnTimeControl
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c71e92f2-77ca-4de6-98ad-64b961ed706e
+    m_ActionName: PlayerControls/TimeControl[/Keyboard/k]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 239ee3ca-17ea-4fb2-85ef-91f8046dfddb
+    m_ActionName: PlayerControls/CameraRotation
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1107887451}
+        m_TargetAssemblyTypeName: MoreMountains.TopDownEngine.TestHub, Assembly-CSharp
+        m_MethodName: ShowMenuTry
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 5f531d69-3a23-4c4c-a114-620394e39f56
+    m_ActionName: DungeonPhase/OpenUpgrade[/DualShock4GamepadHID/dpad/up,/DualShock4GamepadHID1/dpad/up]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1107887446}
+        m_TargetAssemblyTypeName: dungeonduell.LevelUPPanel, Assembly-CSharp
+        m_MethodName: UpgradeSpeedd
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ccca69e4-51ba-415c-be90-1b1e6da5bc2b
+    m_ActionName: DungeonPhase/DoUpgradeSpeed[/DualShock4GamepadHID/dpad/left,/DualShock4GamepadHID1/dpad/left]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1107887446}
+        m_TargetAssemblyTypeName: dungeonduell.LevelUPPanel, Assembly-CSharp
+        m_MethodName: UpgradeHealth
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 13d851c4-efe0-4304-8dd8-2d24a140e047
+    m_ActionName: DungeonPhase/DoUpgradeHealth[/DualShock4GamepadHID/dpad/right,/DualShock4GamepadHID1/dpad/right]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1107887446}
+        m_TargetAssemblyTypeName: dungeonduell.LevelUPPanel, Assembly-CSharp
+        m_MethodName: UpgradeAttackSpeed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: eecdb8dd-ec6c-4d14-aaf0-47a89e42d6bf
+    m_ActionName: DungeonPhase/DoUpgradeAtk[/DualShock4GamepadHID/dpad/up,/DualShock4GamepadHID1/dpad/up]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 95f24a95-d445-4f14-b8c9-7789ea98fe7c
+    m_ActionName: CardPhase/Cursor
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5d894b6c-1123-4baf-b78c-1ea7d37abfaa
+    m_ActionName: CardPhase/RotateR
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7237893a-8919-4366-b4a7-f69d3161e268
+    m_ActionName: CardPhase/RotateL
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 67024220-9a28-4b1a-89bc-10205b6cdabe
+    m_ActionName: CardPhase/Submit
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3c914630-d9c6-47d1-8648-7b8d5a22c551
+    m_ActionName: CardPhase/Navigation[/DualShock4GamepadHID/leftStick,/DualShock4GamepadHID/dpad]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: Gamepad
+  m_DefaultActionMap: DungeonPhase
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &1969435452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1969435448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0db5e781cc44cf4d8b0a702b3cb4087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerName: Player2
+--- !u!1 &1992893108
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1992893109}
+  m_Layer: 5
+  m_Name: Container
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1992893109
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1992893108}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1516729739}
+  - {fileID: 389574126}
+  m_Father: {fileID: 1895701090}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 88}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &2014269309
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2014269310}
+  - component: {fileID: 2014269317}
+  - component: {fileID: 2014269316}
+  - component: {fileID: 2014269315}
+  - component: {fileID: 2014269314}
+  - component: {fileID: 2014269313}
+  - component: {fileID: 2014269312}
+  - component: {fileID: 2014269311}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -17830,5 +18726,6 @@ SceneRoots:
   - {fileID: 1594851653}
   - {fileID: 253516227}
   - {fileID: 639944719}
+  - {fileID: 1555664231}
   - {fileID: 1555664231}
   - {fileID: 1555664231}
