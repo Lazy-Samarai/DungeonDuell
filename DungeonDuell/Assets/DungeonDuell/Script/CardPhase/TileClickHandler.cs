@@ -80,7 +80,7 @@ namespace dungeonduell
             if (tile == null) return false; // kein Tile = ungültig
 
             // Gültig, wenn NICHT das resetTile und in setAbleTiles enthalten
-            if (tile != resetTile && setAbleTiles.Contains(tile))
+            if (tile != resetTile && (setAbleTiles.Contains(tile) | CardShelled.Any(card => card.InPlayerRangeTile.Contains(tile))))
             {
                 return true;
             }
