@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace dungeonduell
 {
-    public class BaseSpawner : MonoBehaviour // Just so all of this OnTime Spawner have same ground Time
+    public class BaseSpawner : MonoBehaviour // All Spawner just have same type
     {
         protected void SpawnSingleObject(GameObject objectSpawn)
         {

@@ -68,7 +68,7 @@ namespace MoreMountains.TopDownEngine
 						if (points.PlayerID == PlayerID)
 						{
 							CoinCounter.text = points.Points.ToString();
-							CoinForNextLevelCounter.text = points.CoinsForNextLevel.ToString() + "  COINS";
+							CoinForNextLevelCounter.text = points.CoinsForNextLevel.ToString();
 						}
 					}
 					break;
