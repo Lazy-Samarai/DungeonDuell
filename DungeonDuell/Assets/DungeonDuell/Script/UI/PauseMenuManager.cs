@@ -48,13 +48,16 @@ namespace dungeonduell
         {
             isPaused = true;
             pausePanel.SetActive(true);
+            pausePanel.transform.localScale = Vector3.zero;
             pauseGroup.alpha = 0;
+            pausePanel.transform.DOScale(1, fadeDuration).SetEase(Ease.OutBack).SetUpdate(true);
             pauseGroup.DOFade(1, fadeDuration).SetUpdate(true);
             Time.timeScale = 0f;
         }
 
         public void ResumeGame()
         {
+            pausePanel.transform.DOScale(0, fadeDuration).SetEase(Ease.InBack).SetUpdate(true);
             pauseGroup.DOFade(0, fadeDuration).SetUpdate(true).OnComplete(() =>
             {
                 pausePanel.SetActive(false);
@@ -66,13 +69,15 @@ namespace dungeonduell
         public void OpenTutorial()
         {
             tutorialPanel.SetActive(true);
-            tutorialPanel.transform.localScale = Vector3.zero;
-            tutorialPanel.transform.DOScale(1, fadeDuration).SetUpdate(true).SetEase(Ease.OutBack);
+            RectTransform rect = tutorialPanel.GetComponent<RectTransform>();
+            rect.anchoredPosition = new Vector2(0, -800);
+            rect.DOAnchorPosY(0, fadeDuration).SetEase(Ease.OutCubic).SetUpdate(true);
         }
 
         public void CloseTutorial()
         {
-            tutorialPanel.transform.DOScale(0, fadeDuration).SetUpdate(true).SetEase(Ease.InBack).OnComplete(() =>
+            RectTransform rect = tutorialPanel.GetComponent<RectTransform>();
+            rect.DOAnchorPosY(-800, fadeDuration).SetEase(Ease.InCubic).SetUpdate(true).OnComplete(() =>
             {
                 tutorialPanel.SetActive(false);
             });

@@ -18,6 +18,10 @@ namespace dungeonduell
         public static void Trigger_CardSelected(DisplayCard card) { CardSelected.Invoke(card); }
         public static event Action<Card, bool> CardPlayed;
         public static void Trigger_CardPlayed(Card card, bool Player1Played) { CardPlayed.Invoke(card, Player1Played); }
+        public static event Action<Card, bool> CardToBeShelled;
+        public static void Trigger_CardToShelled(Card oldcard, bool Player1Played) { CardToBeShelled.Invoke(oldcard, Player1Played); }
+        public static event Action<bool> PlayedAllCards;
+        public static void Trigger_PlayedAllCards(bool player1) { PlayedAllCards.Invoke(player1); }
         public static event Action<Card, Vector3Int> PreSetCardSetOnTilemap;
         public static void Trigger_PreSetCardSetOnTilemap(Card card, Vector3Int point) { PreSetCardSetOnTilemap.Invoke(card, point); }
         public static event Action<bool[]> CardRotating;

@@ -21,6 +21,8 @@ namespace dungeonduell
         private Resolution[] resolutions;
         private OptionDataManager dataManager;
 
+        public float fadeDuration = 0.25f;
+
 
         void Start()
         {
@@ -40,12 +42,16 @@ namespace dungeonduell
         public void OpenOptions()
         {
             optionsPanel.SetActive(true);
-            canvasGroup.DOFade(1, 0.5f).SetUpdate(true).SetEase(Ease.OutQuad);
+            optionsPanel.transform.localScale = Vector3.zero;
+            canvasGroup.alpha = 0;
+            optionsPanel.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack).SetUpdate(true);
+            canvasGroup.DOFade(1, fadeDuration).SetUpdate(true);
         }
 
         public void CloseOptions()
         {
-            canvasGroup.DOFade(0, 0.5f).SetUpdate(true).SetEase(Ease.InQuad).OnComplete(() => optionsPanel.SetActive(false));
+            optionsPanel.transform.DOScale(0f, 0.3f).SetEase(Ease.InBack).SetUpdate(true);
+            canvasGroup.DOFade(0, fadeDuration).SetUpdate(true).OnComplete(() => optionsPanel.SetActive(false));
         }
 
 
@@ -100,7 +106,6 @@ namespace dungeonduell
                     Debug.Log(currentResolutionIndex);
                 }
             }
-
             
             if (dataManager != null)
             {

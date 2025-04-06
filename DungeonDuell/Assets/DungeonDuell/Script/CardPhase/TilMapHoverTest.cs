@@ -25,6 +25,8 @@ namespace dungeonduell
 
         bool Currentlyvisble = false;
 
+        public GameObject controllerCursor;
+
         Animator animator;
 
         void Awake()
@@ -41,6 +43,7 @@ namespace dungeonduell
             {
                 Vector3 mouseWorldPos = cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -cam.transform.position.z));
                 HandleHover(mouseWorldPos);
+                HandleHover(controllerCursor.transform.position);
             }
 
         }

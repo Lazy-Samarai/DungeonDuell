@@ -21,6 +21,9 @@ namespace dungeonduell
 
         public int deckSize = 3;
 
+        public bool isPlayerOne; // Im Inspector setzen
+
+
 
         void OnEnable()
         {
@@ -55,7 +58,6 @@ namespace dungeonduell
 
             playerDeck.Clear();
 
-            // Zuf�llig Karten ausw�hlen und dem Deck hinzuf�gen 
             for (int i = 0; i < deckSize; i++)
             {
                 int randomIndex = Random.Range(0, availableCards.Count);

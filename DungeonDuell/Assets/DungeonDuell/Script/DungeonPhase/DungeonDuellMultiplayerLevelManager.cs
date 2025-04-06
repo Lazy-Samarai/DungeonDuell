@@ -4,10 +4,7 @@ using MoreMountains.Tools;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using MoreMountains.InventoryEngine;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace MoreMountains.TopDownEngine
 {
@@ -37,7 +34,7 @@ namespace MoreMountains.TopDownEngine
     public enum LevelUpOptions
     {
         Speed,
-       // Health,
+        HealingInstead,
         AttackSpeed
     }
 
@@ -54,7 +51,7 @@ namespace MoreMountains.TopDownEngine
 
 
         [Header("Bindings")]
-        /// An array to store each player's points 
+        // An array to store each player's points 
         [Tooltip("an array to store each player's points")]
         public DDPoints[] Points;
         /// the list of countdowns we need to update 
@@ -82,6 +79,12 @@ namespace MoreMountains.TopDownEngine
 
         [SerializeField] float coastMultiply = 2;
         [SerializeField] int startCoast = 1;
+
+        private int _healthOnUpgrade = HealingPreFinal;
+        
+        const int HealingPreFinal = 40;
+        const int HealingInFinal = 80;
+        
 
         /// <summary> 
         /// On init, we initialize our points and countdowns 
@@ -268,13 +271,11 @@ namespace MoreMountains.TopDownEngine
         /// <param name="pickEvent"></param> 
         public virtual void OnMMEvent(CoinEvent coinEvent)
         {
-            print("lol");
             LevelUPID = coinEvent.Picker.MMGetComponentNoAlloc<Character>()?.PlayerID;
             for (int i = 0; i < Points.Length; i++)
             {
                 if (Points[i].PlayerID == LevelUPID)
                 {
-                    print("lol?");
                     Points[i].Points += coinEvent.PointsToAdd;
                     TopDownEngineEvent.Trigger(TopDownEngineEventTypes.Repaint, null);
                     if (Points[i].Points >= Points[i].CoinsForNextLevel)
@@ -288,7 +289,6 @@ namespace MoreMountains.TopDownEngine
         private void HandleUpgradable(int playerID)
         {
             int upgradableCount = (int)Math.Floor(Math.Log(1 + ((coastMultiply - 1) * Points[playerID].Points / Points[playerID].CoinsForNextLevel), coastMultiply));
-            print(upgradableCount);
             DDCodeEventHandler.Trigger_LevelUpAvailable(playerID, upgradableCount);
         }
 
@@ -330,7 +330,15 @@ namespace MoreMountains.TopDownEngine
                 case LevelUpOptions.AttackSpeed:
                     UpgradeWeaponSpeed(playerIndex,amount);
                     break;
+                case LevelUpOptions.HealingInstead:
+                    Healing(playerIndex, amount);
+                    break;
             }
+        }
+
+        private void Healing(int playerID, int amount)
+        {
+            health[playerID].ReceiveHealth(_healthOnUpgrade*amount, health[playerID].gameObject);
         }
 
         private void UpgradeSpeed(int playerID, int amount)
@@ -421,6 +429,11 @@ namespace MoreMountains.TopDownEngine
             weapon[playerIndex].TimeBetweenUses = playerDataManager.PlayerDataList[playerIndex].AttackSpeed;
         }
 
+        private void HealingIncreased()
+        {
+            _healthOnUpgrade = HealingInFinal;
+        }
+
 
         /// <summary> 
         /// Starts listening for pickable item events 
@@ -446,11 +459,13 @@ namespace MoreMountains.TopDownEngine
         public void SubscribeToEvents()
         {
             DDCodeEventHandler.PlayerUpgrade += HandleUpgrade;
+            DDCodeEventHandler.FinalRoundInDungeon += HealingIncreased;
         }
 
         public void UnsubscribeToAllEvents()
         {
             DDCodeEventHandler.PlayerUpgrade -= HandleUpgrade;
+            DDCodeEventHandler.FinalRoundInDungeon -= HealingIncreased;
         }
     }
 }
