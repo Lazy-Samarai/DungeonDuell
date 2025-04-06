@@ -208,6 +208,11 @@ namespace MoreMountains.TopDownEngine
 			_verticalMovement = value.y;
 		}
 
+		public Vector2 GetMovement()
+		{
+			return new Vector2(_horizontalMovement, _verticalMovement);
+		}
+
 		/// <summary>
 		/// Sets the horizontal part of the movement
 		/// </summary>
@@ -542,7 +547,7 @@ namespace MoreMountains.TopDownEngine
 		/// </summary>
 		public virtual void ResetSpeed()
 		{
-			if (!inBlizzardZone)  // Wenn nicht in Blizzardzone, dann Speed zurücksetzen
+			if (!inBlizzardZone)  // Wenn nicht in Blizzardzone, dann Speed zurï¿½cksetzen
 			{
 				MovementSpeed = WalkSpeed;
 			}
@@ -560,7 +565,7 @@ namespace MoreMountains.TopDownEngine
 		public void ExitBlizzardZone()
 		{
 			inBlizzardZone = false;
-			ResetContextSpeedMultiplier();  // Setzt Speed zurück
+			ResetContextSpeedMultiplier();  // Setzt Speed zurï¿½ck
 			MovementSpeed = _baseMovementSpeed;  // Stellt normalen Speed wieder her
 		}
 		/// <summary>

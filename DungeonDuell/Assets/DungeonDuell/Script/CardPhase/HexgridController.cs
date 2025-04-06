@@ -103,6 +103,9 @@ namespace dungeonduell
             Vector2 snappedInput = SnapToHexDirection(input.normalized);
             Vector3Int bestTarget = selectedTilePos;
             float bestScore = -1f;
+            
+            const float dotThreshold = 0.65f;
+            const float distanceThreshold = 0.1f;
 
             foreach (var tile in setAbleTiles)
             {
@@ -110,12 +113,12 @@ namespace dungeonduell
 
                 Vector2 dirToTile = new Vector2(tile.x - selectedTilePos.x, tile.y - selectedTilePos.y);
                 float distance = dirToTile.magnitude;
-                if (distance < 0.1f) continue;
+                if (distance < distanceThreshold) continue;
 
                 dirToTile.Normalize();
                 float dot = Vector2.Dot(snappedInput, dirToTile);
 
-                if (dot > 0.65f)
+                if (dot > dotThreshold)
                 {
                     float score = (dot * 1.5f) - (distance * 0.25f);
                     if (score > bestScore)

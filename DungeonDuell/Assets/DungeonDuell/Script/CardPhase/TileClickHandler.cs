@@ -7,13 +7,17 @@ using System.Linq;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
 using Unity.VisualScripting;
+using Cinemachine;
 
 namespace dungeonduell
 {
     public class TileClickHandler : MonoBehaviour, IObserver
     {
         public Camera cam;
-        public Tilemap tilemap;
+        private Tilemap tilemap;
+        [TagField]
+        [SerializeField] private string TileMapTag;
+
         public Card currentCard;
         public bool[] currentDoorDir = new bool[] { true, true, true, true, true, true };
         public DisplayCard displayCardUi;
@@ -53,7 +57,7 @@ namespace dungeonduell
         private void Start()
         {
             connectCollector = FindObjectOfType<ConnectionsCollector>();
-            tilemap = FindObjectOfType<Tilemap>();
+            tilemap = FindObjectsOfType<Tilemap>().FirstOrDefault(tm => tm.gameObject.tag == TileMapTag); // Becuase there is also the hovermap
             turnManager = FindObjectOfType<TurnManager>();
             hexgridController = FindObjectOfType<HexgridController>();
         }
@@ -257,6 +261,9 @@ namespace dungeonduell
                     isPlayer1Turn = !isPlayer1Turn;
                     currentCard = null;
                 }
+                else{
+                    DDCodeEventHandler.Trigger_PreSetCardSetOnTilemap(card,cellPosition);
+                }
 
                 GameObject indicator = Instantiate(indiactorDoor, tilemap.CellToWorld(cellPosition), Quaternion.identity);
                 if (indiactorDoorAnker == null)
@@ -403,7 +410,9 @@ namespace dungeonduell
             if (context.phase == InputActionPhase.Started)
             {
                 currentDoorDir = ShiftRight(currentDoorDir);
-                displayCardUi?.UpdateDirectionIndicator(currentDoorDir); // see comment in DDCodeEventHandler
+                displayCardUi?.UpdateDirectionIndicator(currentDoorDir); // already ref so not done per comning Event
+
+                DDCodeEventHandler.Trigger_CardRotating(currentDoorDir);
             }
 
         }
