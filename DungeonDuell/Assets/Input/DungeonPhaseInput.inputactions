@@ -159,18 +159,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "DoUpgradeHealth",
+                    "name": "DoUpgradeAtk",
                     "type": "Button",
-                    "id": "13d851c4-efe0-4304-8dd8-2d24a140e047",
+                    "id": "eecdb8dd-ec6c-4d14-aaf0-47a89e42d6bf",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "DoUpgradeAtk",
+                    "name": "DoHealthUp",
                     "type": "Button",
-                    "id": "eecdb8dd-ec6c-4d14-aaf0-47a89e42d6bf",
+                    "id": "13d851c4-efe0-4304-8dd8-2d24a140e047",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -533,7 +533,7 @@
                 {
                     "name": "",
                     "id": "393eacc1-79ff-40aa-a7f9-371466861da5",
-                    "path": "<Gamepad>/dpad/left",
+                    "path": "<Gamepad>/dpad/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -555,29 +555,29 @@
                 {
                     "name": "",
                     "id": "e107ea95-f568-4587-a5ad-8e05ced5a085",
-                    "path": "<Gamepad>/dpad/right",
+                    "path": "<Gamepad>/dpad/down",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "DoUpgradeHealth",
+                    "action": "DoHealthUp",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "0b960752-fdd1-4cc3-b22f-20eb68a65b59",
-                    "path": "<Keyboard>/2",
+                    "path": "<Keyboard>/3",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "DoUpgradeHealth",
+                    "action": "DoHealthUp",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "e80d36e5-1734-4e8a-856d-51106586db86",
-                    "path": "<Gamepad>/dpad/down",
+                    "path": "<Gamepad>/dpad/left",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -588,7 +588,7 @@
                 {
                     "name": "",
                     "id": "5278a078-305c-44e8-8cea-aa55f6235d06",
-                    "path": "<Keyboard>/3",
+                    "path": "<Keyboard>/2",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
