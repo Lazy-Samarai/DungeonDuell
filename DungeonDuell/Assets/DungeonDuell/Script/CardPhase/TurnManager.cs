@@ -18,7 +18,6 @@ namespace dungeonduell
         public TextMeshProUGUI pressAnyKeyText;
         public CardToHand HandPlayer1;
         public CardToHand HandPlayer2;
-        public GameObject canvasEndTurn;
 
         private bool awaitingKeyPress = false;
         public bool isPlayer1Turn = true;
@@ -48,7 +47,6 @@ namespace dungeonduell
             playerTurnText.text = "Next Turn: " + (isPlayer1Turn ? "Player 1" : "Player 2");
             playerTurnText.gameObject.SetActive(true);
             pressAnyKeyText.gameObject.SetActive(true);
-            canvasEndTurn.SetActive(false);
             ToggleHandVisibility(false, false);
         }
 
@@ -60,13 +58,6 @@ namespace dungeonduell
             UpdatePlayerTurnText();
             pressAnyKeyText.gameObject.SetActive(false);
             ToggleHandVisibility(isPlayer1Turn, !isPlayer1Turn);
-            canvasEndTurn.SetActive(true);
-
-            Button skipButton = canvasEndTurn.GetComponentInChildren<Button>();
-            if (skipButton != null)
-            {
-                skipButton.interactable = true;
-            }
 
             StartCoroutine(DelayedFirstSelectable());
         }

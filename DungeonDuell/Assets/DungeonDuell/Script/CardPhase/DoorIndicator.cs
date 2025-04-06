@@ -6,12 +6,13 @@ namespace dungeonduell
 {
     public class DoorIndicator : MonoBehaviour
     {
+        [SerializeField] bool inverted = false;
         [SerializeField] Transform dirAnker;
         public void SetDoorIndiactor(bool[] allowedDoors)
         {
             for(int i = 0;i < allowedDoors.Length;i++)
             {
-                dirAnker.transform.GetChild(i).transform.gameObject.SetActive(allowedDoors[i]);
+                dirAnker.transform.GetChild(i).transform.gameObject.SetActive(inverted ? !allowedDoors[i] : allowedDoors[i]);
             }
         }
 
