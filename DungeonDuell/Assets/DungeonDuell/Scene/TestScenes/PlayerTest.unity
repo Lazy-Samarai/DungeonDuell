@@ -398,8 +398,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 286d1c3722a3a0749afb21ea8728d132, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   PlayerID: Player1
   Content:
   - {fileID: 0}
@@ -3907,8 +3907,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d61e7a32d2ee3844dada35717334f7bf, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   PlayerDataList:
   - PlayerID: Player1
     Points: 0
@@ -8763,8 +8763,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 286d1c3722a3a0749afb21ea8728d132, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   PlayerID: Player2
   Content:
   - {fileID: 0}
@@ -11131,6 +11131,7 @@ MonoBehaviour:
     RemainingLive: 2
     MetaHp: 200
     MaxMetaHp: 200
+    CurrentMask: {fileID: 0}
   - PlayerID: Player2
     Points: 0
     Level: 1
@@ -11142,6 +11143,7 @@ MonoBehaviour:
     RemainingLive: 2
     MetaHp: 200
     MaxMetaHp: 200
+    CurrentMask: {fileID: 0}
   nextRoundFinal: 0
 --- !u!4 &1555664231
 Transform:
@@ -16073,3 +16075,4 @@ SceneRoots:
   - {fileID: 772931561}
   - {fileID: 1861002900}
   - {fileID: 784704204}
+  - {fileID: 1555664231}
