@@ -52,6 +52,7 @@ namespace dungeonduell
 
         public List<PlayerData> PlayerDataList = new List<PlayerData>();
 
+        public int roundCounter = 0;
         public bool nextRoundFinal = false;
 
         void Awake()
@@ -78,6 +79,7 @@ namespace dungeonduell
         {
             if (scene.buildIndex == 1)
             {
+                roundCounter++;
                 if (nextRoundFinal)
                 {
                     DDCodeEventHandler.Trigger_FinalRoundInDungeon();
@@ -89,7 +91,7 @@ namespace dungeonduell
                     }
                 }
             }
-            DDCodeEventHandler.Trigger_PlayerDataExposed(PlayerDataList);
+            DDCodeEventHandler.Trigger_PlayerDataExposed(PlayerDataList,roundCounter);
 
         }
         void OnEnable()

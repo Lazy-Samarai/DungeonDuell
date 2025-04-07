@@ -7,7 +7,11 @@ namespace dungeonduell
 {
     public class SequenceMang : MonoBehaviour, IObserver
     {
+        const float BaseTime = 30;
+        const float TimeMorePerRound = 20;
+        
         [SerializeField] float timeRound = 150.0f;
+        
         [SerializeField] bool timeRunning = false;
         [SerializeField] bool finalRound = false;
         SceneLoading sceneLoading;
@@ -45,6 +49,7 @@ namespace dungeonduell
         }
         public void Reseting()
         {
+            
             ConnectionsCollector connectionsCollector = FindObjectOfType<ConnectionsCollector>();
             PlayerDataManager playerMang = FindObjectOfType<PlayerDataManager>();
             Destroy(playerMang.gameObject);
@@ -58,6 +63,11 @@ namespace dungeonduell
             timerText.text = "X";
 
         }
+
+        private void SetTimer(List<PlayerData> d, int currentRound)
+        {
+            timeRound = BaseTime + (currentRound * TimeMorePerRound);
+        }
         void OnEnable()
         {
             SubscribeToEvents();
@@ -69,11 +79,13 @@ namespace dungeonduell
         public void SubscribeToEvents()
         {
             DDCodeEventHandler.FinalRoundInDungeon += DisableTimer;
+            DDCodeEventHandler.PlayerDataExposed += SetTimer;
         }
 
         public void UnsubscribeToAllEvents()
         {
             DDCodeEventHandler.FinalRoundInDungeon -= DisableTimer;
+            DDCodeEventHandler.PlayerDataExposed += SetTimer;
         }
 
 
