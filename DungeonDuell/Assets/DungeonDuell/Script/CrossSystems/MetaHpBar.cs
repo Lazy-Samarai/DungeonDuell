@@ -13,7 +13,7 @@ namespace dungeonduell
         MMProgressBar mMProgressBar;
 
         [SerializeField] Transform NotUsedHealthBar;
-        private void UpdateMetaHealthBar(List<PlayerData> playerDatas)
+        private void UpdateMetaHealthBar(List<PlayerData> playerDatas, int round)
         {
             PlayerData playerData = playerDatas[player1 ? 0 : 1];
 
