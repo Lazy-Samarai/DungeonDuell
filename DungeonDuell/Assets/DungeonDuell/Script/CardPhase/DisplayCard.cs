@@ -18,6 +18,10 @@ namespace dungeonduell
         public DoorIndicator cardDirectionIndicator;
         public GameObject MonsterRoomIcon;
         public GameObject TreasureRoomIcon;
+        public GameObject normalBG;
+        public GameObject enemyBG;
+        public GameObject lootBG;
+
         public GameObject Frame;
         public GameObject tooltip;
 
@@ -92,22 +96,30 @@ namespace dungeonduell
                     switch (card.roomtype)
                     {
                         case RoomType.Enemy:
-                            currentColor = Color.red;
                             MonsterRoomIcon?.SetActive(true);
                             TreasureRoomIcon?.SetActive(false);
+                            enemyBG?.SetActive(true);
+                            lootBG?.SetActive(false);
+                            normalBG?.SetActive(false);
                             break;
 
                         case RoomType.NormalLott:
-                            currentColor = Color.yellow;
                             MonsterRoomIcon?.SetActive(false);
                             TreasureRoomIcon?.SetActive(true);
+                            enemyBG?.SetActive(false);
+                            lootBG?.SetActive(true);
+                            normalBG?.SetActive(false);
                             break;
 
-                        default:
+                        default: // Generic oder alles andere
                             MonsterRoomIcon?.SetActive(false);
                             TreasureRoomIcon?.SetActive(false);
+                            enemyBG?.SetActive(false);
+                            lootBG?.SetActive(false);
+                            normalBG?.SetActive(true);
                             break;
                     }
+
 
                     if (Frame.GetComponent<Image>() != null)
                         Frame.GetComponent<Image>().color = currentColor;
