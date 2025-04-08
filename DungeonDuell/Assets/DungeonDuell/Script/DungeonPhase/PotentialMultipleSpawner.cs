@@ -8,11 +8,11 @@ namespace dungeonduell
     public class PotentialMultipleSpawner : BaseMultipleSpawner
     {
         [SerializeField]
-        [Range(0,1)] float nothingChange;
+        [Range(0,1)] float chanceforMask;
         void Start()
         {
             float chance = Random.Range(0f, 1f);
-            if (chance < nothingChange)
+            if (chance > chanceforMask)
             {
                 SpawnRandomObject();
             }
