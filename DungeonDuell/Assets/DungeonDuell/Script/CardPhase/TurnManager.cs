@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using MoreMountains.TopDownEngine;
 using UnityEngine.InputSystem;
+using DG.Tweening;
 using UnityEngine.InputSystem.LowLevel;
 
 
@@ -19,8 +20,10 @@ namespace dungeonduell
         public TextMeshProUGUI pressAnyKeyText;
         public CardToHand HandPlayer1;
         public CardToHand HandPlayer2;
-        public GameObject canvasEndTurn;
-
+        
+        public GameObject player1UI;
+        public GameObject player2UI;
+        
         private bool awaitingKeyPress = false;
         public bool isPlayer1Turn = true;
         private float timeStart;
@@ -64,7 +67,6 @@ namespace dungeonduell
             
             playerTurnText.gameObject.SetActive(true);
             pressAnyKeyText.gameObject.SetActive(true);
-            canvasEndTurn.SetActive(false);
             ToggleHandVisibility(false, false);
         }
 
@@ -76,13 +78,6 @@ namespace dungeonduell
             UpdatePlayerTurnText();
             pressAnyKeyText.gameObject.SetActive(false);
             ToggleHandVisibility(isPlayer1Turn, !isPlayer1Turn);
-            canvasEndTurn.SetActive(true);
-
-            Button skipButton = canvasEndTurn.GetComponentInChildren<Button>();
-            if (skipButton != null)
-            {
-                skipButton.interactable = true;
-            }
 
             StartCoroutine(DelayedFirstSelectable());
         }
@@ -122,14 +117,17 @@ namespace dungeonduell
             HandPlayer1.ShowHideDeck(!showForPlayer1);
             HandPlayer2.ShowHideDeck(!showForPlayer2);
 
-            
-            
-            
-            
+            SlidePlayerSprite(player1UI, showForPlayer1);
+            SlidePlayerSprite(player2UI, showForPlayer2);
         }
+
+
+
 
         public void InnitGameCountDown()
         {
+            InputSystem.EnableDevice(_playerInputs[0].user.pairedDevices[0]);
+            InputSystem.EnableDevice(_playerInputs[1].user.pairedDevices[0]);
             StartCoroutine(StartCountDown());
         }
 
@@ -178,6 +176,23 @@ namespace dungeonduell
                     return input;
             }
             return null;
+        }
+        
+        private void SlidePlayerSprite(GameObject uiElement, bool show, float hiddenY = -550f, float visibleY = 0f)
+        {
+            if (uiElement == null) return;
+
+            RectTransform rect = uiElement.GetComponent<RectTransform>();
+            if (show)
+            {
+                uiElement.SetActive(true);
+                rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, hiddenY);
+                rect.DOAnchorPosY(visibleY, 0.5f).SetEase(Ease.OutCubic); // DOTween
+            }
+            else
+            {
+                rect.DOAnchorPosY(hiddenY, 0.5f).SetEase(Ease.InCubic).OnComplete(() => uiElement.SetActive(false));
+            }
         }
     }
 }

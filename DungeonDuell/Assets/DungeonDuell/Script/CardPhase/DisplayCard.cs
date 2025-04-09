@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
@@ -17,6 +18,10 @@ namespace dungeonduell
         public DoorIndicator cardDirectionIndicator;
         public GameObject MonsterRoomIcon;
         public GameObject TreasureRoomIcon;
+        public GameObject normalBG;
+        public GameObject enemyBG;
+        public GameObject lootBG;
+
         public GameObject Frame;
         public GameObject tooltip;
 
@@ -28,6 +33,11 @@ namespace dungeonduell
         private Vector3 originalScale;
         private Vector3 originalPosition;
         private Quaternion originalRotation;
+        private Vector3 originalLeftPosition;
+        private Vector3 originalRightPosition;
+
+        
+        [SerializeField] private Sprite[] spritesFullCard;
 
         void Start()
         {
@@ -47,8 +57,47 @@ namespace dungeonduell
             originalPosition = transform.localPosition;
             originalRotation = transform.localRotation;
 
+            int index = transform.GetSiblingIndex();
+            Transform parent = transform.parent;
+
+            if (parent != null)
+            {
+                if (index > 0)
+                {
+                    Transform leftNeighbor = parent.GetChild(index - 1);
+                    originalLeftPosition = leftNeighbor.localPosition;
+                }
+                if (index < parent.childCount - 1)
+                {
+                    Transform rightNeighbor = parent.GetChild(index + 1);
+                    originalRightPosition = rightNeighbor.localPosition;
+                }
+            }
+
             HideTooltip();
             UpdateCardDisplay();
+
+            // It might make sense to have mutiple Prefab but for now this
+            Image sr = GetComponentInChildren<Image>();
+            
+            normalBG.SetActive((false));
+            switch (card.roomtype)
+            {
+                case RoomType.Generic:
+                    normalBG.SetActive((true));
+                    break;
+                case RoomType.Enemy:
+                    enemyBG.SetActive((true));
+                    MonsterRoomIcon.SetActive(true);
+                    break;
+                case RoomType.NormalLott:
+                    TreasureRoomIcon.SetActive(true);
+                    lootBG.SetActive(true);
+                    break;
+                default:
+                    normalBG.SetActive((true));
+                    break;
+            }
         }
 
         public void UpdateCardDisplay()
@@ -67,26 +116,35 @@ namespace dungeonduell
                 if (HexImage != null && Frame != null)
                 {
                     Color currentColor = new Color(0.3f, 0.3f, 0.3f);
-
+                    
+                    normalBG.SetActive((false));
                     switch (card.roomtype)
                     {
                         case RoomType.Enemy:
-                            currentColor = Color.red;
-                            MonsterRoomIcon?.SetActive(true);
-                            TreasureRoomIcon?.SetActive(false);
+                            MonsterRoomIcon.SetActive(true);
+                            TreasureRoomIcon.SetActive(false);
+                            enemyBG?.SetActive(true);
+                            lootBG?.SetActive(false);
+                            normalBG?.SetActive(false);
                             break;
 
                         case RoomType.NormalLott:
-                            currentColor = Color.yellow;
                             MonsterRoomIcon?.SetActive(false);
                             TreasureRoomIcon?.SetActive(true);
+                            enemyBG?.SetActive(false);
+                            lootBG?.SetActive(true);
+                            normalBG?.SetActive(false);
                             break;
 
-                        default:
+                        default: // Generic oder alles andere
                             MonsterRoomIcon?.SetActive(false);
                             TreasureRoomIcon?.SetActive(false);
+                            enemyBG?.SetActive(false);
+                            lootBG?.SetActive(false);
+                            normalBG?.SetActive(true);
                             break;
                     }
+
 
                     if (Frame.GetComponent<Image>() != null)
                         Frame.GetComponent<Image>().color = currentColor;
@@ -189,8 +247,14 @@ namespace dungeonduell
                 Transform leftNeighbor = parent.GetChild(currentIndex - 1);
                 if (leftNeighbor.TryGetComponent<DisplayCard>(out var leftCard))
                 {
-                    Vector3 offset = isHovering ? -sideOffset : sideOffset;
-                    leftNeighbor.localPosition += offset;
+                    if (isHovering)
+                    {
+                        leftNeighbor.localPosition = originalLeftPosition - sideOffset;
+                    }
+                    else
+                    {
+                        leftNeighbor.localPosition = originalLeftPosition;
+                    }
                 }
             }
 
@@ -199,11 +263,18 @@ namespace dungeonduell
                 Transform rightNeighbor = parent.GetChild(currentIndex + 1);
                 if (rightNeighbor.TryGetComponent<DisplayCard>(out var rightCard))
                 {
-                    Vector3 offset = isHovering ? sideOffset : -sideOffset;
-                    rightNeighbor.localPosition += offset;
+                    if (isHovering)
+                    {
+                        rightNeighbor.localPosition = originalRightPosition + sideOffset;
+                    }
+                    else
+                    {
+                        rightNeighbor.localPosition = originalRightPosition;
+                    }
                 }
             }
         }
+
 
         private void HideTooltip()
         {
