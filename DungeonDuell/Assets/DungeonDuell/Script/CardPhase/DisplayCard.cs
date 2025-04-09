@@ -34,7 +34,7 @@ namespace dungeonduell
         private Vector3 originalPosition;
         private Quaternion originalRotation;
         
-//[SerializeField] private Sprite[] spritesFullCard;
+        [SerializeField] private Sprite[] spritesFullCard;
 
         void Start()
         {
@@ -57,7 +57,27 @@ namespace dungeonduell
             HideTooltip();
             UpdateCardDisplay();
 
+            // It might make sense to have mutiple Prefab but for now this
+            Image sr = GetComponentInChildren<Image>();
             
+            normalBG.SetActive((false));
+            switch (card.roomtype)
+            {
+                case RoomType.Generic:
+                    normalBG.SetActive((true));
+                    break;
+                case RoomType.Enemy:
+                    enemyBG.SetActive((true));
+                    MonsterRoomIcon.SetActive(true);
+                    break;
+                case RoomType.NormalLott:
+                    TreasureRoomIcon.SetActive(true);
+                    lootBG.SetActive(true);
+                    break;
+                default:
+                    normalBG.SetActive((true));
+                    break;
+            }
         }
 
         public void UpdateCardDisplay()
@@ -76,12 +96,13 @@ namespace dungeonduell
                 if (HexImage != null && Frame != null)
                 {
                     Color currentColor = new Color(0.3f, 0.3f, 0.3f);
-
+                    
+                    normalBG.SetActive((false));
                     switch (card.roomtype)
                     {
                         case RoomType.Enemy:
-                            MonsterRoomIcon?.SetActive(true);
-                            TreasureRoomIcon?.SetActive(false);
+                            MonsterRoomIcon.SetActive(true);
+                            TreasureRoomIcon.SetActive(false);
                             enemyBG?.SetActive(true);
                             lootBG?.SetActive(false);
                             normalBG?.SetActive(false);
