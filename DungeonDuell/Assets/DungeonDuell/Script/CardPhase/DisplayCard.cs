@@ -34,7 +34,7 @@ namespace dungeonduell
         private Vector3 originalPosition;
         private Quaternion originalRotation;
         
-        [SerializeField] private Sprite[] spritesFullCard;
+//[SerializeField] private Sprite[] spritesFullCard;
 
         void Start()
         {
@@ -57,23 +57,7 @@ namespace dungeonduell
             HideTooltip();
             UpdateCardDisplay();
 
-            // It might make sense to have mutiple Prefab but for now this
-            Image sr = GetComponentInChildren<Image>();
-            switch (card.roomtype)
-            {
-                case RoomType.Generic:
-                    sr.sprite = spritesFullCard[0];
-                    break;
-                case RoomType.Enemy:
-                    sr.sprite = spritesFullCard[2];
-                    break;
-                case RoomType.NormalLott:
-                    sr.sprite = spritesFullCard[1];
-                    break;
-                default:
-                    sr.sprite = spritesFullCard[0];
-                    break;
-            }
+            
         }
 
         public void UpdateCardDisplay()

@@ -117,8 +117,8 @@ namespace dungeonduell
             HandPlayer1.ShowHideDeck(!showForPlayer1);
             HandPlayer2.ShowHideDeck(!showForPlayer2);
 
-            SlidePlayerSprite(player1UI, showForPlayer1);
-            SlidePlayerSprite(player2UI, showForPlayer2);
+            //SlidePlayerSprite(player1UI, showForPlayer1);
+            //SlidePlayerSprite(player2UI, showForPlayer2);
         }
 
 
