@@ -121,15 +121,14 @@ namespace dungeonduell
         {
             HandPlayer1.ShowHideDeck(!showForPlayer1);
             HandPlayer2.ShowHideDeck(!showForPlayer2);
-
-            
-            
             
             
         }
 
         public void InnitGameCountDown()
         {
+            InputSystem.EnableDevice(_playerInputs[0].user.pairedDevices[0]);
+            InputSystem.EnableDevice(_playerInputs[1].user.pairedDevices[0]);
             StartCoroutine(StartCountDown());
         }
 
