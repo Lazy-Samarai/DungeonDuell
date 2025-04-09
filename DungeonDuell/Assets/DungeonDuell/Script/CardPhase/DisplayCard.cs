@@ -33,6 +33,9 @@ namespace dungeonduell
         private Vector3 originalScale;
         private Vector3 originalPosition;
         private Quaternion originalRotation;
+        private Vector3 originalLeftPosition;
+        private Vector3 originalRightPosition;
+
         
         [SerializeField] private Sprite[] spritesFullCard;
 
@@ -53,6 +56,23 @@ namespace dungeonduell
             originalScale = transform.localScale;
             originalPosition = transform.localPosition;
             originalRotation = transform.localRotation;
+
+            int index = transform.GetSiblingIndex();
+            Transform parent = transform.parent;
+
+            if (parent != null)
+            {
+                if (index > 0)
+                {
+                    Transform leftNeighbor = parent.GetChild(index - 1);
+                    originalLeftPosition = leftNeighbor.localPosition;
+                }
+                if (index < parent.childCount - 1)
+                {
+                    Transform rightNeighbor = parent.GetChild(index + 1);
+                    originalRightPosition = rightNeighbor.localPosition;
+                }
+            }
 
             HideTooltip();
             UpdateCardDisplay();
@@ -227,8 +247,14 @@ namespace dungeonduell
                 Transform leftNeighbor = parent.GetChild(currentIndex - 1);
                 if (leftNeighbor.TryGetComponent<DisplayCard>(out var leftCard))
                 {
-                    Vector3 offset = isHovering ? -sideOffset : sideOffset;
-                    leftNeighbor.localPosition += offset;
+                    if (isHovering)
+                    {
+                        leftNeighbor.localPosition = originalLeftPosition - sideOffset;
+                    }
+                    else
+                    {
+                        leftNeighbor.localPosition = originalLeftPosition;
+                    }
                 }
             }
 
@@ -237,11 +263,18 @@ namespace dungeonduell
                 Transform rightNeighbor = parent.GetChild(currentIndex + 1);
                 if (rightNeighbor.TryGetComponent<DisplayCard>(out var rightCard))
                 {
-                    Vector3 offset = isHovering ? sideOffset : -sideOffset;
-                    rightNeighbor.localPosition += offset;
+                    if (isHovering)
+                    {
+                        rightNeighbor.localPosition = originalRightPosition + sideOffset;
+                    }
+                    else
+                    {
+                        rightNeighbor.localPosition = originalRightPosition;
+                    }
                 }
             }
         }
+
 
         private void HideTooltip()
         {

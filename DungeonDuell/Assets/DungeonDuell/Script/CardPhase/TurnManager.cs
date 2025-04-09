@@ -117,8 +117,8 @@ namespace dungeonduell
             HandPlayer1.ShowHideDeck(!showForPlayer1);
             HandPlayer2.ShowHideDeck(!showForPlayer2);
 
-            //SlidePlayerSprite(player1UI, showForPlayer1);
-            //SlidePlayerSprite(player2UI, showForPlayer2);
+            SlidePlayerSprite(player1UI, showForPlayer1);
+            SlidePlayerSprite(player2UI, showForPlayer2);
         }
 
 
@@ -126,6 +126,8 @@ namespace dungeonduell
 
         public void InnitGameCountDown()
         {
+            InputSystem.EnableDevice(_playerInputs[0].user.pairedDevices[0]);
+            InputSystem.EnableDevice(_playerInputs[1].user.pairedDevices[0]);
             StartCoroutine(StartCountDown());
         }
 
@@ -176,7 +178,7 @@ namespace dungeonduell
             return null;
         }
         
-        private void SlidePlayerSprite(GameObject uiElement, bool show, float hiddenY = -300f, float visibleY = 0f)
+        private void SlidePlayerSprite(GameObject uiElement, bool show, float hiddenY = -550f, float visibleY = 0f)
         {
             if (uiElement == null) return;
 
@@ -185,13 +187,12 @@ namespace dungeonduell
             {
                 uiElement.SetActive(true);
                 rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, hiddenY);
-                rect.DOAnchorPosY(visibleY, 0.5f).SetEase(Ease.OutCubic);
+                rect.DOAnchorPosY(visibleY, 0.5f).SetEase(Ease.OutCubic); // DOTween
             }
             else
             {
                 rect.DOAnchorPosY(hiddenY, 0.5f).SetEase(Ease.InCubic).OnComplete(() => uiElement.SetActive(false));
             }
         }
-
     }
 }
