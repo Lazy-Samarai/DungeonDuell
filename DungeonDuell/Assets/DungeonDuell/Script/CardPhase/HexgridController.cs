@@ -21,7 +21,7 @@ namespace dungeonduell
         public DisplayCard currentDisplayCard;
 
         private Vector3Int selectedTilePos;
-        private List<Vector3Int> setAbleTiles = new List<Vector3Int>();
+        private List<(Vector3Int,bool?)> setAbleTiles = new List<(Vector3Int,bool?)>();
         private PlayerInput playerInput;
         private float lastNavigateTime = 0f;
         private float navigateCooldown = 0.15f;
@@ -52,8 +52,8 @@ namespace dungeonduell
             setAbleTiles.Clear();
             foreach (var cellPos in tilemap.cellBounds.allPositionsWithin)
             {
-                if (tileClickHandler.IsSetablePosition(cellPos))
-                    setAbleTiles.Add(cellPos);
+                if (tileClickHandler.IsSetablePosition(cellPos).Item1)
+                    setAbleTiles.Add((cellPos,tileClickHandler.IsSetablePosition(cellPos).Item2));
             }
 
             if (setAbleTiles.Count == 0)
@@ -62,7 +62,10 @@ namespace dungeonduell
                 return;
             }
 
-            selectedTilePos = setAbleTiles[0];
+            Vector3Int? startPos = setAbleTiles.FirstOrDefault(tuple => tuple.Item2 == turnManager.isPlayer1Turn).Item1;
+
+            selectedTilePos = startPos ?? setAbleTiles[0].Item1;
+            
             if (cursor)
             {
                 cursor.SetActive(true);
@@ -112,9 +115,9 @@ namespace dungeonduell
 
             foreach (var tile in setAbleTiles)
             {
-                if (tile == selectedTilePos) continue;
+                if (tile.Item1 == selectedTilePos) continue;
 
-                Vector2 dirToTile = new Vector2(tile.x - selectedTilePos.x, tile.y - selectedTilePos.y);
+                Vector2 dirToTile = new Vector2(tile.Item1 .x - selectedTilePos.x, tile.Item1.y - selectedTilePos.y);
                 float distance = dirToTile.magnitude;
                 if (distance < distanceThreshold) continue;
 
@@ -127,7 +130,7 @@ namespace dungeonduell
                     if (score > bestScore)
                     {
                         bestScore = score;
-                        bestTarget = tile;
+                        bestTarget = tile.Item1;
                     }
                 }
             }

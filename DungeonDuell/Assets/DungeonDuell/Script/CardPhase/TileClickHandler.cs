@@ -74,17 +74,26 @@ namespace dungeonduell
             }
         }
 
-        public bool IsSetablePosition(Vector3Int cellPosition)
+        public (bool,bool?) IsSetablePosition(Vector3Int cellPosition)
         {
             TileBase tile = tilemap.GetTile(cellPosition);
-            if (tile == null) return false; // kein Tile = ungültig
+            if (tile == null) return (false,null); // kein Tile = ungültig
 
             // Gültig, wenn NICHT das resetTile und in setAbleTiles enthalten
             if (tile != resetTile && (setAbleTiles.Contains(tile) | CardShelled.Any(card => card.InPlayerRangeTile.Contains(tile))))
             {
-                return true;
+                if (setAbleTiles[0] == tile |CardShelled.Any(card => card.InPlayerRangeTile[0] == tile))
+                {
+                    return (true,true);
+                }
+                
+                if (setAbleTiles[1] == tile | CardShelled.Any(card => card.InPlayerRangeTile[1] == tile))
+                {
+                    return (true,false);
+                }
+                return (true,null);
             }
-            return false;
+            return (false,null);
         }
 
 
