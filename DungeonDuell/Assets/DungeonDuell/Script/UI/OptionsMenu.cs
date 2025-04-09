@@ -5,12 +5,15 @@ using MoreMountains.Tools;
 using MoreMountains.TopDownEngine;
 using TMPro;
 using UnityEngine.Audio;
+using UnityEngine.EventSystems;
 
 namespace dungeonduell
 {
     public class OptionsMenu : MonoBehaviour
     {
         public GameObject optionsPanel;
+        public GameObject optionSelectedButton;
+        public GameObject previousSelected;
         public AudioMixer audioMixer;
         public Slider audioSlider;
         public Toggle muteToggle;
@@ -41,17 +44,35 @@ namespace dungeonduell
 
         public void OpenOptions()
         {
+
             optionsPanel.SetActive(true);
             optionsPanel.transform.localScale = Vector3.zero;
             canvasGroup.alpha = 0;
             optionsPanel.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack).SetUpdate(true);
-            canvasGroup.DOFade(1, fadeDuration).SetUpdate(true);
+            canvasGroup.DOFade(1, fadeDuration).SetUpdate(true).OnComplete(() =>
+            { 
+                if (optionSelectedButton != null && EventSystem.current != null)
+                {
+                    EventSystem.current.SetSelectedGameObject(optionSelectedButton);
+                }
+            });
         }
 
         public void CloseOptions()
         {
             optionsPanel.transform.DOScale(0f, 0.3f).SetEase(Ease.InBack).SetUpdate(true);
-            canvasGroup.DOFade(0, fadeDuration).SetUpdate(true).OnComplete(() => optionsPanel.SetActive(false));
+            canvasGroup.DOFade(0, fadeDuration).SetUpdate(true).OnComplete(() => 
+            {
+                    optionsPanel.SetActive(false);
+                    if (EventSystem.current != null)
+                    {
+                        EventSystem.current.SetSelectedGameObject(null);
+                        if (previousSelected != null)
+                        {
+                            EventSystem.current.SetSelectedGameObject(previousSelected);
+                        }
+                    }
+            });
         }
 
 

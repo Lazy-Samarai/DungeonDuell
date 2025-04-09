@@ -835,7 +835,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Start Rooms
+  m_text: Starting Rooms
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1123,7 +1123,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Monster Room
+  m_text: Monster Card
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1312,6 +1312,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   optionsPanel: {fileID: 6444448653312080624}
+  optionSelectedButton: {fileID: 4083766027326132246}
+  previousSelected: {fileID: 0}
   audioMixer: {fileID: 24100000, guid: 7e984f512e89b60468e829489e8883e3, type: 2}
   audioSlider: {fileID: 4459018265904734727}
   muteToggle: {fileID: 5737492686383673700}
@@ -1331,11 +1333,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pausePanel: {fileID: 6739598370246715360}
+  defaultSelectedButton: {fileID: 2186106557323049776}
   optionsPanel: {fileID: 6444448653312080624}
   tutorialPanel: {fileID: 2790051231608372198}
+  tutorialSelectedButton: {fileID: 8298676176434442389}
   confirmationPopup: {fileID: 6084558402998845949}
+  confirmSelectedButton: {fileID: 5283115473506423900}
   fadeDuration: 0.25
-  defaultSelectedButton: {fileID: 2186106557323049776}
 --- !u!1 &3868220508651323743
 GameObject:
   m_ObjectHideFlags: 0
@@ -1401,7 +1405,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Special Room
+  m_text: Treasure Room
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1656,7 +1660,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Treasure Room
+  m_text: Treasure Card
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1760,7 +1764,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -120.0001, y: -132}
+  m_AnchoredPosition: {x: -120.0001, y: 100.99992}
   m_SizeDelta: {x: 634, y: 540}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1149321853624798556
@@ -1836,7 +1840,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -120.0001, y: -227}
+  m_AnchoredPosition: {x: -120.0001, y: -16}
   m_SizeDelta: {x: 634, y: 540}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &156781758968728222
@@ -2083,7 +2087,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -120.0001, y: 167.17996}
+  m_AnchoredPosition: {x: -120.0001, y: -261}
   m_SizeDelta: {x: 350, y: 475}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4078357203797422734
@@ -2159,7 +2163,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -120.0001, y: -41}
+  m_AnchoredPosition: {x: -120.0001, y: 192}
   m_SizeDelta: {x: 634, y: 540}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5758792763264286292
@@ -2370,7 +2374,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -135.00006, y: 56.79396}
+  m_AnchoredPosition: {x: -135.00006, y: 290}
   m_SizeDelta: {x: 634, y: 540}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7188787236058730802
@@ -2581,7 +2585,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -120, y: 289}
+  m_AnchoredPosition: {x: -120, y: -152}
   m_SizeDelta: {x: 350, y: 475}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7406664797369222145
@@ -3325,6 +3329,12 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1991357262776101777}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4083766027326132246 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2526180129613085575, guid: 897d22fb96e95b4439cacd04e697fb3f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1991357262776101777}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4459018265904734727 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2757088756720929174, guid: 897d22fb96e95b4439cacd04e697fb3f,
@@ -3614,6 +3624,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04e4d2f394825a14abf407fe31800c21, type: 3}
+--- !u!1 &5283115473506423900 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6153041913601509906, guid: 04e4d2f394825a14abf407fe31800c21,
+    type: 3}
+  m_PrefabInstance: {fileID: 2031856312781282894}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &8896643831142117576 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7441530845608013446, guid: 04e4d2f394825a14abf407fe31800c21,
@@ -4097,6 +4113,12 @@ PrefabInstance:
 --- !u!224 &4687277331226694657 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7441530845608013446, guid: 04e4d2f394825a14abf407fe31800c21,
+    type: 3}
+  m_PrefabInstance: {fileID: 2758785752917736071}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8298676176434442389 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6153041913601509906, guid: 04e4d2f394825a14abf407fe31800c21,
     type: 3}
   m_PrefabInstance: {fileID: 2758785752917736071}
   m_PrefabAsset: {fileID: 0}
