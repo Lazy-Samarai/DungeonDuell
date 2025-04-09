@@ -32,8 +32,8 @@ namespace dungeonduell
         public static void Trigger_LevelUpAvailable(int playerId, int upgradableCount) { LevelUpAvailable.Invoke(playerId, upgradableCount); }
         public static event Action<LevelUpOptions, String ,int> PlayerUpgrade;
         public static void Trigger_PlayerUpgrade(LevelUpOptions option, String playerReference, int amount) { PlayerUpgrade.Invoke(option, playerReference, amount); }
-        public static event Action<List<PlayerData>> PlayerDataExposed;
-        public static void Trigger_PlayerDataExposed(List<PlayerData> playerdatas) { PlayerDataExposed.Invoke(playerdatas); }
+        public static event Action<List<PlayerData>,int> PlayerDataExposed;
+        public static void Trigger_PlayerDataExposed(List<PlayerData> playerdatas,int currentRound) { PlayerDataExposed.Invoke(playerdatas,currentRound); }
 
 
     }

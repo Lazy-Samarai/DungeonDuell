@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.U2D.Aseprite;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.InputSystem.UI;
+using Cinemachine;
 
 namespace dungeonduell
 {
@@ -25,6 +28,7 @@ namespace dungeonduell
 
         bool Currentlyvisble = false;
 
+        [TagField] [SerializeField] private string cursorTag; // To Not Lose Refrence to Curi
         public GameObject controllerCursor;
 
         Animator animator;
@@ -36,13 +40,20 @@ namespace dungeonduell
             runTimeIndicatorDoor.transform.gameObject.SetActive(false);
             animator = GetComponent<Animator>();
             tilemap = GetComponent<Tilemap>();
+
+           
         }
+            
         void Update()
         {
             if (Currentlyvisble)
             {
                 Vector3 mouseWorldPos = cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -cam.transform.position.z));
                 HandleHover(mouseWorldPos);
+                if (controllerCursor == null)
+                {
+                    controllerCursor = GameObject.FindGameObjectWithTag(cursorTag);
+                }
                 HandleHover(controllerCursor.transform.position);
             }
 
@@ -91,10 +102,14 @@ namespace dungeonduell
         }
         public void OnCardSelected(DisplayCard displayCard)
         {
-            hoverTile = displayCard.card.Tile;
-            SetHoverMapVisable(true);
+            if (displayCard != null)
+            {
+                hoverTile = displayCard.card.Tile;
+                SetHoverMapVisable(true);
 
-            UpdateIndicator(displayCard.card.GetAllowedDirection());
+                UpdateIndicator(displayCard.card.GetAllowedDirection());
+            }
+           
         }
         public void UpdateIndicator(bool[] allowedDoors)
         {

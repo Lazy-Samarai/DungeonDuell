@@ -9,6 +9,7 @@ using UnityEngine.UI;
 using MoreMountains.TopDownEngine;
 using UnityEngine.InputSystem;
 using DG.Tweening;
+using UnityEngine.InputSystem.LowLevel;
 
 
 namespace dungeonduell
@@ -31,10 +32,13 @@ namespace dungeonduell
 
         private bool[] _playerPlayedAllCards = {false, false};
 
+        public PlayerInput[] _playerInputs;
+
         void Start()
         {
             timeStart = Time.time;
             InitializeTurn();
+            
         }
 
         void Update()
@@ -49,6 +53,18 @@ namespace dungeonduell
         {
             awaitingKeyPress = true;
             playerTurnText.text = "Next Turn: " + (isPlayer1Turn ? "Player 1" : "Player 2");
+            
+            if (isPlayer1Turn)
+            {
+                InputSystem.DisableDevice(_playerInputs[1].user.pairedDevices[0]);
+                InputSystem.EnableDevice(_playerInputs[0].user.pairedDevices[0]);
+            }
+            else
+            {
+                InputSystem.DisableDevice(_playerInputs[0].user.pairedDevices[0]);
+                InputSystem.EnableDevice(_playerInputs[1].user.pairedDevices[0]);
+            }
+            
             playerTurnText.gameObject.SetActive(true);
             pressAnyKeyText.gameObject.SetActive(true);
             ToggleHandVisibility(false, false);
@@ -82,6 +98,7 @@ namespace dungeonduell
         public void EndPlayerTurn()
         {
             isPlayer1Turn = !isPlayer1Turn;
+            
             if (_playerPlayedAllCards.All(played => played == true))
             {
                 InnitGameCountDown();

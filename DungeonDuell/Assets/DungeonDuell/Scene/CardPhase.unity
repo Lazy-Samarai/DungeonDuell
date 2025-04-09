@@ -444,6 +444,7 @@ MonoBehaviour:
     MetaHp: 200
     MaxMetaHp: 200
     CurrentMask: {fileID: 0}
+  roundCounter: 0
   nextRoundFinal: 0
 --- !u!4 &376974905
 Transform:
@@ -669,6 +670,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fd9cdf09f6719445984cc19df434a57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TileMapTag: MainTileMap
   tilemap: {fileID: 1763767974}
   cursor: {fileID: 887889882}
   tileClickHandler: {fileID: 481254717}
@@ -1127,7 +1129,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: --- !u!1 &669252398
+  m_EditorClassIdentifier: '--- !u!1 &669252398'
 --- !u!1 &679876425
 GameObject:
   m_ObjectHideFlags: 0
@@ -1301,6 +1303,7 @@ MonoBehaviour:
   indiactorDoorPrefab: {fileID: 2437991209678005845, guid: 54575de20ace43943ab151cd4098d20e,
     type: 3}
   runTimeIndicatorDoor: {fileID: 0}
+  cursorTag: Cursor
   controllerCursor: {fileID: 887889882}
 --- !u!66 &756542406
 CompositeCollider2D:
@@ -1339,6 +1342,8 @@ CompositeCollider2D:
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:
+  - m_Collider: {fileID: 756542408}
+    m_ColliderPaths: []
   - m_Collider: {fileID: 756542408}
     m_ColliderPaths:
     - - X: 204699312
@@ -43337,31 +43342,13 @@ Tilemap:
   m_Enabled: 1
   m_Tiles: {}
   m_AnimatedTiles: {}
-  m_TileAssetArray:
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 1163
-    m_Data: {fileID: 11400000, guid: 1a8eff7b9ea00654cbfc7f73c874a7e2, type: 2}
+  m_TileAssetArray: [{m_RefCount: 0, m_Data: {fileID: 0}}, {m_RefCount: 0, m_Data: {
+        fileID: 0}}, {m_RefCount: 0, m_Data: {fileID: 0}}, {m_RefCount: 0, m_Data: {
+        fileID: 0}}, {m_RefCount: 0, m_Data: {fileID: 0}}, {m_RefCount: 0, m_Data: {
+        fileID: 0}}, {m_RefCount: 0, m_Data: {fileID: 0}}, {m_RefCount: 0, m_Data: {
+        fileID: 0}}, {m_RefCount: 0, m_Data: {fileID: 0}}, {m_RefCount: 0, m_Data: {
+        fileID: 0}}, {m_RefCount: 0, m_Data: {fileID: 0}}, {m_RefCount: 1163, m_Data: {
+        fileID: 11400000, guid: 1a8eff7b9ea00654cbfc7f73c874a7e2, type: 2}}]
   m_TileSpriteArray: []
   m_TileMatrixArray: []
   m_TileColorArray: []
@@ -43584,7 +43571,7 @@ GameObject:
   - component: {fileID: 887889883}
   m_Layer: 0
   m_Name: CursorCircle
-  m_TagString: Untagged
+  m_TagString: Cursor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45241,7 +45228,7 @@ MonoBehaviour:
   availableCards: []
   playerDeck: []
   deckSize: 10
-  isPlayerOne: 0
+  isPlayerOne: 1
 --- !u!4 &1494809203
 Transform:
   m_ObjectHideFlags: 0
@@ -45566,6 +45553,9 @@ MonoBehaviour:
   player1UI: {fileID: 1541103091}
   player2UI: {fileID: 1512983241}
   isPlayer1Turn: 1
+  _playerInputs:
+  - {fileID: 1961649892}
+  - {fileID: 1130448083}
 --- !u!4 &1557636385
 Transform:
   m_ObjectHideFlags: 0

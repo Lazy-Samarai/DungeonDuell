@@ -6,12 +6,14 @@ using UnityEngine.InputSystem;
 using MoreMountains.TopDownEngine;
 using UnityEngine.EventSystems;
 using System.Linq;
+using Cinemachine;
 
 namespace dungeonduell
 {
     public class HexgridController : MonoBehaviour
     {
         [Header("References")]
+        [TagField] [SerializeField] private string TileMapTag;
         public Tilemap tilemap;
         public GameObject cursor;
         public TileClickHandler tileClickHandler;
@@ -40,8 +42,9 @@ namespace dungeonduell
                 turnManager = FindObjectOfType<TurnManager>();
 
             playerInput = null;
-
-            if (cursor) cursor.SetActive(false);
+            tilemap = FindObjectsOfType<Tilemap>().FirstOrDefault(tm => tm.gameObject.tag == TileMapTag); // Becuase there is also the hovermap
+            
+            
         }
 
         public void ActivateNavigation()
