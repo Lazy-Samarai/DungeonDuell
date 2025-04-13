@@ -102,10 +102,14 @@ namespace dungeonduell
         }
         public void OnCardSelected(DisplayCard displayCard)
         {
-            hoverTile = displayCard.card.Tile;
-            SetHoverMapVisable(true);
+            if (displayCard != null)
+            {
+                hoverTile = displayCard.card.Tile;
+                SetHoverMapVisable(true);
 
-            UpdateIndicator(displayCard.card.GetAllowedDirection());
+                UpdateIndicator(displayCard.card.GetAllowedDirection());
+            }
+           
         }
         public void UpdateIndicator(bool[] allowedDoors)
         {
