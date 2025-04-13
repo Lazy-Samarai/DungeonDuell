@@ -1243,6 +1243,12 @@ namespace MoreMountains.TopDownEngine
             UnityEngine.Debug.Assert(!m_CardPhase.enabled, "This will cause a leak and performance issues, DungeonPhaseInput.CardPhase.Disable() has not been called.");
         }
 
+        ~@DungeonPhaseInput()
+        {
+            UnityEngine.Debug.Assert(!m_DungeonPhase.enabled, "This will cause a leak and performance issues, DungeonPhaseInput.DungeonPhase.Disable() has not been called.");
+            UnityEngine.Debug.Assert(!m_CardPhase.enabled, "This will cause a leak and performance issues, DungeonPhaseInput.CardPhase.Disable() has not been called.");
+        }
+
         /// <summary>
         /// Destroys this asset and all associated <see cref="InputAction"/> instances.
         /// </summary>
@@ -1616,6 +1622,9 @@ namespace MoreMountains.TopDownEngine
         private readonly InputAction m_CardPhase_Submit;
         private readonly InputAction m_CardPhase_Navigation;
         private readonly InputAction m_CardPhase_Back;
+        /// <summary>
+        /// Provides access to input actions defined in input action map "CardPhase".
+        /// </summary>
         private readonly InputAction m_CardPhase_Pause;
         private readonly InputAction m_CardPhase_Cancel;
         /// <summary>
