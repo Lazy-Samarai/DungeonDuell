@@ -995,6 +995,12 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 793352271}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &793352273 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6153041913601509906, guid: 04e4d2f394825a14abf407fe31800c21,
+    type: 3}
+  m_PrefabInstance: {fileID: 793352271}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &845037473 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2757088756720929174, guid: 897d22fb96e95b4439cacd04e697fb3f,
@@ -2847,6 +2853,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   optionsPanel: {fileID: 1282732022}
+  optionSelectedButton: {fileID: 6770411731672869147}
+  previousSelected: {fileID: 793352273}
   audioMixer: {fileID: 24100000, guid: 7e984f512e89b60468e829489e8883e3, type: 2}
   audioSlider: {fileID: 845037473}
   muteToggle: {fileID: 222401211}
@@ -3310,6 +3318,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 897d22fb96e95b4439cacd04e697fb3f, type: 3}
+--- !u!1 &6770411731672869147 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2526180129613085575, guid: 897d22fb96e95b4439cacd04e697fb3f,
+    type: 3}
+  m_PrefabInstance: {fileID: 6770411731672869146}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
