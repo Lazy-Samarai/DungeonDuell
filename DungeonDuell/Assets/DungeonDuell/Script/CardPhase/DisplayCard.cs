@@ -6,16 +6,17 @@ using UnityEngine.EventSystems;
 
 namespace dungeonduell
 {
-    public class DisplayCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, ISelectHandler, IDeselectHandler
+    public class DisplayCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler,
+        ISelectHandler, IDeselectHandler
     {
         public Card card;
         public CardToHand cardToHand;
         public Transform handPanel;
 
-        [Header("UI References")]
-        public TextMeshProUGUI nameText;
+        [Header("UI References")] public TextMeshProUGUI nameText;
         public Image HexImage;
-        public DoorIndicator cardDirectionIndicator;
+        public DoorIndicator cardDirectionIndicator1;
+        public DoorIndicator cardDirectionIndicator2;
         public GameObject MonsterRoomIcon;
         public GameObject TreasureRoomIcon;
         public GameObject normalBG;
@@ -25,8 +26,7 @@ namespace dungeonduell
         public GameObject Frame;
         public GameObject tooltip;
 
-        [Header("Hover-Effekt")]
-        public Vector3 hoverScale = new Vector3(1.2f, 1.2f, 1f);
+        [Header("Hover-Effekt")] public Vector3 hoverScale = new Vector3(1.2f, 1.2f, 1f);
         public Vector3 hoverOffset = new Vector3(0f, 20f, 0f);
         public Vector3 sideOffset = new Vector3(30f, 0f, 0f);
 
@@ -36,7 +36,7 @@ namespace dungeonduell
         private Vector3 originalLeftPosition;
         private Vector3 originalRightPosition;
 
-        
+
         [SerializeField] private Sprite[] spritesFullCard;
 
         void Start()
@@ -53,6 +53,7 @@ namespace dungeonduell
                     Debug.LogError("Kein CardToHand im Parent gefunden. HandPanel kann nicht ermittelt werden!");
                 }
             }
+
             originalScale = transform.localScale;
             originalPosition = transform.localPosition;
             originalRotation = transform.localRotation;
@@ -67,6 +68,7 @@ namespace dungeonduell
                     Transform leftNeighbor = parent.GetChild(index - 1);
                     originalLeftPosition = leftNeighbor.localPosition;
                 }
+
                 if (index < parent.childCount - 1)
                 {
                     Transform rightNeighbor = parent.GetChild(index + 1);
@@ -79,7 +81,7 @@ namespace dungeonduell
 
             // It might make sense to have mutiple Prefab but for now this
             Image sr = GetComponentInChildren<Image>();
-            
+
             normalBG.SetActive((false));
             switch (card.roomtype)
             {
@@ -107,16 +109,15 @@ namespace dungeonduell
                 if (nameText != null)
                     nameText.text = card.cardName;
 
-                if (cardDirectionIndicator != null)
-                {
-                    bool[] allowedDoors = card.GetAllowedDirection();
-                    cardDirectionIndicator.SetDoorIndiactor(allowedDoors);
-                }
+                bool[] allowedDoors = card.GetAllowedDirection();
+                cardDirectionIndicator1.SetDoorIndiactor(allowedDoors);
+                cardDirectionIndicator2.SetDoorIndiactor(allowedDoors);
+
 
                 if (HexImage != null && Frame != null)
                 {
                     Color currentColor = new Color(0.3f, 0.3f, 0.3f);
-                    
+
                     normalBG.SetActive((false));
                     switch (card.roomtype)
                     {
@@ -160,8 +161,8 @@ namespace dungeonduell
 
         public void UpdateDirectionIndicator(bool[] allowedDoors)
         {
-            if (cardDirectionIndicator != null)
-                cardDirectionIndicator.SetDoorIndiactor(allowedDoors);
+            cardDirectionIndicator1.SetDoorIndiactor(allowedDoors);
+            cardDirectionIndicator2.SetDoorIndiactor(allowedDoors);
         }
 
         // **Hover mit Maus**
