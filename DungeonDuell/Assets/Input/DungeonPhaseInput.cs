@@ -39,7 +39,7 @@ namespace MoreMountains.TopDownEngine
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""SecondaryMovement"",
+                    ""name"": ""Aim"",
                     ""type"": ""PassThrough"",
                     ""id"": ""e4146e01-7578-46fe-b394-b240c2256b2c"",
                     ""expectedControlType"": ""Vector2"",
@@ -48,19 +48,10 @@ namespace MoreMountains.TopDownEngine
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Jump"",
-                    ""type"": ""Button"",
-                    ""id"": ""314ace32-fb21-4bab-a569-ebe4e48f2102"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Run"",
                     ""type"": ""Button"",
                     ""id"": ""6b5c4b16-7607-4f0a-ad5b-62efd798065d"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -75,28 +66,10 @@ namespace MoreMountains.TopDownEngine
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Crouch"",
-                    ""type"": ""Button"",
-                    ""id"": ""5e6e408c-e79e-4f5c-87b7-8a6d181bd681"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Shoot"",
                     ""type"": ""Button"",
                     ""id"": ""7016cc32-6ee0-4d53-b08c-02cbe6eb2c0e"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""SecondaryShoot"",
-                    ""type"": ""Button"",
-                    ""id"": ""1b70a5ec-5da5-42ce-a7c0-8f54ff84052f"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -105,16 +78,7 @@ namespace MoreMountains.TopDownEngine
                     ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""ae461515-11b0-4cc9-b221-92ed2df4118e"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Reload"",
-                    ""type"": ""Button"",
-                    ""id"": ""cf90ff3a-006b-4ae6-9594-cc2189d6f5f0"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -123,7 +87,7 @@ namespace MoreMountains.TopDownEngine
                     ""name"": ""Pause"",
                     ""type"": ""Button"",
                     ""id"": ""c01ffcc5-adff-4aa3-bb8d-e0139087e5ed"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -138,37 +102,10 @@ namespace MoreMountains.TopDownEngine
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""SwitchCharacter"",
-                    ""type"": ""Button"",
-                    ""id"": ""cde4a43f-3a08-47c8-afdf-2c5dca8d1241"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""TimeControl"",
-                    ""type"": ""Button"",
-                    ""id"": ""c71e92f2-77ca-4de6-98ad-64b961ed706e"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""CameraRotation"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""239ee3ca-17ea-4fb2-85ef-91f8046dfddb"",
-                    ""expectedControlType"": ""Axis"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""OpenUpgrade"",
                     ""type"": ""Button"",
                     ""id"": ""5f531d69-3a23-4c4c-a114-620394e39f56"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": ""Press(behavior=1)"",
                     ""initialStateCheck"": false
@@ -270,28 +207,6 @@ namespace MoreMountains.TopDownEngine
                 },
                 {
                     ""name"": """",
-                    ""id"": ""8923c29f-eb06-45a4-9c25-5ed809d8fea2"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": ""Press(behavior=2)"",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Jump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f7f8488a-fd5a-4098-8088-d75677e01b98"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
-                    ""interactions"": ""Press(behavior=2)"",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Jump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""718dcfd4-5383-4a9f-bab4-92688fd5d743"",
                     ""path"": ""<Keyboard>/leftShift"",
                     ""interactions"": ""Press(behavior=2)"",
@@ -304,7 +219,7 @@ namespace MoreMountains.TopDownEngine
                 {
                     ""name"": """",
                     ""id"": ""385119bf-31ce-4c23-8780-028608d0481c"",
-                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
                     ""interactions"": ""Press(behavior=2)"",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -315,7 +230,7 @@ namespace MoreMountains.TopDownEngine
                 {
                     ""name"": """",
                     ""id"": ""d6b36ab1-5730-4ee6-934d-0da3fd9ad3c7"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": ""Press(behavior=2)"",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -331,28 +246,6 @@ namespace MoreMountains.TopDownEngine
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
                     ""action"": ""Dash"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""62dc31f7-26f0-4d3b-b772-f5fa2bcf5714"",
-                    ""path"": ""<Keyboard>/c"",
-                    ""interactions"": ""Press(behavior=2)"",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Crouch"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""c74dc322-5120-478a-af7a-0d716b64cfc1"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": ""Press(behavior=2)"",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Shoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -380,17 +273,6 @@ namespace MoreMountains.TopDownEngine
                 },
                 {
                     ""name"": """",
-                    ""id"": ""63bf589f-5ef3-4931-bb6e-63038c725e66"",
-                    ""path"": ""<Keyboard>/leftAlt"",
-                    ""interactions"": ""Press(behavior=2)"",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""SecondaryShoot"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""70b57a6b-cd02-4751-90a1-9027a8ed50f0"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": ""Press(behavior=2)"",
@@ -408,28 +290,6 @@ namespace MoreMountains.TopDownEngine
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Interact"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""5149bd3a-469e-4f0d-bb3b-1f08823c3acd"",
-                    ""path"": ""<Keyboard>/r"",
-                    ""interactions"": ""Press(behavior=2)"",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Reload"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""dd9bdaac-271a-4f2a-bdd2-7e6718d1c076"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
-                    ""interactions"": ""Press(behavior=2)"",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Reload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -479,56 +339,12 @@ namespace MoreMountains.TopDownEngine
                 },
                 {
                     ""name"": """",
-                    ""id"": ""5a170d0f-bc8a-4a8d-a2d3-31939a85f104"",
-                    ""path"": ""<Keyboard>/p"",
-                    ""interactions"": ""Press(behavior=2)"",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""SwitchCharacter"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""6fd51ad5-2a26-4828-8ad1-28016fbc2c3d"",
-                    ""path"": ""<Keyboard>/k"",
-                    ""interactions"": ""Press(behavior=2)"",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""TimeControl"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f7d3e6ec-7190-4a72-81ec-d23f276d6b45"",
-                    ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": ""Press(behavior=2)"",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""TimeControl"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""2f940a20-9887-4115-a4cc-f2bcfaa3209c"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""SecondaryMovement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""77200925-45c4-4483-b584-d3255b060915"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""CameraRotation"",
+                    ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -675,7 +491,7 @@ namespace MoreMountains.TopDownEngine
                     ""name"": ""Back"",
                     ""type"": ""Button"",
                     ""id"": ""d858d18f-1581-4499-88be-9325a3bb9b38"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -800,31 +616,9 @@ namespace MoreMountains.TopDownEngine
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""up"",
-                    ""id"": ""a0a34f87-672f-4275-b5ed-c95ee6b47296"",
-                    ""path"": ""<Gamepad>/rightStick/up"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Navigation"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
                     ""name"": ""down"",
                     ""id"": ""4a59b814-2696-4d5b-8167-9d9038d47abd"",
                     ""path"": ""<Gamepad>/leftStick/down"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Navigation"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""390c8e9e-8f61-4b09-a69a-d8d30d52ed16"",
-                    ""path"": ""<Gamepad>/rightStick/down"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -844,17 +638,6 @@ namespace MoreMountains.TopDownEngine
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""left"",
-                    ""id"": ""39605e52-127a-4558-b115-2c322fccb2ce"",
-                    ""path"": ""<Gamepad>/rightStick/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Navigation"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
                     ""name"": ""right"",
                     ""id"": ""f59732c4-634d-4904-9308-950c25d10d6c"",
                     ""path"": ""<Gamepad>/leftStick/right"",
@@ -864,83 +647,6 @@ namespace MoreMountains.TopDownEngine
                     ""action"": ""Navigation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""6b706e1d-d253-489e-8727-4f3c9d3d6dbf"",
-                    ""path"": ""<Gamepad>/rightStick/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Navigation"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""Joystick"",
-                    ""id"": ""28ac72e6-7916-4758-8a41-4e9c9790d9fc"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Navigation"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""ea843028-2150-4fa5-a9f5-f7c2a8667de6"",
-                    ""path"": ""<Joystick>/stick/up"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Navigation"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""bc950517-3da6-4af1-be76-60d673c518b9"",
-                    ""path"": ""<Joystick>/stick/down"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Navigation"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""af1b8435-058b-4a0f-a7c5-16a82d5e8e29"",
-                    ""path"": ""<Joystick>/stick/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Navigation"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""2975fdc7-e83e-4cf2-9aa9-61564911331f"",
-                    ""path"": ""<Joystick>/stick/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Navigation"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""93af95a5-653e-4321-83ae-8d4a00481d88"",
-                    ""path"": ""<Gamepad>/leftStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Navigation"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
@@ -1143,20 +849,13 @@ namespace MoreMountains.TopDownEngine
             // DungeonPhase
             m_DungeonPhase = asset.FindActionMap("DungeonPhase", throwIfNotFound: true);
             m_DungeonPhase_PrimaryMovement = m_DungeonPhase.FindAction("PrimaryMovement", throwIfNotFound: true);
-            m_DungeonPhase_SecondaryMovement = m_DungeonPhase.FindAction("SecondaryMovement", throwIfNotFound: true);
-            m_DungeonPhase_Jump = m_DungeonPhase.FindAction("Jump", throwIfNotFound: true);
+            m_DungeonPhase_Aim = m_DungeonPhase.FindAction("Aim", throwIfNotFound: true);
             m_DungeonPhase_Run = m_DungeonPhase.FindAction("Run", throwIfNotFound: true);
             m_DungeonPhase_Dash = m_DungeonPhase.FindAction("Dash", throwIfNotFound: true);
-            m_DungeonPhase_Crouch = m_DungeonPhase.FindAction("Crouch", throwIfNotFound: true);
             m_DungeonPhase_Shoot = m_DungeonPhase.FindAction("Shoot", throwIfNotFound: true);
-            m_DungeonPhase_SecondaryShoot = m_DungeonPhase.FindAction("SecondaryShoot", throwIfNotFound: true);
             m_DungeonPhase_Interact = m_DungeonPhase.FindAction("Interact", throwIfNotFound: true);
-            m_DungeonPhase_Reload = m_DungeonPhase.FindAction("Reload", throwIfNotFound: true);
             m_DungeonPhase_Pause = m_DungeonPhase.FindAction("Pause", throwIfNotFound: true);
             m_DungeonPhase_SwitchWeapon = m_DungeonPhase.FindAction("SwitchWeapon", throwIfNotFound: true);
-            m_DungeonPhase_SwitchCharacter = m_DungeonPhase.FindAction("SwitchCharacter", throwIfNotFound: true);
-            m_DungeonPhase_TimeControl = m_DungeonPhase.FindAction("TimeControl", throwIfNotFound: true);
-            m_DungeonPhase_CameraRotation = m_DungeonPhase.FindAction("CameraRotation", throwIfNotFound: true);
             m_DungeonPhase_OpenUpgrade = m_DungeonPhase.FindAction("OpenUpgrade", throwIfNotFound: true);
             m_DungeonPhase_DoUpgradeSpeed = m_DungeonPhase.FindAction("DoUpgradeSpeed", throwIfNotFound: true);
             m_DungeonPhase_DoUpgradeAtk = m_DungeonPhase.FindAction("DoUpgradeAtk", throwIfNotFound: true);
@@ -1239,20 +938,13 @@ namespace MoreMountains.TopDownEngine
         private readonly InputActionMap m_DungeonPhase;
         private List<IDungeonPhaseActions> m_DungeonPhaseActionsCallbackInterfaces = new List<IDungeonPhaseActions>();
         private readonly InputAction m_DungeonPhase_PrimaryMovement;
-        private readonly InputAction m_DungeonPhase_SecondaryMovement;
-        private readonly InputAction m_DungeonPhase_Jump;
+        private readonly InputAction m_DungeonPhase_Aim;
         private readonly InputAction m_DungeonPhase_Run;
         private readonly InputAction m_DungeonPhase_Dash;
-        private readonly InputAction m_DungeonPhase_Crouch;
         private readonly InputAction m_DungeonPhase_Shoot;
-        private readonly InputAction m_DungeonPhase_SecondaryShoot;
         private readonly InputAction m_DungeonPhase_Interact;
-        private readonly InputAction m_DungeonPhase_Reload;
         private readonly InputAction m_DungeonPhase_Pause;
         private readonly InputAction m_DungeonPhase_SwitchWeapon;
-        private readonly InputAction m_DungeonPhase_SwitchCharacter;
-        private readonly InputAction m_DungeonPhase_TimeControl;
-        private readonly InputAction m_DungeonPhase_CameraRotation;
         private readonly InputAction m_DungeonPhase_OpenUpgrade;
         private readonly InputAction m_DungeonPhase_DoUpgradeSpeed;
         private readonly InputAction m_DungeonPhase_DoUpgradeAtk;
@@ -1262,20 +954,13 @@ namespace MoreMountains.TopDownEngine
             private @DungeonPhaseInput m_Wrapper;
             public DungeonPhaseActions(@DungeonPhaseInput wrapper) { m_Wrapper = wrapper; }
             public InputAction @PrimaryMovement => m_Wrapper.m_DungeonPhase_PrimaryMovement;
-            public InputAction @SecondaryMovement => m_Wrapper.m_DungeonPhase_SecondaryMovement;
-            public InputAction @Jump => m_Wrapper.m_DungeonPhase_Jump;
+            public InputAction @Aim => m_Wrapper.m_DungeonPhase_Aim;
             public InputAction @Run => m_Wrapper.m_DungeonPhase_Run;
             public InputAction @Dash => m_Wrapper.m_DungeonPhase_Dash;
-            public InputAction @Crouch => m_Wrapper.m_DungeonPhase_Crouch;
             public InputAction @Shoot => m_Wrapper.m_DungeonPhase_Shoot;
-            public InputAction @SecondaryShoot => m_Wrapper.m_DungeonPhase_SecondaryShoot;
             public InputAction @Interact => m_Wrapper.m_DungeonPhase_Interact;
-            public InputAction @Reload => m_Wrapper.m_DungeonPhase_Reload;
             public InputAction @Pause => m_Wrapper.m_DungeonPhase_Pause;
             public InputAction @SwitchWeapon => m_Wrapper.m_DungeonPhase_SwitchWeapon;
-            public InputAction @SwitchCharacter => m_Wrapper.m_DungeonPhase_SwitchCharacter;
-            public InputAction @TimeControl => m_Wrapper.m_DungeonPhase_TimeControl;
-            public InputAction @CameraRotation => m_Wrapper.m_DungeonPhase_CameraRotation;
             public InputAction @OpenUpgrade => m_Wrapper.m_DungeonPhase_OpenUpgrade;
             public InputAction @DoUpgradeSpeed => m_Wrapper.m_DungeonPhase_DoUpgradeSpeed;
             public InputAction @DoUpgradeAtk => m_Wrapper.m_DungeonPhase_DoUpgradeAtk;
@@ -1292,48 +977,27 @@ namespace MoreMountains.TopDownEngine
                 @PrimaryMovement.started += instance.OnPrimaryMovement;
                 @PrimaryMovement.performed += instance.OnPrimaryMovement;
                 @PrimaryMovement.canceled += instance.OnPrimaryMovement;
-                @SecondaryMovement.started += instance.OnSecondaryMovement;
-                @SecondaryMovement.performed += instance.OnSecondaryMovement;
-                @SecondaryMovement.canceled += instance.OnSecondaryMovement;
-                @Jump.started += instance.OnJump;
-                @Jump.performed += instance.OnJump;
-                @Jump.canceled += instance.OnJump;
+                @Aim.started += instance.OnAim;
+                @Aim.performed += instance.OnAim;
+                @Aim.canceled += instance.OnAim;
                 @Run.started += instance.OnRun;
                 @Run.performed += instance.OnRun;
                 @Run.canceled += instance.OnRun;
                 @Dash.started += instance.OnDash;
                 @Dash.performed += instance.OnDash;
                 @Dash.canceled += instance.OnDash;
-                @Crouch.started += instance.OnCrouch;
-                @Crouch.performed += instance.OnCrouch;
-                @Crouch.canceled += instance.OnCrouch;
                 @Shoot.started += instance.OnShoot;
                 @Shoot.performed += instance.OnShoot;
                 @Shoot.canceled += instance.OnShoot;
-                @SecondaryShoot.started += instance.OnSecondaryShoot;
-                @SecondaryShoot.performed += instance.OnSecondaryShoot;
-                @SecondaryShoot.canceled += instance.OnSecondaryShoot;
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
-                @Reload.started += instance.OnReload;
-                @Reload.performed += instance.OnReload;
-                @Reload.canceled += instance.OnReload;
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
                 @SwitchWeapon.started += instance.OnSwitchWeapon;
                 @SwitchWeapon.performed += instance.OnSwitchWeapon;
                 @SwitchWeapon.canceled += instance.OnSwitchWeapon;
-                @SwitchCharacter.started += instance.OnSwitchCharacter;
-                @SwitchCharacter.performed += instance.OnSwitchCharacter;
-                @SwitchCharacter.canceled += instance.OnSwitchCharacter;
-                @TimeControl.started += instance.OnTimeControl;
-                @TimeControl.performed += instance.OnTimeControl;
-                @TimeControl.canceled += instance.OnTimeControl;
-                @CameraRotation.started += instance.OnCameraRotation;
-                @CameraRotation.performed += instance.OnCameraRotation;
-                @CameraRotation.canceled += instance.OnCameraRotation;
                 @OpenUpgrade.started += instance.OnOpenUpgrade;
                 @OpenUpgrade.performed += instance.OnOpenUpgrade;
                 @OpenUpgrade.canceled += instance.OnOpenUpgrade;
@@ -1353,48 +1017,27 @@ namespace MoreMountains.TopDownEngine
                 @PrimaryMovement.started -= instance.OnPrimaryMovement;
                 @PrimaryMovement.performed -= instance.OnPrimaryMovement;
                 @PrimaryMovement.canceled -= instance.OnPrimaryMovement;
-                @SecondaryMovement.started -= instance.OnSecondaryMovement;
-                @SecondaryMovement.performed -= instance.OnSecondaryMovement;
-                @SecondaryMovement.canceled -= instance.OnSecondaryMovement;
-                @Jump.started -= instance.OnJump;
-                @Jump.performed -= instance.OnJump;
-                @Jump.canceled -= instance.OnJump;
+                @Aim.started -= instance.OnAim;
+                @Aim.performed -= instance.OnAim;
+                @Aim.canceled -= instance.OnAim;
                 @Run.started -= instance.OnRun;
                 @Run.performed -= instance.OnRun;
                 @Run.canceled -= instance.OnRun;
                 @Dash.started -= instance.OnDash;
                 @Dash.performed -= instance.OnDash;
                 @Dash.canceled -= instance.OnDash;
-                @Crouch.started -= instance.OnCrouch;
-                @Crouch.performed -= instance.OnCrouch;
-                @Crouch.canceled -= instance.OnCrouch;
                 @Shoot.started -= instance.OnShoot;
                 @Shoot.performed -= instance.OnShoot;
                 @Shoot.canceled -= instance.OnShoot;
-                @SecondaryShoot.started -= instance.OnSecondaryShoot;
-                @SecondaryShoot.performed -= instance.OnSecondaryShoot;
-                @SecondaryShoot.canceled -= instance.OnSecondaryShoot;
                 @Interact.started -= instance.OnInteract;
                 @Interact.performed -= instance.OnInteract;
                 @Interact.canceled -= instance.OnInteract;
-                @Reload.started -= instance.OnReload;
-                @Reload.performed -= instance.OnReload;
-                @Reload.canceled -= instance.OnReload;
                 @Pause.started -= instance.OnPause;
                 @Pause.performed -= instance.OnPause;
                 @Pause.canceled -= instance.OnPause;
                 @SwitchWeapon.started -= instance.OnSwitchWeapon;
                 @SwitchWeapon.performed -= instance.OnSwitchWeapon;
                 @SwitchWeapon.canceled -= instance.OnSwitchWeapon;
-                @SwitchCharacter.started -= instance.OnSwitchCharacter;
-                @SwitchCharacter.performed -= instance.OnSwitchCharacter;
-                @SwitchCharacter.canceled -= instance.OnSwitchCharacter;
-                @TimeControl.started -= instance.OnTimeControl;
-                @TimeControl.performed -= instance.OnTimeControl;
-                @TimeControl.canceled -= instance.OnTimeControl;
-                @CameraRotation.started -= instance.OnCameraRotation;
-                @CameraRotation.performed -= instance.OnCameraRotation;
-                @CameraRotation.canceled -= instance.OnCameraRotation;
                 @OpenUpgrade.started -= instance.OnOpenUpgrade;
                 @OpenUpgrade.performed -= instance.OnOpenUpgrade;
                 @OpenUpgrade.canceled -= instance.OnOpenUpgrade;
@@ -1547,20 +1190,13 @@ namespace MoreMountains.TopDownEngine
         public interface IDungeonPhaseActions
         {
             void OnPrimaryMovement(InputAction.CallbackContext context);
-            void OnSecondaryMovement(InputAction.CallbackContext context);
-            void OnJump(InputAction.CallbackContext context);
+            void OnAim(InputAction.CallbackContext context);
             void OnRun(InputAction.CallbackContext context);
             void OnDash(InputAction.CallbackContext context);
-            void OnCrouch(InputAction.CallbackContext context);
             void OnShoot(InputAction.CallbackContext context);
-            void OnSecondaryShoot(InputAction.CallbackContext context);
             void OnInteract(InputAction.CallbackContext context);
-            void OnReload(InputAction.CallbackContext context);
             void OnPause(InputAction.CallbackContext context);
             void OnSwitchWeapon(InputAction.CallbackContext context);
-            void OnSwitchCharacter(InputAction.CallbackContext context);
-            void OnTimeControl(InputAction.CallbackContext context);
-            void OnCameraRotation(InputAction.CallbackContext context);
             void OnOpenUpgrade(InputAction.CallbackContext context);
             void OnDoUpgradeSpeed(InputAction.CallbackContext context);
             void OnDoUpgradeAtk(InputAction.CallbackContext context);
