@@ -3,19 +3,19 @@ using MoreMountains.TopDownEngine;
 
 public class MinimapFollow : MonoBehaviour
 {
-    [SerializeField] private bool isPlayer1; // True = Kamera für Player1, False = Kamera für Player2
+    [SerializeField] private bool isPlayer1; // True = Kamera fï¿½r Player1, False = Kamera fï¿½r Player2
     private Transform player;
 
     void Start()
     {
         // Findet alle Charaktere in der Szene
-        var characters = FindObjectsOfType<Character>();
+        var characters = FindObjectsByType<Character>(FindObjectsSortMode.None);
 
         foreach (var character in characters)
         {
-            if (character.CharacterType == Character.CharacterTypes.Player) // Nur Spieler-Charaktere berücksichtigen
+            if (character.CharacterType == Character.CharacterTypes.Player) // Nur Spieler-Charaktere berï¿½cksichtigen
             {
-                // Prüft das PlayerID-Feld, um den richtigen Spieler zu finden
+                // Prï¿½ft das PlayerID-Feld, um den richtigen Spieler zu finden
                 if ((isPlayer1 && character.PlayerID == "Player1") || (!isPlayer1 && character.PlayerID == "Player2"))
                 {
                     player = character.transform;
@@ -26,7 +26,7 @@ public class MinimapFollow : MonoBehaviour
 
         if (player == null)
         {
-            Debug.LogError($"Kein Spieler gefunden für Minimap-Kamera (isPlayer1: {isPlayer1})");
+            Debug.LogError($"Kein Spieler gefunden fï¿½r Minimap-Kamera (isPlayer1: {isPlayer1})");
         }
     }
 
@@ -35,7 +35,7 @@ public class MinimapFollow : MonoBehaviour
         if (player != null)
         {
             Vector3 newPosition = player.position;
-            newPosition.z = transform.position.z; // Höhe beibehalten
+            newPosition.z = transform.position.z; // Hï¿½he beibehalten
             transform.position = newPosition;
         }
     }

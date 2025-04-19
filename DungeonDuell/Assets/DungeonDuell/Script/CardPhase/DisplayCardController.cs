@@ -55,7 +55,7 @@ namespace dungeonduell
         {
             string neededPlayerID = IsPlayer1Card() ? "Player1" : "Player2";
 
-            foreach (var player in FindObjectsOfType<PlayerInput>())
+            foreach (var player in FindObjectsByType<PlayerInput>(FindObjectsSortMode.None))
             {
                 var playerManager = player.GetComponent<InputSystemManagerEventsBased>();
                 if (playerManager != null && playerManager.PlayerID == neededPlayerID)
@@ -82,7 +82,7 @@ namespace dungeonduell
 
         private bool IsActivePlayer()
         {
-            var turnManager = FindObjectOfType<TurnManager>();
+            var turnManager = FindFirstObjectByType<TurnManager>();
             return (turnManager.isPlayer1Turn && IsPlayer1Card()) || (!turnManager.isPlayer1Turn && !IsPlayer1Card());
         }
     }

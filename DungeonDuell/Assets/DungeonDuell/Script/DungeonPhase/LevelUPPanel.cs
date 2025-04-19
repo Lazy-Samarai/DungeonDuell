@@ -8,8 +8,7 @@ namespace dungeonduell
 {
     public class LevelUPPanel : MonoBehaviour
     {
-        [Header("UI Elements")]
-        bool menuOpen = false;
+        [Header("UI Elements")] bool menuOpen = false;
         public GameObject LevelUpMenu; // Das Panel für das Level-Up
         public TestHub TestHub;
         private DungeonDuellMultiplayerLevelManager _levelManager;
@@ -18,13 +17,14 @@ namespace dungeonduell
 
         private void Start()
         {
-            _levelManager = FindObjectOfType<DungeonDuellMultiplayerLevelManager>();
+            _levelManager = FindFirstObjectByType<DungeonDuellMultiplayerLevelManager>();
         }
 
         public void UpgradeAttackSpeed()
         {
             OnOptionSelected(LevelUpOptions.AttackSpeed);
         }
+
         public void UpgradeSpeedd()
         {
             OnOptionSelected(LevelUpOptions.Speed);
@@ -47,8 +47,9 @@ namespace dungeonduell
             {
                 if (_levelManager != null)
                 {
-                    _levelManager.ApplyLevelUpPerCoins(option,AmountPerUpgrade,player1 ? 1 : 2);
+                    _levelManager.ApplyLevelUpPerCoins(option, AmountPerUpgrade, player1 ? 1 : 2);
                 }
+
                 TestHub.menuShowing = false;
                 ShowLevelUpMenu(false);
             }

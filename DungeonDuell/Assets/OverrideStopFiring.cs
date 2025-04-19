@@ -9,23 +9,24 @@ namespace dungeonduell
 {
     public class OverrideStopFiring : MonoBehaviour
     {
-       public String playerName;
-       private ProjectileWeapon weapon = null;
-       
-       
-       public void ShowOnShoot(InputAction.CallbackContext context)
-       {
-           print(context);
-       }
+        public String playerName;
+        private ProjectileWeapon weapon = null;
+
+
+        public void ShowOnShoot(InputAction.CallbackContext context)
+        {
+            print(context);
+        }
 
         private void GetWepon()
         {
-            foreach(Character chr in FindObjectsOfType<Character>())
+            foreach (Character chr in FindObjectsByType<Character>(FindObjectsSortMode.None))
             {
                 if (chr.PlayerID == playerName)
                 {
                     print("Assign");
-                    weapon = chr.GetComponent<CharacterHandleWeapon>().WeaponAttachment.GetComponentInChildren<ProjectileWeapon>();
+                    weapon = chr.GetComponent<CharacterHandleWeapon>().WeaponAttachment
+                        .GetComponentInChildren<ProjectileWeapon>();
                 }
             }
         }
@@ -38,6 +39,7 @@ namespace dungeonduell
                 {
                     GetWepon();
                 }
+
                 weapon.WeaponInputStop();
             }
         }

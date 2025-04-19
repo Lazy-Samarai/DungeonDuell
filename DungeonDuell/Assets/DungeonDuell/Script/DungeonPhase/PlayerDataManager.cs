@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 
 namespace dungeonduell
 {
-
     [System.Serializable]
     public class PlayerData
     {
@@ -27,10 +26,11 @@ namespace dungeonduell
         public int MetaHp = 100;
 
         public int MaxMetaHp = 100;
-        
+
         public MaskBase CurrentMask = null;
 
-        public PlayerData(string playerID, int points, int level, int coinsForNextLevel, float walkSpeed, float runSpeed, float health, float attackSpeed, int maxMetaHp,MaskBase currentMask)
+        public PlayerData(string playerID, int points, int level, int coinsForNextLevel, float walkSpeed,
+            float runSpeed, float health, float attackSpeed, int maxMetaHp, MaskBase currentMask)
         {
             PlayerID = playerID;
             Points = points;
@@ -49,7 +49,6 @@ namespace dungeonduell
 
     public class PlayerDataManager : MonoBehaviour, IObserver
     {
-
         public List<PlayerData> PlayerDataList = new List<PlayerData>();
 
         public int roundCounter = 0;
@@ -57,7 +56,7 @@ namespace dungeonduell
 
         void Awake()
         {
-            PlayerDataManager[] objs = FindObjectsOfType<PlayerDataManager>();
+            PlayerDataManager[] objs = FindObjectsByType<PlayerDataManager>(FindObjectsSortMode.None);
 
             if (objs.Length > 1)
             {
@@ -66,6 +65,7 @@ namespace dungeonduell
 
             DontDestroyOnLoad(gameObject);
         }
+
         public void FinalRound()
         {
             nextRoundFinal = true;
@@ -91,17 +91,20 @@ namespace dungeonduell
                     }
                 }
             }
-            DDCodeEventHandler.Trigger_PlayerDataExposed(PlayerDataList,roundCounter);
 
+            DDCodeEventHandler.Trigger_PlayerDataExposed(PlayerDataList, roundCounter);
         }
+
         void OnEnable()
         {
             SubscribeToEvents();
         }
+
         void OnDisable()
         {
             UnsubscribeToAllEvents();
         }
+
         public void SubscribeToEvents()
         {
             DDCodeEventHandler.DungeonConnected += FinalRound;
@@ -113,6 +116,5 @@ namespace dungeonduell
             DDCodeEventHandler.DungeonConnected -= FinalRound;
             SceneManager.sceneLoaded -= OnSceneLoaded;
         }
-
     }
 }

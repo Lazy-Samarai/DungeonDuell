@@ -34,23 +34,23 @@ namespace dungeonduell
             {
                 canvasGroup = optionsPanel.AddComponent<CanvasGroup>();
             }
+
             canvasGroup.alpha = 0;
             optionsPanel.SetActive(false);
 
-            dataManager = FindObjectOfType<OptionDataManager>();
+            dataManager = FindFirstObjectByType<OptionDataManager>();
             SetupResolutionDropdown();
             LoadSettings();
         }
 
         public void OpenOptions()
         {
-
             optionsPanel.SetActive(true);
             optionsPanel.transform.localScale = Vector3.zero;
             canvasGroup.alpha = 0;
             optionsPanel.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack).SetUpdate(true);
             canvasGroup.DOFade(1, fadeDuration).SetUpdate(true).OnComplete(() =>
-            { 
+            {
                 if (optionSelectedButton != null && EventSystem.current != null)
                 {
                     EventSystem.current.SetSelectedGameObject(optionSelectedButton);
@@ -61,24 +61,23 @@ namespace dungeonduell
         public void CloseOptions()
         {
             optionsPanel.transform.DOScale(0f, 0.3f).SetEase(Ease.InBack).SetUpdate(true);
-            canvasGroup.DOFade(0, fadeDuration).SetUpdate(true).OnComplete(() => 
+            canvasGroup.DOFade(0, fadeDuration).SetUpdate(true).OnComplete(() =>
             {
-                    optionsPanel.SetActive(false);
-                    if (EventSystem.current != null)
+                optionsPanel.SetActive(false);
+                if (EventSystem.current != null)
+                {
+                    EventSystem.current.SetSelectedGameObject(null);
+                    if (previousSelected != null)
                     {
-                        EventSystem.current.SetSelectedGameObject(null);
-                        if (previousSelected != null)
-                        {
-                            EventSystem.current.SetSelectedGameObject(previousSelected);
-                        }
+                        EventSystem.current.SetSelectedGameObject(previousSelected);
                     }
+                }
             });
         }
 
 
         public void SetMasterVolume(float volume)
         {
-
             if (dataManager != null)
             {
                 dataManager.SetVolume(volume);
@@ -96,6 +95,7 @@ namespace dungeonduell
                 dataManager.SetMusicVolume(volume);
             }
         }
+
         public void SetSFXVolume(float volume)
         {
             if (dataManager != null)
@@ -120,24 +120,26 @@ namespace dungeonduell
             int currentResolutionIndex = 0;
             for (int i = 0; i < resolutions.Length; i++)
             {
-                resolutionDropdown.options.Add(new TMP_Dropdown.OptionData(resolutions[i].width + "x" + resolutions[i].height));
-                if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
+                resolutionDropdown.options.Add(
+                    new TMP_Dropdown.OptionData(resolutions[i].width + "x" + resolutions[i].height));
+                if (resolutions[i].width == Screen.currentResolution.width &&
+                    resolutions[i].height == Screen.currentResolution.height)
                 {
                     currentResolutionIndex = i;
                     Debug.Log(currentResolutionIndex);
                 }
             }
-            
+
             if (dataManager != null)
             {
                 resolutionDropdown.value = dataManager.ResolutionIndex;
             }
+
             resolutionDropdown.RefreshShownValue();
         }
 
         public void SetFullscreen(bool isFullscreen)
         {
-            
             if (dataManager != null)
             {
                 dataManager.SetFullscreen(isFullscreen);
@@ -146,7 +148,6 @@ namespace dungeonduell
 
         public void SetResolution(int resolutionIndex)
         {
-            
             if (dataManager != null)
             {
                 dataManager.SetResolution(resolutionIndex);
@@ -155,7 +156,6 @@ namespace dungeonduell
 
         void LoadSettings()
         {
-            
             if (dataManager != null)
             {
                 audioSlider.value = dataManager.Volume;

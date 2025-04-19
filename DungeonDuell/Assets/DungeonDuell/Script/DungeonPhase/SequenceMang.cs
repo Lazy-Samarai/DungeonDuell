@@ -9,13 +9,15 @@ namespace dungeonduell
     {
         const float BaseTime = 30;
         const float TimeMorePerRound = 20;
-        
+
         [SerializeField] float timeRound = 150.0f;
-        
+
         [SerializeField] bool timeRunning = false;
         [SerializeField] bool finalRound = false;
         SceneLoading sceneLoading;
+
         [SerializeField] TextMeshProUGUI timerText;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -32,6 +34,7 @@ namespace dungeonduell
                 {
                     BackToCardPhase();
                 }
+
                 int totalSeconds = (int)Mathf.Floor(timeRound);
                 // int minutes = totalSeconds / 60;
                 // int seconds = totalSeconds % 60;
@@ -39,43 +42,44 @@ namespace dungeonduell
 
                 timerText.text = totalSeconds.ToString();
             }
-           
-
-
         }
+
         public void BackToCardPhase()
         {
             sceneLoading.ToTheHex();
         }
+
         public void Reseting()
         {
-            
-            ConnectionsCollector connectionsCollector = FindObjectOfType<ConnectionsCollector>();
-            PlayerDataManager playerMang = FindObjectOfType<PlayerDataManager>();
+            ConnectionsCollector connectionsCollector = FindFirstObjectByType<ConnectionsCollector>();
+            PlayerDataManager playerMang = FindFirstObjectByType<PlayerDataManager>();
             Destroy(playerMang.gameObject);
             Destroy(connectionsCollector.gameObject);
             BackToCardPhase();
         }
+
         public void DisableTimer()
         {
             finalRound = true;
             timeRunning = false;
             timerText.text = "X";
-
         }
 
         private void SetTimer(List<PlayerData> d, int currentRound)
         {
             timeRound = BaseTime + (currentRound * TimeMorePerRound);
         }
+
         void OnEnable()
         {
             SubscribeToEvents();
         }
+
         void OnDisable()
         {
             UnsubscribeToAllEvents();
         }
+
         public void SubscribeToEvents()
         {
             DDCodeEventHandler.FinalRoundInDungeon += DisableTimer;
@@ -87,7 +91,5 @@ namespace dungeonduell
             DDCodeEventHandler.FinalRoundInDungeon -= DisableTimer;
             DDCodeEventHandler.PlayerDataExposed += SetTimer;
         }
-
-
     }
 }

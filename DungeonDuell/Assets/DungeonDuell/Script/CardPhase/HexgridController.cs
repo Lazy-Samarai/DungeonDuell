@@ -12,8 +12,9 @@ namespace dungeonduell
 {
     public class HexgridController : MonoBehaviour
     {
-        [Header("References")]
-        [TagField] [SerializeField] private string TileMapTag;
+        [Header("References")] [TagField] [SerializeField]
+        private string TileMapTag;
+
         public Tilemap tilemap;
         public GameObject cursor;
         public TileClickHandler tileClickHandler;
@@ -21,7 +22,7 @@ namespace dungeonduell
         public DisplayCard currentDisplayCard;
 
         private Vector3Int selectedTilePos;
-        private List<(Vector3Int,bool?)> setAbleTiles = new List<(Vector3Int,bool?)>();
+        private List<(Vector3Int, bool?)> setAbleTiles = new List<(Vector3Int, bool?)>();
         private PlayerInput playerInput;
         private float lastNavigateTime = 0f;
         private float navigateCooldown = 0.15f;
@@ -39,12 +40,11 @@ namespace dungeonduell
         private void Start()
         {
             if (turnManager == null)
-                turnManager = FindObjectOfType<TurnManager>();
+                turnManager = FindFirstObjectByType<TurnManager>();
 
             playerInput = null;
-            tilemap = FindObjectsOfType<Tilemap>().FirstOrDefault(tm => tm.gameObject.tag == TileMapTag); // Becuase there is also the hovermap
-            
-            
+            tilemap = FindObjectsByType<Tilemap>(FindObjectsSortMode.None)
+                .FirstOrDefault(tm => tm.gameObject.tag == TileMapTag); // Becuase there is also the hovermap
         }
 
         public void ActivateNavigation()
@@ -53,7 +53,7 @@ namespace dungeonduell
             foreach (var cellPos in tilemap.cellBounds.allPositionsWithin)
             {
                 if (tileClickHandler.IsSetablePosition(cellPos).Item1)
-                    setAbleTiles.Add((cellPos,tileClickHandler.IsSetablePosition(cellPos).Item2));
+                    setAbleTiles.Add((cellPos, tileClickHandler.IsSetablePosition(cellPos).Item2));
             }
 
             if (setAbleTiles.Count == 0)
@@ -65,7 +65,7 @@ namespace dungeonduell
             Vector3Int? startPos = setAbleTiles.FirstOrDefault(tuple => tuple.Item2 == turnManager.isPlayer1Turn).Item1;
 
             selectedTilePos = startPos ?? setAbleTiles[0].Item1;
-            
+
             if (cursor)
             {
                 cursor.SetActive(true);
@@ -109,7 +109,7 @@ namespace dungeonduell
             Vector2 snappedInput = SnapToHexDirection(input.normalized);
             Vector3Int bestTarget = selectedTilePos;
             float bestScore = -1f;
-            
+
             const float dotThreshold = 0.65f;
             const float distanceThreshold = 0.1f;
 
@@ -117,7 +117,7 @@ namespace dungeonduell
             {
                 if (tile.Item1 == selectedTilePos) continue;
 
-                Vector2 dirToTile = new Vector2(tile.Item1 .x - selectedTilePos.x, tile.Item1.y - selectedTilePos.y);
+                Vector2 dirToTile = new Vector2(tile.Item1.x - selectedTilePos.x, tile.Item1.y - selectedTilePos.y);
                 float distance = dirToTile.magnitude;
                 if (distance < distanceThreshold) continue;
 
@@ -215,7 +215,7 @@ namespace dungeonduell
         {
             string neededPlayerID = turnManager.isPlayer1Turn ? "Player1" : "Player2";
 
-            foreach (var player in FindObjectsOfType<PlayerInput>())
+            foreach (var player in FindObjectsByType<PlayerInput>(FindObjectsSortMode.None))
             {
                 var manager = player.GetComponent<InputSystemManagerEventsBased>();
                 if (manager != null && manager.PlayerID == neededPlayerID)
