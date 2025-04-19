@@ -152,6 +152,54 @@ Transform:
   - {fileID: 1066758488}
   m_Father: {fileID: 1117561725}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &119405584
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 119405585}
+  - component: {fileID: 119405586}
+  m_Layer: 0
+  m_Name: CardPrefabHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &119405585
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119405584}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 517887069}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &119405586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119405584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6af3ca9e002e0dd42b9411c03908fe63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardPrefab:
+  - {fileID: 2857499731240099392, guid: 21606d58a14cb8440b4524597cf1c564, type: 3}
+  - {fileID: 5652465001901149607, guid: 76c4739dfa0f5a244864ec0cc323cd63, type: 3}
+  - {fileID: 8316360044112216478, guid: 08029c2618d4dce40b4416bdeaf3646b, type: 3}
 --- !u!1 &129395052
 GameObject:
   m_ObjectHideFlags: 0
@@ -859,6 +907,7 @@ Transform:
   - {fileID: 1885862863}
   - {fileID: 1148792064}
   - {fileID: 802409283}
+  - {fileID: 119405585}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &545183251
@@ -11968,8 +12017,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerDeck: {fileID: 1494809202}
   handLimit: 3
-  cardPrefab: {fileID: 2857499731240099392, guid: 21606d58a14cb8440b4524597cf1c564,
-    type: 3}
+  cardPrefabHolder: {fileID: 119405586}
   handPanel: {fileID: 2012748596}
   cardHolder: {fileID: 1611718014}
   skipButton: {fileID: 0}
@@ -12166,8 +12214,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerDeck: {fileID: 1010877895}
   handLimit: 3
-  cardPrefab: {fileID: 2857499731240099392, guid: 21606d58a14cb8440b4524597cf1c564,
-    type: 3}
+  cardPrefabHolder: {fileID: 119405586}
   handPanel: {fileID: 2077986322}
   cardHolder: {fileID: 1483647459}
   skipButton: {fileID: 0}
