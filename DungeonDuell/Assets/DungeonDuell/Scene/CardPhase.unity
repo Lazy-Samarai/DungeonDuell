@@ -772,7 +772,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000014781952, y: 285}
+  m_AnchoredPosition: {x: -23, y: 285}
   m_SizeDelta: {x: 364.25, y: 98.7613}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &511666258
@@ -797,8 +797,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Spieler X
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f97413b6961e8a844a852fd545be33f0, type: 2}
+  m_sharedMaterial: {fileID: 6578143679271650886, guid: f97413b6961e8a844a852fd545be33f0,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -860,7 +861,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 2.7540283, y: 0, z: 2.7545166, w: -39.477478}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -12020,7 +12021,6 @@ MonoBehaviour:
   cardPrefabHolder: {fileID: 119405586}
   handPanel: {fileID: 2012748596}
   cardHolder: {fileID: 1611718014}
-  skipButton: {fileID: 0}
   spacing: 200
   maxRotation: 20
   handCards: []
@@ -12065,8 +12065,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Press X
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f97413b6961e8a844a852fd545be33f0, type: 2}
+  m_sharedMaterial: {fileID: 6578143679271650886, guid: f97413b6961e8a844a852fd545be33f0,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -12090,12 +12091,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 100
   m_fontSizeBase: 100
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 100
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -12128,7 +12129,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -4.6273193, w: -0.92326355}
+  m_margin: {x: -787.6719, y: 0, z: -786.791, w: -0.92326355}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -12158,7 +12159,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -322}
+  m_AnchoredPosition: {x: 0, y: -319}
   m_SizeDelta: {x: 344.1305, y: 100.4123}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2077986321
@@ -12217,7 +12218,6 @@ MonoBehaviour:
   cardPrefabHolder: {fileID: 119405586}
   handPanel: {fileID: 2077986322}
   cardHolder: {fileID: 1483647459}
-  skipButton: {fileID: 0}
   spacing: 200
   maxRotation: 20
   handCards: []
