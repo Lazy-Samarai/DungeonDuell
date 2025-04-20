@@ -61,22 +61,10 @@ namespace dungeonduell
         {
             connectCollector = FindFirstObjectByType<ConnectionsCollector>();
             _tilemap = FindObjectsByType<Tilemap>(FindObjectsSortMode.None)
-                .FirstOrDefault(tm => tm.gameObject.tag == tileMapTag); // Becuase there is also the hovermap
+                .FirstOrDefault(tm => tm.gameObject.CompareTag(tileMapTag)); // Becuase there is also the hovermap
             _turnManager = FindFirstObjectByType<TurnManager>();
             _hexgridController = FindFirstObjectByType<HexgridController>();
         }
-
-        private void Update()
-        {
-            if (currentCard != null)
-                if (Input.GetMouseButtonDown(0))
-                {
-                    var mouseWorldPos = cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,
-                        Input.mousePosition.y, -cam.transform.position.z));
-                    SpawnTile(mouseWorldPos, currentCard, true, true, isPlayer1Turn ? 1 : 2);
-                }
-        }
-
 
         private void OnEnable()
         {

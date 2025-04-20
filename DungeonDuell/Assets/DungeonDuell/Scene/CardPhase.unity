@@ -466,31 +466,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d61e7a32d2ee3844dada35717334f7bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerDataList:
-  - PlayerID: Player1
-    Points: 0
-    Level: 1
-    CoinsForNextLevel: 1
-    WalkSpeed: 6
-    RunSpeed: 10
-    MaxHealth: 50
-    AttackSpeed: 1
-    RemainingLive: 2
-    MetaHp: 200
-    MaxMetaHp: 200
-    CurrentMask: {fileID: 0}
-  - PlayerID: Player2
-    Points: 0
-    Level: 1
-    CoinsForNextLevel: 1
-    WalkSpeed: 6
-    RunSpeed: 10
-    MaxHealth: 50
-    AttackSpeed: 1
-    RemainingLive: 2
-    MetaHp: 200
-    MaxMetaHp: 200
-    CurrentMask: {fileID: 0}
+  playerDataList:
+  - playerID: Player1
+    points: 0
+    level: 1
+    coinsForNextLevel: 1
+    walkSpeed: 6
+    runSpeed: 10
+    maxHealth: 50
+    attackSpeed: 1
+    remainingLive: 2
+    metaHp: 200
+    maxMetaHp: 200
+    currentMask: {fileID: 0}
+  - playerID: Player2
+    points: 0
+    level: 1
+    coinsForNextLevel: 1
+    walkSpeed: 6
+    runSpeed: 10
+    maxHealth: 50
+    attackSpeed: 1
+    remainingLive: 2
+    metaHp: 200
+    maxMetaHp: 200
+    currentMask: {fileID: 0}
   roundCounter: 0
   nextRoundFinal: 0
 --- !u!4 &376974905
@@ -674,7 +674,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 1181958480}
-  TileMapTag: MainTileMap
+  tileMapTag: MainTileMap
   currentCard: {fileID: 0}
   currentDoorDir: 010101010101
   displayCardUi: {fileID: 0}
@@ -689,7 +689,8 @@ MonoBehaviour:
   shadowSetAbleTiles:
   - {fileID: 11400000, guid: eba97dcbfa65cce43b6e8898d2506f2d, type: 2}
   - {fileID: 11400000, guid: 61d31bb1dc50f7b488ce49f1e12915e0, type: 2}
-  CardShelled: []
+  cardShelled:
+  - {fileID: 11400000, guid: 27af0542bdc0ff742b14a1d7620896cb, type: 2}
   connectCollector: {fileID: 1945806930}
   isPlayer1Turn: 1
 --- !u!4 &481254718
@@ -719,7 +720,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fd9cdf09f6719445984cc19df434a57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TileMapTag: MainTileMap
+  cam: {fileID: 1181958480}
+  tileMapTag: MainTileMap
   tilemap: {fileID: 1763767974}
   cursor: {fileID: 887889882}
   tileClickHandler: {fileID: 481254717}
@@ -1403,7 +1405,7 @@ MonoBehaviour:
   blockTile: {fileID: 11400000, guid: 1a8eff7b9ea00654cbfc7f73c874a7e2, type: 2}
   tilemap: {fileID: 756542410}
   currentCellPosition: {x: 0, y: 0, z: 0}
-  indiactorDoorPrefab: {fileID: 2437991209678005845, guid: 54575de20ace43943ab151cd4098d20e,
+  indicatorDoorPrefab: {fileID: 2437991209678005845, guid: 54575de20ace43943ab151cd4098d20e,
     type: 3}
   runTimeIndicatorDoor: {fileID: 0}
   cursorTag: Cursor
@@ -1953,10 +1955,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9be47df18adf9449885ab95f026e925, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawnInfo:
+  spawnInfo:
   - {fileID: 11400000, guid: 1cf934f802100af4782165e75dacd883, type: 2}
   - {fileID: 11400000, guid: 01ca3b43f91b5924e85e2894708130ea, type: 2}
-  WorldCard:
+  worldCard:
   - {fileID: 11400000, guid: 27af0542bdc0ff742b14a1d7620896cb, type: 2}
   - {fileID: 0}
 --- !u!1 &1009411790
@@ -2924,7 +2926,7 @@ Transform:
   m_GameObject: {fileID: 1181958478}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.5218134, z: -10.322748}
+  m_LocalPosition: {x: 0, y: 3.5218134, z: -10.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3872,12 +3874,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTurnText: {fileID: 511666260}
   pressAnyKeyText: {fileID: 2034102537}
-  HandPlayer1: {fileID: 2012748599}
-  HandPlayer2: {fileID: 2077986323}
+  handPlayer1: {fileID: 2012748599}
+  handPlayer2: {fileID: 2077986323}
   player1UI: {fileID: 1541103091}
   player2UI: {fileID: 1512983241}
   isPlayer1Turn: 1
-  _playerInputs:
+  playerInputs:
   - {fileID: 1961649892}
   - {fileID: 1130448083}
 --- !u!4 &1557636385

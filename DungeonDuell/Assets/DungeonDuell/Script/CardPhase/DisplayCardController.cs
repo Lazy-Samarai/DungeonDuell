@@ -37,10 +37,14 @@ namespace dungeonduell
 
         private void OnSubmitPressed(InputAction.CallbackContext context)
         {
-            if (EventSystem.current.currentSelectedGameObject == gameObject && IsActivePlayer())
+            if (context.control
+                    .device is not Mouse) // Otherwise the focused element is selected instead the one clicked by Mouse
             {
-                _displayCard.OnPointerClick(null);
-                DdCodeEventHandler.Trigger_CardSelected(_displayCard);
+                if (EventSystem.current.currentSelectedGameObject == gameObject && IsActivePlayer())
+                {
+                    _displayCard.OnPointerClick(null);
+                    DdCodeEventHandler.Trigger_CardSelected(_displayCard);
+                }
             }
         }
 
