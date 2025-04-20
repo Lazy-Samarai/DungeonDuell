@@ -41,15 +41,15 @@ namespace dungeonduell
 
         public void SubscribeToEvents()
         {
-            DDCodeEventHandler.CardPlayed += UpdateCardDeck;
-            DDCodeEventHandler.CardToBeShelled +=
+            DdCodeEventHandler.CardPlayed += UpdateCardDeck;
+            DdCodeEventHandler.CardToBeShelled +=
                 UpdateCardDeck; // When shell card played is modified (and .remove(card) will do nothing) so extra call before that happens
         }
 
         public void UnsubscribeToAllEvents()
         {
-            DDCodeEventHandler.CardPlayed -= UpdateCardDeck;
-            DDCodeEventHandler.CardToBeShelled -= UpdateCardDeck;
+            DdCodeEventHandler.CardPlayed -= UpdateCardDeck;
+            DdCodeEventHandler.CardToBeShelled -= UpdateCardDeck;
         }
 
         private void DrawInitialCards()
@@ -123,7 +123,7 @@ namespace dungeonduell
                 if (!handCards.Contains(clickedCard.card)) handCards.Add(clickedCard.card);
 
                 clickedCard.transform.SetParent(handPanel, false);
-                DDCodeEventHandler.Trigger_CardSelected(null);
+                DdCodeEventHandler.Trigger_CardSelected(null);
 
                 var hexgridController = FindFirstObjectByType<HexgridController>();
                 if (hexgridController != null) hexgridController.ResetNavigation();
@@ -166,7 +166,7 @@ namespace dungeonduell
                 DeactivateHandCards();
                 EventSystem.current.SetSelectedGameObject(null);
 
-                DDCodeEventHandler.Trigger_CardSelected(clickedCard);
+                DdCodeEventHandler.Trigger_CardSelected(clickedCard);
 
                 var hexgridController = FindFirstObjectByType<HexgridController>();
                 if (hexgridController != null)
@@ -290,7 +290,7 @@ namespace dungeonduell
             if (player1Played == isPlayer1)
             {
                 handCards.Remove(card);
-                if (handCards.Count == 0) DDCodeEventHandler.Trigger_PlayedAllCards(isPlayer1);
+                if (handCards.Count == 0) DdCodeEventHandler.Trigger_PlayedAllCards(isPlayer1);
             }
         }
 

@@ -2,13 +2,13 @@ using System.Collections.Generic;
 
 public class RoomInfo
 {
-    public List<ConnectionDir> allowedDoors;
+    public List<ConnectionDir> AllowedDoors;
 
-    public RoomElement roommElement = RoomElement.Standard;
+    public RoomElement RoommElement = RoomElement.Standard;
 
-    public int roomOwner; // 0 - no One - else Player x
+    public int RoomOwner; // 0 - no One - else Player x
 
-    public RoomType roomtype = RoomType.Generic;
+    public RoomType Roomtype = RoomType.Generic;
 
     public RoomInfo(int id, List<RoomConnection> newConncection)
     {
@@ -21,9 +21,9 @@ public class RoomInfo
     {
         RoomID = id;
         Conncection = newConncection;
-        roomtype = newRoomtype;
-        roommElement = newRoomElement;
-        allowedDoors = newAllowedDoors;
+        Roomtype = newRoomtype;
+        RoommElement = newRoomElement;
+        AllowedDoors = newAllowedDoors;
     }
 
     public RoomInfo(int id, List<RoomConnection> newConncection, RoomType newRoomtype, RoomElement newRoomElement,
@@ -31,10 +31,10 @@ public class RoomInfo
     {
         RoomID = id;
         Conncection = newConncection;
-        roomtype = newRoomtype;
-        roommElement = newRoomElement;
-        allowedDoors = newAllowedDoors;
-        roomOwner = owner;
+        Roomtype = newRoomtype;
+        RoommElement = newRoomElement;
+        AllowedDoors = newAllowedDoors;
+        RoomOwner = owner;
         FirstTimeSpawn = newfirstTimeSpawn;
     }
 
@@ -45,13 +45,13 @@ public class RoomInfo
 
 public class RoomConnection
 {
-    public ConnectionDir connectionDir;
-    public int targetRoomId;
+    public ConnectionDir ConnectionDir;
+    public int TargetRoomId;
 
     public RoomConnection(int id, ConnectionDir dir)
     {
-        targetRoomId = id;
-        connectionDir = dir;
+        TargetRoomId = id;
+        ConnectionDir = dir;
     }
 }
 
@@ -82,8 +82,8 @@ public enum RoomType
     PreSetLoot,
     NormalLott,
     Enemy,
-    Spawn_Player1,
-    Spawn_Player2,
+    SpawnPlayer1,
+    SpawnPlayer2,
     Trap
 }
 

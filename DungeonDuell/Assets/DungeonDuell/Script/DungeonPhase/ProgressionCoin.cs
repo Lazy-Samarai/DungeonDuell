@@ -1,5 +1,6 @@
 ﻿using MoreMountains.TopDownEngine;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace dungeonduell
 {
@@ -10,8 +11,8 @@ namespace dungeonduell
     public class ProgressionCoin : PickableItem
     {
         /// The amount of points to add when collected
-        [Tooltip("The amount of points to add when collected")]
-        public int PointsToAdd = 1;
+        [FormerlySerializedAs("PointsToAdd")] [Tooltip("The amount of points to add when collected")]
+        public int pointsToAdd = 1;
 
 
         /// <summary>
@@ -24,7 +25,7 @@ namespace dungeonduell
 
             var character = picker.GetComponent<Character>();
             if (character != null)
-                CoinEvent.Trigger(PointsToAdd, picker);
+                CoinEvent.Trigger(pointsToAdd, picker);
             else
                 Debug.LogError("Character konnte nicht gefunden werden.");
         }

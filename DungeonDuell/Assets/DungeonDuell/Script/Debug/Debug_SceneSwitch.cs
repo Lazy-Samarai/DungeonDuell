@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 namespace dungeonduell
 {
-    public class Debug_SceneSwitch : MonoBehaviour
+    public class DebugSceneSwitch : MonoBehaviour
     {
         [SerializeField] private KeyCode switchSceneKey = KeyCode.Insert;
 

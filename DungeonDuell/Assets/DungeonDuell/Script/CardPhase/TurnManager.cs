@@ -5,6 +5,7 @@ using MoreMountains.TopDownEngine;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace dungeonduell
 {
@@ -13,29 +14,30 @@ namespace dungeonduell
         private const int SecondsToStart = 3;
         public TextMeshProUGUI playerTurnText;
         public TextMeshProUGUI pressAnyKeyText;
-        public CardToHand HandPlayer1;
-        public CardToHand HandPlayer2;
+        [FormerlySerializedAs("HandPlayer1")] public CardToHand handPlayer1;
+        [FormerlySerializedAs("HandPlayer2")] public CardToHand handPlayer2;
 
         public GameObject player1UI;
         public GameObject player2UI;
         public bool isPlayer1Turn = true;
 
-        public PlayerInput[] _playerInputs;
+        [FormerlySerializedAs("_playerInputs")]
+        public PlayerInput[] playerInputs;
 
         private readonly bool[] _playerPlayedAllCards = { false, false };
 
-        private bool awaitingKeyPress;
-        private float timeStart;
+        private bool _awaitingKeyPress;
+        private float _timeStart;
 
         private void Start()
         {
-            timeStart = Time.time;
+            _timeStart = Time.time;
             InitializeTurn();
         }
 
         private void Update()
         {
-            if (awaitingKeyPress && Time.time - timeStart > 0.5f &&
+            if (_awaitingKeyPress && Time.time - _timeStart > 0.5f &&
                 GetActivePlayerInput().actions["Submit"].WasPressedThisFrame())
                 BeginPlayerActionPhase();
         }
@@ -52,30 +54,30 @@ namespace dungeonduell
 
         public void SubscribeToEvents()
         {
-            DDCodeEventHandler.NextPlayerTurn += EndPlayerTurn;
-            DDCodeEventHandler.PlayedAllCards += SetPlayerCardsPlayed;
+            DdCodeEventHandler.NextPlayerTurn += EndPlayerTurn;
+            DdCodeEventHandler.PlayedAllCards += SetPlayerCardsPlayed;
         }
 
         public void UnsubscribeToAllEvents()
         {
-            DDCodeEventHandler.NextPlayerTurn -= EndPlayerTurn;
-            DDCodeEventHandler.PlayedAllCards -= SetPlayerCardsPlayed;
+            DdCodeEventHandler.NextPlayerTurn -= EndPlayerTurn;
+            DdCodeEventHandler.PlayedAllCards -= SetPlayerCardsPlayed;
         }
 
         private void InitializeTurn()
         {
-            awaitingKeyPress = true;
+            _awaitingKeyPress = true;
             playerTurnText.text = "Next Turn: " + (isPlayer1Turn ? "Player 1" : "Player 2");
 
             if (isPlayer1Turn)
             {
-                InputSystem.DisableDevice(_playerInputs[1].user.pairedDevices[0]);
-                InputSystem.EnableDevice(_playerInputs[0].user.pairedDevices[0]);
+                InputSystem.DisableDevice(playerInputs[1].user.pairedDevices[0]);
+                InputSystem.EnableDevice(playerInputs[0].user.pairedDevices[0]);
             }
             else
             {
-                InputSystem.DisableDevice(_playerInputs[0].user.pairedDevices[0]);
-                InputSystem.EnableDevice(_playerInputs[1].user.pairedDevices[0]);
+                InputSystem.DisableDevice(playerInputs[0].user.pairedDevices[0]);
+                InputSystem.EnableDevice(playerInputs[1].user.pairedDevices[0]);
             }
 
             playerTurnText.gameObject.SetActive(true);
@@ -85,9 +87,9 @@ namespace dungeonduell
 
         private void BeginPlayerActionPhase()
         {
-            if (!awaitingKeyPress) return;
+            if (!_awaitingKeyPress) return;
 
-            awaitingKeyPress = false;
+            _awaitingKeyPress = false;
             UpdatePlayerTurnText();
             pressAnyKeyText.gameObject.SetActive(false);
             ToggleHandVisibility(isPlayer1Turn, !isPlayer1Turn);
@@ -99,8 +101,8 @@ namespace dungeonduell
         private IEnumerator DelayedFirstSelectable()
         {
             yield return null;
-            if (isPlayer1Turn) HandPlayer1.FirstSelectable();
-            else HandPlayer2.FirstSelectable();
+            if (isPlayer1Turn) handPlayer1.FirstSelectable();
+            else handPlayer2.FirstSelectable();
         }
 
         private void UpdatePlayerTurnText()
@@ -123,8 +125,8 @@ namespace dungeonduell
         // Neue Methode zum Umschalten der Handkartenanzeige
         private void ToggleHandVisibility(bool showForPlayer1, bool showForPlayer2)
         {
-            HandPlayer1.ShowHideDeck(!showForPlayer1);
-            HandPlayer2.ShowHideDeck(!showForPlayer2);
+            handPlayer1.ShowHideDeck(!showForPlayer1);
+            handPlayer2.ShowHideDeck(!showForPlayer2);
 
             SlidePlayerSprite(player1UI, showForPlayer1);
             SlidePlayerSprite(player2UI, showForPlayer2);
@@ -133,8 +135,8 @@ namespace dungeonduell
 
         public void InnitGameCountDown()
         {
-            InputSystem.EnableDevice(_playerInputs[0].user.pairedDevices[0]);
-            InputSystem.EnableDevice(_playerInputs[1].user.pairedDevices[0]);
+            InputSystem.EnableDevice(playerInputs[0].user.pairedDevices[0]);
+            InputSystem.EnableDevice(playerInputs[1].user.pairedDevices[0]);
             StartCoroutine(StartCountDown());
         }
 

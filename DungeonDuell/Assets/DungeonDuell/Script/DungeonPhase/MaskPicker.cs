@@ -2,17 +2,19 @@ using MoreMountains.Feedbacks;
 using MoreMountains.InventoryEngine;
 using MoreMountains.TopDownEngine;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace dungeonduell
 {
     public class MaskPicker : ItemPicker
     {
-        public MMFeedbacks PickedMMFeedbacks;
+        [FormerlySerializedAs("PickedMMFeedbacks")]
+        public MMFeedbacks pickedMmFeedbacks;
 
         protected override void Start()
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, 0);
-            PickedMMFeedbacks?.Initialization(gameObject);
+            pickedMmFeedbacks?.Initialization(gameObject);
         }
 
         public override void OnTriggerEnter2D(Collider2D collider)
@@ -42,7 +44,7 @@ namespace dungeonduell
             _targetInventory.AddItem(Item, 1);
 
             Item.Pick(playerID);
-            PickedMMFeedbacks?.PlayFeedbacks();
+            pickedMmFeedbacks?.PlayFeedbacks();
         }
     }
 }

@@ -15,12 +15,12 @@ namespace dungeonduell
         [SerializeField] private bool finalRound;
 
         [SerializeField] private TextMeshProUGUI timerText;
-        private SceneLoading sceneLoading;
+        private SceneLoading _sceneLoading;
 
         // Start is called before the first frame update
         private void Start()
         {
-            sceneLoading = GetComponentInChildren<SceneLoading>();
+            _sceneLoading = GetComponentInChildren<SceneLoading>();
         }
 
         // Update is called once per frame
@@ -52,19 +52,19 @@ namespace dungeonduell
 
         public void SubscribeToEvents()
         {
-            DDCodeEventHandler.FinalRoundInDungeon += DisableTimer;
-            DDCodeEventHandler.PlayerDataExposed += SetTimer;
+            DdCodeEventHandler.FinalRoundInDungeon += DisableTimer;
+            DdCodeEventHandler.PlayerDataExposed += SetTimer;
         }
 
         public void UnsubscribeToAllEvents()
         {
-            DDCodeEventHandler.FinalRoundInDungeon -= DisableTimer;
-            DDCodeEventHandler.PlayerDataExposed += SetTimer;
+            DdCodeEventHandler.FinalRoundInDungeon -= DisableTimer;
+            DdCodeEventHandler.PlayerDataExposed += SetTimer;
         }
 
         public void BackToCardPhase()
         {
-            sceneLoading.ToTheHex();
+            _sceneLoading.ToTheHex();
         }
 
         public void Reseting()

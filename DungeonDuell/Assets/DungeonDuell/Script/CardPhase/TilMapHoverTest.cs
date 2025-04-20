@@ -6,7 +6,7 @@ namespace dungeonduell
 {
     public class TilMapHoverTest : MonoBehaviour, IObserver
     {
-        private const string visualAniNameRef = "Visible";
+        private const string VisualAniNameRef = "Visible";
         public Camera cam;
         public TileBase hoverTile;
 
@@ -22,22 +22,22 @@ namespace dungeonduell
         [TagField] [SerializeField] private string cursorTag; // To Not Lose Refrence to Curi
         public GameObject controllerCursor;
 
-        private Animator animator;
+        private Animator _animator;
 
-        private bool Currentlyvisble;
+        private bool _currentlyvisble;
 
         private void Awake()
         {
             runTimeIndicatorDoor = Instantiate(indiactorDoorPrefab, transform.position, Quaternion.identity);
             runTimeIndicatorDoor.transform.parent = transform;
             runTimeIndicatorDoor.transform.gameObject.SetActive(false);
-            animator = GetComponent<Animator>();
+            _animator = GetComponent<Animator>();
             tilemap = GetComponent<Tilemap>();
         }
 
         private void Update()
         {
-            if (Currentlyvisble)
+            if (_currentlyvisble)
             {
                 var mouseWorldPos = cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y,
                     -cam.transform.position.z));
@@ -61,18 +61,18 @@ namespace dungeonduell
 
         public void SubscribeToEvents()
         {
-            DDCodeEventHandler.CardPlayed += OnCardPlayed;
-            DDCodeEventHandler.PreSetCardSetOnTilemap += OnPreSetCardSetOnTilemap;
-            DDCodeEventHandler.CardSelected += OnCardSelected;
-            DDCodeEventHandler.CardRotating += UpdateIndicator;
+            DdCodeEventHandler.CardPlayed += OnCardPlayed;
+            DdCodeEventHandler.PreSetCardSetOnTilemap += OnPreSetCardSetOnTilemap;
+            DdCodeEventHandler.CardSelected += OnCardSelected;
+            DdCodeEventHandler.CardRotating += UpdateIndicator;
         }
 
         public void UnsubscribeToAllEvents()
         {
-            DDCodeEventHandler.CardPlayed -= OnCardPlayed;
-            DDCodeEventHandler.PreSetCardSetOnTilemap -= OnPreSetCardSetOnTilemap;
-            DDCodeEventHandler.CardSelected -= OnCardSelected;
-            DDCodeEventHandler.CardRotating -= UpdateIndicator;
+            DdCodeEventHandler.CardPlayed -= OnCardPlayed;
+            DdCodeEventHandler.PreSetCardSetOnTilemap -= OnPreSetCardSetOnTilemap;
+            DdCodeEventHandler.CardSelected -= OnCardSelected;
+            DdCodeEventHandler.CardRotating -= UpdateIndicator;
         }
 
         private void HandleHover(Vector3 mouseWorldPos)
@@ -87,7 +87,7 @@ namespace dungeonduell
                     ResetTileCheck();
                     tilemap.SetTile(cellPosition, hoverTile);
                     runTimeIndicatorDoor.transform.position = tilemap.CellToWorld(cellPosition);
-                    runTimeIndicatorDoor.transform.gameObject.SetActive(Currentlyvisble ? true : false);
+                    runTimeIndicatorDoor.transform.gameObject.SetActive(_currentlyvisble ? true : false);
                 }
                 else
                 {
@@ -107,8 +107,8 @@ namespace dungeonduell
         public void SetHoverMapVisable(bool visual)
         {
             runTimeIndicatorDoor.transform.gameObject.SetActive(visual);
-            animator.SetBool(visualAniNameRef, visual);
-            Currentlyvisble = visual;
+            _animator.SetBool(VisualAniNameRef, visual);
+            _currentlyvisble = visual;
         }
 
         public void OnCardPlayed(Card card, bool p)
@@ -121,7 +121,7 @@ namespace dungeonduell
         {
             if (displayCard != null)
             {
-                hoverTile = displayCard.card.Tile;
+                hoverTile = displayCard.card.tile;
                 SetHoverMapVisable(true);
 
                 UpdateIndicator(displayCard.card.GetAllowedDirection());

@@ -12,18 +12,18 @@ namespace dungeonduell
         public float slideDuration = 0.5f;
         public TextMeshProUGUI legendButton;
 
-        private Vector2 hiddenPosition;
-        private bool isVisible;
-        private Vector2 visiblePosition;
+        private Vector2 _hiddenPosition;
+        private bool _isVisible;
+        private Vector2 _visiblePosition;
 
         private void Start()
         {
             // Positionen setzen
-            hiddenPosition = new Vector2(-legendPanel.rect.width, legendPanel.anchoredPosition.y);
-            visiblePosition = new Vector2(164, legendPanel.anchoredPosition.y);
+            _hiddenPosition = new Vector2(-legendPanel.rect.width, legendPanel.anchoredPosition.y);
+            _visiblePosition = new Vector2(164, legendPanel.anchoredPosition.y);
 
             // Startposition au�erhalb des Bildschirms
-            legendPanel.anchoredPosition = hiddenPosition;
+            legendPanel.anchoredPosition = _hiddenPosition;
 
             // Eventlistener f�r das Input System registrieren
             //toggleLegendAction.action.performed += ctx => ToggleLegend();
@@ -37,9 +37,10 @@ namespace dungeonduell
 
         public void ToggleLegend()
         {
-            isVisible = !isVisible;
-            legendButton.text = (isVisible ? "<-" : "->") + " Legend";
-            legendPanel.DOAnchorPos(isVisible ? visiblePosition : hiddenPosition, slideDuration).SetEase(Ease.OutCubic);
+            _isVisible = !_isVisible;
+            legendButton.text = (_isVisible ? "<-" : "->") + " Legend";
+            legendPanel.DOAnchorPos(_isVisible ? _visiblePosition : _hiddenPosition, slideDuration)
+                .SetEase(Ease.OutCubic);
         }
     }
 }

@@ -2,54 +2,55 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.InputSystem.UI;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace dungeonduell
 {
     public class TestControllMouseOver : MonoBehaviour
     {
-        public const float speed = 5000f;
+        public const float Speed = 5000f;
         public PlayerInput playerInput; // Reference to PlayerInput component
         public RectTransform cursorVisual; // The visual representation of the cursor
         public Canvas canvas; // Reference to the UI canvas
 
-        public bool ON;
+        [FormerlySerializedAs("ON")] public bool on;
 
         public Image image;
 
-        private Vector2 cursorPosition;
-        private VirtualMouseInput virtualMouse;
+        private Vector2 _cursorPosition;
+        private VirtualMouseInput _virtualMouse;
 
         // Start is called before the first frame update
         private void Start()
         {
-            virtualMouse = GetComponent<VirtualMouseInput>();
-            cursorPosition = GetComponent<RectTransform>().position;
+            _virtualMouse = GetComponent<VirtualMouseInput>();
+            _cursorPosition = GetComponent<RectTransform>().position;
             // InputState.Change(GetComponent<VirtualMouseInput>().virtualMouse, new Vector3());         
         }
 
         public void OverridingMousePostion(InputAction.CallbackContext context)
         {
-            cursorPosition = GetComponent<VirtualMouseInput>().virtualMouse.position.ReadValue();
+            _cursorPosition = GetComponent<VirtualMouseInput>().virtualMouse.position.ReadValue();
         }
 
         public void OnCursorMove(InputAction.CallbackContext context)
         {
-            if (ON)
+            if (on)
             {
                 var input = context.ReadValue<Vector2>();
-                cursorPosition += input * Time.deltaTime * speed;
+                _cursorPosition += input * Time.deltaTime * Speed;
 
-                if (cursorVisual != null) cursorVisual.anchoredPosition = cursorPosition;
+                if (cursorVisual != null) cursorVisual.anchoredPosition = _cursorPosition;
 
                 // Update the virtual mouse position
-                InputState.Change(virtualMouse.virtualMouse.position, cursorPosition);
+                InputState.Change(_virtualMouse.virtualMouse.position, _cursorPosition);
             }
         }
 
         public void Set(bool on)
         {
-            ON = on;
+            this.on = on;
             image.enabled = on;
         }
     }

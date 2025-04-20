@@ -21,18 +21,18 @@ namespace dungeonduell
 
         public void SubscribeToEvents()
         {
-            DDCodeEventHandler.CardPlayed += AddCardToDiscardPile;
+            DdCodeEventHandler.CardPlayed += AddCardToDiscardPile;
         }
 
         public void UnsubscribeToAllEvents()
         {
-            DDCodeEventHandler.CardPlayed -= AddCardToDiscardPile;
+            DdCodeEventHandler.CardPlayed -= AddCardToDiscardPile;
         }
 
         // Methode zum Hinzuf�gen einer Karte zum Abwurfstapel
-        public void AddCardToDiscardPile(Card card, bool Player1played)
+        public void AddCardToDiscardPile(Card card, bool player1Played)
         {
-            if (Player1played == belongPlayer1) discardPile.Add(card);
+            if (player1Played == belongPlayer1) discardPile.Add(card);
         }
     }
 }

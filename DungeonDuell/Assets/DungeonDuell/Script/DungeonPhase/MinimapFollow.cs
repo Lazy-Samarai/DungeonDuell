@@ -4,7 +4,7 @@ using UnityEngine;
 public class MinimapFollow : MonoBehaviour
 {
     [SerializeField] private bool isPlayer1; // True = Kamera f�r Player1, False = Kamera f�r Player2
-    private Transform player;
+    private Transform _player;
 
     private void Start()
     {
@@ -16,18 +16,18 @@ public class MinimapFollow : MonoBehaviour
                 // Pr�ft das PlayerID-Feld, um den richtigen Spieler zu finden
                 if ((isPlayer1 && character.PlayerID == "Player1") || (!isPlayer1 && character.PlayerID == "Player2"))
                 {
-                    player = character.transform;
+                    _player = character.transform;
                     break;
                 }
 
-        if (player == null) Debug.LogError($"Kein Spieler gefunden f�r Minimap-Kamera (isPlayer1: {isPlayer1})");
+        if (_player == null) Debug.LogError($"Kein Spieler gefunden f�r Minimap-Kamera (isPlayer1: {isPlayer1})");
     }
 
     private void LateUpdate()
     {
-        if (player != null)
+        if (_player != null)
         {
-            var newPosition = player.position;
+            var newPosition = _player.position;
             newPosition.z = transform.position.z; // H�he beibehalten
             transform.position = newPosition;
         }

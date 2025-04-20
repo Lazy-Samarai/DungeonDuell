@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using MoreMountains.Tools;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace dungeonduell
 {
@@ -10,12 +11,14 @@ namespace dungeonduell
 
         [SerializeField] private bool showIfHealthReduction; // for in Dungeon Phase 
 
-        [SerializeField] private Transform NotUsedHealthBar;
-        private MMProgressBar mMProgressBar;
+        [FormerlySerializedAs("NotUsedHealthBar")] [SerializeField]
+        private Transform notUsedHealthBar;
+
+        private MMProgressBar _mMProgressBar;
 
         private void OnEnable()
         {
-            mMProgressBar = GetComponent<MMProgressBar>();
+            _mMProgressBar = GetComponent<MMProgressBar>();
             SubscribeToEvents();
         }
 
@@ -26,32 +29,32 @@ namespace dungeonduell
 
         public void SubscribeToEvents()
         {
-            DDCodeEventHandler.PlayerDataExposed += UpdateMetaHealthBar;
-            DDCodeEventHandler.DungeonConnected += DeactivateNotUsedHealth;
+            DdCodeEventHandler.PlayerDataExposed += UpdateMetaHealthBar;
+            DdCodeEventHandler.DungeonConnected += DeactivateNotUsedHealth;
         }
 
         public void UnsubscribeToAllEvents()
         {
-            DDCodeEventHandler.PlayerDataExposed -= UpdateMetaHealthBar;
-            DDCodeEventHandler.DungeonConnected -= DeactivateNotUsedHealth;
+            DdCodeEventHandler.PlayerDataExposed -= UpdateMetaHealthBar;
+            DdCodeEventHandler.DungeonConnected -= DeactivateNotUsedHealth;
         }
 
         private void UpdateMetaHealthBar(List<PlayerData> playerDatas, int round)
         {
             var playerData = playerDatas[player1 ? 0 : 1];
 
-            mMProgressBar.SetBar(showIfHealthReduction ? playerData.MetaHp - playerData.MaxHealth : playerData.MetaHp,
-                0, playerData.MaxMetaHp);
+            _mMProgressBar.SetBar(showIfHealthReduction ? playerData.metaHp - playerData.maxHealth : playerData.metaHp,
+                0, playerData.maxMetaHp);
 
-            if (NotUsedHealthBar != null)
-                NotUsedHealthBar.localScale = new Vector3(
-                    (playerData.MetaHp - playerData.MaxHealth) / playerData.MaxMetaHp,
-                    NotUsedHealthBar.localScale.y, NotUsedHealthBar.localScale.z);
+            if (notUsedHealthBar != null)
+                notUsedHealthBar.localScale = new Vector3(
+                    (playerData.metaHp - playerData.maxHealth) / playerData.maxMetaHp,
+                    notUsedHealthBar.localScale.y, notUsedHealthBar.localScale.z);
         }
 
         public void DeactivateNotUsedHealth()
         {
-            NotUsedHealthBar.gameObject.SetActive(false);
+            notUsedHealthBar.gameObject.SetActive(false);
         }
     }
 }

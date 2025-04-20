@@ -14,14 +14,14 @@ namespace dungeonduell
         protected override bool Apply(string playerID)
         {
             Debug.Log("Apply");
-            DDCodeEventHandler.Trigger_PlayerUpgrade(levelUpOptions, playerID, upgradeAmount);
+            DdCodeEventHandler.Trigger_PlayerUpgrade(levelUpOptions, playerID, upgradeAmount);
             return true;
         }
 
         protected override bool Discharge(string playerID)
         {
             Debug.Log("Discharging");
-            DDCodeEventHandler.Trigger_PlayerUpgrade(levelUpOptions, playerID, upgradeAmount * -1);
+            DdCodeEventHandler.Trigger_PlayerUpgrade(levelUpOptions, playerID, upgradeAmount * -1);
             return base.Discharge(playerID);
         }
     }

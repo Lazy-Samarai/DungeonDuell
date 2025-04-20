@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
 namespace dungeonduell
@@ -14,15 +15,15 @@ namespace dungeonduell
 
         public RoomType roomtype = RoomType.Generic;
         public RoomElement roomElement = RoomElement.Standard;
-        public TileBase Tile;
+        [FormerlySerializedAs("Tile")] public TileBase tile;
         public DirBarSet startDoorConcellation;
 
         public bool[] GetAllowedDirection()
         {
             return new[]
             {
-                startDoorConcellation.TopLeft, startDoorConcellation.TopRight, startDoorConcellation.Left,
-                startDoorConcellation.Right, startDoorConcellation.BottonLeft, startDoorConcellation.BottonRight
+                startDoorConcellation.topLeft, startDoorConcellation.topRight, startDoorConcellation.left,
+                startDoorConcellation.right, startDoorConcellation.bottonLeft, startDoorConcellation.bottonRight
             };
         }
 
@@ -37,7 +38,7 @@ namespace dungeonduell
                    cardDescription == card.cardDescription &&
                    roomtype == card.roomtype &&
                    roomElement == card.roomElement &&
-                   EqualityComparer<TileBase>.Default.Equals(Tile, card.Tile) &&
+                   EqualityComparer<TileBase>.Default.Equals(tile, card.tile) &&
                    EqualityComparer<DirBarSet>.Default.Equals(startDoorConcellation, card.startDoorConcellation);
         }
 
@@ -52,7 +53,7 @@ namespace dungeonduell
             hash.Add(cardDescription);
             hash.Add(roomtype);
             hash.Add(roomElement);
-            hash.Add(Tile);
+            hash.Add(tile);
             hash.Add(startDoorConcellation);
             return hash.ToHashCode();
         }
@@ -65,12 +66,12 @@ namespace dungeonduell
         [Serializable]
         public struct DirBarSet
         {
-            public bool TopLeft;
-            public bool TopRight;
-            public bool Left;
-            public bool Right;
-            public bool BottonLeft;
-            public bool BottonRight;
+            [FormerlySerializedAs("TopLeft")] public bool topLeft;
+            [FormerlySerializedAs("TopRight")] public bool topRight;
+            [FormerlySerializedAs("Left")] public bool left;
+            [FormerlySerializedAs("Right")] public bool right;
+            [FormerlySerializedAs("BottonLeft")] public bool bottonLeft;
+            [FormerlySerializedAs("BottonRight")] public bool bottonRight;
         } // Going Around
     }
 }

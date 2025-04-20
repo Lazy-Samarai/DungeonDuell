@@ -6,11 +6,11 @@ namespace dungeonduell
     public class LockDown : MonoBehaviour
     {
         [SerializeField] private List<GameObject> availableBarrier;
-        private bool SystemActive = true;
+        private bool _systemActive = true;
 
         public void LockingDown(bool down)
         {
-            if (SystemActive)
+            if (_systemActive)
                 foreach (var g in availableBarrier)
                     if (g != null)
                         g.SetActive(down);
@@ -18,7 +18,7 @@ namespace dungeonduell
 
         public void SetLockDownSystem(bool active)
         {
-            SystemActive = active;
+            _systemActive = active;
         }
     }
 }

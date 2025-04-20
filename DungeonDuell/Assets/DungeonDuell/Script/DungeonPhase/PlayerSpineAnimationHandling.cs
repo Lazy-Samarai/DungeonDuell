@@ -22,7 +22,10 @@ namespace dungeonduell
 
         public bool facingEastRunning;
         public bool runningEast;
-        [FormerlySerializedAs("_rigidbody2D")] public CharacterMovement _characterMovement;
+
+        [FormerlySerializedAs("_characterMovement")] [FormerlySerializedAs("_rigidbody2D")]
+        public CharacterMovement characterMovement;
+
         private Bone _ikTargetBone;
         private SkeletonAnimation _skeletonAnimation;
 
@@ -30,7 +33,7 @@ namespace dungeonduell
         // Start is called before the first frame update
         private void Awake()
         {
-            _characterMovement = GetComponentInParent<CharacterMovement>();
+            characterMovement = GetComponentInParent<CharacterMovement>();
             //   _characterOrientation2D  = GetComponentInParent<CharacterOrientation2D>();
             _skeletonAnimation = GetComponent<SkeletonAnimation>();
             _ikTargetBone = _skeletonAnimation.Skeleton.FindBone(TargetBoneName);
@@ -60,9 +63,9 @@ namespace dungeonduell
                 UpdateFacing();
             }
 
-            if (_characterMovement.GetMovement().x >= 0 != runningEast)
+            if (characterMovement.GetMovement().x >= 0 != runningEast)
             {
-                runningEast = _characterMovement.GetMovement().x >= 0;
+                runningEast = characterMovement.GetMovement().x >= 0;
                 UpdateFacing();
             }
         }

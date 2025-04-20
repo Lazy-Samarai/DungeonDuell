@@ -2,51 +2,56 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 namespace dungeonduell
 {
     [Serializable]
     public class PlayerData
     {
-        public string PlayerID;
-        public int Points;
-        public int Level;
-        public int CoinsForNextLevel;
+        [FormerlySerializedAs("PlayerID")] public string playerID;
+        [FormerlySerializedAs("Points")] public int points;
+        [FormerlySerializedAs("Level")] public int level;
 
-        public float WalkSpeed;
-        public float RunSpeed;
-        public float MaxHealth;
-        public float AttackSpeed;
+        [FormerlySerializedAs("CoinsForNextLevel")]
+        public int coinsForNextLevel;
 
-        public int RemainingLive = 2;
+        [FormerlySerializedAs("WalkSpeed")] public float walkSpeed;
+        [FormerlySerializedAs("RunSpeed")] public float runSpeed;
+        [FormerlySerializedAs("MaxHealth")] public float maxHealth;
+        [FormerlySerializedAs("AttackSpeed")] public float attackSpeed;
 
-        public int MetaHp = 100;
+        [FormerlySerializedAs("RemainingLive")]
+        public int remainingLive = 2;
 
-        public int MaxMetaHp = 100;
+        [FormerlySerializedAs("MetaHp")] public int metaHp = 100;
 
-        public MaskBase CurrentMask;
+        [FormerlySerializedAs("MaxMetaHp")] public int maxMetaHp = 100;
+
+        [FormerlySerializedAs("CurrentMask")] public MaskBase currentMask;
 
         public PlayerData(string playerID, int points, int level, int coinsForNextLevel, float walkSpeed,
             float runSpeed, float health, float attackSpeed, int maxMetaHp, MaskBase currentMask)
         {
-            PlayerID = playerID;
-            Points = points;
-            Level = level;
-            CoinsForNextLevel = coinsForNextLevel;
+            this.playerID = playerID;
+            this.points = points;
+            this.level = level;
+            this.coinsForNextLevel = coinsForNextLevel;
 
-            WalkSpeed = walkSpeed;
-            RunSpeed = runSpeed;
-            MaxHealth = health;
-            AttackSpeed = attackSpeed;
-            MaxMetaHp = maxMetaHp;
-            MetaHp = MaxMetaHp;
-            CurrentMask = currentMask;
+            this.walkSpeed = walkSpeed;
+            this.runSpeed = runSpeed;
+            maxHealth = health;
+            this.attackSpeed = attackSpeed;
+            this.maxMetaHp = maxMetaHp;
+            metaHp = this.maxMetaHp;
+            this.currentMask = currentMask;
         }
     }
 
     public class PlayerDataManager : MonoBehaviour, IObserver
     {
-        public List<PlayerData> PlayerDataList = new();
+        [FormerlySerializedAs("PlayerDataList")]
+        public List<PlayerData> playerDataList = new();
 
         public int roundCounter;
         public bool nextRoundFinal;
@@ -72,20 +77,20 @@ namespace dungeonduell
 
         public void SubscribeToEvents()
         {
-            DDCodeEventHandler.DungeonConnected += FinalRound;
+            DdCodeEventHandler.DungeonConnected += FinalRound;
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
         public void UnsubscribeToAllEvents()
         {
-            DDCodeEventHandler.DungeonConnected -= FinalRound;
+            DdCodeEventHandler.DungeonConnected -= FinalRound;
             SceneManager.sceneLoaded -= OnSceneLoaded;
         }
 
         public void FinalRound()
         {
             nextRoundFinal = true;
-            for (var i = 0; i < PlayerDataList.Count; i++) PlayerDataList[i].MaxHealth = PlayerDataList[i].MetaHp;
+            for (var i = 0; i < playerDataList.Count; i++) playerDataList[i].maxHealth = playerDataList[i].metaHp;
         }
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -95,14 +100,14 @@ namespace dungeonduell
                 roundCounter++;
                 if (nextRoundFinal)
                 {
-                    DDCodeEventHandler.Trigger_FinalRoundInDungeon();
+                    DdCodeEventHandler.Trigger_FinalRoundInDungeon();
 
                     SequenceMang sequenceMang;
                     if (sequenceMang = FindAnyObjectByType<SequenceMang>()) sequenceMang.DisableTimer();
                 }
             }
 
-            DDCodeEventHandler.Trigger_PlayerDataExposed(PlayerDataList, roundCounter);
+            DdCodeEventHandler.Trigger_PlayerDataExposed(playerDataList, roundCounter);
         }
     }
 }

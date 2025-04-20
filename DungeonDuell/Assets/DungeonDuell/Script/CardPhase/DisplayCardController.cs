@@ -7,40 +7,40 @@ namespace dungeonduell
 {
     public class DisplayCardController : MonoBehaviour
     {
-        private CardToHand cardToHand;
-        private DisplayCard displayCard;
-        private PlayerInput playerInput;
+        private CardToHand _cardToHand;
+        private DisplayCard _displayCard;
+        private PlayerInput _playerInput;
 
         private void Start()
         {
-            displayCard = GetComponent<DisplayCard>();
-            cardToHand = GetComponentInParent<CardToHand>();
+            _displayCard = GetComponent<DisplayCard>();
+            _cardToHand = GetComponentInParent<CardToHand>();
 
-            if (displayCard == null || cardToHand == null)
+            if (_displayCard == null || _cardToHand == null)
             {
                 Debug.LogError($"DisplayCardController benoetigt DisplayCard & CardToHand auf {gameObject.name}");
                 return;
             }
 
-            playerInput = FindCorrectPlayerInput();
+            _playerInput = FindCorrectPlayerInput();
 
-            if (playerInput != null)
-                playerInput.actions["Submit"].performed += OnSubmitPressed;
+            if (_playerInput != null)
+                _playerInput.actions["Submit"].performed += OnSubmitPressed;
             else
                 Debug.LogError($"Kein passendes PlayerInput-Objekt fuer {gameObject.name} gefunden!");
         }
 
         private void OnDestroy()
         {
-            if (playerInput != null) playerInput.actions["Submit"].performed -= OnSubmitPressed;
+            if (_playerInput != null) _playerInput.actions["Submit"].performed -= OnSubmitPressed;
         }
 
         private void OnSubmitPressed(InputAction.CallbackContext context)
         {
             if (EventSystem.current.currentSelectedGameObject == gameObject && IsActivePlayer())
             {
-                displayCard.OnPointerClick(null);
-                DDCodeEventHandler.Trigger_CardSelected(displayCard);
+                _displayCard.OnPointerClick(null);
+                DdCodeEventHandler.Trigger_CardSelected(_displayCard);
             }
         }
 

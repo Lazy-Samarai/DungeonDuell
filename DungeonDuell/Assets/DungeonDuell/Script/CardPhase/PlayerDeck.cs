@@ -69,9 +69,9 @@ namespace dungeonduell
         private void GetPerDistributer()
         {
             availableCards.Clear();
-            foreach (var CardDistributor in cardDistributors)
-                for (var i = 0; i < CardDistributor.Amount; i++)
-                    availableCards.Add(CardDistributor.Card);
+            foreach (var cardDistributor in cardDistributors)
+                for (var i = 0; i < cardDistributor.Amount; i++)
+                    availableCards.Add(cardDistributor.Card);
         }
     }
 }

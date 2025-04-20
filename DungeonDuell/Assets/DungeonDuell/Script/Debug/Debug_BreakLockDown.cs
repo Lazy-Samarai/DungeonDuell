@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace dungeonduell
 {
-    public class Debug_BreakLockDown : MonoBehaviour
+    public class DebugBreakLockDown : MonoBehaviour
     {
         [SerializeField] private KeyCode breakLockDownKey = KeyCode.Delete;
 

@@ -6,7 +6,7 @@ using UnityEngine;
 namespace dungeonduell
 {
     // When Refractoring the Code add the new Events here
-    public class DDCodeEventHandler : MonoBehaviour
+    public class DdCodeEventHandler : MonoBehaviour
     {
         // Card Phase
         public static event Action DungeonConnected;
@@ -33,16 +33,16 @@ namespace dungeonduell
 
         public static event Action<Card, bool> CardPlayed;
 
-        public static void Trigger_CardPlayed(Card card, bool Player1Played)
+        public static void Trigger_CardPlayed(Card card, bool player1Played)
         {
-            CardPlayed.Invoke(card, Player1Played);
+            CardPlayed.Invoke(card, player1Played);
         }
 
         public static event Action<Card, bool> CardToBeShelled;
 
-        public static void Trigger_CardToShelled(Card oldcard, bool Player1Played)
+        public static void Trigger_CardToShelled(Card oldcard, bool player1Played)
         {
-            CardToBeShelled.Invoke(oldcard, Player1Played);
+            CardToBeShelled.Invoke(oldcard, player1Played);
         }
 
         public static event Action<bool> PlayedAllCards;

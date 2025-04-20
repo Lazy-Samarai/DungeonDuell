@@ -10,7 +10,7 @@ namespace dungeonduell
         public float resetPosition = -600f;
         public float startPosition = 600f;
         public GameObject creditsPanel;
-        private Tweener scrollTween;
+        private Tweener _scrollTween;
 
         private void OnEnable()
         {
@@ -22,7 +22,7 @@ namespace dungeonduell
             if (creditsText == null) return;
 
             creditsText.anchoredPosition = new Vector2(creditsText.anchoredPosition.x, resetPosition);
-            scrollTween = creditsText.DOAnchorPosY(startPosition, scrollSpeed)
+            _scrollTween = creditsText.DOAnchorPosY(startPosition, scrollSpeed)
                 .SetEase(Ease.Linear)
                 .SetLoops(-1, LoopType.Restart);
         }

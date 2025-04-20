@@ -1,24 +1,28 @@
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Serialization;
 
 namespace dungeonduell
 {
     public class OptionDataManager : MonoBehaviour
     {
-        private const string masterVolume = "MasterVolume";
-        private const string musicVolume = "MusicVolume";
-        private const string sfxVolume = "SFXVolume";
+        private const string MasterVolume = "MasterVolume";
+        private const string MusicVolume = "MusicVolume";
+        private const string SfxVolume = "SFXVolume";
 
         public static OptionDataManager Instance;
 
         // Neue Settings f�r das Optionsmen�
-        public float Volume = 1f;
+        [FormerlySerializedAs("Volume")] public float volume = 1f;
         public AudioMixer audioMixer;
 
-        public bool IsFullscreen = true;
+        [FormerlySerializedAs("IsFullscreen")] public bool isFullscreen = true;
         public bool isMuted = true;
-        public int ResolutionIndex;
-        private readonly int volumeMultiplier = 20;
+
+        [FormerlySerializedAs("ResolutionIndex")]
+        public int resolutionIndex;
+
+        private readonly int _volumeMultiplier = 20;
 
 
         private void Awake()
@@ -35,20 +39,20 @@ namespace dungeonduell
 
         public void SetVolume(float volume)
         {
-            Volume = volume;
-            if (audioMixer != null) audioMixer.SetFloat(masterVolume, Mathf.Log10(volume) * volumeMultiplier);
+            this.volume = volume;
+            if (audioMixer != null) audioMixer.SetFloat(MasterVolume, Mathf.Log10(volume) * _volumeMultiplier);
         }
 
         public void SetMusicVolume(float volume)
         {
-            Volume = volume;
-            audioMixer.SetFloat(musicVolume, Mathf.Log10(volume) * volumeMultiplier);
+            this.volume = volume;
+            audioMixer.SetFloat(MusicVolume, Mathf.Log10(volume) * _volumeMultiplier);
         }
 
-        public void SetSFXVolume(float volume)
+        public void SetSfxVolume(float volume)
         {
-            Volume = volume;
-            audioMixer.SetFloat(sfxVolume, Mathf.Log10(volume) * volumeMultiplier);
+            this.volume = volume;
+            audioMixer.SetFloat(SfxVolume, Mathf.Log10(volume) * _volumeMultiplier);
         }
 
         public void MuteToggle(bool muted)
@@ -62,13 +66,13 @@ namespace dungeonduell
 
         public void SetFullscreen(bool isFullscreen)
         {
-            IsFullscreen = isFullscreen;
+            this.isFullscreen = isFullscreen;
             Screen.fullScreen = isFullscreen;
         }
 
         public void SetResolution(int resolutionIndex)
         {
-            ResolutionIndex = resolutionIndex;
+            this.resolutionIndex = resolutionIndex;
             var resolution = Screen.resolutions[resolutionIndex];
             Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
         }

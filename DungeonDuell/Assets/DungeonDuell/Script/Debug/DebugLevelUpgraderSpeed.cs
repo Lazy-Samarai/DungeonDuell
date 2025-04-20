@@ -1,42 +1,47 @@
 using MoreMountains.TopDownEngine;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace dungeonduell
 {
     public class DebugLevelUpgraderSpeed : MonoBehaviour // if used more do Innherritace with other debug Uphgraddcer
     {
-        [SerializeField] private KeyCode UpLevelKey;
-        [SerializeField] private KeyCode DownLevelKey;
-        private float baseRun;
-        private float baseWalk;
-        private int level = 1;
-        private CharacterRun running;
-        private CharacterMovement walking;
+        [FormerlySerializedAs("UpLevelKey")] [SerializeField]
+        private KeyCode upLevelKey;
+
+        [FormerlySerializedAs("DownLevelKey")] [SerializeField]
+        private KeyCode downLevelKey;
+
+        private float _baseRun;
+        private float _baseWalk;
+        private int _level = 1;
+        private CharacterRun _running;
+        private CharacterMovement _walking;
 
         private void Start()
         {
-            walking = GetComponent<CharacterMovement>();
-            running = GetComponent<CharacterRun>();
-            baseWalk = walking.WalkSpeed;
-            baseRun = running.RunSpeed;
+            _walking = GetComponent<CharacterMovement>();
+            _running = GetComponent<CharacterRun>();
+            _baseWalk = _walking.WalkSpeed;
+            _baseRun = _running.RunSpeed;
         }
 
         private void Update()
         {
-            if (Input.GetKeyDown(UpLevelKey)) ChangeLevel(true);
-            if (Input.GetKeyDown(DownLevelKey)) ChangeLevel(false);
+            if (Input.GetKeyDown(upLevelKey)) ChangeLevel(true);
+            if (Input.GetKeyDown(downLevelKey)) ChangeLevel(false);
         }
 
         public void ChangeLevel(bool up)
         {
             if (up)
             {
-                level++;
+                _level++;
             }
             else
             {
-                level--;
-                if (level <= 0) level = 1;
+                _level--;
+                if (_level <= 0) _level = 1;
             }
 
             AdjustToLevel();
@@ -44,10 +49,10 @@ namespace dungeonduell
 
         public void AdjustToLevel()
         {
-            walking.WalkSpeed = baseWalk + (level - 1);
-            walking.MovementSpeed = baseRun + (level - 1);
+            _walking.WalkSpeed = _baseWalk + (_level - 1);
+            _walking.MovementSpeed = _baseRun + (_level - 1);
 
-            running.RunSpeed = baseRun + (level - 1);
+            _running.RunSpeed = _baseRun + (_level - 1);
         }
     }
 }

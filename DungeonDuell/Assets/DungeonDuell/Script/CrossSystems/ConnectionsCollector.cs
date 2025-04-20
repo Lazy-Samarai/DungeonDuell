@@ -8,7 +8,7 @@ namespace dungeonduell
     public class ConnectionsCollector : MonoBehaviour
     {
         [SerializeField] private List<RoomType> filteredRoomTypeFromFirstCoin;
-        public List<Tuple<Vector3Int, RoomInfo>> roomsInfos = new();
+        public List<Tuple<Vector3Int, RoomInfo>> RoomsInfos = new();
 
         private void Awake()
         {
@@ -41,15 +41,15 @@ namespace dungeonduell
                 transform.GetChild(0).gameObject.SetActive(true);
         }
 
-        public void AddRoom(Vector3Int pos, List<RoomConnection> Conncection, RoomType type, RoomElement element,
+        public void AddRoom(Vector3Int pos, List<RoomConnection> conncection, RoomType type, RoomElement element,
             List<ConnectionDir> newAllowedDoors, int owner)
         {
             var newroomsInfos =
                 new Tuple<Vector3Int, RoomInfo>(pos,
-                    new RoomInfo(roomsInfos.Count, Conncection, type, element, newAllowedDoors, owner,
+                    new RoomInfo(RoomsInfos.Count, conncection, type, element, newAllowedDoors, owner,
                         !filteredRoomTypeFromFirstCoin.Contains(type)));
 
-            roomsInfos.Add(newroomsInfos);
+            RoomsInfos.Add(newroomsInfos);
         }
 
         public int[]
@@ -62,9 +62,9 @@ namespace dungeonduell
 
             for (var i = 0; i < allArounds.Length; i++)
                 if (allowedDoors[i]) // Dont Tracking for Connection are not allowed 
-                    foreach (var roomInfo in roomsInfos)
+                    foreach (var roomInfo in RoomsInfos)
                         if ((roomInfo.Item1 == allArounds[i]) & (forceOnRoom |
-                                                                 roomInfo.Item2.allowedDoors.Contains(((ConnectionDir)i)
+                                                                 roomInfo.Item2.AllowedDoors.Contains(((ConnectionDir)i)
                                                                      .GetInvert())))
                         {
                             roomIdsConnect[i] = roomInfo.Item2.RoomID;
@@ -76,15 +76,15 @@ namespace dungeonduell
 
         public List<RoomInfo> GetRoomList()
         {
-            var RoomsInfos = new List<RoomInfo>();
-            foreach (var roomInfo in roomsInfos) RoomsInfos.Add(roomInfo.Item2);
+            var roomsInfos = new List<RoomInfo>();
+            foreach (var roomInfo in this.RoomsInfos) roomsInfos.Add(roomInfo.Item2);
 
-            return RoomsInfos;
+            return roomsInfos;
         }
 
         public List<Tuple<Vector3Int, RoomInfo>> GetFullRoomList()
         {
-            return roomsInfos;
+            return RoomsInfos;
         }
     }
 }

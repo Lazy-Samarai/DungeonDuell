@@ -5,20 +5,20 @@ namespace dungeonduell
 {
     public class BlockFireInObstacle : MonoBehaviour
     {
-        private int colldingCount;
-        private ProjectileWeapon projectileWeapon;
+        private int _colldingCount;
+        private ProjectileWeapon _projectileWeapon;
 
         private void Start()
         {
-            projectileWeapon = GetComponent<ProjectileWeapon>();
+            _projectileWeapon = GetComponent<ProjectileWeapon>();
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.gameObject.layer == 8)
             {
-                colldingCount++;
-                projectileWeapon.InputAuthorized = false;
+                _colldingCount++;
+                _projectileWeapon.InputAuthorized = false;
             }
         }
 
@@ -26,8 +26,8 @@ namespace dungeonduell
         {
             if (collision.gameObject.layer == 8)
             {
-                colldingCount--;
-                if (colldingCount <= 0) projectileWeapon.InputAuthorized = true;
+                _colldingCount--;
+                if (_colldingCount <= 0) _projectileWeapon.InputAuthorized = true;
             }
         }
     }

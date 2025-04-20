@@ -2,6 +2,7 @@ using System.Text.RegularExpressions;
 using dungeonduell;
 using MoreMountains.Tools;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace MoreMountains.TopDownEngine
@@ -9,50 +10,53 @@ namespace MoreMountains.TopDownEngine
     public class TestHub : TopDownMonoBehaviour, MMEventListener<TopDownEngineEvent>
     {
         /// The playerID associated to this HUD
-        [Tooltip("The playerID associated to this HUD")]
-        public string PlayerID = "Player1";
+        [FormerlySerializedAs("PlayerID")] [Tooltip("The playerID associated to this HUD")]
+        public string playerID = "Player1";
 
         /// the progress bar to use to show the healthbar
-        [Tooltip("the progress bar to use to show the healthbar")]
-        public MMProgressBar HealthBar;
+        [FormerlySerializedAs("HealthBar")] [Tooltip("the progress bar to use to show the healthbar")]
+        public MMProgressBar healthBar;
 
         /// the Text comp to use to display the player name
-        [Tooltip("the Text comp to use to display the player name")]
-        public Text PlayerName;
+        [FormerlySerializedAs("PlayerName")] [Tooltip("the Text comp to use to display the player name")]
+        public Text playerName;
 
         /// the radial progress bar to put around the avatar
-        [Tooltip("the radial progress bar to put around the avatar")]
-        public MMProgressBar AvatarBar;
+        [FormerlySerializedAs("AvatarBar")] [Tooltip("the radial progress bar to put around the avatar")]
+        public MMProgressBar avatarBar;
 
         /// the counter used to display coin amounts
-        [Tooltip("the counter used to display coin amounts")]
-        public Text CoinCounter;
+        [FormerlySerializedAs("CoinCounter")] [Tooltip("the counter used to display coin amounts")]
+        public Text coinCounter;
 
+        [FormerlySerializedAs("CoinForNextLevelCounter")]
         [Tooltip("the counter used to display coin amounts needed for level Up")]
-        public Text CoinForNextLevelCounter;
+        public Text coinForNextLevelCounter;
 
-        public Text LevelUpNowText;
+        [FormerlySerializedAs("LevelUpNowText")]
+        public Text levelUpNowText;
+
         public bool canLevelUp;
 
         /// the mask to use when the target player dies
-        [Tooltip("the mask to use when the target player dies")]
-        public CanvasGroup DeadMask;
+        [FormerlySerializedAs("DeadMask")] [Tooltip("the mask to use when the target player dies")]
+        public CanvasGroup deadMask;
 
         /// the screen to display if the target player wins
-        [Tooltip("the screen to display if the target player wins")]
-        public CanvasGroup WinnerScreen;
+        [FormerlySerializedAs("WinnerScreen")] [Tooltip("the screen to display if the target player wins")]
+        public CanvasGroup winnerScreen;
 
-        [Tooltip("the screen to display if the target levels up")]
-        public LevelUPPanel LevelUpPanel;
+        [FormerlySerializedAs("LevelUpPanel")] [Tooltip("the screen to display if the target levels up")]
+        public LevelUpPanel levelUpPanel;
 
         public bool menuShowing;
 
         protected virtual void Start()
         {
-            CoinCounter.text = "0";
-            CoinForNextLevelCounter.text = "1";
-            DeadMask.gameObject.SetActive(false);
-            WinnerScreen.gameObject.SetActive(false);
+            coinCounter.text = "0";
+            coinForNextLevelCounter.text = "1";
+            deadMask.gameObject.SetActive(false);
+            winnerScreen.gameObject.SetActive(false);
         }
 
         /// <summary>
@@ -60,7 +64,7 @@ namespace MoreMountains.TopDownEngine
         /// </summary>
         protected virtual void OnEnable()
         {
-            DDCodeEventHandler.LevelUpAvailable += LevelPossible;
+            DdCodeEventHandler.LevelUpAvailable += LevelPossible;
             this.MMEventStartListening();
         }
 
@@ -69,7 +73,7 @@ namespace MoreMountains.TopDownEngine
         /// </summary>
         protected virtual void OnDisable()
         {
-            DDCodeEventHandler.LevelUpAvailable -= LevelPossible;
+            DdCodeEventHandler.LevelUpAvailable -= LevelPossible;
             this.MMEventStopListening();
         }
 
@@ -78,29 +82,29 @@ namespace MoreMountains.TopDownEngine
             switch (tdEvent.EventType)
             {
                 case TopDownEngineEventTypes.PlayerDeath:
-                    if (tdEvent.OriginCharacter.PlayerID == PlayerID)
+                    if (tdEvent.OriginCharacter.PlayerID == playerID)
                     {
-                        DeadMask.gameObject.SetActive(true);
-                        DeadMask.alpha = 0f;
-                        StartCoroutine(MMFade.FadeCanvasGroup(DeadMask, 0.5f, 0.8f));
+                        deadMask.gameObject.SetActive(true);
+                        deadMask.alpha = 0f;
+                        StartCoroutine(MMFade.FadeCanvasGroup(deadMask, 0.5f, 0.8f));
                     }
 
                     break;
                 case TopDownEngineEventTypes.Repaint:
                     foreach (var points in (LevelManager.Instance as DungeonDuellMultiplayerLevelManager).Points)
-                        if (points.PlayerID == PlayerID)
+                        if (points.PlayerID == playerID)
                         {
-                            CoinCounter.text = points.Points.ToString();
-                            CoinForNextLevelCounter.text = points.CoinsForNextLevel.ToString();
+                            coinCounter.text = points.Points.ToString();
+                            coinForNextLevelCounter.text = points.CoinsForNextLevel.ToString();
                         }
 
                     break;
                 case TopDownEngineEventTypes.GameOver:
-                    if (PlayerID == (LevelManager.Instance as DungeonDuellMultiplayerLevelManager).WinnerID)
+                    if (playerID == (LevelManager.Instance as DungeonDuellMultiplayerLevelManager).WinnerID)
                     {
-                        WinnerScreen.gameObject.SetActive(true);
-                        WinnerScreen.alpha = 0f;
-                        StartCoroutine(MMFade.FadeCanvasGroup(WinnerScreen, 0.5f, 0.8f));
+                        winnerScreen.gameObject.SetActive(true);
+                        winnerScreen.alpha = 0f;
+                        StartCoroutine(MMFade.FadeCanvasGroup(winnerScreen, 0.5f, 0.8f));
                     }
 
                     break;
@@ -109,14 +113,14 @@ namespace MoreMountains.TopDownEngine
 
         public void LevelPossible(int id, int count)
         {
-            var myPlayerIndex = int.Parse(PlayerID[PlayerID.Length - 1].ToString()) - 1;
+            var myPlayerIndex = int.Parse(playerID[playerID.Length - 1].ToString()) - 1;
             if (myPlayerIndex == id)
             {
                 canLevelUp = count > 0;
-                LevelUpNowText.gameObject.SetActive(canLevelUp);
-                LevelUpNowText.text =
-                    Regex.Replace(LevelUpNowText.text, "\\s*\\(.*?\\)", "").Trim(); // remove old "(X)"
-                LevelUpNowText.text += $"({count})";
+                levelUpNowText.gameObject.SetActive(canLevelUp);
+                levelUpNowText.text =
+                    Regex.Replace(levelUpNowText.text, "\\s*\\(.*?\\)", "").Trim(); // remove old "(X)"
+                levelUpNowText.text += $"({count})";
             }
         }
 
@@ -125,9 +129,9 @@ namespace MoreMountains.TopDownEngine
             if (canLevelUp)
             {
                 if (!menuShowing)
-                    LevelUpPanel.ShowLevelUpMenu(true);
+                    levelUpPanel.ShowLevelUpMenu(true);
                 else
-                    LevelUpPanel.ShowLevelUpMenu(false);
+                    levelUpPanel.ShowLevelUpMenu(false);
                 menuShowing = !menuShowing;
             }
         }

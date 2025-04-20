@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace dungeonduell
 {
-    public class TSCircleRotation : MonoBehaviour
+    public class TsCircleRotation : MonoBehaviour
     {
         public float rotationSpeed = 100f;
 
