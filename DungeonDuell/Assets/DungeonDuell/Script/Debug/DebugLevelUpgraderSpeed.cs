@@ -1,20 +1,17 @@
 using MoreMountains.TopDownEngine;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace dungeonduell
 {
     public class DebugLevelUpgraderSpeed : MonoBehaviour // if used more do Innherritace with other debug Uphgraddcer
     {
-        int level = 1;
-        CharacterMovement walking;
-        CharacterRun running;
-        [SerializeField] KeyCode UpLevelKey;
-        [SerializeField] KeyCode DownLevelKey;
-        float baseWalk;
-        float baseRun;
+        [SerializeField] private KeyCode UpLevelKey;
+        [SerializeField] private KeyCode DownLevelKey;
+        private float baseRun;
+        private float baseWalk;
+        private int level = 1;
+        private CharacterRun running;
+        private CharacterMovement walking;
 
         private void Start()
         {
@@ -23,16 +20,11 @@ namespace dungeonduell
             baseWalk = walking.WalkSpeed;
             baseRun = running.RunSpeed;
         }
+
         private void Update()
         {
-            if (Input.GetKeyDown(UpLevelKey))
-            {
-                ChangeLevel(true);
-            }
-            if (Input.GetKeyDown(DownLevelKey))
-            {
-                ChangeLevel(false);
-            }
+            if (Input.GetKeyDown(UpLevelKey)) ChangeLevel(true);
+            if (Input.GetKeyDown(DownLevelKey)) ChangeLevel(false);
         }
 
         public void ChangeLevel(bool up)
@@ -44,22 +36,18 @@ namespace dungeonduell
             else
             {
                 level--;
-                if (level <= 0)
-                {
-                    level = 1;
-                }
+                if (level <= 0) level = 1;
             }
+
             AdjustToLevel();
         }
+
         public void AdjustToLevel()
         {
             walking.WalkSpeed = baseWalk + (level - 1);
             walking.MovementSpeed = baseRun + (level - 1);
-           
-            running.RunSpeed = baseRun + (level - 1);
-           
-        }
 
+            running.RunSpeed = baseRun + (level - 1);
+        }
     }
 }
-

@@ -1,15 +1,10 @@
-﻿using UnityEngine;
-using System.Collections;
-using MoreMountains.Tools;
-using MoreMountains.TopDownEngine;
-using UnityEngine.Events;
-
-
+﻿using MoreMountains.TopDownEngine;
+using UnityEngine;
 
 namespace dungeonduell
 {
     /// <summary>
-    /// Coin manager
+    ///     Coin manager
     /// </summary>
     [AddComponentMenu("TopDown Engine/Items/ProgressionCoin")]
     public class ProgressionCoin : PickableItem
@@ -20,25 +15,18 @@ namespace dungeonduell
 
 
         /// <summary>
-        /// Triggered when something collides with the coin
+        ///     Triggered when something collides with the coin
         /// </summary>
         /// <param name="collider">Other.</param>
         protected override void Pick(GameObject picker)
         {
-
-
             //TopDownEnginePointEvent.Trigger(PointsMethods.Add, PointsToAdd);
 
-            Character character = picker.GetComponent<Character>();
+            var character = picker.GetComponent<Character>();
             if (character != null)
-            {
-                CoinEvent.Trigger(PointsToAdd, picker);            
-            }
+                CoinEvent.Trigger(PointsToAdd, picker);
             else
-            {
                 Debug.LogError("Character konnte nicht gefunden werden.");
-            }
         }
-
     }
 }

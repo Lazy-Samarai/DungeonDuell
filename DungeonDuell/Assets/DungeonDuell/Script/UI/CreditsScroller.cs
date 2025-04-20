@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
 using DG.Tweening;
-using UnityEngine.InputSystem;
+using UnityEngine;
 
 namespace dungeonduell
 {
@@ -16,17 +12,17 @@ namespace dungeonduell
         public GameObject creditsPanel;
         private Tweener scrollTween;
 
-        void OnEnable()
+        private void OnEnable()
         {
             StartScrolling();
         }
 
-        void StartScrolling()
+        private void StartScrolling()
         {
             if (creditsText == null) return;
 
             creditsText.anchoredPosition = new Vector2(creditsText.anchoredPosition.x, resetPosition);
-            scrollTween = creditsText.DOAnchorPosY(startPosition, scrollSpeed, false)
+            scrollTween = creditsText.DOAnchorPosY(startPosition, scrollSpeed)
                 .SetEase(Ease.Linear)
                 .SetLoops(-1, LoopType.Restart);
         }

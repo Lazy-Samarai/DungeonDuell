@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using MoreMountains.InventoryEngine;
-using UnityEngine;
 
 namespace dungeonduell
 {
@@ -9,12 +7,12 @@ namespace dungeonduell
     {
         public override void ApplyingMaskEffects(Inventory inventory)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public override void DeApplyingMaskEffects(Inventory inventory)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

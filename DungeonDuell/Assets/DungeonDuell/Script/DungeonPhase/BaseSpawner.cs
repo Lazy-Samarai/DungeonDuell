@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace dungeonduell
@@ -8,10 +6,7 @@ namespace dungeonduell
     {
         protected void SpawnSingleObject(GameObject objectSpawn)
         {
-            if(objectSpawn != null)
-            {
-                Instantiate(objectSpawn,transform.position,Quaternion.identity,transform);
-            }
+            if (objectSpawn != null) Instantiate(objectSpawn, transform.position, Quaternion.identity, transform);
         }
     }
 }

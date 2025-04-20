@@ -1,41 +1,37 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 namespace dungeonduell
 {
     public class SequenceMang : MonoBehaviour, IObserver
     {
-        const float BaseTime = 30;
-        const float TimeMorePerRound = 20;
+        private const float BaseTime = 30;
+        private const float TimeMorePerRound = 20;
 
-        [SerializeField] float timeRound = 150.0f;
+        [SerializeField] private float timeRound = 150.0f;
 
-        [SerializeField] bool timeRunning = false;
-        [SerializeField] bool finalRound = false;
-        SceneLoading sceneLoading;
+        [SerializeField] private bool timeRunning;
+        [SerializeField] private bool finalRound;
 
-        [SerializeField] TextMeshProUGUI timerText;
+        [SerializeField] private TextMeshProUGUI timerText;
+        private SceneLoading sceneLoading;
 
         // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
             sceneLoading = GetComponentInChildren<SceneLoading>();
         }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
             if (timeRunning & !finalRound)
             {
                 timeRound -= Time.deltaTime;
-                if (timeRound < 0)
-                {
-                    BackToCardPhase();
-                }
+                if (timeRound < 0) BackToCardPhase();
 
-                int totalSeconds = (int)Mathf.Floor(timeRound);
+                var totalSeconds = (int)Mathf.Floor(timeRound);
                 // int minutes = totalSeconds / 60;
                 // int seconds = totalSeconds % 60;
 
@@ -44,38 +40,12 @@ namespace dungeonduell
             }
         }
 
-        public void BackToCardPhase()
-        {
-            sceneLoading.ToTheHex();
-        }
-
-        public void Reseting()
-        {
-            ConnectionsCollector connectionsCollector = FindFirstObjectByType<ConnectionsCollector>();
-            PlayerDataManager playerMang = FindFirstObjectByType<PlayerDataManager>();
-            Destroy(playerMang.gameObject);
-            Destroy(connectionsCollector.gameObject);
-            BackToCardPhase();
-        }
-
-        public void DisableTimer()
-        {
-            finalRound = true;
-            timeRunning = false;
-            timerText.text = "X";
-        }
-
-        private void SetTimer(List<PlayerData> d, int currentRound)
-        {
-            timeRound = BaseTime + (currentRound * TimeMorePerRound);
-        }
-
-        void OnEnable()
+        private void OnEnable()
         {
             SubscribeToEvents();
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
             UnsubscribeToAllEvents();
         }
@@ -90,6 +60,32 @@ namespace dungeonduell
         {
             DDCodeEventHandler.FinalRoundInDungeon -= DisableTimer;
             DDCodeEventHandler.PlayerDataExposed += SetTimer;
+        }
+
+        public void BackToCardPhase()
+        {
+            sceneLoading.ToTheHex();
+        }
+
+        public void Reseting()
+        {
+            var connectionsCollector = FindFirstObjectByType<ConnectionsCollector>();
+            var playerMang = FindFirstObjectByType<PlayerDataManager>();
+            Destroy(playerMang.gameObject);
+            Destroy(connectionsCollector.gameObject);
+            BackToCardPhase();
+        }
+
+        public void DisableTimer()
+        {
+            finalRound = true;
+            timeRunning = false;
+            timerText.text = "X";
+        }
+
+        private void SetTimer(List<PlayerData> d, int currentRound)
+        {
+            timeRound = BaseTime + currentRound * TimeMorePerRound;
         }
     }
 }

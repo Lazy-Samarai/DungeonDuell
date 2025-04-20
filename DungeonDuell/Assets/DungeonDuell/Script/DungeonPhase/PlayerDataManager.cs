@@ -1,14 +1,11 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using MoreMountains.Tools;
-using MoreMountains.TopDownEngine;
 using UnityEngine.SceneManagement;
-
 
 namespace dungeonduell
 {
-    [System.Serializable]
+    [Serializable]
     public class PlayerData
     {
         public string PlayerID;
@@ -27,7 +24,7 @@ namespace dungeonduell
 
         public int MaxMetaHp = 100;
 
-        public MaskBase CurrentMask = null;
+        public MaskBase CurrentMask;
 
         public PlayerData(string playerID, int points, int level, int coinsForNextLevel, float walkSpeed,
             float runSpeed, float health, float attackSpeed, int maxMetaHp, MaskBase currentMask)
@@ -49,58 +46,26 @@ namespace dungeonduell
 
     public class PlayerDataManager : MonoBehaviour, IObserver
     {
-        public List<PlayerData> PlayerDataList = new List<PlayerData>();
+        public List<PlayerData> PlayerDataList = new();
 
-        public int roundCounter = 0;
-        public bool nextRoundFinal = false;
+        public int roundCounter;
+        public bool nextRoundFinal;
 
-        void Awake()
+        private void Awake()
         {
-            PlayerDataManager[] objs = FindObjectsByType<PlayerDataManager>(FindObjectsSortMode.None);
+            var objs = FindObjectsByType<PlayerDataManager>(FindObjectsSortMode.None);
 
-            if (objs.Length > 1)
-            {
-                Destroy(this.gameObject);
-            }
+            if (objs.Length > 1) Destroy(gameObject);
 
             DontDestroyOnLoad(gameObject);
         }
 
-        public void FinalRound()
-        {
-            nextRoundFinal = true;
-            for (int i = 0; i < PlayerDataList.Count; i++)
-            {
-                PlayerDataList[i].MaxHealth = PlayerDataList[i].MetaHp;
-            }
-        }
-
-        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-        {
-            if (scene.buildIndex == 1)
-            {
-                roundCounter++;
-                if (nextRoundFinal)
-                {
-                    DDCodeEventHandler.Trigger_FinalRoundInDungeon();
-
-                    SequenceMang sequenceMang;
-                    if (sequenceMang = FindAnyObjectByType<SequenceMang>())
-                    {
-                        sequenceMang.DisableTimer();
-                    }
-                }
-            }
-
-            DDCodeEventHandler.Trigger_PlayerDataExposed(PlayerDataList, roundCounter);
-        }
-
-        void OnEnable()
+        private void OnEnable()
         {
             SubscribeToEvents();
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
             UnsubscribeToAllEvents();
         }
@@ -115,6 +80,29 @@ namespace dungeonduell
         {
             DDCodeEventHandler.DungeonConnected -= FinalRound;
             SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
+
+        public void FinalRound()
+        {
+            nextRoundFinal = true;
+            for (var i = 0; i < PlayerDataList.Count; i++) PlayerDataList[i].MaxHealth = PlayerDataList[i].MetaHp;
+        }
+
+        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            if (scene.buildIndex == 1)
+            {
+                roundCounter++;
+                if (nextRoundFinal)
+                {
+                    DDCodeEventHandler.Trigger_FinalRoundInDungeon();
+
+                    SequenceMang sequenceMang;
+                    if (sequenceMang = FindAnyObjectByType<SequenceMang>()) sequenceMang.DisableTimer();
+                }
+            }
+
+            DDCodeEventHandler.Trigger_PlayerDataExposed(PlayerDataList, roundCounter);
         }
     }
 }

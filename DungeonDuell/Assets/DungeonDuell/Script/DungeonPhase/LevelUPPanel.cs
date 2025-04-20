@@ -1,19 +1,16 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-using MoreMountains.Tools;
-using UnityEngine.EventSystems;
-using MoreMountains.TopDownEngine;
+﻿using MoreMountains.TopDownEngine;
+using UnityEngine;
 
 namespace dungeonduell
 {
     public class LevelUPPanel : MonoBehaviour
     {
-        [Header("UI Elements")] bool menuOpen = false;
+        private const int AmountPerUpgrade = 1;
         public GameObject LevelUpMenu; // Das Panel für das Level-Up
         public TestHub TestHub;
+        public bool player1;
         private DungeonDuellMultiplayerLevelManager _levelManager;
-        const int AmountPerUpgrade = 1;
-        public bool player1 = false;
+        [Header("UI Elements")] private bool menuOpen;
 
         private void Start()
         {
@@ -46,9 +43,7 @@ namespace dungeonduell
             if (TestHub.canLevelUp & menuOpen)
             {
                 if (_levelManager != null)
-                {
                     _levelManager.ApplyLevelUpPerCoins(option, AmountPerUpgrade, player1 ? 1 : 2);
-                }
 
                 TestHub.menuShowing = false;
                 ShowLevelUpMenu(false);

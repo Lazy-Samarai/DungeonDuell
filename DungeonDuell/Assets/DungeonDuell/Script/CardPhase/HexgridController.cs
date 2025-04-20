@@ -1,33 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Tilemaps;
-using UnityEngine.InputSystem;
-using MoreMountains.TopDownEngine;
-using UnityEngine.EventSystems;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Cinemachine;
+using MoreMountains.TopDownEngine;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using UnityEngine.Tilemaps;
 
 namespace dungeonduell
 {
     public class HexgridController : MonoBehaviour
     {
-        [Header("References")] [TagField] [SerializeField]
-        private string TileMapTag;
-
-        public Tilemap tilemap;
-        public GameObject cursor;
-        public TileClickHandler tileClickHandler;
-        public TurnManager turnManager;
-        public DisplayCard currentDisplayCard;
-
-        private Vector3Int selectedTilePos;
-        private List<(Vector3Int, bool?)> setAbleTiles = new List<(Vector3Int, bool?)>();
-        private PlayerInput playerInput;
-        private float lastNavigateTime = 0f;
-        private float navigateCooldown = 0.15f;
-
-        private static readonly Vector2[] HexDirections = new Vector2[]
+        private static readonly Vector2[] HexDirections =
         {
             new Vector2(1f, 0f).normalized,
             new Vector2(0.5f, 0.866f).normalized,
@@ -36,6 +20,21 @@ namespace dungeonduell
             new Vector2(-0.5f, -0.866f).normalized,
             new Vector2(0.5f, -0.866f).normalized
         };
+
+        [Header("References")] [TagField] [SerializeField]
+        private string TileMapTag;
+
+        public Tilemap tilemap;
+        public GameObject cursor;
+        public TileClickHandler tileClickHandler;
+        public TurnManager turnManager;
+        public DisplayCard currentDisplayCard;
+        private readonly float navigateCooldown = 0.15f;
+        private readonly List<(Vector3Int, bool?)> setAbleTiles = new();
+        private float lastNavigateTime;
+        private PlayerInput playerInput;
+
+        private Vector3Int selectedTilePos;
 
         private void Start()
         {
@@ -51,10 +50,8 @@ namespace dungeonduell
         {
             setAbleTiles.Clear();
             foreach (var cellPos in tilemap.cellBounds.allPositionsWithin)
-            {
                 if (tileClickHandler.IsSetablePosition(cellPos).Item1)
                     setAbleTiles.Add((cellPos, tileClickHandler.IsSetablePosition(cellPos).Item2));
-            }
 
             if (setAbleTiles.Count == 0)
             {
@@ -103,12 +100,12 @@ namespace dungeonduell
             if (!cursor || !cursor.activeSelf || setAbleTiles.Count == 0) return;
             if (Time.time - lastNavigateTime < navigateCooldown) return;
 
-            Vector2 input = ctx.ReadValue<Vector2>();
+            var input = ctx.ReadValue<Vector2>();
             if (input.sqrMagnitude < 0.5f) return;
 
-            Vector2 snappedInput = SnapToHexDirection(input.normalized);
-            Vector3Int bestTarget = selectedTilePos;
-            float bestScore = -1f;
+            var snappedInput = SnapToHexDirection(input.normalized);
+            var bestTarget = selectedTilePos;
+            var bestScore = -1f;
 
             const float dotThreshold = 0.65f;
             const float distanceThreshold = 0.1f;
@@ -117,16 +114,16 @@ namespace dungeonduell
             {
                 if (tile.Item1 == selectedTilePos) continue;
 
-                Vector2 dirToTile = new Vector2(tile.Item1.x - selectedTilePos.x, tile.Item1.y - selectedTilePos.y);
-                float distance = dirToTile.magnitude;
+                var dirToTile = new Vector2(tile.Item1.x - selectedTilePos.x, tile.Item1.y - selectedTilePos.y);
+                var distance = dirToTile.magnitude;
                 if (distance < distanceThreshold) continue;
 
                 dirToTile.Normalize();
-                float dot = Vector2.Dot(snappedInput, dirToTile);
+                var dot = Vector2.Dot(snappedInput, dirToTile);
 
                 if (dot > dotThreshold)
                 {
-                    float score = (dot * 1.5f) - (distance * 0.25f);
+                    var score = dot * 1.5f - distance * 0.25f;
                     if (score > bestScore)
                     {
                         bestScore = score;
@@ -145,12 +142,12 @@ namespace dungeonduell
 
         private Vector2 SnapToHexDirection(Vector2 input)
         {
-            float bestDot = -1f;
-            Vector2 bestDir = HexDirections[0];
+            var bestDot = -1f;
+            var bestDir = HexDirections[0];
 
             foreach (var dir in HexDirections)
             {
-                float dot = Vector2.Dot(input, dir);
+                var dot = Vector2.Dot(input, dir);
                 if (dot > bestDot)
                 {
                     bestDot = dot;
@@ -166,7 +163,7 @@ namespace dungeonduell
             if (!cursor || !cursor.activeSelf || setAbleTiles.Count == 0)
                 return;
 
-            Vector3 worldPos = tilemap.GetCellCenterWorld(selectedTilePos);
+            var worldPos = tilemap.GetCellCenterWorld(selectedTilePos);
 
             var displayCard = tileClickHandler.displayCardUi;
             var card = tileClickHandler.currentCard;
@@ -176,8 +173,8 @@ namespace dungeonduell
                 return;
             }
 
-            int playerID = turnManager.isPlayer1Turn ? 1 : 2;
-            bool wasPlaced = tileClickHandler.SpawnTile(worldPos, card, true, true, playerID);
+            var playerID = turnManager.isPlayer1Turn ? 1 : 2;
+            var wasPlaced = tileClickHandler.SpawnTile(worldPos, card, true, true, playerID);
 
             if (!wasPlaced)
             {
@@ -186,21 +183,18 @@ namespace dungeonduell
             }
 
             ResetNavigation();
-            CardToHand cardToHand = GetCurrentCardToHand();
+            var cardToHand = GetCurrentCardToHand();
             if (cardToHand != null) cardToHand.ReactivateHandCards();
         }
 
         private void OnBack(InputAction.CallbackContext ctx)
         {
-            CardToHand cardToHand = GetCurrentCardToHand();
+            var cardToHand = GetCurrentCardToHand();
             if (cardToHand.cardHolder.childCount > 0)
             {
-                Transform child = cardToHand.cardHolder.GetChild(0);
-                DisplayCard dc = child.GetComponent<DisplayCard>();
-                if (dc != null)
-                {
-                    cardToHand.OnCardClicked(dc);
-                }
+                var child = cardToHand.cardHolder.GetChild(0);
+                var dc = child.GetComponent<DisplayCard>();
+                if (dc != null) cardToHand.OnCardClicked(dc);
             }
 
             ResetNavigation();
@@ -213,15 +207,12 @@ namespace dungeonduell
 
         private PlayerInput GetCurrentPlayerInput()
         {
-            string neededPlayerID = turnManager.isPlayer1Turn ? "Player1" : "Player2";
+            var neededPlayerID = turnManager.isPlayer1Turn ? "Player1" : "Player2";
 
             foreach (var player in FindObjectsByType<PlayerInput>(FindObjectsSortMode.None))
             {
                 var manager = player.GetComponent<InputSystemManagerEventsBased>();
-                if (manager != null && manager.PlayerID == neededPlayerID)
-                {
-                    return player;
-                }
+                if (manager != null && manager.PlayerID == neededPlayerID) return player;
             }
 
             return null;
@@ -240,10 +231,7 @@ namespace dungeonduell
         private void EnableAllHandSelectables()
         {
             var cardToHand = GetCurrentCardToHand();
-            if (cardToHand != null)
-            {
-                cardToHand.ReactivateHandCards();
-            }
+            if (cardToHand != null) cardToHand.ReactivateHandCards();
         }
     }
 }

@@ -1,9 +1,9 @@
-using dungeonduell;
-using MoreMountains.Feedbacks;
-using MoreMountains.Tools;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using dungeonduell;
+using MoreMountains.Feedbacks;
+using MoreMountains.Tools;
 using UnityEngine;
 
 namespace MoreMountains.TopDownEngine
@@ -13,17 +13,17 @@ namespace MoreMountains.TopDownEngine
         public GameObject Picker;
         public int PointsToAdd;
 
-        /// <summary> 
-        /// Initializes a new instance of the <see cref="MoreMountains.TopDownEngine.PickableItemEvent"/> struct. 
-        /// </summary> 
-        /// <param name="pickedItem">Picked item.</param> 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="MoreMountains.TopDownEngine.PickableItemEvent" /> struct.
+        /// </summary>
+        /// <param name="pickedItem">Picked item.</param>
         public CoinEvent(int pointsToAdd, GameObject picker)
         {
             Picker = picker;
             PointsToAdd = pointsToAdd;
         }
 
-        static CoinEvent c;
+        private static CoinEvent c;
 
         public static void Trigger(int pointsToAdd, GameObject picker)
         {
@@ -43,29 +43,14 @@ namespace MoreMountains.TopDownEngine
     // Partically Copy from Grasslands 
     public class DungeonDuellMultiplayerLevelManager : MultiplayerLevelManager, MMEventListener<CoinEvent>, IObserver
     {
-        public struct DDPoints
-        {
-            public string PlayerID;
-            public int Points;
-            public int Level;
-            public int CoinsForNextLevel;
-        }
+        private const string playerNamebase = "Player";
 
+        private const int HealingPreFinal = 40;
+        private const int HealingInFinal = 80;
 
-        [Header("Bindings")]
-        // An array to store each player's points 
-        [Tooltip("an array to store each player's points")]
-        public DDPoints[] Points;
-
-        /// the list of countdowns we need to update 
+        /// the list of countdowns we need to update
         [Tooltip("the list of countdowns we need to update")]
         public List<MMCountdown> Countdowns;
-
-        public virtual string WinnerID { get; set; }
-        public virtual string LevelUPID { get; set; }
-
-        protected string _playerID;
-        protected bool _gameOver = false;
 
         public CharacterMovement[] walking = new CharacterMovement[2];
         public CharacterRun[] running = new CharacterRun[2];
@@ -74,24 +59,81 @@ namespace MoreMountains.TopDownEngine
 
         public PlayerSpineAnimationHandling[] playerSpineAnimationHandlings = new PlayerSpineAnimationHandling[2];
 
-        public dungeonduell.SequenceMang sequenceMang;
+        public SequenceMang sequenceMang;
 
-        const string playerNamebase = "Player";
-
-        PlayerDataManager playerDataManager;
-
-        [SerializeField] float coastMultiply = 2;
-        [SerializeField] int startCoast = 1;
+        [SerializeField] private float coastMultiply = 2;
+        [SerializeField] private int startCoast = 1;
+        protected bool _gameOver;
 
         private int _healthOnUpgrade = HealingPreFinal;
 
-        const int HealingPreFinal = 40;
-        const int HealingInFinal = 80;
+        protected string _playerID;
+
+        private PlayerDataManager playerDataManager;
 
 
-        /// <summary> 
-        /// On init, we initialize our points and countdowns 
-        /// </summary> 
+        [Header("Bindings")]
+        // An array to store each player's points 
+        [Tooltip("an array to store each player's points")]
+        public DDPoints[] Points;
+
+        public virtual string WinnerID { get; set; }
+        public virtual string LevelUPID { get; set; }
+
+
+        /// <summary>
+        ///     Starts listening for pickable item events
+        /// </summary>
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            this.MMEventStartListening<CoinEvent>();
+            SubscribeToEvents();
+        }
+
+        /// <summary>
+        ///     Stops listening for pickable item events
+        /// </summary>
+        protected override void OnDisable()
+        {
+            SavePlayerStates();
+            base.OnDisable();
+            this.MMEventStopListening<CoinEvent>();
+            UnsubscribeToAllEvents();
+        }
+
+        public void SubscribeToEvents()
+        {
+            DDCodeEventHandler.PlayerUpgrade += HandleUpgrade;
+            DDCodeEventHandler.FinalRoundInDungeon += HealingIncreased;
+        }
+
+        public void UnsubscribeToAllEvents()
+        {
+            DDCodeEventHandler.PlayerUpgrade -= HandleUpgrade;
+            DDCodeEventHandler.FinalRoundInDungeon -= HealingIncreased;
+        }
+
+        /// <summary>
+        ///     When a coin gets picked, we increase the amount of points of the character who picked it
+        /// </summary>
+        /// <param name="pickEvent"></param>
+        public virtual void OnMMEvent(CoinEvent coinEvent)
+        {
+            LevelUPID = coinEvent.Picker.MMGetComponentNoAlloc<Character>()?.PlayerID;
+            for (var i = 0; i < Points.Length; i++)
+                if (Points[i].PlayerID == LevelUPID)
+                {
+                    Points[i].Points += coinEvent.PointsToAdd;
+                    TopDownEngineEvent.Trigger(TopDownEngineEventTypes.Repaint, null);
+                    if (Points[i].Points >= Points[i].CoinsForNextLevel) HandleUpgradable(i);
+                }
+        }
+
+
+        /// <summary>
+        ///     On init, we initialize our points and countdowns
+        /// </summary>
         protected override void Initialization()
         {
             base.Initialization();
@@ -112,8 +154,8 @@ namespace MoreMountains.TopDownEngine
             LevelUPID = "";
 
             Points = new DDPoints[Players.Count];
-            int i = 0;
-            foreach (Character player in Players)
+            var i = 0;
+            foreach (var player in Players)
             {
                 Points[i].PlayerID = player.PlayerID;
                 Points[i].Points = 0;
@@ -137,10 +179,8 @@ namespace MoreMountains.TopDownEngine
         private void SynchronizeToPlayerDataManager()
         {
             var playerDataList = playerDataManager.PlayerDataList;
-            for (int i = 0; i < Points.Length; i++)
-            {
+            for (var i = 0; i < Points.Length; i++)
                 foreach (var data in playerDataList)
-                {
                     if (data.PlayerID == Points[i].PlayerID)
                     {
                         data.Points = Points[i].Points;
@@ -156,17 +196,13 @@ namespace MoreMountains.TopDownEngine
                         // Give remain Hp back to meta 
                         data.MetaHp += (int)health[i].CurrentHealth;
                     }
-                }
-            }
         }
 
         private void SynchronizeFromPlayerDataManager()
         {
             var playerDataList = playerDataManager.PlayerDataList;
-            for (int i = 0; i < Points.Length; i++)
-            {
+            for (var i = 0; i < Points.Length; i++)
                 foreach (var data in playerDataList)
-                {
                     if (data.PlayerID == Points[i].PlayerID)
                     {
                         Points[i].Points = data.Points;
@@ -184,37 +220,31 @@ namespace MoreMountains.TopDownEngine
                         // Upate Player MetaHp
                         data.MetaHp = (int)Math.Max(data.MetaHp - health[i].MaximumHealth, 0);
                     }
-                }
-            }
         }
 
-        /// <summary> 
-        /// Whenever a player dies, we check if we only have one left alive, in which case we trigger our game over routine 
-        /// </summary> 
-        /// <param name="playerCharacter"></param> 
+        /// <summary>
+        ///     Whenever a player dies, we check if we only have one left alive, in which case we trigger our game over routine
+        /// </summary>
+        /// <param name="playerCharacter"></param>
         protected override void OnPlayerDeath(Character playerCharacter)
         {
-            int playerIndex = Int32.Parse(playerCharacter.PlayerID[^1].ToString()) - 1;
+            var playerIndex = int.Parse(playerCharacter.PlayerID[^1].ToString()) - 1;
             base.OnPlayerDeath(playerCharacter);
-            int aliveCharacters = 0;
-            int i = 0;
+            var aliveCharacters = 0;
+            var i = 0;
 
             if (playerDataManager.PlayerDataList[playerIndex].MetaHp <= 0)
             {
                 if (playerCharacter.PlayerID == "Player1")
-                {
                     WinnerID = "Player2";
-                }
                 else
-                {
                     WinnerID = "Player1";
-                }
 
                 StartCoroutine(GameOver());
             }
 
 
-            foreach (Character character in LevelManager.Instance.Players)
+            foreach (var character in Instance.Players)
             {
                 if (character.ConditionState.CurrentState != CharacterStates.CharacterConditions.Dead)
                 {
@@ -225,23 +255,17 @@ namespace MoreMountains.TopDownEngine
                 i++;
             }
 
-            if (aliveCharacters <= 0)
-            {
-                sequenceMang.BackToCardPhase();
-            }
+            if (aliveCharacters <= 0) sequenceMang.BackToCardPhase();
         }
 
-        /// <summary> 
-        /// On game over, freezes time and displays the game over screen 
-        /// </summary> 
-        /// <returns></returns> 
+        /// <summary>
+        ///     On game over, freezes time and displays the game over screen
+        /// </summary>
+        /// <returns></returns>
         protected virtual IEnumerator GameOver()
         {
             yield return new WaitForSeconds(2f);
-            if (WinnerID == "")
-            {
-                WinnerID = "Player1";
-            }
+            if (WinnerID == "") WinnerID = "Player1";
 
             MMTimeScaleEvent.Trigger(MMTimeScaleMethods.For, 0f, 0f, false, 0f, true);
             _gameOver = true;
@@ -254,53 +278,27 @@ namespace MoreMountains.TopDownEngine
         protected virtual void CheckForGameOver()
         {
             if (_gameOver)
-            {
                 if (Input.GetButton("Player1_Jump")
                     || Input.GetButton("Player2_Jump")
                     || Input.GetButton("Player3_Jump")
                     || Input.GetButton("Player4_Jump"))
-                {
                     MMTimeScaleEvent.Trigger(MMTimeScaleMethods.Reset, 1f, 0f, false, 0f, true);
-                    // MMSceneLoadingManager.LoadScene(SceneManager.GetActiveScene().name); 
-                }
-            }
-        }
-
-        /// <summary> 
-        /// When a coin gets picked, we increase the amount of points of the character who picked it 
-        /// </summary> 
-        /// <param name="pickEvent"></param> 
-        public virtual void OnMMEvent(CoinEvent coinEvent)
-        {
-            LevelUPID = coinEvent.Picker.MMGetComponentNoAlloc<Character>()?.PlayerID;
-            for (int i = 0; i < Points.Length; i++)
-            {
-                if (Points[i].PlayerID == LevelUPID)
-                {
-                    Points[i].Points += coinEvent.PointsToAdd;
-                    TopDownEngineEvent.Trigger(TopDownEngineEventTypes.Repaint, null);
-                    if (Points[i].Points >= Points[i].CoinsForNextLevel)
-                    {
-                        HandleUpgradable(i);
-                    }
-                }
-            }
+            // MMSceneLoadingManager.LoadScene(SceneManager.GetActiveScene().name); 
         }
 
         private void HandleUpgradable(int playerID)
         {
-            int upgradableCount =
+            var upgradableCount =
                 (int)Math.Floor(Math.Log(
-                    1 + ((coastMultiply - 1) * Points[playerID].Points / Points[playerID].CoinsForNextLevel),
+                    1 + (coastMultiply - 1) * Points[playerID].Points / Points[playerID].CoinsForNextLevel,
                     coastMultiply));
             DDCodeEventHandler.Trigger_LevelUpAvailable(playerID, upgradableCount);
         }
 
         public void ApplyLevelUpPerCoins(LevelUpOptions option, int amount, int playerId)
         {
-            string fullPlayerId = (playerNamebase + playerId);
-            for (int i = 0; i < Points.Length; i++)
-            {
+            var fullPlayerId = playerNamebase + playerId;
+            for (var i = 0; i < Points.Length; i++)
                 if (Points[i].PlayerID == fullPlayerId)
                 {
                     Points[i].Points -= Points[i].CoinsForNextLevel;
@@ -319,12 +317,11 @@ namespace MoreMountains.TopDownEngine
                         TopDownEngineEvent.Trigger(TopDownEngineEventTypes.Repaint, null);
                     }
                 }
-            }
         }
 
-        private void HandleUpgrade(LevelUpOptions option, String playerReference, int amount)
+        private void HandleUpgrade(LevelUpOptions option, string playerReference, int amount)
         {
-            int playerIndex = Int32.Parse(playerReference[^1].ToString()) - 1;
+            var playerIndex = int.Parse(playerReference[^1].ToString()) - 1;
             switch (option)
             {
                 case LevelUpOptions.Speed:
@@ -346,8 +343,8 @@ namespace MoreMountains.TopDownEngine
 
         private void UpgradeSpeed(int playerID, int amount)
         {
-            float defaultWalking = walking[playerID].WalkSpeed / playerSpineAnimationHandlings[playerID].walkMultiply;
-            float defaultRunning = running[playerID].RunSpeed / playerSpineAnimationHandlings[playerID].runningMultiply;
+            var defaultWalking = walking[playerID].WalkSpeed / playerSpineAnimationHandlings[playerID].walkMultiply;
+            var defaultRunning = running[playerID].RunSpeed / playerSpineAnimationHandlings[playerID].runningMultiply;
 
             print(amount);
 
@@ -368,65 +365,45 @@ namespace MoreMountains.TopDownEngine
 
         private Health GetPlayerHealth(int i)
         {
-            foreach (Health health in FindObjectsByType<Health>(FindObjectsSortMode.None))
-            {
-                if (health.GetComponent<Character>().PlayerID == (playerNamebase + i))
-                {
+            foreach (var health in FindObjectsByType<Health>(FindObjectsSortMode.None))
+                if (health.GetComponent<Character>().PlayerID == playerNamebase + i)
                     return health;
-                }
-            }
 
             return null;
         }
 
         private CharacterMovement GetPlayerMovement(int i)
         {
-            foreach (CharacterMovement movement in FindObjectsByType<CharacterMovement>(FindObjectsSortMode.None))
-            {
-                if (movement.GetComponent<Character>().PlayerID == (playerNamebase + i))
-                {
+            foreach (var movement in FindObjectsByType<CharacterMovement>(FindObjectsSortMode.None))
+                if (movement.GetComponent<Character>().PlayerID == playerNamebase + i)
                     return movement;
-                }
-            }
 
             return null;
         }
 
         private CharacterRun GetPlayerRun(int i)
         {
-            foreach (CharacterRun run in FindObjectsByType<CharacterRun>(FindObjectsSortMode.None))
-            {
-                if (run.GetComponent<Character>().PlayerID == (playerNamebase + i))
-                {
+            foreach (var run in FindObjectsByType<CharacterRun>(FindObjectsSortMode.None))
+                if (run.GetComponent<Character>().PlayerID == playerNamebase + i)
                     return run;
-                }
-            }
 
             return null;
         }
 
         private Character GetPlayerCharacter(int i)
         {
-            foreach (Character character in FindObjectsByType<Character>(FindObjectsSortMode.None))
-            {
-                if (character.PlayerID == (playerNamebase + i))
-                {
+            foreach (var character in FindObjectsByType<Character>(FindObjectsSortMode.None))
+                if (character.PlayerID == playerNamebase + i)
                     return character;
-                }
-            }
 
             return null;
         }
 
         private PlayerSpineAnimationHandling GetPlayerSpineAnimationHandling(int i)
         {
-            foreach (Character character in FindObjectsByType<Character>(FindObjectsSortMode.None))
-            {
-                if (character.PlayerID == (playerNamebase + i))
-                {
+            foreach (var character in FindObjectsByType<Character>(FindObjectsSortMode.None))
+                if (character.PlayerID == playerNamebase + i)
                     return character.GetComponentInChildren<PlayerSpineAnimationHandling>();
-                }
-            }
 
             return null;
         }
@@ -435,7 +412,7 @@ namespace MoreMountains.TopDownEngine
         public void RegisterAndUpdateWeapon(ProjectileWeapon weap, string id)
         {
             // Weapons is later Inhilaizes so its updates it self by calling this Function ist self
-            int playerIndex = Int32.Parse(id[id.Length - 1].ToString()) - 1;
+            var playerIndex = int.Parse(id[id.Length - 1].ToString()) - 1;
             weapon[playerIndex] = weap;
             weapon[playerIndex].TimeBetweenUses = playerDataManager.PlayerDataList[playerIndex].AttackSpeed;
         }
@@ -445,38 +422,12 @@ namespace MoreMountains.TopDownEngine
             _healthOnUpgrade = HealingInFinal;
         }
 
-
-        /// <summary> 
-        /// Starts listening for pickable item events 
-        /// </summary> 
-        protected override void OnEnable()
+        public struct DDPoints
         {
-            base.OnEnable();
-            this.MMEventStartListening<CoinEvent>();
-            SubscribeToEvents();
-        }
-
-        /// <summary> 
-        /// Stops listening for pickable item events 
-        /// </summary> 
-        protected override void OnDisable()
-        {
-            SavePlayerStates();
-            base.OnDisable();
-            this.MMEventStopListening<CoinEvent>();
-            UnsubscribeToAllEvents();
-        }
-
-        public void SubscribeToEvents()
-        {
-            DDCodeEventHandler.PlayerUpgrade += HandleUpgrade;
-            DDCodeEventHandler.FinalRoundInDungeon += HealingIncreased;
-        }
-
-        public void UnsubscribeToAllEvents()
-        {
-            DDCodeEventHandler.PlayerUpgrade -= HandleUpgrade;
-            DDCodeEventHandler.FinalRoundInDungeon -= HealingIncreased;
+            public string PlayerID;
+            public int Points;
+            public int Level;
+            public int CoinsForNextLevel;
         }
     }
 }

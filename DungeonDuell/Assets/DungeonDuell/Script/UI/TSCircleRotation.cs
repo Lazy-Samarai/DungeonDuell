@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using DG.Tweening;
+using UnityEngine;
 
 namespace dungeonduell
 {
@@ -9,15 +7,15 @@ namespace dungeonduell
     {
         public float rotationSpeed = 100f;
 
-        public bool unscaledTime = false;
+        public bool unscaledTime;
 
         private void Start()
         {
-            float duration = 360f / rotationSpeed;
+            var duration = 360f / rotationSpeed;
             transform.DORotate(new Vector3(0, 0, 360f), duration, RotateMode.FastBeyond360)
-                     .SetEase(Ease.Linear)
-                     .SetLoops(-1, LoopType.Restart)
-                     .SetUpdate(unscaledTime);
+                .SetEase(Ease.Linear)
+                .SetLoops(-1, LoopType.Restart)
+                .SetUpdate(unscaledTime);
         }
     }
 }

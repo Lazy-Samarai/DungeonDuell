@@ -1,17 +1,17 @@
-using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.EventSystems;
 using MoreMountains.TopDownEngine;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 namespace dungeonduell
 {
     public class DisplayCardController : MonoBehaviour
     {
-        private PlayerInput playerInput;
-        private DisplayCard displayCard;
         private CardToHand cardToHand;
+        private DisplayCard displayCard;
+        private PlayerInput playerInput;
 
-        void Start()
+        private void Start()
         {
             displayCard = GetComponent<DisplayCard>();
             cardToHand = GetComponentInParent<CardToHand>();
@@ -25,21 +25,14 @@ namespace dungeonduell
             playerInput = FindCorrectPlayerInput();
 
             if (playerInput != null)
-            {
                 playerInput.actions["Submit"].performed += OnSubmitPressed;
-            }
             else
-            {
                 Debug.LogError($"Kein passendes PlayerInput-Objekt fuer {gameObject.name} gefunden!");
-            }
         }
 
-        void OnDestroy()
+        private void OnDestroy()
         {
-            if (playerInput != null)
-            {
-                playerInput.actions["Submit"].performed -= OnSubmitPressed;
-            }
+            if (playerInput != null) playerInput.actions["Submit"].performed -= OnSubmitPressed;
         }
 
         private void OnSubmitPressed(InputAction.CallbackContext context)
@@ -53,15 +46,12 @@ namespace dungeonduell
 
         private PlayerInput FindCorrectPlayerInput()
         {
-            string neededPlayerID = IsPlayer1Card() ? "Player1" : "Player2";
+            var neededPlayerID = IsPlayer1Card() ? "Player1" : "Player2";
 
             foreach (var player in FindObjectsByType<PlayerInput>(FindObjectsSortMode.None))
             {
                 var playerManager = player.GetComponent<InputSystemManagerEventsBased>();
-                if (playerManager != null && playerManager.PlayerID == neededPlayerID)
-                {
-                    return player;
-                }
+                if (playerManager != null && playerManager.PlayerID == neededPlayerID) return player;
             }
 
             return null;
@@ -69,7 +59,7 @@ namespace dungeonduell
 
         private bool IsPlayer1Card()
         {
-            Transform parent = transform;
+            var parent = transform;
             while (parent != null)
             {
                 if (parent.name == "CanvasPlayer_1") return true;

@@ -1,52 +1,50 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 using UnityEngine.SceneManagement;
 
 namespace dungeonduell
 {
     public class ConnectionsCollector : MonoBehaviour
     {
-        public List<Tuple<Vector3Int, RoomInfo>> roomsInfos = new List<Tuple<Vector3Int, RoomInfo>>();
-        [SerializeField] List<RoomType> filteredRoomTypeFromFirstCoin;
+        [SerializeField] private List<RoomType> filteredRoomTypeFromFirstCoin;
+        public List<Tuple<Vector3Int, RoomInfo>> roomsInfos = new();
 
-        void OnEnable()
+        private void Awake()
+        {
+            var objs = FindObjectsByType<ConnectionsCollector>(FindObjectsSortMode.None);
+
+            if (objs.Length > 1) Destroy(gameObject);
+
+            DontDestroyOnLoad(gameObject);
+        }
+
+        private void OnEnable()
         {
             //Debug.Log("OnEnable called");
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
-        void Awake()
+
+        private void OnDisable()
         {
-            ConnectionsCollector[] objs = FindObjectsByType<ConnectionsCollector>(FindObjectsSortMode.None);
-
-            if (objs.Length > 1)
-            {
-                Destroy(this.gameObject);
-            }
-
-            DontDestroyOnLoad(gameObject);
+            SceneManager.sceneLoaded -= OnSceneLoaded;
         }
 
         // called second
-        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             // So the map is not seen in Dunegeon Phase
             if (scene.buildIndex == 1)
-            {
                 transform.GetChild(0).gameObject.SetActive(false);
-            }
             else
-            {
                 transform.GetChild(0).gameObject.SetActive(true);
-            }
         }
 
         public void AddRoom(Vector3Int pos, List<RoomConnection> Conncection, RoomType type, RoomElement element,
             List<ConnectionDir> newAllowedDoors, int owner)
         {
-            Tuple<Vector3Int, RoomInfo> newroomsInfos =
+            var newroomsInfos =
                 new Tuple<Vector3Int, RoomInfo>(pos,
                     new RoomInfo(roomsInfos.Count, Conncection, type, element, newAllowedDoors, owner,
                         !filteredRoomTypeFromFirstCoin.Contains(type)));
@@ -62,33 +60,24 @@ namespace dungeonduell
 
             int[] roomIdsConnect = { -1, -1, -1, -1, -1, -1 };
 
-            for (int i = 0; i < allArounds.Length; i++)
-            {
+            for (var i = 0; i < allArounds.Length; i++)
                 if (allowedDoors[i]) // Dont Tracking for Connection are not allowed 
-                {
-                    foreach (Tuple<Vector3Int, RoomInfo> roomInfo in roomsInfos)
-                    {
-                        if (roomInfo.Item1 == allArounds[i] & (forceOnRoom |
-                                                               (roomInfo.Item2.allowedDoors.Contains(((ConnectionDir)i)
-                                                                   .GetInvert()))))
+                    foreach (var roomInfo in roomsInfos)
+                        if ((roomInfo.Item1 == allArounds[i]) & (forceOnRoom |
+                                                                 roomInfo.Item2.allowedDoors.Contains(((ConnectionDir)i)
+                                                                     .GetInvert())))
                         {
                             roomIdsConnect[i] = roomInfo.Item2.RoomID;
                             break;
                         }
-                    }
-                }
-            }
 
             return roomIdsConnect;
         }
 
         public List<RoomInfo> GetRoomList()
         {
-            List<RoomInfo> RoomsInfos = new List<RoomInfo>();
-            foreach (Tuple<Vector3Int, RoomInfo> roomInfo in roomsInfos)
-            {
-                RoomsInfos.Add(roomInfo.Item2);
-            }
+            var RoomsInfos = new List<RoomInfo>();
+            foreach (var roomInfo in roomsInfos) RoomsInfos.Add(roomInfo.Item2);
 
             return RoomsInfos;
         }
@@ -96,12 +85,6 @@ namespace dungeonduell
         public List<Tuple<Vector3Int, RoomInfo>> GetFullRoomList()
         {
             return roomsInfos;
-        }
-
-
-        void OnDisable()
-        {
-            SceneManager.sceneLoaded -= OnSceneLoaded;
         }
     }
 }

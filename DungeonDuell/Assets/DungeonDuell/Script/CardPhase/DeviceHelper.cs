@@ -1,8 +1,8 @@
+using System.Linq;
+using MoreMountains.TopDownEngine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Users;
-using System.Linq;
-using MoreMountains.TopDownEngine;
 
 namespace dungeonduell
 {

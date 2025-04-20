@@ -1,6 +1,5 @@
-using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine;
 
 namespace dungeonduell
 {
@@ -9,10 +8,10 @@ namespace dungeonduell
         public GameObject tooltipPrefab;
         public GameObject cardCanvas;
         private GameObject tooltipInstance;
-        private TextMeshProUGUI tooltipText;
         private RectTransform tooltipRectTransform;
+        private TextMeshProUGUI tooltipText;
 
-        void Start()
+        private void Start()
         {
             if (tooltipPrefab != null)
             {
@@ -57,10 +56,7 @@ namespace dungeonduell
 
         public void HideTooltip()
         {
-            if (tooltipInstance != null)
-            {
-                tooltipInstance.SetActive(false);
-            }
+            if (tooltipInstance != null) tooltipInstance.SetActive(false);
         }
     }
 }

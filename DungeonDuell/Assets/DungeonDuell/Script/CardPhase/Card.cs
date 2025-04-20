@@ -1,8 +1,7 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using System;
 
 namespace dungeonduell
 {
@@ -16,13 +15,15 @@ namespace dungeonduell
         public RoomType roomtype = RoomType.Generic;
         public RoomElement roomElement = RoomElement.Standard;
         public TileBase Tile;
-
-        [System.Serializable]
-        public struct DirBarSet { public bool TopLeft; public bool TopRight; public bool Left; public bool Right; public bool BottonLeft; public bool BottonRight; } // Going Around
         public DirBarSet startDoorConcellation;
+
         public bool[] GetAllowedDirection()
         {
-            return new bool[] { startDoorConcellation.TopLeft, startDoorConcellation.TopRight, startDoorConcellation.Left, startDoorConcellation.Right, startDoorConcellation.BottonLeft, startDoorConcellation.BottonRight, };
+            return new[]
+            {
+                startDoorConcellation.TopLeft, startDoorConcellation.TopRight, startDoorConcellation.Left,
+                startDoorConcellation.Right, startDoorConcellation.BottonLeft, startDoorConcellation.BottonRight
+            };
         }
 
         public override bool Equals(object obj)
@@ -42,7 +43,7 @@ namespace dungeonduell
 
         public override int GetHashCode()
         {
-            HashCode hash = new HashCode();
+            var hash = new HashCode();
             hash.Add(base.GetHashCode());
             hash.Add(name);
             hash.Add(hideFlags);
@@ -55,9 +56,21 @@ namespace dungeonduell
             hash.Add(startDoorConcellation);
             return hash.ToHashCode();
         }
+
         public object Clone()
         {
-            return this.MemberwiseClone();
+            return MemberwiseClone();
         }
+
+        [Serializable]
+        public struct DirBarSet
+        {
+            public bool TopLeft;
+            public bool TopRight;
+            public bool Left;
+            public bool Right;
+            public bool BottonLeft;
+            public bool BottonRight;
+        } // Going Around
     }
 }

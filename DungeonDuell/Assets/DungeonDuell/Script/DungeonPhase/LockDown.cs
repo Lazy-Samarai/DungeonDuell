@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,24 +5,20 @@ namespace dungeonduell
 {
     public class LockDown : MonoBehaviour
     {
-        [SerializeField] List<GameObject> availableBarrier;
-        bool SystemActive = true;
+        [SerializeField] private List<GameObject> availableBarrier;
+        private bool SystemActive = true;
+
         public void LockingDown(bool down)
         {
             if (SystemActive)
-            {
-                foreach (GameObject g in availableBarrier)
-                {
-                    if(g != null){
+                foreach (var g in availableBarrier)
+                    if (g != null)
                         g.SetActive(down);
-                    }
-                   
-                }
-            }
-        }
-        public void SetLockDownSystem(bool active){
-            SystemActive = active;
         }
 
+        public void SetLockDownSystem(bool active)
+        {
+            SystemActive = active;
+        }
     }
 }
