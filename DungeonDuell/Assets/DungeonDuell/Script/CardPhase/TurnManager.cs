@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Linq;
 using DG.Tweening;
@@ -83,16 +84,16 @@ namespace dungeonduell
             playerTurnText.SetEntry(TextEntryNextPlayer);
             SetPlayerInText();
 
-            if (isPlayer1Turn)
+            try
             {
-                InputSystem.DisableDevice(playerInputs[1].user.pairedDevices[0]);
-                InputSystem.EnableDevice(playerInputs[0].user.pairedDevices[0]);
+                ChangeActivateDevice(playerInputs[1].user.pairedDevices[0], !isPlayer1Turn);
+                ChangeActivateDevice(playerInputs[0].user.pairedDevices[0], isPlayer1Turn);
             }
-            else
+            catch (Exception)
             {
-                InputSystem.DisableDevice(playerInputs[0].user.pairedDevices[0]);
-                InputSystem.EnableDevice(playerInputs[1].user.pairedDevices[0]);
+                Debug.LogWarning("It seems not enough Input devices for all player were paired.");
             }
+
 
             playerTurnText.gameObject.SetActive(true);
             pressAnyKeyText.gameObject.SetActive(true);
@@ -154,8 +155,8 @@ namespace dungeonduell
 
         public void InnitGameCountDown()
         {
-            InputSystem.EnableDevice(playerInputs[0].user.pairedDevices[0]);
-            InputSystem.EnableDevice(playerInputs[1].user.pairedDevices[0]);
+            ActivateAllDevice();
+
             StartCoroutine(StartCountDown());
         }
 
@@ -211,6 +212,40 @@ namespace dungeonduell
             else
             {
                 rect.DOAnchorPosY(hiddenY, 0.5f).SetEase(Ease.InCubic).OnComplete(() => uiElement.SetActive(false));
+            }
+        }
+
+        public void ActivateAllDevice()
+        {
+            foreach (PlayerInput playerInput in playerInputs)
+            {
+                ChangeActivateDevice(playerInput.user.pairedDevices[0], true);
+            }
+        }
+
+        private void ChangeActivateDevice(InputDevice device, bool on)
+        {
+            if (on)
+            {
+                InputSystem.EnableDevice(device);
+            }
+            else
+            {
+                InputSystem.DisableDevice(device);
+            }
+
+            if (device is Mouse | device is Keyboard)
+            {
+                Cursor.lockState = !on ? CursorLockMode.Locked : CursorLockMode.None;
+                Cursor.visible = on;
+                if (on) // Yes that has to be done separately  
+                {
+                    InputSystem.EnableDevice(Mouse.current);
+                }
+                else
+                {
+                    InputSystem.DisableDevice(Mouse.current);
+                }
             }
         }
     }

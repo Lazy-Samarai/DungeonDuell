@@ -37,8 +37,8 @@ namespace dungeonduell
 
         private void OnSubmitPressed(InputAction.CallbackContext context)
         {
-            if (context.control
-                    .device is not Mouse) // Otherwise the focused element is selected instead the one clicked by Mouse
+            // Otherwise the focused element is selected instead the one clicked by Mouse
+            if (context.control.device is not Mouse)
             {
                 if (EventSystem.current.currentSelectedGameObject == gameObject && IsActivePlayer())
                 {
