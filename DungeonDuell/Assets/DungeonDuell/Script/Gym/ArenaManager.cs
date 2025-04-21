@@ -11,46 +11,78 @@ namespace dungeonduell
 {
     public class ArenaManager : MonoBehaviour
     {
-        public Transform readyZone;
+        [SerializeField]
+        private Transform player1Transform;
+        [SerializeField]
+        private Transform player2Transform;
+
+        public Collider2D player1Zone;
+        public Collider2D player2Zone;
         public float readyCheckRadius = 2f;
         public int totalPlayersRequired = 2;
-        public TextMeshPro countdownText;
+        public TMP_Text countdownText;
         public string nextSceneName = "CardPhaseScene";
+        private Coroutine countdownCoroutine;
 
         private bool isCountingDown = false;
 
-        private void Update()
+        private void Start()
         {
-            if (!isCountingDown)
+            StartCoroutine(FindPlayersAtStart());
+        }
+
+        private IEnumerator FindPlayersAtStart()
+        {
+            while (player1Transform == null || player2Transform == null)
             {
-                CheckReadyZone();
+                GameObject p1 = GameObject.FindWithTag("Player1");
+                GameObject p2 = GameObject.FindWithTag("Player2");
+
+                if (p1 != null && player1Transform == null)
+                {
+                    player1Transform = p1.transform;
+                }
+                if (p2 != null && player2Transform == null)
+                {
+                    player2Transform = p2.transform;
+                }
+
+                yield return new WaitForSeconds(1f); // Warte bis Spieler erscheinen
             }
         }
 
-        private void CheckReadyZone()
+            private void Update()
         {
-            Collider[] players = Physics.OverlapSphere(readyZone.position, readyCheckRadius);
-            int readyCount = 0;
-            foreach (var col in players)
+            if (player1Transform == null || player2Transform == null) return;
+
+            bool player1InZone = player1Zone.bounds.Contains(player1Transform.transform.position);
+            bool player2InZone = player2Zone.bounds.Contains(player2Transform.transform.position);
+
+            if (player1InZone && player2InZone)
             {
-                if (col.CompareTag("Player"))
+                if (countdownCoroutine == null)
                 {
-                    readyCount++;
+                    countdownCoroutine = StartCoroutine(StartGameCountdown());
                 }
             }
-
-            if (readyCount >= totalPlayersRequired)
+            else
             {
-                StartCoroutine(StartGameCountdown());
+                if (countdownCoroutine != null)
+                {
+                    StopCoroutine(countdownCoroutine);
+                    countdownCoroutine = null;
+                    if (countdownText != null)
+                    {
+                        countdownText.text = "X";
+                    }
+                }
             }
         }
 
         private IEnumerator StartGameCountdown()
         {
-            isCountingDown = true;
-
             float countdown = 3f;
-            while (countdown > 0)
+            while (countdown > 0f)
             {
                 if (countdownText != null)
                 {
@@ -58,6 +90,17 @@ namespace dungeonduell
                 }
                 yield return new WaitForSeconds(1f);
                 countdown -= 1f;
+
+                bool player1StillInZone = player1Zone.bounds.Contains(player1Transform.transform.position);
+                bool player2StillInZone = player2Zone.bounds.Contains(player2Transform.transform.position);
+                if (!player1StillInZone || !player2StillInZone)
+                {
+                    if (countdownText != null)
+                    {
+                        countdownText.text = "X";
+                    }
+                    yield break;
+                }
             }
 
             if (countdownText != null)
