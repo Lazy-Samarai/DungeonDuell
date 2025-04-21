@@ -1641,7 +1641,7 @@ MonoBehaviour:
   ResetButtonStatesOnFocusLoss: 1
   PlayerID: Player1
   AutoMobileDetection: 0
-  InputForcedMode: 2
+  InputForcedMode: 0
   ForceWeaponMode: 0
   WeaponForcedMode: 0
   HideMobileControlsInEditor: 0
@@ -2039,7 +2039,7 @@ MonoBehaviour:
     m_ActionId: facc7a30-9bf5-4458-a444-3b84b19a4385
     m_ActionName: 'CardPhase/Cancel[/Keyboard/escape,/XInputControllerWindows/buttonEast,/XInputControllerWindows1/buttonEast]'
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Gamepad
+  m_DefaultControlScheme: 
   m_DefaultActionMap: DungeonPhase
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -2052,11 +2052,11 @@ Transform:
   m_GameObject: {fileID: 318792411}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4896.398, y: 1030.793, z: 88.5}
+  m_LocalPosition: {x: 4822.184, y: 1021.7602, z: 102.289665}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 808795873}
+  m_Father: {fileID: 948937445}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &318792415
 MonoBehaviour:
@@ -5250,8 +5250,7 @@ Transform:
   - {fileID: 68070329}
   - {fileID: 1070023022}
   - {fileID: 705329673}
-  - {fileID: 318792414}
-  - {fileID: 1078324501}
+  - {fileID: 948937445}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &820939799
@@ -5849,6 +5848,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 938821696}
   m_CullTransparentMesh: 1
+--- !u!1 &948937444
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 948937445}
+  - component: {fileID: 948937446}
+  m_Layer: 0
+  m_Name: Devices
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &948937445
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 948937444}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 74.21407, y: 9.032759, z: -13.789667}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 318792414}
+  - {fileID: 1078324501}
+  m_Father: {fileID: 808795873}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &948937446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 948937444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f3bc5929bc138c4590a271766d07060, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &953001462
 GameObject:
   m_ObjectHideFlags: 0
@@ -7118,7 +7163,7 @@ MonoBehaviour:
     m_ActionId: facc7a30-9bf5-4458-a444-3b84b19a4385
     m_ActionName: 'CardPhase/Cancel[/Keyboard/escape,/XInputControllerWindows/buttonEast,/XInputControllerWindows1/buttonEast]'
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Gamepad
+  m_DefaultControlScheme: 
   m_DefaultActionMap: DungeonPhase
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -7131,11 +7176,11 @@ Transform:
   m_GameObject: {fileID: 1078324498}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4896.398, y: 1030.793, z: 88.5}
+  m_LocalPosition: {x: 4822.184, y: 1021.7602, z: 102.289665}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 808795873}
+  m_Father: {fileID: 948937445}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1078324502
 MonoBehaviour:
@@ -9232,7 +9277,7 @@ MonoBehaviour:
   GroupCameraRig: {fileID: 68070328}
   SplitCameraRig: {fileID: 1070023021}
   MPGUIManager: {fileID: 0}
-  Countdowns: []
+  countdowns: []
   walking:
   - {fileID: 0}
   - {fileID: 0}
@@ -11263,8 +11308,8 @@ MonoBehaviour:
   - {fileID: 3408852718116007260, guid: 40a24f6f31a55df40a711d109befc09e, type: 3}
   stepCross: 22.75
   stepUpDown: 19.5
-  spawnPoint_Player1: {fileID: 686585495}
-  spawnPoint_Player2: {fileID: 1133580718}
+  spawnPointPlayer1: {fileID: 686585495}
+  spawnPointPlayer2: {fileID: 1133580718}
 --- !u!4 &1623725768
 Transform:
   m_ObjectHideFlags: 0
@@ -11665,6 +11710,11 @@ PrefabInstance:
     - target: {fileID: 7277498198348813292, guid: e738a2ac7ae5bcc4894527f901d1007f,
         type: 3}
       propertyPath: PlayerID
+      value: Player2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7277498198348813292, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: playerID
       value: Player2
       objectReference: {fileID: 0}
     - target: {fileID: 7277498198348813292, guid: e738a2ac7ae5bcc4894527f901d1007f,

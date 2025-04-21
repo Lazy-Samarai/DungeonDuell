@@ -26,7 +26,7 @@ namespace dungeonduell
 
         public GameObject player1UI;
         public GameObject player2UI;
-        
+
         public bool isPlayer1Turn = true;
 
         [FormerlySerializedAs("_playerInputs")]
@@ -99,6 +99,7 @@ namespace dungeonduell
             pressAnyKeyText.gameObject.SetActive(true);
             ToggleHandVisibility(false, false);
         }
+
         private void SetPlayerInText()
         {
             ((IntVariable)playerTurnText.StringReference[playerTurnText.StringReference.Keys.First()]).Value =
@@ -217,6 +218,8 @@ namespace dungeonduell
 
         public void ActivateAllDevice()
         {
+            InputSystem.DisableDevice(Mouse.current);
+            InputSystem.DisableDevice(Keyboard.current);
             foreach (PlayerInput playerInput in playerInputs)
             {
                 ChangeActivateDevice(playerInput.user.pairedDevices[0], true);
