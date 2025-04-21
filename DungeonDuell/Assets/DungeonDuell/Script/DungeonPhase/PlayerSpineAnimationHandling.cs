@@ -8,7 +8,7 @@ namespace dungeonduell
 {
     public class PlayerSpineAnimationHandling : MonoBehaviour
     {
-        const string TargetBoneName = "Target"; 
+        const string TargetBoneName = "Target";
         private Bone _ikTargetBone;
         SkeletonAnimation _skeletonAnimation;
         [SpineAnimation] public string running;
@@ -31,9 +31,9 @@ namespace dungeonduell
         void Awake()
         {
             _characterMovement = GetComponentInParent<CharacterMovement>();
-         //   _characterOrientation2D  = GetComponentInParent<CharacterOrientation2D>();
+            //   _characterOrientation2D  = GetComponentInParent<CharacterOrientation2D>();
             _skeletonAnimation = GetComponent<SkeletonAnimation>();
-            _ikTargetBone = _skeletonAnimation.Skeleton.FindBone(TargetBoneName); 
+            _ikTargetBone = _skeletonAnimation.Skeleton.FindBone(TargetBoneName);
             SetToIdle();
         }
 
@@ -41,7 +41,7 @@ namespace dungeonduell
         {
             Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mouseWorldPosition.z = 0;
-            
+
             if (transform.parent.transform.rotation.y <= 0)
             {
                 mouseWorldPosition.x *= -1;
@@ -50,10 +50,9 @@ namespace dungeonduell
             CheckRunningDirection();
 
             _ikTargetBone.SetLocalPosition(mouseWorldPosition);
-            
-            
+
+
             _skeletonAnimation.skeleton.UpdateWorldTransform(Skeleton.Physics.Update);
-            
         }
 
         private void CheckRunningDirection()
@@ -66,8 +65,7 @@ namespace dungeonduell
 
             if (_characterMovement.GetMovement().x >= 0 != runningEast)
             {
-             
-                runningEast =_characterMovement.GetMovement().x >= 0;
+                runningEast = _characterMovement.GetMovement().x >= 0;
                 UpdateFacing();
             }
         }
@@ -90,7 +88,8 @@ namespace dungeonduell
 
         public void UpdateFacing()
         {
-            if (_skeletonAnimation.state.GetCurrent(0).ToString() == running | _skeletonAnimation.state.GetCurrent(0).ToString() == runningBackward)
+            if (_skeletonAnimation.state.GetCurrent(0).ToString() == running |
+                _skeletonAnimation.state.GetCurrent(0).ToString() == runningBackward)
             {
                 SetToRunning();
             }
@@ -104,19 +103,20 @@ namespace dungeonduell
 
         public void SetToRunning()
         {
-           bool backwards = facingEastRunning != runningEast;
-           SetAnimation(!backwards ? running : runningBackward, runningMultiply);
+            bool backwards = facingEastRunning != runningEast;
+            SetAnimation(!backwards ? running : runningBackward, runningMultiply);
         }
 
         public void SetToWalk()
         {
             SetAnimation(walk, walkMultiply);
         }
+
         public void SetToDeath()
         {
-            print("Deeeeeeeeeeeaddddd");
             SetAnimation(death, false);
         }
+
         public void SetToDash()
         {
             SetAnimation(dash);
@@ -124,10 +124,8 @@ namespace dungeonduell
 
         public void SetToShoot()
         {
-            _skeletonAnimation.AnimationState.AddAnimation(1,shoot,false,0f);
+            _skeletonAnimation.AnimationState.AddAnimation(1, shoot, false, 0f);
             _skeletonAnimation.AnimationState.AddEmptyAnimation(1, 0.25f, 0f);
         }
-
-     
     }
 }
