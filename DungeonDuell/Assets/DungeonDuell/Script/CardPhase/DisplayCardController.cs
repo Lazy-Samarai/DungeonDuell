@@ -18,7 +18,7 @@ namespace dungeonduell
 
             if (displayCard == null || cardToHand == null)
             {
-                Debug.LogError($"DisplayCardController benötigt DisplayCard & CardToHand auf {gameObject.name}");
+                Debug.LogError($"DisplayCardController benoetigt DisplayCard & CardToHand auf {gameObject.name}");
                 return;
             }
 
@@ -30,7 +30,7 @@ namespace dungeonduell
             }
             else
             {
-                Debug.LogError($"Kein passendes PlayerInput-Objekt für {gameObject.name} gefunden!");
+                Debug.LogError($"Kein passendes PlayerInput-Objekt fuer {gameObject.name} gefunden!");
             }
         }
 
@@ -63,6 +63,7 @@ namespace dungeonduell
                     return player;
                 }
             }
+
             return null;
         }
 
@@ -75,6 +76,7 @@ namespace dungeonduell
                 if (parent.name == "CanvasPlayer_2") return false;
                 parent = parent.parent;
             }
+
             return true;
         }
 
