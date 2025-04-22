@@ -689,8 +689,7 @@ MonoBehaviour:
   shadowSetAbleTiles:
   - {fileID: 11400000, guid: eba97dcbfa65cce43b6e8898d2506f2d, type: 2}
   - {fileID: 11400000, guid: 61d31bb1dc50f7b488ce49f1e12915e0, type: 2}
-  CardShelled:
-  - {fileID: 11400000, guid: 27af0542bdc0ff742b14a1d7620896cb, type: 2}
+  CardShelled: []
   connectCollector: {fileID: 1945806930}
   isPlayer1Turn: 1
 --- !u!4 &481254718
@@ -749,6 +748,7 @@ GameObject:
   - component: {fileID: 511666257}
   - component: {fileID: 511666259}
   - component: {fileID: 511666258}
+  - component: {fileID: 511666260}
   m_Layer: 5
   m_Name: TextNextPlayer
   m_TagString: Untagged
@@ -875,6 +875,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 511666256}
   m_CullTransparentMesh: 1
+--- !u!114 &511666260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511666256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:eef0979b750b7f146af4bb76d5395c33
+    m_TableEntryReference:
+      m_KeyId: 279384223744
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables:
+    - name: playerNumber
+      variable:
+        rid: 6862435139449782277
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 511666258}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds:
+    - rid: 6862435139449782277
+      type: {class: IntVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables,
+        asm: Unity.Localization}
+      data:
+        m_Value: 1
 --- !u!1 &517887068
 GameObject:
   m_ObjectHideFlags: 0
@@ -3822,8 +3870,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 385310870bca89243a9f10841d4ee16c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTurnText: {fileID: 511666258}
-  pressAnyKeyText: {fileID: 2034102534}
+  playerTurnText: {fileID: 511666260}
+  pressAnyKeyText: {fileID: 2034102537}
   HandPlayer1: {fileID: 2012748599}
   HandPlayer2: {fileID: 2077986323}
   player1UI: {fileID: 1541103091}
@@ -12036,6 +12084,7 @@ GameObject:
   - component: {fileID: 2034102536}
   - component: {fileID: 2034102535}
   - component: {fileID: 2034102534}
+  - component: {fileID: 2034102537}
   m_Layer: 5
   m_Name: TextPressKey
   m_TagString: Untagged
@@ -12063,7 +12112,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press X
+  m_text: Press
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f97413b6961e8a844a852fd545be33f0, type: 2}
   m_sharedMaterial: {fileID: 6578143679271650886, guid: f97413b6961e8a844a852fd545be33f0,
@@ -12162,6 +12211,54 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -319}
   m_SizeDelta: {x: 344.1305, y: 100.4123}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2034102537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2034102533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:eef0979b750b7f146af4bb76d5395c33
+    m_TableEntryReference:
+      m_KeyId: 266545459200
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables:
+    - name: sec
+      variable:
+        rid: 6862435139449782378
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2034102534}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds:
+    - rid: 6862435139449782378
+      type: {class: IntVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables,
+        asm: Unity.Localization}
+      data:
+        m_Value: 5
 --- !u!1 &2077986321
 GameObject:
   m_ObjectHideFlags: 0

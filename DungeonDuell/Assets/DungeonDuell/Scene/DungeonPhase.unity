@@ -13,7 +13,7 @@ OcclusionCullingSettings:
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 9
+  serializedVersion: 10
   m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
@@ -38,13 +38,12 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &4
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 12
-  m_GIWorkflowMode: 1
+  serializedVersion: 13
+  m_BakeOnSceneLoad: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -67,9 +66,6 @@ LightmapSettings:
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
     m_TextureCompression: 1
-    m_FinalGather: 0
-    m_FinalGatherFiltering: 1
-    m_FinalGatherRayCount: 1024
     m_ReflectionCompression: 2
     m_MixedBakeMode: 1
     m_BakeBackend: 0
@@ -177,6 +173,9 @@ SpriteMask:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -211,6 +210,7 @@ SpriteMask:
   m_BackSortingOrder: 0
   m_IsCustomRangeActive: 0
   m_SpriteSortPoint: 0
+  m_MaskSource: 0
 --- !u!4 &9382128
 Transform:
   m_ObjectHideFlags: 0
@@ -326,15 +326,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 00000000
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -850,15 +852,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -1725,7 +1729,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 265ae792-b274-4758-9c3f-67c2f395c758
-    m_ActionName: PlayerControls/PrimaryMovement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+    m_ActionName: 'PlayerControls/PrimaryMovement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 318792412}
@@ -1757,7 +1761,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 314ace32-fb21-4bab-a569-ebe4e48f2102
-    m_ActionName: PlayerControls/Jump[/Keyboard/space]
+    m_ActionName: 'PlayerControls/Jump[/Keyboard/space]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 318792412}
@@ -1773,7 +1777,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 6b5c4b16-7607-4f0a-ad5b-62efd798065d
-    m_ActionName: PlayerControls/Run[/Keyboard/leftShift]
+    m_ActionName: 'PlayerControls/Run[/Keyboard/leftShift]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 318792412}
@@ -1789,7 +1793,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 56a37787-c3be-4789-a219-0509391dc113
-    m_ActionName: PlayerControls/Dash[/Keyboard/f]
+    m_ActionName: 'PlayerControls/Dash[/Keyboard/f]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 318792412}
@@ -1805,7 +1809,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 5e6e408c-e79e-4f5c-87b7-8a6d181bd681
-    m_ActionName: PlayerControls/Crouch[/Keyboard/c]
+    m_ActionName: 'PlayerControls/Crouch[/Keyboard/c]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 318792412}
@@ -1821,7 +1825,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 7016cc32-6ee0-4d53-b08c-02cbe6eb2c0e
-    m_ActionName: PlayerControls/Shoot[/Keyboard/e,/Mouse/leftButton]
+    m_ActionName: 'PlayerControls/Shoot[/Keyboard/e,/Mouse/leftButton]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 318792412}
@@ -1837,7 +1841,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 1b70a5ec-5da5-42ce-a7c0-8f54ff84052f
-    m_ActionName: PlayerControls/SecondaryShoot[/Keyboard/leftAlt]
+    m_ActionName: 'PlayerControls/SecondaryShoot[/Keyboard/leftAlt]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 318792412}
@@ -1853,7 +1857,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: ae461515-11b0-4cc9-b221-92ed2df4118e
-    m_ActionName: PlayerControls/Interact[/Keyboard/space]
+    m_ActionName: 'PlayerControls/Interact[/Keyboard/space]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 318792412}
@@ -1869,7 +1873,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: cf90ff3a-006b-4ae6-9594-cc2189d6f5f0
-    m_ActionName: PlayerControls/Reload[/Keyboard/r]
+    m_ActionName: 'PlayerControls/Reload[/Keyboard/r]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 318792412}
@@ -1885,7 +1889,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: c01ffcc5-adff-4aa3-bb8d-e0139087e5ed
-    m_ActionName: PlayerControls/Pause[/Keyboard/escape]
+    m_ActionName: 'PlayerControls/Pause[/Keyboard/escape]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 318792412}
@@ -1901,7 +1905,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 6e3febaf-dba5-4b43-b4f8-3b720e7ad1be
-    m_ActionName: PlayerControls/SwitchWeapon[/Keyboard/t]
+    m_ActionName: 'PlayerControls/SwitchWeapon[/Keyboard/t]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 318792412}
@@ -1917,7 +1921,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: cde4a43f-3a08-47c8-afdf-2c5dca8d1241
-    m_ActionName: PlayerControls/SwitchCharacter[/Keyboard/p]
+    m_ActionName: 'PlayerControls/SwitchCharacter[/Keyboard/p]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 318792412}
@@ -1933,7 +1937,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: c71e92f2-77ca-4de6-98ad-64b961ed706e
-    m_ActionName: PlayerControls/TimeControl[/Keyboard/k]
+    m_ActionName: 'PlayerControls/TimeControl[/Keyboard/k]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 239ee3ca-17ea-4fb2-85ef-91f8046dfddb
@@ -1953,7 +1957,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 5f531d69-3a23-4c4c-a114-620394e39f56
-    m_ActionName: DungeonPhase/OpenUpgrade[/DualShock4GamepadHID/dpad/up,/DualShock4GamepadHID1/dpad/up]
+    m_ActionName: 'DungeonPhase/OpenUpgrade[/DualShock4GamepadHID/dpad/up,/DualShock4GamepadHID1/dpad/up]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2141670533}
@@ -1969,7 +1973,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: ccca69e4-51ba-415c-be90-1b1e6da5bc2b
-    m_ActionName: DungeonPhase/DoUpgradeSpeed[/DualShock4GamepadHID/dpad/left,/DualShock4GamepadHID1/dpad/left]
+    m_ActionName: 'DungeonPhase/DoUpgradeSpeed[/DualShock4GamepadHID/dpad/left,/DualShock4GamepadHID1/dpad/left]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2141670533}
@@ -1985,7 +1989,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 13d851c4-efe0-4304-8dd8-2d24a140e047
-    m_ActionName: DungeonPhase/DoUpgradeHealth[/DualShock4GamepadHID/dpad/right,/DualShock4GamepadHID1/dpad/right]
+    m_ActionName: 'DungeonPhase/DoUpgradeHealth[/DualShock4GamepadHID/dpad/right,/DualShock4GamepadHID1/dpad/right]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2141670533}
@@ -2001,7 +2005,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: eecdb8dd-ec6c-4d14-aaf0-47a89e42d6bf
-    m_ActionName: DungeonPhase/DoUpgradeAtk[/DualShock4GamepadHID/dpad/up,/DualShock4GamepadHID1/dpad/up]
+    m_ActionName: 'DungeonPhase/DoUpgradeAtk[/DualShock4GamepadHID/dpad/up,/DualShock4GamepadHID1/dpad/up]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 95f24a95-d445-4f14-b8c9-7789ea98fe7c
@@ -2021,19 +2025,19 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 3c914630-d9c6-47d1-8648-7b8d5a22c551
-    m_ActionName: CardPhase/Navigation[/DualShock4GamepadHID/leftStick,/DualShock4GamepadHID/dpad]
+    m_ActionName: 'CardPhase/Navigation[/DualShock4GamepadHID/leftStick,/DualShock4GamepadHID/dpad]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: d858d18f-1581-4499-88be-9325a3bb9b38
-    m_ActionName: CardPhase/Back[/DualShock4GamepadHID/buttonEast,/DualShock4GamepadHID1/buttonEast]
+    m_ActionName: 'CardPhase/Back[/DualShock4GamepadHID/buttonEast,/DualShock4GamepadHID1/buttonEast]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: b0b637a1-f591-4af1-81bf-f5342742219f
-    m_ActionName: CardPhase/Pause[/Keyboard/escape,/XInputControllerWindows/start,/XInputControllerWindows1/start]
+    m_ActionName: 'CardPhase/Pause[/Keyboard/escape,/XInputControllerWindows/start,/XInputControllerWindows1/start]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: facc7a30-9bf5-4458-a444-3b84b19a4385
-    m_ActionName: CardPhase/Cancel[/Keyboard/escape,/XInputControllerWindows/buttonEast,/XInputControllerWindows1/buttonEast]
+    m_ActionName: 'CardPhase/Cancel[/Keyboard/escape,/XInputControllerWindows/buttonEast,/XInputControllerWindows1/buttonEast]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: DungeonPhase
@@ -2514,7 +2518,7 @@ RectTransform:
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &382463283
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2528,6 +2532,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -3866,7 +3871,7 @@ RectTransform:
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &570456430
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -3880,6 +3885,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -4604,6 +4610,7 @@ BoxCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 686585494}
   m_Enabled: 1
+  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -4627,7 +4634,8 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -4638,7 +4646,6 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
   m_Size: {x: 3, y: 3}
   m_EdgeRadius: 0
 --- !u!1 &688477627
@@ -4917,12 +4924,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    quality: 3
-    frameInfluence: 0.1
-    jitterScale: 1
-    mipBias: 0
-    varianceClampScale: 0.9
-    contrastAdaptiveSharpening: 0
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!1 &747842290
 GameObject:
   m_ObjectHideFlags: 0
@@ -5158,6 +5165,9 @@ SpriteMask:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5192,6 +5202,7 @@ SpriteMask:
   m_BackSortingOrder: 0
   m_IsCustomRangeActive: 0
   m_SpriteSortPoint: 0
+  m_MaskSource: 0
 --- !u!4 &768311738
 Transform:
   m_ObjectHideFlags: 0
@@ -5802,15 +5813,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 00000000
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -5936,15 +5949,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 00000000
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -6339,7 +6354,7 @@ RectTransform:
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1027728200
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -6353,6 +6368,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -6584,7 +6600,7 @@ RectTransform:
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1059172058
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -6598,6 +6614,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -6791,7 +6808,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 265ae792-b274-4758-9c3f-67c2f395c758
-    m_ActionName: PlayerControls/PrimaryMovement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+    m_ActionName: 'PlayerControls/PrimaryMovement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1078324499}
@@ -6823,7 +6840,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 314ace32-fb21-4bab-a569-ebe4e48f2102
-    m_ActionName: PlayerControls/Jump[/Keyboard/space]
+    m_ActionName: 'PlayerControls/Jump[/Keyboard/space]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1078324499}
@@ -6839,7 +6856,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 6b5c4b16-7607-4f0a-ad5b-62efd798065d
-    m_ActionName: PlayerControls/Run[/Keyboard/leftShift]
+    m_ActionName: 'PlayerControls/Run[/Keyboard/leftShift]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1078324499}
@@ -6855,7 +6872,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 56a37787-c3be-4789-a219-0509391dc113
-    m_ActionName: PlayerControls/Dash[/Keyboard/f]
+    m_ActionName: 'PlayerControls/Dash[/Keyboard/f]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1078324499}
@@ -6871,7 +6888,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 5e6e408c-e79e-4f5c-87b7-8a6d181bd681
-    m_ActionName: PlayerControls/Crouch[/Keyboard/c]
+    m_ActionName: 'PlayerControls/Crouch[/Keyboard/c]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1078324499}
@@ -6887,7 +6904,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 7016cc32-6ee0-4d53-b08c-02cbe6eb2c0e
-    m_ActionName: PlayerControls/Shoot[/Keyboard/e,/Mouse/leftButton]
+    m_ActionName: 'PlayerControls/Shoot[/Keyboard/e,/Mouse/leftButton]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1078324499}
@@ -6903,7 +6920,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 1b70a5ec-5da5-42ce-a7c0-8f54ff84052f
-    m_ActionName: PlayerControls/SecondaryShoot[/Keyboard/leftAlt]
+    m_ActionName: 'PlayerControls/SecondaryShoot[/Keyboard/leftAlt]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1078324499}
@@ -6919,7 +6936,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: ae461515-11b0-4cc9-b221-92ed2df4118e
-    m_ActionName: PlayerControls/Interact[/Keyboard/space]
+    m_ActionName: 'PlayerControls/Interact[/Keyboard/space]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1078324499}
@@ -6935,7 +6952,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: cf90ff3a-006b-4ae6-9594-cc2189d6f5f0
-    m_ActionName: PlayerControls/Reload[/Keyboard/r]
+    m_ActionName: 'PlayerControls/Reload[/Keyboard/r]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1078324499}
@@ -6951,7 +6968,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: c01ffcc5-adff-4aa3-bb8d-e0139087e5ed
-    m_ActionName: PlayerControls/Pause[/Keyboard/escape]
+    m_ActionName: 'PlayerControls/Pause[/Keyboard/escape]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1078324499}
@@ -6967,7 +6984,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 6e3febaf-dba5-4b43-b4f8-3b720e7ad1be
-    m_ActionName: PlayerControls/SwitchWeapon[/Keyboard/t]
+    m_ActionName: 'PlayerControls/SwitchWeapon[/Keyboard/t]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1078324499}
@@ -6983,7 +7000,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: cde4a43f-3a08-47c8-afdf-2c5dca8d1241
-    m_ActionName: PlayerControls/SwitchCharacter[/Keyboard/p]
+    m_ActionName: 'PlayerControls/SwitchCharacter[/Keyboard/p]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1078324499}
@@ -6999,7 +7016,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: c71e92f2-77ca-4de6-98ad-64b961ed706e
-    m_ActionName: PlayerControls/TimeControl[/Keyboard/k]
+    m_ActionName: 'PlayerControls/TimeControl[/Keyboard/k]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 239ee3ca-17ea-4fb2-85ef-91f8046dfddb
@@ -7019,7 +7036,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 5f531d69-3a23-4c4c-a114-620394e39f56
-    m_ActionName: DungeonPhase/OpenUpgrade[/DualShock4GamepadHID/dpad/up,/DualShock4GamepadHID1/dpad/up]
+    m_ActionName: 'DungeonPhase/OpenUpgrade[/DualShock4GamepadHID/dpad/up,/DualShock4GamepadHID1/dpad/up]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2143161137}
@@ -7035,7 +7052,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: ccca69e4-51ba-415c-be90-1b1e6da5bc2b
-    m_ActionName: DungeonPhase/DoUpgradeSpeed[/DualShock4GamepadHID/dpad/left,/DualShock4GamepadHID1/dpad/left]
+    m_ActionName: 'DungeonPhase/DoUpgradeSpeed[/DualShock4GamepadHID/dpad/left,/DualShock4GamepadHID1/dpad/left]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2143161137}
@@ -7051,7 +7068,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 13d851c4-efe0-4304-8dd8-2d24a140e047
-    m_ActionName: DungeonPhase/DoUpgradeHealth[/DualShock4GamepadHID/dpad/right,/DualShock4GamepadHID1/dpad/right]
+    m_ActionName: 'DungeonPhase/DoUpgradeHealth[/DualShock4GamepadHID/dpad/right,/DualShock4GamepadHID1/dpad/right]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2143161137}
@@ -7067,7 +7084,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: eecdb8dd-ec6c-4d14-aaf0-47a89e42d6bf
-    m_ActionName: DungeonPhase/DoUpgradeAtk[/DualShock4GamepadHID/dpad/up,/DualShock4GamepadHID1/dpad/up]
+    m_ActionName: 'DungeonPhase/DoUpgradeAtk[/DualShock4GamepadHID/dpad/up,/DualShock4GamepadHID1/dpad/up]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 95f24a95-d445-4f14-b8c9-7789ea98fe7c
@@ -7087,19 +7104,19 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 3c914630-d9c6-47d1-8648-7b8d5a22c551
-    m_ActionName: CardPhase/Navigation[/DualShock4GamepadHID/leftStick,/DualShock4GamepadHID/dpad]
+    m_ActionName: 'CardPhase/Navigation[/DualShock4GamepadHID/leftStick,/DualShock4GamepadHID/dpad]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: d858d18f-1581-4499-88be-9325a3bb9b38
-    m_ActionName: CardPhase/Back[/DualShock4GamepadHID/buttonEast,/DualShock4GamepadHID1/buttonEast]
+    m_ActionName: 'CardPhase/Back[/DualShock4GamepadHID/buttonEast,/DualShock4GamepadHID1/buttonEast]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: b0b637a1-f591-4af1-81bf-f5342742219f
-    m_ActionName: CardPhase/Pause[/Keyboard/escape,/XInputControllerWindows/start,/XInputControllerWindows1/start]
+    m_ActionName: 'CardPhase/Pause[/Keyboard/escape,/XInputControllerWindows/start,/XInputControllerWindows1/start]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: facc7a30-9bf5-4458-a444-3b84b19a4385
-    m_ActionName: CardPhase/Cancel[/Keyboard/escape,/XInputControllerWindows/buttonEast,/XInputControllerWindows1/buttonEast]
+    m_ActionName: 'CardPhase/Cancel[/Keyboard/escape,/XInputControllerWindows/buttonEast,/XInputControllerWindows1/buttonEast]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: DungeonPhase
@@ -7447,6 +7464,7 @@ BoxCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1133580717}
   m_Enabled: 1
+  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -7470,7 +7488,8 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -7481,7 +7500,6 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
   m_Size: {x: 3, y: 3}
   m_EdgeRadius: 0
 --- !u!1 &1135551835
@@ -7827,8 +7845,7 @@ LightingSettings:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Settings.lighting
-  serializedVersion: 6
-  m_GIWorkflowMode: 1
+  serializedVersion: 9
   m_EnableBakedLightmaps: 0
   m_EnableRealtimeLightmaps: 0
   m_RealtimeEnvironmentLighting: 1
@@ -7836,8 +7853,10 @@ LightingSettings:
   m_AlbedoBoost: 1
   m_IndirectOutputScale: 1
   m_UsingShadowmask: 0
-  m_BakeBackend: 0
+  m_BakeBackend: 1
   m_LightmapMaxSize: 1024
+  m_LightmapSizeFixed: 0
+  m_UseMipmapLimits: 1
   m_BakeResolution: 40
   m_Padding: 2
   m_LightmapCompression: 3
@@ -7851,13 +7870,11 @@ LightingSettings:
   m_FilterMode: 1
   m_LightmapParameters: {fileID: 15204, guid: 0000000000000000f000000000000000, type: 0}
   m_ExportTrainingData: 0
+  m_EnableWorkerProcessBaking: 1
   m_TrainingDataDestination: TrainingData
   m_RealtimeResolution: 2
   m_ForceWhiteAlbedo: 0
   m_ForceUpdates: 0
-  m_FinalGather: 0
-  m_FinalGatherRayCount: 1024
-  m_FinalGatherFiltering: 1
   m_PVRCulling: 1
   m_PVRSampling: 1
   m_PVRDirectSampleCount: 32
@@ -7881,8 +7898,6 @@ LightingSettings:
   m_PVRFilteringAtrousPositionSigmaDirect: 0.5
   m_PVRFilteringAtrousPositionSigmaIndirect: 2
   m_PVRFilteringAtrousPositionSigmaAO: 1
-  m_PVRTiledBaking: 0
-  m_NumRaysToShootPerTexel: -1
   m_RespectSceneVisibilityWhenBakingGI: 0
 --- !u!1 &1244061317
 GameObject:
@@ -8140,15 +8155,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 00000000
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -9446,15 +9463,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 00000000
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -9580,15 +9599,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 00000000
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -9654,7 +9675,7 @@ RectTransform:
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1485355108
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -9668,6 +9689,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -11658,7 +11680,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4803188867100092302, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1896863492}
   m_SourcePrefab: {fileID: 100100000, guid: e738a2ac7ae5bcc4894527f901d1007f, type: 3}
 --- !u!224 &1654634604 stripped
 RectTransform:
@@ -13021,15 +13047,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 00000000
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -14923,6 +14951,64 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!1 &1896863490 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4803188867100092302, guid: e738a2ac7ae5bcc4894527f901d1007f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1654634603}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1896863491 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4803188867100092300, guid: e738a2ac7ae5bcc4894527f901d1007f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1654634603}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1896863490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1896863492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1896863490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:d54be7e4f919c674ca9fcfdccc64d108
+    m_TableEntryReference:
+      m_KeyId: 66344575365120
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1896863491}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Text, UnityEngine.UI
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &1905127525
 GameObject:
   m_ObjectHideFlags: 0
@@ -16064,7 +16150,7 @@ RectTransform:
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &2071617602
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -16078,6 +16164,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -16195,15 +16282,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 00000000
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -16345,7 +16434,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4803188867100092302, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2102279929}
   m_SourcePrefab: {fileID: 100100000, guid: e738a2ac7ae5bcc4894527f901d1007f, type: 3}
 --- !u!224 &2102279924 stripped
 RectTransform:
@@ -16377,6 +16470,64 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a42a23ce4f9ed24abde69beacbef2f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2102279927 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4803188867100092300, guid: e738a2ac7ae5bcc4894527f901d1007f,
+    type: 3}
+  m_PrefabInstance: {fileID: 2102279923}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2102279928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &2102279928 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4803188867100092302, guid: e738a2ac7ae5bcc4894527f901d1007f,
+    type: 3}
+  m_PrefabInstance: {fileID: 2102279923}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2102279929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2102279928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:d54be7e4f919c674ca9fcfdccc64d108
+    m_TableEntryReference:
+      m_KeyId: 66094682927104
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2102279927}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Text, UnityEngine.UI
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &2118239597
 GameObject:
   m_ObjectHideFlags: 0
