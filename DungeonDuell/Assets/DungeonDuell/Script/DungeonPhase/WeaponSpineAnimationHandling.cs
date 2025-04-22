@@ -6,9 +6,11 @@ namespace dungeonduell
     public class WeaponSpineAnimationHandling : MonoBehaviour
     {
         private PlayerSpineAnimationHandling _playerSpineAnimationHandling;
-        void Start()
+
+        private void Start()
         {
-            _playerSpineAnimationHandling = GetComponentInParent<Character>().gameObject.GetComponentInChildren<PlayerSpineAnimationHandling>();
+            _playerSpineAnimationHandling = GetComponentInParent<Character>().gameObject
+                .GetComponentInChildren<PlayerSpineAnimationHandling>();
         }
 
         public void HandleShootAnimation()

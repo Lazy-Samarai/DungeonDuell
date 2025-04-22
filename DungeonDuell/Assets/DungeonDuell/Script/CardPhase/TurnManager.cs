@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Linq;
+using DG.Tweening;
 using UnityEngine;
 using TMPro;
 using MoreMountains.TopDownEngine;
+using TMPro;
+using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 using DG.Tweening;
 using UnityEngine.Localization.Components;
 using UnityEngine.Localization.SmartFormat.PersistentVariables;
@@ -14,23 +18,23 @@ namespace dungeonduell
     public class TurnManager : MonoBehaviour, IObserver
     {
         public LocalizeStringEvent playerTurnText;
-
         public LocalizeStringEvent pressAnyKeyText;
-        public CardToHand HandPlayer1;
-        public CardToHand HandPlayer2;
+        private const int SecondsToStart = 3;
+        [FormerlySerializedAs("HandPlayer1")] public CardToHand handPlayer1;
+        [FormerlySerializedAs("HandPlayer2")] public CardToHand handPlayer2;
 
         public GameObject player1UI;
         public GameObject player2UI;
-
-        private bool awaitingKeyPress = false;
+        
         public bool isPlayer1Turn = true;
-        private float timeStart;
 
-        private const int SecondsToStart = 3;
+        [FormerlySerializedAs("_playerInputs")]
+        public PlayerInput[] playerInputs;
 
-        private bool[] _playerPlayedAllCards = { false, false };
+        private readonly bool[] _playerPlayedAllCards = { false, false };
 
-        public PlayerInput[] _playerInputs;
+        private bool _awaitingKeyPress;
+        private float _timeStart;
 
         const string TextEntryCurrentPlayer = "Current_Player";
         private const string TextEntryMakeReady = "Make_Ready";
@@ -38,55 +42,73 @@ namespace dungeonduell
         private const string TextEntryStartIn = "Start_In";
         private const string TextEntryNextPlayer = "Next_Player";
 
-        void Start()
+        private void Start()
         {
-            timeStart = Time.time;
+            _timeStart = Time.time;
             InitializeTurn();
         }
 
-        void Update()
+        private void Update()
         {
-            if (awaitingKeyPress && (Time.time - timeStart > 0.5f) &&
+            if (_awaitingKeyPress && Time.time - _timeStart > 0.5f &&
                 GetActivePlayerInput().actions["Submit"].WasPressedThisFrame())
-            {
                 BeginPlayerActionPhase();
-            }
         }
 
-        void InitializeTurn()
+        private void OnEnable()
         {
-            awaitingKeyPress = true;
+            SubscribeToEvents();
+        }
 
+        private void OnDisable()
+        {
+            UnsubscribeToAllEvents();
+        }
+
+        public void SubscribeToEvents()
+        {
+            DdCodeEventHandler.NextPlayerTurn += EndPlayerTurn;
+            DdCodeEventHandler.PlayedAllCards += SetPlayerCardsPlayed;
+        }
+
+        public void UnsubscribeToAllEvents()
+        {
+            DdCodeEventHandler.NextPlayerTurn -= EndPlayerTurn;
+            DdCodeEventHandler.PlayedAllCards -= SetPlayerCardsPlayed;
+        }
+
+        private void InitializeTurn()
+        {
+            _awaitingKeyPress = true;
             playerTurnText.SetEntry(TextEntryNextPlayer);
             SetPlayerInText();
 
             if (isPlayer1Turn)
             {
-                InputSystem.DisableDevice(_playerInputs[1].user.pairedDevices[0]);
-                InputSystem.EnableDevice(_playerInputs[0].user.pairedDevices[0]);
+                InputSystem.DisableDevice(playerInputs[1].user.pairedDevices[0]);
+                InputSystem.EnableDevice(playerInputs[0].user.pairedDevices[0]);
             }
             else
             {
-                InputSystem.DisableDevice(_playerInputs[0].user.pairedDevices[0]);
-                InputSystem.EnableDevice(_playerInputs[1].user.pairedDevices[0]);
+                InputSystem.DisableDevice(playerInputs[0].user.pairedDevices[0]);
+                InputSystem.EnableDevice(playerInputs[1].user.pairedDevices[0]);
             }
 
             playerTurnText.gameObject.SetActive(true);
             pressAnyKeyText.gameObject.SetActive(true);
             ToggleHandVisibility(false, false);
         }
-
         private void SetPlayerInText()
         {
             ((IntVariable)playerTurnText.StringReference[playerTurnText.StringReference.Keys.First()]).Value =
                 isPlayer1Turn ? 1 : 2;
         }
 
-        void BeginPlayerActionPhase()
+        private void BeginPlayerActionPhase()
         {
-            if (!awaitingKeyPress) return;
+            if (!_awaitingKeyPress) return;
 
-            awaitingKeyPress = false;
+            _awaitingKeyPress = false;
             UpdatePlayerTurnText();
             pressAnyKeyText.gameObject.SetActive(false);
             ToggleHandVisibility(isPlayer1Turn, !isPlayer1Turn);
@@ -98,11 +120,11 @@ namespace dungeonduell
         private IEnumerator DelayedFirstSelectable()
         {
             yield return null;
-            if (isPlayer1Turn) HandPlayer1.FirstSelectable();
-            else HandPlayer2.FirstSelectable();
+            if (isPlayer1Turn) handPlayer1.FirstSelectable();
+            else handPlayer2.FirstSelectable();
         }
 
-        void UpdatePlayerTurnText()
+        private void UpdatePlayerTurnText()
         {
             playerTurnText.SetEntry(TextEntryCurrentPlayer);
             SetPlayerInText();
@@ -112,22 +134,18 @@ namespace dungeonduell
         {
             isPlayer1Turn = !isPlayer1Turn;
 
-            if (_playerPlayedAllCards.All(played => played == true))
-            {
+            if (_playerPlayedAllCards.All(played => played))
                 InnitGameCountDown();
-            }
             else
-            {
                 // Verz�gere das Initialisieren des neuen Zuges, um sicherzustellen, dass awaitingKeyPress korrekt gesetzt ist
                 Invoke(nameof(InitializeTurn), 0.1f);
-            }
         }
 
         // Neue Methode zum Umschalten der Handkartenanzeige
         private void ToggleHandVisibility(bool showForPlayer1, bool showForPlayer2)
         {
-            HandPlayer1.ShowHideDeck(!showForPlayer1);
-            HandPlayer2.ShowHideDeck(!showForPlayer2);
+            handPlayer1.ShowHideDeck(!showForPlayer1);
+            handPlayer2.ShowHideDeck(!showForPlayer2);
 
             SlidePlayerSprite(player1UI, showForPlayer1);
             SlidePlayerSprite(player2UI, showForPlayer2);
@@ -136,12 +154,12 @@ namespace dungeonduell
 
         public void InnitGameCountDown()
         {
-            InputSystem.EnableDevice(_playerInputs[0].user.pairedDevices[0]);
-            InputSystem.EnableDevice(_playerInputs[1].user.pairedDevices[0]);
+            InputSystem.EnableDevice(playerInputs[0].user.pairedDevices[0]);
+            InputSystem.EnableDevice(playerInputs[1].user.pairedDevices[0]);
             StartCoroutine(StartCountDown());
         }
 
-        IEnumerator StartCountDown()
+        private IEnumerator StartCountDown()
         {
             pressAnyKeyText.gameObject.SetActive(true);
             pressAnyKeyText.GetComponent<TextMeshProUGUI>().fontSize *= 2;
@@ -150,7 +168,7 @@ namespace dungeonduell
             yield return new WaitForSeconds(1f);
             pressAnyKeyText.SetEntry(TextEntryStartIn);
 
-            for (int i = SecondsToStart; i > 0; i--)
+            for (var i = SecondsToStart; i > 0; i--)
             {
                 ((IntVariable)pressAnyKeyText.StringReference[pressAnyKeyText.StringReference.Keys.First()]).Value = i;
                 yield return new WaitForSeconds(1f);
@@ -158,7 +176,7 @@ namespace dungeonduell
 
             yield return new WaitForSeconds(1f);
             pressAnyKeyText.SetEntry(TextEntryEntryName);
-            FindObjectOfType<SceneLoading>().ToTheDungeon();
+            FindFirstObjectByType<SceneLoading>().ToTheDungeon();
         }
 
         private void SetPlayerCardsPlayed(bool player1)
@@ -166,25 +184,10 @@ namespace dungeonduell
             _playerPlayedAllCards[player1 ? 0 : 1] = true;
         }
 
-        void OnEnable() => SubscribeToEvents();
-        void OnDisable() => UnsubscribeToAllEvents();
-
-        public void SubscribeToEvents()
-        {
-            DDCodeEventHandler.NextPlayerTurn += EndPlayerTurn;
-            DDCodeEventHandler.PlayedAllCards += SetPlayerCardsPlayed;
-        }
-
-        public void UnsubscribeToAllEvents()
-        {
-            DDCodeEventHandler.NextPlayerTurn -= EndPlayerTurn;
-            DDCodeEventHandler.PlayedAllCards -= SetPlayerCardsPlayed;
-        }
-
         private PlayerInput GetActivePlayerInput()
         {
-            string neededID = isPlayer1Turn ? "Player1" : "Player2";
-            foreach (var input in FindObjectsOfType<PlayerInput>())
+            var neededID = isPlayer1Turn ? "Player1" : "Player2";
+            foreach (var input in FindObjectsByType<PlayerInput>(FindObjectsSortMode.None))
             {
                 var manager = input.GetComponent<InputSystemManagerEventsBased>();
                 if (manager != null && manager.PlayerID == neededID)
@@ -198,7 +201,7 @@ namespace dungeonduell
         {
             if (uiElement == null) return;
 
-            RectTransform rect = uiElement.GetComponent<RectTransform>();
+            var rect = uiElement.GetComponent<RectTransform>();
             if (show)
             {
                 uiElement.SetActive(true);

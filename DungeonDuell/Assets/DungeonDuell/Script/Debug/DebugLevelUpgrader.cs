@@ -1,54 +1,50 @@
-using MoreMountains.TopDownEngine;
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using MoreMountains.TopDownEngine;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace dungeonduell
 {
     public class DebugLevelUpgrader : MonoBehaviour
     {
-        int level = 1;
-        ProjectileWeapon weapon;
-        [SerializeField] KeyCode UpLevelKey;
-        [SerializeField] KeyCode DownLevelKey;
+        [FormerlySerializedAs("UpLevelKey")] [SerializeField]
+        private KeyCode upLevelKey;
+
+        [FormerlySerializedAs("DownLevelKey")] [SerializeField]
+        private KeyCode downLevelKey;
+
+        private int _level = 1;
+        private ProjectileWeapon _weapon;
 
         private void Start()
         {
-            weapon = GetComponent<ProjectileWeapon>();
+            _weapon = GetComponent<ProjectileWeapon>();
         }
+
         private void Update()
         {
-            if (Input.GetKeyDown(UpLevelKey))
-            {
-                ChangeLevel(true);
-            }
-            if (Input.GetKeyDown(DownLevelKey))
-            {
-                ChangeLevel(false);
-            }
+            if (Input.GetKeyDown(upLevelKey)) ChangeLevel(true);
+            if (Input.GetKeyDown(downLevelKey)) ChangeLevel(false);
         }
 
         public void ChangeLevel(bool up)
         {
             if (up)
             {
-                level++;
+                _level++;
             }
             else
             {
-                level--;
-                if(level <= 0)
-                {
-                    level = 1;
-                }
+                _level--;
+                if (_level <= 0) _level = 1;
             }
+
             AdjustToLevel();
         }
+
         public void AdjustToLevel()
         {
-            weapon.TimeBetweenUses = (float)(1 / (Math.Pow(2, (level - 1))));
+            _weapon.TimeBetweenUses = (float)(1 / Math.Pow(2, _level - 1));
         }
-
     }
 }

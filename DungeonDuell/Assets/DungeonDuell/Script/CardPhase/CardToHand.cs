@@ -1,9 +1,9 @@
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using DG.Tweening;
-using UnityEngine.EventSystems;
 using System.Collections;
+using System.Collections.Generic;
+using DG.Tweening;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace dungeonduell
 {
@@ -19,14 +19,37 @@ namespace dungeonduell
         [Header("Fächer-Einstellungen")] public float spacing = 40f;
         public float maxRotation = 20f;
 
-        public List<Card> handCards = new List<Card>();
-        private readonly List<DisplayCard> _displayCards = new List<DisplayCard>();
+        public List<Card> handCards = new();
 
         public bool isPlayer1;
+        private readonly List<DisplayCard> _displayCards = new();
 
-        void Start()
+        private void Start()
         {
             DrawInitialCards();
+        }
+
+        private void OnEnable()
+        {
+            SubscribeToEvents();
+        }
+
+        private void OnDisable()
+        {
+            UnsubscribeToAllEvents();
+        }
+
+        public void SubscribeToEvents()
+        {
+            DdCodeEventHandler.CardPlayed += UpdateCardDeck;
+            DdCodeEventHandler.CardToBeShelled +=
+                UpdateCardDeck; // When shell card played is modified (and .remove(card) will do nothing) so extra call before that happens
+        }
+
+        public void UnsubscribeToAllEvents()
+        {
+            DdCodeEventHandler.CardPlayed -= UpdateCardDeck;
+            DdCodeEventHandler.CardToBeShelled -= UpdateCardDeck;
         }
 
         private void DrawInitialCards()
@@ -39,11 +62,10 @@ namespace dungeonduell
 
             handCards.Clear();
 
-            for (int i = 0; i < handLimit; i++)
-            {
+            for (var i = 0; i < handLimit; i++)
                 if (playerDeck.playerDeck.Count > 0)
                 {
-                    Card cardToDraw = playerDeck.playerDeck[0];
+                    var cardToDraw = playerDeck.playerDeck[0];
                     playerDeck.playerDeck.RemoveAt(0);
                     handCards.Add(cardToDraw);
                 }
@@ -52,40 +74,39 @@ namespace dungeonduell
                     Debug.Log("Das Deck ist leer, keine weitere Karte kann gezogen werden!");
                     break;
                 }
-            }
 
             DisplayHand();
         }
 
         private void DisplayHand()
         {
-            for (int i = handPanel.childCount - 1; i >= 0; i--)
+            for (var i = handPanel.childCount - 1; i >= 0; i--)
             {
-                Transform child = handPanel.GetChild(i);
+                var child = handPanel.GetChild(i);
                 if (child == cardHolder) continue;
                 Destroy(child.gameObject);
             }
 
             _displayCards.Clear();
 
-            foreach (Card cardData in handCards)
+            foreach (var cardData in handCards)
             {
-                GameObject cardObj = Instantiate(cardPrefabHolder.GetCardPrefab(cardData.roomtype), handPanel);
-                DisplayCard dc = cardObj.GetComponent<DisplayCard>();
+                var cardObj = Instantiate(cardPrefabHolder.GetCardPrefab(cardData.roomtype), handPanel);
+                var dc = cardObj.GetComponent<DisplayCard>();
 
                 dc.cardToHand = this;
                 dc.card = cardData;
                 _displayCards.Add(dc);
             }
 
-            int n = _displayCards.Count;
-            float middleIndex = (n - 1) / 2f;
-            for (int i = 0; i < n; i++)
+            var n = _displayCards.Count;
+            var middleIndex = (n - 1) / 2f;
+            for (var i = 0; i < n; i++)
             {
-                DisplayCard dc = _displayCards[i];
-                float offsetFromCenter = i - middleIndex;
-                float xPos = offsetFromCenter * spacing;
-                float zRot = -offsetFromCenter * maxRotation;
+                var dc = _displayCards[i];
+                var offsetFromCenter = i - middleIndex;
+                var xPos = offsetFromCenter * spacing;
+                var zRot = -offsetFromCenter * maxRotation;
 
                 dc.transform.localPosition = new Vector2(xPos, 0f);
                 dc.transform.localRotation = Quaternion.Euler(0f, 0f, zRot);
@@ -99,19 +120,13 @@ namespace dungeonduell
         {
             if (clickedCard.transform.parent == cardHolder)
             {
-                if (!handCards.Contains(clickedCard.card))
-                {
-                    handCards.Add(clickedCard.card);
-                }
+                if (!handCards.Contains(clickedCard.card)) handCards.Add(clickedCard.card);
 
                 clickedCard.transform.SetParent(handPanel, false);
-                DDCodeEventHandler.Trigger_CardSelected(null);
+                DdCodeEventHandler.Trigger_CardSelected(null);
 
-                HexgridController hexgridController = FindFirstObjectByType<HexgridController>();
-                if (hexgridController != null)
-                {
-                    hexgridController.ResetNavigation();
-                }
+                var hexgridController = FindFirstObjectByType<HexgridController>();
+                if (hexgridController != null) hexgridController.ResetNavigation();
 
                 ReactivateHandCards();
                 DisplayHand();
@@ -120,11 +135,9 @@ namespace dungeonduell
                 //Select wieder aktiv setzen
                 if (_displayCards.Count > 0)
                 {
-                    DisplayCard firstCard = _displayCards[^1]; // ganz rechts
+                    var firstCard = _displayCards[^1]; // ganz rechts
                     if (firstCard != null && firstCard.GetComponent<Selectable>() is { } firstSel)
-                    {
                         StartCoroutine(SetSelectableNextFrame(firstSel));
-                    }
                 }
             }
             else
@@ -133,8 +146,8 @@ namespace dungeonduell
 
                 if (cardHolder.childCount > 0)
                 {
-                    Transform oldCardTransform = cardHolder.GetChild(0);
-                    DisplayCard oldDc = oldCardTransform.GetComponent<DisplayCard>();
+                    var oldCardTransform = cardHolder.GetChild(0);
+                    var oldDc = oldCardTransform.GetComponent<DisplayCard>();
                     if (oldDc != null)
                     {
                         if (!handCards.Contains(oldDc.card))
@@ -153,9 +166,9 @@ namespace dungeonduell
                 DeactivateHandCards();
                 EventSystem.current.SetSelectedGameObject(null);
 
-                DDCodeEventHandler.Trigger_CardSelected(clickedCard);
+                DdCodeEventHandler.Trigger_CardSelected(clickedCard);
 
-                HexgridController hexgridController = FindFirstObjectByType<HexgridController>();
+                var hexgridController = FindFirstObjectByType<HexgridController>();
                 if (hexgridController != null)
                 {
                     hexgridController.currentDisplayCard = clickedCard;
@@ -175,28 +188,19 @@ namespace dungeonduell
 
         public void DisableHandCardsForNavigation()
         {
-            foreach (DisplayCard dc in _displayCards)
-            {
+            foreach (var dc in _displayCards)
                 if (dc.transform.parent != cardHolder)
-                {
                     dc.GetComponent<Selectable>().interactable = false;
-                }
-            }
         }
 
         private void EnableHandCardsForNavigation()
         {
-            foreach (DisplayCard dc in _displayCards)
-            {
+            foreach (var dc in _displayCards)
                 if (dc != null)
                 {
-                    Selectable selectable = dc.GetComponent<Selectable>();
-                    if (selectable != null)
-                    {
-                        selectable.interactable = true;
-                    }
+                    var selectable = dc.GetComponent<Selectable>();
+                    if (selectable != null) selectable.interactable = true;
                 }
-            }
         }
 
         public void DeactivateHandCards()
@@ -223,7 +227,6 @@ namespace dungeonduell
         public void FirstSelectable()
         {
             foreach (Transform child in handPanel)
-            {
                 if (child.TryGetComponent<Selectable>(out var sel) && sel.interactable &&
                     sel.gameObject.activeInHierarchy)
                 {
@@ -231,7 +234,6 @@ namespace dungeonduell
                     StartCoroutine(SetSelectableNextFrame(sel));
                     break; // Nur das erste gültige Objekt selektieren
                 }
-            }
         }
 
         private IEnumerator SetSelectableNextFrame(Selectable sel)
@@ -242,53 +244,45 @@ namespace dungeonduell
 
         private void SetupNavigation()
         {
-            List<Selectable> selectables = new List<Selectable>();
+            var selectables = new List<Selectable>();
 
-            foreach (Card card in handCards)
+            foreach (var card in handCards)
             {
-                DisplayCard displayCard = _displayCards.Find(dc => dc.card == card);
+                var displayCard = _displayCards.Find(dc => dc.card == card);
 
                 if (displayCard != null)
                 {
-                    Selectable selectable = displayCard.GetComponent<Selectable>();
-                    if (selectable != null)
-                    {
-                        selectables.Add(selectable);
-                    }
+                    var selectable = displayCard.GetComponent<Selectable>();
+                    if (selectable != null) selectables.Add(selectable);
                 }
             }
 
-            for (int i = 0; i < selectables.Count; i++)
+            for (var i = 0; i < selectables.Count; i++)
             {
-                Navigation nav = new Navigation
+                var nav = new Navigation
                 {
                     mode = Navigation.Mode.Explicit,
-                    selectOnLeft = (i > 0) ? selectables[i - 1] : null,
-                    selectOnRight = (i < selectables.Count - 1) ? selectables[i + 1] : null
+                    selectOnLeft = i > 0 ? selectables[i - 1] : null,
+                    selectOnRight = i < selectables.Count - 1 ? selectables[i + 1] : null
                 };
 
                 selectables[i].navigation = nav;
             }
 
-            if (selectables.Count > 0)
-            {
-                EventSystem.current.SetSelectedGameObject(selectables[0].gameObject);
-            }
+            if (selectables.Count > 0) EventSystem.current.SetSelectedGameObject(selectables[0].gameObject);
         }
 
         public void DrawCard()
         {
             if (playerDeck != null && playerDeck.playerDeck.Count > 0)
-            {
                 if (handCards.Count < handLimit)
                 {
-                    Card cardToDraw = playerDeck.playerDeck[0];
+                    var cardToDraw = playerDeck.playerDeck[0];
                     playerDeck.playerDeck.RemoveAt(0);
                     handCards.Add(cardToDraw);
 
                     DisplayHand();
                 }
-            }
         }
 
         private void UpdateCardDeck(Card card, bool player1Played)
@@ -296,10 +290,7 @@ namespace dungeonduell
             if (player1Played == isPlayer1)
             {
                 handCards.Remove(card);
-                if (handCards.Count == 0)
-                {
-                    DDCodeEventHandler.Trigger_PlayedAllCards(isPlayer1);
-                }
+                if (handCards.Count == 0) DdCodeEventHandler.Trigger_PlayedAllCards(isPlayer1);
             }
         }
 
@@ -313,35 +304,12 @@ namespace dungeonduell
             {
                 gameObject.SetActive(true);
 
-                Vector3 startPos = transform.position;
+                var startPos = transform.position;
                 startPos.y = -300;
                 transform.position = startPos;
 
                 transform.DOMoveY(0, 0.5f);
             }
-        }
-
-        void OnEnable()
-        {
-            SubscribeToEvents();
-        }
-
-        void OnDisable()
-        {
-            UnsubscribeToAllEvents();
-        }
-
-        public void SubscribeToEvents()
-        {
-            DDCodeEventHandler.CardPlayed += UpdateCardDeck;
-            DDCodeEventHandler.CardToBeShelled +=
-                UpdateCardDeck; // When shell card played is modified (and .remove(card) will do nothing) so extra call before that happens
-        }
-
-        public void UnsubscribeToAllEvents()
-        {
-            DDCodeEventHandler.CardPlayed -= UpdateCardDeck;
-            DDCodeEventHandler.CardToBeShelled -= UpdateCardDeck;
         }
     }
 }

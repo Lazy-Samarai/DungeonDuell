@@ -1,8 +1,8 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
-using System;
 
 namespace dungeonduell
 {
@@ -15,14 +15,16 @@ namespace dungeonduell
 
         public RoomType roomtype = RoomType.Generic;
         public RoomElement roomElement = RoomElement.Standard;
-        public TileBase Tile;
-
-        [System.Serializable]
-        public struct DirBarSet { public bool TopLeft; public bool TopRight; public bool Left; public bool Right; public bool BottonLeft; public bool BottonRight; } // Going Around
+        [FormerlySerializedAs("Tile")] public TileBase tile;
         public DirBarSet startDoorConcellation;
+
         public bool[] GetAllowedDirection()
         {
-            return new bool[] { startDoorConcellation.TopLeft, startDoorConcellation.TopRight, startDoorConcellation.Left, startDoorConcellation.Right, startDoorConcellation.BottonLeft, startDoorConcellation.BottonRight, };
+            return new[]
+            {
+                startDoorConcellation.topLeft, startDoorConcellation.topRight, startDoorConcellation.left,
+                startDoorConcellation.right, startDoorConcellation.bottonLeft, startDoorConcellation.bottonRight
+            };
         }
 
         public override bool Equals(object obj)
@@ -36,13 +38,13 @@ namespace dungeonduell
                    cardDescription == card.cardDescription &&
                    roomtype == card.roomtype &&
                    roomElement == card.roomElement &&
-                   EqualityComparer<TileBase>.Default.Equals(Tile, card.Tile) &&
+                   EqualityComparer<TileBase>.Default.Equals(tile, card.tile) &&
                    EqualityComparer<DirBarSet>.Default.Equals(startDoorConcellation, card.startDoorConcellation);
         }
 
         public override int GetHashCode()
         {
-            HashCode hash = new HashCode();
+            var hash = new HashCode();
             hash.Add(base.GetHashCode());
             hash.Add(name);
             hash.Add(hideFlags);
@@ -51,13 +53,25 @@ namespace dungeonduell
             hash.Add(cardDescription);
             hash.Add(roomtype);
             hash.Add(roomElement);
-            hash.Add(Tile);
+            hash.Add(tile);
             hash.Add(startDoorConcellation);
             return hash.ToHashCode();
         }
+
         public object Clone()
         {
-            return this.MemberwiseClone();
+            return MemberwiseClone();
         }
+
+        [Serializable]
+        public struct DirBarSet
+        {
+            [FormerlySerializedAs("TopLeft")] public bool topLeft;
+            [FormerlySerializedAs("TopRight")] public bool topRight;
+            [FormerlySerializedAs("Left")] public bool left;
+            [FormerlySerializedAs("Right")] public bool right;
+            [FormerlySerializedAs("BottonLeft")] public bool bottonLeft;
+            [FormerlySerializedAs("BottonRight")] public bool bottonRight;
+        } // Going Around
     }
 }
