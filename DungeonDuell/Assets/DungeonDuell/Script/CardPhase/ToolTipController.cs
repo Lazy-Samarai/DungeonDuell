@@ -1,6 +1,5 @@
-using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine;
 
 namespace dungeonduell
 {
@@ -8,17 +7,17 @@ namespace dungeonduell
     {
         public GameObject tooltipPrefab;
         public GameObject cardCanvas;
-        private GameObject tooltipInstance;
-        private TextMeshProUGUI tooltipText;
-        private RectTransform tooltipRectTransform;
+        private GameObject _tooltipInstance;
+        private RectTransform _tooltipRectTransform;
+        private TextMeshProUGUI _tooltipText;
 
-        void Start()
+        private void Start()
         {
             if (tooltipPrefab != null)
             {
-                tooltipInstance = Instantiate(tooltipPrefab, cardCanvas.transform);
-                tooltipText = tooltipInstance.GetComponentInChildren<TextMeshProUGUI>();
-                tooltipRectTransform = tooltipInstance.GetComponent<RectTransform>();
+                _tooltipInstance = Instantiate(tooltipPrefab, cardCanvas.transform);
+                _tooltipText = _tooltipInstance.GetComponentInChildren<TextMeshProUGUI>();
+                _tooltipRectTransform = _tooltipInstance.GetComponent<RectTransform>();
                 HideTooltip();
             }
             else
@@ -30,16 +29,16 @@ namespace dungeonduell
 
         public void ShowTooltip(string text, Vector3 position)
         {
-            if (tooltipInstance != null)
+            if (_tooltipInstance != null)
             {
-                if (tooltipText == null || tooltipRectTransform == null)
+                if (_tooltipText == null || _tooltipRectTransform == null)
                 {
                     Debug.LogError("Tooltip TextMeshProUGUI oder RectTransform nicht gefunden!");
                     return;
                 }
 
-                tooltipText.text = text;
-                tooltipInstance.SetActive(true);
+                _tooltipText.text = text;
+                _tooltipInstance.SetActive(true);
 
                 // Umwandlung der Weltposition in die Position des UI-Camvas
                 Vector2 localPosition;
@@ -50,17 +49,14 @@ namespace dungeonduell
                     out localPosition
                 );
 
-                tooltipRectTransform.anchoredPosition = localPosition;
+                _tooltipRectTransform.anchoredPosition = localPosition;
             }
         }
 
 
         public void HideTooltip()
         {
-            if (tooltipInstance != null)
-            {
-                tooltipInstance.SetActive(false);
-            }
+            if (_tooltipInstance != null) _tooltipInstance.SetActive(false);
         }
     }
 }

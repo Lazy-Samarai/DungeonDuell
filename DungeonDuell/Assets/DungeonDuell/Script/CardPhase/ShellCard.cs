@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
 namespace dungeonduell
@@ -8,8 +7,9 @@ namespace dungeonduell
     [CreateAssetMenu]
     public class ShellCard : Card // Shell card should have a unique Tile!
     {
-        public TileBase[] InPlayerRangeTile;
+        [FormerlySerializedAs("InPlayerRangeTile")]
+        public TileBase[] inPlayerRangeTile;
 
-        public TileBase CompleteTile;
+        [FormerlySerializedAs("CompleteTile")] public TileBase completeTile;
     }
 }

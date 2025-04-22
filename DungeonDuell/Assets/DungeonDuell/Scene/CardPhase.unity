@@ -466,31 +466,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d61e7a32d2ee3844dada35717334f7bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerDataList:
-  - PlayerID: Player1
-    Points: 0
-    Level: 1
-    CoinsForNextLevel: 1
-    WalkSpeed: 6
-    RunSpeed: 10
-    MaxHealth: 50
-    AttackSpeed: 1
-    RemainingLive: 2
-    MetaHp: 200
-    MaxMetaHp: 200
-    CurrentMask: {fileID: 0}
-  - PlayerID: Player2
-    Points: 0
-    Level: 1
-    CoinsForNextLevel: 1
-    WalkSpeed: 6
-    RunSpeed: 10
-    MaxHealth: 50
-    AttackSpeed: 1
-    RemainingLive: 2
-    MetaHp: 200
-    MaxMetaHp: 200
-    CurrentMask: {fileID: 0}
+  playerDataList:
+  - playerID: Player1
+    points: 0
+    level: 1
+    coinsForNextLevel: 1
+    walkSpeed: 6
+    runSpeed: 10
+    maxHealth: 50
+    attackSpeed: 1
+    remainingLive: 2
+    metaHp: 200
+    maxMetaHp: 200
+    currentMask: {fileID: 0}
+  - playerID: Player2
+    points: 0
+    level: 1
+    coinsForNextLevel: 1
+    walkSpeed: 6
+    runSpeed: 10
+    maxHealth: 50
+    attackSpeed: 1
+    remainingLive: 2
+    metaHp: 200
+    maxMetaHp: 200
+    currentMask: {fileID: 0}
   roundCounter: 0
   nextRoundFinal: 0
 --- !u!4 &376974905
@@ -674,7 +674,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 1181958480}
-  TileMapTag: MainTileMap
+  tileMapTag: MainTileMap
   currentCard: {fileID: 0}
   currentDoorDir: 010101010101
   displayCardUi: {fileID: 0}
@@ -689,7 +689,7 @@ MonoBehaviour:
   shadowSetAbleTiles:
   - {fileID: 11400000, guid: eba97dcbfa65cce43b6e8898d2506f2d, type: 2}
   - {fileID: 11400000, guid: 61d31bb1dc50f7b488ce49f1e12915e0, type: 2}
-  CardShelled:
+  cardShelled:
   - {fileID: 11400000, guid: 27af0542bdc0ff742b14a1d7620896cb, type: 2}
   connectCollector: {fileID: 1945806930}
   isPlayer1Turn: 1
@@ -720,7 +720,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fd9cdf09f6719445984cc19df434a57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TileMapTag: MainTileMap
+  cam: {fileID: 1181958480}
+  tileMapTag: MainTileMap
   tilemap: {fileID: 1763767974}
   cursor: {fileID: 887889882}
   tileClickHandler: {fileID: 481254717}
@@ -749,6 +750,7 @@ GameObject:
   - component: {fileID: 511666257}
   - component: {fileID: 511666259}
   - component: {fileID: 511666258}
+  - component: {fileID: 511666260}
   m_Layer: 5
   m_Name: TextNextPlayer
   m_TagString: Untagged
@@ -875,6 +877,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 511666256}
   m_CullTransparentMesh: 1
+--- !u!114 &511666260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511666256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:eef0979b750b7f146af4bb76d5395c33
+    m_TableEntryReference:
+      m_KeyId: 279384223744
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables:
+    - name: playerNumber
+      variable:
+        rid: 6862435139449782277
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 511666258}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds:
+    - rid: 6862435139449782277
+      type: {class: IntVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables,
+        asm: Unity.Localization}
+      data:
+        m_Value: 1
 --- !u!1 &517887068
 GameObject:
   m_ObjectHideFlags: 0
@@ -1355,7 +1405,7 @@ MonoBehaviour:
   blockTile: {fileID: 11400000, guid: 1a8eff7b9ea00654cbfc7f73c874a7e2, type: 2}
   tilemap: {fileID: 756542410}
   currentCellPosition: {x: 0, y: 0, z: 0}
-  indiactorDoorPrefab: {fileID: 2437991209678005845, guid: 54575de20ace43943ab151cd4098d20e,
+  indicatorDoorPrefab: {fileID: 2437991209678005845, guid: 54575de20ace43943ab151cd4098d20e,
     type: 3}
   runTimeIndicatorDoor: {fileID: 0}
   cursorTag: Cursor
@@ -1905,10 +1955,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9be47df18adf9449885ab95f026e925, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawnInfo:
+  spawnInfo:
   - {fileID: 11400000, guid: 1cf934f802100af4782165e75dacd883, type: 2}
   - {fileID: 11400000, guid: 01ca3b43f91b5924e85e2894708130ea, type: 2}
-  WorldCard:
+  worldCard:
   - {fileID: 11400000, guid: 27af0542bdc0ff742b14a1d7620896cb, type: 2}
   - {fileID: 0}
 --- !u!1 &1009411790
@@ -2661,6 +2711,7 @@ GameObject:
   - component: {fileID: 1148792063}
   - component: {fileID: 1148792062}
   - component: {fileID: 1148792061}
+  - component: {fileID: 1148792065}
   m_Layer: 5
   m_Name: CanvasPlayer_2
   m_TagString: Untagged
@@ -2752,6 +2803,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!225 &1148792065
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1148792060}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 1
 --- !u!1 &1162489420
 GameObject:
   m_ObjectHideFlags: 0
@@ -2876,7 +2939,7 @@ Transform:
   m_GameObject: {fileID: 1181958478}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.5218134, z: -10.322748}
+  m_LocalPosition: {x: 0, y: 3.5218134, z: -10.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3822,14 +3885,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 385310870bca89243a9f10841d4ee16c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTurnText: {fileID: 511666258}
-  pressAnyKeyText: {fileID: 2034102534}
-  HandPlayer1: {fileID: 2012748599}
-  HandPlayer2: {fileID: 2077986323}
+  playerTurnText: {fileID: 511666260}
+  pressAnyKeyText: {fileID: 2034102537}
+  handPlayer1: {fileID: 2012748599}
+  handPlayer2: {fileID: 2077986323}
   player1UI: {fileID: 1541103091}
   player2UI: {fileID: 1512983241}
   isPlayer1Turn: 1
-  _playerInputs:
+  playerInputs:
   - {fileID: 1961649892}
   - {fileID: 1130448083}
 --- !u!4 &1557636385
@@ -11923,7 +11986,7 @@ MonoBehaviour:
     m_ActionId: facc7a30-9bf5-4458-a444-3b84b19a4385
     m_ActionName: 'CardPhase/Cancel[/Keyboard/escape,/XInputControllerWindows/buttonEast,/XInputControllerWindows1/buttonEast]'
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: Keyboard
   m_DefaultActionMap: CardPhase
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -12036,6 +12099,7 @@ GameObject:
   - component: {fileID: 2034102536}
   - component: {fileID: 2034102535}
   - component: {fileID: 2034102534}
+  - component: {fileID: 2034102537}
   m_Layer: 5
   m_Name: TextPressKey
   m_TagString: Untagged
@@ -12063,7 +12127,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press X
+  m_text: Press
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f97413b6961e8a844a852fd545be33f0, type: 2}
   m_sharedMaterial: {fileID: 6578143679271650886, guid: f97413b6961e8a844a852fd545be33f0,
@@ -12162,6 +12226,54 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -319}
   m_SizeDelta: {x: 344.1305, y: 100.4123}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2034102537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2034102533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:eef0979b750b7f146af4bb76d5395c33
+    m_TableEntryReference:
+      m_KeyId: 266545459200
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables:
+    - name: sec
+      variable:
+        rid: 6862435139449782378
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2034102534}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds:
+    - rid: 6862435139449782378
+      type: {class: IntVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables,
+        asm: Unity.Localization}
+      data:
+        m_Value: 5
 --- !u!1 &2077986321
 GameObject:
   m_ObjectHideFlags: 0

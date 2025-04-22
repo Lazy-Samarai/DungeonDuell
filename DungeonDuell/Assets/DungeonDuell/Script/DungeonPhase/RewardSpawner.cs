@@ -2,7 +2,8 @@ namespace dungeonduell
 {
     public class RewardSpawner : BaseSingleSpawner
     {
-        public void SpawnReward(){
+        public void SpawnReward()
+        {
             SpawnSingleObject(objectToSpawn);
         }
     }
