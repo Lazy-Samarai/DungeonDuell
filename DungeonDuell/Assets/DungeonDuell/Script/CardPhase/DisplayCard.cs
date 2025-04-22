@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 namespace dungeonduell
 {
@@ -28,6 +29,7 @@ namespace dungeonduell
         private Quaternion _originalRotation;
 
         private Vector3 _originalScale;
+
 
         private void Start()
         {

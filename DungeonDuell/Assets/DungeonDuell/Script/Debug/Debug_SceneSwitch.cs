@@ -12,7 +12,15 @@ namespace dungeonduell
         // Update is called once per frame
         private void Update()
         {
-            if (Input.GetKeyDown(switchSceneKey)) SceneManager.LoadScene(targetSceneIndex);
+            if (Input.GetKeyDown(switchSceneKey))
+            {
+                if (SceneManager.GetActiveScene().buildIndex == 0)
+                {
+                    FindFirstObjectByType<TurnManager>().ActivateAllDevice();
+                }
+
+                SceneManager.LoadScene(targetSceneIndex);
+            }
         }
     }
 }

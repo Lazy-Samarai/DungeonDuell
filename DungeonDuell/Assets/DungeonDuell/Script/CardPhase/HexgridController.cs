@@ -12,6 +12,8 @@ namespace dungeonduell
 {
     public class HexgridController : MonoBehaviour
     {
+        public Camera cam;
+
         private static readonly Vector2[] HexDirections =
         {
             new Vector2(1f, 0f).normalized,
@@ -44,7 +46,7 @@ namespace dungeonduell
 
             _playerInput = null;
             tilemap = FindObjectsByType<Tilemap>(FindObjectsSortMode.None)
-                .FirstOrDefault(tm => tm.gameObject.tag == tileMapTag); // Becuase there is also the hovermap
+                .FirstOrDefault(tm => tm.gameObject.CompareTag(tileMapTag)); // Becuase there is also the hovermap
         }
 
         public void ActivateNavigation()
@@ -60,10 +62,10 @@ namespace dungeonduell
                 return;
             }
 
-            Vector3Int? startPos =
+            Vector3Int startPos =
                 _setAbleTiles.FirstOrDefault(tuple => tuple.Item2 == turnManager.isPlayer1Turn).Item1;
 
-            _selectedTilePos = startPos ?? _setAbleTiles[0].Item1;
+            _selectedTilePos = startPos;
 
             if (cursor)
             {
@@ -104,7 +106,6 @@ namespace dungeonduell
 
             var input = ctx.ReadValue<Vector2>();
             if (input.sqrMagnitude < 0.5f) return;
-
             var snappedInput = SnapToHexDirection(input.normalized);
             var bestTarget = _selectedTilePos;
             var bestScore = -1f;
@@ -116,20 +117,39 @@ namespace dungeonduell
             {
                 if (tile.Item1 == _selectedTilePos) continue;
 
-                var dirToTile = new Vector2(tile.Item1.x - _selectedTilePos.x, tile.Item1.y - _selectedTilePos.y);
-                var distance = dirToTile.magnitude;
-                if (distance < distanceThreshold) continue;
 
-                dirToTile.Normalize();
-                var dot = Vector2.Dot(snappedInput, dirToTile);
-
-                if (dot > dotThreshold)
+                if (ctx.control.device is Mouse)
                 {
-                    var score = dot * 1.5f - distance * 0.25f;
-                    if (score > bestScore)
+                    Vector3 mouseWorldPos =
+                        cam.ScreenToWorldPoint(new Vector3(input.x, input.y, -cam.transform.position.z));
+                    Vector3Int cellPosition =
+                        tilemap.WorldToCell(new Vector3(mouseWorldPos.x, mouseWorldPos.y, cam.transform.position.z));
+
+                    if (tile.Item1 == cellPosition)
                     {
-                        bestScore = score;
-                        bestTarget = tile.Item1;
+                        bestTarget = cellPosition;
+                    }
+                }
+                else
+                {
+                    Vector2 dirToTile = new Vector2(tile.Item1.x - _selectedTilePos.x,
+                        tile.Item1.y - _selectedTilePos.y);
+
+
+                    var distance = dirToTile.magnitude;
+                    if (distance < distanceThreshold) continue;
+
+                    dirToTile.Normalize();
+                    var dot = Vector2.Dot(snappedInput, dirToTile);
+
+                    if (dot > dotThreshold)
+                    {
+                        var score = dot * 1.5f - distance * 0.25f;
+                        if (score > bestScore)
+                        {
+                            bestScore = score;
+                            bestTarget = tile.Item1;
+                        }
                     }
                 }
             }
