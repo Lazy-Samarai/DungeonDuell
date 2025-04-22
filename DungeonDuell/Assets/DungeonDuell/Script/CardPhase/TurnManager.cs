@@ -1,49 +1,53 @@
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using TMPro;
-using Cinemachine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
 using MoreMountains.TopDownEngine;
 using UnityEngine.InputSystem;
 using DG.Tweening;
-using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.Localization.Components;
+using UnityEngine.Localization.SmartFormat.PersistentVariables;
 
 
 namespace dungeonduell
 {
     public class TurnManager : MonoBehaviour, IObserver
     {
-        public TextMeshProUGUI playerTurnText;
-        public TextMeshProUGUI pressAnyKeyText;
+        public LocalizeStringEvent playerTurnText;
+
+        public LocalizeStringEvent pressAnyKeyText;
         public CardToHand HandPlayer1;
         public CardToHand HandPlayer2;
-        
+
         public GameObject player1UI;
         public GameObject player2UI;
-        
+
         private bool awaitingKeyPress = false;
         public bool isPlayer1Turn = true;
         private float timeStart;
 
         private const int SecondsToStart = 3;
 
-        private bool[] _playerPlayedAllCards = {false, false};
+        private bool[] _playerPlayedAllCards = { false, false };
 
         public PlayerInput[] _playerInputs;
+
+        const string TextEntryCurrentPlayer = "Current_Player";
+        private const string TextEntryMakeReady = "Make_Ready";
+        private const string TextEntryEntryName = "Loading";
+        private const string TextEntryStartIn = "Start_In";
+        private const string TextEntryNextPlayer = "Next_Player";
 
         void Start()
         {
             timeStart = Time.time;
             InitializeTurn();
-            
         }
 
         void Update()
         {
-            if (awaitingKeyPress && (Time.time - timeStart > 0.5f) && GetActivePlayerInput().actions["Submit"].WasPressedThisFrame())
+            if (awaitingKeyPress && (Time.time - timeStart > 0.5f) &&
+                GetActivePlayerInput().actions["Submit"].WasPressedThisFrame())
             {
                 BeginPlayerActionPhase();
             }
@@ -52,8 +56,10 @@ namespace dungeonduell
         void InitializeTurn()
         {
             awaitingKeyPress = true;
-            playerTurnText.text = "Next Turn: " + (isPlayer1Turn ? "Player 1" : "Player 2");
-            
+
+            playerTurnText.SetEntry(TextEntryNextPlayer);
+            SetPlayerInText();
+
             if (isPlayer1Turn)
             {
                 InputSystem.DisableDevice(_playerInputs[1].user.pairedDevices[0]);
@@ -64,10 +70,16 @@ namespace dungeonduell
                 InputSystem.DisableDevice(_playerInputs[0].user.pairedDevices[0]);
                 InputSystem.EnableDevice(_playerInputs[1].user.pairedDevices[0]);
             }
-            
+
             playerTurnText.gameObject.SetActive(true);
             pressAnyKeyText.gameObject.SetActive(true);
             ToggleHandVisibility(false, false);
+        }
+
+        private void SetPlayerInText()
+        {
+            ((IntVariable)playerTurnText.StringReference[playerTurnText.StringReference.Keys.First()]).Value =
+                isPlayer1Turn ? 1 : 2;
         }
 
         void BeginPlayerActionPhase()
@@ -92,13 +104,14 @@ namespace dungeonduell
 
         void UpdatePlayerTurnText()
         {
-            if (playerTurnText != null)
-                playerTurnText.text = "Current Turn: " + (isPlayer1Turn ? "Player 1" : "Player 2");
+            playerTurnText.SetEntry(TextEntryCurrentPlayer);
+            SetPlayerInText();
         }
+
         public void EndPlayerTurn()
         {
             isPlayer1Turn = !isPlayer1Turn;
-            
+
             if (_playerPlayedAllCards.All(played => played == true))
             {
                 InnitGameCountDown();
@@ -108,9 +121,8 @@ namespace dungeonduell
                 // Verz�gere das Initialisieren des neuen Zuges, um sicherzustellen, dass awaitingKeyPress korrekt gesetzt ist
                 Invoke(nameof(InitializeTurn), 0.1f);
             }
-
-           
         }
+
         // Neue Methode zum Umschalten der Handkartenanzeige
         private void ToggleHandVisibility(bool showForPlayer1, bool showForPlayer2)
         {
@@ -120,8 +132,6 @@ namespace dungeonduell
             SlidePlayerSprite(player1UI, showForPlayer1);
             SlidePlayerSprite(player2UI, showForPlayer2);
         }
-
-
 
 
         public void InnitGameCountDown()
@@ -134,15 +144,20 @@ namespace dungeonduell
         IEnumerator StartCountDown()
         {
             pressAnyKeyText.gameObject.SetActive(true);
-            pressAnyKeyText.fontSize *= 2;
-            pressAnyKeyText.text = "Make Ready";
-            for (int i = SecondsToStart ; i > 0; i--)
-            {
-                yield return new WaitForSeconds(1f);
-                pressAnyKeyText.text = "Start in " + i;
-            }
+            pressAnyKeyText.GetComponent<TextMeshProUGUI>().fontSize *= 2;
+
+            pressAnyKeyText.SetEntry(TextEntryMakeReady);
             yield return new WaitForSeconds(1f);
-            pressAnyKeyText.text = "Loading...";
+            pressAnyKeyText.SetEntry(TextEntryStartIn);
+
+            for (int i = SecondsToStart; i > 0; i--)
+            {
+                ((IntVariable)pressAnyKeyText.StringReference[pressAnyKeyText.StringReference.Keys.First()]).Value = i;
+                yield return new WaitForSeconds(1f);
+            }
+
+            yield return new WaitForSeconds(1f);
+            pressAnyKeyText.SetEntry(TextEntryEntryName);
             FindObjectOfType<SceneLoading>().ToTheDungeon();
         }
 
@@ -153,7 +168,7 @@ namespace dungeonduell
 
         void OnEnable() => SubscribeToEvents();
         void OnDisable() => UnsubscribeToAllEvents();
-        
+
         public void SubscribeToEvents()
         {
             DDCodeEventHandler.NextPlayerTurn += EndPlayerTurn;
@@ -175,9 +190,10 @@ namespace dungeonduell
                 if (manager != null && manager.PlayerID == neededID)
                     return input;
             }
+
             return null;
         }
-        
+
         private void SlidePlayerSprite(GameObject uiElement, bool show, float hiddenY = -550f, float visibleY = 0f)
         {
             if (uiElement == null) return;

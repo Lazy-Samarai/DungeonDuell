@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Legends Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: Legends
+  m_TableCollectionNameGuidString: 97f028d663ba8b24ab4f819fe2ef5f43
+  m_Entries:
+  - m_Id: 10596446208
+    m_Key: Treasure_Card
+    m_Metadata:
+      m_Items: []
+  - m_Id: 185977073664
+    m_Key: Monster_Card
+    m_Metadata:
+      m_Items: []
+  - m_Id: 423282405376
+    m_Key: Starting_Rooms
+    m_Metadata:
+      m_Items: []
+  - m_Id: 572972920832
+    m_Key: Empty_Space
+    m_Metadata:
+      m_Items: []
+  - m_Id: 739495178240
+    m_Key: Normal_Room
+    m_Metadata:
+      m_Items: []
+  - m_Id: 854544936960
+    m_Key: Treasure_Room
+    m_Metadata:
+      m_Items: []
+  - m_Id: 992667561984
+    m_Key: Legend
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 6862435139449782404
+  references:
+    version: 2
+    RefIds:
+    - rid: 6862435139449782404
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables,
+        asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1745074195287
