@@ -1649,9 +1649,6 @@ namespace MoreMountains.TopDownEngine
         private readonly InputAction m_CardPhase_Submit;
         private readonly InputAction m_CardPhase_Navigation;
         private readonly InputAction m_CardPhase_Back;
-        /// <summary>
-        /// Provides access to input actions defined in input action map "CardPhase".
-        /// </summary>
         private readonly InputAction m_CardPhase_Pause;
         private readonly InputAction m_CardPhase_Cancel;
         /// <summary>
