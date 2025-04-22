@@ -1,88 +1,92 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class RoomInfo {
+public class RoomInfo
+{
+    public List<ConnectionDir> AllowedDoors;
 
-    public int RoomID { get; set; }
-    public List<RoomConnection> Conncection { get; set; }
+    public RoomElement RoommElement = RoomElement.Standard;
 
-    public RoomType roomtype = RoomType.Generic;
+    public int RoomOwner; // 0 - no One - else Player x
 
-    public RoomElement roommElement = RoomElement.Standard;
-
-    public List<ConnectionDir> allowedDoors;
-
-    public int roomOwner = 0; // 0 - no One - else Player x
-
-    private bool firstTimeSpawn = true;
+    public RoomType Roomtype = RoomType.Generic;
 
     public RoomInfo(int id, List<RoomConnection> newConncection)
     {
         RoomID = id;
         Conncection = newConncection;
     }
-    public RoomInfo(int id, List<RoomConnection> newConncection, RoomType newRoomtype, RoomElement newRoomElement, List<ConnectionDir> newAllowedDoors)
-    {
-        RoomID = id;
-        Conncection = newConncection;
-        roomtype = newRoomtype;
-        roommElement = newRoomElement;
-        allowedDoors = newAllowedDoors;
-    }
-    public RoomInfo(int id, List<RoomConnection> newConncection, RoomType newRoomtype, RoomElement newRoomElement, List<ConnectionDir> newAllowedDoors,int owner,bool newfirstTimeSpawn)
-    {
-        RoomID = id;
-        Conncection = newConncection;
-        roomtype = newRoomtype;
-        roommElement = newRoomElement;
-        allowedDoors = newAllowedDoors;
-        roomOwner = owner;
-        firstTimeSpawn = newfirstTimeSpawn;
-    }
-    public global::System.Boolean FirstTimeSpawn { get => firstTimeSpawn; set => firstTimeSpawn = value; }
 
+    public RoomInfo(int id, List<RoomConnection> newConncection, RoomType newRoomtype, RoomElement newRoomElement,
+        List<ConnectionDir> newAllowedDoors)
+    {
+        RoomID = id;
+        Conncection = newConncection;
+        Roomtype = newRoomtype;
+        RoommElement = newRoomElement;
+        AllowedDoors = newAllowedDoors;
+    }
+
+    public RoomInfo(int id, List<RoomConnection> newConncection, RoomType newRoomtype, RoomElement newRoomElement,
+        List<ConnectionDir> newAllowedDoors, int owner, bool newfirstTimeSpawn)
+    {
+        RoomID = id;
+        Conncection = newConncection;
+        Roomtype = newRoomtype;
+        RoommElement = newRoomElement;
+        AllowedDoors = newAllowedDoors;
+        RoomOwner = owner;
+        FirstTimeSpawn = newfirstTimeSpawn;
+    }
+
+    public int RoomID { get; set; }
+    public List<RoomConnection> Conncection { get; set; }
+    public bool FirstTimeSpawn { get; set; } = true;
 }
+
 public class RoomConnection
 {
-    public ConnectionDir connectionDir;
-    public int targetRoomId;
+    public ConnectionDir ConnectionDir;
+    public int TargetRoomId;
 
     public RoomConnection(int id, ConnectionDir dir)
     {
-        targetRoomId = id;
-        connectionDir = dir;
-
+        TargetRoomId = id;
+        ConnectionDir = dir;
     }
 }
-public enum ConnectionDir // structed llike this so the list can be inverted and you have the other dir of a door  (top right conncet botton left of the  hexagon)
+
+public enum
+    ConnectionDir // structed llike this so the list can be inverted and you have the other dir of a door  (top right conncet botton left of the  hexagon)
 {
-    TopLeft,      // rev bottonright
-    TopRight,     // rev bottonleft
-    Left,         // rev right
-    Right,        // rev left
-    BottonLeft,   // rev TopRight
+    TopLeft, // rev bottonright
+    TopRight, // rev bottonleft
+    Left, // rev right
+    Right, // rev left
+    BottonLeft, // rev TopRight
     BottonRight // rev TopLeft
 }
-static class ConnectionDirExtension
+
+internal static class ConnectionDirExtension
 {
     public static ConnectionDir GetInvert(this ConnectionDir s1)
     {
-        ConnectionDir[] values = (ConnectionDir[])ConnectionDir.GetValues(typeof(ConnectionDir));
-        int invertedIndex = values.Length - 1 - (int)s1;
+        var values = (ConnectionDir[])ConnectionDir.GetValues(typeof(ConnectionDir));
+        var invertedIndex = values.Length - 1 - (int)s1;
         return values[invertedIndex];
     }
 }
+
 public enum RoomType
 {
     Generic,
     PreSetLoot,
     NormalLott,
     Enemy,
-    Spawn_Player1,
-    Spawn_Player2,
+    SpawnPlayer1,
+    SpawnPlayer2,
     Trap
 }
+
 public enum RoomElement
 {
     Standard,
@@ -90,5 +94,4 @@ public enum RoomElement
     Fire,
     Water,
     Hole
-
 }

@@ -1,19 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace dungeonduell
 {
-    public class Debug_SceneSwitch : MonoBehaviour
+    public class DebugSceneSwitch : MonoBehaviour
     {
-        [SerializeField] KeyCode switchSceneKey = KeyCode.Insert;
-        [SerializeField] int targetSceneIndex = 1;
+        [SerializeField] private KeyCode switchSceneKey = KeyCode.Insert;
+
+        [SerializeField] private int targetSceneIndex = 1;
+
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
             if (Input.GetKeyDown(switchSceneKey))
             {
+                if (SceneManager.GetActiveScene().buildIndex == 0)
+                {
+                    FindFirstObjectByType<TurnManager>().ActivateAllDevice();
+                }
+
                 SceneManager.LoadScene(targetSceneIndex);
             }
         }

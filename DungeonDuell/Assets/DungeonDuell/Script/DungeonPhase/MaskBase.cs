@@ -1,17 +1,49 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Drawing.Printing;
-using System.Linq;
 using MoreMountains.InventoryEngine;
-using UnityEditor;
-using UnityEngine;
 
 namespace dungeonduell
 {
-    
     public class MaskBase : InventoryItem
     {
+        public static IEqualityComparer<MaskBase> MaskBaseComparer { get; } = new MaskBaseEqualityComparer();
+
+        public override bool Pick(string playerID)
+        {
+            return Equip(playerID);
+            ;
+        }
+
+        public override bool Equip(string playerID)
+        {
+            return Apply(playerID);
+        }
+
+        public override bool UnEquip(string playerID)
+        {
+            return Discharge(playerID);
+        }
+
+        public override void Swap(string playerID)
+        {
+            Discharge(playerID);
+        }
+
+        public override bool Drop(string playerID)
+        {
+            return Discharge(playerID);
+        }
+
+        protected virtual bool Apply(string playerID)
+        {
+            return true;
+        }
+
+        protected virtual bool Discharge(string playerID)
+        {
+            return true;
+        }
+
         private sealed class MaskBaseEqualityComparer : IEqualityComparer<MaskBase>
         {
             public bool Equals(MaskBase x, MaskBase y)
@@ -20,7 +52,25 @@ namespace dungeonduell
                 if (x is null) return false;
                 if (y is null) return false;
                 if (x.GetType() != y.GetType()) return false;
-                return x.name == y.name && x.hideFlags == y.hideFlags && x.ItemID == y.ItemID && x.TargetInventoryName == y.TargetInventoryName && x.ForceSlotIndex == y.ForceSlotIndex && x.TargetIndex == y.TargetIndex && x.Usable == y.Usable && x.Consumable == y.Consumable && x.ConsumeQuantity == y.ConsumeQuantity && x.Equippable == y.Equippable && x.EquippableIfInventoryIsFull == y.EquippableIfInventoryIsFull && x.MoveWhenEquipped == y.MoveWhenEquipped && x.Droppable == y.Droppable && x.CanMoveObject == y.CanMoveObject && x.CanSwapObject == y.CanSwapObject && Equals(x.DisplayProperties, y.DisplayProperties) && x.Quantity == y.Quantity && x.ItemName == y.ItemName && x.ShortDescription == y.ShortDescription && x.Description == y.Description && Equals(x.Icon, y.Icon) && Equals(x.Prefab, y.Prefab) && x.ForcePrefabDropQuantity == y.ForcePrefabDropQuantity && x.PrefabDropQuantity == y.PrefabDropQuantity && Equals(x.DropProperties, y.DropProperties) && x.MaximumStack == y.MaximumStack && x.MaximumQuantity == y.MaximumQuantity && x.ItemClass == y.ItemClass && x.TargetEquipmentInventoryName == y.TargetEquipmentInventoryName && Equals(x.EquippedSound, y.EquippedSound) && Equals(x.UsedSound, y.UsedSound) && Equals(x.MovedSound, y.MovedSound) && Equals(x.DroppedSound, y.DroppedSound) && x.UseDefaultSoundsIfNull == y.UseDefaultSoundsIfNull && Equals(x._targetInventory, y._targetInventory) && Equals(x._targetEquipmentInventory, y._targetEquipmentInventory);
+                return x.name == y.name && x.hideFlags == y.hideFlags && x.ItemID == y.ItemID &&
+                       x.TargetInventoryName == y.TargetInventoryName && x.ForceSlotIndex == y.ForceSlotIndex &&
+                       x.TargetIndex == y.TargetIndex && x.Usable == y.Usable && x.Consumable == y.Consumable &&
+                       x.ConsumeQuantity == y.ConsumeQuantity && x.Equippable == y.Equippable &&
+                       x.EquippableIfInventoryIsFull == y.EquippableIfInventoryIsFull &&
+                       x.MoveWhenEquipped == y.MoveWhenEquipped && x.Droppable == y.Droppable &&
+                       x.CanMoveObject == y.CanMoveObject && x.CanSwapObject == y.CanSwapObject &&
+                       Equals(x.DisplayProperties, y.DisplayProperties) && x.Quantity == y.Quantity &&
+                       x.ItemName == y.ItemName && x.ShortDescription == y.ShortDescription &&
+                       x.Description == y.Description && Equals(x.Icon, y.Icon) && Equals(x.Prefab, y.Prefab) &&
+                       x.ForcePrefabDropQuantity == y.ForcePrefabDropQuantity &&
+                       x.PrefabDropQuantity == y.PrefabDropQuantity && Equals(x.DropProperties, y.DropProperties) &&
+                       x.MaximumStack == y.MaximumStack && x.MaximumQuantity == y.MaximumQuantity &&
+                       x.ItemClass == y.ItemClass && x.TargetEquipmentInventoryName == y.TargetEquipmentInventoryName &&
+                       Equals(x.EquippedSound, y.EquippedSound) && Equals(x.UsedSound, y.UsedSound) &&
+                       Equals(x.MovedSound, y.MovedSound) && Equals(x.DroppedSound, y.DroppedSound) &&
+                       x.UseDefaultSoundsIfNull == y.UseDefaultSoundsIfNull &&
+                       Equals(x._targetInventory, y._targetInventory) &&
+                       Equals(x._targetEquipmentInventory, y._targetEquipmentInventory);
             }
 
             public int GetHashCode(MaskBase obj)
@@ -65,43 +115,5 @@ namespace dungeonduell
                 return hashCode.ToHashCode();
             }
         }
-
-        public static IEqualityComparer<MaskBase> MaskBaseComparer { get; } = new MaskBaseEqualityComparer();
-
-        public override bool Pick(string playerID)
-        {
-            return Equip(playerID);;
-        }
-
-        public override bool Equip(string playerID)
-        {
-            return Apply(playerID);
-        }
-        
-        public override bool UnEquip(string playerID)
-        {
-            return Discharge(playerID);
-        }
-
-        public override void Swap(string playerID)
-        {
-            Discharge(playerID);
-        }
-
-        public override bool Drop(string playerID)
-        {
-            return Discharge(playerID);
-        }
-        
-        protected virtual bool Apply(string playerID)
-        {
-            return true;
-        }
-        protected virtual bool Discharge(string playerID)
-        {
-            return true;
-        }
-        
-        
     }
 }

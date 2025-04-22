@@ -1,96 +1,90 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 using UnityEngine.SceneManagement;
 
 namespace dungeonduell
 {
     public class ConnectionsCollector : MonoBehaviour
-    {    
-        public List<Tuple<Vector3Int, RoomInfo>> roomsInfos = new List<Tuple<Vector3Int, RoomInfo>>();
-        [SerializeField] List<RoomType> filteredRoomTypeFromFirstCoin;
+    {
+        [SerializeField] private List<RoomType> filteredRoomTypeFromFirstCoin;
+        public List<Tuple<Vector3Int, RoomInfo>> RoomsInfos = new();
 
-        void OnEnable()
+        private void Awake()
+        {
+            var objs = FindObjectsByType<ConnectionsCollector>(FindObjectsSortMode.None);
+
+            if (objs.Length > 1) Destroy(gameObject);
+
+            DontDestroyOnLoad(gameObject);
+        }
+
+        private void OnEnable()
         {
             //Debug.Log("OnEnable called");
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
-        void Awake()
+
+
+        private void OnDisable()
         {
-            ConnectionsCollector[] objs = FindObjectsOfType<ConnectionsCollector>();
-
-            if (objs.Length > 1)
-            {
-                Destroy(this.gameObject);
-            }
-
-            DontDestroyOnLoad(gameObject);
+            SceneManager.sceneLoaded -= OnSceneLoaded;
         }
+
         // called second
-        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             // So the map is not seen in Dunegeon Phase
-           if(scene.buildIndex == 1)
-           {
+            if (scene.buildIndex == 1)
                 transform.GetChild(0).gameObject.SetActive(false);
-           }
-           else
-           {
+            else
                 transform.GetChild(0).gameObject.SetActive(true);
-           }
         }
 
-        public void AddRoom(Vector3Int pos, List<RoomConnection> Conncection,RoomType type, RoomElement element, List<ConnectionDir> newAllowedDoors,int owner)
+        public void AddRoom(Vector3Int pos, List<RoomConnection> conncection, RoomType type, RoomElement element,
+            List<ConnectionDir> newAllowedDoors, int owner)
         {
-            Tuple<Vector3Int, RoomInfo> newroomsInfos = 
-                new Tuple<Vector3Int, RoomInfo>(pos,new RoomInfo(roomsInfos.Count, Conncection, type, element, newAllowedDoors, owner, !filteredRoomTypeFromFirstCoin.Contains(type)));
+            var newroomsInfos =
+                new Tuple<Vector3Int, RoomInfo>(pos,
+                    new RoomInfo(RoomsInfos.Count, conncection, type, element, newAllowedDoors, owner,
+                        !filteredRoomTypeFromFirstCoin.Contains(type)));
 
-            roomsInfos.Add(newroomsInfos);
+            RoomsInfos.Add(newroomsInfos);
         }
 
-        public int[] GetPossibleConnects(Vector3Int[] allArounds,bool[] allowedDoors,bool forceOnRoom) // TODO Allround probaly not parll
+        public int[]
+            GetPossibleConnects(Vector3Int[] allArounds, bool[] allowedDoors,
+                bool forceOnRoom) // TODO Allround probaly not parll
         {
             // FocredRoom for scenario that player connecting tile is placed but connection is not two sided even after adding one from set tile to target
 
             int[] roomIdsConnect = { -1, -1, -1, -1, -1, -1 };
 
-            for (int i = 0; i < allArounds.Length; i++)
-                {
-                    if (allowedDoors[i]) // Dont Tracking for Connection are not allowed 
-                    {                       
-                        foreach (Tuple<Vector3Int, RoomInfo> roomInfo in roomsInfos)
+            for (var i = 0; i < allArounds.Length; i++)
+                if (allowedDoors[i]) // Dont Tracking for Connection are not allowed 
+                    foreach (var roomInfo in RoomsInfos)
+                        if ((roomInfo.Item1 == allArounds[i]) & (forceOnRoom |
+                                                                 roomInfo.Item2.AllowedDoors.Contains(((ConnectionDir)i)
+                                                                     .GetInvert())))
                         {
-                            if (roomInfo.Item1 == allArounds[i] & (forceOnRoom | (roomInfo.Item2.allowedDoors.Contains(((ConnectionDir)i).GetInvert()))))
-                            {
-                                roomIdsConnect[i] = roomInfo.Item2.RoomID;
-                                break;
-                            }
+                            roomIdsConnect[i] = roomInfo.Item2.RoomID;
+                            break;
                         }
-                    }
-                }
-            
+
             return roomIdsConnect;
         }
 
         public List<RoomInfo> GetRoomList()
         {
-            List<RoomInfo> RoomsInfos = new List<RoomInfo>();
-            foreach (Tuple<Vector3Int, RoomInfo> roomInfo in roomsInfos)
-            {
-                RoomsInfos.Add(roomInfo.Item2);
-            }
-            return RoomsInfos;
-        }
-        public List<Tuple<Vector3Int, RoomInfo>> GetFullRoomList()
-        {
+            var roomsInfos = new List<RoomInfo>();
+            foreach (var roomInfo in this.RoomsInfos) roomsInfos.Add(roomInfo.Item2);
+
             return roomsInfos;
         }
-        
 
-        void OnDisable()
+        public List<Tuple<Vector3Int, RoomInfo>> GetFullRoomList()
         {
-            SceneManager.sceneLoaded -= OnSceneLoaded;
+            return RoomsInfos;
         }
     }
 }

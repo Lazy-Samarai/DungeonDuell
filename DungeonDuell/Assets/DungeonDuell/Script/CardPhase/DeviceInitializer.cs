@@ -4,7 +4,7 @@ namespace dungeonduell
 {
     public class DeviceInitializer : MonoBehaviour
     {
-        void Start()
+        private void Start()
         {
             DeviceHelper.SetupDevicesManuell();
         }

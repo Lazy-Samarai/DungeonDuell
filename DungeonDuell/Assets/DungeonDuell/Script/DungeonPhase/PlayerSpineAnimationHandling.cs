@@ -8,9 +8,7 @@ namespace dungeonduell
 {
     public class PlayerSpineAnimationHandling : MonoBehaviour
     {
-        const string TargetBoneName = "Target";
-        private Bone _ikTargetBone;
-        SkeletonAnimation _skeletonAnimation;
+        private const string TargetBoneName = "Target";
         [SpineAnimation] public string running;
         [SpineAnimation] public string runningBackward;
         [SpineAnimation] public string idle;
@@ -22,15 +20,20 @@ namespace dungeonduell
         public float runningMultiply = 1f;
         public float walkMultiply = 1f;
 
-        public bool facingEastRunning = false;
-        public bool runningEast = false;
-        [FormerlySerializedAs("_rigidbody2D")] public CharacterMovement _characterMovement;
+        public bool facingEastRunning;
+        public bool runningEast;
+
+        [FormerlySerializedAs("_characterMovement")] [FormerlySerializedAs("_rigidbody2D")]
+        public CharacterMovement characterMovement;
+
+        private Bone _ikTargetBone;
+        private SkeletonAnimation _skeletonAnimation;
 
 
         // Start is called before the first frame update
-        void Awake()
+        private void Awake()
         {
-            _characterMovement = GetComponentInParent<CharacterMovement>();
+            characterMovement = GetComponentInParent<CharacterMovement>();
             //   _characterOrientation2D  = GetComponentInParent<CharacterOrientation2D>();
             _skeletonAnimation = GetComponent<SkeletonAnimation>();
             _ikTargetBone = _skeletonAnimation.Skeleton.FindBone(TargetBoneName);
@@ -39,13 +42,10 @@ namespace dungeonduell
 
         private void Update()
         {
-            Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            var mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mouseWorldPosition.z = 0;
 
-            if (transform.parent.transform.rotation.y <= 0)
-            {
-                mouseWorldPosition.x *= -1;
-            }
+            if (transform.parent.transform.rotation.y <= 0) mouseWorldPosition.x *= -1;
 
             CheckRunningDirection();
 
@@ -63,9 +63,9 @@ namespace dungeonduell
                 UpdateFacing();
             }
 
-            if (_characterMovement.GetMovement().x >= 0 != runningEast)
+            if (characterMovement.GetMovement().x >= 0 != runningEast)
             {
-                runningEast = _characterMovement.GetMovement().x >= 0;
+                runningEast = characterMovement.GetMovement().x >= 0;
                 UpdateFacing();
             }
         }
@@ -82,17 +82,14 @@ namespace dungeonduell
 
         public void SetAnimation(string aniName, float scale)
         {
-            TrackEntry trackEntry = _skeletonAnimation.AnimationState.SetAnimation(0, aniName, true);
+            var trackEntry = _skeletonAnimation.AnimationState.SetAnimation(0, aniName, true);
             trackEntry.TimeScale = scale;
         }
 
         public void UpdateFacing()
         {
-            if (_skeletonAnimation.state.GetCurrent(0).ToString() == running |
-                _skeletonAnimation.state.GetCurrent(0).ToString() == runningBackward)
-            {
-                SetToRunning();
-            }
+            if ((_skeletonAnimation.state.GetCurrent(0).ToString() == running) |
+                (_skeletonAnimation.state.GetCurrent(0).ToString() == runningBackward)) SetToRunning();
         }
 
         // Done like this to avoid String reference
@@ -103,7 +100,7 @@ namespace dungeonduell
 
         public void SetToRunning()
         {
-            bool backwards = facingEastRunning != runningEast;
+            var backwards = facingEastRunning != runningEast;
             SetAnimation(!backwards ? running : runningBackward, runningMultiply);
         }
 
@@ -114,6 +111,7 @@ namespace dungeonduell
 
         public void SetToDeath()
         {
+            print("Deeeeeeeeeeeaddddd");
             SetAnimation(death, false);
         }
 

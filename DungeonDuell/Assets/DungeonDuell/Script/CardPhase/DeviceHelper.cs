@@ -1,8 +1,8 @@
+using System.Linq;
+using MoreMountains.TopDownEngine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Users;
-using System.Linq;
-using MoreMountains.TopDownEngine;
 
 namespace dungeonduell
 {
@@ -14,7 +14,7 @@ namespace dungeonduell
             var keyboard = Keyboard.current;
             var mouse = Mouse.current;
 
-            foreach (var playerInput in Object.FindObjectsOfType<PlayerInput>())
+            foreach (var playerInput in Object.FindObjectsByType<PlayerInput>(FindObjectsSortMode.None))
             {
                 var manager = playerInput.GetComponent<InputSystemManagerEventsBased>();
                 if (manager == null) continue;
@@ -49,7 +49,8 @@ namespace dungeonduell
                     }
                 }
 
-                Debug.Log($"[DeviceHelper] {manager.PlayerID} uses: {string.Join(", ", playerInput.user.pairedDevices.Select(d => d.displayName))}");
+                Debug.Log(
+                    $"[DeviceHelper] {manager.PlayerID} uses: {string.Join(", ", playerInput.user.pairedDevices.Select(d => d.displayName))}");
             }
         }
     }

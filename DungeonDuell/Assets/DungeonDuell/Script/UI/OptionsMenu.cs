@@ -1,11 +1,9 @@
-using UnityEngine;
-using UnityEngine.UI;
 using DG.Tweening;
-using MoreMountains.Tools;
-using MoreMountains.TopDownEngine;
 using TMPro;
+using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace dungeonduell
 {
@@ -20,148 +18,118 @@ namespace dungeonduell
         public Toggle fullscreenToggle;
         public TMP_Dropdown resolutionDropdown;
 
-        private CanvasGroup canvasGroup;
-        private Resolution[] resolutions;
-        private OptionDataManager dataManager;
-
         public float fadeDuration = 0.25f;
 
+        private CanvasGroup _canvasGroup;
+        private OptionDataManager _dataManager;
+        private Resolution[] _resolutions;
 
-        void Start()
+
+        private void Start()
         {
-            canvasGroup = optionsPanel.GetComponent<CanvasGroup>();
-            if (canvasGroup == null)
-            {
-                canvasGroup = optionsPanel.AddComponent<CanvasGroup>();
-            }
-            canvasGroup.alpha = 0;
+            _canvasGroup = optionsPanel.GetComponent<CanvasGroup>();
+            if (_canvasGroup == null) _canvasGroup = optionsPanel.AddComponent<CanvasGroup>();
+
+            _canvasGroup.alpha = 0;
             optionsPanel.SetActive(false);
 
-            dataManager = FindObjectOfType<OptionDataManager>();
+            _dataManager = FindFirstObjectByType<OptionDataManager>();
             SetupResolutionDropdown();
             LoadSettings();
         }
 
         public void OpenOptions()
         {
-
             optionsPanel.SetActive(true);
             optionsPanel.transform.localScale = Vector3.zero;
-            canvasGroup.alpha = 0;
+            _canvasGroup.alpha = 0;
             optionsPanel.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack).SetUpdate(true);
-            canvasGroup.DOFade(1, fadeDuration).SetUpdate(true).OnComplete(() =>
-            { 
+            _canvasGroup.DOFade(1, fadeDuration).SetUpdate(true).OnComplete(() =>
+            {
                 if (optionSelectedButton != null && EventSystem.current != null)
-                {
                     EventSystem.current.SetSelectedGameObject(optionSelectedButton);
-                }
             });
         }
 
         public void CloseOptions()
         {
             optionsPanel.transform.DOScale(0f, 0.3f).SetEase(Ease.InBack).SetUpdate(true);
-            canvasGroup.DOFade(0, fadeDuration).SetUpdate(true).OnComplete(() => 
+            _canvasGroup.DOFade(0, fadeDuration).SetUpdate(true).OnComplete(() =>
             {
-                    optionsPanel.SetActive(false);
-                    if (EventSystem.current != null)
-                    {
-                        EventSystem.current.SetSelectedGameObject(null);
-                        if (previousSelected != null)
-                        {
-                            EventSystem.current.SetSelectedGameObject(previousSelected);
-                        }
-                    }
+                optionsPanel.SetActive(false);
+                if (EventSystem.current != null)
+                {
+                    EventSystem.current.SetSelectedGameObject(null);
+                    if (previousSelected != null) EventSystem.current.SetSelectedGameObject(previousSelected);
+                }
             });
         }
 
 
         public void SetMasterVolume(float volume)
         {
-
-            if (dataManager != null)
-            {
-                dataManager.SetVolume(volume);
-            }
+            if (_dataManager != null)
+                _dataManager.SetVolume(volume);
             else
-            {
                 Debug.Log("Datamanager fehlt");
-            }
         }
 
         public void SetMusicVolume(float volume)
         {
-            if (dataManager != null)
-            {
-                dataManager.SetMusicVolume(volume);
-            }
+            if (_dataManager != null) _dataManager.SetMusicVolume(volume);
         }
-        public void SetSFXVolume(float volume)
+
+        public void SetSfxVolume(float volume)
         {
-            if (dataManager != null)
-            {
-                dataManager.SetSFXVolume(volume);
-            }
+            if (_dataManager != null) _dataManager.SetSfxVolume(volume);
         }
 
         public void MuteToggle(bool muted)
         {
-            if (dataManager != null)
-            {
-                dataManager.MuteToggle(muted);
-            }
+            if (_dataManager != null) _dataManager.MuteToggle(muted);
         }
 
-        void SetupResolutionDropdown()
+        private void SetupResolutionDropdown()
         {
-            resolutions = Screen.resolutions;
+            _resolutions = Screen.resolutions;
             resolutionDropdown.ClearOptions();
 
-            int currentResolutionIndex = 0;
-            for (int i = 0; i < resolutions.Length; i++)
+            var currentResolutionIndex = 0;
+            for (var i = 0; i < _resolutions.Length; i++)
             {
-                resolutionDropdown.options.Add(new TMP_Dropdown.OptionData(resolutions[i].width + "x" + resolutions[i].height));
-                if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
+                resolutionDropdown.options.Add(
+                    new TMP_Dropdown.OptionData(_resolutions[i].width + "x" + _resolutions[i].height));
+                if (_resolutions[i].width == Screen.currentResolution.width &&
+                    _resolutions[i].height == Screen.currentResolution.height)
                 {
                     currentResolutionIndex = i;
                     Debug.Log(currentResolutionIndex);
                 }
             }
-            
-            if (dataManager != null)
-            {
-                resolutionDropdown.value = dataManager.ResolutionIndex;
-            }
+
+            if (_dataManager != null) resolutionDropdown.value = _dataManager.resolutionIndex;
+
             resolutionDropdown.RefreshShownValue();
         }
 
         public void SetFullscreen(bool isFullscreen)
         {
-            
-            if (dataManager != null)
-            {
-                dataManager.SetFullscreen(isFullscreen);
-            }
+            if (_dataManager != null) _dataManager.SetFullscreen(isFullscreen);
         }
 
         public void SetResolution(int resolutionIndex)
         {
-            
-            if (dataManager != null)
-            {
-                dataManager.SetResolution(resolutionIndex);
-            }
+            if (_dataManager != null) _dataManager.SetResolution(resolutionIndex);
         }
 
-        void LoadSettings()
+        private void LoadSettings()
         {
-            
-            if (dataManager != null)
+            if (_dataManager != null)
             {
-                audioSlider.value = dataManager.Volume;
-                fullscreenToggle.isOn = dataManager.IsFullscreen;
-                resolutionDropdown.value = dataManager.ResolutionIndex;
-                muteToggle.isOn = dataManager.isMuted;
+                audioSlider.value = _dataManager.volume;
+                fullscreenToggle.isOn = _dataManager.isFullscreen;
+                resolutionDropdown.value = _dataManager.resolutionIndex;
+                muteToggle.isOn = _dataManager.isMuted;
             }
         }
     }
