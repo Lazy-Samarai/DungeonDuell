@@ -21,7 +21,7 @@ namespace dungeonduell
         public float readyCheckRadius = 2f;
         public int totalPlayersRequired = 2;
         public TMP_Text countdownText;
-        public string nextSceneName = "CardPhaseScene";
+        public string nextSceneName = "CardPhase";
         private Coroutine countdownCoroutine;
 
         private bool isCountingDown = false;

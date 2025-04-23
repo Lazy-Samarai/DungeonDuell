@@ -124,7 +124,7 @@ namespace dungeonduell
                 if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
                 {
                     currentResolutionIndex = i;
-                    Debug.Log(currentResolutionIndex);
+                    //Debug.Log(currentResolutionIndex);
                 }
             }
             

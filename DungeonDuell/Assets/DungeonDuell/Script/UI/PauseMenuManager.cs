@@ -47,7 +47,7 @@ namespace dungeonduell
         {
             Debug.Log("Pause Input");
             if (!isPaused) OpenPauseMenu();
-            else ResumeGame();
+            //else ResumeGame();
         }
 
         void Start()
@@ -67,7 +67,7 @@ namespace dungeonduell
         public void OpenPauseMenu()
         {
             isPaused = true;
-            Time.timeScale = 1f;
+            Time.timeScale = 0f;
             pausePanel.SetActive(true);
             pausePanel.transform.localScale = Vector3.zero;
             pauseGroup.alpha = 0;
