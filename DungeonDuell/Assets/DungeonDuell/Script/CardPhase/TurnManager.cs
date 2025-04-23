@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using TMPro;
-using Cinemachine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using MoreMountains.TopDownEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 using DG.Tweening;
-using UnityEngine.InputSystem.LowLevel;
-
+using MoreMountains.TopDownEngine;
 
 namespace dungeonduell
 {
@@ -20,30 +17,30 @@ namespace dungeonduell
         public TextMeshProUGUI pressAnyKeyText;
         public CardToHand HandPlayer1;
         public CardToHand HandPlayer2;
-        
+
         public GameObject player1UI;
         public GameObject player2UI;
-        
+
+        public InputSystemUIInputModule uiInputModule; // 💡 das UI-Modul des EventSystems
+
         private bool awaitingKeyPress = false;
         public bool isPlayer1Turn = true;
         private float timeStart;
 
         private const int SecondsToStart = 3;
+        private bool[] _playerPlayedAllCards = { false, false };
 
-        private bool[] _playerPlayedAllCards = {false, false};
-
-        public PlayerInput[] _playerInputs;
+        public PlayerInput[] _playerInputs; // 🎮 Zwei PlayerInput-Komponenten aus der Szene
 
         void Start()
         {
             timeStart = Time.time;
             InitializeTurn();
-            
         }
 
         void Update()
         {
-            if (awaitingKeyPress && (Time.time - timeStart > 0.5f) && GetActivePlayerInput().actions["Submit"].WasPressedThisFrame())
+            if (awaitingKeyPress && (Time.time - timeStart > 0.5f) && GetActivePlayerInput()?.actions["Submit"].WasPressedThisFrame() == true)
             {
                 BeginPlayerActionPhase();
             }
@@ -53,7 +50,10 @@ namespace dungeonduell
         {
             awaitingKeyPress = true;
             playerTurnText.text = "Next Turn: " + (isPlayer1Turn ? "Player 1" : "Player 2");
-            
+
+            UpdateUIInputModule(); // 👉 EventSystem hört auf den aktiven Spieler
+
+            // Aktivieren/Deaktivieren der Devices
             if (isPlayer1Turn)
             {
                 InputSystem.DisableDevice(_playerInputs[1].user.pairedDevices[0]);
@@ -64,7 +64,7 @@ namespace dungeonduell
                 InputSystem.DisableDevice(_playerInputs[0].user.pairedDevices[0]);
                 InputSystem.EnableDevice(_playerInputs[1].user.pairedDevices[0]);
             }
-            
+
             playerTurnText.gameObject.SetActive(true);
             pressAnyKeyText.gameObject.SetActive(true);
             ToggleHandVisibility(false, false);
@@ -78,10 +78,8 @@ namespace dungeonduell
             UpdatePlayerTurnText();
             pressAnyKeyText.gameObject.SetActive(false);
             ToggleHandVisibility(isPlayer1Turn, !isPlayer1Turn);
-
             StartCoroutine(DelayedFirstSelectable());
         }
-
 
         private IEnumerator DelayedFirstSelectable()
         {
@@ -95,23 +93,21 @@ namespace dungeonduell
             if (playerTurnText != null)
                 playerTurnText.text = "Current Turn: " + (isPlayer1Turn ? "Player 1" : "Player 2");
         }
+
         public void EndPlayerTurn()
         {
             isPlayer1Turn = !isPlayer1Turn;
-            
+
             if (_playerPlayedAllCards.All(played => played == true))
             {
                 InnitGameCountDown();
             }
             else
             {
-                // Verz�gere das Initialisieren des neuen Zuges, um sicherzustellen, dass awaitingKeyPress korrekt gesetzt ist
                 Invoke(nameof(InitializeTurn), 0.1f);
             }
-
-           
         }
-        // Neue Methode zum Umschalten der Handkartenanzeige
+
         private void ToggleHandVisibility(bool showForPlayer1, bool showForPlayer2)
         {
             HandPlayer1.ShowHideDeck(!showForPlayer1);
@@ -120,9 +116,6 @@ namespace dungeonduell
             SlidePlayerSprite(player1UI, showForPlayer1);
             SlidePlayerSprite(player2UI, showForPlayer2);
         }
-
-
-
 
         public void InnitGameCountDown()
         {
@@ -136,7 +129,7 @@ namespace dungeonduell
             pressAnyKeyText.gameObject.SetActive(true);
             pressAnyKeyText.fontSize *= 2;
             pressAnyKeyText.text = "Make Ready";
-            for (int i = SecondsToStart ; i > 0; i--)
+            for (int i = SecondsToStart; i > 0; i--)
             {
                 yield return new WaitForSeconds(1f);
                 pressAnyKeyText.text = "Start in " + i;
@@ -153,7 +146,7 @@ namespace dungeonduell
 
         void OnEnable() => SubscribeToEvents();
         void OnDisable() => UnsubscribeToAllEvents();
-        
+
         public void SubscribeToEvents()
         {
             DDCodeEventHandler.NextPlayerTurn += EndPlayerTurn;
@@ -169,15 +162,17 @@ namespace dungeonduell
         private PlayerInput GetActivePlayerInput()
         {
             string neededID = isPlayer1Turn ? "Player1" : "Player2";
+
             foreach (var input in FindObjectsOfType<PlayerInput>())
             {
-                var manager = input.GetComponent<InputSystemManagerEventsBased>();
-                if (manager != null && manager.PlayerID == neededID)
+                var inputManager = input.GetComponent<InputSystemManagerEventsBased>();
+                if (inputManager != null && inputManager.PlayerID == neededID)
                     return input;
             }
+
             return null;
         }
-        
+
         private void SlidePlayerSprite(GameObject uiElement, bool show, float hiddenY = -550f, float visibleY = 0f)
         {
             if (uiElement == null) return;
@@ -187,12 +182,23 @@ namespace dungeonduell
             {
                 uiElement.SetActive(true);
                 rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, hiddenY);
-                rect.DOAnchorPosY(visibleY, 0.5f).SetEase(Ease.OutCubic); // DOTween
+                rect.DOAnchorPosY(visibleY, 0.5f).SetEase(Ease.OutCubic);
             }
             else
             {
                 rect.DOAnchorPosY(hiddenY, 0.5f).SetEase(Ease.InCubic).OnComplete(() => uiElement.SetActive(false));
             }
+        }
+
+        // UI Input System aktiv auf den aktiven Spieler setzen
+        private void UpdateUIInputModule()
+        {
+            var activePlayerInput = GetActivePlayerInput();
+            if (uiInputModule == null || activePlayerInput == null) return;
+
+            // UI InputModule auf aktiven PlayerInput umschalten
+            uiInputModule.actionsAsset = activePlayerInput.actions;
+            Debug.Log($"[TurnManager] UI Input Module wurde PlayerInput {activePlayerInput.name} zugewiesen.");
         }
     }
 }
