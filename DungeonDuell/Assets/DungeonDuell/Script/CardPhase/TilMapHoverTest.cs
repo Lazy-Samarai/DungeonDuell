@@ -11,8 +11,6 @@ namespace dungeonduell
         public Camera cam;
         public TileBase hoverTile;
 
-        public TileBase blockTile;
-
         public Tilemap tilemap;
 
         public Vector3Int currentCellPosition;
@@ -27,6 +25,9 @@ namespace dungeonduell
 
         private bool _currentlyVisible;
 
+        public TileBase hoverBridgeTile;
+        private bool _isBridged;
+
         private void Awake()
         {
             runTimeIndicatorDoor = Instantiate(indicatorDoorPrefab, transform.position, Quaternion.identity);
@@ -40,11 +41,6 @@ namespace dungeonduell
         {
             if (_currentlyVisible)
             {
-                var mouseWorldPos = cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y,
-                    -cam.transform.position.z));
-                HandleHover(mouseWorldPos);
-
-
                 if (controllerCursor == null) controllerCursor = GameObject.FindGameObjectWithTag(cursorTag);
                 HandleHover(controllerCursor.transform.position);
             }
@@ -65,17 +61,17 @@ namespace dungeonduell
         public void SubscribeToEvents()
         {
             DdCodeEventHandler.CardPlayed += OnCardPlayed;
-            DdCodeEventHandler.PreSetCardSetOnTilemap += OnPreSetCardSetOnTilemap;
             DdCodeEventHandler.CardSelected += OnCardSelected;
             DdCodeEventHandler.CardRotating += UpdateIndicator;
+            DdCodeEventHandler.BridgeMode += GoBridgeMode;
         }
 
         public void UnsubscribeToAllEvents()
         {
             DdCodeEventHandler.CardPlayed -= OnCardPlayed;
-            DdCodeEventHandler.PreSetCardSetOnTilemap -= OnPreSetCardSetOnTilemap;
             DdCodeEventHandler.CardSelected -= OnCardSelected;
             DdCodeEventHandler.CardRotating -= UpdateIndicator;
+            DdCodeEventHandler.BridgeMode -= GoBridgeMode;
         }
 
         private void HandleHover(Vector3 mouseWorldPos)
@@ -83,28 +79,18 @@ namespace dungeonduell
             var cellPosition =
                 tilemap.WorldToCell(new Vector3(mouseWorldPos.x, mouseWorldPos.y, cam.transform.position.z));
 
-            if (cellPosition != currentCellPosition)
-            {
-                if (tilemap.GetTile(cellPosition) != blockTile)
-                {
-                    ResetTileCheck();
-                    tilemap.SetTile(cellPosition, hoverTile);
-                    runTimeIndicatorDoor.transform.position = tilemap.CellToWorld(cellPosition);
-                    runTimeIndicatorDoor.transform.gameObject.SetActive(_currentlyVisible ? true : false);
-                }
-                else
-                {
-                    ResetTileCheck();
-                    runTimeIndicatorDoor.transform.gameObject.SetActive(false);
-                }
+            ResetTileCheck();
 
-                currentCellPosition = cellPosition;
-            }
+            tilemap.SetTile(cellPosition, _isBridged ? hoverBridgeTile : hoverTile);
+            runTimeIndicatorDoor.transform.position = tilemap.CellToWorld(cellPosition);
+            runTimeIndicatorDoor.transform.gameObject.SetActive(_currentlyVisible);
+
+            currentCellPosition = cellPosition;
         }
 
         private void ResetTileCheck()
         {
-            if (tilemap.GetTile(currentCellPosition) != blockTile) tilemap.SetTile(currentCellPosition, null);
+            tilemap.SetTile(currentCellPosition, null);
         }
 
         private void SetHoverMapVisable(bool visual)
@@ -116,7 +102,8 @@ namespace dungeonduell
 
         private void OnCardPlayed(Card card, bool p)
         {
-            SetBlockOnTile(currentCellPosition);
+            _isBridged = false;
+            ResetTileCheck();
             SetHoverMapVisable(false);
         }
 
@@ -133,17 +120,14 @@ namespace dungeonduell
 
         private void UpdateIndicator(bool[] allowedDoors)
         {
-            runTimeIndicatorDoor.SetDoorIndiactor(allowedDoors);
+            runTimeIndicatorDoor.SetDoorIndiactor(_isBridged
+                ? new[] { false, false, false, false, false, false }
+                : allowedDoors);
         }
 
-        private void OnPreSetCardSetOnTilemap(Card card, Vector3Int point)
+        private void GoBridgeMode()
         {
-            SetBlockOnTile(point);
-        }
-
-        private void SetBlockOnTile(Vector3Int postion)
-        {
-            tilemap.SetTile(postion, blockTile);
+            _isBridged = true;
         }
     }
 }

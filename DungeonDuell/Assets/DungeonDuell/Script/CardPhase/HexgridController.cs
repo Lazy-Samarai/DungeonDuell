@@ -117,7 +117,6 @@ namespace dungeonduell
             {
                 if (tile.Item1 == _selectedTilePos) continue;
 
-
                 if (ctx.control.device is Mouse)
                 {
                     Vector3 mouseWorldPos =
