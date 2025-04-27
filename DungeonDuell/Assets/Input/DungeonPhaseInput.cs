@@ -187,7 +187,7 @@ namespace MoreMountains.TopDownEngine
                     ""name"": ""Pause"",
                     ""type"": ""Button"",
                     ""id"": ""c01ffcc5-adff-4aa3-bb8d-e0139087e5ed"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -515,6 +515,17 @@ namespace MoreMountains.TopDownEngine
                     ""interactions"": ""Press(behavior=2)"",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""aa2d0286-fa22-43f0-9d5a-1a06ff0d23c0"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

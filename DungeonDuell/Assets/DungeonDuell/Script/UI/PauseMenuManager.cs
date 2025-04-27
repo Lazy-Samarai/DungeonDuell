@@ -1,7 +1,9 @@
 using DG.Tweening;
 using MoreMountains.TopDownEngine;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 namespace dungeonduell
@@ -19,7 +21,6 @@ namespace dungeonduell
 
         [Header("Settings")] public float fadeDuration = 0.25f;
 
-        private DungeonPhaseInput _controls;
         private bool _isPaused;
 
         private CanvasGroup _pauseGroup;
@@ -27,8 +28,10 @@ namespace dungeonduell
 
         private void Awake()
         {
-            _controls = new DungeonPhaseInput();
-            _controls.CardPhase.Pause.performed += ctx => TogglePause();
+            foreach (PlayerInput playerInput in FindObjectsByType<PlayerInput>(FindObjectsSortMode.None))
+            {
+                playerInput.actions["Pause"].started += TogglePause;
+            }
         }
 
         private void Start()
@@ -42,60 +45,67 @@ namespace dungeonduell
             confirmationPopup.SetActive(false);
         }
 
-        private void OnEnable()
+        private void TogglePause(InputAction.CallbackContext context)
         {
-            _controls.CardPhase.Enable();
-        }
-
-        private void OnDisable()
-        {
-            _controls.CardPhase.Disable();
-        }
-
-        private void TogglePause()
-        {
-            Debug.Log("Pause Input");
-            if (!_isPaused) OpenPauseMenu();
-            else ResumeGame();
+            Debug.Log("TogglePause");
+            if (!_isPaused)
+            {
+                OpenPauseMenu();
+            }
+            else
+            {
+                ResumeGame();
+            }
         }
 
         public void OpenPauseMenu()
         {
-            _isPaused = true;
-            Time.timeScale = 1f;
+            /*
             pausePanel.SetActive(true);
             pausePanel.transform.localScale = Vector3.zero;
             _pauseGroup.alpha = 0;
 
-            if (EventSystem.current != null)
-            {
-                _previousSelected = EventSystem.current.currentSelectedGameObject;
-                EventSystem.current.SetSelectedGameObject(null);
-            }
-
             pausePanel.transform.DOScale(1, fadeDuration).SetEase(Ease.OutBack).SetUpdate(true);
             _pauseGroup.DOFade(1, fadeDuration).SetUpdate(true).OnComplete(() =>
             {
-                if (defaultSelectedButton != null && EventSystem.current != null)
-                    EventSystem.current.SetSelectedGameObject(defaultSelectedButton);
+                if (EventSystem.current != null)
+                {
+                    _previousSelected = EventSystem.current.currentSelectedGameObject;
+                }
+
+                pausePanel.transform.DOScale(1, fadeDuration).SetEase(Ease.OutBack).SetUpdate(true);
+                _pauseGroup.DOFade(1, fadeDuration).SetUpdate(true).OnComplete(() =>
+                {
+                    if (defaultSelectedButton != null && EventSystem.current != null)
+                        EventSystem.current.SetSelectedGameObject(defaultSelectedButton);
+                });
+                TimePauseSet(true);
             });
+            */
+
+            TimePauseSet(true);
         }
 
         public void ResumeGame()
         {
+            TimePauseSet(false);
+            /*
             pausePanel.transform.DOScale(0, fadeDuration).SetEase(Ease.InBack).SetUpdate(true);
             _pauseGroup.DOFade(0, fadeDuration).SetUpdate(true).OnComplete(() =>
             {
                 pausePanel.SetActive(false);
-                Time.timeScale = 1f;
-                _isPaused = false;
-
                 if (EventSystem.current != null)
                 {
-                    EventSystem.current.SetSelectedGameObject(null);
                     if (_previousSelected != null) EventSystem.current.SetSelectedGameObject(_previousSelected);
                 }
             });
+            */
+        }
+
+        private void TimePauseSet(bool isPaused)
+        {
+            _isPaused = isPaused;
+            Time.timeScale = isPaused ? 0 : 1;
         }
 
         public void OpenTutorial()

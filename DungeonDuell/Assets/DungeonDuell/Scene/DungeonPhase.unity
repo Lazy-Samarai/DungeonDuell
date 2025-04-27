@@ -4420,7 +4420,7 @@ GameObject:
   m_Component:
   - component: {fileID: 681661207}
   - component: {fileID: 681661209}
-  - component: {fileID: 681661208}
+  - component: {fileID: 681661210}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -4436,33 +4436,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 681661206}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 44, y: -26, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 4887.628, y: 1011.5403, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 705329673}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &681661208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 681661206}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
-  m_HorizontalAxis: Player1_Horizontal
-  m_VerticalAxis: Player1_Vertical
-  m_SubmitButton: Player1_Jump
-  m_CancelButton: Player1_Pause
-  m_InputActionsPerSecond: 4
-  m_RepeatDelay: 0.25
-  m_ForceModuleActive: 0
 --- !u!114 &681661209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4478,6 +4458,18 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 5
+--- !u!114 &681661210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 681661206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c82cf35166701394ab910f41269944f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &686310898
 GameObject:
   m_ObjectHideFlags: 0
@@ -4777,7 +4769,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2060384199}
-  - {fileID: 681661207}
   - {fileID: 1406968497}
   m_Father: {fileID: 808795873}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -15994,6 +15985,12 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6526398265185208615, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
+        type: 3}
+      propertyPath: inputActionAsset
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: 0cad7e50cc0a66a4d9ba264d314913d3,
+        type: 3}
     - target: {fileID: 6739598370246715360, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
         type: 3}
       propertyPath: m_IsActive
@@ -16541,3 +16538,4 @@ SceneRoots:
   - {fileID: 1623725768}
   - {fileID: 924425118}
   - {fileID: 808795873}
+  - {fileID: 681661207}
