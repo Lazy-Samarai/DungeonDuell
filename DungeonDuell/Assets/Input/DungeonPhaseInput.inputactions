@@ -69,15 +69,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "SwitchWeapon",
-                    "type": "Button",
-                    "id": "6e3febaf-dba5-4b43-b4f8-3b720e7ad1be",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "OpenUpgrade",
                     "type": "Button",
                     "id": "5f531d69-3a23-4c4c-a114-620394e39f56",
@@ -293,28 +284,6 @@
                 },
                 {
                     "name": "",
-                    "id": "4c3ea5cb-6737-4947-ba0f-12fe1143e541",
-                    "path": "<Gamepad>/leftShoulder",
-                    "interactions": "Press(behavior=2)",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "SwitchWeapon",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "31347280-3484-4765-8820-ab0871c9d6ad",
-                    "path": "<Keyboard>/t",
-                    "interactions": "Press(behavior=2)",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "SwitchWeapon",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "2f940a20-9887-4115-a4cc-f2bcfaa3209c",
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
@@ -476,15 +445,6 @@
                     "name": "Pause",
                     "type": "Button",
                     "id": "b0b637a1-f591-4af1-81bf-f5342742219f",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Cancel",
-                    "type": "Button",
-                    "id": "facc7a30-9bf5-4458-a444-3b84b19a4385",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -764,17 +724,6 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Pause",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "ae34ed89-9330-488e-862a-96dc9a1c6ace",
-                    "path": "*/{Cancel}",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse;Gamepad;Touch;Joystick;XR",
-                    "action": "Cancel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
