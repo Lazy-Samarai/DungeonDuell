@@ -5,11 +5,8 @@ using DG.Tweening;
 using UnityEngine;
 using TMPro;
 using MoreMountains.TopDownEngine;
-using TMPro;
-using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
-using DG.Tweening;
 using UnityEngine.Localization.Components;
 using UnityEngine.Localization.SmartFormat.PersistentVariables;
 
