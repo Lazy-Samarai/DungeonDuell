@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 namespace dungeonduell
 {
@@ -30,9 +31,11 @@ namespace dungeonduell
 
         private Vector3 _originalScale;
 
+        private Selectable _selectable;
 
         private void Start()
         {
+            _selectable = GetComponent<Selectable>();
             if (handPanel == null)
             {
                 var cth = GetComponentInParent<CardToHand>();
@@ -46,20 +49,20 @@ namespace dungeonduell
             _originalPosition = transform.localPosition;
             _originalRotation = transform.localRotation;
 
-            var index = transform.GetSiblingIndex();
+
             var parent = transform.parent;
 
             if (parent != null)
             {
-                if (index > 0)
+                if (_selectable.navigation.selectOnLeft != null)
                 {
-                    var leftNeighbor = parent.GetChild(index - 1);
+                    var leftNeighbor = _selectable.navigation.selectOnLeft.transform;
                     _originalLeftPosition = leftNeighbor.localPosition;
                 }
 
-                if (index < parent.childCount - 1)
+                if (_selectable.navigation.selectOnRight != null)
                 {
-                    var rightNeighbor = parent.GetChild(index + 1);
+                    var rightNeighbor = _selectable.navigation.selectOnRight.transform;
                     _originalRightPosition = rightNeighbor.localPosition;
                 }
             }
@@ -109,6 +112,7 @@ namespace dungeonduell
 
         private void ActivateHoverEffect()
         {
+            transform.SetSiblingIndex(transform.parent.childCount);
             if (transform.parent == handPanel)
             {
                 transform.localScale = hoverScale;
@@ -143,11 +147,9 @@ namespace dungeonduell
             var parent = transform.parent;
             if (parent == null) return;
 
-            var currentIndex = transform.GetSiblingIndex();
-
-            if (currentIndex > 0)
+            if (_selectable.navigation.selectOnLeft != null)
             {
-                var leftNeighbor = parent.GetChild(currentIndex - 1);
+                var leftNeighbor = _selectable.navigation.selectOnLeft.transform;
                 if (leftNeighbor.TryGetComponent<DisplayCard>(out _))
                 {
                     if (isHovering)
@@ -157,9 +159,9 @@ namespace dungeonduell
                 }
             }
 
-            if (currentIndex < parent.childCount - 1)
+            if (_selectable.navigation.selectOnRight != null)
             {
-                var rightNeighbor = parent.GetChild(currentIndex + 1);
+                var rightNeighbor = _selectable.navigation.selectOnRight.transform;
                 if (rightNeighbor.TryGetComponent<DisplayCard>(out _))
                 {
                     if (isHovering)
