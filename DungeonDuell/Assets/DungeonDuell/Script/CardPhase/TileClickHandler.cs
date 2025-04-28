@@ -17,7 +17,13 @@ namespace dungeonduell
         private string tileMapTag;
 
         public Card currentCard;
-        public bool[] currentDoorDir = { true, true, true, true, true, true };
+
+        public bool[] currentDoorDir =
+        {
+            true, true, true, true,
+            true, true
+        };
+
         public DisplayCard displayCardUi;
         public GameObject indiactorDoor;
         public Transform indiactorDoorAnker;
