@@ -29,25 +29,29 @@ namespace dungeonduell
 
         void Awake()
         {
-            controls = new DungeonPhaseInput();
-            controls.CardPhase.Pause.performed += ctx => TogglePause();
+            foreach (PlayerInput playerInput in FindObjectsByType<PlayerInput>(FindObjectsSortMode.None))
+            {
+                playerInput.actions["Pause"].started += TogglePause;
+            }
+        
+        
         }
 
         void OnEnable()
         {
-            controls.CardPhase.Enable();
+            //controls.CardPhase.Enable();
         }
 
         void OnDisable()
         {
-            controls.CardPhase.Disable();
+            //controls.CardPhase.Disable();
         }
 
-        private void TogglePause()
+        private void TogglePause(InputAction.CallbackContext context)
         {
             Debug.Log("Pause Input");
             if (!isPaused) OpenPauseMenu();
-            //else ResumeGame();
+            else ResumeGame();
         }
 
         void Start()
