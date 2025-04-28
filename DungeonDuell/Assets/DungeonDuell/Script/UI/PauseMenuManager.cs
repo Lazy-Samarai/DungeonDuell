@@ -57,6 +57,7 @@ namespace dungeonduell
             Debug.Log("Pause Input");
             if (!_isPaused) OpenPauseMenu();
             else ResumeGame();
+            print("wfefewwfe");
         }
 
         public void OpenPauseMenu()
