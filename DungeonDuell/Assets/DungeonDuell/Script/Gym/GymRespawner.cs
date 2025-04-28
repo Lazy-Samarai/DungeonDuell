@@ -2,17 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 namespace dungeonduell
 {
-   
-    public class InteriorSpawner : BaseSingleSpawner
+    public class GymRespawner : BaseSingleSpawner
     {
-      
-        void Start()
+        //public GameObject ObjectToDestroy;
+        public void GymEnemyRespawn()
         {
             SpawnSingleObject(objectToSpawn);
+            //Destroy(ObjectToDestroy);
         }
-
-
     }
 }
