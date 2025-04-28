@@ -17,6 +17,7 @@ namespace dungeonduell
         public RoomElement roomElement = RoomElement.Standard;
         [FormerlySerializedAs("Tile")] public TileBase tile;
         public DirBarSet startDoorConcellation;
+        public bool isBridgeCard = false;
 
         public bool[] GetAllowedDirection()
         {
