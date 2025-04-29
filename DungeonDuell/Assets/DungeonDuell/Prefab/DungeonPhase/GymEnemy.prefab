@@ -5029,6 +5029,7 @@ GameObject:
   - component: {fileID: 7868703852352556298}
   - component: {fileID: 2727722503292096328}
   - component: {fileID: 4657305930924458142}
+  - component: {fileID: 43208205071470593}
   m_Layer: 13
   m_Name: GymEnemy
   m_TagString: Enemy
@@ -5808,6 +5809,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da8fd7a28bb1e264c8cdeaa85508649b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &43208205071470593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7827707600634268342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4bc68d697ba35440a86d37872dce48f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 5
 --- !u!1 &7827807178966529222
 GameObject:
   m_ObjectHideFlags: 0
@@ -11152,7 +11166,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7889016501038362883}
   - component: {fileID: 503466047980644536}
-  - component: {fileID: 1949871772934200195}
   m_Layer: 13
   m_Name: DeathFeedback
   m_TagString: Untagged
@@ -11582,10 +11595,10 @@ MonoBehaviour:
                 m_StringArgument: 
                 m_BoolArgument: 0
               m_CallState: 2
-            - m_Target: {fileID: 7827707600634268342}
-              m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-              m_MethodName: SetActive
-              m_Mode: 6
+            - m_Target: {fileID: 43208205071470593}
+              m_TargetAssemblyTypeName: dungeonduell.GymCorpseDespawn, Assembly-CSharp
+              m_MethodName: CorpseDesapwn
+              m_Mode: 1
               m_Arguments:
                 m_ObjectArgument: {fileID: 0}
                 m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -11603,16 +11616,3 @@ MonoBehaviour:
         ResetEvents:
           m_PersistentCalls:
             m_Calls: []
---- !u!114 &1949871772934200195
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9105006242565300944}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 742756ae97b7ba546a474a4a8c9229a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectToSpawn: {fileID: 7827707600634268342}

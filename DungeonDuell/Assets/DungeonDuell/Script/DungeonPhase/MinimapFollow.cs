@@ -1,5 +1,8 @@
 using UnityEngine;
 using MoreMountains.TopDownEngine;
+using MoreMountains.Tools;
+using UnityEngine.EventSystems;
+using System.Collections;
 
 public class MinimapFollow : MonoBehaviour
 {
@@ -8,7 +11,18 @@ public class MinimapFollow : MonoBehaviour
 
     void Start()
     {
+        StartCoroutine(StartLate());
         // Findet alle Charaktere in der Szene
+    }
+
+    private IEnumerator StartLate()
+    {
+        yield return new WaitForEndOfFrame();
+        AfterStart();
+    }
+
+    private void AfterStart()
+    {
         var characters = FindObjectsOfType<Character>();
 
         foreach (var character in characters)
@@ -19,6 +33,7 @@ public class MinimapFollow : MonoBehaviour
                 if ((isPlayer1 && character.PlayerID == "Player1") || (!isPlayer1 && character.PlayerID == "Player2"))
                 {
                     player = character.transform;
+                    Debug.Log(player + " gefunden");
                     break;
                 }
             }
@@ -29,6 +44,7 @@ public class MinimapFollow : MonoBehaviour
             Debug.LogError($"Kein Spieler gefunden für Minimap-Kamera (isPlayer1: {isPlayer1})");
         }
     }
+
 
     void LateUpdate()
     {
