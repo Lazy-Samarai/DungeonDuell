@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System.Collections.Generic;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 
 namespace dungeonduell
 {
@@ -17,6 +20,7 @@ namespace dungeonduell
         public Toggle muteToggle;
         public Toggle fullscreenToggle;
         public TMP_Dropdown resolutionDropdown;
+        public TMP_Dropdown languageDropdown;
 
         public float fadeDuration = 0.25f;
 
@@ -35,6 +39,7 @@ namespace dungeonduell
 
             _dataManager = FindFirstObjectByType<OptionDataManager>();
             SetupResolutionDropdown();
+            SetupLanguageDropdown();
             LoadSettings();
         }
 
@@ -130,6 +135,41 @@ namespace dungeonduell
                 fullscreenToggle.isOn = _dataManager.isFullscreen;
                 resolutionDropdown.value = _dataManager.resolutionIndex;
                 muteToggle.isOn = _dataManager.isMuted;
+            }
+        }
+
+        private void SetupLanguageDropdown()
+        {
+            if (languageDropdown == null) return;
+
+            languageDropdown.ClearOptions();
+
+            var options = new List<string>();
+            var locales = LocalizationSettings.AvailableLocales.Locales;
+            var currentLocale = LocalizationSettings.SelectedLocale;
+            var selectedIndex = 0;
+
+            for (int i = 0; i < locales.Count; i++)
+            {
+                var locale = locales[i];
+                options.Add(locale.Identifier.CultureInfo.NativeName);
+
+                if (_dataManager != null && _dataManager.selectedLanguageCode == locale.Identifier.Code)
+                    selectedIndex = i;
+            }
+
+            languageDropdown.AddOptions(options);
+            languageDropdown.value = selectedIndex;
+            languageDropdown.RefreshShownValue();
+            languageDropdown.onValueChanged.AddListener(SetLanguageFromDropdown);
+        }
+
+        private void SetLanguageFromDropdown(int index)
+        {
+            var locale = LocalizationSettings.AvailableLocales.Locales[index];
+            if (_dataManager != null)
+            {
+                _dataManager.SetLanguage(locale.Identifier.Code);
             }
         }
     }
