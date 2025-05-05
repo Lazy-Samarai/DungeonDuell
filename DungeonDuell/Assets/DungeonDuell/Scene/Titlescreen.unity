@@ -1309,6 +1309,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3814744896787272450, guid: 04e4d2f394825a14abf407fe31800c21,
         type: 3}
+      propertyPath: m_margin.x
+      value: -15.527267
+      objectReference: {fileID: 0}
+    - target: {fileID: 3814744896787272450, guid: 04e4d2f394825a14abf407fe31800c21,
+        type: 3}
+      propertyPath: m_margin.z
+      value: -14.492065
+      objectReference: {fileID: 0}
+    - target: {fileID: 3814744896787272450, guid: 04e4d2f394825a14abf407fe31800c21,
+        type: 3}
       propertyPath: m_fontSizeMax
       value: 24
       objectReference: {fileID: 0}
@@ -4100,6 +4110,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 108653170}
+    - targetCorrespondingSourceObject: {fileID: 7104364446485611865, guid: 897d22fb96e95b4439cacd04e697fb3f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6770411731672869150}
     - targetCorrespondingSourceObject: {fileID: 7679504775390991682, guid: 897d22fb96e95b4439cacd04e697fb3f,
         type: 3}
       insertIndex: -1
@@ -4127,6 +4141,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b743370ac3e4ec2a1668f5455a8ef8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &6770411731672869149 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7104364446485611865, guid: 897d22fb96e95b4439cacd04e697fb3f,
+    type: 3}
+  m_PrefabInstance: {fileID: 6770411731672869146}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6770411731672869150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6770411731672869149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
