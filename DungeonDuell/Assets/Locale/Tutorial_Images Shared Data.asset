@@ -19,9 +19,18 @@ MonoBehaviour:
     m_Key: First Image
     m_Metadata:
       m_Items: []
+  - m_Id: 19007410040832
+    m_Key: Second_Image
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19046169604096
+    m_Key: Third_Image
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items:
     - rid: 4730252024954224730
+    - rid: 4730252027615772672
   m_KeyGenerator:
     rid: 4730252024954224729
   references:
@@ -40,5 +49,19 @@ MonoBehaviour:
           m_TableCodes:
           - en
           - de
+        - m_KeyId: 19046169604096
+          m_TableCodes:
+          - en
+          - de
         m_TypeString: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+    - rid: 4730252027615772672
+      type: {class: AssetTypeMetadata, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries:
+        - m_KeyId: 19007410040832
+          m_TableCodes:
+          - en
+          - de
+        m_TypeString: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
