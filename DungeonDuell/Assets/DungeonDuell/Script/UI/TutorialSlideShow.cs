@@ -6,6 +6,7 @@ using UnityEngine.Localization;
 using UnityEngine.Localization.Components;
 using DG.Tweening;
 using MoreMountains.TopDownEngine;
+using System;
 
 namespace dungeonduell
 {
@@ -153,7 +154,23 @@ namespace dungeonduell
 
         void CloseTutorial()
         {
-            gameObject.SetActive(false);
+            canvasGroup.DOFade(0, 0.25f).OnComplete(() =>
+            {
+                gameObject.SetActive(false);
+                ResetTutorial();
+
+            });
+        }
+
+        void ResetTutorial()
+        {
+            currentPageIndex = 0;
+            skipHoldTime = 0f;
+            isSkipPressed = false;
+            isTransitioning = false;
+
+            UpdateSkipBar(0f);
+            ShowPage(currentPageIndex, instant: true);
         }
     }
 }
