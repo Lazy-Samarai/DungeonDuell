@@ -16,7 +16,7 @@ namespace dungeonduell
         {
             public LocalizedString localizedTitle;
             public LocalizedString localizedDescription;
-            public Sprite illustration;
+            public LocalizedSprite localizedImage;
         }
 
         [Header("UI References")]
@@ -130,16 +130,18 @@ namespace dungeonduell
         {
             var page = pages[index];
 
-            page.localizedTitle.StringChanged += (value) => titleText.text = value;
-            page.localizedDescription.StringChanged += (value) => descriptionText.text = value;
-
+            page.localizedTitle.StringChanged += value => titleText.text = value;
+            page.localizedDescription.StringChanged += value => descriptionText.text = value;
             page.localizedTitle.RefreshString();
             page.localizedDescription.RefreshString();
 
-            if (illustrationImage != null)
+            if (illustrationImage != null && page.localizedImage != null)
             {
-                illustrationImage.sprite = page.illustration;
-                illustrationImage.enabled = (page.illustration != null);
+                page.localizedImage.LoadAssetAsync().Completed += handle =>
+                {
+                    illustrationImage.sprite = handle.Result;
+                    illustrationImage.enabled = (handle.Result != null);
+                };
             }
         }
 
