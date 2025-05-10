@@ -219,7 +219,10 @@ namespace dungeonduell
             InputSystem.DisableDevice(Keyboard.current);
             foreach (PlayerInput playerInput in playerInputs)
             {
-                ChangeActivateDevice(playerInput.user.pairedDevices[0], true);
+                if (playerInput.user.pairedDevices.Count > 1)
+                {
+                    ChangeActivateDevice(playerInput.user.pairedDevices[0], true);
+                }
             }
         }
 
