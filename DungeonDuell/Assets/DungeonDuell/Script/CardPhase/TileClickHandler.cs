@@ -64,10 +64,28 @@ namespace dungeonduell
         private void Start()
         {
             connectCollector = FindFirstObjectByType<ConnectionsCollector>();
-            _tilemap = FindObjectsByType<Tilemap>(FindObjectsSortMode.None)
+            _tilemap = FindObjectsByType<Tilemap>(FindObjectsInactive.Include, FindObjectsSortMode.None)
                 .FirstOrDefault(tm => tm.gameObject.CompareTag(tileMapTag)); // Becuase there is also the hovermap
             _turnManager = FindFirstObjectByType<TurnManager>();
             _hexgridController = FindFirstObjectByType<HexgridController>();
+
+            GetCurrentSetAbleCount();
+        }
+
+        private void GetCurrentSetAbleCount()
+        {
+            foreach (var cellPos in _tilemap.cellBounds.allPositionsWithin)
+            {
+                TileBase tile = _tilemap.GetTile(cellPos);
+
+                for (int i = 0; i < setAbleCount.Length; i++)
+                {
+                    if (tile == setAbleTiles[i])
+                    {
+                        setAbleCount[i] += 1;
+                    }
+                }
+            }
         }
 
         private void OnEnable()
@@ -316,7 +334,7 @@ namespace dungeonduell
                 var indicator =
                     Instantiate(indiactorDoor, _tilemap.CellToWorld(cellPosition), Quaternion.identity);
 
-                indicator.transform.parent = indiactorDoorAnker;
+                indicator.transform.parent = _tilemap.transform;
                 indicator.GetComponent<DoorIndicator>().SetDoorIndiactor(currentDoorDir);
                 if (connectionForcing) indicator.GetComponent<DoorIndicator>().OverExtend(overriteCurrentDoorDir);
 
