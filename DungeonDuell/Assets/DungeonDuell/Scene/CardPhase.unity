@@ -680,7 +680,7 @@ MonoBehaviour:
   displayCardUi: {fileID: 0}
   indiactorDoor: {fileID: 3366682477725355440, guid: 54575de20ace43943ab151cd4098d20e,
     type: 3}
-  indiactorDoorAnker: {fileID: 1330985300}
+  indiactorDoorAnker: {fileID: 0}
   resetTile: {fileID: 11400000, guid: fbc5379f7e0fce94d806560aa6bfa827, type: 2}
   setAbleTiles:
   - {fileID: 11400000, guid: eac5b490d6d704242a7ba80fc84bbc61, type: 2}
@@ -724,7 +724,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 1181958480}
   tileMapTag: MainTileMap
-  tilemap: {fileID: 1763767974}
+  tilemap: {fileID: 0}
   cursor: {fileID: 887889882}
   tileClickHandler: {fileID: 481254717}
   turnManager: {fileID: 1557636384}
@@ -3234,37 +3234,6 @@ MonoBehaviour:
   Persistent: 0
   ResetThisInventorySaveOnStart: 0
   DrawContentInInspector: 1
---- !u!1 &1330985299
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1330985300}
-  m_Layer: 0
-  m_Name: IndicatorsAnker
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1330985300
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1330985299}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.4, y: -2.21, z: -10.173537}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1945806929}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1334771749
 GameObject:
   m_ObjectHideFlags: 0
@@ -11308,7 +11277,6 @@ Transform:
   - {fileID: 679876426}
   - {fileID: 942159206}
   - {fileID: 1117561725}
-  - {fileID: 1330985300}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1945806930
