@@ -45,7 +45,7 @@ namespace dungeonduell
                 turnManager = FindFirstObjectByType<TurnManager>();
 
             _playerInput = null;
-            tilemap = FindObjectsByType<Tilemap>(FindObjectsInactive.Include, FindObjectsSortMode.None)
+            tilemap = FindFirstObjectByType<Grid>().GetComponentsInChildren<Tilemap>()
                 .FirstOrDefault(tm => tm.gameObject.CompareTag(tileMapTag)); // Becuase there is also the hovermap
         }
 
