@@ -28,7 +28,7 @@ namespace dungeonduell
             foreach (var roomInfo in RoomsInfosWithPos)
             foreach (var roomConnection in roomInfo.Item2.Conncection)
                 RoomsInfosWithPos.FirstOrDefault(obj => obj.Item2.RoomID == roomConnection.TargetRoomId)
-                    .Item2.Conncection.Add(
+                    ?.Item2.Conncection.Add(
                         new RoomConnection(roomInfo.Item2.RoomID, roomConnection.ConnectionDir.GetInvert()));
 
             // Generate
