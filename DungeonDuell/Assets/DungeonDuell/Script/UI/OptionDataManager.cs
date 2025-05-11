@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Serialization;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 
 namespace dungeonduell
 {
@@ -22,6 +24,9 @@ namespace dungeonduell
         [FormerlySerializedAs("ResolutionIndex")]
         public int resolutionIndex;
 
+        public string selectedLanguageCode = "en"; // Standard auf Englisch
+
+
         private readonly int _volumeMultiplier = 20;
 
 
@@ -35,6 +40,11 @@ namespace dungeonduell
 
             //Set SoundManager to DontDestroyOnLoad so that it won't be destroyed when reloading our scene.
             DontDestroyOnLoad(gameObject);
+        }
+
+        void Start()
+        {
+            ApplyLanguageSetting();
         }
 
         public void SetVolume(float volume)
@@ -75,6 +85,28 @@ namespace dungeonduell
             this.resolutionIndex = resolutionIndex;
             var resolution = Screen.resolutions[resolutionIndex];
             Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+        }
+
+        public void SetLanguage(string localeCode)
+        {
+            selectedLanguageCode = localeCode;
+            var locale = LocalizationSettings.AvailableLocales.GetLocale(localeCode);
+            if (locale != null)
+            {
+                LocalizationSettings.SelectedLocale = locale;
+            }
+        }
+
+        private void ApplyLanguageSetting()
+        {
+            if (!string.IsNullOrEmpty(selectedLanguageCode))
+            {
+                var locale = LocalizationSettings.AvailableLocales.GetLocale(selectedLanguageCode);
+                if (locale != null)
+                {
+                    LocalizationSettings.SelectedLocale = locale;
+                }
+            }
         }
     }
 }

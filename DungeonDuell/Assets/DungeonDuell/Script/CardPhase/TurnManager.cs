@@ -5,11 +5,8 @@ using DG.Tweening;
 using UnityEngine;
 using TMPro;
 using MoreMountains.TopDownEngine;
-using TMPro;
-using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
-using DG.Tweening;
 using UnityEngine.Localization.Components;
 using UnityEngine.Localization.SmartFormat.PersistentVariables;
 
@@ -222,7 +219,10 @@ namespace dungeonduell
             InputSystem.DisableDevice(Keyboard.current);
             foreach (PlayerInput playerInput in playerInputs)
             {
-                ChangeActivateDevice(playerInput.user.pairedDevices[0], true);
+                if (playerInput.user.pairedDevices.Count > 1)
+                {
+                    ChangeActivateDevice(playerInput.user.pairedDevices[0], true);
+                }
             }
         }
 
