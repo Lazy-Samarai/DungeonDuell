@@ -22,31 +22,56 @@ namespace dungeonduell
         [SerializeField] private float loserScale = 0.8f;
         [SerializeField] private Color loserColor = Color.gray;
         [SerializeField] private Color normalColor = Color.white;
+        
+        [SerializeField] private SequenceMang sequenceMang;
+
 
         private void Start()
         {
             winnerPanel.SetActive(false);
             buttonsContainer.SetActive(false);
+
+            if (sequenceMang == null)
+            {
+                sequenceMang = FindFirstObjectByType<SequenceMang>();
+                if (sequenceMang == null)
+                {
+                    Debug.LogWarning("SequenceMang konnte nicht gefunden werden.");
+                }
+            }
         }
+
+
 
         public void ShowWinnerScreen(bool player1Won)
         {
+            Time.timeScale = 1f; 
+            
+            Debug.Log("ShowWinnerScreen called. player1Won: " + player1Won);
             winnerPanel.SetActive(true);
             buttonsContainer.SetActive(false);
 
+            if (player1Visual == null || player2Visual == null)
+            {
+                Debug.LogError("Visuals not assigned!");
+            }
+
             if (player1Won)
             {
+                Debug.Log("Animating Player 1 as winner");
                 StartCoroutine(AnimateVisual(player1Visual, winnerScale, normalColor));
                 StartCoroutine(AnimateVisual(player2Visual, loserScale, loserColor));
             }
             else
             {
+                Debug.Log("Animating Player 2 as winner");
                 StartCoroutine(AnimateVisual(player2Visual, winnerScale, normalColor));
                 StartCoroutine(AnimateVisual(player1Visual, loserScale, loserColor));
             }
 
             StartCoroutine(ShowButtonsDelayed());
         }
+
 
         private IEnumerator AnimateVisual(Image visual, float targetScale, Color targetColor)
         {
@@ -57,16 +82,23 @@ namespace dungeonduell
 
             while (elapsed < scaleDuration)
             {
+                Time.timeScale = 1f; 
                 float t = elapsed / scaleDuration;
                 visual.rectTransform.localScale = Vector3.Lerp(initialScale, finalScale, t);
                 visual.color = Color.Lerp(initialColor, targetColor, t);
+
+                Debug.Log($"{visual.name} scale: {visual.rectTransform.localScale}, color: {visual.color}");
+
                 elapsed += Time.deltaTime;
                 yield return null;
             }
 
             visual.rectTransform.localScale = finalScale;
             visual.color = targetColor;
+
+            Debug.Log($"{visual.name} FINAL scale: {visual.rectTransform.localScale}, color: {visual.color}");
         }
+
 
         private IEnumerator ShowButtonsDelayed()
         {
@@ -77,8 +109,16 @@ namespace dungeonduell
         public void OnRestartButton()
         {
             Debug.Log("Restarting Game...");
-            // SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            if (sequenceMang != null)
+            {
+                sequenceMang.Reseting();
+            }
+            else
+            {
+                Debug.LogError("SequenceMang ist nicht gesetzt – Restart nicht möglich.");
+            }
         }
+
 
         public void OnMainMenuButton()
         {
