@@ -88,6 +88,15 @@ namespace dungeonduell
             if (PlayerUpgrade != null) PlayerUpgrade.Invoke(option, playerReference, amount);
         }
 
+        public static event Action<LevelUpOptions, string, int, int> PlayerUpgradeWithMask;
+
+        public static void Trigger_PlayerUpgradeWithMask(LevelUpOptions option, string playerReference, int amount,
+            int maskIndex)
+        {
+            if (PlayerUpgrade != null) PlayerUpgradeWithMask.Invoke(option, playerReference, amount, maskIndex);
+        }
+
+
         public static event Action<List<PlayerData>, int> PlayerDataExposed;
 
         public static void Trigger_PlayerDataExposed(List<PlayerData> playerdatas, int currentRound)

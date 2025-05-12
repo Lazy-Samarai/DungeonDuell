@@ -1,6 +1,8 @@
+using System;
 using MoreMountains.TopDownEngine;
 using Spine;
 using Spine.Unity;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -49,7 +51,7 @@ namespace dungeonduell
 
             CheckRunningDirection();
 
-            _ikTargetBone.SetLocalPosition(mouseWorldPosition);
+//            _ikTargetBone.SetLocalPosition(mouseWorldPosition);
 
 
             _skeletonAnimation.skeleton.UpdateWorldTransform(Skeleton.Physics.Update);
@@ -111,7 +113,6 @@ namespace dungeonduell
 
         public void SetToDeath()
         {
-            print("Deeeeeeeeeeeaddddd");
             SetAnimation(death, false);
         }
 
@@ -124,6 +125,12 @@ namespace dungeonduell
         {
             _skeletonAnimation.AnimationState.AddAnimation(1, shoot, false, 0f);
             _skeletonAnimation.AnimationState.AddEmptyAnimation(1, 0.25f, 0f);
+        }
+
+        public void SetSkin(int indexOfSkin)
+        {
+            _skeletonAnimation.skeleton.SetSkin(_skeletonAnimation.skeleton.Data.Skins.Items[indexOfSkin]);
+            _skeletonAnimation.skeleton.SetSlotsToSetupPose();
         }
     }
 }

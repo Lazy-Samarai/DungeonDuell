@@ -106,12 +106,14 @@ namespace MoreMountains.TopDownEngine
         public void SubscribeToEvents()
         {
             DdCodeEventHandler.PlayerUpgrade += HandleUpgrade;
+            DdCodeEventHandler.PlayerUpgradeWithMask += HandleUpgrade;
             DdCodeEventHandler.FinalRoundInDungeon += HealingIncreased;
         }
 
         public void UnsubscribeToAllEvents()
         {
             DdCodeEventHandler.PlayerUpgrade -= HandleUpgrade;
+            DdCodeEventHandler.PlayerUpgradeWithMask -= HandleUpgrade;
             DdCodeEventHandler.FinalRoundInDungeon -= HealingIncreased;
         }
 
@@ -337,6 +339,13 @@ namespace MoreMountains.TopDownEngine
             }
         }
 
+        private void HandleUpgrade(LevelUpOptions option, string playerReference, int amount, int mask)
+        {
+            HandleUpgrade(option, playerReference, amount);
+            playerSpineAnimationHandlings[int.Parse(playerReference[^1].ToString()) - 1].SetSkin(mask);
+        }
+
+
         private void Healing(int playerID, int amount)
         {
             health[playerID].ReceiveHealth(_healthOnUpgrade * amount, health[playerID].gameObject);
@@ -346,8 +355,6 @@ namespace MoreMountains.TopDownEngine
         {
             var defaultWalking = walking[playerID].WalkSpeed / playerSpineAnimationHandlings[playerID].walkMultiply;
             var defaultRunning = running[playerID].RunSpeed / playerSpineAnimationHandlings[playerID].runningMultiply;
-
-            print(amount);
 
             walking[playerID].WalkSpeed += 1.0f * amount;
             walking[playerID].MovementSpeed += 1.0f * amount;
@@ -360,7 +367,6 @@ namespace MoreMountains.TopDownEngine
 
         private void UpgradeWeaponSpeed(int playerID, int amount)
         {
-            print((float)Math.Pow(0.85f, amount));
             weapon[playerID].TimeBetweenUses *= (float)Math.Pow(0.85f, amount);
         }
 
