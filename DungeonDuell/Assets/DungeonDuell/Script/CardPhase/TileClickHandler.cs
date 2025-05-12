@@ -53,7 +53,7 @@ namespace dungeonduell
         };
 
         private HexgridController _hexgridController;
-        private Tilemap _tilemap;
+        public Tilemap _tilemap;
         private TurnManager _turnManager;
 
         private static readonly Color BridgeColor = new Color(0, 0, 5);
@@ -64,7 +64,7 @@ namespace dungeonduell
         private void Start()
         {
             connectCollector = FindFirstObjectByType<ConnectionsCollector>();
-            _tilemap = FindObjectsByType<Tilemap>(FindObjectsInactive.Include, FindObjectsSortMode.None)
+            _tilemap = FindFirstObjectByType<Grid>().GetComponentsInChildren<Tilemap>()
                 .FirstOrDefault(tm => tm.gameObject.CompareTag(tileMapTag)); // Becuase there is also the hovermap
             _turnManager = FindFirstObjectByType<TurnManager>();
             _hexgridController = FindFirstObjectByType<HexgridController>();
