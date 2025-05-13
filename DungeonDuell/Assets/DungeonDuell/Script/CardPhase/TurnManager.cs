@@ -21,7 +21,7 @@ namespace dungeonduell
         public GameObject player1UI;
         public GameObject player2UI;
 
-        public InputSystemUIInputModule uiInputModule; // 💡 das UI-Modul des EventSystems
+        public InputSystemUIInputModule uiInputModule; // das UI-Modul des EventSystems
 
         private bool awaitingKeyPress = false;
         public bool isPlayer1Turn = true;
@@ -30,7 +30,7 @@ namespace dungeonduell
         private const int SecondsToStart = 3;
         private bool[] _playerPlayedAllCards = { false, false };
 
-        public PlayerInput[] _playerInputs; // 🎮 Zwei PlayerInput-Komponenten aus der Szene
+        public PlayerInput[] _playerInputs; // Zwei PlayerInput-Komponenten aus der Szene
 
         void Start()
         {
@@ -51,7 +51,7 @@ namespace dungeonduell
             awaitingKeyPress = true;
             playerTurnText.text = "Next Turn: " + (isPlayer1Turn ? "Player 1" : "Player 2");
 
-            UpdateUIInputModule(); // 👉 EventSystem hört auf den aktiven Spieler
+            UpdateUIInputModule(); // EventSystem hört auf den aktiven Spieler
 
             // Aktivieren/Deaktivieren der Devices
             if (isPlayer1Turn)
@@ -198,7 +198,7 @@ namespace dungeonduell
 
             // UI InputModule auf aktiven PlayerInput umschalten
             uiInputModule.actionsAsset = activePlayerInput.actions;
-            Debug.Log($"[TurnManager] UI Input Module wurde PlayerInput {activePlayerInput.name} zugewiesen.");
+            
         }
     }
 }
