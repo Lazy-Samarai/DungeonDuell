@@ -18,6 +18,7 @@ namespace dungeonduell
         [SpineAnimation] public string death;
         [SpineAnimation] public string shoot;
         [SpineAnimation] public string dash;
+        [SpineAnimation] public string dashReverse;
 
         public float runningMultiply = 1f;
         public float walkMultiply = 1f;
@@ -118,7 +119,8 @@ namespace dungeonduell
 
         public void SetToDash()
         {
-            SetAnimation(dash);
+            var backwards = facingEastRunning != runningEast;
+            SetAnimation(!backwards ? dash : dashReverse);
         }
 
         public void SetToShoot()
