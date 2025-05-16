@@ -1826,7 +1826,11 @@ MonoBehaviour:
   walkMultiply: 1
   facingEastRunning: 0
   runningEast: 0
-  characterMovement: {fileID: 0}
+  dashParticlesRenderer: {fileID: 6325014291572867025}
+  dashParticlesMaterial: {fileID: 2100000, guid: b4408fe3e91c72248b6abba44fb7c103,
+    type: 2}
+  dashParticlesBackwardsMaterial: {fileID: 2100000, guid: 07729317d94320f4789705c7b8c2c82a,
+    type: 2}
 --- !u!1 &1899941585429488189
 GameObject:
   m_ObjectHideFlags: 0
@@ -8713,7 +8717,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7696407255475040281}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -13935,8 +13939,8 @@ Transform:
   m_GameObject: {fileID: 8197157346837308637}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.134, y: 1.1, z: 0}
-  m_LocalScale: {x: 1, y: 1.4699999, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9062742569001319047}
@@ -13957,7 +13961,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 0
   useUnscaledTime: 0
@@ -18735,7 +18739,7 @@ ParticleSystemRenderer:
   m_MeshDistribution: 0
   m_SortMode: 0
   m_MinParticleSize: 0
-  m_MaxParticleSize: 0.5
+  m_MaxParticleSize: 1
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
   m_LengthScale: 2
@@ -18747,7 +18751,7 @@ ParticleSystemRenderer:
   m_Flip: {x: 0, y: 0, z: 0}
   m_EnableGPUInstancing: 1
   m_ApplyActiveColorSpace: 1
-  m_AllowRoll: 1
+  m_AllowRoll: 0
   m_FreeformStretching: 0
   m_RotateWithStretchDirection: 1
   m_UseCustomVertexStreams: 0

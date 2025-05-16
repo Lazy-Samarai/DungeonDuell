@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using MoreMountains.TopDownEngine;
 using Spine;
 using Spine.Unity;
@@ -26,12 +27,14 @@ namespace dungeonduell
         public bool facingEastRunning;
         public bool runningEast;
 
-        [FormerlySerializedAs("_characterMovement")] [FormerlySerializedAs("_rigidbody2D")]
-        public CharacterMovement characterMovement;
+        private CharacterMovement characterMovement;
 
         private Bone _ikTargetBone;
         private SkeletonAnimation _skeletonAnimation;
 
+        public ParticleSystemRenderer dashParticlesRenderer;
+        public Material dashParticlesMaterial;
+        public Material dashParticlesBackwardsMaterial;
 
         // Start is called before the first frame update
         private void Awake()
@@ -73,24 +76,26 @@ namespace dungeonduell
             }
         }
 
-        public void SetAnimation(string aniName)
+        private void SetAnimation(string aniName)
         {
             _skeletonAnimation.AnimationState.SetAnimation(0, aniName, true);
         }
 
-        public void SetAnimation(string aniName, bool loop)
+        private void SetAnimation(string aniName, bool loop)
         {
             _skeletonAnimation.AnimationState.SetAnimation(0, aniName, loop);
         }
 
-        public void SetAnimation(string aniName, float scale)
+        private void SetAnimation(string aniName, float scale)
         {
             var trackEntry = _skeletonAnimation.AnimationState.SetAnimation(0, aniName, true);
             trackEntry.TimeScale = scale;
         }
 
-        public void UpdateFacing()
+        private void UpdateFacing()
         {
+            dashParticlesRenderer.flip = new Vector3(facingEastRunning ? 1 : 0, 0, 0);
+
             if ((_skeletonAnimation.state.GetCurrent(0).ToString() == running) |
                 (_skeletonAnimation.state.GetCurrent(0).ToString() == runningBackward)) SetToRunning();
         }
@@ -120,6 +125,7 @@ namespace dungeonduell
         public void SetToDash()
         {
             var backwards = facingEastRunning != runningEast;
+            dashParticlesRenderer.material = backwards ? dashParticlesBackwardsMaterial : dashParticlesMaterial;
             SetAnimation(!backwards ? dash : dashReverse);
         }
 

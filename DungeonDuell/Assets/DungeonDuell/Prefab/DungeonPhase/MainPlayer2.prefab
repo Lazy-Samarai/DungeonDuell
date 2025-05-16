@@ -18367,11 +18367,16 @@ MonoBehaviour:
   death: Dead
   shoot: Shoot
   dash: Dash
+  dashReverse: 
   runningMultiply: 1
   walkMultiply: 1
   facingEastRunning: 0
   runningEast: 0
-  characterMovement: {fileID: 0}
+  dashParticlesRenderer: {fileID: 199630857930723226}
+  dashParticlesMaterial: {fileID: 2100000, guid: b4408fe3e91c72248b6abba44fb7c103,
+    type: 2}
+  dashParticlesBackwardsMaterial: {fileID: 2100000, guid: 07729317d94320f4789705c7b8c2c82a,
+    type: 2}
 --- !u!1 &6808776468769401931
 GameObject:
   m_ObjectHideFlags: 0
