@@ -4903,8 +4903,8 @@ Transform:
   m_GameObject: {fileID: 1295953292495014}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.134, y: 1.1, z: 0}
-  m_LocalScale: {x: 1, y: 1.47, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 1.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4105561756980196}
@@ -9678,7 +9678,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b4408fe3e91c72248b6abba44fb7c103, type: 2}
+  - {fileID: 2100000, guid: 6f371b1b180d2c243b97f0346d906264, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9871,12 +9871,12 @@ Transform:
   m_Children:
   - {fileID: 4375450038814108}
   - {fileID: 4330552656303096}
+  - {fileID: 7970815346521647334}
   - {fileID: 5797006686581982211}
   - {fileID: 1412856920691769247}
   - {fileID: 210470828788380443}
   - {fileID: 7375390012173718480}
   - {fileID: 8773258298053573596}
-  - {fileID: 7970815346521647334}
   - {fileID: 7147486838466164235}
   - {fileID: 5071447624959820777}
   - {fileID: 733534323727214313}
@@ -9943,8 +9943,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.15302092, y: 1.0452319}
-  m_Size: {x: 1.1367646, y: 2.142721}
+  m_Offset: {x: 0.01, y: 0.054535836}
+  m_Size: {x: 1.1367646, y: 2.0835748}
   m_Direction: 0
 --- !u!210 &210286107803106362
 SortingGroup:
@@ -18243,7 +18243,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: -0.19567, y: 0.19567, z: 0.19567}
+  m_LocalScale: {x: -0.225, y: 0.225, z: 0.225}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4330552656303096}
@@ -18279,11 +18279,9 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ccc32f4db5630b44f84f3f990ec6a616, type: 2}
-  - {fileID: 2100000, guid: 441c44ec6892fd046a16e6d98831c534, type: 2}
-  - {fileID: 2100000, guid: ccc32f4db5630b44f84f3f990ec6a616, type: 2}
-  - {fileID: 2100000, guid: 441c44ec6892fd046a16e6d98831c534, type: 2}
-  - {fileID: 2100000, guid: ccc32f4db5630b44f84f3f990ec6a616, type: 2}
+  - {fileID: 2100000, guid: 7c4e6e4403b94384facbe98dc5eb6ce5, type: 2}
+  - {fileID: 2100000, guid: a6e8fb34334301b4eba53d9961ac1d45, type: 2}
+  - {fileID: 2100000, guid: 7c4e6e4403b94384facbe98dc5eb6ce5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -18317,7 +18315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 0db710752574c53478687a21f0c9d060, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: b087c4f3c54d9a34d9f0086912ab1b62, type: 2}
   initialSkinName: 
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 0
@@ -18345,7 +18343,7 @@ MonoBehaviour:
   physicsMovementRelativeTo: {fileID: 0}
   updateTiming: 1
   unscaledTime: 0
-  _animationName: animation
+  _animationName: 
   loop: 1
   timeScale: 1
 --- !u!114 &7799100199690533719
@@ -18367,15 +18365,15 @@ MonoBehaviour:
   death: Dead
   shoot: Shoot
   dash: Dash
-  dashReverse: 
+  dashReverse: DashBackwards
   runningMultiply: 1
   walkMultiply: 1
   facingEastRunning: 0
   runningEast: 0
   dashParticlesRenderer: {fileID: 199630857930723226}
-  dashParticlesMaterial: {fileID: 2100000, guid: b4408fe3e91c72248b6abba44fb7c103,
+  dashParticlesMaterial: {fileID: 2100000, guid: 6f371b1b180d2c243b97f0346d906264,
     type: 2}
-  dashParticlesBackwardsMaterial: {fileID: 2100000, guid: 07729317d94320f4789705c7b8c2c82a,
+  dashParticlesBackwardsMaterial: {fileID: 2100000, guid: f8b6ab0f470199b468e4ab569e109fba,
     type: 2}
 --- !u!1 &6808776468769401931
 GameObject:
@@ -18914,7 +18912,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7449263630794858027}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.2004013, y: 2.2004013, z: 2.2004013}
   m_ConstrainProportionsScale: 1
@@ -18923,7 +18921,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.07, y: 1.16}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8964243732164415311
