@@ -42,10 +42,6 @@ namespace MoreMountains.TopDownEngine
         [FormerlySerializedAs("DeadMask")] [Tooltip("the mask to use when the target player dies")]
         public CanvasGroup deadMask;
 
-        /// the screen to display if the target player wins
-        [FormerlySerializedAs("WinnerScreen")] [Tooltip("the screen to display if the target player wins")]
-        public CanvasGroup winnerScreen;
-
         [FormerlySerializedAs("LevelUpPanel")] [Tooltip("the screen to display if the target levels up")]
         public LevelUpPanel levelUpPanel;
 
@@ -56,7 +52,6 @@ namespace MoreMountains.TopDownEngine
             coinCounter.text = "0";
             coinForNextLevelCounter.text = "1";
             deadMask.gameObject.SetActive(false);
-            winnerScreen.gameObject.SetActive(false);
         }
 
         /// <summary>
@@ -100,15 +95,27 @@ namespace MoreMountains.TopDownEngine
 
                     break;
                 case TopDownEngineEventTypes.GameOver:
-                    if (playerID == (LevelManager.Instance as DungeonDuellMultiplayerLevelManager).WinnerID)
+                {
+                    var winnerID = (LevelManager.Instance as DungeonDuellMultiplayerLevelManager).WinnerID;
+                    bool isWinner = playerID == winnerID;
+                    
+                    if (isWinner)
                     {
-                        winnerScreen.gameObject.SetActive(true);
-                        winnerScreen.alpha = 0f;
-                        StartCoroutine(MMFade.FadeCanvasGroup(winnerScreen, 0.5f, 0.8f));
+                        var winnerController = GameObject.FindObjectOfType<CentralWinnerScreenController>();
+                        
+                        if (winnerController != null)
+                        {
+                            bool player1Won = playerID == "Player1";
+                            winnerController.ShowWinnerScreen(player1Won);
+                        }
+                        else
+                        {
+                            Debug.LogWarning("CentralWinnerScreenController nicht gefunden!");
+                        }
                     }
-
                     break;
-            }
+                }
+            }  
         }
 
         public void LevelPossible(int id, int count)
