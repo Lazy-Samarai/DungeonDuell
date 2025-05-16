@@ -96,24 +96,16 @@ namespace MoreMountains.TopDownEngine
                     break;
                 case TopDownEngineEventTypes.GameOver:
                 {
-                    Debug.Log("GameOver-Event empfangen.");
-
                     var winnerID = (LevelManager.Instance as DungeonDuellMultiplayerLevelManager).WinnerID;
-                    Debug.Log("WinnerID laut LevelManager: " + winnerID);
-                    Debug.Log("Mein playerID: " + playerID);
-
                     bool isWinner = playerID == winnerID;
-                    Debug.Log("Bin ich der Gewinner? " + isWinner);
-
+                    
                     if (isWinner)
                     {
                         var winnerController = GameObject.FindObjectOfType<CentralWinnerScreenController>();
-                        Debug.Log("WinnerController gefunden: " + (winnerController != null));
-
+                        
                         if (winnerController != null)
                         {
                             bool player1Won = playerID == "Player1";
-                            Debug.Log("Rufe ShowWinnerScreen auf. player1Won = " + player1Won);
                             winnerController.ShowWinnerScreen(player1Won);
                         }
                         else
@@ -123,7 +115,6 @@ namespace MoreMountains.TopDownEngine
                     }
                     break;
                 }
-
             }  
         }
 

@@ -47,7 +47,6 @@ namespace dungeonduell
         {
             Time.timeScale = 1f; 
             
-            Debug.Log("ShowWinnerScreen called. player1Won: " + player1Won);
             winnerPanel.SetActive(true);
             buttonsContainer.SetActive(false);
 
@@ -87,16 +86,12 @@ namespace dungeonduell
                 visual.rectTransform.localScale = Vector3.Lerp(initialScale, finalScale, t);
                 visual.color = Color.Lerp(initialColor, targetColor, t);
 
-                Debug.Log($"{visual.name} scale: {visual.rectTransform.localScale}, color: {visual.color}");
-
                 elapsed += Time.deltaTime;
                 yield return null;
             }
 
             visual.rectTransform.localScale = finalScale;
             visual.color = targetColor;
-
-            Debug.Log($"{visual.name} FINAL scale: {visual.rectTransform.localScale}, color: {visual.color}");
         }
 
 
@@ -108,7 +103,6 @@ namespace dungeonduell
 
         public void OnRestartButton()
         {
-            Debug.Log("Restarting Game...");
             if (sequenceMang != null)
             {
                 sequenceMang.Reseting();
@@ -122,7 +116,6 @@ namespace dungeonduell
 
         public void OnMainMenuButton()
         {
-            Debug.Log("Returning to Menu...");
             SceneManager.LoadScene("Titlescreen");
         }
     }
