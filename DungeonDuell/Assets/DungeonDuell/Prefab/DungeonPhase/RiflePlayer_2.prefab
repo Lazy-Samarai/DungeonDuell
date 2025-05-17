@@ -5075,7 +5075,6 @@ GameObject:
   - component: {fileID: 941323431325580120}
   - component: {fileID: 4008837654617038452}
   - component: {fileID: 5711037192045914571}
-  - component: {fileID: 1770532992283947980}
   m_Layer: 24
   m_Name: RiflePlayer_2
   m_TagString: Untagged
@@ -5359,18 +5358,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b8cfc487f3d503241bc43c1960c3aa5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1770532992283947980
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1490220044263310}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5a821b8b0d5a9d43ada4964fbe31165, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1806446063217534
@@ -21050,20 +21037,7 @@ MonoBehaviour:
         DebugActive: 0
         PlayEvents:
           m_PersistentCalls:
-            m_Calls:
-            - m_Target: {fileID: 1770532992283947980}
-              m_TargetAssemblyTypeName: dungeonduell.WeaponSpineAnimationHandling,
-                Assembly-CSharp
-              m_MethodName: HandleShootAnimation
-              m_Mode: 1
-              m_Arguments:
-                m_ObjectArgument: {fileID: 0}
-                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-                m_IntArgument: 0
-                m_FloatArgument: 0
-                m_StringArgument: 
-                m_BoolArgument: 0
-              m_CallState: 2
+            m_Calls: []
         StopEvents:
           m_PersistentCalls:
             m_Calls: []
