@@ -693,6 +693,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 27af0542bdc0ff742b14a1d7620896cb, type: 2}
   connectCollector: {fileID: 1945806930}
   isPlayer1Turn: 1
+  _tilemap: {fileID: 0}
   setAbleCount: 0000000000000000
   indiactorDoorOver: {fileID: 0}
 --- !u!4 &481254718
@@ -2180,7 +2181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 0cad7e50cc0a66a4d9ba264d314913d3,
+  m_Actions: {fileID: -944628639613478452, guid: b4930166bea2fa34a9000d0c36e770ec,
     type: 3}
   m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
@@ -2266,22 +2267,6 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1130448082}
         m_TargetAssemblyTypeName: 
-        m_MethodName: OnJump
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 314ace32-fb21-4bab-a569-ebe4e48f2102
-    m_ActionName: 'PlayerControls/Jump[/Keyboard/space]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1130448082}
-        m_TargetAssemblyTypeName: 
         m_MethodName: OnRun
         m_Mode: 0
         m_Arguments:
@@ -2314,22 +2299,6 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1130448082}
         m_TargetAssemblyTypeName: 
-        m_MethodName: OnCrouch
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 5e6e408c-e79e-4f5c-87b7-8a6d181bd681
-    m_ActionName: 'PlayerControls/Crouch[/Keyboard/c]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1130448082}
-        m_TargetAssemblyTypeName: 
         m_MethodName: OnShoot
         m_Mode: 0
         m_Arguments:
@@ -2342,22 +2311,6 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 7016cc32-6ee0-4d53-b08c-02cbe6eb2c0e
     m_ActionName: 'PlayerControls/Shoot[/Keyboard/e,/Mouse/leftButton]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1130448082}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: OnSecondaryShoot
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 1b70a5ec-5da5-42ce-a7c0-8f54ff84052f
-    m_ActionName: 'PlayerControls/SecondaryShoot[/Keyboard/leftAlt]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1130448082}
@@ -2378,22 +2331,6 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1130448082}
         m_TargetAssemblyTypeName: 
-        m_MethodName: OnReload
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: cf90ff3a-006b-4ae6-9594-cc2189d6f5f0
-    m_ActionName: 'PlayerControls/Reload[/Keyboard/r]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1130448082}
-        m_TargetAssemblyTypeName: 
         m_MethodName: OnPause
         m_Mode: 0
         m_Arguments:
@@ -2406,58 +2343,6 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: c01ffcc5-adff-4aa3-bb8d-e0139087e5ed
     m_ActionName: 'PlayerControls/Pause[/Keyboard/escape]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1130448082}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: OnSwitchWeapon
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 6e3febaf-dba5-4b43-b4f8-3b720e7ad1be
-    m_ActionName: 'PlayerControls/SwitchWeapon[/Keyboard/t]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1130448082}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: OnSwitchCharacter
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: cde4a43f-3a08-47c8-afdf-2c5dca8d1241
-    m_ActionName: 'PlayerControls/SwitchCharacter[/Keyboard/p]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1130448082}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: OnTimeControl
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: c71e92f2-77ca-4de6-98ad-64b961ed706e
-    m_ActionName: 'PlayerControls/TimeControl[/Keyboard/k]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 239ee3ca-17ea-4fb2-85ef-91f8046dfddb
-    m_ActionName: PlayerControls/CameraRotation
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
@@ -2555,10 +2440,6 @@ MonoBehaviour:
     m_ActionId: 5d894b6c-1123-4baf-b78c-1ea7d37abfaa
     m_ActionName: 'CardPhase/RotateR[/DualShock4GamepadHID/rightShoulder,/DualShock4GamepadHID1/rightShoulder]'
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 7237893a-8919-4366-b4a7-f69d3161e268
-    m_ActionName: 'CardPhase/RotateL[/DualShock4GamepadHID/leftShoulder,/DualShock4GamepadHID1/leftShoulder]'
-  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 481254717}
         m_TargetAssemblyTypeName: dungeonduell.TileClickHandler, Assembly-CSharp
@@ -2588,8 +2469,16 @@ MonoBehaviour:
     m_ActionName: 'CardPhase/Pause[/Keyboard/escape,/XInputControllerWindows/start,/XInputControllerWindows1/start]'
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: facc7a30-9bf5-4458-a444-3b84b19a4385
-    m_ActionName: 'CardPhase/Cancel[/Keyboard/escape,/XInputControllerWindows/buttonEast,/XInputControllerWindows1/buttonEast]'
+    m_ActionId: b24dd24e-a00f-42af-8c0f-b7c9fa4adb5f
+    m_ActionName: 'CardPhase/Click[/Mouse/leftButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 42488b8d-36e7-4245-a2d9-b47d7054c865
+    m_ActionName: 'CardPhase/RightClick[/Mouse/rightButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a6b09542-b4ae-4e9a-8cc0-9ee4b5dfbb2a
+    m_ActionName: 'CardPhase/MiddleClick[/Mouse/middleButton]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: CardPhase
@@ -4013,28 +3902,25 @@ MonoBehaviour:
   m_MoveRepeatDelay: 0.5
   m_MoveRepeatRate: 0.1
   m_XRTrackingOrigin: {fileID: 0}
-  m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018,
+  m_ActionsAsset: {fileID: -944628639613478452, guid: b4930166bea2fa34a9000d0c36e770ec,
     type: 3}
-  m_PointAction: {fileID: -1654692200621890270, guid: ca9f5fa95ffab41fb9a615ab714db018,
+  m_PointAction: {fileID: 795409599024973436, guid: b4930166bea2fa34a9000d0c36e770ec,
     type: 3}
-  m_MoveAction: {fileID: -8784545083839296357, guid: ca9f5fa95ffab41fb9a615ab714db018,
+  m_MoveAction: {fileID: 8800371597162477539, guid: b4930166bea2fa34a9000d0c36e770ec,
     type: 3}
-  m_SubmitAction: {fileID: 392368643174621059, guid: ca9f5fa95ffab41fb9a615ab714db018,
+  m_SubmitAction: {fileID: -3121155424896286413, guid: b4930166bea2fa34a9000d0c36e770ec,
     type: 3}
-  m_CancelAction: {fileID: 7727032971491509709, guid: ca9f5fa95ffab41fb9a615ab714db018,
+  m_CancelAction: {fileID: -4041891184605415978, guid: b4930166bea2fa34a9000d0c36e770ec,
     type: 3}
-  m_LeftClickAction: {fileID: 3001919216989983466, guid: ca9f5fa95ffab41fb9a615ab714db018,
+  m_LeftClickAction: {fileID: -1394883230106352327, guid: b4930166bea2fa34a9000d0c36e770ec,
     type: 3}
-  m_MiddleClickAction: {fileID: -2185481485913320682, guid: ca9f5fa95ffab41fb9a615ab714db018,
+  m_MiddleClickAction: {fileID: 2027559498232568739, guid: b4930166bea2fa34a9000d0c36e770ec,
     type: 3}
-  m_RightClickAction: {fileID: -4090225696740746782, guid: ca9f5fa95ffab41fb9a615ab714db018,
+  m_RightClickAction: {fileID: 3440161419892806767, guid: b4930166bea2fa34a9000d0c36e770ec,
     type: 3}
-  m_ScrollWheelAction: {fileID: 6240969308177333660, guid: ca9f5fa95ffab41fb9a615ab714db018,
-    type: 3}
-  m_TrackedDevicePositionAction: {fileID: 6564999863303420839, guid: ca9f5fa95ffab41fb9a615ab714db018,
-    type: 3}
-  m_TrackedDeviceOrientationAction: {fileID: 7970375526676320489, guid: ca9f5fa95ffab41fb9a615ab714db018,
-    type: 3}
+  m_ScrollWheelAction: {fileID: 0}
+  m_TrackedDevicePositionAction: {fileID: 0}
+  m_TrackedDeviceOrientationAction: {fileID: 0}
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
@@ -11364,7 +11250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 0cad7e50cc0a66a4d9ba264d314913d3,
+  m_Actions: {fileID: -944628639613478452, guid: b4930166bea2fa34a9000d0c36e770ec,
     type: 3}
   m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
@@ -11450,22 +11336,6 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1961649891}
         m_TargetAssemblyTypeName: 
-        m_MethodName: OnJump
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 314ace32-fb21-4bab-a569-ebe4e48f2102
-    m_ActionName: 'PlayerControls/Jump[/Keyboard/space]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1961649891}
-        m_TargetAssemblyTypeName: 
         m_MethodName: OnRun
         m_Mode: 0
         m_Arguments:
@@ -11498,22 +11368,6 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1961649891}
         m_TargetAssemblyTypeName: 
-        m_MethodName: OnCrouch
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 5e6e408c-e79e-4f5c-87b7-8a6d181bd681
-    m_ActionName: 'PlayerControls/Crouch[/Keyboard/c]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1961649891}
-        m_TargetAssemblyTypeName: 
         m_MethodName: OnShoot
         m_Mode: 0
         m_Arguments:
@@ -11526,22 +11380,6 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 7016cc32-6ee0-4d53-b08c-02cbe6eb2c0e
     m_ActionName: 'PlayerControls/Shoot[/Keyboard/e,/Mouse/leftButton]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1961649891}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: OnSecondaryShoot
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 1b70a5ec-5da5-42ce-a7c0-8f54ff84052f
-    m_ActionName: 'PlayerControls/SecondaryShoot[/Keyboard/leftAlt]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1961649891}
@@ -11562,22 +11400,6 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1961649891}
         m_TargetAssemblyTypeName: 
-        m_MethodName: OnReload
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: cf90ff3a-006b-4ae6-9594-cc2189d6f5f0
-    m_ActionName: 'PlayerControls/Reload[/Keyboard/r]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1961649891}
-        m_TargetAssemblyTypeName: 
         m_MethodName: OnPause
         m_Mode: 0
         m_Arguments:
@@ -11590,58 +11412,6 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: c01ffcc5-adff-4aa3-bb8d-e0139087e5ed
     m_ActionName: 'PlayerControls/Pause[/Keyboard/escape]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1961649891}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: OnSwitchWeapon
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 6e3febaf-dba5-4b43-b4f8-3b720e7ad1be
-    m_ActionName: 'PlayerControls/SwitchWeapon[/Keyboard/t]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1961649891}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: OnSwitchCharacter
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: cde4a43f-3a08-47c8-afdf-2c5dca8d1241
-    m_ActionName: 'PlayerControls/SwitchCharacter[/Keyboard/p]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1961649891}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: OnTimeControl
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: c71e92f2-77ca-4de6-98ad-64b961ed706e
-    m_ActionName: 'PlayerControls/TimeControl[/Keyboard/k]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 239ee3ca-17ea-4fb2-85ef-91f8046dfddb
-    m_ActionName: PlayerControls/CameraRotation
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
@@ -11739,10 +11509,6 @@ MonoBehaviour:
     m_ActionId: 5d894b6c-1123-4baf-b78c-1ea7d37abfaa
     m_ActionName: 'CardPhase/RotateR[/DualShock4GamepadHID/rightShoulder,/DualShock4GamepadHID1/rightShoulder]'
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 7237893a-8919-4366-b4a7-f69d3161e268
-    m_ActionName: 'CardPhase/RotateL[/DualShock4GamepadHID/leftShoulder,/DualShock4GamepadHID1/leftShoulder]'
-  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 481254717}
         m_TargetAssemblyTypeName: dungeonduell.TileClickHandler, Assembly-CSharp
@@ -11772,8 +11538,16 @@ MonoBehaviour:
     m_ActionName: 'CardPhase/Pause[/Keyboard/escape,/XInputControllerWindows/start,/XInputControllerWindows1/start]'
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: facc7a30-9bf5-4458-a444-3b84b19a4385
-    m_ActionName: 'CardPhase/Cancel[/Keyboard/escape,/XInputControllerWindows/buttonEast,/XInputControllerWindows1/buttonEast]'
+    m_ActionId: b24dd24e-a00f-42af-8c0f-b7c9fa4adb5f
+    m_ActionName: 'CardPhase/Click[/Mouse/leftButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 42488b8d-36e7-4245-a2d9-b47d7054c865
+    m_ActionName: 'CardPhase/RightClick[/Mouse/rightButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a6b09542-b4ae-4e9a-8cc0-9ee4b5dfbb2a
+    m_ActionName: 'CardPhase/MiddleClick[/Mouse/middleButton]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard
   m_DefaultActionMap: CardPhase
