@@ -142,7 +142,9 @@ namespace dungeonduell
             }
             else
             {
-                handCards.Remove(clickedCard.card);
+                var indexOfItem = handCards.IndexOf(clickedCard.card);
+                if (indexOfItem != -1)
+                    handCards.RemoveAt(indexOfItem);
 
                 if (cardHolder.childCount > 0)
                 {
@@ -246,10 +248,8 @@ namespace dungeonduell
         {
             var selectables = new List<Selectable>();
 
-            foreach (var card in handCards)
+            foreach (DisplayCard displayCard in _displayCards)
             {
-                var displayCard = _displayCards.Find(dc => dc.card == card);
-
                 if (displayCard != null)
                 {
                     var selectable = displayCard.GetComponent<Selectable>();
@@ -289,7 +289,6 @@ namespace dungeonduell
         {
             if (player1Played == isPlayer1)
             {
-                handCards.Remove(card);
                 if (handCards.Count == 0) DdCodeEventHandler.Trigger_PlayedAllCards(isPlayer1);
             }
         }

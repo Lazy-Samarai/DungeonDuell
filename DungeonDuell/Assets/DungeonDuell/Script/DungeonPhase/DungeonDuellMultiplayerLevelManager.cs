@@ -106,12 +106,14 @@ namespace MoreMountains.TopDownEngine
         public void SubscribeToEvents()
         {
             DdCodeEventHandler.PlayerUpgrade += HandleUpgrade;
+            DdCodeEventHandler.PlayerUpgradeWithMask += HandleUpgrade;
             DdCodeEventHandler.FinalRoundInDungeon += HealingIncreased;
         }
 
         public void UnsubscribeToAllEvents()
         {
             DdCodeEventHandler.PlayerUpgrade -= HandleUpgrade;
+            DdCodeEventHandler.PlayerUpgradeWithMask -= HandleUpgrade;
             DdCodeEventHandler.FinalRoundInDungeon -= HealingIncreased;
         }
 
@@ -260,31 +262,22 @@ namespace MoreMountains.TopDownEngine
         }
 
         /// <summary>
-        ///     On game over, freezes time and displays the game over screen
+        ///     On game over, displays the game over screen
         /// </summary>
         /// <returns></returns>
         protected virtual IEnumerator GameOver()
         {
-            yield return new WaitForSeconds(2f);
             if (WinnerID == "") WinnerID = "Player1";
-
-            MMTimeScaleEvent.Trigger(MMTimeScaleMethods.For, 0f, 0f, false, 0f, true);
+            DdCodeEventHandler.Trigger_WeHaveWinner(WinnerID);
+            yield return new WaitForSeconds(5f);
             _gameOver = true;
             MMSoundManagerAllSoundsControlEvent.Trigger(MMSoundManagerAllSoundsControlEventTypes.FreeAllLooping);
             TopDownEngineEvent.Trigger(TopDownEngineEventTypes.GameOver, null);
             yield return new WaitForSeconds(0.1f); // Still Press Space to Coutinue  
-            sequenceMang.Reseting();
         }
 
         protected virtual void CheckForGameOver()
         {
-            if (_gameOver)
-                if (Input.GetButton("Player1_Jump")
-                    || Input.GetButton("Player2_Jump")
-                    || Input.GetButton("Player3_Jump")
-                    || Input.GetButton("Player4_Jump"))
-                    MMTimeScaleEvent.Trigger(MMTimeScaleMethods.Reset, 1f, 0f, false, 0f, true);
-            // MMSceneLoadingManager.LoadScene(SceneManager.GetActiveScene().name); 
         }
 
         private void HandleUpgradable(int playerID)
@@ -337,6 +330,13 @@ namespace MoreMountains.TopDownEngine
             }
         }
 
+        private void HandleUpgrade(LevelUpOptions option, string playerReference, int amount, int mask)
+        {
+            HandleUpgrade(option, playerReference, amount);
+            playerSpineAnimationHandlings[int.Parse(playerReference[^1].ToString()) - 1].SetSkin(mask);
+        }
+
+
         private void Healing(int playerID, int amount)
         {
             health[playerID].ReceiveHealth(_healthOnUpgrade * amount, health[playerID].gameObject);
@@ -346,8 +346,6 @@ namespace MoreMountains.TopDownEngine
         {
             var defaultWalking = walking[playerID].WalkSpeed / playerSpineAnimationHandlings[playerID].walkMultiply;
             var defaultRunning = running[playerID].RunSpeed / playerSpineAnimationHandlings[playerID].runningMultiply;
-
-            print(amount);
 
             walking[playerID].WalkSpeed += 1.0f * amount;
             walking[playerID].MovementSpeed += 1.0f * amount;
@@ -360,7 +358,6 @@ namespace MoreMountains.TopDownEngine
 
         private void UpgradeWeaponSpeed(int playerID, int amount)
         {
-            print((float)Math.Pow(0.85f, amount));
             weapon[playerID].TimeBetweenUses *= (float)Math.Pow(0.85f, amount);
         }
 

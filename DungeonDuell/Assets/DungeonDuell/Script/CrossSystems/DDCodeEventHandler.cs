@@ -88,6 +88,15 @@ namespace dungeonduell
             if (PlayerUpgrade != null) PlayerUpgrade.Invoke(option, playerReference, amount);
         }
 
+        public static event Action<LevelUpOptions, string, int, int> PlayerUpgradeWithMask;
+
+        public static void Trigger_PlayerUpgradeWithMask(LevelUpOptions option, string playerReference, int amount,
+            int maskIndex)
+        {
+            if (PlayerUpgrade != null) PlayerUpgradeWithMask.Invoke(option, playerReference, amount, maskIndex);
+        }
+
+
         public static event Action<List<PlayerData>, int> PlayerDataExposed;
 
         public static void Trigger_PlayerDataExposed(List<PlayerData> playerdatas, int currentRound)
@@ -100,6 +109,13 @@ namespace dungeonduell
         public static void Trigger_BridgeMode()
         {
             if (BridgeMode != null) BridgeMode.Invoke();
+        }
+
+        public static event Action<string> weHaveWinner;
+
+        public static void Trigger_WeHaveWinner(string playerWinner)
+        {
+            if (weHaveWinner != null) weHaveWinner.Invoke(playerWinner);
         }
     }
 }

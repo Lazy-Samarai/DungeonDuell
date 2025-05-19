@@ -44,7 +44,7 @@ PrefabInstance:
     - target: {fileID: 7827707600634268342, guid: 7d0279d9159d28849b4c3f90b7ca4f6e,
         type: 3}
       propertyPath: m_Name
-      value: KoalaNinjaSwordMaster
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 7830258664008805622, guid: 7d0279d9159d28849b4c3f90b7ca4f6e,
         type: 3}
@@ -96,6 +96,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8740900041047438612, guid: 7d0279d9159d28849b4c3f90b7ca4f6e,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -118,7 +123,7 @@ PrefabInstance:
     - target: {fileID: 7827707600634268342, guid: 7d0279d9159d28849b4c3f90b7ca4f6e,
         type: 3}
       propertyPath: m_Name
-      value: KoalaNinjaSwordMaster (1)
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 7830258664008805622, guid: 7d0279d9159d28849b4c3f90b7ca4f6e,
         type: 3}
@@ -169,6 +174,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8740900041047438612, guid: 7d0279d9159d28849b4c3f90b7ca4f6e,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
