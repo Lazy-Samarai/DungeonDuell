@@ -110,5 +110,12 @@ namespace dungeonduell
         {
             if (BridgeMode != null) BridgeMode.Invoke();
         }
+
+        public static event Action<string> weHaveWinner;
+
+        public static void Trigger_WeHaveWinner(string playerWinner)
+        {
+            if (weHaveWinner != null) weHaveWinner.Invoke(playerWinner);
+        }
     }
 }
