@@ -86,7 +86,7 @@ namespace MoreMountains.TopDownEngine
 
                     break;
                 case TopDownEngineEventTypes.Repaint:
-                    foreach (var points in (LevelManager.Instance as DungeonDuellMultiplayerLevelManager).Points)
+                    foreach (var points in ((LevelManager.Instance as DungeonDuellMultiplayerLevelManager)!).Points)
                         if (points.PlayerID == playerID)
                         {
                             coinCounter.text = points.Points.ToString();
@@ -96,13 +96,13 @@ namespace MoreMountains.TopDownEngine
                     break;
                 case TopDownEngineEventTypes.GameOver:
                 {
-                    var winnerID = (LevelManager.Instance as DungeonDuellMultiplayerLevelManager).WinnerID;
+                    var winnerID = (LevelManager.Instance as DungeonDuellMultiplayerLevelManager)?.WinnerID;
                     bool isWinner = playerID == winnerID;
-                    
+
                     if (isWinner)
                     {
-                        var winnerController = GameObject.FindObjectOfType<CentralWinnerScreenController>();
-                        
+                        var winnerController = GameObject.FindFirstObjectByType<CentralWinnerScreenController>();
+
                         if (winnerController != null)
                         {
                             bool player1Won = playerID == "Player1";
@@ -113,14 +113,15 @@ namespace MoreMountains.TopDownEngine
                             Debug.LogWarning("CentralWinnerScreenController nicht gefunden!");
                         }
                     }
+
                     break;
                 }
-            }  
+            }
         }
 
         public void LevelPossible(int id, int count)
         {
-            var myPlayerIndex = int.Parse(playerID[playerID.Length - 1].ToString()) - 1;
+            var myPlayerIndex = int.Parse(playerID[^1].ToString()) - 1;
             if (myPlayerIndex == id)
             {
                 canLevelUp = count > 0;

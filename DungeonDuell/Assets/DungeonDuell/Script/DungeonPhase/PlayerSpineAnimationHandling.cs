@@ -1,10 +1,12 @@
+using MoreMountains.TopDownEngine;
 using Spine;
 using Spine.Unity;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace dungeonduell
 {
-    public class PlayerSpineAnimationHandling : SpineCharacterAnimationHandler
+    public class PlayerSpineAnimationHandling : SpineCharacterAnimationHandler, IObserver
     {
         private const string TargetBoneName = "Target";
         [SpineAnimation] public string running;
@@ -12,6 +14,9 @@ namespace dungeonduell
 
         [SpineAnimation] public string dash;
         [SpineAnimation] public string dashReverse;
+
+        [SpineAnimation] public string preWin;
+        [SpineAnimation] public string win;
 
         public float runningMultiply = 1f;
         public float walkMultiply = 1f;
@@ -26,7 +31,19 @@ namespace dungeonduell
         {
             base.Awake();
             //   _ikTargetBone = _skeletonAnimation.Skeleton.FindBone(TargetBoneName);
+            SetUpWinAnimation();
             SetToIdle();
+        }
+
+        private void SetUpWinAnimation()
+        {
+            SkeletonAnimation.AnimationState.End += delegate(TrackEntry trackEntry)
+            {
+                if (SkeletonAnimation.AnimationName == preWin)
+                {
+                    SkeletonAnimation.AnimationState.AddAnimation(0, win, true, 0);
+                }
+            };
         }
 
         private void Update()
@@ -78,10 +95,43 @@ namespace dungeonduell
             SkeletonAnimation.AnimationState.AddEmptyAnimation(1, 0.25f, 0f);
         }
 
+        private void SetToWin()
+        {
+            SkeletonAnimation.AnimationState.SetAnimation(0, preWin, false);
+        }
+
         public void SetSkin(int indexOfSkin)
         {
             SkeletonAnimation.skeleton.SetSkin(SkeletonAnimation.skeleton.Data.Skins.Items[indexOfSkin]);
             SkeletonAnimation.skeleton.SetSlotsToSetupPose();
+        }
+
+        private void HandleGameEnd(string playerID)
+        {
+            if (GetComponentInParent<Character>().PlayerID == playerID)
+            {
+                SetToWin();
+            }
+        }
+
+        void OnEnable()
+        {
+            SubscribeToEvents();
+        }
+
+        void OnDisable()
+        {
+            UnsubscribeToAllEvents();
+        }
+
+        public void SubscribeToEvents()
+        {
+            DdCodeEventHandler.weHaveWinner += HandleGameEnd;
+        }
+
+        public void UnsubscribeToAllEvents()
+        {
+            DdCodeEventHandler.weHaveWinner -= HandleGameEnd;
         }
     }
 }

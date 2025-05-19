@@ -267,18 +267,17 @@ namespace MoreMountains.TopDownEngine
         /// <returns></returns>
         protected virtual IEnumerator GameOver()
         {
-            yield return new WaitForSeconds(2f);
             if (WinnerID == "") WinnerID = "Player1";
+            DdCodeEventHandler.Trigger_WeHaveWinner(WinnerID);
+            yield return new WaitForSeconds(5f);
             _gameOver = true;
             MMSoundManagerAllSoundsControlEvent.Trigger(MMSoundManagerAllSoundsControlEventTypes.FreeAllLooping);
             TopDownEngineEvent.Trigger(TopDownEngineEventTypes.GameOver, null);
             yield return new WaitForSeconds(0.1f); // Still Press Space to Coutinue  
-            
         }
 
         protected virtual void CheckForGameOver()
         {
-            
         }
 
         private void HandleUpgradable(int playerID)

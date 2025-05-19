@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 114104414726605804}
   - component: {fileID: 114171358364461030}
   - component: {fileID: 114499223069276626}
+  - component: {fileID: 9014544855692269556}
   m_Layer: 10
   m_Name: MainPlayer1
   m_TagString: Player1
@@ -609,6 +610,18 @@ MonoBehaviour:
   EdgePrecision: 3
   EdgeThreshold: 0.5
   VisionMeshFilter: {fileID: 6222626707385097864}
+--- !u!114 &9014544855692269556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498750440386690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19267abeb94c15f42a7764c499668f9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &394705885309749715
 GameObject:
   m_ObjectHideFlags: 0
@@ -1825,6 +1838,8 @@ MonoBehaviour:
   runningBackward: RunBackwards
   dash: Dash
   dashReverse: DashBackwards
+  preWin: WinStart
+  win: WinIdle
   runningMultiply: 1
   walkMultiply: 1
   dashParticlesRenderer: {fileID: 6325014291572867025}
