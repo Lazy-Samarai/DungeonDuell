@@ -721,7 +721,7 @@ namespace MoreMountains.TopDownEngine
                     ""name"": ""Submit"",
                     ""type"": ""Button"",
                     ""id"": ""67024220-9a28-4b1a-89bc-10205b6cdabe"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -739,7 +739,7 @@ namespace MoreMountains.TopDownEngine
                     ""name"": ""Back"",
                     ""type"": ""Button"",
                     ""id"": ""d858d18f-1581-4499-88be-9325a3bb9b38"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -766,7 +766,7 @@ namespace MoreMountains.TopDownEngine
                     ""name"": ""Cancel"",
                     ""type"": ""Button"",
                     ""id"": ""facc7a30-9bf5-4458-a444-3b84b19a4385"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -779,7 +779,7 @@ namespace MoreMountains.TopDownEngine
                     ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Keyboard"",
+                    ""groups"": """",
                     ""action"": ""Cursor"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -1127,33 +1127,11 @@ namespace MoreMountains.TopDownEngine
                 },
                 {
                     ""name"": """",
-                    ""id"": ""572e4d65-5f23-4f05-8952-4c937321f9c8"",
-                    ""path"": ""<Mouse>/position"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard"",
-                    ""action"": ""Navigation"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""2c74360d-c83b-44ae-80ce-1d94c5460874"",
                     ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""Back"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b90c01be-1653-4d5d-bb06-350584ecb857"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
                     ""action"": ""Back"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -1220,17 +1198,6 @@ namespace MoreMountains.TopDownEngine
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Submit"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""e7740e0c-de0b-4e8b-903e-47cb0d3f1ad5"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard"",
                     ""action"": ""Submit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -1723,6 +1690,9 @@ namespace MoreMountains.TopDownEngine
             /// Provides access to the underlying input action "CardPhase/Pause".
             /// </summary>
             public InputAction @Pause => m_Wrapper.m_CardPhase_Pause;
+            /// <summary>
+            /// Provides access to the underlying input action "CardPhase/ResumeConfirm".
+            /// </summary>
             public InputAction @ResumeConfirm => m_Wrapper.m_CardPhase_ResumeConfirm;
             /// <summary>
             /// Provides access to the underlying input action "CardPhase/Cancel".
@@ -2075,7 +2045,19 @@ namespace MoreMountains.TopDownEngine
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnPause(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "ResumeConfirm" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnResumeConfirm(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "Cancel" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnCancel(InputAction.CallbackContext context);
         }
     }

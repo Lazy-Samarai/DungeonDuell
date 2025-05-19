@@ -3,6 +3,8 @@ using MoreMountains.TopDownEngine;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
+
 
 namespace dungeonduell
 {
@@ -16,6 +18,7 @@ namespace dungeonduell
         public GameObject tutorialSelectedButton;
         public GameObject confirmationPopup;
         public GameObject confirmSelectedButton;
+        
 
         [Header("Settings")]
         public float fadeDuration = 0.25f;
@@ -29,8 +32,10 @@ namespace dungeonduell
             foreach (PlayerInput playerInput in FindObjectsByType<PlayerInput>(FindObjectsSortMode.None))
             {
                 playerInput.actions["Pause"].started += TogglePause;
+                
             }
-        
+            _controls = new DungeonPhaseInput();
+
         
         }
 
@@ -44,23 +49,14 @@ namespace dungeonduell
             tutorialPanel.SetActive(false);
             confirmationPopup.SetActive(false);
         }
-
-        private void OnEnable()
-        {
-            _controls.CardPhase.Enable();
-        }
-
-        private void OnDisable()
-        {
-            _controls.CardPhase.Disable();
-        }
-
-        private void TogglePause()
+        
+        private void TogglePause(InputAction.CallbackContext context)
         {
             Debug.Log("Pause Input");
             if (!_isPaused) OpenPauseMenu();
             else ResumeGame();
         }
+
 
         public void OpenPauseMenu()
         {
@@ -163,6 +159,16 @@ namespace dungeonduell
         {
             Time.timeScale = 1f;
             SceneManager.LoadScene("Titlescreen");
+        }
+        
+        private void OnEnable()
+        {
+            _controls.CardPhase.Enable();
+        }
+
+        private void OnDisable()
+        {
+            _controls.CardPhase.Disable();
         }
     }
 }
