@@ -1,30 +1,28 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-using MoreMountains.Tools;
-using UnityEngine.EventSystems;
-using MoreMountains.TopDownEngine;
+﻿using MoreMountains.TopDownEngine;
+using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace dungeonduell
 {
-    public class LevelUPPanel : MonoBehaviour
+    public class LevelUpPanel : MonoBehaviour
     {
-        [Header("UI Elements")]
-        bool menuOpen = false;
-        public GameObject LevelUpMenu; // Das Panel für das Level-Up
-        public TestHub TestHub;
+        private const int AmountPerUpgrade = 1;
+        [FormerlySerializedAs("LevelUpMenu")] public GameObject levelUpMenu; // Das Panel für das Level-Up
+        [FormerlySerializedAs("TestHub")] public TestHub testHub;
+        public bool player1;
         private DungeonDuellMultiplayerLevelManager _levelManager;
-        const int AmountPerUpgrade = 1;
-        public bool player1 = false;
+        [Header("UI Elements")] private bool _menuOpen;
 
         private void Start()
         {
-            _levelManager = FindObjectOfType<DungeonDuellMultiplayerLevelManager>();
+            _levelManager = FindFirstObjectByType<DungeonDuellMultiplayerLevelManager>();
         }
 
         public void UpgradeAttackSpeed()
         {
             OnOptionSelected(LevelUpOptions.AttackSpeed);
         }
+
         public void UpgradeSpeedd()
         {
             OnOptionSelected(LevelUpOptions.Speed);
@@ -37,19 +35,18 @@ namespace dungeonduell
 
         public void ShowLevelUpMenu(bool on)
         {
-            menuOpen = on;
-            LevelUpMenu.SetActive(on);
+            _menuOpen = on;
+            levelUpMenu.SetActive(on);
         }
 
         private void OnOptionSelected(LevelUpOptions option)
         {
-            if (TestHub.canLevelUp & menuOpen)
+            if (testHub.canLevelUp & _menuOpen)
             {
                 if (_levelManager != null)
-                {
-                    _levelManager.ApplyLevelUpPerCoins(option,AmountPerUpgrade,player1 ? 1 : 2);
-                }
-                TestHub.menuShowing = false;
+                    _levelManager.ApplyLevelUpPerCoins(option, AmountPerUpgrade, player1 ? 1 : 2);
+
+                testHub.menuShowing = false;
                 ShowLevelUpMenu(false);
             }
         }

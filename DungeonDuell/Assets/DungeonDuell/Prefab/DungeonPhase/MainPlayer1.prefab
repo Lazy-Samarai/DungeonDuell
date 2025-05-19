@@ -133,7 +133,7 @@ SortingGroup:
   m_Enabled: 1
   m_SortingLayerID: 47421343
   m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_SortAtRoot: 0
 --- !u!114 &114923167933730068
 MonoBehaviour:
@@ -1733,7 +1733,11 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c49691c94d54e5947901f3e5866839d5, type: 2}
+  - {fileID: 2100000, guid: ccc32f4db5630b44f84f3f990ec6a616, type: 2}
+  - {fileID: 2100000, guid: 441c44ec6892fd046a16e6d98831c534, type: 2}
+  - {fileID: 2100000, guid: ccc32f4db5630b44f84f3f990ec6a616, type: 2}
+  - {fileID: 2100000, guid: 441c44ec6892fd046a16e6d98831c534, type: 2}
+  - {fileID: 2100000, guid: ccc32f4db5630b44f84f3f990ec6a616, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1821,7 +1825,7 @@ MonoBehaviour:
   walkMultiply: 1
   facingEastRunning: 0
   runningEast: 0
-  _characterMovement: {fileID: 0}
+  characterMovement: {fileID: 0}
 --- !u!1 &1899941585429488189
 GameObject:
   m_ObjectHideFlags: 0

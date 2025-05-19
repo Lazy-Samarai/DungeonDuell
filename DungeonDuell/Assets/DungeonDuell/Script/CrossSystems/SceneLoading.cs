@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
 
 namespace dungeonduell
 {
@@ -12,6 +9,7 @@ namespace dungeonduell
         {
             SceneManager.LoadScene(1);
         }
+
         public void ToTheHex()
         {
             SceneManager.LoadScene(0);

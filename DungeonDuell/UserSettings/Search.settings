@@ -1,5 +1,6 @@
 trackSelection = true
 refreshSearchWindowsInPlayMode = false
+pickerAdvancedUI = false
 fetchPreview = true
 defaultFlags = 0
 keepOpen = false
@@ -14,6 +15,13 @@ scopes = {
 	"last_search.310DEAF3" = "h:t:GameObject #m_TagString=\"Untagged\""
 	"OpenInspectorPreview.310DEAF3" = "0"
 	"currentGroup.310DEAF3" = "all"
+	"picker_window_position_offset.075BCD15" = "306;440,6667;320;550"
+	"picker_visibility_flags.075BCD15" = "264"
+	"picker_item_size.075BCD15" = "96"
+	"picker_inspector.075BCD15" = "0"
+	"last_search.66F56946" = "post"
+	"OpenInspectorPreview.66F56946" = "0"
+	"currentGroup.66F56946" = null
 }
 providers = {
 	adb = {
@@ -61,10 +69,28 @@ providers = {
 		priority = 50
 		defaultAction = null
 	}
+	at = {
+		active = true
+		priority = 100
+		defaultAction = null
+	}
+	st = {
+		active = true
+		priority = 100
+		defaultAction = null
+	}
+	presets_provider = {
+		active = false
+		priority = -10
+		defaultAction = null
+	}
 }
 objectSelectors = {
 }
 recentSearches = [
+	"st: Spieler 1"
+	"st: Legend"
+	"st: start"
 ]
 searchItemFavorites = [
 ]
