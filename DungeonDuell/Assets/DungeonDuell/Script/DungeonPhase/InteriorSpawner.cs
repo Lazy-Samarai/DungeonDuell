@@ -6,7 +6,5 @@ namespace dungeonduell
         {
             SpawnSingleObject(objectToSpawn);
         }
-
-
     }
 }

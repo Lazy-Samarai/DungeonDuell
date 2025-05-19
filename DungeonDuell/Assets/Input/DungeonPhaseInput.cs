@@ -187,7 +187,7 @@ namespace MoreMountains.TopDownEngine
                     ""name"": ""Pause"",
                     ""type"": ""Button"",
                     ""id"": ""c01ffcc5-adff-4aa3-bb8d-e0139087e5ed"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -196,7 +196,7 @@ namespace MoreMountains.TopDownEngine
                     ""name"": ""SwitchWeapon"",
                     ""type"": ""Button"",
                     ""id"": ""6e3febaf-dba5-4b43-b4f8-3b720e7ad1be"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -259,7 +259,7 @@ namespace MoreMountains.TopDownEngine
                     ""name"": ""DoHealthUp"",
                     ""type"": ""Button"",
                     ""id"": ""13d851c4-efe0-4304-8dd8-2d24a140e047"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -512,7 +512,7 @@ namespace MoreMountains.TopDownEngine
                     ""name"": """",
                     ""id"": ""0edbe9a3-9973-478d-b677-437ae7b60275"",
                     ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": ""Press"",
+                    ""interactions"": ""Press(behavior=2)"",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
                     ""action"": ""Pause"",
@@ -721,7 +721,7 @@ namespace MoreMountains.TopDownEngine
                     ""name"": ""Submit"",
                     ""type"": ""Button"",
                     ""id"": ""67024220-9a28-4b1a-89bc-10205b6cdabe"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -739,7 +739,7 @@ namespace MoreMountains.TopDownEngine
                     ""name"": ""Back"",
                     ""type"": ""Button"",
                     ""id"": ""d858d18f-1581-4499-88be-9325a3bb9b38"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -754,19 +754,10 @@ namespace MoreMountains.TopDownEngine
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""ResumeConfirm"",
-                    ""type"": ""Button"",
-                    ""id"": ""bdcc0eda-84aa-43bf-a9d9-20578c683f2d"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Cancel"",
                     ""type"": ""Button"",
                     ""id"": ""facc7a30-9bf5-4458-a444-3b84b19a4385"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -779,7 +770,7 @@ namespace MoreMountains.TopDownEngine
                     ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Keyboard"",
                     ""action"": ""Cursor"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -1127,11 +1118,33 @@ namespace MoreMountains.TopDownEngine
                 },
                 {
                     ""name"": """",
+                    ""id"": ""572e4d65-5f23-4f05-8952-4c937321f9c8"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""Navigation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""2c74360d-c83b-44ae-80ce-1d94c5460874"",
                     ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
+                    ""action"": ""Back"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b90c01be-1653-4d5d-bb06-350584ecb857"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
                     ""action"": ""Back"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -1160,28 +1173,6 @@ namespace MoreMountains.TopDownEngine
                 },
                 {
                     ""name"": """",
-                    ""id"": ""bd965b29-5e56-4d16-ba81-348929ff77b3"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
-                    ""interactions"": ""Press(behavior=2)"",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""ResumeConfirm"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""5e471215-2945-4116-b49d-4b28e323a920"",
-                    ""path"": ""<Keyboard>/enter"",
-                    ""interactions"": ""Press"",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""ResumeConfirm"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""ae34ed89-9330-488e-862a-96dc9a1c6ace"",
                     ""path"": ""*/{Cancel}"",
                     ""interactions"": """",
@@ -1198,6 +1189,17 @@ namespace MoreMountains.TopDownEngine
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
+                    ""action"": ""Submit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e7740e0c-de0b-4e8b-903e-47cb0d3f1ad5"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
                     ""action"": ""Submit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -1265,7 +1267,6 @@ namespace MoreMountains.TopDownEngine
             m_CardPhase_Navigation = m_CardPhase.FindAction("Navigation", throwIfNotFound: true);
             m_CardPhase_Back = m_CardPhase.FindAction("Back", throwIfNotFound: true);
             m_CardPhase_Pause = m_CardPhase.FindAction("Pause", throwIfNotFound: true);
-            m_CardPhase_ResumeConfirm = m_CardPhase.FindAction("ResumeConfirm", throwIfNotFound: true);
             m_CardPhase_Cancel = m_CardPhase.FindAction("Cancel", throwIfNotFound: true);
         }
 
@@ -1649,7 +1650,6 @@ namespace MoreMountains.TopDownEngine
         private readonly InputAction m_CardPhase_Navigation;
         private readonly InputAction m_CardPhase_Back;
         private readonly InputAction m_CardPhase_Pause;
-        private readonly InputAction m_CardPhase_ResumeConfirm;
         private readonly InputAction m_CardPhase_Cancel;
         /// <summary>
         /// Provides access to input actions defined in input action map "CardPhase".
@@ -1690,10 +1690,6 @@ namespace MoreMountains.TopDownEngine
             /// Provides access to the underlying input action "CardPhase/Pause".
             /// </summary>
             public InputAction @Pause => m_Wrapper.m_CardPhase_Pause;
-            /// <summary>
-            /// Provides access to the underlying input action "CardPhase/ResumeConfirm".
-            /// </summary>
-            public InputAction @ResumeConfirm => m_Wrapper.m_CardPhase_ResumeConfirm;
             /// <summary>
             /// Provides access to the underlying input action "CardPhase/Cancel".
             /// </summary>
@@ -1745,9 +1741,6 @@ namespace MoreMountains.TopDownEngine
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
-                @ResumeConfirm.started += instance.OnResumeConfirm;
-                @ResumeConfirm.performed += instance.OnResumeConfirm;
-                @ResumeConfirm.canceled += instance.OnResumeConfirm;
                 @Cancel.started += instance.OnCancel;
                 @Cancel.performed += instance.OnCancel;
                 @Cancel.canceled += instance.OnCancel;
@@ -1783,9 +1776,6 @@ namespace MoreMountains.TopDownEngine
                 @Pause.started -= instance.OnPause;
                 @Pause.performed -= instance.OnPause;
                 @Pause.canceled -= instance.OnPause;
-                @ResumeConfirm.started -= instance.OnResumeConfirm;
-                @ResumeConfirm.performed -= instance.OnResumeConfirm;
-                @ResumeConfirm.canceled -= instance.OnResumeConfirm;
                 @Cancel.started -= instance.OnCancel;
                 @Cancel.performed -= instance.OnCancel;
                 @Cancel.canceled -= instance.OnCancel;
@@ -2045,13 +2035,6 @@ namespace MoreMountains.TopDownEngine
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnPause(InputAction.CallbackContext context);
-            /// <summary>
-            /// Method invoked when associated input action "ResumeConfirm" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-            /// </summary>
-            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-            void OnResumeConfirm(InputAction.CallbackContext context);
             /// <summary>
             /// Method invoked when associated input action "Cancel" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
             /// </summary>

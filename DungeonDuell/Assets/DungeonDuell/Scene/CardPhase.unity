@@ -1964,18 +1964,6 @@ MonoBehaviour:
   playerDeck: []
   deckSize: 10
   isPlayerOne: 0
---- !u!114 &1028370829 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8468760139500744304, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
-    type: 3}
-  m_PrefabInstance: {fileID: 1264689841}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b743370ac3e4ec2a1668f5455a8ef8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1066758487
 GameObject:
   m_ObjectHideFlags: 0
@@ -3128,11 +3116,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8781711511381453681, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
-        type: 3}
-      propertyPath: languageDropdown
-      value: 
-      objectReference: {fileID: 1028370829}
     - target: {fileID: 8781711511381453681, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
         type: 3}
       propertyPath: previousSelected

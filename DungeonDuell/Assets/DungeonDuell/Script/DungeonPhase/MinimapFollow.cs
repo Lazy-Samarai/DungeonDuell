@@ -1,7 +1,4 @@
 using MoreMountains.TopDownEngine;
-using MoreMountains.Tools;
-using UnityEngine.EventSystems;
-using System.Collections;
 using UnityEngine;
 
 public class MinimapFollow : MonoBehaviour
@@ -11,18 +8,7 @@ public class MinimapFollow : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(StartLate());
         // Findet alle Charaktere in der Szene
-    }
-
-    private IEnumerator StartLate()
-    {
-        yield return new WaitForEndOfFrame();
-        AfterStart();
-    }
-
-    private void AfterStart()
-    {
         var characters = FindObjectsByType<Character>(FindObjectsSortMode.None);
 
         foreach (var character in characters)
