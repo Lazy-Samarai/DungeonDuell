@@ -693,6 +693,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 27af0542bdc0ff742b14a1d7620896cb, type: 2}
   connectCollector: {fileID: 1945806930}
   isPlayer1Turn: 1
+  _tilemap: {fileID: 0}
   setAbleCount: 0000000000000000
   indiactorDoorOver: {fileID: 0}
 --- !u!4 &481254718
@@ -3104,6 +3105,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PauseCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6084558402998845949, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6739598370246715360, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
         type: 3}
