@@ -5181,7 +5181,7 @@ MonoBehaviour:
   SpawnTransformsMode: 1
   Spread: {x: 0, y: 0, z: 5}
   RotateWeaponOnSpread: 1
-  RandomSpread: 1
+  RandomSpread: 0
   SpawnPosition: {x: 0.39999998, y: 0.103, z: 0}
   ObjectPooler: {fileID: 0}
   SpawnFeedbacks: []
@@ -5355,12 +5355,15 @@ MonoBehaviour:
   DrawLaser: 1
   RaycastOriginOffset: {x: 0, y: 0, z: 0}
   LaserOriginOffset: {x: 0, y: 0, z: 0}
-  LaserMaxDistance: 50
+  LaserMaxDistance: 8
   LaserCollisionMask:
     serializedVersion: 2
     m_Bits: 8386930
   LaserWidth: {x: 0.05, y: 0.05}
-  LaserMaterial: {fileID: 2100000, guid: 421ea2e7b588af74c8232eecbd7b5b46, type: 2}
+  DefaultLaserMaterial: {fileID: 2100000, guid: 222171c3110368643bb58d8651b9ccf5,
+    type: 2}
+  TargetLaserMaterial: {fileID: 2100000, guid: 421ea2e7b588af74c8232eecbd7b5b46, type: 2}
+  IsPlayer1: 1
 --- !u!114 &7085844251839101421
 MonoBehaviour:
   m_ObjectHideFlags: 0

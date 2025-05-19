@@ -3,32 +3,40 @@ using MoreMountains.TopDownEngine;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
+
 
 namespace dungeonduell
 {
     public class PauseMenuManager : MonoBehaviour
     {
-        [Header("Panels & Buttons")] public GameObject pausePanel;
-
+        [Header("Panels & Buttons")]
+        public GameObject pausePanel;
         public GameObject defaultSelectedButton;
         public GameObject optionsPanel;
         public GameObject tutorialPanel;
         public GameObject tutorialSelectedButton;
         public GameObject confirmationPopup;
         public GameObject confirmSelectedButton;
+        
 
-        [Header("Settings")] public float fadeDuration = 0.25f;
-
+        [Header("Settings")]
+        public float fadeDuration = 0.25f;
         private DungeonPhaseInput _controls;
         private bool _isPaused;
-
         private CanvasGroup _pauseGroup;
         private GameObject _previousSelected;
 
-        private void Awake()
+        void Awake()
         {
+            foreach (PlayerInput playerInput in FindObjectsByType<PlayerInput>(FindObjectsSortMode.None))
+            {
+                playerInput.actions["Pause"].started += TogglePause;
+                
+            }
             _controls = new DungeonPhaseInput();
-            _controls.CardPhase.Pause.performed += ctx => TogglePause();
+
+        
         }
 
         private void Start()
@@ -41,28 +49,19 @@ namespace dungeonduell
             tutorialPanel.SetActive(false);
             confirmationPopup.SetActive(false);
         }
-
-        private void OnEnable()
-        {
-            _controls.CardPhase.Enable();
-        }
-
-        private void OnDisable()
-        {
-            _controls.CardPhase.Disable();
-        }
-
-        private void TogglePause()
+        
+        private void TogglePause(InputAction.CallbackContext context)
         {
             Debug.Log("Pause Input");
             if (!_isPaused) OpenPauseMenu();
             else ResumeGame();
         }
 
+
         public void OpenPauseMenu()
         {
             _isPaused = true;
-            Time.timeScale = 1f;
+            Time.timeScale = 0f;
             pausePanel.SetActive(true);
             pausePanel.transform.localScale = Vector3.zero;
             _pauseGroup.alpha = 0;
@@ -77,7 +76,9 @@ namespace dungeonduell
             _pauseGroup.DOFade(1, fadeDuration).SetUpdate(true).OnComplete(() =>
             {
                 if (defaultSelectedButton != null && EventSystem.current != null)
+                {
                     EventSystem.current.SetSelectedGameObject(defaultSelectedButton);
+                }
             });
         }
 
@@ -86,9 +87,9 @@ namespace dungeonduell
             pausePanel.transform.DOScale(0, fadeDuration).SetEase(Ease.InBack).SetUpdate(true);
             _pauseGroup.DOFade(0, fadeDuration).SetUpdate(true).OnComplete(() =>
             {
-                pausePanel.SetActive(false);
-                Time.timeScale = 1f;
                 _isPaused = false;
+                Time.timeScale = 1f;
+                pausePanel.SetActive(false);
 
                 if (EventSystem.current != null)
                 {
@@ -101,7 +102,7 @@ namespace dungeonduell
         public void OpenTutorial()
         {
             tutorialPanel.SetActive(true);
-            var rect = tutorialPanel.GetComponent<RectTransform>();
+            RectTransform rect = tutorialPanel.GetComponent<RectTransform>();
             rect.anchoredPosition = new Vector2(0, -800);
             rect.DOAnchorPosY(0, fadeDuration).SetEase(Ease.OutCubic).SetUpdate(true).OnComplete(() =>
             {
@@ -115,7 +116,7 @@ namespace dungeonduell
 
         public void CloseTutorial()
         {
-            var rect = tutorialPanel.GetComponent<RectTransform>();
+            RectTransform rect = tutorialPanel.GetComponent<RectTransform>();
             rect.DOAnchorPosY(-800, fadeDuration).SetEase(Ease.InCubic).SetUpdate(true).OnComplete(() =>
             {
                 tutorialPanel.SetActive(false);
@@ -158,6 +159,16 @@ namespace dungeonduell
         {
             Time.timeScale = 1f;
             SceneManager.LoadScene("Titlescreen");
+        }
+        
+        private void OnEnable()
+        {
+            _controls.CardPhase.Enable();
+        }
+
+        private void OnDisable()
+        {
+            _controls.CardPhase.Disable();
         }
     }
 }
