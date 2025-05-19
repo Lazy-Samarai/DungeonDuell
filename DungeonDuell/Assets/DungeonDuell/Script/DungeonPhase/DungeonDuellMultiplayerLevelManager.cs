@@ -262,31 +262,23 @@ namespace MoreMountains.TopDownEngine
         }
 
         /// <summary>
-        ///     On game over, freezes time and displays the game over screen
+        ///     On game over, displays the game over screen
         /// </summary>
         /// <returns></returns>
         protected virtual IEnumerator GameOver()
         {
             yield return new WaitForSeconds(2f);
             if (WinnerID == "") WinnerID = "Player1";
-
-            MMTimeScaleEvent.Trigger(MMTimeScaleMethods.For, 0f, 0f, false, 0f, true);
             _gameOver = true;
             MMSoundManagerAllSoundsControlEvent.Trigger(MMSoundManagerAllSoundsControlEventTypes.FreeAllLooping);
             TopDownEngineEvent.Trigger(TopDownEngineEventTypes.GameOver, null);
             yield return new WaitForSeconds(0.1f); // Still Press Space to Coutinue  
-            sequenceMang.Reseting();
+            
         }
 
         protected virtual void CheckForGameOver()
         {
-            if (_gameOver)
-                if (Input.GetButton("Player1_Jump")
-                    || Input.GetButton("Player2_Jump")
-                    || Input.GetButton("Player3_Jump")
-                    || Input.GetButton("Player4_Jump"))
-                    MMTimeScaleEvent.Trigger(MMTimeScaleMethods.Reset, 1f, 0f, false, 0f, true);
-            // MMSceneLoadingManager.LoadScene(SceneManager.GetActiveScene().name); 
+            
         }
 
         private void HandleUpgradable(int playerID)
