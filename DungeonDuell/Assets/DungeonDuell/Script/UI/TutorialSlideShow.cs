@@ -7,6 +7,7 @@ using UnityEngine.Localization.Components;
 using DG.Tweening;
 using MoreMountains.TopDownEngine;
 using System;
+using System.Drawing.Printing;
 
 namespace dungeonduell
 {
@@ -26,19 +27,23 @@ namespace dungeonduell
         public TextMeshProUGUI descriptionText;
         public Image illustrationImage;
         public TextMeshProUGUI progressText;
-        public Image skipProgressBar;
 
         [Header("Tutorial Pages")]
         public TutorialPage[] pages;
+        private int currentPageIndex = 0;
 
         [Header("Skip Settings")]
         public float skipHoldDuration = 2f;
-
-        private int currentPageIndex = 0;
-        private DungeonPhaseInput inputActions;
-
+        public Image SkipImage;
+        public Image skipProgressBar;
+        public float rotationSpeed = 100f;
         private float skipHoldTime = 0f;
         private bool isSkipPressed = false;
+        private Tween rotationTween;
+        private bool rotationStarted = false;
+
+        private DungeonPhaseInput inputActions;
+
         private bool isTransitioning = false;
 
         private void Awake()
@@ -53,6 +58,18 @@ namespace dungeonduell
                 isSkipPressed = false;
                 skipHoldTime = 0f;
                 UpdateSkipBar(0f);
+
+                if (rotationTween != null && rotationTween.IsActive())
+                {
+                    rotationTween.Kill();
+                }
+
+                SkipImage.transform
+                    .DORotate(Vector3.zero, 0.3f)
+                    .SetEase(Ease.OutCubic)
+                    .SetUpdate(true);
+
+                rotationStarted = false;
             };
 
         }
@@ -60,6 +77,13 @@ namespace dungeonduell
         private void OnEnable()
         {
             inputActions.Enable();
+
+            if (!OptionDataManager.Instance.showTutorial)
+            {
+                gameObject.SetActive(false);
+                return;
+            }
+
             ShowPage(currentPageIndex, instant: true);
         }
 
@@ -72,11 +96,21 @@ namespace dungeonduell
         {
             if (isSkipPressed)
             {
+                if (!rotationStarted)
+                {
+                    rotationStarted = true;
+                    rotationTween = SkipImage.transform
+                        .DORotate(new Vector3(0, 0, 360f), skipHoldDuration, RotateMode.FastBeyond360)
+                        .SetEase(Ease.Linear)
+                        .SetUpdate(true);
+                }
+
                 skipHoldTime += Time.unscaledDeltaTime;
                 UpdateSkipBar(skipHoldTime / skipHoldDuration);
 
                 if (skipHoldTime >= skipHoldDuration)
                 {
+                    rotationTween.Kill(); // Falls noch aktiv
                     CloseTutorial();
                 }
             }
