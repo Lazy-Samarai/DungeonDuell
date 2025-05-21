@@ -88,7 +88,7 @@ namespace dungeonduell
             pausePanel.transform.DOScale(0, fadeDuration).SetEase(Ease.InBack).SetUpdate(true);
             _pauseGroup.DOFade(0, fadeDuration).SetUpdate(true).OnComplete(() =>
             {
-                isPaused = false;
+                _isPaused = false;
                 Time.timeScale = 1f;
                 pausePanel.SetActive(false);
                 Time.timeScale = 1f;

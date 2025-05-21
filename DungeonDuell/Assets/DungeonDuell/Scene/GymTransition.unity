@@ -4849,7 +4849,6 @@ MonoBehaviour:
   ConfineCameraToLevelBounds: 1
   ListenToSetConfinerEvents: 1
   TargetCharacter: {fileID: 0}
-  orthographicSize: 12
 --- !u!114 &495569490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5217,31 +5216,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d61e7a32d2ee3844dada35717334f7bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerDataList:
-  - PlayerID: Player1
-    Points: 0
-    Level: 1
-    CoinsForNextLevel: 1
-    WalkSpeed: 6
-    RunSpeed: 10
-    MaxHealth: 50
-    AttackSpeed: 1
-    RemainingLive: 2
-    MetaHp: 200
-    MaxMetaHp: 200
-    CurrentMask: {fileID: 0}
-  - PlayerID: Player2
-    Points: 0
-    Level: 1
-    CoinsForNextLevel: 1
-    WalkSpeed: 6
-    RunSpeed: 10
-    MaxHealth: 50
-    AttackSpeed: 1
-    RemainingLive: 2
-    MetaHp: 200
-    MaxMetaHp: 200
-    CurrentMask: {fileID: 0}
+  playerDataList:
+  - playerID: Player1
+    points: 0
+    level: 1
+    coinsForNextLevel: 1
+    walkSpeed: 6
+    runSpeed: 10
+    maxHealth: 50
+    attackSpeed: 1
+    remainingLive: 2
+    metaHp: 200
+    maxMetaHp: 200
+    currentMask: {fileID: 0}
+  - playerID: Player2
+    points: 0
+    level: 1
+    coinsForNextLevel: 1
+    walkSpeed: 6
+    runSpeed: 10
+    maxHealth: 50
+    attackSpeed: 1
+    remainingLive: 2
+    metaHp: 200
+    maxMetaHp: 200
+    currentMask: {fileID: 0}
   roundCounter: 0
   nextRoundFinal: 0
 --- !u!4 &639944719
@@ -6655,7 +6654,6 @@ MonoBehaviour:
   ConfineCameraToLevelBounds: 1
   ListenToSetConfinerEvents: 1
   TargetCharacter: {fileID: 0}
-  orthographicSize: 0
 --- !u!114 &876391343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7359,7 +7357,7 @@ MonoBehaviour:
   GroupCameraRig: {fileID: 0}
   SplitCameraRig: {fileID: 0}
   MPGUIManager: {fileID: 0}
-  Countdowns: []
+  countdowns: []
   walking:
   - {fileID: 0}
   - {fileID: 0}
@@ -12409,7 +12407,6 @@ MonoBehaviour:
   ConfineCameraToLevelBounds: 1
   ListenToSetConfinerEvents: 1
   TargetCharacter: {fileID: 0}
-  orthographicSize: 0
 --- !u!4 &1538648569
 Transform:
   m_ObjectHideFlags: 0
@@ -16435,7 +16432,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2070367427}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 4
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0.019607844}
@@ -16573,7 +16570,7 @@ Behaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2070367427}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!4 &2070367432
 Transform:
   m_ObjectHideFlags: 0
