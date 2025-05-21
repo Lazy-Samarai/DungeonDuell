@@ -8,6 +8,7 @@ using DG.Tweening;
 using MoreMountains.TopDownEngine;
 using System;
 using System.Drawing.Printing;
+using UnityEngine.SceneManagement;
 
 namespace dungeonduell
 {
@@ -41,6 +42,11 @@ namespace dungeonduell
         private bool isSkipPressed = false;
         private Tween rotationTween;
         private bool rotationStarted = false;
+
+        [Header("Scene Transition")]
+        public bool transitionOnClose = false;
+        [Tooltip("Index aus Build Settings")]
+        public int targetSceneIndex = -1;
 
         private DungeonPhaseInput inputActions;
 
@@ -78,9 +84,11 @@ namespace dungeonduell
         {
             inputActions.Enable();
             ShowPage(currentPageIndex, instant: true);
+            /*
             var rect = canvasGroup.GetComponent<RectTransform>();
             rect.anchoredPosition = new Vector2(0, 800); // Startposition außerhalb
-            rect.DOAnchorPosY(-540, 1f).SetEase(Ease.OutCubic);
+            rect.DOAnchorPosY(-540, 2f).SetEase(Ease.OutCubic);
+            */
         }
 
         private void OnDisable()
@@ -145,7 +153,7 @@ namespace dungeonduell
             else
             {
                 isTransitioning = true;
-                canvasGroup.DOFade(0, 0.25f).OnComplete(() =>
+                canvasGroup.DOFade(0, 0f).OnComplete(() =>
                 {
                     ApplyPage(index);
                     canvasGroup.DOFade(1, 0.25f).OnComplete(() =>
@@ -185,10 +193,12 @@ namespace dungeonduell
 
         void CloseTutorial()
         {
-            canvasGroup.DOFade(0, 0.25f).OnComplete(() =>
+            canvasGroup.DOFade(0, 1f).OnComplete(() =>
             {
                 gameObject.SetActive(false);
                 ResetTutorial();
+
+                SceneManager.LoadScene(targetSceneIndex);
 
             });
         }

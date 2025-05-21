@@ -12,6 +12,9 @@ namespace dungeonduell
 
         public GameObject tutorialSlideshow;
 
+        [Tooltip("Index aus Build Settings")]
+        public int targetSceneIndex = -1;
+
         private void Start()
         {
             /* Vorhänge öffnen beim Start
@@ -31,6 +34,10 @@ namespace dungeonduell
                 {
                     tutorialSlideshow.SetActive(true);
                     return;
+                }
+                else
+                {
+                    SceneManager.LoadScene(targetSceneIndex);
                 }
             });
         }
