@@ -77,14 +77,10 @@ namespace dungeonduell
         private void OnEnable()
         {
             inputActions.Enable();
-
-            if (!OptionDataManager.Instance.showTutorial)
-            {
-                gameObject.SetActive(false);
-                return;
-            }
-
             ShowPage(currentPageIndex, instant: true);
+            var rect = canvasGroup.GetComponent<RectTransform>();
+            rect.anchoredPosition = new Vector2(0, 800); // Startposition auﬂerhalb
+            rect.DOAnchorPosY(-540, 1f).SetEase(Ease.OutCubic);
         }
 
         private void OnDisable()
@@ -144,6 +140,7 @@ namespace dungeonduell
             {
                 ApplyPage(index);
                 canvasGroup.alpha = 1;
+
             }
             else
             {
