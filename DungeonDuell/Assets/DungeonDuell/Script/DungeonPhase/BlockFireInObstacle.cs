@@ -1,40 +1,34 @@
-using System.Collections;
-using System.Collections.Generic;
+using MoreMountains.TopDownEngine;
 using UnityEngine;
 
 namespace dungeonduell
 {
     public class BlockFireInObstacle : MonoBehaviour
     {
-        int colldingCount;
-        MoreMountains.TopDownEngine.ProjectileWeapon projectileWeapon;
-        void Start()
+        private int _colldingCount;
+        private ProjectileWeapon _projectileWeapon;
+
+        private void Start()
         {
-            projectileWeapon = GetComponent<MoreMountains.TopDownEngine.ProjectileWeapon>();
+            _projectileWeapon = GetComponent<ProjectileWeapon>();
         }
 
-        void OnTriggerEnter2D(Collider2D collision)
+        private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.gameObject.layer == 8)
             {
-                colldingCount++;
-                projectileWeapon.InputAuthorized = false;
+                _colldingCount++;
+                _projectileWeapon.InputAuthorized = false;
             }
-
-
         }
-        void OnTriggerExit2D(Collider2D collision)
+
+        private void OnTriggerExit2D(Collider2D collision)
         {
             if (collision.gameObject.layer == 8)
             {
-                colldingCount--;
-                if (colldingCount <= 0)
-                {
-                    projectileWeapon.InputAuthorized = true;
-                }
-
+                _colldingCount--;
+                if (_colldingCount <= 0) _projectileWeapon.InputAuthorized = true;
             }
-
         }
     }
 }

@@ -1,86 +1,82 @@
-using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.EventSystems;
 using MoreMountains.TopDownEngine;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 namespace dungeonduell
 {
     public class DisplayCardController : MonoBehaviour
     {
-        private PlayerInput playerInput;
-        private DisplayCard displayCard;
-        private CardToHand cardToHand;
+        private CardToHand _cardToHand;
+        private DisplayCard _displayCard;
+        private PlayerInput _playerInput;
 
-        void Start()
+        private void Start()
         {
-            displayCard = GetComponent<DisplayCard>();
-            cardToHand = GetComponentInParent<CardToHand>();
+            _displayCard = GetComponent<DisplayCard>();
+            _cardToHand = GetComponentInParent<CardToHand>();
 
-            if (displayCard == null || cardToHand == null)
+            if (_displayCard == null || _cardToHand == null)
             {
-                Debug.LogError($"DisplayCardController benötigt DisplayCard & CardToHand auf {gameObject.name}");
+                Debug.LogError($"DisplayCardController benoetigt DisplayCard & CardToHand auf {gameObject.name}");
                 return;
             }
 
-            playerInput = FindCorrectPlayerInput();
+            _playerInput = FindCorrectPlayerInput();
 
-            if (playerInput != null)
-            {
-                playerInput.actions["Submit"].performed += OnSubmitPressed;
-            }
+            if (_playerInput != null)
+                _playerInput.actions["Submit"].performed += OnSubmitPressed;
             else
-            {
-                Debug.LogError($"Kein passendes PlayerInput-Objekt für {gameObject.name} gefunden!");
-            }
+                Debug.LogError($"Kein passendes PlayerInput-Objekt fuer {gameObject.name} gefunden!");
         }
 
-        void OnDestroy()
+        private void OnDestroy()
         {
-            if (playerInput != null)
-            {
-                playerInput.actions["Submit"].performed -= OnSubmitPressed;
-            }
+            if (_playerInput != null) _playerInput.actions["Submit"].performed -= OnSubmitPressed;
         }
 
         private void OnSubmitPressed(InputAction.CallbackContext context)
         {
-            if (EventSystem.current.currentSelectedGameObject == gameObject && IsActivePlayer())
+            // Otherwise the focused element is selected instead the one clicked by Mouse
+            if (context.control.device is not Mouse)
             {
-                displayCard.OnPointerClick(null);
-                DDCodeEventHandler.Trigger_CardSelected(displayCard);
+                if (EventSystem.current.currentSelectedGameObject == gameObject && IsActivePlayer())
+                {
+                    _displayCard.OnPointerClick(null);
+                    DdCodeEventHandler.Trigger_CardSelected(_displayCard);
+                }
             }
         }
 
         private PlayerInput FindCorrectPlayerInput()
         {
-            string neededPlayerID = IsPlayer1Card() ? "Player1" : "Player2";
+            var neededPlayerID = IsPlayer1Card() ? "Player1" : "Player2";
 
-            foreach (var player in FindObjectsOfType<PlayerInput>())
+            foreach (var player in FindObjectsByType<PlayerInput>(FindObjectsSortMode.None))
             {
                 var playerManager = player.GetComponent<InputSystemManagerEventsBased>();
-                if (playerManager != null && playerManager.PlayerID == neededPlayerID)
-                {
-                    return player;
-                }
+                if (playerManager != null && playerManager.PlayerID == neededPlayerID) return player;
             }
+
             return null;
         }
 
         private bool IsPlayer1Card()
         {
-            Transform parent = transform;
+            var parent = transform;
             while (parent != null)
             {
                 if (parent.name == "CanvasPlayer_1") return true;
                 if (parent.name == "CanvasPlayer_2") return false;
                 parent = parent.parent;
             }
+
             return true;
         }
 
         private bool IsActivePlayer()
         {
-            var turnManager = FindObjectOfType<TurnManager>();
+            var turnManager = FindFirstObjectByType<TurnManager>();
             return (turnManager.isPlayer1Turn && IsPlayer1Card()) || (!turnManager.isPlayer1Turn && !IsPlayer1Card());
         }
     }

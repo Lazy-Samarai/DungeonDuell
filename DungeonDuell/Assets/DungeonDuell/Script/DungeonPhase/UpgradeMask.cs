@@ -1,8 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Drawing.Printing;
 using MoreMountains.TopDownEngine;
+using Spine.Unity;
 using UnityEngine;
 
 namespace dungeonduell
@@ -11,18 +9,19 @@ namespace dungeonduell
     [Serializable]
     public class UpgradeMask : MaskBase
     {
-        [SerializeField] LevelUpOptions levelUpOptions;
-        [SerializeField] int upgradeAmount;
+        [SerializeField] private LevelUpOptions levelUpOptions;
+        [SerializeField] private int upgradeAmount;
+        [SerializeField] private int skinId;
+
         protected override bool Apply(string playerID)
         {
-            Debug.Log("Apply");
-            DDCodeEventHandler.Trigger_PlayerUpgrade(levelUpOptions,playerID,upgradeAmount);
+            DdCodeEventHandler.Trigger_PlayerUpgradeWithMask(levelUpOptions, playerID, upgradeAmount, skinId);
             return true;
         }
+
         protected override bool Discharge(string playerID)
         {
-            Debug.Log("Discharging");
-            DDCodeEventHandler.Trigger_PlayerUpgrade(levelUpOptions,playerID,upgradeAmount*-1);
+            DdCodeEventHandler.Trigger_PlayerUpgradeWithMask(levelUpOptions, playerID, upgradeAmount * -1, 0);
             return base.Discharge(playerID);
         }
     }

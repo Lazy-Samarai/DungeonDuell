@@ -1,167 +1,90 @@
-using System;
-using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
+using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 namespace dungeonduell
 {
-    public class DisplayCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, ISelectHandler, IDeselectHandler
+    public class DisplayCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler,
+        ISelectHandler, IDeselectHandler
     {
         public Card card;
         public CardToHand cardToHand;
         public Transform handPanel;
 
-        [Header("UI References")]
-        public TextMeshProUGUI nameText;
-        public Image HexImage;
-        public DoorIndicator cardDirectionIndicator;
-        public GameObject MonsterRoomIcon;
-        public GameObject TreasureRoomIcon;
-        public GameObject normalBG;
-        public GameObject enemyBG;
-        public GameObject lootBG;
-
-        public GameObject Frame;
+        [Header("UI References")] public TextMeshProUGUI nameText;
+        public DoorIndicator cardDirectionIndicator1;
+        public DoorIndicator cardDirectionIndicator2;
         public GameObject tooltip;
 
-        [Header("Hover-Effekt")]
-        public Vector3 hoverScale = new Vector3(1.2f, 1.2f, 1f);
-        public Vector3 hoverOffset = new Vector3(0f, 20f, 0f);
-        public Vector3 sideOffset = new Vector3(30f, 0f, 0f);
+        [Header("Hover-Effekt")] public Vector3 hoverScale = new(1.2f, 1.2f, 1f);
+        public Vector3 hoverOffset = new(0f, 20f, 0f);
+        public Vector3 sideOffset = new(30f, 0f, 0f);
 
-        private Vector3 originalScale;
-        private Vector3 originalPosition;
-        private Quaternion originalRotation;
-        private Vector3 originalLeftPosition;
-        private Vector3 originalRightPosition;
 
-        
         [SerializeField] private Sprite[] spritesFullCard;
+        private Vector3 _originalLeftPosition;
+        private Vector3 _originalPosition;
+        private Vector3 _originalRightPosition;
+        private Quaternion _originalRotation;
 
-        void Start()
+        private Vector3 _originalScale;
+
+        private Selectable _selectable;
+
+        private void Start()
         {
+            _selectable = GetComponent<Selectable>();
             if (handPanel == null)
             {
-                CardToHand cth = GetComponentInParent<CardToHand>();
+                var cth = GetComponentInParent<CardToHand>();
                 if (cth != null)
-                {
                     handPanel = cth.handPanel;
-                }
                 else
-                {
                     Debug.LogError("Kein CardToHand im Parent gefunden. HandPanel kann nicht ermittelt werden!");
-                }
             }
-            originalScale = transform.localScale;
-            originalPosition = transform.localPosition;
-            originalRotation = transform.localRotation;
 
-            int index = transform.GetSiblingIndex();
-            Transform parent = transform.parent;
+            _originalScale = transform.localScale;
+            _originalPosition = transform.localPosition;
+            _originalRotation = transform.localRotation;
+
+
+            var parent = transform.parent;
 
             if (parent != null)
             {
-                if (index > 0)
+                if (_selectable.navigation.selectOnLeft != null)
                 {
-                    Transform leftNeighbor = parent.GetChild(index - 1);
-                    originalLeftPosition = leftNeighbor.localPosition;
+                    var leftNeighbor = _selectable.navigation.selectOnLeft.transform;
+                    _originalLeftPosition = leftNeighbor.localPosition;
                 }
-                if (index < parent.childCount - 1)
+
+                if (_selectable.navigation.selectOnRight != null)
                 {
-                    Transform rightNeighbor = parent.GetChild(index + 1);
-                    originalRightPosition = rightNeighbor.localPosition;
+                    var rightNeighbor = _selectable.navigation.selectOnRight.transform;
+                    _originalRightPosition = rightNeighbor.localPosition;
                 }
             }
 
+            UpdateDirectionIndicator(card.GetAllowedDirection());
             HideTooltip();
-            UpdateCardDisplay();
-
-            // It might make sense to have mutiple Prefab but for now this
-            Image sr = GetComponentInChildren<Image>();
-            
-            normalBG.SetActive((false));
-            switch (card.roomtype)
-            {
-                case RoomType.Generic:
-                    normalBG.SetActive((true));
-                    break;
-                case RoomType.Enemy:
-                    enemyBG.SetActive((true));
-                    MonsterRoomIcon.SetActive(true);
-                    break;
-                case RoomType.NormalLott:
-                    TreasureRoomIcon.SetActive(true);
-                    lootBG.SetActive(true);
-                    break;
-                default:
-                    normalBG.SetActive((true));
-                    break;
-            }
         }
 
-        public void UpdateCardDisplay()
+        // **NEU: Hover deaktivieren, wenn Karte mit Controller abgewählt wird**
+        public void OnDeselect(BaseEventData eventData)
         {
-            if (card != null)
-            {
-                if (nameText != null)
-                    nameText.text = card.cardName;
-
-                if (cardDirectionIndicator != null)
-                {
-                    bool[] allowedDoors = card.GetAllowedDirection();
-                    cardDirectionIndicator.SetDoorIndiactor(allowedDoors);
-                }
-
-                if (HexImage != null && Frame != null)
-                {
-                    Color currentColor = new Color(0.3f, 0.3f, 0.3f);
-                    
-                    normalBG.SetActive((false));
-                    switch (card.roomtype)
-                    {
-                        case RoomType.Enemy:
-                            MonsterRoomIcon.SetActive(true);
-                            TreasureRoomIcon.SetActive(false);
-                            enemyBG?.SetActive(true);
-                            lootBG?.SetActive(false);
-                            normalBG?.SetActive(false);
-                            break;
-
-                        case RoomType.NormalLott:
-                            MonsterRoomIcon?.SetActive(false);
-                            TreasureRoomIcon?.SetActive(true);
-                            enemyBG?.SetActive(false);
-                            lootBG?.SetActive(true);
-                            normalBG?.SetActive(false);
-                            break;
-
-                        default: // Generic oder alles andere
-                            MonsterRoomIcon?.SetActive(false);
-                            TreasureRoomIcon?.SetActive(false);
-                            enemyBG?.SetActive(false);
-                            lootBG?.SetActive(false);
-                            normalBG?.SetActive(true);
-                            break;
-                    }
-
-
-                    if (Frame.GetComponent<Image>() != null)
-                        Frame.GetComponent<Image>().color = currentColor;
-                    HexImage.color = currentColor;
-
-                    if (nameText != null)
-                        nameText.color = currentColor;
-                    MonsterRoomIcon.GetComponent<Image>().color = currentColor;
-                    TreasureRoomIcon.GetComponent<Image>().color = currentColor;
-                }
-            }
+            DeactivateHoverEffect();
         }
 
-        public void UpdateDirectionIndicator(bool[] allowedDoors)
+        // **Klick-Verhalten**
+        public void OnPointerClick(PointerEventData eventData)
         {
-            if (cardDirectionIndicator != null)
-                cardDirectionIndicator.SetDoorIndiactor(allowedDoors);
+            DeactivateHoverEffect();
+            if (cardToHand != null)
+                cardToHand.OnCardClicked(this);
+            else
+                Debug.LogWarning("Keine cardToHand-Referenz in DisplayCard vorhanden!");
         }
 
         // **Hover mit Maus**
@@ -181,28 +104,15 @@ namespace dungeonduell
             ActivateHoverEffect();
         }
 
-        // **NEU: Hover deaktivieren, wenn Karte mit Controller abgewählt wird**
-        public void OnDeselect(BaseEventData eventData)
+        public void UpdateDirectionIndicator(bool[] allowedDoors)
         {
-            DeactivateHoverEffect();
+            cardDirectionIndicator1.SetDoorIndiactor(allowedDoors);
+            cardDirectionIndicator2.SetDoorIndiactor(allowedDoors);
         }
 
-        // **Klick-Verhalten**
-        public void OnPointerClick(PointerEventData eventData)
+        private void ActivateHoverEffect()
         {
-            DeactivateHoverEffect();
-            if (cardToHand != null)
-            {
-                cardToHand.OnCardClicked(this);
-            }
-            else
-            {
-                Debug.LogWarning("Keine cardToHand-Referenz in DisplayCard vorhanden!");
-            }
-        }
-
-        public void ActivateHoverEffect()
-        {
+            transform.SetSiblingIndex(transform.parent.childCount);
             if (transform.parent == handPanel)
             {
                 transform.localScale = hoverScale;
@@ -212,10 +122,7 @@ namespace dungeonduell
                 if (tooltip != null)
                 {
                     var tmp = tooltip.GetComponentInChildren<TextMeshProUGUI>();
-                    if (tmp != null && card != null)
-                    {
-                        tmp.text = card.cardDescription;
-                    }
+                    if (tmp != null && card != null) tmp.text = card.cardDescription;
 
                     AdjustNeighborCards(true);
                 }
@@ -226,9 +133,9 @@ namespace dungeonduell
         {
             if (transform.parent == handPanel)
             {
-                transform.localScale = originalScale;
-                transform.localRotation = originalRotation;
-                transform.localPosition = originalPosition;
+                transform.localScale = _originalScale;
+                transform.localRotation = _originalRotation;
+                transform.localPosition = _originalPosition;
 
                 HideTooltip();
                 AdjustNeighborCards(false);
@@ -237,40 +144,30 @@ namespace dungeonduell
 
         private void AdjustNeighborCards(bool isHovering)
         {
-            Transform parent = transform.parent;
+            var parent = transform.parent;
             if (parent == null) return;
 
-            int currentIndex = transform.GetSiblingIndex();
-
-            if (currentIndex > 0)
+            if (_selectable.navigation.selectOnLeft != null)
             {
-                Transform leftNeighbor = parent.GetChild(currentIndex - 1);
-                if (leftNeighbor.TryGetComponent<DisplayCard>(out var leftCard))
+                var leftNeighbor = _selectable.navigation.selectOnLeft.transform;
+                if (leftNeighbor.TryGetComponent<DisplayCard>(out _))
                 {
                     if (isHovering)
-                    {
-                        leftNeighbor.localPosition = originalLeftPosition - sideOffset;
-                    }
+                        leftNeighbor.localPosition = _originalLeftPosition - sideOffset;
                     else
-                    {
-                        leftNeighbor.localPosition = originalLeftPosition;
-                    }
+                        leftNeighbor.localPosition = _originalLeftPosition;
                 }
             }
 
-            if (currentIndex < parent.childCount - 1)
+            if (_selectable.navigation.selectOnRight != null)
             {
-                Transform rightNeighbor = parent.GetChild(currentIndex + 1);
-                if (rightNeighbor.TryGetComponent<DisplayCard>(out var rightCard))
+                var rightNeighbor = _selectable.navigation.selectOnRight.transform;
+                if (rightNeighbor.TryGetComponent<DisplayCard>(out _))
                 {
                     if (isHovering)
-                    {
-                        rightNeighbor.localPosition = originalRightPosition + sideOffset;
-                    }
+                        rightNeighbor.localPosition = _originalRightPosition + sideOffset;
                     else
-                    {
-                        rightNeighbor.localPosition = originalRightPosition;
-                    }
+                        rightNeighbor.localPosition = _originalRightPosition;
                 }
             }
         }

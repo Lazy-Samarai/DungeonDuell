@@ -1,133 +1,137 @@
 using MoreMountains.TopDownEngine;
 using Spine;
 using Spine.Unity;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace dungeonduell
 {
-    public class PlayerSpineAnimationHandling : MonoBehaviour
+    public class PlayerSpineAnimationHandling : SpineCharacterAnimationHandler, IObserver
     {
-        const string TargetBoneName = "Target"; 
-        private Bone _ikTargetBone;
-        SkeletonAnimation _skeletonAnimation;
+        private const string TargetBoneName = "Target";
         [SpineAnimation] public string running;
         [SpineAnimation] public string runningBackward;
-        [SpineAnimation] public string idle;
-        [SpineAnimation] public string walk;
-        [SpineAnimation] public string death;
-        [SpineAnimation] public string shoot;
+
         [SpineAnimation] public string dash;
+        [SpineAnimation] public string dashReverse;
+
+        [SpineAnimation] public string preWin;
+        [SpineAnimation] public string win;
 
         public float runningMultiply = 1f;
         public float walkMultiply = 1f;
 
-        public bool facingEastRunning = false;
-        public bool runningEast = false;
-        [FormerlySerializedAs("_rigidbody2D")] public CharacterMovement _characterMovement;
+        private Bone _ikTargetBone;
 
+        public ParticleSystemRenderer dashParticlesRenderer;
+        public Material dashParticlesMaterial;
+        public Material dashParticlesBackwardsMaterial;
 
-        // Start is called before the first frame update
-        void Awake()
+        protected override void Awake()
         {
-            _characterMovement = GetComponentInParent<CharacterMovement>();
-         //   _characterOrientation2D  = GetComponentInParent<CharacterOrientation2D>();
-            _skeletonAnimation = GetComponent<SkeletonAnimation>();
-            _ikTargetBone = _skeletonAnimation.Skeleton.FindBone(TargetBoneName); 
+            base.Awake();
+            //   _ikTargetBone = _skeletonAnimation.Skeleton.FindBone(TargetBoneName);
+            SetUpWinAnimation();
             SetToIdle();
+        }
+
+        private void SetUpWinAnimation()
+        {
+            SkeletonAnimation.AnimationState.End += delegate(TrackEntry trackEntry)
+            {
+                if (SkeletonAnimation.AnimationName == preWin)
+                {
+                    SkeletonAnimation.AnimationState.AddAnimation(0, win, true, 0);
+                }
+            };
         }
 
         private void Update()
         {
-            Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mouseWorldPosition.z = 0;
-            
-            if (transform.parent.transform.rotation.y <= 0)
+            if (Camera.main != null)
             {
-                mouseWorldPosition.x *= -1;
+                var mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                mouseWorldPosition.z = 0;
+
+                if (transform.parent.transform.rotation.y <= 0) mouseWorldPosition.x *= -1;
             }
 
             CheckRunningDirection();
 
-            _ikTargetBone.SetLocalPosition(mouseWorldPosition);
-            
-            
-            _skeletonAnimation.skeleton.UpdateWorldTransform(Skeleton.Physics.Update);
-            
+//            _ikTargetBone.SetLocalPosition(mouseWorldPosition);
+
+            SkeletonAnimation.skeleton.UpdateWorldTransform(Skeleton.Physics.Update);
         }
 
-        private void CheckRunningDirection()
+        protected override void UpdateFacing()
         {
-            if (transform.parent.transform.rotation.y <= 0 != facingEastRunning)
-            {
-                facingEastRunning = transform.parent.transform.rotation.y <= 0;
-                UpdateFacing();
-            }
+            dashParticlesRenderer.flip = new Vector3(facingEastRunning ? 1 : 0, 0, 0);
 
-            if (_characterMovement.GetMovement().x >= 0 != runningEast)
-            {
-             
-                runningEast =_characterMovement.GetMovement().x >= 0;
-                UpdateFacing();
-            }
-        }
-
-        public void SetAnimation(string aniName)
-        {
-            _skeletonAnimation.AnimationState.SetAnimation(0, aniName, true);
-        }
-
-        public void SetAnimation(string aniName, bool loop)
-        {
-            _skeletonAnimation.AnimationState.SetAnimation(0, aniName, loop);
-        }
-
-        public void SetAnimation(string aniName, float scale)
-        {
-            TrackEntry trackEntry = _skeletonAnimation.AnimationState.SetAnimation(0, aniName, true);
-            trackEntry.TimeScale = scale;
-        }
-
-        public void UpdateFacing()
-        {
-            if (_skeletonAnimation.state.GetCurrent(0).ToString() == running | _skeletonAnimation.state.GetCurrent(0).ToString() == runningBackward)
-            {
-                SetToRunning();
-            }
-        }
-
-        // Done like this to avoid String reference
-        public void SetToIdle()
-        {
-            SetAnimation(idle);
+            if ((SkeletonAnimation.state.GetCurrent(0).ToString() == running) |
+                (SkeletonAnimation.state.GetCurrent(0).ToString() == runningBackward)) SetToRunning();
         }
 
         public void SetToRunning()
         {
-           bool backwards = facingEastRunning != runningEast;
-           SetAnimation(!backwards ? running : runningBackward, runningMultiply);
+            var backwards = facingEastRunning != runningEast;
+            SetAnimation(!backwards ? running : runningBackward, runningMultiply);
         }
 
-        public void SetToWalk()
+        public override void SetToBaseMovement()
         {
-            SetAnimation(walk, walkMultiply);
+            SetAnimation(baseMoving, walkMultiply);
         }
-        public void SetToDeath()
-        {
-            print("Deeeeeeeeeeeaddddd");
-            SetAnimation(death, false);
-        }
+
         public void SetToDash()
         {
-            SetAnimation(dash);
+            var backwards = facingEastRunning != runningEast;
+            dashParticlesRenderer.material = backwards ? dashParticlesBackwardsMaterial : dashParticlesMaterial;
+            SetAnimation(!backwards ? dash : dashReverse);
         }
 
-        public void SetToShoot()
+        public override void SetToAttacking()
         {
-            _skeletonAnimation.AnimationState.AddAnimation(1,shoot,false,0f);
-            _skeletonAnimation.AnimationState.AddEmptyAnimation(1, 0.25f, 0f);
+            SkeletonAnimation.AnimationState.AddAnimation(1, attack, false, 0f);
+            SkeletonAnimation.AnimationState.AddEmptyAnimation(1, 0.25f, 0f);
         }
 
-     
+        private void SetToWin()
+        {
+            SkeletonAnimation.AnimationState.SetAnimation(0, preWin, false);
+        }
+
+        public void SetSkin(int indexOfSkin)
+        {
+            SkeletonAnimation.skeleton.SetSkin(SkeletonAnimation.skeleton.Data.Skins.Items[indexOfSkin]);
+            SkeletonAnimation.skeleton.SetSlotsToSetupPose();
+        }
+
+        private void HandleGameEnd(string playerID)
+        {
+            if (GetComponentInParent<Character>().PlayerID == playerID)
+            {
+                SetToWin();
+            }
+        }
+
+        void OnEnable()
+        {
+            SubscribeToEvents();
+        }
+
+        void OnDisable()
+        {
+            UnsubscribeToAllEvents();
+        }
+
+        public void SubscribeToEvents()
+        {
+            DdCodeEventHandler.weHaveWinner += HandleGameEnd;
+        }
+
+        public void UnsubscribeToAllEvents()
+        {
+            DdCodeEventHandler.weHaveWinner -= HandleGameEnd;
+        }
     }
 }

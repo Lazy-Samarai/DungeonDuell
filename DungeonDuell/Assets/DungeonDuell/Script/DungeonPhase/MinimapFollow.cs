@@ -1,15 +1,15 @@
-using UnityEngine;
 using MoreMountains.TopDownEngine;
 using MoreMountains.Tools;
 using UnityEngine.EventSystems;
 using System.Collections;
+using UnityEngine;
 
 public class MinimapFollow : MonoBehaviour
 {
-    [SerializeField] private bool isPlayer1; // True = Kamera für Player1, False = Kamera für Player2
-    private Transform player;
+    [SerializeField] private bool isPlayer1; // True = Kamera fï¿½r Player1, False = Kamera fï¿½r Player2
+    private Transform _player;
 
-    void Start()
+    private void Start()
     {
         StartCoroutine(StartLate());
         // Findet alle Charaktere in der Szene
@@ -23,35 +23,26 @@ public class MinimapFollow : MonoBehaviour
 
     private void AfterStart()
     {
-        var characters = FindObjectsOfType<Character>();
+        var characters = FindObjectsByType<Character>(FindObjectsSortMode.None);
 
         foreach (var character in characters)
-        {
-            if (character.CharacterType == Character.CharacterTypes.Player) // Nur Spieler-Charaktere berücksichtigen
-            {
-                // Prüft das PlayerID-Feld, um den richtigen Spieler zu finden
+            if (character.CharacterType == Character.CharacterTypes.Player) // Nur Spieler-Charaktere berï¿½cksichtigen
+                // Prï¿½ft das PlayerID-Feld, um den richtigen Spieler zu finden
                 if ((isPlayer1 && character.PlayerID == "Player1") || (!isPlayer1 && character.PlayerID == "Player2"))
                 {
-                    player = character.transform;
-                    Debug.Log(player + " gefunden");
+                    _player = character.transform;
                     break;
                 }
-            }
-        }
 
-        if (player == null)
-        {
-            Debug.LogError($"Kein Spieler gefunden für Minimap-Kamera (isPlayer1: {isPlayer1})");
-        }
+        if (_player == null) Debug.LogError($"Kein Spieler gefunden fï¿½r Minimap-Kamera (isPlayer1: {isPlayer1})");
     }
 
-
-    void LateUpdate()
+    private void LateUpdate()
     {
-        if (player != null)
+        if (_player != null)
         {
-            Vector3 newPosition = player.position;
-            newPosition.z = transform.position.z; // Höhe beibehalten
+            var newPosition = _player.position;
+            newPosition.z = transform.position.z; // Hï¿½he beibehalten
             transform.position = newPosition;
         }
     }
