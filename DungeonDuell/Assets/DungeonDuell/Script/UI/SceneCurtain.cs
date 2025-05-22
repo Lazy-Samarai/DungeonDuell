@@ -7,8 +7,10 @@ namespace dungeonduell
     public class SceneCurtain : MonoBehaviour
     {
         public RectTransform topPanel;
+        private float topPanelPosY = -540f;
         public RectTransform bottomPanel;
-        public float animationDuration = 0.5f;
+        private float bottomPanelPosY = 540f;
+        public float animationDuration = 1f;
 
         public GameObject tutorialSlideshow;
 
@@ -27,8 +29,8 @@ namespace dungeonduell
 
         public void StartTransitionToScene()
         {
-            topPanel.DOAnchorPosY(-540, animationDuration).SetEase(Ease.InOutSine);
-            bottomPanel.DOAnchorPosY(540, animationDuration).SetEase(Ease.InOutSine).OnComplete(() =>
+            topPanel.DOAnchorPosY(topPanelPosY, animationDuration).SetEase(Ease.InOutSine);
+            bottomPanel.DOAnchorPosY(bottomPanelPosY, animationDuration).SetEase(Ease.InOutSine).OnComplete(() =>
             {
                 if (OptionDataManager.Instance.showTutorial)
                 {

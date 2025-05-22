@@ -34,10 +34,9 @@ namespace dungeonduell
         private int currentPageIndex = 0;
 
         [Header("Skip Settings")]
-        public float skipHoldDuration = 2f;
         public Image SkipImage;
         public Image skipProgressBar;
-        public float rotationSpeed = 100f;
+        public float skipHoldDuration = 2f;
         private float skipHoldTime = 0f;
         private bool isSkipPressed = false;
         private Tween rotationTween;
@@ -47,6 +46,10 @@ namespace dungeonduell
         public bool transitionOnClose = false;
         [Tooltip("Index aus Build Settings")]
         public int targetSceneIndex = -1;
+
+        private const float PageFadeDuration = 0.5f;
+        private const float TutorialCloseFadeDuration = 1f;
+        public float rotationSpeed = 100f;
 
         private DungeonPhaseInput inputActions;
 
@@ -58,8 +61,8 @@ namespace dungeonduell
 
             inputActions.CardPhase.RotateR.performed += ctx => NextPage();
             inputActions.CardPhase.RotateL.performed += ctx => PreviousPage();
-            inputActions.CardPhase.Pause.started += ctx => isSkipPressed = true;
-            inputActions.CardPhase.Pause.canceled += ctx =>
+            inputActions.CardPhase.RotateR.started += ctx => isSkipPressed = true;
+            inputActions.CardPhase.RotateR.canceled += ctx =>
             {
                 isSkipPressed = false;
                 skipHoldTime = 0f;
@@ -80,21 +83,6 @@ namespace dungeonduell
 
         }
 
-        private void OnEnable()
-        {
-            inputActions.Enable();
-            ShowPage(currentPageIndex, instant: true);
-            /*
-            var rect = canvasGroup.GetComponent<RectTransform>();
-            rect.anchoredPosition = new Vector2(0, 800); // Startposition außerhalb
-            rect.DOAnchorPosY(-540, 2f).SetEase(Ease.OutCubic);
-            */
-        }
-
-        private void OnDisable()
-        {
-            inputActions.Disable();
-        }
 
         private void Update()
         {
@@ -104,7 +92,7 @@ namespace dungeonduell
                 {
                     rotationStarted = true;
                     rotationTween = SkipImage.transform
-                        .DORotate(new Vector3(0, 0, 360f), skipHoldDuration, RotateMode.FastBeyond360)
+                        .DORotate(new Vector3(0, 0, -360f), skipHoldDuration, RotateMode.FastBeyond360)
                         .SetEase(Ease.Linear)
                         .SetUpdate(true);
                 }
@@ -147,16 +135,19 @@ namespace dungeonduell
             if (instant)
             {
                 ApplyPage(index);
-                canvasGroup.alpha = 1;
+                canvasGroup.DOFade(0, PageFadeDuration).OnComplete(() =>
+                {
+                    canvasGroup.DOFade(1, PageFadeDuration);
+                });
 
             }
             else
             {
                 isTransitioning = true;
-                canvasGroup.DOFade(0, 0f).OnComplete(() =>
+                canvasGroup.DOFade(0, PageFadeDuration).OnComplete(() =>
                 {
                     ApplyPage(index);
-                    canvasGroup.DOFade(1, 0.25f).OnComplete(() =>
+                    canvasGroup.DOFade(1, PageFadeDuration).OnComplete(() =>
                     {
                         isTransitioning = false;
                     });
@@ -193,7 +184,7 @@ namespace dungeonduell
 
         void CloseTutorial()
         {
-            canvasGroup.DOFade(0, 1f).OnComplete(() =>
+            canvasGroup.DOFade(0, TutorialCloseFadeDuration).OnComplete(() =>
             {
                 gameObject.SetActive(false);
                 ResetTutorial();
@@ -213,5 +204,17 @@ namespace dungeonduell
             UpdateSkipBar(0f);
             ShowPage(currentPageIndex, instant: true);
         }
+        private void OnEnable()
+        {
+            inputActions.Enable();
+            canvasGroup.alpha = 0f;
+            ShowPage(currentPageIndex, instant: true);
+        }
+
+        private void OnDisable()
+        {
+            inputActions.Disable();
+        }
+
     }
 }
