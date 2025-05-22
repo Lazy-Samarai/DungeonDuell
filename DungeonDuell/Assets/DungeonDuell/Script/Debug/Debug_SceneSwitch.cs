@@ -14,11 +14,7 @@ namespace dungeonduell
         {
             if (Input.GetKeyDown(switchSceneKey))
             {
-                if (SceneManager.GetActiveScene().buildIndex == 0)
-                {
-                    FindFirstObjectByType<TurnManager>().ActivateAllDevice();
-                }
-
+                FindFirstObjectByType<TurnManager>()?.ActivateAllDevice();
                 SceneManager.LoadScene(targetSceneIndex);
             }
         }
