@@ -28,7 +28,7 @@ namespace dungeonduell
         private void Awake()
         {
             _controls = new DungeonPhaseInput();
-            _controls.CardPhase.Pause.performed += ctx => TogglePause();
+            _controls.CardPhase.Pause.started += ctx => TogglePause();
         }
 
         private void Start()
@@ -61,8 +61,6 @@ namespace dungeonduell
 
         public void OpenPauseMenu()
         {
-            _isPaused = true;
-            Time.timeScale = 1f;
             pausePanel.SetActive(true);
             pausePanel.transform.localScale = Vector3.zero;
             _pauseGroup.alpha = 0;
@@ -79,16 +77,18 @@ namespace dungeonduell
                 if (defaultSelectedButton != null && EventSystem.current != null)
                     EventSystem.current.SetSelectedGameObject(defaultSelectedButton);
             });
+            _isPaused = true;
+            Time.timeScale = 0f;
         }
 
         public void ResumeGame()
         {
+            Time.timeScale = 1f;
+            _isPaused = false;
             pausePanel.transform.DOScale(0, fadeDuration).SetEase(Ease.InBack).SetUpdate(true);
             _pauseGroup.DOFade(0, fadeDuration).SetUpdate(true).OnComplete(() =>
             {
                 pausePanel.SetActive(false);
-                Time.timeScale = 1f;
-                _isPaused = false;
 
                 if (EventSystem.current != null)
                 {
