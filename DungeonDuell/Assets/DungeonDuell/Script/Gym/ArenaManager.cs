@@ -11,10 +11,8 @@ namespace dungeonduell
 {
     public class ArenaManager : MonoBehaviour
     {
-        [SerializeField]
-        private Transform player1Transform;
-        [SerializeField]
-        private Transform player2Transform;
+        [SerializeField] private Transform player1Transform;
+        [SerializeField] private Transform player2Transform;
 
         public Collider2D player1Zone;
         public Collider2D player2Zone;
@@ -24,7 +22,6 @@ namespace dungeonduell
         public string nextSceneName = "CardPhase";
         private Coroutine countdownCoroutine;
 
-        private bool isCountingDown = false;
 
         private void Start()
         {
@@ -42,6 +39,7 @@ namespace dungeonduell
                 {
                     player1Transform = p1.transform;
                 }
+
                 if (p2 != null && player2Transform == null)
                 {
                     player2Transform = p2.transform;
@@ -51,7 +49,7 @@ namespace dungeonduell
             }
         }
 
-            private void Update()
+        private void Update()
         {
             if (player1Transform == null || player2Transform == null) return;
 
@@ -88,6 +86,7 @@ namespace dungeonduell
                 {
                     countdownText.text = Mathf.Ceil(countdown).ToString();
                 }
+
                 yield return new WaitForSeconds(1f);
                 countdown -= 1f;
 
@@ -99,6 +98,7 @@ namespace dungeonduell
                     {
                         countdownText.text = "X";
                     }
+
                     yield break;
                 }
             }

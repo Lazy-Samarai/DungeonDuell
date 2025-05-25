@@ -66,7 +66,6 @@ namespace MoreMountains.TopDownEngine
 
         [SerializeField] private float coastMultiply = 2;
         [SerializeField] private int startCoast = 1;
-        private bool _gameOver;
 
         private int _healthOnUpgrade = HealingPreFinal;
 
@@ -227,9 +226,9 @@ namespace MoreMountains.TopDownEngine
                         MaskBase currentMask = (MaskBase)data.inventory.Content[0];
 
                         if (currentMask != null)
-                        {
                             playerSpineAnimationHandlings[i].SetSkin(((UpgradeMask)currentMask).skinId);
-                        }
+
+                        if (Points[i].Points >= Points[i].CoinsForNextLevel) HandleUpgradable(i);
                     }
         }
 
@@ -278,7 +277,6 @@ namespace MoreMountains.TopDownEngine
             if (WinnerID == "") WinnerID = "Player1";
             DdCodeEventHandler.Trigger_WeHaveWinner(WinnerID);
             yield return new WaitForSeconds(5f);
-            _gameOver = true;
             MMSoundManagerAllSoundsControlEvent.Trigger(MMSoundManagerAllSoundsControlEventTypes.FreeAllLooping);
             TopDownEngineEvent.Trigger(TopDownEngineEventTypes.GameOver, null);
             yield return new WaitForSeconds(0.1f); // Still Press Space to Coutinue  
