@@ -11,7 +11,7 @@ namespace dungeonduell
     {
         [SerializeField] private LevelUpOptions levelUpOptions;
         [SerializeField] private int upgradeAmount;
-        [SerializeField] private int skinId;
+        [SerializeField] public int skinId;
 
         protected override bool Apply(string playerID)
         {

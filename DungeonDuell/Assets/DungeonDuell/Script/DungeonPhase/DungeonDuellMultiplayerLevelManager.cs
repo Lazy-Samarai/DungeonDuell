@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using dungeonduell;
 using MoreMountains.Feedbacks;
+using MoreMountains.InventoryEngine;
 using MoreMountains.Tools;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -195,7 +197,6 @@ namespace MoreMountains.TopDownEngine
                         data.maxHealth = health[i].MaximumHealth;
                         data.attackSpeed = weapon[i].TimeBetweenUses;
 
-
                         // Give remain Hp back to meta 
                         data.metaHp += (int)health[i].CurrentHealth;
                     }
@@ -222,6 +223,13 @@ namespace MoreMountains.TopDownEngine
                         health[i].InitialHealth = Math.Min(data.metaHp, health[i].MaximumHealth);
                         // Upate Player MetaHp
                         data.metaHp = (int)Math.Max(data.metaHp - health[i].MaximumHealth, 0);
+
+                        MaskBase currentMask = (MaskBase)data.inventory.Content[0];
+
+                        if (currentMask != null)
+                        {
+                            playerSpineAnimationHandlings[i].SetSkin(((UpgradeMask)currentMask).skinId);
+                        }
                     }
         }
 
@@ -384,15 +392,6 @@ namespace MoreMountains.TopDownEngine
             foreach (var run in FindObjectsByType<CharacterRun>(FindObjectsSortMode.None))
                 if (run.GetComponent<Character>().PlayerID == PlayerNamebase + i)
                     return run;
-
-            return null;
-        }
-
-        private Character GetPlayerCharacter(int i)
-        {
-            foreach (var character in FindObjectsByType<Character>(FindObjectsSortMode.None))
-                if (character.PlayerID == PlayerNamebase + i)
-                    return character;
 
             return null;
         }
