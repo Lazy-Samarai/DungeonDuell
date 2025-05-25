@@ -56,13 +56,18 @@ namespace dungeonduell
         public int roundCounter;
         public bool nextRoundFinal;
 
+        public bool gymScene = false;
+
         private void Awake()
         {
-            var objs = FindObjectsByType<PlayerDataManager>(FindObjectsSortMode.None);
+            if (!gymScene)
+            {
+                var objs = FindObjectsByType<PlayerDataManager>(FindObjectsSortMode.None);
 
-            if (objs.Length > 1) Destroy(gameObject);
+                if (objs.Length > 1) Destroy(gameObject);
 
-            DontDestroyOnLoad(gameObject);
+                DontDestroyOnLoad(gameObject);
+            }
         }
 
         private void OnEnable()
@@ -95,7 +100,7 @@ namespace dungeonduell
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            if (scene.buildIndex == 1)
+            if (scene.buildIndex == 2)
             {
                 roundCounter++;
                 if (nextRoundFinal)

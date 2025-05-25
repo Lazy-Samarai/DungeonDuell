@@ -35,7 +35,7 @@ namespace dungeonduell
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             // So the map is not seen in Dunegeon Phase
-            if (scene.buildIndex == 1)
+            if (scene.buildIndex == 2)
                 transform.GetChild(0).gameObject.SetActive(false);
             else
                 transform.GetChild(0).gameObject.SetActive(true);
