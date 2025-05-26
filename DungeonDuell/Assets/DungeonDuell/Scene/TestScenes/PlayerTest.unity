@@ -10731,6 +10731,18 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 3c914630-d9c6-47d1-8648-7b8d5a22c551
     m_ActionName: 'CardPhase/Navigation[/DualShock4GamepadHID/leftStick,/DualShock4GamepadHID/dpad]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d858d18f-1581-4499-88be-9325a3bb9b38
+    m_ActionName: 'CardPhase/Back[/DualShock4GamepadHID1/buttonEast,/DualShock4GamepadHID/buttonEast,/Mouse/rightButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b0b637a1-f591-4af1-81bf-f5342742219f
+    m_ActionName: 'CardPhase/Pause[/Keyboard/escape,/DualShock4GamepadHID1/start,/DualShock4GamepadHID/start]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: facc7a30-9bf5-4458-a444-3b84b19a4385
+    m_ActionName: 'CardPhase/Cancel[/Keyboard/escape,/DualShock4GamepadHID1/buttonEast,/DualShock4GamepadHID/buttonEast]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard
   m_DefaultActionMap: DungeonPhase
@@ -13127,6 +13139,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1594851653}
+  - component: {fileID: 1594851654}
   m_Layer: 0
   m_Name: MultiplayerCameras --------------------------------------------------------
   m_TagString: Untagged
@@ -13154,6 +13167,18 @@ Transform:
   - {fileID: 1724419669}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1594851654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1594851652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae2949c52eb4bf94f9764b37ffd2fb70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1598808996
 GameObject:
   m_ObjectHideFlags: 0
