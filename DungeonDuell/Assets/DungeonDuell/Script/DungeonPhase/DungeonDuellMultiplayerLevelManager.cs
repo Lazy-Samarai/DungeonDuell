@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using dungeonduell;
 using MoreMountains.Feedbacks;
+using MoreMountains.InventoryEngine;
 using MoreMountains.Tools;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -64,7 +66,6 @@ namespace MoreMountains.TopDownEngine
 
         [SerializeField] private float coastMultiply = 2;
         [SerializeField] private int startCoast = 1;
-        private bool _gameOver;
 
         private int _healthOnUpgrade = HealingPreFinal;
 
@@ -195,7 +196,6 @@ namespace MoreMountains.TopDownEngine
                         data.maxHealth = health[i].MaximumHealth;
                         data.attackSpeed = weapon[i].TimeBetweenUses;
 
-
                         // Give remain Hp back to meta 
                         data.metaHp += (int)health[i].CurrentHealth;
                     }
@@ -222,6 +222,13 @@ namespace MoreMountains.TopDownEngine
                         health[i].InitialHealth = Math.Min(data.metaHp, health[i].MaximumHealth);
                         // Upate Player MetaHp
                         data.metaHp = (int)Math.Max(data.metaHp - health[i].MaximumHealth, 0);
+
+                        MaskBase currentMask = (MaskBase)data.inventory.Content[0];
+
+                        if (currentMask != null)
+                            playerSpineAnimationHandlings[i].SetSkin(((UpgradeMask)currentMask).skinId);
+
+                        if (Points[i].Points >= Points[i].CoinsForNextLevel) HandleUpgradable(i);
                     }
         }
 
@@ -270,7 +277,6 @@ namespace MoreMountains.TopDownEngine
             if (WinnerID == "") WinnerID = "Player1";
             DdCodeEventHandler.Trigger_WeHaveWinner(WinnerID);
             yield return new WaitForSeconds(5f);
-            _gameOver = true;
             MMSoundManagerAllSoundsControlEvent.Trigger(MMSoundManagerAllSoundsControlEventTypes.FreeAllLooping);
             TopDownEngineEvent.Trigger(TopDownEngineEventTypes.GameOver, null);
             yield return new WaitForSeconds(0.1f); // Still Press Space to Coutinue  
@@ -384,15 +390,6 @@ namespace MoreMountains.TopDownEngine
             foreach (var run in FindObjectsByType<CharacterRun>(FindObjectsSortMode.None))
                 if (run.GetComponent<Character>().PlayerID == PlayerNamebase + i)
                     return run;
-
-            return null;
-        }
-
-        private Character GetPlayerCharacter(int i)
-        {
-            foreach (var character in FindObjectsByType<Character>(FindObjectsSortMode.None))
-                if (character.PlayerID == PlayerNamebase + i)
-                    return character;
 
             return null;
         }

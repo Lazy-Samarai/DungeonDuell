@@ -17,7 +17,6 @@ namespace dungeonduell
         public string nextSceneName = "CardPhase";
         private Coroutine countdownCoroutine;
 
-        private bool isCountingDown = false;
 
         private void Start()
         {
