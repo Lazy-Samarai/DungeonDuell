@@ -14,6 +14,9 @@ namespace dungeonduell
 
         public static OptionDataManager Instance;
 
+        [FormerlySerializedAs("ShowTutorial")]
+        public bool showTutorial = true;
+
         // Neue Settings f�r das Optionsmen�
         [FormerlySerializedAs("Volume")] public float volume = 1f;
         public AudioMixer audioMixer;
@@ -45,6 +48,12 @@ namespace dungeonduell
         void Start()
         {
             ApplyLanguageSetting();
+        }
+
+        public void SetShowTutorial(bool show)
+        {
+            showTutorial = show;
+            Debug.Log("Tutrorial Show is" + show);
         }
 
         public void SetVolume(float volume)
