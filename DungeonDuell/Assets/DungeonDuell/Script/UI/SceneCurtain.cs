@@ -14,12 +14,11 @@ namespace dungeonduell
 
         public GameObject tutorialSlideshow;
 
-        [Tooltip("Index aus Build Settings")]
-        public int targetSceneIndex = -1;
+        [Tooltip("Index aus Build Settings")] public int targetSceneIndex = -1;
 
         private void Start()
         {
-            /* Vorhänge öffnen beim Start
+            /* Vorhï¿½nge ï¿½ffnen beim Start
             topPanel.anchoredPosition = new Vector2(0, 0);
             bottomPanel.anchoredPosition = new Vector2(0, 0);
 
@@ -32,7 +31,7 @@ namespace dungeonduell
             topPanel.DOAnchorPosY(topPanelPosY, animationDuration).SetEase(Ease.InOutSine);
             bottomPanel.DOAnchorPosY(bottomPanelPosY, animationDuration).SetEase(Ease.InOutSine).OnComplete(() =>
             {
-                if (OptionDataManager.Instance.showTutorial)
+                if (FindFirstObjectByType<OptionDataManager>().showTutorial)
                 {
                     tutorialSlideshow.SetActive(true);
                     return;
