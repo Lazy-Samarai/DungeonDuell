@@ -6,6 +6,8 @@ using UnityEngine;
 using TMPro;
 using MoreMountains.TopDownEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.InputSystem.Users;
 using UnityEngine.Serialization;
 using UnityEngine.Localization.Components;
 using UnityEngine.Localization.SmartFormat.PersistentVariables;
@@ -40,10 +42,13 @@ namespace dungeonduell
         private const string TextEntryStartIn = "Start_In";
         private const string TextEntryNextPlayer = "Next_Player";
 
+
         private void Start()
         {
             _timeStart = Time.time;
             InitializeTurn();
+
+            InputUser.onChange += SetDevicesActivation;
         }
 
         private void Update()
@@ -61,6 +66,15 @@ namespace dungeonduell
         private void OnDisable()
         {
             UnsubscribeToAllEvents();
+            try
+            {
+                ChangeActivateDevice(playerInputs[1].user.pairedDevices[0], true);
+                ChangeActivateDevice(playerInputs[0].user.pairedDevices[0], true);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
 
         public void SubscribeToEvents()
@@ -73,6 +87,8 @@ namespace dungeonduell
         {
             DdCodeEventHandler.NextPlayerTurn -= EndPlayerTurn;
             DdCodeEventHandler.PlayedAllCards -= SetPlayerCardsPlayed;
+
+            InputUser.onChange -= SetDevicesActivation;
         }
 
         private void InitializeTurn()
@@ -81,6 +97,21 @@ namespace dungeonduell
             playerTurnText.SetEntry(TextEntryNextPlayer);
             SetPlayerInText();
 
+            ActivateAllDevice();
+            SetDevicesActivation();
+
+            playerTurnText.gameObject.SetActive(true);
+            pressAnyKeyText.gameObject.SetActive(true);
+            ToggleHandVisibility(false, false);
+        }
+
+        private void SetDevicesActivation(InputUser i, InputUserChange iu, InputDevice id)
+        {
+            SetDevicesActivation();
+        }
+
+        private void SetDevicesActivation()
+        {
             try
             {
                 ChangeActivateDevice(playerInputs[1].user.pairedDevices[0], !isPlayer1Turn);
@@ -90,11 +121,6 @@ namespace dungeonduell
             {
                 Debug.LogWarning("It seems not enough Input devices for all player were paired.");
             }
-
-
-            playerTurnText.gameObject.SetActive(true);
-            pressAnyKeyText.gameObject.SetActive(true);
-            ToggleHandVisibility(false, false);
         }
 
         private void SetPlayerInText()
@@ -230,6 +256,9 @@ namespace dungeonduell
         {
             if (on)
             {
+                // It should be noted that this could be not the best way.Usually you would call a (De)Activate
+                // Input Method the player self. But in this cases the Ui is still controlled per the Controller
+                // so it is done like this instead unless the 
                 InputSystem.EnableDevice(device);
             }
             else

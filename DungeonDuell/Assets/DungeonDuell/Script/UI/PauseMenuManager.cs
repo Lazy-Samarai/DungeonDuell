@@ -1,15 +1,16 @@
-using DG.Tweening;
-using MoreMountains.TopDownEngine;
 using UnityEngine;
-using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
+using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
+using MoreMountains.TopDownEngine;
 
 namespace dungeonduell
 {
     public class PauseMenuManager : MonoBehaviour
     {
         [Header("Panels & Buttons")] public GameObject pausePanel;
-
         public GameObject defaultSelectedButton;
         public GameObject optionsPanel;
         public GameObject tutorialPanel;
@@ -54,7 +55,6 @@ namespace dungeonduell
 
         private void TogglePause()
         {
-            Debug.Log("Pause Input");
             if (!_isPaused) OpenPauseMenu();
             else ResumeGame();
         }
@@ -88,6 +88,8 @@ namespace dungeonduell
             pausePanel.transform.DOScale(0, fadeDuration).SetEase(Ease.InBack).SetUpdate(true);
             _pauseGroup.DOFade(0, fadeDuration).SetUpdate(true).OnComplete(() =>
             {
+                _isPaused = false;
+                Time.timeScale = 1f;
                 pausePanel.SetActive(false);
 
                 if (EventSystem.current != null)
