@@ -14,7 +14,7 @@ namespace dungeonduell
                 {
                     InputSystem.EnableDevice(playerInput.user.pairedDevices[0]);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     // ignored
                 }
