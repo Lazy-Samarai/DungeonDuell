@@ -108,7 +108,7 @@ namespace dungeonduell
                     _resolutions[i].height == Screen.currentResolution.height)
                 {
                     currentResolutionIndex = i;
-                    Debug.Log(currentResolutionIndex);
+                    //Debug.Log(currentResolutionIndex);
                 }
             }
 

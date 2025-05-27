@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using MoreMountains.InventoryEngine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
@@ -28,10 +29,10 @@ namespace dungeonduell
 
         [FormerlySerializedAs("MaxMetaHp")] public int maxMetaHp = 100;
 
-        [FormerlySerializedAs("CurrentMask")] public MaskBase currentMask;
+        [FormerlySerializedAs("CurrentMask")] public Inventory inventory;
 
         public PlayerData(string playerID, int points, int level, int coinsForNextLevel, float walkSpeed,
-            float runSpeed, float health, float attackSpeed, int maxMetaHp, MaskBase currentMask)
+            float runSpeed, float health, float attackSpeed, int maxMetaHp, Inventory inventory)
         {
             this.playerID = playerID;
             this.points = points;
@@ -44,7 +45,7 @@ namespace dungeonduell
             this.attackSpeed = attackSpeed;
             this.maxMetaHp = maxMetaHp;
             metaHp = this.maxMetaHp;
-            this.currentMask = currentMask;
+            this.inventory = inventory;
         }
     }
 
@@ -56,13 +57,18 @@ namespace dungeonduell
         public int roundCounter;
         public bool nextRoundFinal;
 
+        public bool gymScene = false;
+
         private void Awake()
         {
-            var objs = FindObjectsByType<PlayerDataManager>(FindObjectsSortMode.None);
+            if (!gymScene)
+            {
+                var objs = FindObjectsByType<PlayerDataManager>(FindObjectsSortMode.None);
 
-            if (objs.Length > 1) Destroy(gameObject);
+                if (objs.Length > 1) Destroy(gameObject);
 
-            DontDestroyOnLoad(gameObject);
+                DontDestroyOnLoad(gameObject);
+            }
         }
 
         private void OnEnable()
@@ -95,7 +101,7 @@ namespace dungeonduell
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            if (scene.buildIndex == 1)
+            if (scene.buildIndex == 2)
             {
                 roundCounter++;
                 if (nextRoundFinal)
