@@ -478,7 +478,7 @@ MonoBehaviour:
     remainingLive: 2
     metaHp: 200
     maxMetaHp: 200
-    currentMask: {fileID: 0}
+    inventory: {fileID: 129395054}
   - playerID: Player2
     points: 0
     level: 1
@@ -490,9 +490,10 @@ MonoBehaviour:
     remainingLive: 2
     metaHp: 200
     maxMetaHp: 200
-    currentMask: {fileID: 0}
+    inventory: {fileID: 1483324274}
   roundCounter: 0
   nextRoundFinal: 0
+  gymScene: 0
 --- !u!4 &376974905
 Transform:
   m_ObjectHideFlags: 0
@@ -1033,10 +1034,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -1935,7 +1936,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f59f14b0cd7525648b2ff384931bf41c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  designatedCardScene: 0
+  designatedCardScene: 1
   useDistributorSystem: 1
   firstTime: 1
   cardDistributors:
@@ -3410,7 +3411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f59f14b0cd7525648b2ff384931bf41c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  designatedCardScene: 0
+  designatedCardScene: 1
   useDistributorSystem: 1
   firstTime: 1
   cardDistributors:
@@ -4103,7 +4104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   switchSceneKey: 277
-  targetSceneIndex: 1
+  targetSceneIndex: 2
 --- !u!1 &1702099985
 GameObject:
   m_ObjectHideFlags: 0
