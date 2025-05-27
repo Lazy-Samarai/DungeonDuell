@@ -117,5 +117,12 @@ namespace dungeonduell
         {
             if (weHaveWinner != null) weHaveWinner.Invoke(playerWinner);
         }
+
+        public static event Action GymPhaseFinished;
+
+        public static void Trigger_GymPhaseFinished()
+        {
+            GymPhaseFinished?.Invoke();
+        }
     }
 }

@@ -7,10 +7,11 @@ namespace dungeonduell
     public class SceneCurtain : MonoBehaviour
     {
         public RectTransform topPanel;
-        private float topPanelPosY = -540f;
+        private float topPanelPosY = 540f;
         public RectTransform bottomPanel;
-        private float bottomPanelPosY = 540f;
+        private float bottomPanelPosY = -540f;
         public float animationDuration = 1f;
+        public bool openGym;
 
         public GameObject tutorialSlideshow;
 
@@ -18,18 +19,16 @@ namespace dungeonduell
 
         private void Start()
         {
-            /* Vorh�nge �ffnen beim Start
-            topPanel.anchoredPosition = new Vector2(0, 0);
-            bottomPanel.anchoredPosition = new Vector2(0, 0);
-
-            topPanel.DOAnchorPosY(540, animationDuration).SetEase(Ease.InOutSine);
-            bottomPanel.DOAnchorPosY(-540, animationDuration).SetEase(Ease.InOutSine);*/
+            if (openGym)
+            {
+                OpenCurtain();
+            }
         }
 
         public void StartTransitionToScene()
         {
-            topPanel.DOAnchorPosY(topPanelPosY, animationDuration).SetEase(Ease.InOutSine);
-            bottomPanel.DOAnchorPosY(bottomPanelPosY, animationDuration).SetEase(Ease.InOutSine).OnComplete(() =>
+            topPanel.DOAnchorPosY(bottomPanelPosY, animationDuration).SetEase(Ease.InOutSine);
+            bottomPanel.DOAnchorPosY(topPanelPosY, animationDuration).SetEase(Ease.InOutSine).OnComplete(() =>
             {
                 if (FindFirstObjectByType<OptionDataManager>().showTutorial)
                 {
@@ -41,6 +40,13 @@ namespace dungeonduell
                     SceneManager.LoadScene(targetSceneIndex);
                 }
             });
+        }
+
+
+        public void OpenCurtain()
+        {
+            topPanel.DOAnchorPosY(topPanelPosY, animationDuration).SetEase(Ease.InOutSine);
+            bottomPanel.DOAnchorPosY(bottomPanelPosY, animationDuration).SetEase(Ease.InOutSine);
         }
     }
 }

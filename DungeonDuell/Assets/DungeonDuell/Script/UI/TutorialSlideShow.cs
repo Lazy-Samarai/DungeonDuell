@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using TMPro;
@@ -20,6 +20,8 @@ namespace dungeonduell
             public LocalizedString localizedTitle;
             public LocalizedString localizedDescription;
             public LocalizedSprite localizedImage;
+
+            public GameObject additionalUI; // z. B. Button, Pfeile, Steuerungshinweise
         }
 
         [Header("UI References")]
@@ -108,6 +110,7 @@ namespace dungeonduell
             }
         }
 
+
         void UpdateSkipBar(float progress)
         {
             if (skipProgressBar != null)
@@ -161,6 +164,12 @@ namespace dungeonduell
         {
             var page = pages[index];
 
+            foreach (var p in pages)
+            {
+                if (p.additionalUI != null)
+                    p.additionalUI.SetActive(false);
+            }
+
             page.localizedTitle.StringChanged += value => titleText.text = value;
             page.localizedDescription.StringChanged += value => descriptionText.text = value;
             page.localizedTitle.RefreshString();
@@ -172,7 +181,13 @@ namespace dungeonduell
                 {
                     illustrationImage.sprite = handle.Result;
                     illustrationImage.enabled = (handle.Result != null);
+
                 };
+            }
+
+            if (page.additionalUI != null)
+            {
+                page.additionalUI.SetActive(true);
             }
         }
 
@@ -186,10 +201,16 @@ namespace dungeonduell
         {
             canvasGroup.DOFade(0, TutorialCloseFadeDuration).OnComplete(() =>
             {
-                gameObject.SetActive(false);
                 ResetTutorial();
 
-                SceneManager.LoadScene(targetSceneIndex);
+                gameObject.SetActive(false);
+
+
+                if(transitionOnClose)
+                {
+                    SceneManager.LoadScene(targetSceneIndex);
+                }
+
 
             });
         }
