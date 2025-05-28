@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
+using Unity.VisualScripting;
 
 namespace dungeonduell
 {
@@ -27,8 +28,8 @@ namespace dungeonduell
 
         public void StartTransitionToScene()
         {
-            topPanel.DOAnchorPosY(bottomPanelPosY, animationDuration).SetEase(Ease.InOutSine);
-            bottomPanel.DOAnchorPosY(topPanelPosY, animationDuration).SetEase(Ease.InOutSine).OnComplete(() =>
+            topPanel.DOAnchorPosY(bottomPanelPosY, animationDuration).SetUpdate(true).SetEase(Ease.InOutSine);
+            bottomPanel.DOAnchorPosY(topPanelPosY, animationDuration).SetUpdate(true).SetEase(Ease.InOutSine).OnComplete(() =>
             {
                 if (FindFirstObjectByType<OptionDataManager>().showTutorial)
                 {
@@ -45,8 +46,27 @@ namespace dungeonduell
 
         public void OpenCurtain()
         {
-            topPanel.DOAnchorPosY(topPanelPosY, animationDuration).SetEase(Ease.InOutSine);
-            bottomPanel.DOAnchorPosY(bottomPanelPosY, animationDuration).SetEase(Ease.InOutSine);
+            topPanel.DOAnchorPosY(topPanelPosY, animationDuration).SetUpdate(true).SetEase(Ease.InOutSine);
+            bottomPanel.DOAnchorPosY(bottomPanelPosY, animationDuration).SetUpdate(true).SetEase(Ease.InOutSine);
+        }
+
+        public void CloseCurtain()
+        {
+            topPanel.DOAnchorPosY(bottomPanelPosY, animationDuration).SetUpdate(true).SetEase(Ease.InOutSine);
+            bottomPanel.DOAnchorPosY(topPanelPosY, animationDuration).SetUpdate(true).SetEase(Ease.InOutSine).OnComplete(() =>
+            {
+                    tutorialSlideshow.SetActive(true);
+            });
+        }
+
+        private void OnEnable()
+        {
+            DdCodeEventHandler.TutorialDone += OpenCurtain;
+        }
+
+        private void OnDisable()
+        {
+            DdCodeEventHandler.TutorialDone -= OpenCurtain;
         }
     }
 }

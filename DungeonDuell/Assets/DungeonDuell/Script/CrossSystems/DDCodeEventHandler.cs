@@ -124,5 +124,12 @@ namespace dungeonduell
         {
             GymPhaseFinished?.Invoke();
         }
+
+        public static event Action TutorialDone;
+
+        public static void Trigger_TutorialDone()
+        {
+            TutorialDone?.Invoke();
+        }
     }
 }

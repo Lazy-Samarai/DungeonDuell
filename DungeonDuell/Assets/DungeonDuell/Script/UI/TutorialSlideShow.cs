@@ -77,6 +77,7 @@ namespace dungeonduell
 
                 SkipImage.transform
                     .DORotate(Vector3.zero, 0.3f)
+                    .SetUpdate(true)
                     .SetEase(Ease.OutCubic)
                     .SetUpdate(true);
 
@@ -95,6 +96,7 @@ namespace dungeonduell
                     rotationStarted = true;
                     rotationTween = SkipImage.transform
                         .DORotate(new Vector3(0, 0, -360f), skipHoldDuration, RotateMode.FastBeyond360)
+                        .SetUpdate(true)
                         .SetEase(Ease.Linear)
                         .SetUpdate(true);
                 }
@@ -138,19 +140,19 @@ namespace dungeonduell
             if (instant)
             {
                 ApplyPage(index);
-                canvasGroup.DOFade(0, PageFadeDuration).OnComplete(() =>
+                canvasGroup.DOFade(0, PageFadeDuration).SetUpdate(true).OnComplete(() =>
                 {
-                    canvasGroup.DOFade(1, PageFadeDuration);
+                    canvasGroup.DOFade(1, PageFadeDuration).SetUpdate(true);
                 });
 
             }
             else
             {
                 isTransitioning = true;
-                canvasGroup.DOFade(0, PageFadeDuration).OnComplete(() =>
+                canvasGroup.DOFade(0, PageFadeDuration).SetUpdate(true).OnComplete(() =>
                 {
                     ApplyPage(index);
-                    canvasGroup.DOFade(1, PageFadeDuration).OnComplete(() =>
+                    canvasGroup.DOFade(1, PageFadeDuration).SetUpdate(true).OnComplete(() =>
                     {
                         isTransitioning = false;
                     });
@@ -199,14 +201,15 @@ namespace dungeonduell
 
         void CloseTutorial()
         {
-            canvasGroup.DOFade(0, TutorialCloseFadeDuration).OnComplete(() =>
+            canvasGroup.DOFade(0, TutorialCloseFadeDuration).SetUpdate(true).OnComplete(() =>
             {
                 ResetTutorial();
 
                 gameObject.SetActive(false);
 
+                DdCodeEventHandler.Trigger_TutorialDone();
 
-                if(transitionOnClose)
+                if (transitionOnClose)
                 {
                     SceneManager.LoadScene(targetSceneIndex);
                 }
@@ -228,12 +231,14 @@ namespace dungeonduell
         private void OnEnable()
         {
             inputActions.Enable();
+            DdCodeEventHandler.TutorialDone += CloseTutorial;
             canvasGroup.alpha = 0f;
             ShowPage(currentPageIndex, instant: true);
         }
 
         private void OnDisable()
         {
+            DdCodeEventHandler.TutorialDone -= CloseTutorial;
             inputActions.Disable();
         }
 
