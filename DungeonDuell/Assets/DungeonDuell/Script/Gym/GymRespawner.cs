@@ -1,17 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 
 namespace dungeonduell
 {
     public class GymRespawner : BaseSingleSpawner
     {
-        //public GameObject ObjectToDestroy;
+        [Tooltip("Zeit in Sekunden, bis ein Gegner gespawnt wird")]
+        [SerializeField] private float respawnDelay = 3f;
+
         public void GymEnemyRespawn()
         {
+            Invoke(nameof(Spawn), respawnDelay);
+        }
+
+        private void Spawn()
+        {
             SpawnSingleObject(objectToSpawn);
-            //Destroy(ObjectToDestroy);
         }
     }
 }

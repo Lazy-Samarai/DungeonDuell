@@ -1047,10 +1047,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2405699209896045696, guid: 180fe35b70adcf1408380a6df6160816,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2413320224843677218, guid: 180fe35b70adcf1408380a6df6160816,
         type: 3}
       propertyPath: m_Name
       value: TutorialCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 2413320224843677218, guid: 180fe35b70adcf1408380a6df6160816,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4327382521235786302, guid: 180fe35b70adcf1408380a6df6160816,
+        type: 3}
+      propertyPath: transitionOnClose
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5003725403159195776, guid: 180fe35b70adcf1408380a6df6160816,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5034935039909364716, guid: 180fe35b70adcf1408380a6df6160816,
         type: 3}
