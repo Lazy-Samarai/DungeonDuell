@@ -5075,6 +5075,7 @@ GameObject:
   - component: {fileID: 941323431325580120}
   - component: {fileID: 4008837654617038452}
   - component: {fileID: 5711037192045914571}
+  - component: {fileID: 3125256498508051748}
   m_Layer: 24
   m_Name: RiflePlayer_2
   m_TagString: Untagged
@@ -5289,7 +5290,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8386930
   LaserWidth: {x: 0.05, y: 0.05}
-  LaserMaterial: {fileID: 2100000, guid: 421ea2e7b588af74c8232eecbd7b5b46, type: 2}
+  DefaultLaserMaterial: {fileID: 0}
+  TargetLaserMaterial: {fileID: 0}
+  IsPlayer1: 1
 --- !u!114 &941323431325580120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5358,6 +5361,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b8cfc487f3d503241bc43c1960c3aa5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3125256498508051748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490220044263310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eef26aa40fc6d94493b02681137e013, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1806446063217534
