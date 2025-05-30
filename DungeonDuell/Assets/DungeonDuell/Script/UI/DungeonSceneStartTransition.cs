@@ -1,14 +1,11 @@
 using Cinemachine;
-using UnityEngine;
-using UnityEngine.SceneManagement;
 using DG.Tweening;
-using Unity.VisualScripting;
+using UnityEngine;
 
 namespace dungeonduell
 {
-    public class SceneLoading : MonoBehaviour
+    public class DungeonSceneStartTransition : MonoBehaviour
     {
-
         [Header("Camera References")]
         [SerializeField] private CinemachineVirtualCamera player1Cam;
         [SerializeField] private CinemachineVirtualCamera player2Cam;
@@ -17,25 +14,28 @@ namespace dungeonduell
         [SerializeField] private CanvasGroup fadeCanvasGroup;
 
         [Header("Settings")]
-        [SerializeField] private float targetZoom = 0f;
+        [SerializeField] private float startZoom = 80f;
+        [SerializeField] private float targetZoom = 8f;
         [SerializeField] private float zoomDuration = 1f;
         [SerializeField] private float fadeDuration = 0.6f;
         [SerializeField] private float fadeDelay = 0.7f;
-        [SerializeField] private int targetSceneIndex = 2;
 
         private bool transitionStarted = false;
-
-        public void ToTheDungeon()
+        // Start is called once before the first execution of Update after the MonoBehaviour is created
+        void Awake()
         {
-            SceneManager.LoadScene(2);
+            if (player1Cam != null)
+            {
+                player1Cam.m_Lens.OrthographicSize = startZoom;
+            }
+            if (player2Cam != null)
+            {
+                player2Cam.m_Lens.OrthographicSize = startZoom;
+            }
+
         }
 
-        public void ToTheHex()
-        {
-            SceneManager.LoadScene(1);
-        }
-
-        public void ToTheDungeonTransition()
+        void Start()
         {
             if (transitionStarted) return;
             transitionStarted = true;
@@ -60,24 +60,9 @@ namespace dungeonduell
             // Fading
             if (fadeCanvasGroup != null)
             {
-                fadeCanvasGroup.DOFade(1f, fadeDuration)
-                    .SetDelay(fadeDelay)
-                    .OnComplete(() =>
-                    {
-                        SceneManager.LoadScene(targetSceneIndex);
-                    });
+                fadeCanvasGroup.DOFade(0f, fadeDuration)
+                    .SetDelay(fadeDelay);
             }
-        }
-
-
-        private void OnEnable()
-        {
-            DdCodeEventHandler.SceneTransition += ToTheDungeonTransition;
-        }
-
-        private void OnDisable()
-        {
-            DdCodeEventHandler.SceneTransition -= ToTheDungeonTransition;
         }
     }
 }

@@ -160,7 +160,7 @@ namespace dungeonduell
             }
 
             yield return new WaitForSeconds(1f);
-            DdCodeEventHandler.Trigger_GymPhaseFinished();
+            DdCodeEventHandler.Trigger_SceneTransition();
         }
     }
 }

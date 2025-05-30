@@ -25,12 +25,25 @@ namespace dungeonduell
 
         private void OnEnable()
         {
-            DdCodeEventHandler.GymPhaseFinished += StartTransition;
+            DdCodeEventHandler.SceneTransition += StartTransition;
         }
 
         private void OnDisable()
         {
-            DdCodeEventHandler.GymPhaseFinished -= StartTransition;
+            DdCodeEventHandler.SceneTransition -= StartTransition;
+        }
+
+        private void Start()
+        {
+            if (fadeCanvasGroup != null)
+            {
+                fadeCanvasGroup.DOFade(0f, fadeDuration)
+                    .SetDelay(fadeDelay)
+                    .OnComplete(() =>
+                    {
+                        //SceneManager.LoadScene(targetSceneIndex);
+                    });
+            }
         }
 
         public void StartTransition()
