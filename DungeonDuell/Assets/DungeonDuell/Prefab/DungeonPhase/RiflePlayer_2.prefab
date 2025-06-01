@@ -5071,10 +5071,10 @@ GameObject:
   - component: {fileID: 114345180357598506}
   - component: {fileID: 114251315345146356}
   - component: {fileID: -1803590343298730861}
-  - component: {fileID: 6032885677554127453}
   - component: {fileID: 941323431325580120}
   - component: {fileID: 4008837654617038452}
   - component: {fileID: 5711037192045914571}
+  - component: {fileID: 6032885677554127453}
   - component: {fileID: 8230448844655474948}
   m_Layer: 24
   m_Name: RiflePlayer_2
@@ -5269,29 +5269,6 @@ MonoBehaviour:
   CheckMouse: 1
   CheckPrimaryAxis: 1
   CheckSecondaryAxis: 1
---- !u!114 &6032885677554127453
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1490220044263310}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03aaf62627f364a7d92d307729fe738d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Mode: 0
-  PerformRaycast: 1
-  DrawLaser: 1
-  RaycastOriginOffset: {x: 0, y: 0, z: 0}
-  LaserOriginOffset: {x: 0, y: 0, z: 0}
-  LaserMaxDistance: 50
-  LaserCollisionMask:
-    serializedVersion: 2
-    m_Bits: 8386930
-  LaserWidth: {x: 0.05, y: 0.05}
-  LaserMaterial: {fileID: 2100000, guid: 421ea2e7b588af74c8232eecbd7b5b46, type: 2}
 --- !u!114 &941323431325580120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5362,6 +5339,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8cfc487f3d503241bc43c1960c3aa5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6032885677554127453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490220044263310}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03aaf62627f364a7d92d307729fe738d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Mode: 0
+  PerformRaycast: 1
+  DrawLaser: 1
+  RaycastOriginOffset: {x: 0, y: 0, z: 0}
+  LaserOriginOffset: {x: 0, y: 0, z: 0}
+  LaserMaxDistance: 50
+  LaserCollisionMask:
+    serializedVersion: 2
+    m_Bits: 8386930
+  LaserWidth: {x: 0.05, y: 0.05}
+  DefaultLaserMaterial: {fileID: 0}
+  TargetLaserMaterial: {fileID: 0}
+  IsPlayer1: 1
 --- !u!114 &8230448844655474948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5369,13 +5371,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1490220044263310}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3af04c9a19ea59549847e271933e0f27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crosshair: {fileID: 4588754732248120491}
-  aimDistance: 6
+  crosshair: {fileID: 0}
+  aimDistance: 10
 --- !u!1 &1806446063217534
 GameObject:
   m_ObjectHideFlags: 0
@@ -21073,8 +21075,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4588754732248120491}
   - component: {fileID: 5219813626724226859}
-  m_Layer: 10
-  m_Name: Crosshair
+  m_Layer: 26
+  m_Name: Crosshair2
   m_TagString: Crosshair2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21088,13 +21090,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8721795928816245783}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: -0.003, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0.38268343, w: 0.92387956}
+  m_LocalPosition: {x: 5, y: -0.003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4943838447161096}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
 --- !u!212 &5219813626724226859
 SpriteRenderer:
   m_ObjectHideFlags: 0
