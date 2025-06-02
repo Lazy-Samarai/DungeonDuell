@@ -225,7 +225,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300010, guid: 082c310ac59e31e4886d543523aa015e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2d2e468fbb2b53a4084398b05ecab95b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -557,7 +557,6 @@ MonoBehaviour:
   levelUpNowText: {fileID: 594451571744507654}
   canLevelUp: 0
   deadMask: {fileID: 4792492970908136277}
-  winnerScreen: {fileID: 6535510183179943956}
   levelUpPanel: {fileID: 6925360300092289244}
   menuShowing: 0
 --- !u!1 &4804220276458347516
@@ -2069,7 +2068,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300010, guid: 082c310ac59e31e4886d543523aa015e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2d2e468fbb2b53a4084398b05ecab95b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2194,7 +2193,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -2999,10 +2998,20 @@ PrefabInstance:
       propertyPath: m_fontSizeBase
       value: 16
       objectReference: {fileID: 0}
+    - target: {fileID: 6032886994881974626, guid: 246a14deecdfd424abf00bff33586da6,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     - target: {fileID: 7533237862147660355, guid: 246a14deecdfd424abf00bff33586da6,
         type: 3}
       propertyPath: m_text
       value: "\u2190"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7533237862147660355, guid: 246a14deecdfd424abf00bff33586da6,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
       objectReference: {fileID: 0}
     - target: {fileID: 9050789857141430060, guid: 246a14deecdfd424abf00bff33586da6,
         type: 3}
@@ -3189,6 +3198,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UpgradeShow
+      objectReference: {fileID: 0}
+    - target: {fileID: 6032886994881974626, guid: 246a14deecdfd424abf00bff33586da6,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
+    - target: {fileID: 7533237862147660355, guid: 246a14deecdfd424abf00bff33586da6,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
       objectReference: {fileID: 0}
     - target: {fileID: 9050789857141430060, guid: 246a14deecdfd424abf00bff33586da6,
         type: 3}
@@ -3421,6 +3440,11 @@ PrefabInstance:
       propertyPath: m_fontStyle
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6032886994881974626, guid: 246a14deecdfd424abf00bff33586da6,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     - target: {fileID: 7533237862147660355, guid: 246a14deecdfd424abf00bff33586da6,
         type: 3}
       propertyPath: m_text
@@ -3435,6 +3459,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_margin.y
       value: 11.014893
+      objectReference: {fileID: 0}
+    - target: {fileID: 7533237862147660355, guid: 246a14deecdfd424abf00bff33586da6,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
       objectReference: {fileID: 0}
     - target: {fileID: 9050789857141430060, guid: 246a14deecdfd424abf00bff33586da6,
         type: 3}
