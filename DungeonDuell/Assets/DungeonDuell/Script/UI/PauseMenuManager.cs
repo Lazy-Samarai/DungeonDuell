@@ -90,7 +90,10 @@ namespace dungeonduell
             {
                 _isPaused = false;
                 Time.timeScale = 1f;
-                pausePanel.SetActive(false);
+                //pausePanel.SetActive(false);
+                DdCodeEventHandler.Trigger_TutorialDone();
+                //CloseTutorial();
+
 
                 if (EventSystem.current != null)
                 {

@@ -204,7 +204,9 @@ namespace dungeonduell
 
             yield return new WaitForSeconds(1f);
             pressAnyKeyText.SetEntry(TextEntryEntryName);
-            FindFirstObjectByType<SceneLoading>().ToTheDungeon();
+            DdCodeEventHandler.Trigger_SceneTransition();
+            
+            //FindFirstObjectByType<SceneLoading>().ToTheDungeon();
         }
 
         private void SetPlayerCardsPlayed(bool player1)

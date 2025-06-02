@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using TMPro;
@@ -20,6 +20,8 @@ namespace dungeonduell
             public LocalizedString localizedTitle;
             public LocalizedString localizedDescription;
             public LocalizedSprite localizedImage;
+
+            public GameObject additionalUI; // z. B. Button, Pfeile, Steuerungshinweise
         }
 
         [Header("UI References")]
@@ -75,6 +77,7 @@ namespace dungeonduell
 
                 SkipImage.transform
                     .DORotate(Vector3.zero, 0.3f)
+                    .SetUpdate(true)
                     .SetEase(Ease.OutCubic)
                     .SetUpdate(true);
 
@@ -93,6 +96,7 @@ namespace dungeonduell
                     rotationStarted = true;
                     rotationTween = SkipImage.transform
                         .DORotate(new Vector3(0, 0, -360f), skipHoldDuration, RotateMode.FastBeyond360)
+                        .SetUpdate(true)
                         .SetEase(Ease.Linear)
                         .SetUpdate(true);
                 }
@@ -107,6 +111,7 @@ namespace dungeonduell
                 }
             }
         }
+
 
         void UpdateSkipBar(float progress)
         {
@@ -135,19 +140,19 @@ namespace dungeonduell
             if (instant)
             {
                 ApplyPage(index);
-                canvasGroup.DOFade(0, PageFadeDuration).OnComplete(() =>
+                canvasGroup.DOFade(0, PageFadeDuration).SetUpdate(true).OnComplete(() =>
                 {
-                    canvasGroup.DOFade(1, PageFadeDuration);
+                    canvasGroup.DOFade(1, PageFadeDuration).SetUpdate(true);
                 });
 
             }
             else
             {
                 isTransitioning = true;
-                canvasGroup.DOFade(0, PageFadeDuration).OnComplete(() =>
+                canvasGroup.DOFade(0, PageFadeDuration).SetUpdate(true).OnComplete(() =>
                 {
                     ApplyPage(index);
-                    canvasGroup.DOFade(1, PageFadeDuration).OnComplete(() =>
+                    canvasGroup.DOFade(1, PageFadeDuration).SetUpdate(true).OnComplete(() =>
                     {
                         isTransitioning = false;
                     });
@@ -161,6 +166,12 @@ namespace dungeonduell
         {
             var page = pages[index];
 
+            foreach (var p in pages)
+            {
+                if (p.additionalUI != null)
+                    p.additionalUI.SetActive(false);
+            }
+
             page.localizedTitle.StringChanged += value => titleText.text = value;
             page.localizedDescription.StringChanged += value => descriptionText.text = value;
             page.localizedTitle.RefreshString();
@@ -172,7 +183,13 @@ namespace dungeonduell
                 {
                     illustrationImage.sprite = handle.Result;
                     illustrationImage.enabled = (handle.Result != null);
+
                 };
+            }
+
+            if (page.additionalUI != null)
+            {
+                page.additionalUI.SetActive(true);
             }
         }
 
@@ -184,12 +201,19 @@ namespace dungeonduell
 
         void CloseTutorial()
         {
-            canvasGroup.DOFade(0, TutorialCloseFadeDuration).OnComplete(() =>
+            canvasGroup.DOFade(0, TutorialCloseFadeDuration).SetUpdate(true).OnComplete(() =>
             {
-                gameObject.SetActive(false);
                 ResetTutorial();
 
-                SceneManager.LoadScene(targetSceneIndex);
+                gameObject.SetActive(false);
+
+                DdCodeEventHandler.Trigger_TutorialDone();
+
+                if (transitionOnClose)
+                {
+                    SceneManager.LoadScene(targetSceneIndex);
+                }
+
 
             });
         }
@@ -207,12 +231,14 @@ namespace dungeonduell
         private void OnEnable()
         {
             inputActions.Enable();
+            DdCodeEventHandler.TutorialDone += CloseTutorial;
             canvasGroup.alpha = 0f;
             ShowPage(currentPageIndex, instant: true);
         }
 
         private void OnDisable()
         {
+            DdCodeEventHandler.TutorialDone -= CloseTutorial;
             inputActions.Disable();
         }
 

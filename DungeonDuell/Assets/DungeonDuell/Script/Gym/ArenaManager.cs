@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using TMPro;
+using DG.Tweening;
 
 namespace dungeonduell
 {
@@ -16,6 +17,12 @@ namespace dungeonduell
         public TMP_Text countdownText;
         public string nextSceneName = "CardPhase";
         private Coroutine countdownCoroutine;
+
+        [Header("CircleAnim")]
+        public float rotationSpeed = 100f;
+        public bool unscaledTime;
+        private Tween player1Tween;
+        private Tween player2Tween;
 
 
         private void Start()
@@ -50,6 +57,55 @@ namespace dungeonduell
 
             bool player1InZone = player1Zone.bounds.Contains(player1Transform.transform.position);
             bool player2InZone = player2Zone.bounds.Contains(player2Transform.transform.position);
+
+            if (player1InZone)
+            {
+                if (player1Tween == null || !player1Tween.IsActive())
+                {
+                    var duration = 360f / rotationSpeed;
+                    player1Tween = player1Zone.transform
+                        .DORotate(new Vector3(0, 0, -360f), duration, RotateMode.FastBeyond360)
+                        .SetEase(Ease.Linear)
+                        .SetLoops(-1, LoopType.Restart)
+                        .SetUpdate(unscaledTime);
+                }
+                else if (player1Tween.IsPlaying() == false)
+                {
+                    player1Tween.Play(); // Wiederaufnahme, falls pausiert
+                }
+            }
+            else
+            {
+                if (player1Tween != null && player1Tween.IsPlaying())
+                {
+                    player1Tween.Pause(); // Nur pausieren
+                }
+            }
+
+            if (player2InZone)
+            {
+                if (player2Tween == null || !player2Tween.IsActive())
+                {
+                    var duration = 360f / rotationSpeed;
+                    player2Tween = player2Zone.transform
+                        .DORotate(new Vector3(0, 0, -360f), duration, RotateMode.FastBeyond360)
+                        .SetEase(Ease.Linear)
+                        .SetLoops(-1, LoopType.Restart)
+                        .SetUpdate(unscaledTime);
+                }
+                else if (player2Tween.IsPlaying() == false)
+                {
+                    player2Tween.Play();
+                }
+            }
+            else
+            {
+                if (player2Tween != null && player2Tween.IsPlaying())
+                {
+                    player2Tween.Pause();
+                }
+            }
+
 
             if (player1InZone && player2InZone)
             {
@@ -104,7 +160,7 @@ namespace dungeonduell
             }
 
             yield return new WaitForSeconds(1f);
-            UnityEngine.SceneManagement.SceneManager.LoadScene(nextSceneName);
+            DdCodeEventHandler.Trigger_SceneTransition();
         }
     }
 }

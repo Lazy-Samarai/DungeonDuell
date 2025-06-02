@@ -79,7 +79,7 @@ namespace dungeonduell
             _playerInput = GetCurrentPlayerInput();
             if (_playerInput != null)
             {
-                _playerInput.actions["MoveNav"].performed += OnNavigate;
+                _playerInput.actions["Navigation"].performed += OnNavigate;
                 _playerInput.actions["Submit"].performed += OnSubmit;
                 _playerInput.actions["Back"].performed += OnBack;
             }
@@ -92,7 +92,7 @@ namespace dungeonduell
 
             if (_playerInput != null)
             {
-                _playerInput.actions["MoveNav"].performed -= OnNavigate;
+                _playerInput.actions["Navigation"].performed -= OnNavigate;
                 _playerInput.actions["Submit"].performed -= OnSubmit;
                 _playerInput.actions["Back"].performed -= OnBack;
                 _playerInput = null;

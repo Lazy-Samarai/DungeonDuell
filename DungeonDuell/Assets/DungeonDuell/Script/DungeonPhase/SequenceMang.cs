@@ -64,7 +64,8 @@ namespace dungeonduell
 
         public void BackToCardPhase()
         {
-            _sceneLoading.ToTheHex();
+            DdCodeEventHandler.Trigger_SceneTransition();
+            //_sceneLoading.ToTheHex();
         }
 
         public void Reseting()
