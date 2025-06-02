@@ -2,11 +2,12 @@ using System;
 using System.Collections;
 using System.Linq;
 using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 using UnityEngine;
 using TMPro;
 using MoreMountains.TopDownEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.InputSystem.Users;
 using UnityEngine.Serialization;
 using UnityEngine.Localization.Components;
@@ -42,6 +43,8 @@ namespace dungeonduell
         private const string TextEntryStartIn = "Start_In";
         private const string TextEntryNextPlayer = "Next_Player";
 
+        private TweenerCore<Vector2, Vector2, VectorOptions> currentTween;
+        private TweenerCore<Vector2, Vector2, VectorOptions> currentTween2;
 
         private void Start()
         {
@@ -172,8 +175,8 @@ namespace dungeonduell
             handPlayer1.ShowHideDeck(!showForPlayer1);
             handPlayer2.ShowHideDeck(!showForPlayer2);
 
-            SlidePlayerSprite(player1UI, showForPlayer1);
-            SlidePlayerSprite(player2UI, showForPlayer2);
+            SlidePlayerSprite(player1UI, showForPlayer1, true);
+            SlidePlayerSprite(player2UI, showForPlayer2, false);
         }
 
 
@@ -222,21 +225,35 @@ namespace dungeonduell
             return null;
         }
 
-        private void SlidePlayerSprite(GameObject uiElement, bool show, float hiddenY = -550f, float visibleY = 0f)
+        private void SlidePlayerSprite(GameObject uiElement, bool show, bool player1, float hiddenY = -550f,
+            float visibleY = 0f)
         {
+            TweenerCore<Vector2, Vector2, VectorOptions> tween;
             if (uiElement == null) return;
+
+
+            if (player1)
+                currentTween.Complete();
+            else
+                currentTween2.Complete();
 
             var rect = uiElement.GetComponent<RectTransform>();
             if (show)
             {
                 uiElement.SetActive(true);
                 rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, hiddenY);
-                rect.DOAnchorPosY(visibleY, 0.5f).SetEase(Ease.OutCubic); // DOTween
+                tween = rect.DOAnchorPosY(visibleY, 0.5f).SetEase(Ease.OutCubic); // DOTween
             }
             else
             {
-                rect.DOAnchorPosY(hiddenY, 0.5f).SetEase(Ease.InCubic).OnComplete(() => uiElement.SetActive(false));
+                tween = rect.DOAnchorPosY(hiddenY, 0.5f).SetEase(Ease.InCubic)
+                    .OnComplete(() => uiElement.SetActive(false));
             }
+
+            if (player1)
+                currentTween = tween;
+            else
+                currentTween2 = tween;
         }
 
         public void ActivateAllDevice()
