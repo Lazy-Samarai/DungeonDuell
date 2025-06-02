@@ -234,6 +234,7 @@ namespace dungeonduell
         {
             var overriteCurrentDoorDir = new[] { false, false, false, false, false, false };
             var connectionForcing = false;
+            bool hitContested = false;
 
             if (clickedTile == setAbleTiles[^1]) // Hited Contested
             {
@@ -246,6 +247,8 @@ namespace dungeonduell
                         currentDoorDir[i] = true;
                         overriteCurrentDoorDir[i] = true;
                     }
+
+                hitContested = true;
             }
 
             var sourroundCorr = GetSouroundCorr(cellPosition, currentDoorDir);
@@ -257,58 +260,10 @@ namespace dungeonduell
 
                 if (spawnSourroundSetables)
                 {
-                    foreach (var sourrendTilePos in GetSouroundCorr(cellPosition,
-                                 new[] { true, true, true, true, true, true }))
-                    {
-                        var souroundTile = _tilemap.GetTile(sourrendTilePos.Item1);
+                    if(!hitContested) 
+                        SpawnShadowTileOperations(playerMove, cellPosition, clickedTile);
 
-                        if (setAbleTiles.Contains(souroundTile))
-                        {
-                            if (clickedTile != souroundTile)
-                                _tilemap.SetTile(sourrendTilePos.Item1, setAbleTiles[^1]);
-                        }
-                        else if (shadowSetAbleTiles.Contains(souroundTile))
-                        {
-                            var i = Array.FindIndex(setAbleTiles, entity => entity == clickedTile);
-                            if (i == setAbleTiles.Length - 1)
-                                _tilemap.SetTile(sourrendTilePos.Item1, setAbleTiles[^1]);
-                            else if (souroundTile != shadowSetAbleTiles[i])
-                                _tilemap.SetTile(sourrendTilePos.Item1, setAbleTiles[^1]);
-                        }
-
-                        if (souroundTile == resetTile && playerMove)
-                        {
-                            var i = Array.FindIndex(setAbleTiles, entity => entity == clickedTile);
-                            if (i < shadowSetAbleTiles.Length)
-                                _tilemap.SetTile(sourrendTilePos.Item1, shadowSetAbleTiles[i]);
-                        }
-                    }
-
-                    foreach (var sourrendTilePos in GetSouroundCorr(cellPosition, currentDoorDir))
-                    {
-                        var souroundTile = _tilemap.GetTile(sourrendTilePos.Item1);
-
-                        if (souroundTile == resetTile || shadowSetAbleTiles.Contains(souroundTile))
-                        {
-                            SpawnSetAbleTile(setAbleTiles.Contains(clickedTile) ? clickedTile : setAbleTiles[owner - 1],
-                                sourrendTilePos);
-                        }
-                        else
-                        {
-                            var shelledTileCard = cardShelled.FirstOrDefault(x => x.tile == souroundTile);
-                            if (shelledTileCard != null && setAbleTiles.Contains(clickedTile))
-                                SpawnSetAbleTile(
-                                    shelledTileCard.inPlayerRangeTile[Array.IndexOf(setAbleTiles, clickedTile)],
-                                    sourrendTilePos);
-
-                            var shelledTileCardModif =
-                                cardShelled.FirstOrDefault(x => x.inPlayerRangeTile.Contains(souroundTile));
-                            if (shelledTileCardModif != null && setAbleTiles.Contains(clickedTile))
-                                if (Array.IndexOf(setAbleTiles, clickedTile) !=
-                                    Array.IndexOf(shelledTileCardModif.inPlayerRangeTile, souroundTile))
-                                    SpawnSetAbleTile(shelledTileCardModif.inPlayerRangeTile[2], sourrendTilePos);
-                        }
-                    }
+                    SpawnSetAbleOperation(cellPosition, clickedTile, owner,hitContested);
 
                     if (playerMove)
                     {
@@ -345,12 +300,85 @@ namespace dungeonduell
             return false;
         }
 
+        private void SpawnSetAbleOperation(Vector3Int cellPosition, TileBase clickedTile, int owner,bool contestedHit)
+        {
+            foreach (var sourrendTilePos in GetSouroundCorr(cellPosition, currentDoorDir))
+            {
+                var souroundTile = _tilemap.GetTile(sourrendTilePos.Item1);
+                
+                if (souroundTile == resetTile && contestedHit)
+                {
+                    _tilemap.SetTile(sourrendTilePos.Item1, setAbleTiles[owner -1]);
+                }
+                else if (souroundTile == resetTile || shadowSetAbleTiles.Contains(souroundTile))
+                {
+                    if (souroundTile == shadowSetAbleTiles[^1])
+                    {
+                        _tilemap.SetTile(sourrendTilePos.Item1, setAbleTiles[^1]);
+                    }
+                    else
+                    {
+                        SpawnSetAbleTile(setAbleTiles.Contains(clickedTile) ? clickedTile : setAbleTiles[owner - 1],
+                            sourrendTilePos);
+                    }
+                }
+                else
+                {
+                    var shelledTileCard = cardShelled.FirstOrDefault(x => x.tile == souroundTile);
+                    if (shelledTileCard != null && setAbleTiles.Contains(clickedTile))
+                        SpawnSetAbleTile(
+                            shelledTileCard.inPlayerRangeTile[Array.IndexOf(setAbleTiles, clickedTile)],
+                            sourrendTilePos);
+
+                    var shelledTileCardModif =
+                        cardShelled.FirstOrDefault(x => x.inPlayerRangeTile.Contains(souroundTile));
+                    if (shelledTileCardModif != null && setAbleTiles.Contains(clickedTile))
+                        if (Array.IndexOf(setAbleTiles, clickedTile) !=
+                            Array.IndexOf(shelledTileCardModif.inPlayerRangeTile, souroundTile))
+                            SpawnSetAbleTile(shelledTileCardModif.inPlayerRangeTile[2], sourrendTilePos);
+                }
+            }
+        }
+
+        private void SpawnShadowTileOperations(bool playerMove, Vector3Int cellPosition, TileBase clickedTile)
+        {
+            foreach (var sourrendTilePos in GetSouroundCorr(cellPosition,
+                         new[] { true, true, true, true, true, true }))
+            {
+                var souroundTile = _tilemap.GetTile(sourrendTilePos.Item1);
+
+                if (setAbleTiles.Contains(souroundTile))
+                {
+                    if (clickedTile != souroundTile)
+                        _tilemap.SetTile(sourrendTilePos.Item1, setAbleTiles[^1]);
+                }
+                else if (shadowSetAbleTiles.Contains(souroundTile))
+                {
+                    if (souroundTile != shadowSetAbleTiles[^1])
+                    {
+                        var i = Array.FindIndex(setAbleTiles, entity => entity == clickedTile);
+                        if (i == setAbleTiles.Length - 1)
+                            _tilemap.SetTile(sourrendTilePos.Item1, shadowSetAbleTiles[^1]);
+                        else if (souroundTile != shadowSetAbleTiles[i])
+                            _tilemap.SetTile(sourrendTilePos.Item1, shadowSetAbleTiles[^1]);
+                    }
+                       
+                }
+
+                if (souroundTile == resetTile && playerMove)
+                {
+                    var i = Array.FindIndex(setAbleTiles, entity => entity == clickedTile);
+                    if (i < shadowSetAbleTiles.Length)
+                        _tilemap.SetTile(sourrendTilePos.Item1, shadowSetAbleTiles[i]);
+                }
+            }
+        }
+
         private void HandleCountSetDecrease(TileBase clickedTile)
         {
-            if (clickedTile == setAbleTiles[2])
+            if (clickedTile == setAbleTiles[^1])
             {
-                setAbleCount[0]--;
-                setAbleCount[1]--;
+                return;
             }
             else
             {
@@ -378,7 +406,7 @@ namespace dungeonduell
             {
                 if (tileBaseType == setAbleTiles[i])
                 {
-                    if (i < setAbleTiles.Length)
+                    if (i < setAbleTiles.Length -1)
                     {
                         setAbleCount[i]++;
                     }
