@@ -14109,10 +14109,10 @@ MonoBehaviour:
                 m_StringArgument: 
                 m_BoolArgument: 0
               m_CallState: 2
-            - m_Target: {fileID: 3641043158486298760}
-              m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-              m_MethodName: set_enabled
-              m_Mode: 6
+            - m_Target: {fileID: 1498750440386690}
+              m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+              m_MethodName: set_layer
+              m_Mode: 3
               m_Arguments:
                 m_ObjectArgument: {fileID: 0}
                 m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -18995,6 +18995,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6528088653591432593}
   - component: {fileID: 5592333435813369184}
+  - component: {fileID: 543301697331381333}
   m_Layer: 10
   m_Name: WalkFeedback
   m_TagString: Untagged
@@ -19210,15 +19211,70 @@ MonoBehaviour:
                 m_StringArgument: Walk
                 m_BoolArgument: 0
               m_CallState: 2
+            - m_Target: {fileID: 543301697331381333}
+              m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+              m_MethodName: Play
+              m_Mode: 1
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 0
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
         StopEvents:
           m_PersistentCalls:
-            m_Calls: []
+            m_Calls:
+            - m_Target: {fileID: 543301697331381333}
+              m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+              m_MethodName: Stop
+              m_Mode: 1
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 0
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
         InitializationEvents:
           m_PersistentCalls:
             m_Calls: []
         ResetEvents:
           m_PersistentCalls:
             m_Calls: []
+--- !u!114 &543301697331381333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8662637827851525772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1468963454
+      Data2: 1138359358
+      Data3: 813505967
+      Data4: 2068457669
+    Path: event:/SFXLoopTest
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &8846133153256829495
 GameObject:
   m_ObjectHideFlags: 0

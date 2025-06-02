@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -23,6 +25,8 @@ namespace dungeonduell
 
         public bool isPlayer1;
         private readonly List<DisplayCard> _displayCards = new();
+
+        private TweenerCore<Vector3, Vector3, VectorOptions> currentTween;
 
         private void Start()
         {
@@ -295,9 +299,10 @@ namespace dungeonduell
 
         public void ShowHideDeck(bool hide)
         {
+            currentTween.Complete();
             if (hide)
             {
-                transform.DOMoveY(-300, 0.5f).OnComplete(() => { gameObject.SetActive(false); });
+                currentTween = transform.DOMoveY(-300, 0.5f).OnComplete(() => { gameObject.SetActive(false); });
             }
             else
             {
@@ -307,7 +312,7 @@ namespace dungeonduell
                 startPos.y = -300;
                 transform.position = startPos;
 
-                transform.DOMoveY(0, 0.5f);
+                currentTween = transform.DOMoveY(0, 0.5f);
             }
         }
     }
