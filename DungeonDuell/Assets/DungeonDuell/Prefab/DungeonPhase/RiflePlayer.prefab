@@ -5075,6 +5075,7 @@ GameObject:
   - component: {fileID: 1867951725043699587}
   - component: {fileID: 2965726219822037401}
   - component: {fileID: 6032885677554127453}
+  - component: {fileID: 4100436367201047374}
   - component: {fileID: 9079768699320588012}
   m_Layer: 24
   m_Name: RiflePlayer
@@ -5202,8 +5203,7 @@ MonoBehaviour:
   MutualizeWaitingPools: 1
   NestWaitingPool: 1
   NestUnderThis: 0
-  GameObjectToPool: {fileID: 1486318089921324, guid: 6afd4e402a07abb459fc7ced942c6964,
-    type: 3}
+  GameObjectToPool: {fileID: 1486318089921324, guid: 6afd4e402a07abb459fc7ced942c6964, type: 3}
   PoolSize: 20
   PoolCanExpand: 1
 --- !u!114 &114345180357598506
@@ -5364,6 +5364,18 @@ MonoBehaviour:
   DefaultLaserMaterial: {fileID: 0}
   TargetLaserMaterial: {fileID: 0}
   IsPlayer1: 1
+--- !u!114 &4100436367201047374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490220044263310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eef26aa40fc6d94493b02681137e013, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &9079768699320588012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20273,8 +20285,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 5375683744671434912, guid: 740ce72795682114e93191ae232da35d,
-    type: 3}
+  m_Sprite: {fileID: 5375683744671434912, guid: 740ce72795682114e93191ae232da35d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -20667,8 +20678,7 @@ MonoBehaviour:
         RemapThresholdZero: 0
         RemapThresholdOne: 0
     - rid: 2
-      type: {class: MMF_ChromaticAberration, ns: MoreMountains.FeedbacksForThirdParty,
-        asm: MoreMountains.Tools}
+      type: {class: MMF_ChromaticAberration, ns: MoreMountains.FeedbacksForThirdParty, asm: MoreMountains.Tools}
       data:
         Active: 1
         UniqueID: 1896230025

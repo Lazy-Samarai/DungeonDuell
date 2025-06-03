@@ -117,5 +117,19 @@ namespace dungeonduell
         {
             if (weHaveWinner != null) weHaveWinner.Invoke(playerWinner);
         }
+
+        public static event Action SceneTransition;
+
+        public static void Trigger_SceneTransition()
+        {
+            SceneTransition?.Invoke();
+        }
+
+        public static event Action TutorialDone;
+
+        public static void Trigger_TutorialDone()
+        {
+            TutorialDone?.Invoke();
+        }
     }
 }
