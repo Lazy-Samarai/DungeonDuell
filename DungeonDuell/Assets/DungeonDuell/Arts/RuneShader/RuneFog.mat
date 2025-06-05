@@ -25,7 +25,7 @@ Material:
     type: 3}
   m_Parent: {fileID: -876546973899608171, guid: 8dc590f2a78da8543af9b753350a4c6a,
     type: 3}
-  m_ModifiedSerializedProperties: 2
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords:
@@ -33,44 +33,19 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap:
     RenderType: Transparent
   disabledShaderPasses:
-  - DepthOnly
-  - SHADOWCASTER
   - MOTIONVECTORS
+  - SHADOWCASTER
+  - DepthOnly
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
-    m_TexEnvs:
-    - _BaseMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Fog1Tex:
-        m_Texture: {fileID: 2800000, guid: 156c746e5163dd442aad43699cefee17, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Fog2Tex:
-        m_Texture: {fileID: 2800000, guid: b00f6f3c2e6d92a4c8c5cd38396ef9ea, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _FusselTex:
-        m_Texture: {fileID: 2800000, guid: 0c5de98d56d6e0b469056675eb3001bf, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 8fbc43a477bbadc44bd71b8195bc9b6c, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Noise:
-        m_Texture: {fileID: 2800000, guid: 7da2b2a89403f0e43afde44a4b10a48b, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
+    m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _DistortionStrengthScaled: 0.1
     - _DstBlend: 10
     - _QueueControl: 0
     - _SrcBlend: 5
