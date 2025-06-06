@@ -447,6 +447,7 @@ GameObject:
   m_Component:
   - component: {fileID: 376974905}
   - component: {fileID: 376974904}
+  - component: {fileID: 376974906}
   m_Layer: 0
   m_Name: PlayerDataManger
   m_TagString: Untagged
@@ -510,6 +511,18 @@ Transform:
   - {fileID: 1702099986}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &376974906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376974903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d90547393724a37488f96afba6144351, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &394553475
 GameObject:
   m_ObjectHideFlags: 0
@@ -12593,6 +12606,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1945806929}
   - component: {fileID: 1945806930}
+  - component: {fileID: 1945806931}
   m_Layer: 0
   m_Name: RoomConnectTracker
   m_TagString: Untagged
@@ -12631,6 +12645,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   filteredRoomTypeFromFirstCoin: 0300000001000000020000000400000005000000
+--- !u!114 &1945806931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945806928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d90547393724a37488f96afba6144351, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1961649889
 GameObject:
   m_ObjectHideFlags: 0

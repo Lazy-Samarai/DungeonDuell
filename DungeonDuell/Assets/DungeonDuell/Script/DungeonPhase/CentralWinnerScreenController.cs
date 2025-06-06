@@ -7,22 +7,25 @@ namespace dungeonduell
 {
     public class CentralWinnerScreenController : MonoBehaviour
     {
-        [Header("Visual References")]
-        [SerializeField] private Image player1Visual;
+        [Header("Visual References")] [SerializeField]
+        private Image player1Visual;
+
         [SerializeField] private Image player2Visual;
 
-        [Header("Winner Panel")]
-        [SerializeField] private GameObject winnerPanel;
+        [Header("Winner Panel")] [SerializeField]
+        private GameObject winnerPanel;
+
         [SerializeField] private GameObject buttonsContainer;
 
-        [Header("Animation Settings")]
-        [SerializeField] private float delayBeforeButtons = 2f;
+        [Header("Animation Settings")] [SerializeField]
+        private float delayBeforeButtons = 2f;
+
         [SerializeField] private float scaleDuration = 0.5f;
         [SerializeField] private float winnerScale = 1.2f;
         [SerializeField] private float loserScale = 0.8f;
         [SerializeField] private Color loserColor = Color.gray;
         [SerializeField] private Color normalColor = Color.white;
-        
+
         [SerializeField] private SequenceMang sequenceMang;
 
 
@@ -42,11 +45,10 @@ namespace dungeonduell
         }
 
 
-
         public void ShowWinnerScreen(bool player1Won)
         {
-            Time.timeScale = 1f; 
-            
+            Time.timeScale = 1f;
+
             winnerPanel.SetActive(true);
             buttonsContainer.SetActive(false);
 
@@ -81,7 +83,7 @@ namespace dungeonduell
 
             while (elapsed < scaleDuration)
             {
-                Time.timeScale = 1f; 
+                Time.timeScale = 1f;
                 float t = elapsed / scaleDuration;
                 visual.rectTransform.localScale = Vector3.Lerp(initialScale, finalScale, t);
                 visual.color = Color.Lerp(initialColor, targetColor, t);
@@ -105,7 +107,8 @@ namespace dungeonduell
         {
             if (sequenceMang != null)
             {
-                sequenceMang.Reseting();
+                DdCodeEventHandler.Trigger_GameReset();
+                sequenceMang.BackToCardPhase();
             }
             else
             {
@@ -116,7 +119,8 @@ namespace dungeonduell
 
         public void OnMainMenuButton()
         {
-            SceneManager.LoadScene("Titlescreen");
+            DdCodeEventHandler.Trigger_GameReset();
+            SceneManager.LoadScene(0);
         }
     }
 }
