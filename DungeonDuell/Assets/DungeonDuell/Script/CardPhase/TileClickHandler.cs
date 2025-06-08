@@ -260,10 +260,10 @@ namespace dungeonduell
 
                 if (spawnSourroundSetables)
                 {
-                    if(!hitContested) 
+                    if (!hitContested)
                         SpawnShadowTileOperations(playerMove, cellPosition, clickedTile);
 
-                    SpawnSetAbleOperation(cellPosition, clickedTile, owner,hitContested);
+                    SpawnSetAbleOperation(cellPosition, clickedTile, owner, hitContested);
 
                     if (playerMove)
                     {
@@ -300,15 +300,15 @@ namespace dungeonduell
             return false;
         }
 
-        private void SpawnSetAbleOperation(Vector3Int cellPosition, TileBase clickedTile, int owner,bool contestedHit)
+        private void SpawnSetAbleOperation(Vector3Int cellPosition, TileBase clickedTile, int owner, bool contestedHit)
         {
             foreach (var sourrendTilePos in GetSouroundCorr(cellPosition, currentDoorDir))
             {
                 var souroundTile = _tilemap.GetTile(sourrendTilePos.Item1);
-                
+
                 if (souroundTile == resetTile && contestedHit)
                 {
-                    _tilemap.SetTile(sourrendTilePos.Item1, setAbleTiles[owner -1]);
+                    _tilemap.SetTile(sourrendTilePos.Item1, setAbleTiles[owner - 1]);
                 }
                 else if (souroundTile == resetTile || shadowSetAbleTiles.Contains(souroundTile))
                 {
@@ -362,7 +362,6 @@ namespace dungeonduell
                         else if (souroundTile != shadowSetAbleTiles[i])
                             _tilemap.SetTile(sourrendTilePos.Item1, shadowSetAbleTiles[^1]);
                     }
-                       
                 }
 
                 if (souroundTile == resetTile && playerMove)
@@ -406,7 +405,7 @@ namespace dungeonduell
             {
                 if (tileBaseType == setAbleTiles[i])
                 {
-                    if (i < setAbleTiles.Length -1)
+                    if (i < setAbleTiles.Length - 1)
                     {
                         setAbleCount[i]++;
                     }
@@ -443,7 +442,7 @@ namespace dungeonduell
         private void CreateRoom(Vector3Int clickedTile, RoomType type, RoomElement element, bool[] allowedDoors,
             int owner, bool forceOnRoom)
         {
-            var aroundpos = GetSouroundCorr(clickedTile); // 
+            var aroundpos = GetSouroundCorr(clickedTile);
 
             var establishConnection = connectCollector.GetPossibleConnects(aroundpos, allowedDoors, forceOnRoom);
 

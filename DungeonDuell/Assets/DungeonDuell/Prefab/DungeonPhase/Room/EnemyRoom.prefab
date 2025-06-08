@@ -599,18 +599,18 @@ PrefabInstance:
     - target: {fileID: 8685141252984007569, guid: d4d8335d9d79f8142a60155a765b9399,
         type: 3}
       propertyPath: onPlayerRoomInnerEnter.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8685141252984007569, guid: d4d8335d9d79f8142a60155a765b9399,
         type: 3}
       propertyPath: onPlayerRoomEnter.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8685141252984007569, guid: d4d8335d9d79f8142a60155a765b9399,
         type: 3}
       propertyPath: onPlayerRoomEnter.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 8910317849417596550}
+      objectReference: {fileID: 4211780703338736311}
     - target: {fileID: 8685141252984007569, guid: d4d8335d9d79f8142a60155a765b9399,
         type: 3}
       propertyPath: onPlayerRoomEnter.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
@@ -624,12 +624,12 @@ PrefabInstance:
     - target: {fileID: 8685141252984007569, guid: d4d8335d9d79f8142a60155a765b9399,
         type: 3}
       propertyPath: onPlayerRoomInnerEnter.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8685141252984007569, guid: d4d8335d9d79f8142a60155a765b9399,
         type: 3}
       propertyPath: onPlayerRoomEnter.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: LockingDown
+      value: EnteringRoom
       objectReference: {fileID: 0}
     - target: {fileID: 8685141252984007569, guid: d4d8335d9d79f8142a60155a765b9399,
         type: 3}
@@ -640,7 +640,7 @@ PrefabInstance:
         type: 3}
       propertyPath: onPlayerRoomInnerEnter.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 6134790555348859420}
+      objectReference: {fileID: 8910317849417596550}
     - target: {fileID: 8685141252984007569, guid: d4d8335d9d79f8142a60155a765b9399,
         type: 3}
       propertyPath: onPlayerRoomInnerEnter.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -654,17 +654,17 @@ PrefabInstance:
     - target: {fileID: 8685141252984007569, guid: d4d8335d9d79f8142a60155a765b9399,
         type: 3}
       propertyPath: onPlayerRoomInnerEnter.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LockingDown
+      value: SetLockDownSystem
       objectReference: {fileID: 0}
     - target: {fileID: 8685141252984007569, guid: d4d8335d9d79f8142a60155a765b9399,
         type: 3}
       propertyPath: onPlayerRoomInnerEnter.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: set_tag
+      value: LockingDown
       objectReference: {fileID: 0}
     - target: {fileID: 8685141252984007569, guid: d4d8335d9d79f8142a60155a765b9399,
         type: 3}
       propertyPath: onPlayerRoomEnter.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: dungeonduell.LockDown, Assembly-CSharp
+      value: dungeonduell.SimpleCamHandler, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8685141252984007569, guid: d4d8335d9d79f8142a60155a765b9399,
         type: 3}
@@ -679,7 +679,7 @@ PrefabInstance:
     - target: {fileID: 8685141252984007569, guid: d4d8335d9d79f8142a60155a765b9399,
         type: 3}
       propertyPath: onPlayerRoomInnerEnter.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: UnityEngine.Component, UnityEngine
+      value: dungeonduell.LockDown, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8685141252984007569, guid: d4d8335d9d79f8142a60155a765b9399,
         type: 3}
@@ -758,6 +758,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7826376139832576482}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1448767468555444851 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8685141252984007569, guid: d4d8335d9d79f8142a60155a765b9399,
+    type: 3}
+  m_PrefabInstance: {fileID: 7826376139832576482}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66eb864899ffbb14f83a1517fed57813, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3408852718116007260 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4887094845199197374, guid: d4d8335d9d79f8142a60155a765b9399,
@@ -806,6 +818,18 @@ MonoBehaviour:
       - m_Target: {fileID: 3859365038787772050}
         m_TargetAssemblyTypeName: dungeonduell.RewardSpawner, Assembly-CSharp
         m_MethodName: SpawnReward
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1448767468555444851}
+        m_TargetAssemblyTypeName: dungeonduell.RoomEngagement, Assembly-CSharp
+        m_MethodName: DeclareRoomEntered
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -869,12 +893,6 @@ MonoBehaviour:
 --- !u!4 &4252883511853408427 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6312244197616462153, guid: d4d8335d9d79f8142a60155a765b9399,
-    type: 3}
-  m_PrefabInstance: {fileID: 7826376139832576482}
-  m_PrefabAsset: {fileID: 0}
---- !u!61 &6134790555348859420 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: 4161317412935644158, guid: d4d8335d9d79f8142a60155a765b9399,
     type: 3}
   m_PrefabInstance: {fileID: 7826376139832576482}
   m_PrefabAsset: {fileID: 0}
