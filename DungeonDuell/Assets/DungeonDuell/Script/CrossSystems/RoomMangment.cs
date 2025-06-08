@@ -112,20 +112,42 @@ namespace dungeonduell
         private void onOneRoomEntered(int roomIndex)
         {
             roomEngagnedList[roomIndex] = true;
+            CheckAllVisited();
+        }
+
+        private void CheckAllVisited()
+        {
             if (roomEngagnedList.All(b => b))
             {
                 DdCodeEventHandler.Trigger_AllRoomVisited();
             }
         }
 
+        private void OnPlayerDeath(int playerId)
+        {
+            foreach (var room in RoomsInfosWithPos)
+            {
+                print("check");
+                print(room.Item2.TerritoryOwner);
+                if (room.Item2.TerritoryOwner == playerId)
+                {
+                    roomEngagnedList[RoomsInfosWithPos.IndexOf(room)] = true;
+                }
+            }
+
+            CheckAllVisited();
+        }
+
         public void SubscribeToEvents()
         {
             DdCodeEventHandler.RoomEntered += onOneRoomEntered;
+            DdCodeEventHandler.PlayerDeath += OnPlayerDeath;
         }
 
         public void UnsubscribeToAllEvents()
         {
             DdCodeEventHandler.RoomEntered -= onOneRoomEntered;
+            DdCodeEventHandler.PlayerDeath -= OnPlayerDeath;
         }
 
         private void OnEnable()

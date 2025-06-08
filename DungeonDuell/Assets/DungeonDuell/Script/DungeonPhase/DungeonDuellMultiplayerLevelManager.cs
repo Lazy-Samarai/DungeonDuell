@@ -252,6 +252,10 @@ namespace MoreMountains.TopDownEngine
 
                 StartCoroutine(GameOver());
             }
+            else
+            {
+                DdCodeEventHandler.Trigger_PlayerDeath(playerIndex);
+            }
 
 
             foreach (var character in Instance.Players)

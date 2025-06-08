@@ -8,6 +8,8 @@ public class RoomInfo
 
     public int RoomOwner; // 0 - no One - else Player x
 
+    public int TerritoryOwner;
+
     public RoomType Roomtype = RoomType.Generic;
 
     public RoomInfo(int id, List<RoomConnection> newConncection)
@@ -27,7 +29,7 @@ public class RoomInfo
     }
 
     public RoomInfo(int id, List<RoomConnection> newConncection, RoomType newRoomtype, RoomElement newRoomElement,
-        List<ConnectionDir> newAllowedDoors, int owner, bool newfirstTimeSpawn)
+        List<ConnectionDir> newAllowedDoors, int owner, bool newfirstTimeSpawn, int territoryOwner)
     {
         RoomID = id;
         Conncection = newConncection;
@@ -36,6 +38,7 @@ public class RoomInfo
         AllowedDoors = newAllowedDoors;
         RoomOwner = owner;
         FirstTimeSpawn = newfirstTimeSpawn;
+        TerritoryOwner = territoryOwner;
     }
 
     public int RoomID { get; set; }

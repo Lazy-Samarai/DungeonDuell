@@ -145,5 +145,12 @@ namespace dungeonduell
         {
             AllRoomVisited?.Invoke();
         }
+
+        public static event Action<int> PlayerDeath;
+
+        public static void Trigger_PlayerDeath(int playerId)
+        {
+            PlayerDeath?.Invoke(playerId);
+        }
     }
 }

@@ -271,7 +271,8 @@ namespace dungeonduell
                     }
                 }
 
-                CreateRoom(cellPosition, card.roomtype, card.roomElement, currentDoorDir, owner, connectionForcing);
+                CreateRoom(cellPosition, card.roomtype, card.roomElement, currentDoorDir, owner, connectionForcing,
+                    clickedTile);
 
                 if (playerMove)
                 {
@@ -439,10 +440,10 @@ namespace dungeonduell
             Destroy(displayCardUi.gameObject);
         }
 
-        private void CreateRoom(Vector3Int clickedTile, RoomType type, RoomElement element, bool[] allowedDoors,
-            int owner, bool forceOnRoom)
+        private void CreateRoom(Vector3Int clickedTilePos, RoomType type, RoomElement element, bool[] allowedDoors,
+            int owner, bool forceOnRoom, TileBase clickedTile)
         {
-            var aroundpos = GetSouroundCorr(clickedTile);
+            var aroundpos = GetSouroundCorr(clickedTilePos);
 
             var establishConnection = connectCollector.GetPossibleConnects(aroundpos, allowedDoors, forceOnRoom);
 
@@ -458,7 +459,8 @@ namespace dungeonduell
                     newConnectionDir.Add((ConnectionDir)i);
             }
 
-            connectCollector.AddRoom(clickedTile, conncection, type, element, newConnectionDir, owner);
+            connectCollector.AddRoom(clickedTilePos, conncection, type, element, newConnectionDir, owner,
+                Array.IndexOf(setAbleTiles, clickedTile));
         }
 
         private Vector3Int[] GetSouroundCorr(Vector3Int clickedTile)
