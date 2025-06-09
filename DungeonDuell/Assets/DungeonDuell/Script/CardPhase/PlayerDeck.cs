@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using MoreMountains.Tools;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -44,7 +45,6 @@ namespace dungeonduell
             if (firstTime)
             {
                 GetPerDistributer();
-                firstTime = false;
             }
 
             if (availableCards.Count == 0)
@@ -55,14 +55,32 @@ namespace dungeonduell
 
             playerDeck.Clear();
 
+
+            PickCards();
+            if (firstTime)
+            {
+                // If no Enemy Card on First time replace one with it
+                if (playerDeck.Find(card => card.roomtype == RoomType.Enemy) == null)
+                {
+                    var randomIndex = Random.Range(0, playerDeck.Count);
+                    availableCards.Add(playerDeck[randomIndex]);
+                    playerDeck.RemoveAt(randomIndex);
+                    playerDeck.Add(availableCards.Find(card => card.roomtype == RoomType.Enemy));
+                }
+
+                firstTime = false;
+            }
+
+            if (availableCards.Count <= 0) GetPerDistributer();
+        }
+
+        private void PickCards()
+        {
             for (var i = 0; i < deckSize; i++)
             {
-                var randomIndex = Random.Range(0, availableCards.Count);
+                var randomIndex = Random.Range(0, firstTime ? availableCards.Count - 1 : availableCards.Count);
                 playerDeck.Add(availableCards[randomIndex]);
                 availableCards.RemoveAt(randomIndex);
-
-
-                if (availableCards.Count <= 0) GetPerDistributer();
             }
         }
 

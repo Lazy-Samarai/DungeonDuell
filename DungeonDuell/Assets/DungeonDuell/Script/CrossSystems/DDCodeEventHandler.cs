@@ -152,5 +152,12 @@ namespace dungeonduell
         {
             PlayerDeath?.Invoke(playerId);
         }
+
+        public static event Action GameReset;
+
+        public static void Trigger_GameReset()
+        {
+            GameReset?.Invoke();
+        }
     }
 }

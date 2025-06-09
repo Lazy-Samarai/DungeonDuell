@@ -72,15 +72,6 @@ namespace dungeonduell
             //_sceneLoading.ToTheHex();
         }
 
-        public void Reseting()
-        {
-            var connectionsCollector = FindFirstObjectByType<ConnectionsCollector>();
-            var playerMang = FindFirstObjectByType<PlayerDataManager>();
-            Destroy(playerMang.gameObject);
-            Destroy(connectionsCollector.gameObject);
-            BackToCardPhase();
-        }
-
         public void DisableTimer()
         {
             finalRound = true;
