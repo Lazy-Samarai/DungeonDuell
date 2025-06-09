@@ -116,6 +116,16 @@ namespace dungeonduell
 
                 UpdateIndicator(displayCard.card.GetAllowedDirection());
             }
+            else
+            {
+                OnCardDeselect();
+            }
+        }
+
+        private void OnCardDeselect()
+        {
+            ResetTileCheck();
+            SetHoverMapVisable(false);
         }
 
         private void UpdateIndicator(bool[] allowedDoors)
