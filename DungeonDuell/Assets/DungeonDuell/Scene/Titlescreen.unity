@@ -5200,8 +5200,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5394191413390374784, guid: ec66fba4027b2e04b914ce8c06503c30,
         type: 3}
+      propertyPath: prewarm
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5394191413390374784, guid: ec66fba4027b2e04b914ce8c06503c30,
+        type: 3}
+      propertyPath: UVModule.cycles
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5394191413390374784, guid: ec66fba4027b2e04b914ce8c06503c30,
+        type: 3}
       propertyPath: ShapeModule.type
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5394191413390374784, guid: ec66fba4027b2e04b914ce8c06503c30,
+        type: 3}
+      propertyPath: UVModule.timeMode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5394191413390374784, guid: ec66fba4027b2e04b914ce8c06503c30,
         type: 3}
@@ -5215,8 +5230,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5394191413390374784, guid: ec66fba4027b2e04b914ce8c06503c30,
         type: 3}
+      propertyPath: UVModule.animationType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5394191413390374784, guid: ec66fba4027b2e04b914ce8c06503c30,
+        type: 3}
       propertyPath: ShapeModule.placementMode
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5394191413390374784, guid: ec66fba4027b2e04b914ce8c06503c30,
+        type: 3}
+      propertyPath: UVModule.startFrame.scalar
+      value: 0.9999
       objectReference: {fileID: 0}
     - target: {fileID: 5394191413390374784, guid: ec66fba4027b2e04b914ce8c06503c30,
         type: 3}
@@ -5230,8 +5255,28 @@ PrefabInstance:
       objectReference: {fileID: 1083623472}
     - target: {fileID: 5394191413390374784, guid: ec66fba4027b2e04b914ce8c06503c30,
         type: 3}
+      propertyPath: UVModule.frameOverTime.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5394191413390374784, guid: ec66fba4027b2e04b914ce8c06503c30,
+        type: 3}
+      propertyPath: UVModule.startFrame.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5394191413390374784, guid: ec66fba4027b2e04b914ce8c06503c30,
+        type: 3}
+      propertyPath: UVModule.frameOverTime.minScalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5394191413390374784, guid: ec66fba4027b2e04b914ce8c06503c30,
+        type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5394191413390374784, guid: ec66fba4027b2e04b914ce8c06503c30,
+        type: 3}
+      propertyPath: UVModule.frameOverTime.minMaxState
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5394191413390374784, guid: ec66fba4027b2e04b914ce8c06503c30,
         type: 3}
