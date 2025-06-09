@@ -63,6 +63,26 @@ namespace dungeonduell
 
             inputActions.CardPhase.RotateR.performed += ctx => NextPage();
             inputActions.CardPhase.RotateL.performed += ctx => PreviousPage();
+            inputActions.CardPhase.Submit.started += ctx => isSkipPressed = true;
+            inputActions.CardPhase.Submit.canceled += ctx =>
+            {
+                isSkipPressed = false;
+                skipHoldTime = 0f;
+                UpdateSkipBar(0f);
+
+                if (rotationTween != null && rotationTween.IsActive())
+                {
+                    rotationTween.Kill();
+                }
+
+                SkipImage.transform
+                    .DORotate(Vector3.zero, 0.3f)
+                    .SetUpdate(true)
+                    .SetEase(Ease.OutCubic)
+                    .SetUpdate(true);
+
+                rotationStarted = false;
+            };
             inputActions.CardPhase.RotateR.started += ctx => isSkipPressed = true;
             inputActions.CardPhase.RotateR.canceled += ctx =>
             {
