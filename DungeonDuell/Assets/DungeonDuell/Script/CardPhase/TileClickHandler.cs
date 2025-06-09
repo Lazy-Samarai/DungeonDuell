@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -154,6 +155,12 @@ namespace dungeonduell
 
         public bool SpawnTile(Vector3 mouseWorldPos, Card card, bool playerMove, bool spawnSourroundSetables, int owner)
         {
+            if (_tilemap == null)
+            {
+                _tilemap = FindFirstObjectByType<Grid>().GetComponentsInChildren<Tilemap>()
+                    .FirstOrDefault(tm => tm.gameObject.CompareTag(tileMapTag));
+            }
+
             var cellPosition =
                 _tilemap.WorldToCell(new Vector3(mouseWorldPos.x, mouseWorldPos.y, cam.transform.position.z));
             var clickedTile = _tilemap.GetTile(cellPosition);

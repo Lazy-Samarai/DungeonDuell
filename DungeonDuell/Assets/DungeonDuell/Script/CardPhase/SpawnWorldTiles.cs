@@ -13,7 +13,7 @@ namespace dungeonduell
 
         private void Start()
         {
-            _startTiles = transform.GetChild(0).gameObject;
+            _startTiles = transform.GetChild(0).GetChild(0).gameObject;
             _tileClickHandler = FindFirstObjectByType<TileClickHandler>();
             SpawnTiles();
         }
