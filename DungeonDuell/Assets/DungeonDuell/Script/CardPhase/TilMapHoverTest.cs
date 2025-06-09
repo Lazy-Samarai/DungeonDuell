@@ -100,7 +100,7 @@ namespace dungeonduell
             _currentlyVisible = visual;
         }
 
-        // Test
+        // Test to Be Sure
 
         private void OnCardPlayed(Card card, bool p)
         {
