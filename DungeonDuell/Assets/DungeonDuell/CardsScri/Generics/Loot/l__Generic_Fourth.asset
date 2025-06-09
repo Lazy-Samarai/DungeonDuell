@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 46bc6ac2b5a276c4188aed6497cbba38, type: 3}
-  m_Name: l_Generic_Three_1
+  m_Name: l__Generic_Fourth
   m_EditorClassIdentifier: 
   cardId: 4
   cardName: Treasure Vault
   cardDescription: Riches beyond your wildest dreams.
   roomtype: 2
   roomElement: 0
-  Tile: {fileID: 11400000, guid: 9812d194454fb304897e6c490a3470b5, type: 2}
-  SheelCard: 0
+  tile: {fileID: 11400000, guid: 9812d194454fb304897e6c490a3470b5, type: 2}
   startDoorConcellation:
-    TopLeft: 0
-    TopRight: 1
-    Left: 1
-    Right: 0
-    BottonLeft: 0
-    BottonRight: 1
+    topLeft: 1
+    topRight: 1
+    left: 0
+    right: 0
+    bottonLeft: 1
+    bottonRight: 1
+  isBridgeCard: 0
