@@ -100,6 +100,9 @@ namespace dungeonduell
             _currentlyVisible = visual;
         }
 
+        // Test Lol
+
+
         private void OnCardPlayed(Card card, bool p)
         {
             _isBridged = false;
