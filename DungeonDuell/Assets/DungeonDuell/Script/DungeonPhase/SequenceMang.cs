@@ -17,6 +17,8 @@ namespace dungeonduell
         [SerializeField] private TextMeshProUGUI timerText;
         private SceneLoading _sceneLoading;
 
+        [SerializeField] private float allRoomVisitedTime = 10;
+
         // Start is called before the first frame update
         private void Start()
         {
@@ -54,12 +56,14 @@ namespace dungeonduell
         {
             DdCodeEventHandler.FinalRoundInDungeon += DisableTimer;
             DdCodeEventHandler.PlayerDataExposed += SetTimer;
+            DdCodeEventHandler.AllRoomVisited += OnAllRoomVisited;
         }
 
         public void UnsubscribeToAllEvents()
         {
             DdCodeEventHandler.FinalRoundInDungeon -= DisableTimer;
-            DdCodeEventHandler.PlayerDataExposed += SetTimer;
+            DdCodeEventHandler.PlayerDataExposed -= SetTimer;
+            DdCodeEventHandler.AllRoomVisited -= OnAllRoomVisited;
         }
 
         public void BackToCardPhase()
@@ -78,6 +82,14 @@ namespace dungeonduell
         private void SetTimer(List<PlayerData> d, int currentRound)
         {
             timeRound = BaseTime + currentRound * TimeMorePerRound;
+        }
+
+        private void OnAllRoomVisited()
+        {
+            if (timeRound > allRoomVisitedTime && !finalRound)
+            {
+                timeRound = allRoomVisitedTime;
+            }
         }
     }
 }

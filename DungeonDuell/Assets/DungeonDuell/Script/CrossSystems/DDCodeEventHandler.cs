@@ -132,6 +132,27 @@ namespace dungeonduell
             TutorialDone?.Invoke();
         }
 
+        public static event Action<int> RoomEntered;
+
+        public static void Trigger_RoomEntered(int index)
+        {
+            RoomEntered?.Invoke(index);
+        }
+
+        public static event Action AllRoomVisited;
+
+        public static void Trigger_AllRoomVisited()
+        {
+            AllRoomVisited?.Invoke();
+        }
+
+        public static event Action<int> PlayerDeath;
+
+        public static void Trigger_PlayerDeath(int playerId)
+        {
+            PlayerDeath?.Invoke(playerId);
+        }
+
         public static event Action GameReset;
 
         public static void Trigger_GameReset()
