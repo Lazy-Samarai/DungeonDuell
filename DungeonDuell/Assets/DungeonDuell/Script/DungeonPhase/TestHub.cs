@@ -51,7 +51,7 @@ namespace MoreMountains.TopDownEngine
         {
             coinCounter.text = "0";
             coinForNextLevelCounter.text = "1";
-            deadMask.gameObject.SetActive(false);
+            //deadMask.gameObject.SetActive(false);
         }
 
         /// <summary>

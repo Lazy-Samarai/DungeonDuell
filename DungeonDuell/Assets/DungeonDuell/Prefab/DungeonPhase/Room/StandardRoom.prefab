@@ -226,6 +226,37 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &2635936303491343815
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6483599252863024455}
+  m_Layer: 2
+  m_Name: RoomCenter
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6483599252863024455
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2635936303491343815}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3538675380022621002}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3440582934223206865
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,6 +311,7 @@ MonoBehaviour:
   - {fileID: 4954732209658398120}
   coverCam: {fileID: 8694289718764192602}
   coverMapTop: {fileID: 4976719239953763269}
+  minimapCamManager: {fileID: 0}
 --- !u!1 &3833840116815920682
 GameObject:
   m_ObjectHideFlags: 0
@@ -561,6 +593,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3538675380022621002}
   - component: {fileID: 4161317412935644158}
+  - component: {fileID: 2539206945135546671}
   m_Layer: 2
   m_Name: StandardRoom
   m_TagString: Untagged
@@ -587,6 +620,7 @@ Transform:
   - {fileID: 6781719013486278975}
   - {fileID: 5515626406806384136}
   - {fileID: 1652160458167822916}
+  - {fileID: 6483599252863024455}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &4161317412935644158
@@ -635,6 +669,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 17.599007, y: 19.064262}
   m_EdgeRadius: 0
+--- !u!114 &2539206945135546671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4887094845199197374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1770291ed563d7b499c123698d402489, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomCenter: {fileID: 6483599252863024455}
 --- !u!1 &5600428792414313055
 GameObject:
   m_ObjectHideFlags: 0
