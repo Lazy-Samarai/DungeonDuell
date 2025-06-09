@@ -131,5 +131,12 @@ namespace dungeonduell
         {
             TutorialDone?.Invoke();
         }
+
+        public static event Action GameReset;
+
+        public static void Trigger_GameReset()
+        {
+            GameReset?.Invoke();
+        }
     }
 }
