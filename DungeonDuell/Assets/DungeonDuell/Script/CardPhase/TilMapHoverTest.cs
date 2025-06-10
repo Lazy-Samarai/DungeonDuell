@@ -1,6 +1,8 @@
 using Cinemachine;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using FMODUnity;
+using static UnityEditor.Profiling.RawFrameDataView;
 
 namespace dungeonduell
 {
@@ -27,6 +29,9 @@ namespace dungeonduell
 
         public TileBase hoverBridgeTile;
         private bool _isBridged;
+
+        [SerializeField] private EventReference cardSelectedSFXEvent;
+        [SerializeField] private EventReference cardDeselectedSFXEvent;
 
         private void Awake()
         {
@@ -113,6 +118,7 @@ namespace dungeonduell
             {
                 hoverTile = displayCard.card.tile;
                 SetHoverMapVisable(true);
+                RuntimeManager.PlayOneShot(cardSelectedSFXEvent);
 
                 UpdateIndicator(displayCard.card.GetAllowedDirection());
             }
@@ -125,6 +131,7 @@ namespace dungeonduell
         private void OnCardDeselect()
         {
             ResetTileCheck();
+            RuntimeManager.PlayOneShot(cardDeselectedSFXEvent);
             SetHoverMapVisable(false);
         }
 

@@ -12,6 +12,8 @@ using UnityEngine.InputSystem.Users;
 using UnityEngine.Serialization;
 using UnityEngine.Localization.Components;
 using UnityEngine.Localization.SmartFormat.PersistentVariables;
+using FMODUnity;
+using static UnityEditor.Profiling.RawFrameDataView;
 
 
 namespace dungeonduell
@@ -45,6 +47,10 @@ namespace dungeonduell
 
         private TweenerCore<Vector2, Vector2, VectorOptions> currentTween;
         private TweenerCore<Vector2, Vector2, VectorOptions> currentTween2;
+
+        [SerializeField] private EventReference playerDisappearEvent;
+        [SerializeField] private EventReference playerAppearEvent;
+        [SerializeField] private EventReference countdownBeginEvent;
 
         private void Start()
         {
@@ -137,6 +143,7 @@ namespace dungeonduell
             if (!_awaitingKeyPress) return;
 
             _awaitingKeyPress = false;
+            RuntimeManager.PlayOneShot(playerAppearEvent);
             UpdatePlayerTurnText();
             pressAnyKeyText.gameObject.SetActive(false);
             ToggleHandVisibility(isPlayer1Turn, !isPlayer1Turn);
@@ -160,6 +167,7 @@ namespace dungeonduell
 
         public void EndPlayerTurn()
         {
+            RuntimeManager.PlayOneShot(playerDisappearEvent);
             isPlayer1Turn = !isPlayer1Turn;
 
             if (_playerPlayedAllCards.All(played => played))
@@ -195,6 +203,7 @@ namespace dungeonduell
             pressAnyKeyText.SetEntry(TextEntryMakeReady);
             yield return new WaitForSeconds(1f);
             pressAnyKeyText.SetEntry(TextEntryStartIn);
+            RuntimeManager.PlayOneShot(countdownBeginEvent);
 
             for (var i = SecondsToStart; i > 0; i--)
             {

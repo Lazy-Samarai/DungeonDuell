@@ -7,6 +7,8 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
+using FMODUnity;
+using static UnityEditor.Profiling.RawFrameDataView;
 
 namespace dungeonduell
 {
@@ -38,6 +40,8 @@ namespace dungeonduell
         private PlayerInput _playerInput;
 
         private Vector3Int _selectedTilePos;
+
+        [SerializeField] private EventReference hexGridMovementSFXEvent;
 
         private void Start()
         {
@@ -108,7 +112,7 @@ namespace dungeonduell
             if (input.sqrMagnitude < 0.5f) return;
             var snappedInput = SnapToHexDirection(input.normalized);
             var bestTarget = _selectedTilePos;
-            var bestScore = -1f;
+            var bestScore = -1f;           
 
             const float dotThreshold = 0.65f;
             const float distanceThreshold = 0.1f;
@@ -127,6 +131,7 @@ namespace dungeonduell
                     if (tile.Item1 == cellPosition)
                     {
                         bestTarget = cellPosition;
+                        //RuntimeManager.PlayOneShot(hexGridMovementSFXEvent);
                     }
                 }
                 else
@@ -155,6 +160,7 @@ namespace dungeonduell
 
             if (bestTarget != _selectedTilePos)
             {
+                RuntimeManager.PlayOneShot(hexGridMovementSFXEvent);
                 _selectedTilePos = bestTarget;
                 cursor.transform.position = tilemap.GetCellCenterWorld(_selectedTilePos);
                 _lastNavigateTime = Time.time;

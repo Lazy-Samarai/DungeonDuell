@@ -2,11 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cinemachine;
+using FMODUnity;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
+using static UnityEditor.Profiling.RawFrameDataView;
 
 namespace dungeonduell
 {
@@ -60,7 +62,8 @@ namespace dungeonduell
         private static readonly Color BridgeColor = new Color(0, 0, 5);
         [SerializeField] int[] setAbleCount = { 0, 0 };
         public GameObject indiactorDoorOver;
-
+        [SerializeField] private EventReference rotateSFXEvent;
+        [SerializeField] private EventReference gridPlaceSFXEvent;
 
         private void Start()
         {
@@ -539,7 +542,7 @@ namespace dungeonduell
             {
                 currentDoorDir = ShiftRight(currentDoorDir);
                 displayCardUi?.UpdateDirectionIndicator(currentDoorDir); // already ref so not done per comning Event
-
+                RuntimeManager.PlayOneShot(rotateSFXEvent);
                 DdCodeEventHandler.Trigger_CardRotating(currentDoorDir);
             }
         }
@@ -553,7 +556,7 @@ namespace dungeonduell
                 {
                     //cardToHand.ReactivateHandCards();
                 }
-
+                RuntimeManager.PlayOneShot(gridPlaceSFXEvent);
                 if (_hexgridController != null) _hexgridController.ResetNavigation();
             }
         }
