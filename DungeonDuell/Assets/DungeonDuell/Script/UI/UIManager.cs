@@ -10,12 +10,28 @@ namespace dungeonduell
         public GameObject optionsPanel;
         public CanvasGroup fadeCanvas;
 
+        public float fadeDuration = 0.5f;
+
         private void Start()
+        {
+            ShowCanvasGroup();
+        }
+
+        public void HideCanvasGroup()
+        {
+            if (fadeCanvas != null)
+            {
+                fadeCanvas.alpha = 1;
+                fadeCanvas.DOFade(0, fadeDuration); // Sanftes Einblenden des UI
+            }
+        }
+
+        public void ShowCanvasGroup()
         {
             if (fadeCanvas != null)
             {
                 fadeCanvas.alpha = 0;
-                fadeCanvas.DOFade(1, 0.5f); // Sanftes Einblenden des UI
+                fadeCanvas.DOFade(1, fadeDuration); // Sanftes Einblenden des UI
             }
         }
 
@@ -23,7 +39,7 @@ namespace dungeonduell
         public void ChangeScene(string sceneName)
         {
             if (fadeCanvas != null)
-                fadeCanvas.DOFade(0, 0.5f).OnComplete(() => SceneManager.LoadScene(sceneName));
+                fadeCanvas.DOFade(0, fadeDuration).OnComplete(() => SceneManager.LoadScene(sceneName));
             else
                 SceneManager.LoadScene(sceneName);
         }
@@ -48,7 +64,7 @@ namespace dungeonduell
                 var isActive = creditsPanel.activeSelf;
                 creditsPanel.SetActive(true);
                 creditsPanel.transform.localScale = Vector3.zero;
-                creditsPanel.transform.DOScale(isActive ? 0 : 1, 0.5f).OnComplete(() =>
+                creditsPanel.transform.DOScale(isActive ? 0 : 1, fadeDuration).OnComplete(() =>
                 {
                     if (isActive) creditsPanel.SetActive(false);
                 });
@@ -63,7 +79,7 @@ namespace dungeonduell
                 var isActive = optionsPanel.activeSelf;
                 optionsPanel.SetActive(true);
                 optionsPanel.transform.localScale = Vector3.zero;
-                optionsPanel.transform.DOScale(isActive ? 0 : 1, 0.5f).OnComplete(() =>
+                optionsPanel.transform.DOScale(isActive ? 0 : 1, fadeDuration).OnComplete(() =>
                 {
                     if (isActive) optionsPanel.SetActive(false);
                 });
