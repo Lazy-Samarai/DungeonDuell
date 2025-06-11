@@ -1,86 +1,80 @@
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.Serialization;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
+using FMODUnity;
+using FMOD.Studio;
 
 namespace dungeonduell
 {
     public class OptionDataManager : MonoBehaviour
     {
-        private const string MasterVolume = "MasterVolume";
-        private const string MusicVolume = "MusicVolume";
-        private const string SfxVolume = "SFXVolume";
-
         public static OptionDataManager Instance;
 
         [FormerlySerializedAs("ShowTutorial")]
         public bool showTutorial = true;
 
-        // Neue Settings f�r das Optionsmen�
         [FormerlySerializedAs("Volume")] public float volume = 1f;
-        public AudioMixer audioMixer;
-
         [FormerlySerializedAs("IsFullscreen")] public bool isFullscreen = true;
-        public bool isMuted = true;
+        public bool isMuted = false;
 
         [FormerlySerializedAs("ResolutionIndex")]
         public int resolutionIndex;
 
         public string selectedLanguageCode = "en"; // Standard auf Englisch
 
-
-        private readonly int _volumeMultiplier = 20;
-
+        private VCA _masterVCA;
+        private VCA _musicVCA;
+        private VCA _sfxVCA;
 
         private void Awake()
         {
-            // If there is not already an instance of SoundManager, set it to this.
             if (Instance == null)
                 Instance = this;
-            //If an instance already exists, destroy whatever this object is to enforce the singleton.
             else if (Instance != this) Destroy(gameObject);
 
-            //Set SoundManager to DontDestroyOnLoad so that it won't be destroyed when reloading our scene.
             DontDestroyOnLoad(gameObject);
+
+            /* FMOD VCAs initialisieren
+            _masterVCA = RuntimeManager.GetVCA("vca:/Master");
+            _musicVCA = RuntimeManager.GetVCA("vca:/Music");
+            _sfxVCA = RuntimeManager.GetVCA("vca:/SFX");
+            */
         }
 
         void Start()
         {
             ApplyLanguageSetting();
+            ApplyVolumeSettings();
         }
 
         public void SetShowTutorial(bool show)
         {
             showTutorial = show;
-            Debug.Log("Tutrorial Show is" + show);
+            Debug.Log("Tutorial Show is " + show);
         }
 
         public void SetVolume(float volume)
         {
             this.volume = volume;
-            if (audioMixer != null) audioMixer.SetFloat(MasterVolume, Mathf.Log10(volume) * _volumeMultiplier);
+            _masterVCA.setVolume(volume);
         }
 
         public void SetMusicVolume(float volume)
         {
-            this.volume = volume;
-            audioMixer.SetFloat(MusicVolume, Mathf.Log10(volume) * _volumeMultiplier);
+            _musicVCA.setVolume(volume);
         }
 
         public void SetSfxVolume(float volume)
         {
-            this.volume = volume;
-            audioMixer.SetFloat(SfxVolume, Mathf.Log10(volume) * _volumeMultiplier);
+            _sfxVCA.setVolume(volume);
         }
 
         public void MuteToggle(bool muted)
         {
             isMuted = muted;
-            if (isMuted)
-                AudioListener.volume = 0;
-            else
-                AudioListener.volume = 1;
+            float muteVolume = muted ? 0f : volume;
+            _masterVCA.setVolume(muteVolume);
         }
 
         public void SetFullscreen(bool isFullscreen)
@@ -116,6 +110,12 @@ namespace dungeonduell
                     LocalizationSettings.SelectedLocale = locale;
                 }
             }
+        }
+
+        private void ApplyVolumeSettings()
+        {
+            _masterVCA.setVolume(isMuted ? 0f : volume);
+            // Optional: Set default volumes for other VCAs if needed
         }
     }
 }

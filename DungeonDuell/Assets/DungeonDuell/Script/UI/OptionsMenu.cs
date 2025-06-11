@@ -7,6 +7,8 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
+using FMODUnity;
+using FMOD.Studio;
 
 namespace dungeonduell
 {
@@ -28,6 +30,9 @@ namespace dungeonduell
         private OptionDataManager _dataManager;
         private Resolution[] _resolutions;
 
+        private VCA _masterVCA;
+        private VCA _musicVCA;
+        private VCA _sfxVCA;
 
         private void Start()
         {
@@ -36,6 +41,12 @@ namespace dungeonduell
 
             _canvasGroup.alpha = 0;
             optionsPanel.SetActive(false);
+
+            /*
+            _masterVCA = RuntimeManager.GetVCA("vca:/Master");
+            _musicVCA = RuntimeManager.GetVCA("vca:/Music");
+            _sfxVCA = RuntimeManager.GetVCA("vca:/SFX");
+            */
 
             _dataManager = FindFirstObjectByType<OptionDataManager>();
             SetupResolutionDropdown();
@@ -73,24 +84,29 @@ namespace dungeonduell
 
         public void SetMasterVolume(float volume)
         {
+            _masterVCA.setVolume(volume);
             if (_dataManager != null)
                 _dataManager.SetVolume(volume);
-            else
-                Debug.Log("Datamanager fehlt");
         }
 
         public void SetMusicVolume(float volume)
         {
-            if (_dataManager != null) _dataManager.SetMusicVolume(volume);
+            //_musicVCA.setVolume(volume);
+            if (_dataManager != null)
+                _dataManager.SetMusicVolume(volume);
         }
 
         public void SetSfxVolume(float volume)
         {
-            if (_dataManager != null) _dataManager.SetSfxVolume(volume);
+            //_sfxVCA.setVolume(volume);
+            if (_dataManager != null)
+                _dataManager.SetSfxVolume(volume);
         }
 
         public void MuteToggle(bool muted)
         {
+            float volume = muted ? 0f : audioSlider.value;
+            //_masterVCA.setVolume(volume);
             if (_dataManager != null) _dataManager.MuteToggle(muted);
         }
 
