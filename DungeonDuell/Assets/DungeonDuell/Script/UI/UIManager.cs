@@ -22,7 +22,8 @@ namespace dungeonduell
             if (fadeCanvas != null)
             {
                 fadeCanvas.alpha = 1;
-                fadeCanvas.DOFade(0, fadeDuration); // Sanftes Einblenden des UI
+                fadeCanvas.DOFade(0, fadeDuration).OnComplete(() =>
+                fadeCanvas.gameObject.SetActive(false));
             }
         }
 
@@ -30,6 +31,7 @@ namespace dungeonduell
         {
             if (fadeCanvas != null)
             {
+                fadeCanvas.gameObject.SetActive(true);
                 fadeCanvas.alpha = 0;
                 fadeCanvas.DOFade(1, fadeDuration); // Sanftes Einblenden des UI
             }
@@ -84,6 +86,11 @@ namespace dungeonduell
                     if (isActive) optionsPanel.SetActive(false);
                 });
             }
+        }
+
+        private void OnEnable()
+        {
+            ShowCanvasGroup();
         }
     }
 }

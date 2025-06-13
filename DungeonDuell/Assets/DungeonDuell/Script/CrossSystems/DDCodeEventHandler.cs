@@ -132,6 +132,13 @@ namespace dungeonduell
             TutorialDone?.Invoke();
         }
 
+        public static event Action TutorialCancel;
+
+        public static void Trigger_TutorialCancel()
+        {
+            TutorialCancel?.Invoke();
+        }
+
         public static event Action<int> RoomEntered;
 
         public static void Trigger_RoomEntered(int index)

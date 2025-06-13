@@ -4155,6 +4155,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1445213764}
   - component: {fileID: 1445213765}
+  - component: {fileID: 1445213766}
   m_Layer: 0
   m_Name: OptionDataManager
   m_TagString: Untagged
@@ -4195,6 +4196,19 @@ MonoBehaviour:
   isMuted: 0
   resolutionIndex: 0
   selectedLanguageCode: en
+--- !u!114 &1445213766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445213762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da48706f3084c5040a77b7fd939f573d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMenu: {fileID: 2118469192}
 --- !u!1 &1451484446
 GameObject:
   m_ObjectHideFlags: 0
