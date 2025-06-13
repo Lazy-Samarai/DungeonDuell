@@ -39,8 +39,8 @@ namespace MoreMountains.TopDownEngine
         public bool canLevelUp;
 
         /// the mask to use when the target player dies
-        [FormerlySerializedAs("DeadMask")] [Tooltip("the mask to use when the target player dies")]
-        public CanvasGroup deadMask;
+        //[FormerlySerializedAs("DeadMask")] [Tooltip("the mask to use when the target player dies")]
+        //public CanvasGroup deadMask;
 
         [FormerlySerializedAs("LevelUpPanel")] [Tooltip("the screen to display if the target levels up")]
         public LevelUpPanel levelUpPanel;
@@ -79,9 +79,9 @@ namespace MoreMountains.TopDownEngine
                 case TopDownEngineEventTypes.PlayerDeath:
                     if (tdEvent.OriginCharacter.PlayerID == playerID)
                     {
-                        deadMask.gameObject.SetActive(true);
-                        deadMask.alpha = 0f;
-                        StartCoroutine(MMFade.FadeCanvasGroup(deadMask, 0.5f, 0.8f));
+                        //deadMask.gameObject.SetActive(true);
+                        //deadMask.alpha = 0f;
+                        //StartCoroutine(MMFade.FadeCanvasGroup(deadMask, 0.5f, 0.8f));
                     }
 
                     break;

@@ -14,16 +14,29 @@ namespace dungeonduell
 
         [Header("Minimap Fokus")]
         [SerializeField] private MinimapCamManager minimapCamManager;
+        [SerializeField] private RoomData roomData;
+
 
         private void Start()
         {
-            // Suche zur Laufzeit das globale MinimapCamManager-Objekt
             minimapCamManager = FindObjectOfType<MinimapCamManager>();
             if (minimapCamManager == null)
             {
                 Debug.LogWarning("MinimapCamManager not found in scene!");
+                return;
             }
+
+            // Player 1 Spawn suchen und als Startziel setzen
+            GameObject p1Spawn = GameObject.FindWithTag("SpawnpointPlayer1");
+            if (p1Spawn != null)
+                minimapCamManager.SetFollowTarget(p1Spawn.transform, true);
+
+            // Player 2 Spawn suchen und als Startziel setzen
+            GameObject p2Spawn = GameObject.FindWithTag("SpawnpointPlayer2");
+            if (p2Spawn != null)
+                minimapCamManager.SetFollowTarget(p2Spawn.transform, false);
         }
+
         public void EnteringRoom(Collider2D collision)
         {
             for (int i = 0; i < cams.Count; i++)
@@ -34,17 +47,16 @@ namespace dungeonduell
                     cams[i].Follow = collision.transform;
 
                     coverCam.SetBool("InRoom", true);
-                    coverMapTop.SetBool("InRoom", true);
+                    coverMapTop.SetBool("InRoom_Map", true);
 
-                    // Minimap auf Raumzentrum setzen
-                    Transform roomCenter = collision.transform.GetComponentInParent<RoomData>()?.roomCenter;
-                    if (roomCenter != null)
+                    if (roomData != null && roomData.roomCenter != null)
                     {
-                        minimapCamManager.SetFollowTarget(roomCenter, i == 0);
+                        minimapCamManager.SetFollowTarget(roomData.roomCenter, i == 0);
+                        Debug.Log($"Minimap-Fokus gesetzt auf Raumzentrum für Player{i + 1}");
                     }
                     else
                     {
-                        Debug.LogWarning("RoomCenter missing on player parent.");
+                        Debug.LogWarning($"[SimpleCamHandler] RoomData oder roomCenter fehlt im Inspector.");
                     }
                 }
             }
@@ -63,7 +75,7 @@ namespace dungeonduell
             if (AllCamsOff())
             {
                 coverCam.SetBool("InRoom", false);
-                coverMapTop.SetBool("InRoom", false);
+                coverMapTop.SetBool("InRoom_Map", false);
             }
         }
 
