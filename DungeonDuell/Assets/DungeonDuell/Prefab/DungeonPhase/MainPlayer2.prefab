@@ -18572,6 +18572,7 @@ GameObject:
   - component: {fileID: 8692502278165774885}
   - component: {fileID: 1089973464931697958}
   - component: {fileID: 7799100199690533719}
+  - component: {fileID: 5124725597580364446}
   m_Layer: 10
   m_Name: Spine GameObject (skeleton)
   m_TagString: Untagged
@@ -18723,6 +18724,26 @@ MonoBehaviour:
     type: 2}
   dashParticlesBackwardsMaterial: {fileID: 2100000, guid: f8b6ab0f470199b468e4ab569e109fba,
     type: 2}
+--- !u!114 &5124725597580364446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6607950396814960949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f88a7aecb5999445860b4f8215390e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spineEventName: Step
+  fmodFootstepEvent:
+    Guid:
+      Data1: -1085801826
+      Data2: 1296669467
+      Data3: 1327523200
+      Data4: -1316949880
+    Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player_walk_normal
 --- !u!1 &6808776468769401931
 GameObject:
   m_ObjectHideFlags: 0
