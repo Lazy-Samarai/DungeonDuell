@@ -35,11 +35,11 @@ namespace dungeonduell
 
             DontDestroyOnLoad(gameObject);
 
-            /* FMOD VCAs initialisieren
+            // FMOD VCAs initialisieren
             _masterVCA = RuntimeManager.GetVCA("vca:/Master");
             _musicVCA = RuntimeManager.GetVCA("vca:/Music");
             _sfxVCA = RuntimeManager.GetVCA("vca:/SFX");
-            */
+            
         }
 
         void Start()

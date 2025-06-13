@@ -13,7 +13,7 @@ using UnityEngine.Serialization;
 using UnityEngine.Localization.Components;
 using UnityEngine.Localization.SmartFormat.PersistentVariables;
 using FMODUnity;
-using static UnityEditor.Profiling.RawFrameDataView;
+//using static UnityEditor.Profiling.RawFrameDataView;
 
 
 namespace dungeonduell

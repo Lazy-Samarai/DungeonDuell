@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
-using static UnityEditor.Profiling.RawFrameDataView;
+//using static UnityEditor.Profiling.RawFrameDataView;
 
 namespace dungeonduell
 {

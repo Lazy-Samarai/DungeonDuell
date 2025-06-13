@@ -42,11 +42,10 @@ namespace dungeonduell
             _canvasGroup.alpha = 0;
             optionsPanel.SetActive(false);
 
-            /*
-            _masterVCA = RuntimeManager.GetVCA("vca:/Master");
-            _musicVCA = RuntimeManager.GetVCA("vca:/Music");
-            _sfxVCA = RuntimeManager.GetVCA("vca:/SFX");
-            */
+            _masterVCA = RuntimeManager.GetVCA("VCA:/Master");            
+            _musicVCA = RuntimeManager.GetVCA("VCA:/Music");
+            _sfxVCA = RuntimeManager.GetVCA("VCA:/SFX");
+            
 
             _dataManager = FindFirstObjectByType<OptionDataManager>();
             SetupResolutionDropdown();
@@ -91,14 +90,14 @@ namespace dungeonduell
 
         public void SetMusicVolume(float volume)
         {
-            //_musicVCA.setVolume(volume);
+            _musicVCA.setVolume(volume);
             if (_dataManager != null)
                 _dataManager.SetMusicVolume(volume);
         }
 
         public void SetSfxVolume(float volume)
         {
-            //_sfxVCA.setVolume(volume);
+            _sfxVCA.setVolume(volume);
             if (_dataManager != null)
                 _dataManager.SetSfxVolume(volume);
         }
@@ -106,7 +105,7 @@ namespace dungeonduell
         public void MuteToggle(bool muted)
         {
             float volume = muted ? 0f : audioSlider.value;
-            //_masterVCA.setVolume(volume);
+            _masterVCA.setVolume(volume);
             if (_dataManager != null) _dataManager.MuteToggle(muted);
         }
 
