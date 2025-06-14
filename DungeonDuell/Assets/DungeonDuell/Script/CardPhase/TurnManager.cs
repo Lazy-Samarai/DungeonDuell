@@ -6,7 +6,6 @@ using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
 using UnityEngine;
 using TMPro;
-using MoreMountains.TopDownEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Users;
 using UnityEngine.Serialization;
@@ -34,31 +33,18 @@ namespace dungeonduell
 
         private readonly bool[] _playerPlayedAllCards = { false, false };
 
-        private bool _awaitingKeyPress;
-        private float _timeStart;
-
         const string TextEntryCurrentPlayer = "Current_Player";
         private const string TextEntryMakeReady = "Make_Ready";
         private const string TextEntryEntryName = "Loading";
         private const string TextEntryStartIn = "Start_In";
         private const string TextEntryNextPlayer = "Next_Player";
 
-        private TweenerCore<Vector2, Vector2, VectorOptions> currentTween;
-        private TweenerCore<Vector2, Vector2, VectorOptions> currentTween2;
 
         private void Start()
         {
-            _timeStart = Time.time;
             InitializeTurn();
 
             InputUser.onChange += SetDevicesActivation;
-        }
-
-        private void Update()
-        {
-            if (_awaitingKeyPress && Time.time - _timeStart > 0.5f &&
-                GetActivePlayerInput().actions["Submit"].WasPressedThisFrame())
-                BeginPlayerActionPhase();
         }
 
         private void OnEnable()
@@ -96,7 +82,6 @@ namespace dungeonduell
 
         private void InitializeTurn()
         {
-            _awaitingKeyPress = true;
             playerTurnText.SetEntry(TextEntryNextPlayer);
             SetPlayerInText();
 
@@ -104,8 +89,8 @@ namespace dungeonduell
             SetDevicesActivation();
 
             playerTurnText.gameObject.SetActive(true);
-            pressAnyKeyText.gameObject.SetActive(true);
-            ToggleHandVisibility(false, false);
+
+            BeginPlayerActionPhase();
         }
 
         private void SetDevicesActivation(InputUser i, InputUserChange iu, InputDevice id)
@@ -134,22 +119,11 @@ namespace dungeonduell
 
         private void BeginPlayerActionPhase()
         {
-            if (!_awaitingKeyPress) return;
-
-            _awaitingKeyPress = false;
             UpdatePlayerTurnText();
             pressAnyKeyText.gameObject.SetActive(false);
             ToggleHandVisibility(isPlayer1Turn, !isPlayer1Turn);
 
-            StartCoroutine(DelayedFirstSelectable());
-        }
-
-
-        private IEnumerator DelayedFirstSelectable()
-        {
-            yield return null;
-            if (isPlayer1Turn) handPlayer1.FirstSelectable();
-            else handPlayer2.FirstSelectable();
+            //    StartCoroutine(DelayedFirstSelectable());
         }
 
         private void UpdatePlayerTurnText()
@@ -172,15 +146,31 @@ namespace dungeonduell
         // Neue Methode zum Umschalten der Handkartenanzeige
         private void ToggleHandVisibility(bool showForPlayer1, bool showForPlayer2)
         {
-            handPlayer1.ShowHideDeck(!showForPlayer1);
-            handPlayer2.ShowHideDeck(!showForPlayer2);
-
-            SlidePlayerSprite(player1UI, showForPlayer1, true);
-            SlidePlayerSprite(player2UI, showForPlayer2, false);
+            if (!showForPlayer1 && !showForPlayer2)
+            {
+                SlidePlayerSprite(player1UI, false);
+                SlidePlayerSprite(player2UI, false);
+                handPlayer1.ShowHideDeck(true);
+                handPlayer2.ShowHideDeck(true);
+            }
+            else
+            {
+                SlidePlayerSprite(!showForPlayer1 ? player1UI : player2UI, false).OnComplete(
+                    () =>
+                    {
+                        handPlayer1.ShowHideDeck(!showForPlayer1);
+                        handPlayer2.ShowHideDeck(!showForPlayer2);
+                        SlidePlayerSprite(!showForPlayer2 ? player1UI : player2UI, true).OnStart(() =>
+                        {
+                            if (isPlayer1Turn) handPlayer1.FirstSelectable();
+                            else handPlayer2.FirstSelectable();
+                        });
+                    });
+            }
         }
 
 
-        public void InnitGameCountDown()
+        private void InnitGameCountDown()
         {
             ActivateAllDevice();
 
@@ -205,7 +195,7 @@ namespace dungeonduell
             yield return new WaitForSeconds(1f);
             pressAnyKeyText.SetEntry(TextEntryEntryName);
             DdCodeEventHandler.Trigger_SceneTransition();
-            
+
             //FindFirstObjectByType<SceneLoading>().ToTheDungeon();
         }
 
@@ -214,30 +204,12 @@ namespace dungeonduell
             _playerPlayedAllCards[player1 ? 0 : 1] = true;
         }
 
-        private PlayerInput GetActivePlayerInput()
-        {
-            var neededID = isPlayer1Turn ? "Player1" : "Player2";
-            foreach (var input in FindObjectsByType<PlayerInput>(FindObjectsSortMode.None))
-            {
-                var manager = input.GetComponent<InputSystemManagerEventsBased>();
-                if (manager != null && manager.PlayerID == neededID)
-                    return input;
-            }
-
-            return null;
-        }
-
-        private void SlidePlayerSprite(GameObject uiElement, bool show, bool player1, float hiddenY = -550f,
+        private TweenerCore<Vector2, Vector2, VectorOptions> SlidePlayerSprite(GameObject uiElement, bool show,
+            float hiddenY = -550f,
             float visibleY = 0f)
         {
             TweenerCore<Vector2, Vector2, VectorOptions> tween;
-            if (uiElement == null) return;
-
-
-            if (player1)
-                currentTween.Complete();
-            else
-                currentTween2.Complete();
+            if (uiElement == null) return null;
 
             var rect = uiElement.GetComponent<RectTransform>();
             if (show)
@@ -252,10 +224,7 @@ namespace dungeonduell
                     .OnComplete(() => uiElement.SetActive(false));
             }
 
-            if (player1)
-                currentTween = tween;
-            else
-                currentTween2 = tween;
+            return tween;
         }
 
         public void ActivateAllDevice()
