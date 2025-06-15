@@ -166,5 +166,12 @@ namespace dungeonduell
         {
             GameReset?.Invoke();
         }
+
+        public static event Action<AtmoLevel> AtmosphereLevelChanged;
+
+        public static void Trigger_AtmosphereLevelChanged(AtmoLevel level)
+        {
+            AtmosphereLevelChanged?.Invoke(level);
+        }
     }
 }
