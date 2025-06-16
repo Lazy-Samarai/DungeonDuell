@@ -202,9 +202,11 @@ namespace dungeonduell
             {
                 page.localizedImage.LoadAssetAsync().Completed += handle =>
                 {
-                    illustrationImage.sprite = handle.Result;
-                    illustrationImage.enabled = (handle.Result != null);
-
+                    if (illustrationImage != null && illustrationImage.isActiveAndEnabled)
+                    {
+                        illustrationImage.sprite = handle.Result;
+                        illustrationImage.enabled = (handle.Result != null);
+                    }
                 };
             }
 

@@ -4155,7 +4155,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1445213764}
   - component: {fileID: 1445213765}
-  - component: {fileID: 1445213766}
   - component: {fileID: 1445213767}
   m_Layer: 0
   m_Name: OptionDataManager
@@ -4197,19 +4196,6 @@ MonoBehaviour:
   isMuted: 0
   resolutionIndex: 0
   selectedLanguageCode: en
---- !u!114 &1445213766
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1445213762}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da48706f3084c5040a77b7fd939f573d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainMenu: {fileID: 2118469192}
 --- !u!114 &1445213767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5097,6 +5083,7 @@ GameObject:
   - component: {fileID: 2004923708}
   - component: {fileID: 2004923707}
   - component: {fileID: 2004923709}
+  - component: {fileID: 2004923710}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -5176,6 +5163,19 @@ MonoBehaviour:
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
   m_ScrollDeltaPerTick: 6
+--- !u!114 &2004923710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004923705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da48706f3084c5040a77b7fd939f573d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMenu: {fileID: 2118469192}
 --- !u!1001 &2098895664
 PrefabInstance:
   m_ObjectHideFlags: 0
