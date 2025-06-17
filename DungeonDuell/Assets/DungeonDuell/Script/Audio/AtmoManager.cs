@@ -24,12 +24,17 @@ namespace dungeonduell
     public class AtmoManager : MonoBehaviour
     {
         public EventReference fmodAtmoEvent;
+        public EventReference fmodBGMusicEvent;
         private EventInstance _atmoInstance;
+        private EventInstance _BGInstance;
 
         void Awake()
         {
             _atmoInstance = RuntimeManager.CreateInstance(fmodAtmoEvent);
             _atmoInstance.start();
+
+            _BGInstance = RuntimeManager.CreateInstance(fmodBGMusicEvent);
+            _BGInstance.start();
 
             DdCodeEventHandler.AtmosphereLevelChanged += OnAtmosphereLevelChanged;
             SceneManager.sceneLoaded += OnSceneLoaded;
@@ -63,6 +68,7 @@ namespace dungeonduell
         private void OnAtmosphereLevelChanged(AtmoLevel level)
         {
             _atmoInstance.setParameterByName("Atmo_sections", (float)level);
+            _BGInstance.setParameterByName("Music_Sections",(float)level);
             Debug.Log($"[AtmoManager] Atmo_sections set to: {level} ({(int)level})");
         }
 
