@@ -18736,14 +18736,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f88a7aecb5999445860b4f8215390e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spineEventName: Step
-  fmodFootstepEvent:
+  spineEventName: 
+  normalWalk:
     Guid:
       Data1: -1085801826
       Data2: 1296669467
       Data3: 1327523200
       Data4: -1316949880
     Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player_walk_normal
+  normalRun:
+    Guid:
+      Data1: 1595341294
+      Data2: 1311128039
+      Data3: -80156500
+      Data4: -2070091831
+    Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player_run_normal
+  lootWalk:
+    Guid:
+      Data1: -1347077510
+      Data2: 1254471300
+      Data3: -251857223
+      Data4: -277967773
+    Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player_walk_treasure
+  lootRun:
+    Guid:
+      Data1: 1062527318
+      Data2: 1083238653
+      Data3: 1422034111
+      Data4: 1661999426
+    Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player_run_treasure
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 4
+  raycastDistance: 1
 --- !u!1 &6808776468769401931
 GameObject:
   m_ObjectHideFlags: 0

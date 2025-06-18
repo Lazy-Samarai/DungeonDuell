@@ -843,8 +843,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.5, y: 0.3}
-  m_SizeDelta: {x: 51.91, y: 48.52}
+  m_AnchoredPosition: {x: 0.5, y: 7.377}
+  m_SizeDelta: {x: 51.91, y: 34.366}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &59417392
 CanvasRenderer:
@@ -876,8 +876,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 99
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: a7cf2bc8733f6c0468062c8e95e84690, type: 2}
-  m_sharedMaterial: {fileID: -7371932871882357731, guid: a7cf2bc8733f6c0468062c8e95e84690,
+  m_fontAsset: {fileID: 11400000, guid: 38995161939ff9748885e40667efa249, type: 2}
+  m_sharedMaterial: {fileID: -6973804868841263877, guid: 38995161939ff9748885e40667efa249,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -10331,6 +10331,13 @@ MonoBehaviour:
   finalRound: 0
   timerText: {fileID: 59417393}
   allRoomVisitedTime: 10
+  countdownSfx:
+    Guid:
+      Data1: 1717994450
+      Data2: 1172614899
+      Data3: -1593419873
+      Data4: -1269177009
+    Path: event:/Dungeon Duell Audio V1/Card Phase/CP_UI/CP_UI_countdown
 --- !u!4 &839105399
 Transform:
   m_ObjectHideFlags: 0

@@ -1,68 +1,84 @@
 ﻿using UnityEngine;
 using Spine.Unity;
-using UnityEngine.Events;
-using FMOD.Studio;
 using FMODUnity;
+using FMOD.Studio;
+using MoreMountains.TopDownEngine;
 
 public class SpineStepSound : MonoBehaviour
 {
-    public string spineEventName = ""; // z. B. "Footstep"
-    public EventReference fmodFootstepEvent;
+    [SpineEvent] public string spineEventName = "Step";
+
+    [Header("FMOD Events")]
+    public EventReference normalWalk;
+    public EventReference normalRun;
+    public EventReference lootWalk;
+    public EventReference lootRun;
+
+    [Header("Bodenerkennung")]
+    public LayerMask groundLayerMask;
+    public float raycastDistance = 1f;
 
     private SkeletonAnimation skeletonAnimation;
-    private EventInstance footstepInstance;
-    private bool isStepPlaying = false;
+    private Character _character;
 
-    void Awake()
+    private void Awake()
     {
         skeletonAnimation = GetComponent<SkeletonAnimation>();
-        if (skeletonAnimation != null)
-        {
-            skeletonAnimation.AnimationState.Event += HandleSpineEvent;
-        }
+        _character = GetComponent<Character>();
 
+        if (skeletonAnimation != null)
+            skeletonAnimation.AnimationState.Event += HandleSpineEvent;
     }
 
     private void HandleSpineEvent(Spine.TrackEntry trackEntry, Spine.Event e)
     {
-        print(e.Data.Name);
-        if (e.Data.Name == spineEventName)
-        {
-            // Wenn schon ein Sound läuft, stoppen und neu erzeugen
-            if (isStepPlaying && footstepInstance.isValid())
-            {
-                footstepInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-                footstepInstance.release();
-            }
+        if (e.Data.Name != spineEventName) return;
 
-            footstepInstance = RuntimeManager.CreateInstance(fmodFootstepEvent);
-            footstepInstance.start();
-            footstepInstance.release();
-            isStepPlaying = true;
-        }
+        // Prüfe: läuft oder geht
+        bool isRunning = _character != null && _character.MovementState.CurrentState == CharacterStates.MovementStates.Running;
+
+        // Ermittle Untergrund
+        string groundType = GetGroundType();
+
+        // Wähle EventReference
+        EventReference stepEvent = SelectEvent(groundType, isRunning);
+
+        // Sound abspielen
+        if (stepEvent.IsNull) return;
+
+        var instance = RuntimeManager.CreateInstance(stepEvent);
+        instance.set3DAttributes(RuntimeUtils.To3DAttributes(transform));
+        instance.start();
+        instance.release();
     }
 
-    public void StopStepSound()
+    private string GetGroundType()
     {
-        if (isStepPlaying && footstepInstance.isValid())
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, raycastDistance, groundLayerMask);
+        if (hit.collider != null)
         {
-            footstepInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-            footstepInstance.release();
-            isStepPlaying = false;
+            return hit.collider.tag; // Boden-Tags wie "Grass", "Stone"
+        }
+        return "Default";
+    }
+
+    private EventReference SelectEvent(string groundType, bool isRunning)
+    {
+        Debug.Log(groundType);
+        switch (groundType)
+        {
+            case "Untagged":
+                return isRunning ? normalWalk : normalRun;
+            case "Respawn":
+                return isRunning ? lootWalk : lootRun;
+            default:
+                return isRunning ? normalWalk : normalRun;
         }
     }
 
     private void OnDestroy()
     {
         if (skeletonAnimation != null)
-        {
             skeletonAnimation.AnimationState.Event -= HandleSpineEvent;
-        }
-
-        if (footstepInstance.isValid())
-        {
-            footstepInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-            footstepInstance.release();
-        }
     }
 }
