@@ -20358,11 +20358,21 @@ PrefabInstance:
         type: 3}
       propertyPath: LevelUpNowText
       value: 
-      objectReference: {fileID: 1654634607}
+      objectReference: {fileID: 0}
+    - target: {fileID: 7277498198348813292, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: levelUpNowText
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7617324663695077372, guid: e738a2ac7ae5bcc4894527f901d1007f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -0.0055236816
+      objectReference: {fileID: 0}
+    - target: {fileID: 7652588100673016364, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8085697583571887646, guid: e738a2ac7ae5bcc4894527f901d1007f,
         type: 3}
@@ -20408,18 +20418,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a42a23ce4f9ed24abde69beacbef2f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1654634607 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 594451571744507654, guid: e738a2ac7ae5bcc4894527f901d1007f,
-    type: 3}
-  m_PrefabInstance: {fileID: 1654634603}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1654634608 stripped
@@ -25490,6 +25488,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -0.0055236816
+      objectReference: {fileID: 0}
+    - target: {fileID: 7652588100673016364, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8582763663889452001, guid: e738a2ac7ae5bcc4894527f901d1007f,
         type: 3}
