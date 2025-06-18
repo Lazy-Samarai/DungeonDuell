@@ -1693,6 +1693,7 @@ GameObject:
   - component: {fileID: 5397218293021403670}
   - component: {fileID: 2995376572896925343}
   - component: {fileID: 629897164198188153}
+  - component: {fileID: 2440228349515558812}
   m_Layer: 10
   m_Name: Spine GameObject (skeleton)
   m_TagString: Untagged
@@ -1829,7 +1830,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   facingEastRunning: 0
   runningEast: 0
-  idle: Idle2
+  idle: Idle
   death: Dead
   baseMoving: Walk
   attack: Shoot
@@ -1846,6 +1847,51 @@ MonoBehaviour:
     type: 2}
   dashParticlesBackwardsMaterial: {fileID: 2100000, guid: 07729317d94320f4789705c7b8c2c82a,
     type: 2}
+--- !u!114 &2440228349515558812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1647888063969688703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f88a7aecb5999445860b4f8215390e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spineEventName: Step
+  normalWalk:
+    Guid:
+      Data1: -1085801826
+      Data2: 1296669467
+      Data3: 1327523200
+      Data4: -1316949880
+    Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player_walk_normal
+  normalRun:
+    Guid:
+      Data1: 1595341294
+      Data2: 1311128039
+      Data3: -80156500
+      Data4: -2070091831
+    Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player_run_normal
+  lootWalk:
+    Guid:
+      Data1: -1347077510
+      Data2: 1254471300
+      Data3: -251857223
+      Data4: -277967773
+    Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player_walk_treasure
+  lootRun:
+    Guid:
+      Data1: 1062527318
+      Data2: 1083238653
+      Data3: 1422034111
+      Data4: 1661999426
+    Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player_run_treasure
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 4
+  raycastDistance: 1
 --- !u!1 &1899941585429488189
 GameObject:
   m_ObjectHideFlags: 0
@@ -19242,24 +19288,12 @@ MonoBehaviour:
                 m_StringArgument: Walk
                 m_BoolArgument: 0
               m_CallState: 2
-            - m_Target: {fileID: 543301697331381333}
-              m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
-              m_MethodName: Play
-              m_Mode: 1
-              m_Arguments:
-                m_ObjectArgument: {fileID: 0}
-                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-                m_IntArgument: 0
-                m_FloatArgument: 0
-                m_StringArgument: 
-                m_BoolArgument: 0
-              m_CallState: 2
         StopEvents:
           m_PersistentCalls:
             m_Calls:
-            - m_Target: {fileID: 543301697331381333}
-              m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
-              m_MethodName: Stop
+            - m_Target: {fileID: 2440228349515558812}
+              m_TargetAssemblyTypeName: SpineStepSound, Assembly-CSharp
+              m_MethodName: StopStepSound
               m_Mode: 1
               m_Arguments:
                 m_ObjectArgument: {fileID: 0}
@@ -19290,16 +19324,16 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: -1468963454
-      Data2: 1138359358
-      Data3: 813505967
-      Data4: 2068457669
-    Path: event:/SFXLoopTest
+      Data1: -1085801826
+      Data2: 1296669467
+      Data3: 1327523200
+      Data4: -1316949880
+    Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player_walk_normal
   Event: 
   EventPlayTrigger: 0
   EventStopTrigger: 0
   AllowFadeout: 1
-  TriggerOnce: 0
+  TriggerOnce: 1
   Preload: 0
   NonRigidbodyVelocity: 0
   Params: []
@@ -19316,6 +19350,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8757570661848954714}
   - component: {fileID: 7961611125693687952}
+  - component: {fileID: 1219970271564434075}
   m_Layer: 10
   m_Name: RunFeedback
   m_TagString: Untagged
@@ -19533,10 +19568,53 @@ MonoBehaviour:
               m_CallState: 2
         StopEvents:
           m_PersistentCalls:
-            m_Calls: []
+            m_Calls:
+            - m_Target: {fileID: 2440228349515558812}
+              m_TargetAssemblyTypeName: SpineStepSound, Assembly-CSharp
+              m_MethodName: StopStepSound
+              m_Mode: 1
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 0
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
         InitializationEvents:
           m_PersistentCalls:
             m_Calls: []
         ResetEvents:
           m_PersistentCalls:
             m_Calls: []
+--- !u!114 &1219970271564434075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8846133153256829495}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1595341294
+      Data2: 1311128039
+      Data3: -80156500
+      Data4: -2070091831
+    Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player_run_normal
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
