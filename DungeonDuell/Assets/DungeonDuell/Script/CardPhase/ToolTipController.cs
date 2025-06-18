@@ -5,58 +5,47 @@ namespace dungeonduell
 {
     public class TooltipController : MonoBehaviour
     {
-        public GameObject tooltipPrefab;
-        public GameObject cardCanvas;
-        private GameObject _tooltipInstance;
+        [SerializeField] private GameObject tooltipPanel; // Direkt im Canvas
+        [SerializeField] private TextMeshProUGUI tooltipText;
+
         private RectTransform _tooltipRectTransform;
-        private TextMeshProUGUI _tooltipText;
 
-        private void Start()
+        private void Awake()
         {
-            if (tooltipPrefab != null)
+            if (tooltipPanel == null || tooltipText == null)
             {
-                _tooltipInstance = Instantiate(tooltipPrefab, cardCanvas.transform);
-                _tooltipText = _tooltipInstance.GetComponentInChildren<TextMeshProUGUI>();
-                _tooltipRectTransform = _tooltipInstance.GetComponent<RectTransform>();
-                HideTooltip();
+                Debug.LogError("TooltipPanel oder Text nicht zugewiesen!");
+                return;
             }
-            else
-            {
-                Debug.LogError("Tooltip Prefab nicht zugewiesen!");
-            }
+
+            _tooltipRectTransform = tooltipPanel.GetComponent<RectTransform>();
+            HideTooltip();
         }
 
-
-        public void ShowTooltip(string text, Vector3 position)
+        public void ShowTooltip(string text, Vector3 worldPosition)
         {
-            if (_tooltipInstance != null)
-            {
-                if (_tooltipText == null || _tooltipRectTransform == null)
-                {
-                    Debug.LogError("Tooltip TextMeshProUGUI oder RectTransform nicht gefunden!");
-                    return;
-                }
+            if (tooltipText == null || _tooltipRectTransform == null) return;
 
-                _tooltipText.text = text;
-                _tooltipInstance.SetActive(true);
+            tooltipText.text = text;
+            tooltipPanel.SetActive(true);
 
-                // Umwandlung der Weltposition in die Position des UI-Camvas
-                Vector2 localPosition;
-                RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                    (RectTransform)cardCanvas.transform,
-                    Camera.main.WorldToScreenPoint(position),
-                    Camera.main,
-                    out localPosition
-                );
+            Vector2 localPosition;
+            RectTransform canvasRect = tooltipPanel.transform.parent.GetComponent<RectTransform>();
 
-                _tooltipRectTransform.anchoredPosition = localPosition;
-            }
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                canvasRect,
+                Camera.main.WorldToScreenPoint(worldPosition),
+                Camera.main,
+                out localPosition
+            );
+
+            _tooltipRectTransform.anchoredPosition = localPosition;
         }
-
 
         public void HideTooltip()
         {
-            if (_tooltipInstance != null) _tooltipInstance.SetActive(false);
+            if (tooltipPanel != null)
+                tooltipPanel.SetActive(false);
         }
     }
 }
