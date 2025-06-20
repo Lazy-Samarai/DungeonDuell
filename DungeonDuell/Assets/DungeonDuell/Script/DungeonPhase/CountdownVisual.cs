@@ -19,8 +19,8 @@ public class CountdownVisual : MonoBehaviour
 
     private int lastSecond = -1;
 
-    private Color textRed = new Color(1f, 0.3f, 0.3f);      // Hellrot für Text
-    private Color bgRed = new Color(0.6f, 0f, 0f);          // Dunkelrot für UI
+    public Color textRed = new Color(1f, 0.3f, 0.3f);      // Hellrot für Text
+    public Color bgRed = new Color(0.6f, 0f, 0f);          // Dunkelrot für UI
     private Color defaultTextColor = Color.black;
     private Color defaultBGColor = Color.white;
 
