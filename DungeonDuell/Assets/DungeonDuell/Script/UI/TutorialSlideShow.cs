@@ -63,6 +63,7 @@ namespace dungeonduell
 
             inputActions.CardPhase.RotateR.performed += ctx => NextPage();
             inputActions.CardPhase.RotateL.performed += ctx => PreviousPage();
+            inputActions.CardPhase.Pause.performed += ctx => CancelTutorial();
             inputActions.CardPhase.Submit.started += ctx => isSkipPressed = true;
             inputActions.CardPhase.Submit.canceled += ctx =>
             {
@@ -201,9 +202,11 @@ namespace dungeonduell
             {
                 page.localizedImage.LoadAssetAsync().Completed += handle =>
                 {
-                    illustrationImage.sprite = handle.Result;
-                    illustrationImage.enabled = (handle.Result != null);
-
+                    if (illustrationImage != null && illustrationImage.isActiveAndEnabled)
+                    {
+                        illustrationImage.sprite = handle.Result;
+                        illustrationImage.enabled = (handle.Result != null);
+                    }
                 };
             }
 
@@ -235,6 +238,18 @@ namespace dungeonduell
                 }
 
 
+            });
+        }
+
+        void CancelTutorial()
+        {
+            canvasGroup.DOFade(0, TutorialCloseFadeDuration).SetUpdate(true).OnComplete(() =>
+            {
+                ResetTutorial();
+
+                gameObject.SetActive(false);
+
+                DdCodeEventHandler.Trigger_TutorialCancel();
             });
         }
 
