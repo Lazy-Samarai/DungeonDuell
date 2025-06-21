@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
@@ -16,7 +17,6 @@ namespace dungeonduell
         [SerializeField] private MinimapCamManager minimapCamManager;
         [SerializeField] private RoomData roomData;
 
-
         private void Start()
         {
             minimapCamManager = FindObjectOfType<MinimapCamManager>();
@@ -26,12 +26,10 @@ namespace dungeonduell
                 return;
             }
 
-            // Player 1 Spawn suchen und als Startziel setzen
             GameObject p1Spawn = GameObject.FindWithTag("SpawnpointPlayer1");
             if (p1Spawn != null)
                 minimapCamManager.SetFollowTarget(p1Spawn.transform, true);
 
-            // Player 2 Spawn suchen und als Startziel setzen
             GameObject p2Spawn = GameObject.FindWithTag("SpawnpointPlayer2");
             if (p2Spawn != null)
                 minimapCamManager.SetFollowTarget(p2Spawn.transform, false);
@@ -49,16 +47,26 @@ namespace dungeonduell
                     coverCam.SetBool("InRoom", true);
                     coverMapTop.SetBool("InRoom_Map", true);
 
-                    if (roomData != null && roomData.roomCenter != null)
-                    {
-                        minimapCamManager.SetFollowTarget(roomData.roomCenter, i == 0);
-                        Debug.Log($"Minimap-Fokus gesetzt auf Raumzentrum für Player{i + 1}");
-                    }
-                    else
-                    {
-                        Debug.LogWarning($"[SimpleCamHandler] RoomData oder roomCenter fehlt im Inspector.");
-                    }
+                    StartCoroutine(DelayedFocusSet(i == 0, 0.25f));
+
+                    if (roomData != null)
+                        roomData.SetMapWallsActive(true); // MapWalls AN im aktiven Raum
                 }
+            }
+        }
+
+        private IEnumerator DelayedFocusSet(bool isPlayer1, float delay)
+        {
+            yield return new WaitForSeconds(delay);
+
+            if (roomData != null && roomData.roomCenter != null)
+            {
+                minimapCamManager.SetFollowTarget(roomData.roomCenter, isPlayer1);
+                
+            }
+            else
+            {
+                Debug.LogWarning("[SimpleCamHandler] roomData oder roomCenter fehlt.");
             }
         }
 
@@ -76,8 +84,12 @@ namespace dungeonduell
             {
                 coverCam.SetBool("InRoom", false);
                 coverMapTop.SetBool("InRoom_Map", false);
+
+                if (roomData != null)
+                    roomData.SetMapWallsActive(false); // MapWalls AUS wenn niemand mehr im Raum
             }
         }
+
 
         private bool AllCamsOff()
         {

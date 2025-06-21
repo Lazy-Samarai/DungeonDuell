@@ -1,10 +1,14 @@
 using UnityEngine;
 
-namespace dungeonduell
+public class RoomData : MonoBehaviour
 {
-    public class RoomData : MonoBehaviour
-    {
-        public Transform roomCenter;
-    }
+    [Header("Map-Zeug")]
+    public Transform roomCenter;
+    public GameObject mapWalls; // Die weißen Map-Walls
 
+    public void SetMapWallsActive(bool active)
+    {
+        if (mapWalls != null)
+            mapWalls.SetActive(active);
+    }
 }
