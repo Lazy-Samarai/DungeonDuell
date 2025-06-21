@@ -798,10 +798,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: eba97dcbfa65cce43b6e8898d2506f2d, type: 2}
   - {fileID: 11400000, guid: 61d31bb1dc50f7b488ce49f1e12915e0, type: 2}
   - {fileID: 11400000, guid: 8d64645383b29db46aa6ed284f9d9dfc, type: 2}
-  cardShelled:
-  - {fileID: 11400000, guid: 27af0542bdc0ff742b14a1d7620896cb, type: 2}
   connectCollector: {fileID: 1945806930}
   isPlayer1Turn: 1
+  shellCardMarker: {fileID: 9030860857177964664, guid: 17099331d7c4e3e4793d1adafb7d4ce9,
+    type: 3}
   _tilemap: {fileID: 0}
   setAbleCount: 0000000000000000
   indiactorDoorOver: {fileID: 0}
@@ -5534,6 +5534,7 @@ GameObject:
   - component: {fileID: 1945806929}
   - component: {fileID: 1945806930}
   - component: {fileID: 1945806931}
+  - component: {fileID: 1945806932}
   m_Layer: 0
   m_Name: RoomConnectTracker
   m_TagString: Untagged
@@ -5581,6 +5582,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d90547393724a37488f96afba6144351, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1945806932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945806928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82332fb09497e21439e610bc1ec4e5c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1961649889
