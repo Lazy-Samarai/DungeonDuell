@@ -19,35 +19,13 @@ namespace dungeonduell
             DontDestroyOnLoad(gameObject);
         }
 
-        private void OnEnable()
-        {
-            //Debug.Log("OnEnable called");
-            SceneManager.sceneLoaded += OnSceneLoaded;
-        }
-
-
-        private void OnDisable()
-        {
-            SceneManager.sceneLoaded -= OnSceneLoaded;
-        }
-
-        // called second
-        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-        {
-            // So the map is not seen in Dunegeon Phase
-            if (scene.buildIndex == 2)
-                transform.GetChild(0).gameObject.SetActive(false);
-            else
-                transform.GetChild(0).gameObject.SetActive(true);
-        }
-
         public void AddRoom(Vector3Int pos, List<RoomConnection> conncection, RoomType type, RoomElement element,
-            List<ConnectionDir> newAllowedDoors, int owner)
+            List<ConnectionDir> newAllowedDoors, int owner, int territoryOwner)
         {
             var newroomsInfos =
                 new Tuple<Vector3Int, RoomInfo>(pos,
                     new RoomInfo(RoomsInfos.Count, conncection, type, element, newAllowedDoors, owner,
-                        !filteredRoomTypeFromFirstCoin.Contains(type)));
+                        !filteredRoomTypeFromFirstCoin.Contains(type), territoryOwner));
 
             RoomsInfos.Add(newroomsInfos);
         }

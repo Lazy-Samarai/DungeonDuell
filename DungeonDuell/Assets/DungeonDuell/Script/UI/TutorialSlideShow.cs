@@ -63,6 +63,27 @@ namespace dungeonduell
 
             inputActions.CardPhase.RotateR.performed += ctx => NextPage();
             inputActions.CardPhase.RotateL.performed += ctx => PreviousPage();
+            inputActions.CardPhase.Pause.performed += ctx => CancelTutorial();
+            inputActions.CardPhase.Submit.started += ctx => isSkipPressed = true;
+            inputActions.CardPhase.Submit.canceled += ctx =>
+            {
+                isSkipPressed = false;
+                skipHoldTime = 0f;
+                UpdateSkipBar(0f);
+
+                if (rotationTween != null && rotationTween.IsActive())
+                {
+                    rotationTween.Kill();
+                }
+
+                SkipImage.transform
+                    .DORotate(Vector3.zero, 0.3f)
+                    .SetUpdate(true)
+                    .SetEase(Ease.OutCubic)
+                    .SetUpdate(true);
+
+                rotationStarted = false;
+            };
             inputActions.CardPhase.RotateR.started += ctx => isSkipPressed = true;
             inputActions.CardPhase.RotateR.canceled += ctx =>
             {
@@ -181,9 +202,11 @@ namespace dungeonduell
             {
                 page.localizedImage.LoadAssetAsync().Completed += handle =>
                 {
-                    illustrationImage.sprite = handle.Result;
-                    illustrationImage.enabled = (handle.Result != null);
-
+                    if (illustrationImage != null && illustrationImage.isActiveAndEnabled)
+                    {
+                        illustrationImage.sprite = handle.Result;
+                        illustrationImage.enabled = (handle.Result != null);
+                    }
                 };
             }
 
@@ -215,6 +238,18 @@ namespace dungeonduell
                 }
 
 
+            });
+        }
+
+        void CancelTutorial()
+        {
+            canvasGroup.DOFade(0, TutorialCloseFadeDuration).SetUpdate(true).OnComplete(() =>
+            {
+                ResetTutorial();
+
+                gameObject.SetActive(false);
+
+                DdCodeEventHandler.Trigger_TutorialCancel();
             });
         }
 

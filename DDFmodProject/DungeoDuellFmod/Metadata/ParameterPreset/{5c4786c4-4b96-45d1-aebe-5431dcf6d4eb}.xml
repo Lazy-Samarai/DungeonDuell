@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="ParameterPreset" id="{5c4786c4-4b96-45d1-aebe-5431dcf6d4eb}">
+		<property name="name">
+			<value>Atmo_sections</value>
+		</property>
+		<relationship name="folder">
+			<destination>{15777f2b-f42d-4cdd-bb4a-9cc2cb920a3b}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{db54ba86-7014-4feb-95d4-f0756807f81a}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{db54ba86-7014-4feb-95d4-f0756807f81a}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>3</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>Atmo_basic</value>
+			<value>Atmo_concentrated</value>
+			<value>Atmo_action</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

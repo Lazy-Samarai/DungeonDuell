@@ -103,7 +103,7 @@ namespace MoreMountains.TopDownEngine
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""SecondaryMovement"",
+                    ""name"": ""Aim"",
                     ""type"": ""PassThrough"",
                     ""id"": ""e4146e01-7578-46fe-b394-b240c2256b2c"",
                     ""expectedControlType"": ""Vector2"",
@@ -581,7 +581,7 @@ namespace MoreMountains.TopDownEngine
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""SecondaryMovement"",
+                    ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -1240,7 +1240,7 @@ namespace MoreMountains.TopDownEngine
             // DungeonPhase
             m_DungeonPhase = asset.FindActionMap("DungeonPhase", throwIfNotFound: true);
             m_DungeonPhase_PrimaryMovement = m_DungeonPhase.FindAction("PrimaryMovement", throwIfNotFound: true);
-            m_DungeonPhase_SecondaryMovement = m_DungeonPhase.FindAction("SecondaryMovement", throwIfNotFound: true);
+            m_DungeonPhase_Aim = m_DungeonPhase.FindAction("Aim", throwIfNotFound: true);
             m_DungeonPhase_Jump = m_DungeonPhase.FindAction("Jump", throwIfNotFound: true);
             m_DungeonPhase_Run = m_DungeonPhase.FindAction("Run", throwIfNotFound: true);
             m_DungeonPhase_Dash = m_DungeonPhase.FindAction("Dash", throwIfNotFound: true);
@@ -1350,7 +1350,7 @@ namespace MoreMountains.TopDownEngine
         private readonly InputActionMap m_DungeonPhase;
         private List<IDungeonPhaseActions> m_DungeonPhaseActionsCallbackInterfaces = new List<IDungeonPhaseActions>();
         private readonly InputAction m_DungeonPhase_PrimaryMovement;
-        private readonly InputAction m_DungeonPhase_SecondaryMovement;
+        private readonly InputAction m_DungeonPhase_Aim;
         private readonly InputAction m_DungeonPhase_Jump;
         private readonly InputAction m_DungeonPhase_Run;
         private readonly InputAction m_DungeonPhase_Dash;
@@ -1384,9 +1384,9 @@ namespace MoreMountains.TopDownEngine
             /// </summary>
             public InputAction @PrimaryMovement => m_Wrapper.m_DungeonPhase_PrimaryMovement;
             /// <summary>
-            /// Provides access to the underlying input action "DungeonPhase/SecondaryMovement".
+            /// Provides access to the underlying input action "DungeonPhase/Aim".
             /// </summary>
-            public InputAction @SecondaryMovement => m_Wrapper.m_DungeonPhase_SecondaryMovement;
+            public InputAction @Aim => m_Wrapper.m_DungeonPhase_Aim;
             /// <summary>
             /// Provides access to the underlying input action "DungeonPhase/Jump".
             /// </summary>
@@ -1484,9 +1484,9 @@ namespace MoreMountains.TopDownEngine
                 @PrimaryMovement.started += instance.OnPrimaryMovement;
                 @PrimaryMovement.performed += instance.OnPrimaryMovement;
                 @PrimaryMovement.canceled += instance.OnPrimaryMovement;
-                @SecondaryMovement.started += instance.OnSecondaryMovement;
-                @SecondaryMovement.performed += instance.OnSecondaryMovement;
-                @SecondaryMovement.canceled += instance.OnSecondaryMovement;
+                @Aim.started += instance.OnAim;
+                @Aim.performed += instance.OnAim;
+                @Aim.canceled += instance.OnAim;
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
@@ -1552,9 +1552,9 @@ namespace MoreMountains.TopDownEngine
                 @PrimaryMovement.started -= instance.OnPrimaryMovement;
                 @PrimaryMovement.performed -= instance.OnPrimaryMovement;
                 @PrimaryMovement.canceled -= instance.OnPrimaryMovement;
-                @SecondaryMovement.started -= instance.OnSecondaryMovement;
-                @SecondaryMovement.performed -= instance.OnSecondaryMovement;
-                @SecondaryMovement.canceled -= instance.OnSecondaryMovement;
+                @Aim.started -= instance.OnAim;
+                @Aim.performed -= instance.OnAim;
+                @Aim.canceled -= instance.OnAim;
                 @Jump.started -= instance.OnJump;
                 @Jump.performed -= instance.OnJump;
                 @Jump.canceled -= instance.OnJump;
@@ -1853,12 +1853,12 @@ namespace MoreMountains.TopDownEngine
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnPrimaryMovement(InputAction.CallbackContext context);
             /// <summary>
-            /// Method invoked when associated input action "SecondaryMovement" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// Method invoked when associated input action "Aim" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
             /// </summary>
             /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-            void OnSecondaryMovement(InputAction.CallbackContext context);
+            void OnAim(InputAction.CallbackContext context);
             /// <summary>
             /// Method invoked when associated input action "Jump" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
             /// </summary>

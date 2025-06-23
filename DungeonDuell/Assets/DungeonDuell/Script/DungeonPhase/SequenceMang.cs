@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using FMODUnity;
+using FMOD.Studio;
 
 namespace dungeonduell
 {
@@ -17,6 +19,11 @@ namespace dungeonduell
         [SerializeField] private TextMeshProUGUI timerText;
         private SceneLoading _sceneLoading;
 
+        [SerializeField] private float allRoomVisitedTime = 10;
+
+        [SerializeField] private EventReference countdownSfx;
+        private bool countdownSfxPlayed = false;
+
         // Start is called before the first frame update
         private void Start()
         {
@@ -29,14 +36,16 @@ namespace dungeonduell
             if (timeRunning & !finalRound)
             {
                 timeRound -= Time.deltaTime;
-                if (timeRound < 0) BackToCardPhase();
+                if (timeRound <= 1) BackToCardPhase();
 
-                var totalSeconds = (int)Mathf.Floor(timeRound);
-                // int minutes = totalSeconds / 60;
-                // int seconds = totalSeconds % 60;
+                int displaySeconds = Mathf.Max(0, Mathf.FloorToInt(timeRound));
+                timerText.text = displaySeconds.ToString();
 
-
-                timerText.text = totalSeconds.ToString();
+                if (!countdownSfxPlayed && timeRound <= 4f)
+                {
+                    countdownSfxPlayed = true;
+                    RuntimeManager.PlayOneShot(countdownSfx, transform.position);
+                }
             }
         }
 
@@ -54,12 +63,14 @@ namespace dungeonduell
         {
             DdCodeEventHandler.FinalRoundInDungeon += DisableTimer;
             DdCodeEventHandler.PlayerDataExposed += SetTimer;
+            DdCodeEventHandler.AllRoomVisited += OnAllRoomVisited;
         }
 
         public void UnsubscribeToAllEvents()
         {
             DdCodeEventHandler.FinalRoundInDungeon -= DisableTimer;
-            DdCodeEventHandler.PlayerDataExposed += SetTimer;
+            DdCodeEventHandler.PlayerDataExposed -= SetTimer;
+            DdCodeEventHandler.AllRoomVisited -= OnAllRoomVisited;
         }
 
         public void BackToCardPhase()
@@ -68,25 +79,27 @@ namespace dungeonduell
             //_sceneLoading.ToTheHex();
         }
 
-        public void Reseting()
-        {
-            var connectionsCollector = FindFirstObjectByType<ConnectionsCollector>();
-            var playerMang = FindFirstObjectByType<PlayerDataManager>();
-            Destroy(playerMang.gameObject);
-            Destroy(connectionsCollector.gameObject);
-            BackToCardPhase();
-        }
-
         public void DisableTimer()
         {
             finalRound = true;
             timeRunning = false;
             timerText.text = "X";
+            DdCodeEventHandler.Trigger_AtmosphereLevelChanged(AtmoLevel.Atmo_Action);
         }
 
         private void SetTimer(List<PlayerData> d, int currentRound)
         {
             timeRound = BaseTime + currentRound * TimeMorePerRound;
+            countdownSfxPlayed = false;
+        }
+
+        private void OnAllRoomVisited()
+        {
+            if (timeRound > allRoomVisitedTime && !finalRound)
+            {
+                timeRound = allRoomVisitedTime;
+                countdownSfxPlayed = false;
+            }
         }
     }
 }

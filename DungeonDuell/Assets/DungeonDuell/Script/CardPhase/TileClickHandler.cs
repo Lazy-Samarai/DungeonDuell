@@ -2,10 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cinemachine;
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
+
+//using static UnityEditor.Profiling.RawFrameDataView;
 
 namespace dungeonduell
 {
@@ -24,7 +27,6 @@ namespace dungeonduell
         public TileBase resetTile;
         public TileBase[] setAbleTiles;
         public TileBase[] shadowSetAbleTiles;
-        [FormerlySerializedAs("CardShelled")] public List<ShellCard> cardShelled;
         public ConnectionsCollector connectCollector;
         public bool isPlayer1Turn = true;
 
@@ -53,30 +55,35 @@ namespace dungeonduell
         };
 
         private HexgridController _hexgridController;
-        public Tilemap _tilemap;
+        public Tilemap tilemap;
         private TurnManager _turnManager;
 
         private static readonly Color BridgeColor = new Color(0, 0, 5);
         [SerializeField] int[] setAbleCount = { 0, 0 };
         public GameObject indiactorDoorOver;
+        [SerializeField] private EventReference rotateSFXEvent;
+        [SerializeField] private EventReference gridPlaceSFXEvent;
 
+        ShellTracker _shellTracker;
 
         private void Start()
         {
             connectCollector = FindFirstObjectByType<ConnectionsCollector>();
-            _tilemap = FindFirstObjectByType<Grid>().GetComponentsInChildren<Tilemap>()
+            tilemap = FindFirstObjectByType<Grid>().GetComponentsInChildren<Tilemap>()
                 .FirstOrDefault(tm => tm.gameObject.CompareTag(tileMapTag)); // Becuase there is also the hovermap
             _turnManager = FindFirstObjectByType<TurnManager>();
             _hexgridController = FindFirstObjectByType<HexgridController>();
+
+            _shellTracker = FindFirstObjectByType<ShellTracker>();
 
             GetCurrentSetAbleCount();
         }
 
         private void GetCurrentSetAbleCount()
         {
-            foreach (var cellPos in _tilemap.cellBounds.allPositionsWithin)
+            foreach (var cellPos in tilemap.cellBounds.allPositionsWithin)
             {
-                TileBase tile = _tilemap.GetTile(cellPos);
+                TileBase tile = tilemap.GetTile(cellPos);
 
                 for (int i = 0; i < setAbleCount.Length; i++)
                 {
@@ -110,7 +117,7 @@ namespace dungeonduell
 
         public (bool, bool?) IsSetablePosition(Vector3Int cellPosition)
         {
-            var tile = _tilemap.GetTile(cellPosition);
+            var tile = tilemap.GetTile(cellPosition);
             if (tile == null) return (false, null); // kein Tile = ungültig
 
             // Block Player Boxed in to only escape Bridge and other player not be applied to intervene 
@@ -136,13 +143,12 @@ namespace dungeonduell
 
 
             // Gültig, wenn NICHT das resetTile und in setAbleTiles enthalten
-            if (tile != resetTile && setAbleTiles.Contains(tile) |
-                cardShelled.Any(card => card.inPlayerRangeTile.Contains(tile)))
+            if (tile != resetTile && setAbleTiles.Contains(tile))
             {
-                if ((setAbleTiles[0] == tile) | cardShelled.Any(card => card.inPlayerRangeTile[0] == tile))
+                if ((setAbleTiles[0] == tile))
                     return (true, true);
 
-                if ((setAbleTiles[1] == tile) | cardShelled.Any(card => card.inPlayerRangeTile[1] == tile))
+                if ((setAbleTiles[1] == tile))
                     return (true, false);
 
                 return (true, null);
@@ -154,9 +160,12 @@ namespace dungeonduell
 
         public bool SpawnTile(Vector3 mouseWorldPos, Card card, bool playerMove, bool spawnSourroundSetables, int owner)
         {
+            // Not Ideal but as its execute Awake its solved like this
+            if (!playerMove) EnsureRefernces();
+
             var cellPosition =
-                _tilemap.WorldToCell(new Vector3(mouseWorldPos.x, mouseWorldPos.y, cam.transform.position.z));
-            var clickedTile = _tilemap.GetTile(cellPosition);
+                tilemap.WorldToCell(new Vector3(mouseWorldPos.x, mouseWorldPos.y, cam.transform.position.z));
+            var clickedTile = tilemap.GetTile(cellPosition);
 
 
             if (playerMove)
@@ -179,9 +188,13 @@ namespace dungeonduell
             // Sonderfall: ShellCard
             if (card is ShellCard)
             {
-                if (card.tile is AnimatedTile) _tilemap.SetTile(cellPosition, null);
+                GameObject marker = Instantiate(((ShellCard)card).marker, tilemap.CellToWorld(cellPosition),
+                    Quaternion.identity);
 
-                _tilemap.SetTile(cellPosition, card.tile);
+                marker.transform.parent = _shellTracker.transform;
+
+                _shellTracker.AddMarker(cellPosition, marker);
+                _shellTracker.AddShell(cellPosition, (ShellCard)card);
 
                 FinalizePlacement();
                 return true;
@@ -190,17 +203,17 @@ namespace dungeonduell
             if (clickedTile != resetTile || !playerMove)
             {
                 // ShellCard-Verarbeitung
-                var shelledTileCard = cardShelled.FirstOrDefault(x => x.inPlayerRangeTile.Contains(clickedTile));
+                var shelledTileCard = _shellTracker.TryGetShell(cellPosition);
                 if (shelledTileCard != null)
                 {
+                    shelledTileCard.Item1.startDoorConcellation = card.startDoorConcellation;
+
+                    card = (Card)shelledTileCard.Item1.Clone();
+                    card.tile = shelledTileCard.Item1.completeTile;
+
+                    _shellTracker.RemoveMarker(cellPosition);
+
                     DdCodeEventHandler.Trigger_CardToShelled(card, isPlayer1Turn);
-
-                    var index = Array.FindIndex(shelledTileCard.inPlayerRangeTile, tile => clickedTile == tile);
-                    clickedTile = setAbleTiles[index];
-                    shelledTileCard.startDoorConcellation = card.startDoorConcellation;
-
-                    card = (Card)shelledTileCard.Clone();
-                    card.tile = shelledTileCard.completeTile;
                 }
 
 
@@ -226,6 +239,20 @@ namespace dungeonduell
 
             Debug.Log("[TileClickHandler] OutOfReachTile");
             return false;
+        }
+
+        private void EnsureRefernces()
+        {
+            if (tilemap == null)
+            {
+                tilemap = FindFirstObjectByType<Grid>().GetComponentsInChildren<Tilemap>()
+                    .FirstOrDefault(tm => tm.gameObject.CompareTag(tileMapTag));
+            }
+
+            if (_shellTracker == null)
+            {
+                _shellTracker = FindFirstObjectByType<ShellTracker>();
+            }
         }
 
 
@@ -256,14 +283,14 @@ namespace dungeonduell
             if (CheckConnectAblity(sourroundCorr) || !playerMove)
             {
                 // --- HIER bleibt alles wie im Original ---
-                _tilemap.SetTile(cellPosition, card.tile);
+                tilemap.SetTile(cellPosition, card.tile);
 
                 if (spawnSourroundSetables)
                 {
-                    if(!hitContested) 
+                    if (!hitContested)
                         SpawnShadowTileOperations(playerMove, cellPosition, clickedTile);
 
-                    SpawnSetAbleOperation(cellPosition, clickedTile, owner,hitContested);
+                    SpawnSetAbleOperation(cellPosition, clickedTile, owner, hitContested);
 
                     if (playerMove)
                     {
@@ -271,7 +298,8 @@ namespace dungeonduell
                     }
                 }
 
-                CreateRoom(cellPosition, card.roomtype, card.roomElement, currentDoorDir, owner, connectionForcing);
+                CreateRoom(cellPosition, card.roomtype, card.roomElement, currentDoorDir, owner, connectionForcing,
+                    clickedTile);
 
                 if (playerMove)
                 {
@@ -287,9 +315,9 @@ namespace dungeonduell
                 }
 
                 var indicator =
-                    Instantiate(indiactorDoor, _tilemap.CellToWorld(cellPosition), Quaternion.identity);
+                    Instantiate(indiactorDoor, tilemap.CellToWorld(cellPosition), Quaternion.identity);
 
-                indicator.transform.parent = _tilemap.transform;
+                indicator.transform.parent = tilemap.transform;
                 indicator.GetComponent<DoorIndicator>().SetDoorIndiactor(currentDoorDir);
                 if (connectionForcing) indicator.GetComponent<DoorIndicator>().OverExtend(overriteCurrentDoorDir);
 
@@ -300,42 +328,27 @@ namespace dungeonduell
             return false;
         }
 
-        private void SpawnSetAbleOperation(Vector3Int cellPosition, TileBase clickedTile, int owner,bool contestedHit)
+        private void SpawnSetAbleOperation(Vector3Int cellPosition, TileBase clickedTile, int owner, bool contestedHit)
         {
             foreach (var sourrendTilePos in GetSouroundCorr(cellPosition, currentDoorDir))
             {
-                var souroundTile = _tilemap.GetTile(sourrendTilePos.Item1);
-                
+                var souroundTile = tilemap.GetTile(sourrendTilePos.Item1);
+
                 if (souroundTile == resetTile && contestedHit)
                 {
-                    _tilemap.SetTile(sourrendTilePos.Item1, setAbleTiles[owner -1]);
+                    tilemap.SetTile(sourrendTilePos.Item1, setAbleTiles[owner - 1]);
                 }
                 else if (souroundTile == resetTile || shadowSetAbleTiles.Contains(souroundTile))
                 {
                     if (souroundTile == shadowSetAbleTiles[^1])
                     {
-                        _tilemap.SetTile(sourrendTilePos.Item1, setAbleTiles[^1]);
+                        tilemap.SetTile(sourrendTilePos.Item1, setAbleTiles[^1]);
                     }
                     else
                     {
                         SpawnSetAbleTile(setAbleTiles.Contains(clickedTile) ? clickedTile : setAbleTiles[owner - 1],
                             sourrendTilePos);
                     }
-                }
-                else
-                {
-                    var shelledTileCard = cardShelled.FirstOrDefault(x => x.tile == souroundTile);
-                    if (shelledTileCard != null && setAbleTiles.Contains(clickedTile))
-                        SpawnSetAbleTile(
-                            shelledTileCard.inPlayerRangeTile[Array.IndexOf(setAbleTiles, clickedTile)],
-                            sourrendTilePos);
-
-                    var shelledTileCardModif =
-                        cardShelled.FirstOrDefault(x => x.inPlayerRangeTile.Contains(souroundTile));
-                    if (shelledTileCardModif != null && setAbleTiles.Contains(clickedTile))
-                        if (Array.IndexOf(setAbleTiles, clickedTile) !=
-                            Array.IndexOf(shelledTileCardModif.inPlayerRangeTile, souroundTile))
-                            SpawnSetAbleTile(shelledTileCardModif.inPlayerRangeTile[2], sourrendTilePos);
                 }
             }
         }
@@ -345,12 +358,12 @@ namespace dungeonduell
             foreach (var sourrendTilePos in GetSouroundCorr(cellPosition,
                          new[] { true, true, true, true, true, true }))
             {
-                var souroundTile = _tilemap.GetTile(sourrendTilePos.Item1);
+                var souroundTile = tilemap.GetTile(sourrendTilePos.Item1);
 
                 if (setAbleTiles.Contains(souroundTile))
                 {
                     if (clickedTile != souroundTile)
-                        _tilemap.SetTile(sourrendTilePos.Item1, setAbleTiles[^1]);
+                        tilemap.SetTile(sourrendTilePos.Item1, setAbleTiles[^1]);
                 }
                 else if (shadowSetAbleTiles.Contains(souroundTile))
                 {
@@ -358,18 +371,17 @@ namespace dungeonduell
                     {
                         var i = Array.FindIndex(setAbleTiles, entity => entity == clickedTile);
                         if (i == setAbleTiles.Length - 1)
-                            _tilemap.SetTile(sourrendTilePos.Item1, shadowSetAbleTiles[^1]);
+                            tilemap.SetTile(sourrendTilePos.Item1, shadowSetAbleTiles[^1]);
                         else if (souroundTile != shadowSetAbleTiles[i])
-                            _tilemap.SetTile(sourrendTilePos.Item1, shadowSetAbleTiles[^1]);
+                            tilemap.SetTile(sourrendTilePos.Item1, shadowSetAbleTiles[^1]);
                     }
-                       
                 }
 
                 if (souroundTile == resetTile && playerMove)
                 {
                     var i = Array.FindIndex(setAbleTiles, entity => entity == clickedTile);
                     if (i < shadowSetAbleTiles.Length)
-                        _tilemap.SetTile(sourrendTilePos.Item1, shadowSetAbleTiles[i]);
+                        tilemap.SetTile(sourrendTilePos.Item1, shadowSetAbleTiles[i]);
                 }
             }
         }
@@ -396,7 +408,7 @@ namespace dungeonduell
 
         private void SpawnSetAbleTile(TileBase clickedTile, Tuple<Vector3Int, ConnectionDir> sourrendTilePos)
         {
-            _tilemap.SetTile(sourrendTilePos.Item1, clickedTile);
+            tilemap.SetTile(sourrendTilePos.Item1, clickedTile);
             CountSetAbleTiles(clickedTile);
         }
 
@@ -406,7 +418,7 @@ namespace dungeonduell
             {
                 if (tileBaseType == setAbleTiles[i])
                 {
-                    if (i < setAbleTiles.Length -1)
+                    if (i < setAbleTiles.Length - 1)
                     {
                         setAbleCount[i]++;
                     }
@@ -440,10 +452,10 @@ namespace dungeonduell
             Destroy(displayCardUi.gameObject);
         }
 
-        private void CreateRoom(Vector3Int clickedTile, RoomType type, RoomElement element, bool[] allowedDoors,
-            int owner, bool forceOnRoom)
+        private void CreateRoom(Vector3Int clickedTilePos, RoomType type, RoomElement element, bool[] allowedDoors,
+            int owner, bool forceOnRoom, TileBase clickedTile)
         {
-            var aroundpos = GetSouroundCorr(clickedTile); // 
+            var aroundpos = GetSouroundCorr(clickedTilePos);
 
             var establishConnection = connectCollector.GetPossibleConnects(aroundpos, allowedDoors, forceOnRoom);
 
@@ -459,7 +471,8 @@ namespace dungeonduell
                     newConnectionDir.Add((ConnectionDir)i);
             }
 
-            connectCollector.AddRoom(clickedTile, conncection, type, element, newConnectionDir, owner);
+            connectCollector.AddRoom(clickedTilePos, conncection, type, element, newConnectionDir, owner,
+                Array.IndexOf(setAbleTiles, clickedTile));
         }
 
         private Vector3Int[] GetSouroundCorr(Vector3Int clickedTile)
@@ -531,7 +544,7 @@ namespace dungeonduell
             {
                 currentDoorDir = ShiftRight(currentDoorDir);
                 displayCardUi?.UpdateDirectionIndicator(currentDoorDir); // already ref so not done per comning Event
-
+                RuntimeManager.PlayOneShot(rotateSFXEvent);
                 DdCodeEventHandler.Trigger_CardRotating(currentDoorDir);
             }
         }
@@ -546,6 +559,7 @@ namespace dungeonduell
                     //cardToHand.ReactivateHandCards();
                 }
 
+                RuntimeManager.PlayOneShot(gridPlaceSFXEvent);
                 if (_hexgridController != null) _hexgridController.ResetNavigation();
             }
         }
@@ -573,10 +587,10 @@ namespace dungeonduell
                 }
             }
 
-            GameObject indicator = Instantiate(indiactorDoorOver, _tilemap.CellToWorld(postion), Quaternion.identity);
+            GameObject indicator = Instantiate(indiactorDoorOver, tilemap.CellToWorld(postion), Quaternion.identity);
             indicator.GetComponent<DoorIndicator>().SetDoorIndiactor(allowedDoorsForEscape);
 
-            _tilemap.SetTile(postion, setAbleTiles[owner - 1]);
+            tilemap.SetTile(postion, setAbleTiles[owner - 1]);
             CountSetAbleTiles(setAbleTiles[owner - 1]);
 
             SetShadowVisible(owner - 1, false);
@@ -584,12 +598,12 @@ namespace dungeonduell
 
         private void SetShadowVisible(int owner, bool visible)
         {
-            foreach (var cellPos in _tilemap.cellBounds.allPositionsWithin)
+            foreach (var cellPos in tilemap.cellBounds.allPositionsWithin)
             {
-                if (_tilemap.GetTile(cellPos) == shadowSetAbleTiles[owner])
+                if (tilemap.GetTile(cellPos) == shadowSetAbleTiles[owner])
                 {
-                    _tilemap.SetTileFlags(cellPos, TileFlags.None);
-                    _tilemap.SetColor(cellPos, visible ? BridgeColor : Color.black);
+                    tilemap.SetTileFlags(cellPos, TileFlags.None);
+                    tilemap.SetColor(cellPos, visible ? BridgeColor : Color.black);
                 }
             }
         }

@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 
 namespace dungeonduell
 {
-    public class RoomMangment : MonoBehaviour
+    public class RoomMangment : MonoBehaviour, IObserver
     {
         [SerializeField] private List<GameObject> roomPrefabs;
         [SerializeField] private float stepCross;
@@ -19,6 +19,8 @@ namespace dungeonduell
         private Transform spawnPointPlayer2;
 
         public List<Tuple<Vector3Int, RoomInfo>> RoomsInfosWithPos = new();
+
+        public bool[] roomEngagnedList;
 
         private void Awake()
         {
@@ -37,11 +39,15 @@ namespace dungeonduell
 
         private void GenerateRooms()
         {
+            // foreach (var roomInfo in RoomsInfosWithPos)
+
             foreach (var roomInfo in RoomsInfosWithPos) // spawing all rooms in 
             {
                 var roomPrefabToUse = GetRoomPrefabByType(roomInfo.Item2.Roomtype);
 
                 var nextroom = Instantiate(roomPrefabToUse ?? roomPrefabs[0], transform);
+
+                nextroom.GetComponentInChildren<RoomEngagement>().RoomIndex = roomInfo.Item2.RoomID;
 
                 if (roomInfo.Item2.FirstTimeSpawn)
                 {
@@ -59,7 +65,8 @@ namespace dungeonduell
 
                 var roomPortHandler = nextroom.GetComponentInChildren<RoomPortHandler>();
 
-                foreach (var rc in roomInfo.Item2.Conncection) roomPortHandler.OpenPort(rc.ConnectionDir);
+                foreach (var rc in roomInfo.Item2.Conncection)
+                    roomPortHandler.OpenPort(rc.ConnectionDir);
 
                 if (roomInfo.Item2.Roomtype == RoomType.SpawnPlayer1)
                     // Some Player Check required later for Mutiplayer here 
@@ -67,6 +74,8 @@ namespace dungeonduell
                 if (roomInfo.Item2.Roomtype == RoomType.SpawnPlayer2)
                     spawnPointPlayer2.transform.position = new Vector3(posX, posY, 0);
             }
+
+            roomEngagnedList = new bool[RoomsInfosWithPos.Count];
 
             Destroy(transform.GetChild(0).gameObject);
 
@@ -98,6 +107,57 @@ namespace dungeonduell
                 default:
                     return roomPrefabs[0];
             }
+        }
+
+        private void onOneRoomEntered(int roomIndex)
+        {
+            roomEngagnedList[roomIndex] = true;
+            CheckAllVisited();
+        }
+
+        private void CheckAllVisited()
+        {
+            if (roomEngagnedList.All(b => b))
+            {
+                DdCodeEventHandler.Trigger_AllRoomVisited();
+            }
+        }
+
+        private void OnPlayerDeath(int playerId)
+        {
+            foreach (var room in RoomsInfosWithPos)
+            {
+                print("check");
+                print(room.Item2.TerritoryOwner);
+                if (room.Item2.TerritoryOwner == playerId)
+                {
+                    roomEngagnedList[RoomsInfosWithPos.IndexOf(room)] = true;
+                }
+            }
+
+            CheckAllVisited();
+        }
+
+        public void SubscribeToEvents()
+        {
+            DdCodeEventHandler.RoomEntered += onOneRoomEntered;
+            DdCodeEventHandler.PlayerDeath += OnPlayerDeath;
+        }
+
+        public void UnsubscribeToAllEvents()
+        {
+            DdCodeEventHandler.RoomEntered -= onOneRoomEntered;
+            DdCodeEventHandler.PlayerDeath -= OnPlayerDeath;
+        }
+
+        private void OnEnable()
+        {
+            SubscribeToEvents();
+        }
+
+        private void OnDisable()
+        {
+            UnsubscribeToAllEvents();
         }
     }
 }

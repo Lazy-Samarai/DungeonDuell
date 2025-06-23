@@ -36,7 +36,9 @@ namespace dungeonduell
 
             foreach (CinemachineBrain brain in brains)
             {
-                ((CinemachineVirtualCamera)brain.ActiveVirtualCamera).GetComponent<Animator>().SetTrigger(WinZoom);
+                Animator animator = ((CinemachineVirtualCamera)brain.ActiveVirtualCamera).GetComponent<Animator>();
+                animator.cullingMode = AnimatorCullingMode.AlwaysAnimate;
+                animator.SetTrigger(WinZoom);
             }
         }
     }
