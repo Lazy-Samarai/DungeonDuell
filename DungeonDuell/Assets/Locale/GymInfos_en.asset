@@ -16,7 +16,8 @@ MonoBehaviour:
     m_Code: en
   m_SharedData: {fileID: 11400000, guid: 0d19c9c886f929c4c960c695873e26eb, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 6286853880586698885
   m_TableData:
   - m_Id: 13466628096
     m_Localized: Enemy Room
@@ -26,6 +27,19 @@ MonoBehaviour:
     m_Localized: Loot Room
     m_Metadata:
       m_Items: []
+  - m_Id: 6078770936606720
+    m_Localized: 'Player {p}
+
+      Press Any Button'
+    m_Metadata:
+      m_Items:
+      - rid: 6286853880586698885
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 6286853880586698885
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 
+        m_SharedEntries:
+        - id: 6078770936606720
