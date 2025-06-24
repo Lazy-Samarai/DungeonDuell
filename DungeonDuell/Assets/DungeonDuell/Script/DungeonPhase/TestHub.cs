@@ -19,7 +19,7 @@ namespace MoreMountains.TopDownEngine
 
         [FormerlySerializedAs("PlayerName")]
         [Tooltip("the Text comp to use to display the player name")]
-        public Text playerName;
+        public TMPro.TextMeshProUGUI playerName;
 
         [FormerlySerializedAs("AvatarBar")]
         [Tooltip("the radial progress bar to put around the avatar")]
@@ -27,11 +27,11 @@ namespace MoreMountains.TopDownEngine
 
         [FormerlySerializedAs("CoinCounter")]
         [Tooltip("the counter used to display coin amounts")]
-        public Text coinCounter;
+        public TMPro.TextMeshProUGUI coinCounter;
 
         [FormerlySerializedAs("CoinForNextLevelCounter")]
         [Tooltip("the counter used to display coin amounts needed for level Up")]
-        public Text coinForNextLevelCounter;
+        public TMPro.TextMeshProUGUI coinForNextLevelCounter;
 
         [FormerlySerializedAs("LevelUpNowText")]
         public TMPro.TextMeshProUGUI levelUpNowText;

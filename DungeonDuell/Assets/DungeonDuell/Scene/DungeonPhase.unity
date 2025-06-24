@@ -3995,7 +3995,7 @@ MonoBehaviour:
     m_ActionName: 'DungeonPhase/OpenUpgrade[/DualShock4GamepadHID/dpad/up,/DualShock4GamepadHID1/dpad/up]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2141670533}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: dungeonduell.LevelUPPanel, Assembly-CSharp
         m_MethodName: UpgradeSpeedd
         m_Mode: 1
@@ -4011,7 +4011,7 @@ MonoBehaviour:
     m_ActionName: 'DungeonPhase/DoUpgradeSpeed[/DualShock4GamepadHID/dpad/left,/DualShock4GamepadHID1/dpad/left]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2141670533}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: dungeonduell.LevelUPPanel, Assembly-CSharp
         m_MethodName: UpgradeHealth
         m_Mode: 1
@@ -4027,7 +4027,7 @@ MonoBehaviour:
     m_ActionName: 'DungeonPhase/DoUpgradeHealth[/DualShock4GamepadHID/dpad/right,/DualShock4GamepadHID1/dpad/right]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2141670533}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: dungeonduell.LevelUPPanel, Assembly-CSharp
         m_MethodName: UpgradeAttackSpeed
         m_Mode: 1
@@ -4162,6 +4162,18 @@ MonoBehaviour:
   Persistent: 0
   ResetThisInventorySaveOnStart: 0
   DrawContentInInspector: 1
+--- !u!114 &327103861 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 681601712707010505, guid: e738a2ac7ae5bcc4894527f901d1007f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1654634603}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &340096772
 GameObject:
   m_ObjectHideFlags: 0
@@ -4774,6 +4786,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   switchSceneKey: 277
   targetSceneIndex: 1
+--- !u!114 &370005464 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4214668084396683173, guid: e738a2ac7ae5bcc4894527f901d1007f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1654634603}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &381493381
 GameObject:
   m_ObjectHideFlags: 0
@@ -12718,7 +12742,7 @@ MonoBehaviour:
     m_ActionName: 'DungeonPhase/OpenUpgrade[/DualShock4GamepadHID/dpad/up,/DualShock4GamepadHID1/dpad/up]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2143161137}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: dungeonduell.LevelUPPanel, Assembly-CSharp
         m_MethodName: UpgradeSpeedd
         m_Mode: 1
@@ -12734,7 +12758,7 @@ MonoBehaviour:
     m_ActionName: 'DungeonPhase/DoUpgradeSpeed[/DualShock4GamepadHID/dpad/left,/DualShock4GamepadHID1/dpad/left]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2143161137}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: dungeonduell.LevelUPPanel, Assembly-CSharp
         m_MethodName: UpgradeHealth
         m_Mode: 1
@@ -12750,7 +12774,7 @@ MonoBehaviour:
     m_ActionName: 'DungeonPhase/DoUpgradeHealth[/DualShock4GamepadHID/dpad/right,/DualShock4GamepadHID1/dpad/right]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2143161137}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: dungeonduell.LevelUPPanel, Assembly-CSharp
         m_MethodName: UpgradeAttackSpeed
         m_Mode: 1
@@ -20170,6 +20194,36 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 576495431}
     m_Modifications:
+    - target: {fileID: 339537200880915047, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -129
+      objectReference: {fileID: 0}
+    - target: {fileID: 339537200880915047, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -46
+      objectReference: {fileID: 0}
+    - target: {fileID: 387478362255916041, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 387478362255916041, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1654634607}
+    - target: {fileID: 387478362255916041, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UpgradeAttackSpeed
+      objectReference: {fileID: 0}
+    - target: {fileID: 387478362255916041, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: dungeonduell.LevelUpPanel, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 480365700728331795, guid: e738a2ac7ae5bcc4894527f901d1007f,
         type: 3}
       propertyPath: isPlayer1Screen
@@ -20310,6 +20364,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4789983300283227109, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4789983300283227109, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1654634607}
+    - target: {fileID: 4789983300283227109, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UpgradeSpeedd
+      objectReference: {fileID: 0}
+    - target: {fileID: 4789983300283227109, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: dungeonduell.LevelUpPanel, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 4804087224219151714, guid: e738a2ac7ae5bcc4894527f901d1007f,
         type: 3}
       propertyPath: m_Name
@@ -20345,6 +20419,37 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5272522385634088657, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5272522385634088657, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1654634607}
+    - target: {fileID: 5272522385634088657, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UpgradeHealth
+      objectReference: {fileID: 0}
+    - target: {fileID: 5272522385634088657, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: dungeonduell.LevelUpPanel, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5417284571062829510, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a25b5e150956456409b51c9a2e81c8cd,
+        type: 3}
+    - target: {fileID: 6013881019734557435, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: player1
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6617670104504817573, guid: e738a2ac7ae5bcc4894527f901d1007f,
         type: 3}
       propertyPath: m_IsActive
@@ -20353,7 +20458,7 @@ PrefabInstance:
     - target: {fileID: 6740568025359378812, guid: e738a2ac7ae5bcc4894527f901d1007f,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6925360300092289244, guid: e738a2ac7ae5bcc4894527f901d1007f,
         type: 3}
@@ -20372,6 +20477,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7277498198348813292, guid: e738a2ac7ae5bcc4894527f901d1007f,
         type: 3}
+      propertyPath: coinCounter
+      value: 
+      objectReference: {fileID: 370005464}
+    - target: {fileID: 7277498198348813292, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: levelUpPanel
+      value: 
+      objectReference: {fileID: 1654634607}
+    - target: {fileID: 7277498198348813292, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
       propertyPath: winnerScreen
       value: 
       objectReference: {fileID: 0}
@@ -20384,7 +20499,12 @@ PrefabInstance:
         type: 3}
       propertyPath: levelUpNowText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 327103861}
+    - target: {fileID: 7277498198348813292, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: coinForNextLevelCounter
+      value: 
+      objectReference: {fileID: 1654634609}
     - target: {fileID: 7617324663695077372, guid: e738a2ac7ae5bcc4894527f901d1007f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -20394,6 +20514,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7990798110862285659, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8085697583571887646, guid: e738a2ac7ae5bcc4894527f901d1007f,
         type: 3}
@@ -20429,6 +20554,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 8085697583571887646, guid: e738a2ac7ae5bcc4894527f901d1007f, type: 3}
+    - {fileID: 4503247359209352239, guid: e738a2ac7ae5bcc4894527f901d1007f, type: 3}
+    - {fileID: 36047877382317744, guid: e738a2ac7ae5bcc4894527f901d1007f, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e738a2ac7ae5bcc4894527f901d1007f, type: 3}
@@ -20462,6 +20589,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a42a23ce4f9ed24abde69beacbef2f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1654634607 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6013881019734557435, guid: e738a2ac7ae5bcc4894527f901d1007f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1654634603}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9d94441a16284b45955f390216b3cc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1654634608 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7277498198348813292, guid: e738a2ac7ae5bcc4894527f901d1007f,
@@ -20472,6 +20611,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67b2b1362e523c145a8760ba4403a6de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1654634609 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6033398028346578440, guid: e738a2ac7ae5bcc4894527f901d1007f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1654634603}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1665738671
@@ -25396,11 +25547,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 619441585}
     m_Modifications:
-    - target: {fileID: 665260212809221728, guid: e738a2ac7ae5bcc4894527f901d1007f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4735025654416790448, guid: e738a2ac7ae5bcc4894527f901d1007f,
         type: 3}
       propertyPath: m_Pivot.x
@@ -25506,6 +25652,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GrasslandsHUD
       objectReference: {fileID: 0}
+    - target: {fileID: 7990798110862285659, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -25575,30 +25726,6 @@ Transform:
   - {fileID: 323899675}
   m_Father: {fileID: 1918232351}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2141670533 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6925360300092289244, guid: e738a2ac7ae5bcc4894527f901d1007f,
-    type: 3}
-  m_PrefabInstance: {fileID: 2102279923}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9d94441a16284b45955f390216b3cc6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2143161137 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6925360300092289244, guid: e738a2ac7ae5bcc4894527f901d1007f,
-    type: 3}
-  m_PrefabInstance: {fileID: 1654634603}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9d94441a16284b45955f390216b3cc6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
