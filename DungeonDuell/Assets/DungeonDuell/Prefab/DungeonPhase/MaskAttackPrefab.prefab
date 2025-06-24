@@ -165,6 +165,88 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &4953664081229733220
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 602781764791290075}
+  - component: {fileID: 8386815325559530383}
+  - component: {fileID: 7400430278912061912}
+  m_Layer: 0
+  m_Name: ToolTipCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &602781764791290075
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4953664081229733220}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.07000017, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6677866144696928354}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &8386815325559530383
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4953664081229733220}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 2.5
+--- !u!114 &7400430278912061912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4953664081229733220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ac8aa156fb3b8142b012c227db8ed88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipText: This mask increases your attack power.
 --- !u!1 &5818663546459846169
 GameObject:
   m_ObjectHideFlags: 0
@@ -790,7 +872,6 @@ GameObject:
   - component: {fileID: 9103870760556382252}
   - component: {fileID: -1105557231012554004}
   - component: {fileID: -967601759681146480}
-  - component: {fileID: 5598510728579132231}
   m_Layer: 0
   m_Name: MaskAttackPrefab
   m_TagString: Untagged
@@ -815,6 +896,7 @@ Transform:
   - {fileID: 2149676118263378414}
   - {fileID: 3054478070655785433}
   - {fileID: 6049296498080688862}
+  - {fileID: 602781764791290075}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &9103870760556382252
@@ -895,20 +977,6 @@ MonoBehaviour:
   DisableObjectWhenDepleted: 0
   RequirePlayerTag: 1
   pickedMmFeedbacks: {fileID: 7486488762816957190}
---- !u!114 &5598510728579132231
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6787643065935835065}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ac8aa156fb3b8142b012c227db8ed88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tooltipText: This mask increases your attack power.
-  triggerDistance: 10
 --- !u!1 &7854498320831865523
 GameObject:
   m_ObjectHideFlags: 0

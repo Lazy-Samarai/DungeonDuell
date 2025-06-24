@@ -5,10 +5,12 @@ namespace dungeonduell
 {
     public class TooltipController : MonoBehaviour
     {
-        [SerializeField] private GameObject tooltipPanel; // Direkt im Canvas
+        [SerializeField] private GameObject tooltipPanel;
         [SerializeField] private TextMeshProUGUI tooltipText;
 
         private RectTransform _tooltipRectTransform;
+        private Vector3? worldTargetPosition = null;
+        private Camera cam;
 
         private void Awake()
         {
@@ -22,30 +24,31 @@ namespace dungeonduell
             HideTooltip();
         }
 
-        public void ShowTooltip(string text, Vector3 worldPosition)
+        private void Update()
         {
-            if (tooltipText == null || _tooltipRectTransform == null) return;
+            if (tooltipPanel.activeSelf && worldTargetPosition.HasValue && cam != null)
+            {
+                Vector3 screenPosition = cam.WorldToScreenPoint(worldTargetPosition.Value);
+                tooltipPanel.transform.position = screenPosition;
+            }
+        }
+
+        public void ShowTooltip(string text, Vector3 worldPosition, Camera camera)
+        {
+            if (tooltipText == null || tooltipPanel == null || camera == null) return;
 
             tooltipText.text = text;
+            cam = camera;
+            worldTargetPosition = worldPosition;
+
             tooltipPanel.SetActive(true);
-
-            Vector2 localPosition;
-            RectTransform canvasRect = tooltipPanel.transform.parent.GetComponent<RectTransform>();
-
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                canvasRect,
-                Camera.main.WorldToScreenPoint(worldPosition),
-                Camera.main,
-                out localPosition
-            );
-
-            _tooltipRectTransform.anchoredPosition = localPosition;
         }
 
         public void HideTooltip()
         {
-            if (tooltipPanel != null)
-                tooltipPanel.SetActive(false);
+            tooltipPanel.SetActive(false);
+            worldTargetPosition = null;
+            cam = null;
         }
     }
 }

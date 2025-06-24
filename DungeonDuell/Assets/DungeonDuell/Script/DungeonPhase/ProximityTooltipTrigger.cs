@@ -5,74 +5,58 @@ namespace dungeonduell
     public class ProximityTooltipTrigger : MonoBehaviour
     {
         [TextArea] public string tooltipText = "Standard-Tooltip";
-        public float triggerDistance = 2.5f;
 
-        private Transform[] players;
-        private TooltipController tooltipController;
-        private bool tooltipVisible;
+        private TooltipController tooltipControllerPlayer1;
+        private TooltipController tooltipControllerPlayer2;
+
+        private Camera cameraPlayer1;
+        private Camera cameraPlayer2;
 
         private void Start()
         {
-            tooltipController = FindObjectOfType<TooltipController>();
-            if (tooltipController == null)
+            // TooltipController für Spieler 1 & 2 suchen
+            tooltipControllerPlayer1 = FindTooltipController("TooltipCanvasP1");
+            tooltipControllerPlayer2 = FindTooltipController("TooltipCanvasP2");
+
+            // Kameras automatisch finden
+            cameraPlayer1 = GameObject.Find("CameraPlayer1")?.GetComponent<Camera>();
+            cameraPlayer2 = GameObject.Find("CameraPlayer2")?.GetComponent<Camera>();
+
+            if (tooltipControllerPlayer1 == null || tooltipControllerPlayer2 == null)
+                Debug.LogWarning("[TooltipTrigger] TooltipController nicht gefunden!");
+
+            if (cameraPlayer1 == null || cameraPlayer2 == null)
+                Debug.LogWarning("[TooltipTrigger] Kamera nicht gefunden!");
+        }
+
+        private TooltipController FindTooltipController(string canvasName)
+        {
+            GameObject canvasGO = GameObject.Find(canvasName);
+            if (canvasGO == null) return null;
+            return canvasGO.GetComponent<TooltipController>();
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.CompareTag("Player1") && tooltipControllerPlayer1 && cameraPlayer1)
             {
-                Debug.LogError("[TooltipTrigger] Kein TooltipController gefunden!");
+                tooltipControllerPlayer1.ShowTooltip(tooltipText, transform.position + Vector3.up * 1f, cameraPlayer1);
             }
-
-            // Spieler suchen (Player1 + Player2)
-            GameObject[] player1 = GameObject.FindGameObjectsWithTag("Player1");
-            GameObject[] player2 = GameObject.FindGameObjectsWithTag("Player2");
-
-            players = new Transform[player1.Length + player2.Length];
-
-            for (int i = 0; i < player1.Length; i++)
+            else if (other.CompareTag("Player2") && tooltipControllerPlayer2 && cameraPlayer2)
             {
-                players[i] = player1[i].transform;
-                Debug.Log("[TooltipTrigger] Player1 gefunden: " + players[i].name);
-            }
-
-            for (int i = 0; i < player2.Length; i++)
-            {
-                players[i + player1.Length] = player2[i].transform;
-                Debug.Log("[TooltipTrigger] Player2 gefunden: " + players[i + player1.Length].name);
-            }
-
-            if (players.Length == 0)
-            {
-                Debug.LogWarning("[TooltipTrigger] Keine Spieler gefunden!");
+                tooltipControllerPlayer2.ShowTooltip(tooltipText, transform.position + Vector3.up * 1f, cameraPlayer2);
             }
         }
 
-        private void Update()
+        private void OnTriggerExit2D(Collider2D other)
         {
-            if (players == null || tooltipController == null) return;
-
-            bool anyPlayerNear = false;
-
-            foreach (var player in players)
+            if (other.CompareTag("Player1") && tooltipControllerPlayer1)
             {
-                float dist = Vector3.Distance(player.position, transform.position);
-                // 💬 Debug: Zeige jede Distanz zur Maske
-                Debug.Log("[TooltipTrigger] Distanz zu " + player.name + ": " + dist);
-
-                if (dist <= triggerDistance)
-                {
-                    anyPlayerNear = true;
-                    break;
-                }
+                tooltipControllerPlayer1.HideTooltip();
             }
-
-            if (anyPlayerNear && !tooltipVisible)
+            else if (other.CompareTag("Player2") && tooltipControllerPlayer2)
             {
-                Debug.Log("[TooltipTrigger] Spieler in Reichweite – Tooltip anzeigen.");
-                tooltipController.ShowTooltip(tooltipText, transform.position + Vector3.up * 0.5f);
-                tooltipVisible = true;
-            }
-            else if (!anyPlayerNear && tooltipVisible)
-            {
-                Debug.Log("[TooltipTrigger] Spieler hat Bereich verlassen – Tooltip ausblenden.");
-                tooltipController.HideTooltip();
-                tooltipVisible = false;
+                tooltipControllerPlayer2.HideTooltip();
             }
         }
     }
