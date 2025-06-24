@@ -800,9 +800,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8d64645383b29db46aa6ed284f9d9dfc, type: 2}
   connectCollector: {fileID: 1945806930}
   isPlayer1Turn: 1
-  shellCardMarker: {fileID: 9030860857177964664, guid: 17099331d7c4e3e4793d1adafb7d4ce9,
-    type: 3}
-  _tilemap: {fileID: 0}
+  tilemap: {fileID: 0}
   setAbleCount: 0000000000000000
   indiactorDoorOver: {fileID: 0}
   rotateSFXEvent:
@@ -814,11 +812,11 @@ MonoBehaviour:
     Path: event:/Dungeon Duell Audio V1/Card Phase/CP_player/CP_player_turn-hexagon
   gridPlaceSFXEvent:
     Guid:
-      Data1: 1373822686
-      Data2: 1247048980
-      Data3: 1148483993
-      Data4: -650632590
-    Path: event:/Dungeon Duell Audio V1/Card Phase/CP_player/CP_player_place-on-cardholder
+      Data1: 175814895
+      Data2: 1264259661
+      Data3: 2088876940
+      Data4: -1804597625
+    Path: event:/Dungeon Duell Audio V1/Card Phase/CP_player/CP_player_place-card-on-hexgrid
 --- !u!4 &481254718
 Transform:
   m_ObjectHideFlags: 0
@@ -3134,11 +3132,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 175814895
+      Data2: 1264259661
+      Data3: 2088876940
+      Data4: -1804597625
+    Path: event:/Dungeon Duell Audio V1/Card Phase/CP_player/CP_player_place-card-on-hexgrid
   Event: 
   EventPlayTrigger: 0
   EventStopTrigger: 0
@@ -3148,8 +3146,8 @@ MonoBehaviour:
   NonRigidbodyVelocity: 0
   Params: []
   OverrideAttenuation: 0
-  OverrideMinDistance: -1
-  OverrideMaxDistance: -1
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!4 &1341336961
 Transform:
   m_ObjectHideFlags: 0
