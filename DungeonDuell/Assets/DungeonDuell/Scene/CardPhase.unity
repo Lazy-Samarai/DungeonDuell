@@ -800,9 +800,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8d64645383b29db46aa6ed284f9d9dfc, type: 2}
   connectCollector: {fileID: 1945806930}
   isPlayer1Turn: 1
-  shellCardMarker: {fileID: 9030860857177964664, guid: 17099331d7c4e3e4793d1adafb7d4ce9,
-    type: 3}
-  _tilemap: {fileID: 0}
+  tilemap: {fileID: 0}
   setAbleCount: 0000000000000000
   indiactorDoorOver: {fileID: 0}
   rotateSFXEvent:
@@ -2853,6 +2851,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8781711511381453681, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
         type: 3}
+      propertyPath: languageDropdown
+      value: 
+      objectReference: {fileID: 1264689842}
+    - target: {fileID: 8781711511381453681, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
+        type: 3}
       propertyPath: previousSelected
       value: 
       objectReference: {fileID: 1706345217}
@@ -2861,6 +2864,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43f99acd15d9f5e43a2e3332512fcbb6, type: 3}
+--- !u!114 &1264689842 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8468760139500744304, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1264689841}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b743370ac3e4ec2a1668f5455a8ef8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1270329091
 PrefabInstance:
   m_ObjectHideFlags: 0
