@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using FMODUnity;
 
 namespace dungeonduell
 {
@@ -32,6 +33,7 @@ namespace dungeonduell
         private Vector3 _originalScale;
 
         private Selectable _selectable;
+        [SerializeField] private EventReference hoverSFXEvent;
 
         private void Start()
         {
@@ -127,6 +129,7 @@ namespace dungeonduell
                     AdjustNeighborCards(true);
                 }
             }
+            RuntimeManager.PlayOneShot(hoverSFXEvent);
         }
 
         private void DeactivateHoverEffect()

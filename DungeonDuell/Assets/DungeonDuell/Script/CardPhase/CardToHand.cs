@@ -6,6 +6,7 @@ using DG.Tweening.Plugins.Options;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using FMODUnity;
 
 namespace dungeonduell
 {
@@ -27,6 +28,9 @@ namespace dungeonduell
         private readonly List<DisplayCard> _displayCards = new();
 
         private TweenerCore<Vector3, Vector3, VectorOptions> currentTween;
+
+        [SerializeField] private EventReference cardToHandEvent;
+        [SerializeField] private EventReference cardFromHandEvent;
 
         private void Start()
         {
@@ -135,6 +139,7 @@ namespace dungeonduell
                 ReactivateHandCards();
                 DisplayHand();
                 SetupNavigation();
+                RuntimeManager.PlayOneShot(cardFromHandEvent);
 
                 //Select wieder aktiv setzen
                 if (_displayCards.Count > 0)
@@ -171,6 +176,7 @@ namespace dungeonduell
                 DisableHandCardsForNavigation();
                 DeactivateHandCards();
                 EventSystem.current.SetSelectedGameObject(null);
+                RuntimeManager.PlayOneShot(cardToHandEvent);
 
                 DdCodeEventHandler.Trigger_CardSelected(clickedCard);
 
