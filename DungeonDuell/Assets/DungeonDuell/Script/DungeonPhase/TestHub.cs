@@ -9,24 +9,24 @@ namespace MoreMountains.TopDownEngine
 {
     public class TestHub : TopDownMonoBehaviour, MMEventListener<TopDownEngineEvent>
     {
-        [FormerlySerializedAs("PlayerID")]
-        [Tooltip("The playerID associated to this HUD")]
+        /// The playerID associated to this HUD
+        [FormerlySerializedAs("PlayerID")] [Tooltip("The playerID associated to this HUD")]
         public string playerID = "Player1";
 
-        [FormerlySerializedAs("HealthBar")]
-        [Tooltip("the progress bar to use to show the healthbar")]
+        /// the progress bar to use to show the healthbar
+        [FormerlySerializedAs("HealthBar")] [Tooltip("the progress bar to use to show the healthbar")]
         public MMProgressBar healthBar;
 
-        [FormerlySerializedAs("PlayerName")]
-        [Tooltip("the Text comp to use to display the player name")]
+        /// the Text comp to use to display the player name
+        [FormerlySerializedAs("PlayerName")] [Tooltip("the Text comp to use to display the player name")]
         public Text playerName;
 
-        [FormerlySerializedAs("AvatarBar")]
-        [Tooltip("the radial progress bar to put around the avatar")]
+        /// the radial progress bar to put around the avatar
+        [FormerlySerializedAs("AvatarBar")] [Tooltip("the radial progress bar to put around the avatar")]
         public MMProgressBar avatarBar;
 
-        [FormerlySerializedAs("CoinCounter")]
-        [Tooltip("the counter used to display coin amounts")]
+        /// the counter used to display coin amounts
+        [FormerlySerializedAs("CoinCounter")] [Tooltip("the counter used to display coin amounts")]
         public Text coinCounter;
 
         [FormerlySerializedAs("CoinForNextLevelCounter")]
@@ -34,16 +34,15 @@ namespace MoreMountains.TopDownEngine
         public Text coinForNextLevelCounter;
 
         [FormerlySerializedAs("LevelUpNowText")]
-        public TMPro.TextMeshProUGUI levelUpNowText;
-
-
-        [Tooltip("the badge UI element showing level up count in red circle")]
-        public LevelUpBadgeUI levelUpBadgeUI;
+        public Text levelUpNowText;
 
         public bool canLevelUp;
 
-        [FormerlySerializedAs("LevelUpPanel")]
-        [Tooltip("the screen to display if the target levels up")]
+        /// the mask to use when the target player dies
+        [FormerlySerializedAs("DeadMask")] [Tooltip("the mask to use when the target player dies")]
+        public CanvasGroup deadMask;
+
+        [FormerlySerializedAs("LevelUpPanel")] [Tooltip("the screen to display if the target levels up")]
         public LevelUpPanel levelUpPanel;
 
         public bool menuShowing;
@@ -52,14 +51,21 @@ namespace MoreMountains.TopDownEngine
         {
             coinCounter.text = "0";
             coinForNextLevelCounter.text = "1";
+            deadMask.gameObject.SetActive(false);
         }
 
+        /// <summary>
+        ///     OnDisable, we start listening to events.
+        /// </summary>
         protected virtual void OnEnable()
         {
             DdCodeEventHandler.LevelUpAvailable += LevelPossible;
             this.MMEventStartListening();
         }
 
+        /// <summary>
+        ///     OnDisable, we stop listening to events.
+        /// </summary>
         protected virtual void OnDisable()
         {
             DdCodeEventHandler.LevelUpAvailable -= LevelPossible;
@@ -73,10 +79,12 @@ namespace MoreMountains.TopDownEngine
                 case TopDownEngineEventTypes.PlayerDeath:
                     if (tdEvent.OriginCharacter.PlayerID == playerID)
                     {
-                        // Optional: death mask handling
+                        deadMask.gameObject.SetActive(true);
+                        deadMask.alpha = 0f;
+                        StartCoroutine(MMFade.FadeCanvasGroup(deadMask, 0.5f, 0.8f));
                     }
-                    break;
 
+                    break;
                 case TopDownEngineEventTypes.Repaint:
                     foreach (var points in ((LevelManager.Instance as DungeonDuellMultiplayerLevelManager)!).Points)
                         if (points.PlayerID == playerID)
@@ -84,9 +92,10 @@ namespace MoreMountains.TopDownEngine
                             coinCounter.text = points.Points.ToString();
                             coinForNextLevelCounter.text = points.CoinsForNextLevel.ToString();
                         }
-                    break;
 
+                    break;
                 case TopDownEngineEventTypes.GameOver:
+                {
                     var winnerID = (LevelManager.Instance as DungeonDuellMultiplayerLevelManager)?.WinnerID;
                     bool isWinner = playerID == winnerID;
 
@@ -104,7 +113,9 @@ namespace MoreMountains.TopDownEngine
                             Debug.LogWarning("CentralWinnerScreenController nicht gefunden!");
                         }
                     }
+
                     break;
+                }
             }
         }
 
@@ -115,12 +126,9 @@ namespace MoreMountains.TopDownEngine
             {
                 canLevelUp = count > 0;
                 levelUpNowText.gameObject.SetActive(canLevelUp);
-                levelUpNowText.text = "LEVEL UP";
-
-                if (levelUpBadgeUI != null)
-                {
-                    levelUpBadgeUI.SetLevelUpCount(count);
-                }
+                levelUpNowText.text =
+                    Regex.Replace(levelUpNowText.text, "\\s*\\(.*?\\)", "").Trim(); // remove old "(X)"
+                levelUpNowText.text += $"({count})";
             }
         }
 
