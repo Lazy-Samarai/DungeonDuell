@@ -9,30 +9,39 @@ namespace dungeonduell
     {
         [SerializeField] private List<CinemachineVirtualCamera> cams;
 
-        [Header("Overlay Animatoren")]
-        [SerializeField] private Animator coverCam;       // Schwarzes Overlay
-        [SerializeField] private Animator coverMapTop;    // Graues Minimap-Overlay
+        [Header("Overlay Animatoren")] [SerializeField]
+        private Animator coverCam; // Schwarzes Overlay
 
-        [Header("Minimap Fokus")]
-        [SerializeField] private MinimapCamManager minimapCamManager;
+        [SerializeField] private Animator coverMapTop; // Graues Minimap-Overlay
+
+        [Header("Minimap Fokus")] [SerializeField]
+        private MinimapCamManager minimapCamManager;
+
         [SerializeField] private RoomData roomData;
 
         private void Start()
         {
-            minimapCamManager = FindObjectOfType<MinimapCamManager>();
-            if (minimapCamManager == null)
+            minimapCamManager = FindFirstObjectByType<MinimapCamManager>();
+            if (minimapCamManager.systemActive)
             {
-                Debug.LogWarning("MinimapCamManager not found in scene!");
-                return;
+                if (minimapCamManager == null)
+                {
+                    Debug.LogWarning("MinimapCamManager not found in scene!");
+                    return;
+                }
+
+                GameObject p1Spawn = GameObject.FindWithTag("SpawnpointPlayer1");
+                if (p1Spawn != null)
+                    minimapCamManager.SetFollowTarget(p1Spawn.transform, true);
+
+                GameObject p2Spawn = GameObject.FindWithTag("SpawnpointPlayer2");
+                if (p2Spawn != null)
+                    minimapCamManager.SetFollowTarget(p2Spawn.transform, false);
             }
-
-            GameObject p1Spawn = GameObject.FindWithTag("SpawnpointPlayer1");
-            if (p1Spawn != null)
-                minimapCamManager.SetFollowTarget(p1Spawn.transform, true);
-
-            GameObject p2Spawn = GameObject.FindWithTag("SpawnpointPlayer2");
-            if (p2Spawn != null)
-                minimapCamManager.SetFollowTarget(p2Spawn.transform, false);
+            else
+            {
+                coverMapTop.gameObject.SetActive(false);
+            }
         }
 
         public void EnteringRoom(Collider2D collision)
@@ -45,11 +54,11 @@ namespace dungeonduell
                     cams[i].Follow = collision.transform;
 
                     coverCam.SetBool("InRoom", true);
-                    coverMapTop.SetBool("InRoom_Map", true);
+                    if (minimapCamManager.systemActive) coverMapTop.SetBool("InRoom_Map", true);
 
                     StartCoroutine(DelayedFocusSet(i == 0, 0.25f));
 
-                    if (roomData != null)
+                    if (roomData != null & minimapCamManager.systemActive)
                         roomData.SetMapWallsActive(true); // MapWalls AN im aktiven Raum
                 }
             }
@@ -62,7 +71,6 @@ namespace dungeonduell
             if (roomData != null && roomData.roomCenter != null)
             {
                 minimapCamManager.SetFollowTarget(roomData.roomCenter, isPlayer1);
-                
             }
             else
             {
@@ -83,7 +91,7 @@ namespace dungeonduell
             if (AllCamsOff())
             {
                 coverCam.SetBool("InRoom", false);
-                coverMapTop.SetBool("InRoom_Map", false);
+                if (minimapCamManager.systemActive) coverMapTop.SetBool("InRoom_Map", false);
 
                 if (roomData != null)
                     roomData.SetMapWallsActive(false); // MapWalls AUS wenn niemand mehr im Raum
@@ -98,6 +106,7 @@ namespace dungeonduell
                 if (cam.gameObject.activeSelf)
                     return false;
             }
+
             return true;
         }
     }
