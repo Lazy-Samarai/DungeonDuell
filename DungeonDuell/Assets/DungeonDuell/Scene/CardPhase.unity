@@ -6091,6 +6091,20 @@ MonoBehaviour:
   maxRotation: 20
   handCards: []
   isPlayer1: 1
+  cardToHandEvent:
+    Guid:
+      Data1: 1373822686
+      Data2: 1247048980
+      Data3: 1148483993
+      Data4: -650632590
+    Path: event:/Dungeon Duell Audio V1/Card Phase/CP_player/CP_player_place-on-cardholder
+  cardFromHandEvent:
+    Guid:
+      Data1: 586341560
+      Data2: 1095945456
+      Data3: 2011764871
+      Data4: -846766931
+    Path: event:/Dungeon Duell Audio V1/Card Phase/CP_player/CP_player_take-from-cardholder
 --- !u!1 &2034102533
 GameObject:
   m_ObjectHideFlags: 0
@@ -6337,6 +6351,20 @@ MonoBehaviour:
   maxRotation: 20
   handCards: []
   isPlayer1: 0
+  cardToHandEvent:
+    Guid:
+      Data1: 1373822686
+      Data2: 1247048980
+      Data3: 1148483993
+      Data4: -650632590
+    Path: event:/Dungeon Duell Audio V1/Card Phase/CP_player/CP_player_place-on-cardholder
+  cardFromHandEvent:
+    Guid:
+      Data1: 586341560
+      Data2: 1095945456
+      Data3: 2011764871
+      Data4: -846766931
+    Path: event:/Dungeon Duell Audio V1/Card Phase/CP_player/CP_player_take-from-cardholder
 --- !u!114 &2077986324
 MonoBehaviour:
   m_ObjectHideFlags: 0

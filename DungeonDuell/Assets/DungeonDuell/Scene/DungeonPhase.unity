@@ -3995,8 +3995,8 @@ MonoBehaviour:
     m_ActionName: 'DungeonPhase/OpenUpgrade[/DualShock4GamepadHID/dpad/up,/DualShock4GamepadHID1/dpad/up]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: dungeonduell.LevelUPPanel, Assembly-CSharp
+      - m_Target: {fileID: 1803452274}
+        m_TargetAssemblyTypeName: dungeonduell.LevelUpPanel, Assembly-CSharp
         m_MethodName: UpgradeSpeedd
         m_Mode: 1
         m_Arguments:
@@ -4011,8 +4011,8 @@ MonoBehaviour:
     m_ActionName: 'DungeonPhase/DoUpgradeSpeed[/DualShock4GamepadHID/dpad/left,/DualShock4GamepadHID1/dpad/left]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: dungeonduell.LevelUPPanel, Assembly-CSharp
+      - m_Target: {fileID: 1803452274}
+        m_TargetAssemblyTypeName: dungeonduell.LevelUpPanel, Assembly-CSharp
         m_MethodName: UpgradeHealth
         m_Mode: 1
         m_Arguments:
@@ -4027,8 +4027,8 @@ MonoBehaviour:
     m_ActionName: 'DungeonPhase/DoUpgradeHealth[/DualShock4GamepadHID/dpad/right,/DualShock4GamepadHID1/dpad/right]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: dungeonduell.LevelUPPanel, Assembly-CSharp
+      - m_Target: {fileID: 1803452274}
+        m_TargetAssemblyTypeName: dungeonduell.LevelUpPanel, Assembly-CSharp
         m_MethodName: UpgradeAttackSpeed
         m_Mode: 1
         m_Arguments:
@@ -4077,6 +4077,26 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: a6b09542-b4ae-4e9a-8cc0-9ee4b5dfbb2a
     m_ActionName: 'CardPhase/MiddleClick[/Mouse/middleButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 88d39635-ee27-4be1-bf1d-2016a93696a7
+    m_ActionName: 'DungeonPhase/Any[/Keyboard/anyKey,/XInputControllerWindows/buttonEast,/XInputControllerWindows/buttonNorth,/XInputControllerWindows/buttonSouth,/XInputControllerWindows/buttonWest,/XInputControllerWindows/dpad/down,/XInputControllerWindows/dpad/left,/XInputControllerWindows/dpad/right,/XInputControllerWindows/dpad/up,/XInputControllerWindows/leftShoulder,/XInputControllerWindows/leftStick/down,/XInputControllerWindows/leftStick/left,/XInputControllerWindows/leftStick/up,/XInputControllerWindows/leftStick/right,/XInputControllerWindows/leftStickPress,/XInputControllerWindows/leftTrigger,/XInputControllerWindows/rightShoulder,/XInputControllerWindows/rightStick/down,/XInputControllerWindows/rightStick/left,/XInputControllerWindows/rightStick/right,/XInputControllerWindows/rightStick/up,/XInputControllerWindows/rightStickPress,/XInputControllerWindows/rightTrigger,/XInputControllerWindows/select,/XInputControllerWindows/start,/Mouse/rightButton,/Mouse/leftButton,/Mouse/press]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fc707469-0199-4470-8335-7c045b5636f0
+    m_ActionName: 'CardPhase/MoveNav[/XInputControllerWindows/leftStick/up,/XInputControllerWindows/rightStick/up,/XInputControllerWindows/leftStick/down,/XInputControllerWindows/rightStick/down,/XInputControllerWindows/leftStick/left,/XInputControllerWindows/rightStick/left,/XInputControllerWindows/leftStick/right,/XInputControllerWindows/rightStick/right,/XInputControllerWindows/dpad,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 927e9c8d-f1d1-4d7e-ab67-ea6a2e6f9cf2
+    m_ActionName: 'CardPhase/ScrollWheel[/Mouse/scroll]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ac346352-45ed-453d-b652-00b5b16fbff6
+    m_ActionName: CardPhase/TrackedDevicePosition
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 67481b39-65a3-4432-ad85-2f9178693466
+    m_ActionName: CardPhase/TrackedDeviceOrientation
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: DungeonPhase
@@ -12742,8 +12762,8 @@ MonoBehaviour:
     m_ActionName: 'DungeonPhase/OpenUpgrade[/DualShock4GamepadHID/dpad/up,/DualShock4GamepadHID1/dpad/up]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: dungeonduell.LevelUPPanel, Assembly-CSharp
+      - m_Target: {fileID: 1654634607}
+        m_TargetAssemblyTypeName: dungeonduell.LevelUpPanel, Assembly-CSharp
         m_MethodName: UpgradeSpeedd
         m_Mode: 1
         m_Arguments:
@@ -12758,8 +12778,8 @@ MonoBehaviour:
     m_ActionName: 'DungeonPhase/DoUpgradeSpeed[/DualShock4GamepadHID/dpad/left,/DualShock4GamepadHID1/dpad/left]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: dungeonduell.LevelUPPanel, Assembly-CSharp
+      - m_Target: {fileID: 1654634607}
+        m_TargetAssemblyTypeName: dungeonduell.LevelUpPanel, Assembly-CSharp
         m_MethodName: UpgradeHealth
         m_Mode: 1
         m_Arguments:
@@ -12774,8 +12794,8 @@ MonoBehaviour:
     m_ActionName: 'DungeonPhase/DoUpgradeHealth[/DualShock4GamepadHID/dpad/right,/DualShock4GamepadHID1/dpad/right]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: dungeonduell.LevelUPPanel, Assembly-CSharp
+      - m_Target: {fileID: 1654634607}
+        m_TargetAssemblyTypeName: dungeonduell.LevelUpPanel, Assembly-CSharp
         m_MethodName: UpgradeAttackSpeed
         m_Mode: 1
         m_Arguments:
@@ -12824,6 +12844,26 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: a6b09542-b4ae-4e9a-8cc0-9ee4b5dfbb2a
     m_ActionName: 'CardPhase/MiddleClick[/Mouse/middleButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 88d39635-ee27-4be1-bf1d-2016a93696a7
+    m_ActionName: 'DungeonPhase/Any[/Keyboard/anyKey,/XInputControllerWindows/buttonEast,/XInputControllerWindows/buttonNorth,/XInputControllerWindows/buttonSouth,/XInputControllerWindows/buttonWest,/XInputControllerWindows/dpad/down,/XInputControllerWindows/dpad/left,/XInputControllerWindows/dpad/right,/XInputControllerWindows/dpad/up,/XInputControllerWindows/leftShoulder,/XInputControllerWindows/leftStick/down,/XInputControllerWindows/leftStick/left,/XInputControllerWindows/leftStick/up,/XInputControllerWindows/leftStick/right,/XInputControllerWindows/leftStickPress,/XInputControllerWindows/leftTrigger,/XInputControllerWindows/rightShoulder,/XInputControllerWindows/rightStick/down,/XInputControllerWindows/rightStick/left,/XInputControllerWindows/rightStick/right,/XInputControllerWindows/rightStick/up,/XInputControllerWindows/rightStickPress,/XInputControllerWindows/rightTrigger,/XInputControllerWindows/select,/XInputControllerWindows/start,/Mouse/rightButton,/Mouse/leftButton,/Mouse/press]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fc707469-0199-4470-8335-7c045b5636f0
+    m_ActionName: 'CardPhase/MoveNav[/XInputControllerWindows/leftStick/up,/XInputControllerWindows/rightStick/up,/XInputControllerWindows/leftStick/down,/XInputControllerWindows/rightStick/down,/XInputControllerWindows/leftStick/left,/XInputControllerWindows/rightStick/left,/XInputControllerWindows/leftStick/right,/XInputControllerWindows/rightStick/right,/XInputControllerWindows/dpad,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 927e9c8d-f1d1-4d7e-ab67-ea6a2e6f9cf2
+    m_ActionName: 'CardPhase/ScrollWheel[/Mouse/scroll]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ac346352-45ed-453d-b652-00b5b16fbff6
+    m_ActionName: CardPhase/TrackedDevicePosition
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 67481b39-65a3-4432-ad85-2f9178693466
+    m_ActionName: CardPhase/TrackedDeviceOrientation
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: DungeonPhase
@@ -22602,6 +22642,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1789900644}
   m_CullTransparentMesh: 1
+--- !u!114 &1803452274 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6013881019734557435, guid: e738a2ac7ae5bcc4894527f901d1007f,
+    type: 3}
+  m_PrefabInstance: {fileID: 2102279923}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9d94441a16284b45955f390216b3cc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1806037454
 GameObject:
   m_ObjectHideFlags: 0
