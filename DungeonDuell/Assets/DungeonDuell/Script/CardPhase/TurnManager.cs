@@ -12,6 +12,7 @@ using UnityEngine.Serialization;
 using UnityEngine.Localization.Components;
 using UnityEngine.Localization.SmartFormat.PersistentVariables;
 using FMODUnity;
+
 //using static UnityEditor.Profiling.RawFrameDataView;
 
 
@@ -61,15 +62,7 @@ namespace dungeonduell
         private void OnDisable()
         {
             UnsubscribeToAllEvents();
-            try
-            {
-                ChangeActivateDevice(playerInputs[1].user.pairedDevices[0], true);
-                ChangeActivateDevice(playerInputs[0].user.pairedDevices[0], true);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
+            ActivateAllDevice();
         }
 
         public void SubscribeToEvents()
@@ -129,8 +122,6 @@ namespace dungeonduell
             UpdatePlayerTurnText();
             pressAnyKeyText.gameObject.SetActive(false);
             ToggleHandVisibility(isPlayer1Turn, !isPlayer1Turn);
-
-            //    StartCoroutine(DelayedFirstSelectable());
         }
 
         private void UpdatePlayerTurnText()
@@ -139,7 +130,7 @@ namespace dungeonduell
             SetPlayerInText();
         }
 
-        public void EndPlayerTurn()
+        private void EndPlayerTurn()
         {
             RuntimeManager.PlayOneShot(playerDisappearEvent);
             isPlayer1Turn = !isPlayer1Turn;
@@ -238,8 +229,8 @@ namespace dungeonduell
 
         public void ActivateAllDevice()
         {
-            InputSystem.DisableDevice(Mouse.current);
-            InputSystem.DisableDevice(Keyboard.current);
+            InputSystem.EnableDevice(Mouse.current);
+            InputSystem.EnableDevice(Keyboard.current);
             foreach (PlayerInput playerInput in playerInputs)
             {
                 if (playerInput.user.pairedDevices.Count > 1)
