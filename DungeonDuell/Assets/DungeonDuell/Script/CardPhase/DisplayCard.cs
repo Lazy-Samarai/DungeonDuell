@@ -17,6 +17,8 @@ namespace dungeonduell
         public DoorIndicator cardDirectionIndicator1;
         public DoorIndicator cardDirectionIndicator2;
         public GameObject tooltip;
+        public GameObject outlineObject;
+
 
         [Header("Hover-Effekt")] public Vector3 hoverScale = new(1.2f, 1.2f, 1f);
         public Vector3 hoverOffset = new(0f, 20f, 0f);
@@ -119,6 +121,9 @@ namespace dungeonduell
                 transform.localRotation = Quaternion.identity;
                 transform.localPosition += hoverOffset;
 
+                if (outlineObject != null)
+                    outlineObject.SetActive(true); 
+                
                 if (tooltip != null)
                 {
                     var tmp = tooltip.GetComponentInChildren<TextMeshProUGUI>();
@@ -136,6 +141,9 @@ namespace dungeonduell
                 transform.localScale = _originalScale;
                 transform.localRotation = _originalRotation;
                 transform.localPosition = _originalPosition;
+                
+                if (outlineObject != null)
+                    outlineObject.SetActive(false); 
 
                 HideTooltip();
                 AdjustNeighborCards(false);
