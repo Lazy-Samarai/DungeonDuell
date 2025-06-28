@@ -18,6 +18,8 @@ namespace dungeonduell
         [SpineAnimation] public string preWin;
         [SpineAnimation] public string win;
 
+        public float walkPlainMutiply = 1.5f; // Applied first were other base animation speed
+
         public float runningMultiply = 1f;
         public float walkMultiply = 1f;
 
@@ -79,7 +81,7 @@ namespace dungeonduell
 
         public override void SetToBaseMovement()
         {
-            SetAnimation(baseMoving, walkMultiply);
+            SetAnimation(baseMoving, walkPlainMutiply * walkMultiply);
         }
 
         public void SetToDash()
