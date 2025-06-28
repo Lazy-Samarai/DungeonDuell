@@ -63,6 +63,7 @@ namespace FMODUnity
                 lastMatch = -1;
                 message = null;
             }
+
             EditorGUILayout.PrefixLabel(L10n.Tr("Replace:"));
             replaceText = EditorGUILayout.TextField(replaceText);
 
@@ -74,6 +75,7 @@ namespace FMODUnity
             {
                 OnHierarchyChange();
             }
+
             EditorGUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
@@ -89,6 +91,7 @@ namespace FMODUnity
                     messageType = MessageType.Warning;
                 }
             }
+
             if (GUILayout.Button(L10n.Tr("Replace")))
             {
                 message = "";
@@ -100,19 +103,24 @@ namespace FMODUnity
                 {
                     Replace();
                 }
+
                 if (lastMatch == -1)
                 {
                     message = L10n.Tr("Finished Search");
                     messageType = MessageType.Warning;
                 }
             }
+
             if (GUILayout.Button(L10n.Tr("Replace All")))
             {
-                if (EditorUtility.DisplayDialog(L10n.Tr("Replace All"), L10n.Tr("Are you sure you wish to replace all in the current hierachy?"), L10n.Tr("yes"), L10n.Tr("no")))
+                if (EditorUtility.DisplayDialog(L10n.Tr("Replace All"),
+                        L10n.Tr("Are you sure you wish to replace all in the current hierachy?"), L10n.Tr("yes"),
+                        L10n.Tr("no")))
                 {
                     ReplaceAll();
                 }
             }
+
             GUILayout.EndHorizontal();
             if (!string.IsNullOrEmpty(message))
             {
@@ -134,7 +142,8 @@ namespace FMODUnity
         {
             for (int i = lastMatch + 1; i < emitters.Count; i++)
             {
-                if (emitters[i].EventReference.Path.IndexOf(findText, 0, StringComparison.CurrentCultureIgnoreCase) >= 0)
+                if (emitters[i].EventReference.Path.IndexOf(findText, 0, StringComparison.CurrentCultureIgnoreCase) >=
+                    0)
                 {
                     lastMatch = i;
                     EditorGUIUtility.PingObject(emitters[i]);
@@ -144,6 +153,7 @@ namespace FMODUnity
                     return;
                 }
             }
+
             lastMatch = -1;
         }
 
@@ -168,7 +178,8 @@ namespace FMODUnity
             int replaceLength = replaceText.Length;
             int position = 0;
             var serializedObject = new SerializedObject(emitter);
-            var pathProperty = serializedObject.FindProperty(L10n.Tr("Event"));
+            var eventReferenceProperty = serializedObject.FindProperty("EventReference");
+            var pathProperty = eventReferenceProperty.FindPropertyRelative("Path");
             string path = pathProperty.stringValue;
             position = path.IndexOf(findText, position, StringComparison.CurrentCultureIgnoreCase);
             while (position >= 0)
@@ -177,7 +188,9 @@ namespace FMODUnity
                 position += replaceLength;
                 position = path.IndexOf(findText, position, StringComparison.CurrentCultureIgnoreCase);
             }
-            pathProperty.stringValue = path;
+
+            EventReference newEventReference = EventReference.Find(path);
+            eventReferenceProperty.SetEventReference(newEventReference.Guid, newEventReference.Path);
             return serializedObject.ApplyModifiedProperties();
         }
 

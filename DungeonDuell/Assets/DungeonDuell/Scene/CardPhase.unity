@@ -800,9 +800,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8d64645383b29db46aa6ed284f9d9dfc, type: 2}
   connectCollector: {fileID: 1945806930}
   isPlayer1Turn: 1
-  shellCardMarker: {fileID: 9030860857177964664, guid: 17099331d7c4e3e4793d1adafb7d4ce9,
-    type: 3}
-  _tilemap: {fileID: 0}
+  tilemap: {fileID: 0}
   setAbleCount: 0000000000000000
   indiactorDoorOver: {fileID: 0}
   rotateSFXEvent:
@@ -4549,6 +4547,7 @@ GameObject:
   - component: {fileID: 1781931319}
   - component: {fileID: 1781931318}
   - component: {fileID: 1781931317}
+  - component: {fileID: 1781931331}
   m_Layer: 19
   m_Name: CameraPlayer1
   m_TagString: MainCamera
@@ -5390,6 +5389,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1781931331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1781931316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nonRigidbodyVelocity: 0
+  attenuationObject: {fileID: 0}
 --- !u!1 &1802524973
 GameObject:
   m_ObjectHideFlags: 0
