@@ -3,6 +3,7 @@ using Spine;
 using Spine.Unity;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace dungeonduell
 {
@@ -18,9 +19,12 @@ namespace dungeonduell
         [SpineAnimation] public string preWin;
         [SpineAnimation] public string win;
 
-        public float walkPlainMutiply = 1.5f; // Applied first were other base animation speed
+        [Header("Plain Animation Adjustment")]
+        public float walkPlainMultiply = 1.5f; // Applied first were other base animation speed
 
-        public float runningMultiply = 1f;
+        public float runningPlainMultiply = 1.0f;
+
+        [Header("Upgrade Animation Increase")] public float runningMultiply = 1f;
         public float walkMultiply = 1f;
 
         private Bone _ikTargetBone;
@@ -76,12 +80,12 @@ namespace dungeonduell
         public void SetToRunning()
         {
             var backwards = facingEastRunning != runningEast;
-            SetAnimation(!backwards ? running : runningBackward, runningMultiply);
+            SetAnimation(!backwards ? running : runningBackward, runningPlainMultiply * runningMultiply);
         }
 
         public override void SetToBaseMovement()
         {
-            SetAnimation(baseMoving, walkPlainMutiply * walkMultiply);
+            SetAnimation(baseMoving, walkPlainMultiply * walkMultiply);
         }
 
         public void SetToDash()
