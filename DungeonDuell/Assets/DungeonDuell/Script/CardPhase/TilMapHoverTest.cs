@@ -1,6 +1,8 @@
+using System;
 using Cinemachine;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using FMODUnity;
 
 namespace dungeonduell
 {
@@ -28,6 +30,13 @@ namespace dungeonduell
         public TileBase hoverBridgeTile;
         private bool _isBridged;
 
+        [SerializeField] private EventReference cardSelectedSfxEvent;
+        [SerializeField] private EventReference cardDeselectedSfxEvent;
+
+        private ShellTracker _shellTracker;
+
+        private DisplayCard _currentDisplayCard;
+
         private void Awake()
         {
             runTimeIndicatorDoor = Instantiate(indicatorDoorPrefab, transform.position, Quaternion.identity);
@@ -35,6 +44,8 @@ namespace dungeonduell
             runTimeIndicatorDoor.transform.gameObject.SetActive(false);
             _animator = GetComponent<Animator>();
             tilemap = GetComponent<Tilemap>();
+
+            _shellTracker = FindFirstObjectByType<ShellTracker>();
         }
 
         private void Update()
@@ -85,12 +96,33 @@ namespace dungeonduell
             runTimeIndicatorDoor.transform.position = tilemap.CellToWorld(cellPosition);
             runTimeIndicatorDoor.transform.gameObject.SetActive(_currentlyVisible);
 
-            currentCellPosition = cellPosition;
+            if (currentCellPosition != cellPosition)
+            {
+                Tuple<ShellCard, Vector3Int> shell = _shellTracker.TryGetShell(cellPosition);
+                if (shell != null)
+                {
+                    UpdateHoverTile(shell.Item1.completeTile);
+                }
+                else
+                {
+                    UpdateHoverTile(_currentDisplayCard.card.tile);
+                }
+
+                currentCellPosition = cellPosition;
+            }
         }
 
         private void ResetTileCheck()
         {
             tilemap.SetTile(currentCellPosition, null);
+        }
+
+        private void UpdateHoverTile(TileBase newHoverTile)
+        {
+            if (newHoverTile != null && hoverTile != newHoverTile)
+            {
+                hoverTile = newHoverTile;
+            }
         }
 
         private void SetHoverMapVisable(bool visual)
@@ -111,8 +143,11 @@ namespace dungeonduell
         {
             if (displayCard != null)
             {
-                hoverTile = displayCard.card.tile;
+                _currentDisplayCard = displayCard;
+                UpdateHoverTile(_currentDisplayCard.card.tile);
+
                 SetHoverMapVisable(true);
+                RuntimeManager.PlayOneShot(cardSelectedSfxEvent);
 
                 UpdateIndicator(displayCard.card.GetAllowedDirection());
             }
@@ -125,6 +160,7 @@ namespace dungeonduell
         private void OnCardDeselect()
         {
             ResetTileCheck();
+            RuntimeManager.PlayOneShot(cardDeselectedSfxEvent);
             SetHoverMapVisable(false);
         }
 

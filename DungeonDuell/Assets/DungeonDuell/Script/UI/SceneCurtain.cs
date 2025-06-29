@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
-using Unity.VisualScripting;
 
 namespace dungeonduell
 {
@@ -18,7 +17,7 @@ namespace dungeonduell
 
         [Tooltip("Index aus Build Settings")] public int targetSceneIndex = -1;
 
-        private void Start()
+        protected virtual void Start()
         {
             if (openGym)
             {
@@ -29,34 +28,59 @@ namespace dungeonduell
         public void StartTransitionToScene()
         {
             topPanel.DOAnchorPosY(bottomPanelPosY, animationDuration).SetUpdate(true).SetEase(Ease.InOutSine);
-            bottomPanel.DOAnchorPosY(topPanelPosY, animationDuration).SetUpdate(true).SetEase(Ease.InOutSine).OnComplete(() =>
-            {
-                if (FindFirstObjectByType<OptionDataManager>().showTutorial)
+            bottomPanel.DOAnchorPosY(topPanelPosY, animationDuration).SetUpdate(true).SetEase(Ease.InOutSine)
+                .OnComplete(() =>
                 {
-                    tutorialSlideshow.SetActive(true);
-                    return;
-                }
-                else
-                {
-                    SceneManager.LoadScene(targetSceneIndex);
-                }
-            });
+                    if (FindFirstObjectByType<OptionDataManager>().showTutorial)
+                    {
+                        tutorialSlideshow.SetActive(true);
+                        return;
+                    }
+                    else
+                    {
+                        SceneManager.LoadScene(targetSceneIndex);
+                    }
+                });
         }
 
 
-        public void OpenCurtain()
+        protected void OpenCurtain()
         {
-            topPanel.DOAnchorPosY(topPanelPosY, animationDuration).SetUpdate(true).SetEase(Ease.InOutSine);
-            bottomPanel.DOAnchorPosY(bottomPanelPosY, animationDuration).SetUpdate(true).SetEase(Ease.InOutSine);
+            ChangeCurtainSingle(true, true);
+            ChangeCurtainSingle(false, true);
+        }
+
+        protected void ChangeCurtainSingle(bool player1, bool open)
+        {
+            if (player1)
+            {
+                topPanel.DOAnchorPosY(open ? topPanelPosY : bottomPanelPosY, animationDuration).SetUpdate(true)
+                    .SetEase(Ease.InOutSine).OnComplete(() =>
+                    {
+                        if (!open)
+                        {
+                            tutorialSlideshow.SetActive(true);
+                        }
+                    });
+            }
+            else
+            {
+                bottomPanel.DOAnchorPosY(open ? bottomPanelPosY : topPanelPosY, animationDuration).SetUpdate(true)
+                    .SetEase(Ease.InOutSine).OnComplete(() =>
+                    {
+                        if (!open)
+                        {
+                            tutorialSlideshow.SetActive(true);
+                        }
+                    });
+                ;
+            }
         }
 
         public void CloseCurtain()
         {
-            topPanel.DOAnchorPosY(bottomPanelPosY, animationDuration).SetUpdate(true).SetEase(Ease.InOutSine);
-            bottomPanel.DOAnchorPosY(topPanelPosY, animationDuration).SetUpdate(true).SetEase(Ease.InOutSine).OnComplete(() =>
-            {
-                    tutorialSlideshow.SetActive(true);
-            });
+            ChangeCurtainSingle(true, false);
+            ChangeCurtainSingle(false, false);
         }
 
         private void OnEnable()
