@@ -1,7 +1,6 @@
 using Cinemachine;
 using UnityEngine;
 
-
 namespace dungeonduell
 {
     public class ProximityTooltipTrigger : MonoBehaviour
@@ -20,13 +19,13 @@ namespace dungeonduell
 
         private void Start()
         {
-            // TooltipController für Spieler 1 & 2 suchen
-            tooltipControllerPlayer1 = FindTooltipController("TooltipCanvasP1");
-            tooltipControllerPlayer2 = FindTooltipController("TooltipCanvasP2");
+            // TooltipController für Spieler 1 & 2 suchen anhand von Canvas-Namen
+            tooltipControllerPlayer1 = FindTooltipControllerByCanvasName("TooltipCanvasP1");
+            tooltipControllerPlayer2 = FindTooltipControllerByCanvasName("TooltipCanvasP2");
 
-            // Kameras automatisch finden
-            cameraPlayer1 = GameObject.Find("CameraPlayer1")?.GetComponent<Camera>();
-            cameraPlayer2 = GameObject.Find("CameraPlayer2")?.GetComponent<Camera>();
+            // Kameras anhand des GameObject-Namens finden
+            cameraPlayer1 = FindCameraByName("CameraPlayer1");
+            cameraPlayer2 = FindCameraByName("CameraPlayer2");
 
             if (tooltipControllerPlayer1 == null || tooltipControllerPlayer2 == null)
                 Debug.LogWarning("[TooltipTrigger] TooltipController nicht gefunden!");
@@ -35,11 +34,24 @@ namespace dungeonduell
                 Debug.LogWarning("[TooltipTrigger] Kamera nicht gefunden!");
         }
 
-        private TooltipController FindTooltipController(string canvasName)
+        private TooltipController FindTooltipControllerByCanvasName(string canvasName)
         {
-            GameObject canvasGO = GameObject.Find(canvasName);
-            if (canvasGO == null) return null;
-            return canvasGO.GetComponent<TooltipController>();
+            foreach (var controller in FindObjectsOfType<TooltipController>())
+            {
+                if (controller.gameObject.name == canvasName)
+                    return controller;
+            }
+            return null;
+        }
+
+        private Camera FindCameraByName(string cameraName)
+        {
+            foreach (var cam in FindObjectsOfType<Camera>())
+            {
+                if (cam.gameObject.name == cameraName)
+                    return cam;
+            }
+            return null;
         }
 
         private void OnTriggerEnter2D(Collider2D other)
