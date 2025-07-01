@@ -8,10 +8,11 @@ namespace dungeonduell
         [SerializeField] private List<GameObject>
             availablePort; // for some unclear stupid reason getting in Sart per get Child doesnt work
 
-        private List<Transform> _usedPort;
+        public List<ConnectionDir> usedPort;
 
         public void OpenPort(ConnectionDir dir)
         {
+            usedPort.Add(dir);
             var port = GetPort(dir);
 
             port.SetActive(false);
