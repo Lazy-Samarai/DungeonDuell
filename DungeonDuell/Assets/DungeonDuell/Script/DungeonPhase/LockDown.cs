@@ -10,10 +10,12 @@ namespace dungeonduell
 
         public void LockingDown(bool down)
         {
+            List<ConnectionDir> usedPort = GetComponent<RoomPortHandler>().usedPort;
             if (_systemActive)
-                foreach (var g in availableBarrier)
-                    if (g != null)
-                        g.SetActive(down);
+                for (int g = 0; g < availableBarrier.Count; g++)
+                    if (availableBarrier[g] != null)
+                        if (usedPort.Contains((ConnectionDir)g))
+                            availableBarrier[g].GetComponent<RoomBarrier>().LockdownBarrier(down);
         }
 
         public void SetLockDownSystem(bool active)
