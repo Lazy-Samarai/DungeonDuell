@@ -1,80 +1,39 @@
-using Cinemachine;
 using UnityEngine;
+using TMPro;
+using Cinemachine;
 
 namespace dungeonduell
 {
     public class ProximityTooltipTrigger : MonoBehaviour
     {
-        [TextArea] public string tooltipText = "Standard-Tooltip";
+        [Header("Textobjekt im World Space")]
+        [SerializeField] private GameObject toolTip;
 
         [Header("Player Tags")]
         [SerializeField] [TagField] private string player1Tag = "Player1";
         [SerializeField] [TagField] private string player2Tag = "Player2";
 
-        private TooltipController tooltipControllerPlayer1;
-        private TooltipController tooltipControllerPlayer2;
-
-        private Camera cameraPlayer1;
-        private Camera cameraPlayer2;
-
         private void Start()
         {
-            // TooltipController für Spieler 1 & 2 suchen anhand von Canvas-Namen
-            tooltipControllerPlayer1 = FindTooltipControllerByCanvasName("TooltipCanvasP1");
-            tooltipControllerPlayer2 = FindTooltipControllerByCanvasName("TooltipCanvasP2");
-
-            // Kameras anhand des GameObject-Namens finden
-            cameraPlayer1 = FindCameraByName("CameraPlayer1");
-            cameraPlayer2 = FindCameraByName("CameraPlayer2");
-
-            if (tooltipControllerPlayer1 == null || tooltipControllerPlayer2 == null)
-                Debug.LogWarning("[TooltipTrigger] TooltipController nicht gefunden!");
-
-            if (cameraPlayer1 == null || cameraPlayer2 == null)
-                Debug.LogWarning("[TooltipTrigger] Kamera nicht gefunden!");
-        }
-
-        private TooltipController FindTooltipControllerByCanvasName(string canvasName)
-        {
-            foreach (var controller in FindObjectsOfType<TooltipController>())
-            {
-                if (controller.gameObject.name == canvasName)
-                    return controller;
-            }
-            return null;
-        }
-
-        private Camera FindCameraByName(string cameraName)
-        {
-            foreach (var cam in FindObjectsOfType<Camera>())
-            {
-                if (cam.gameObject.name == cameraName)
-                    return cam;
-            }
-            return null;
+            if (toolTip != null)
+                toolTip.SetActive(false);
+            else
+                Debug.LogWarning("toolTip nicht gesetzt.");
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag(player1Tag) && tooltipControllerPlayer1 && cameraPlayer1)
+            if ((other.CompareTag(player1Tag) || other.CompareTag(player2Tag)) && toolTip != null)
             {
-                tooltipControllerPlayer1.ShowTooltip(tooltipText, transform.position + Vector3.up * 1f, cameraPlayer1);
-            }
-            else if (other.CompareTag(player2Tag) && tooltipControllerPlayer2 && cameraPlayer2)
-            {
-                tooltipControllerPlayer2.ShowTooltip(tooltipText, transform.position + Vector3.up * 1f, cameraPlayer2);
+                toolTip.SetActive(true);
             }
         }
 
         private void OnTriggerExit2D(Collider2D other)
         {
-            if (other.CompareTag(player1Tag) && tooltipControllerPlayer1)
+            if ((other.CompareTag(player1Tag) || other.CompareTag(player2Tag)) && toolTip != null)
             {
-                tooltipControllerPlayer1.HideTooltip();
-            }
-            else if (other.CompareTag(player2Tag) && tooltipControllerPlayer2)
-            {
-                tooltipControllerPlayer2.HideTooltip();
+                toolTip.SetActive(false);
             }
         }
     }
