@@ -179,11 +179,38 @@ MonoBehaviour:
   Path: ../DDFmodProject/DungeoDuellFmod/Build/Desktop/Card Phase.bank
   Name: Card Phase
   StudioPath: bank:/Card Phase
-  lastModified: 638858513908475087
+  lastModified: 638865359014174352
   FileSizes:
   - Name: Desktop
-    Value: 122432
+    Value: 128384
   Exists: 1
+--- !u!114 &-4898395840425352690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Dungeon Duell Audio V1/Card Phase/CP_player/CP_player_place-card-on-hexgrid
+  m_EditorClassIdentifier: 
+  Path: event:/Dungeon Duell Audio V1/Card Phase/CP_player/CP_player_place-card-on-hexgrid
+  Guid:
+    Data1: 175814895
+    Data2: 1264259661
+    Data3: 2088876940
+    Data4: -1804597625
+  Banks:
+  - {fileID: -5026038177479864259}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-4138030320544568134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,7 +273,7 @@ MonoBehaviour:
   Path: ../DDFmodProject/DungeoDuellFmod/Build/Desktop/misc.bank
   Name: misc
   StudioPath: bank:/misc
-  lastModified: 638858513910049829
+  lastModified: 638865358974702486
   FileSizes:
   - Name: Desktop
     Value: 9992384
@@ -374,10 +401,10 @@ MonoBehaviour:
   Path: ../DDFmodProject/DungeoDuellFmod/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638854289014654236
+  lastModified: 638865359014204219
   FileSizes:
   - Name: Desktop
-    Value: 1942
+    Value: 1910
   Exists: 1
 --- !u!114 &-382770318705056648
 MonoBehaviour:
@@ -421,7 +448,7 @@ MonoBehaviour:
   Path: ../DDFmodProject/DungeoDuellFmod/Build/Desktop/Dungeon Phase.bank
   Name: Dungeon Phase
   StudioPath: bank:/Dungeon Phase
-  lastModified: 638858513909073486
+  lastModified: 638865358941604669
   FileSizes:
   - Name: Desktop
     Value: 70208
@@ -466,13 +493,14 @@ MonoBehaviour:
   - {fileID: -7376268707069141929}
   - {fileID: -6265661387666663448}
   - {fileID: 4888935114736287384}
+  - {fileID: -4898395840425352690}
   EditorParameters: []
   MasterBanks:
   - {fileID: -1405512841764259611}
   StringsBanks:
   - {fileID: 1276395289756070088}
   cacheVersion: 131847
-  cacheTime: 638858513910049829
+  cacheTime: 638865359014204219
   SerializableEventsDict:
   - key: event:/Dungeon Duell Audio V1/Card Phase/CP_player/CP_player_navigate-on-hexgrid
     index: 0
@@ -512,6 +540,8 @@ MonoBehaviour:
     index: 17
   - key: event:/Dungeon Duell Audio V1/misc/Misc_UI/misc_player_press-any-key
     index: 18
+  - key: event:/Dungeon Duell Audio V1/Card Phase/CP_player/CP_player_place-card-on-hexgrid
+    index: 19
 --- !u!114 &225930445049737312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -581,10 +611,10 @@ MonoBehaviour:
   Path: ../DDFmodProject/DungeoDuellFmod/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638854289014665542
+  lastModified: 638865359014204219
   FileSizes:
   - Name: Desktop
-    Value: 2382
+    Value: 2440
   Exists: 1
 --- !u!114 &3486052223056188987
 MonoBehaviour:

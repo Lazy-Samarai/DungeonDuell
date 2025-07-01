@@ -69,7 +69,7 @@ public class SpineStepSound : MonoBehaviour
         {
             case "Untagged":
                 return isRunning ? normalWalk : normalRun;
-            case "Respawn":
+            case "LootRoom":
                 return isRunning ? lootWalk : lootRun;
             default:
                 return isRunning ? normalWalk : normalRun;

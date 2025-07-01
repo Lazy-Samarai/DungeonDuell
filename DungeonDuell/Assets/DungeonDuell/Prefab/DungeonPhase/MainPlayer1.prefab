@@ -1890,7 +1890,7 @@ MonoBehaviour:
     Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player_run_treasure
   groundLayerMask:
     serializedVersion: 2
-    m_Bits: 4
+    m_Bits: 8388608
   raycastDistance: 1
 --- !u!1 &1899941585429488189
 GameObject:
@@ -19379,9 +19379,9 @@ MonoBehaviour:
         StopEvents:
           m_PersistentCalls:
             m_Calls:
-            - m_Target: {fileID: 2440228349515558812}
+            - m_Target: {fileID: 1647888063969688703}
               m_TargetAssemblyTypeName: SpineStepSound, Assembly-CSharp
-              m_MethodName: StopStepSound
+              m_MethodName: 
               m_Mode: 1
               m_Arguments:
                 m_ObjectArgument: {fileID: 0}
