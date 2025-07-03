@@ -1,6 +1,7 @@
 ﻿using MoreMountains.TopDownEngine;
 using UnityEngine;
 using UnityEngine.Serialization;
+using FMODUnity;
 
 namespace dungeonduell
 {
@@ -12,6 +13,10 @@ namespace dungeonduell
         public bool player1;
         private DungeonDuellMultiplayerLevelManager _levelManager;
         [Header("UI Elements")] private bool _menuOpen;
+
+        [SerializeField] private EventReference openLevelUPEvent;
+        [SerializeField] private EventReference closeLevelUpEvent;
+        [SerializeField] private EventReference optionSelectedEvent;
 
         private void Start()
         {
@@ -37,6 +42,15 @@ namespace dungeonduell
         {
             _menuOpen = on;
             levelUpMenu.SetActive(on);
+
+            if (on == true)
+            {
+                RuntimeManager.PlayOneShot(openLevelUPEvent);
+            }
+            else
+            {
+                RuntimeManager.PlayOneShot(closeLevelUpEvent);
+            }
         }
 
         private void OnOptionSelected(LevelUpOptions option)
@@ -46,6 +60,7 @@ namespace dungeonduell
                 if (_levelManager != null)
                     _levelManager.ApplyLevelUpPerCoins(option, AmountPerUpgrade, player1 ? 1 : 2);
 
+                RuntimeManager.PlayOneShot(optionSelectedEvent);
                 testHub.menuShowing = false;
                 ShowLevelUpMenu(false);
             }
