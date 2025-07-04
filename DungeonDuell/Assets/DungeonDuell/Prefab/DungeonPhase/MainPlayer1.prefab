@@ -1840,6 +1840,8 @@ MonoBehaviour:
   dashReverse: DashBackwards
   preWin: WinStart
   win: WinIdle
+  walkPlainMultiply: 1.5
+  runningPlainMultiply: 1
   runningMultiply: 1
   walkMultiply: 1
   dashParticlesRenderer: {fileID: 6325014291572867025}
@@ -9306,7 +9308,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.85882354, g: 0.827451, b: 0.70980394, a: 1}
+      maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
