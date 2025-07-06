@@ -66,12 +66,14 @@ namespace dungeonduell
 
         ShellTracker _shellTracker;
 
-        Dictionary<RoomType, SecondaryRoomType> convertMapShell = new Dictionary<RoomType, SecondaryRoomType>
+        readonly Dictionary<RoomType, SecondaryRoomType> _convertMapShell = new Dictionary<RoomType, SecondaryRoomType>
         {
             { RoomType.Generic, SecondaryRoomType.Generic },
             { RoomType.NormalLott, SecondaryRoomType.Loot },
             { RoomType.Enemy, SecondaryRoomType.Enemy },
         };
+
+        [SerializeField] private GameObject[] indiactorSub;
 
         private void Start()
         {
@@ -217,12 +219,20 @@ namespace dungeonduell
 
                     ShellCard cardToUse = (ShellCard)shelledTileCard.Item1.Clone();
                     cardToUse.secondaryRoomType =
-                        convertMapShell.GetValueOrDefault(card.roomtype, SecondaryRoomType.Generic);
+                        _convertMapShell.GetValueOrDefault(card.roomtype, SecondaryRoomType.Generic);
 
                     card = cardToUse;
                     card.tile = shelledTileCard.Item1.completeTile;
 
                     _shellTracker.RemoveMarker(cellPosition);
+
+                    if (cardToUse.secondaryRoomType != SecondaryRoomType.Generic)
+                    {
+                        GameObject marker = Instantiate(indiactorSub[(int)cardToUse.secondaryRoomType - 1],
+                            tilemap.CellToWorld(cellPosition), Quaternion.identity);
+                        marker.transform.parent = _shellTracker.transform;
+                    }
+
 
                     DdCodeEventHandler.Trigger_CardToShelled(card, isPlayer1Turn);
                 }
