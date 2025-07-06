@@ -15984,33 +15984,9 @@ MonoBehaviour:
                 m_StringArgument: Walk
                 m_BoolArgument: 0
               m_CallState: 2
-            - m_Target: {fileID: 1435327524876659838}
-              m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
-              m_MethodName: Play
-              m_Mode: 1
-              m_Arguments:
-                m_ObjectArgument: {fileID: 0}
-                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-                m_IntArgument: 0
-                m_FloatArgument: 0
-                m_StringArgument: 
-                m_BoolArgument: 0
-              m_CallState: 2
         StopEvents:
           m_PersistentCalls:
-            m_Calls:
-            - m_Target: {fileID: 1435327524876659838}
-              m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
-              m_MethodName: Stop
-              m_Mode: 1
-              m_Arguments:
-                m_ObjectArgument: {fileID: 0}
-                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-                m_IntArgument: 0
-                m_FloatArgument: 0
-                m_StringArgument: 
-                m_BoolArgument: 0
-              m_CallState: 2
+            m_Calls: []
         InitializationEvents:
           m_PersistentCalls:
             m_Calls: []
@@ -18496,33 +18472,9 @@ MonoBehaviour:
                 m_StringArgument: Run
                 m_BoolArgument: 0
               m_CallState: 2
-            - m_Target: {fileID: 4662688513243654321}
-              m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
-              m_MethodName: Play
-              m_Mode: 1
-              m_Arguments:
-                m_ObjectArgument: {fileID: 0}
-                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-                m_IntArgument: 0
-                m_FloatArgument: 0
-                m_StringArgument: 
-                m_BoolArgument: 0
-              m_CallState: 2
         StopEvents:
           m_PersistentCalls:
-            m_Calls:
-            - m_Target: {fileID: 4662688513243654321}
-              m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
-              m_MethodName: Stop
-              m_Mode: 1
-              m_Arguments:
-                m_ObjectArgument: {fileID: 0}
-                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-                m_IntArgument: 0
-                m_FloatArgument: 0
-                m_StringArgument: 
-                m_BoolArgument: 0
-              m_CallState: 2
+            m_Calls: []
         InitializationEvents:
           m_PersistentCalls:
             m_Calls: []
@@ -18718,6 +18670,8 @@ MonoBehaviour:
   dashReverse: DashBackwards
   preWin: WinStart
   win: WinIdle
+  walkPlainMultiply: 1.5
+  runningPlainMultiply: 1
   runningMultiply: 1
   walkMultiply: 1
   dashParticlesRenderer: {fileID: 199630857930723226}
