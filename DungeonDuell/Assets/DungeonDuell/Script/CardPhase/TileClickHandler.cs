@@ -226,12 +226,10 @@ namespace dungeonduell
 
                     _shellTracker.RemoveMarker(cellPosition);
 
-                    if (cardToUse.secondaryRoomType != SecondaryRoomType.Generic)
-                    {
-                        GameObject marker = Instantiate(indiactorSub[(int)cardToUse.secondaryRoomType - 1],
-                            tilemap.CellToWorld(cellPosition), Quaternion.identity);
-                        marker.transform.parent = _shellTracker.transform;
-                    }
+
+                    GameObject marker = Instantiate(indiactorSub[(int)cardToUse.secondaryRoomType],
+                        tilemap.CellToWorld(cellPosition), Quaternion.identity);
+                    marker.transform.parent = _shellTracker.transform;
 
 
                     DdCodeEventHandler.Trigger_CardToShelled(card, isPlayer1Turn);
