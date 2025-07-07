@@ -1308,7 +1308,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 0.29411766, b: 0, a: 1}
+        key0: {r: 0.5686275, g: 0.14117648, b: 0.6431373, a: 1}
         key1: {r: 1, g: 1, b: 1, a: 0}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
@@ -4862,7 +4862,7 @@ GameObject:
   - component: {fileID: 61214810784111820}
   - component: {fileID: 50008530485997898}
   m_Layer: 18
-  m_Name: TestProjDD
+  m_Name: BulletP2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11459,7 +11459,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 1, b: 1, a: 1}
+        key0: {r: 0.5686275, g: 0.14509805, b: 0.6431373, a: 1}
         key1: {r: 1, g: 1, b: 1, a: 0}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
@@ -11484,7 +11484,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
-        m_ColorSpace: -1
+        m_ColorSpace: 0
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
       minGradient:
@@ -14943,8 +14943,8 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a099cdda6d5d4664fb6b3d26b9e4d20e, type: 2}
-  - {fileID: 2100000, guid: bf9bcf65d80fbe84d946d6786d20c8cf, type: 2}
+  - {fileID: 2100000, guid: 620b83789778ae44989c387dd1ce9c3a, type: 2}
+  - {fileID: 2100000, guid: c0073bf0d86da524582af32c854995f8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -25192,7 +25192,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b,
     type: 3}
-  m_Color: {r: 1, g: 0.28235295, b: 0, a: 1}
+  m_Color: {r: 0.5686275, g: 0.14509805, b: 0.6431373, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
