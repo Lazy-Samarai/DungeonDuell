@@ -71,7 +71,7 @@ namespace dungeonduell
                 firstTime = false;
             }
 
-            if (availableCards.Count <= 0) GetPerDistributer();
+            if (availableCards.Count <= deckSize) GetPerDistributer();
         }
 
         private void PickCards()

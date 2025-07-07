@@ -13,8 +13,11 @@ TagManager:
   - Player2
   - MainTileMap
   - Cursor
+  - SpawnpointPlayer1
+  - SpawnpointPlayer2
   - Crosshair1
   - Crosshair2
+  - LootRoom
   layers:
   - Default
   - TransparentFX
@@ -41,9 +44,9 @@ TagManager:
   - Camera4
   - RoomFloor
   - Weapon
-  - Crosshair1
-  - Crosshair2
-  - 
+  - CoverRoomMinimap
+  - VisualCone
+  - LootRoomFloor
   - 
   - 
   - 
@@ -63,6 +66,9 @@ TagManager:
     locked: 0
   - name: Characters
     uniqueID: 47421343
+    locked: 0
+  - name: Barrier
+    uniqueID: 550260375
     locked: 0
   - name: Above
     uniqueID: 961700441

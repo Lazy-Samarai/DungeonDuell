@@ -73,6 +73,12 @@ namespace dungeonduell
                     spawnPointPlayer1.transform.position = new Vector3(posX, posY, 0);
                 if (roomInfo.Item2.Roomtype == RoomType.SpawnPlayer2)
                     spawnPointPlayer2.transform.position = new Vector3(posX, posY, 0);
+
+                if (roomInfo.Item2.Roomtype == RoomType.PreSetLoot)
+                {
+                    nextroom.GetComponentInChildren<SecondaryInterior>()
+                        .SpawnExtraInterior(roomInfo.Item2.secondaryRoomType);
+                }
             }
 
             roomEngagnedList = new bool[RoomsInfosWithPos.Count];

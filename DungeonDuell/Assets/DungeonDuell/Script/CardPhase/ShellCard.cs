@@ -8,7 +8,7 @@ namespace dungeonduell
     public class ShellCard : Card // Shell card should have a unique Tile!
     {
         [FormerlySerializedAs("InPlayerRangeTile")]
-        public TileBase[] inPlayerRangeTile;
+        public GameObject marker;
 
         [FormerlySerializedAs("CompleteTile")] public TileBase completeTile;
     }

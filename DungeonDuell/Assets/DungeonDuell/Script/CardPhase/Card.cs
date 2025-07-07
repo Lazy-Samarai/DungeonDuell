@@ -14,6 +14,7 @@ namespace dungeonduell
         public string cardDescription;
 
         public RoomType roomtype = RoomType.Generic;
+        public SecondaryRoomType secondaryRoomType;
         public RoomElement roomElement = RoomElement.Standard;
         [FormerlySerializedAs("Tile")] public TileBase tile;
         public DirBarSet startDoorConcellation;
