@@ -4455,7 +4455,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &346383595
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6010,6 +6010,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 712764912}
     m_Modifications:
+    - target: {fileID: 765327180515991281, guid: 04e4d2f394825a14abf407fe31800c21,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 765327180515991281, guid: 04e4d2f394825a14abf407fe31800c21,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1690111847243631282, guid: 04e4d2f394825a14abf407fe31800c21,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -6063,7 +6073,12 @@ PrefabInstance:
     - target: {fileID: 3814744896787272450, guid: 04e4d2f394825a14abf407fe31800c21,
         type: 3}
       propertyPath: m_text
-      value: Menu
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3814744896787272450, guid: 04e4d2f394825a14abf407fe31800c21,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 3814744896787272450, guid: 04e4d2f394825a14abf407fe31800c21,
         type: 3}
@@ -6083,7 +6098,7 @@ PrefabInstance:
     - target: {fileID: 3814744896787272450, guid: 04e4d2f394825a14abf407fe31800c21,
         type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 4294440951
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 3814744896787272450, guid: 04e4d2f394825a14abf407fe31800c21,
         type: 3}
@@ -6109,6 +6124,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7199872299456976314, guid: 04e4d2f394825a14abf407fe31800c21,
+        type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 63674821177344
       objectReference: {fileID: 0}
     - target: {fileID: 7441530845608013446, guid: 04e4d2f394825a14abf407fe31800c21,
         type: 3}
@@ -9391,6 +9411,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7199872299456976314, guid: 04e4d2f394825a14abf407fe31800c21,
+        type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 28662450762608640
       objectReference: {fileID: 0}
     - target: {fileID: 7441530845608013446, guid: 04e4d2f394825a14abf407fe31800c21,
         type: 3}
