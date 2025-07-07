@@ -20,12 +20,12 @@ namespace dungeonduell
         }
 
         public void AddRoom(Vector3Int pos, List<RoomConnection> conncection, RoomType type, RoomElement element,
-            List<ConnectionDir> newAllowedDoors, int owner, int territoryOwner)
+            List<ConnectionDir> newAllowedDoors, int owner, int territoryOwner, SecondaryRoomType secondaryRoomType)
         {
             var newroomsInfos =
                 new Tuple<Vector3Int, RoomInfo>(pos,
                     new RoomInfo(RoomsInfos.Count, conncection, type, element, newAllowedDoors, owner,
-                        !filteredRoomTypeFromFirstCoin.Contains(type), territoryOwner));
+                        !filteredRoomTypeFromFirstCoin.Contains(type), territoryOwner, secondaryRoomType));
 
             RoomsInfos.Add(newroomsInfos);
         }

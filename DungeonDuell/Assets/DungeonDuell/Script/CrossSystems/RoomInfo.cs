@@ -12,6 +12,8 @@ public class RoomInfo
 
     public RoomType Roomtype = RoomType.Generic;
 
+    public SecondaryRoomType secondaryRoomType = SecondaryRoomType.Generic;
+
     public RoomInfo(int id, List<RoomConnection> newConncection)
     {
         RoomID = id;
@@ -19,17 +21,19 @@ public class RoomInfo
     }
 
     public RoomInfo(int id, List<RoomConnection> newConncection, RoomType newRoomtype, RoomElement newRoomElement,
-        List<ConnectionDir> newAllowedDoors)
+        List<ConnectionDir> newAllowedDoors, SecondaryRoomType newsecondaryRoomType)
     {
         RoomID = id;
         Conncection = newConncection;
         Roomtype = newRoomtype;
         RoommElement = newRoomElement;
         AllowedDoors = newAllowedDoors;
+        secondaryRoomType = newsecondaryRoomType;
     }
 
     public RoomInfo(int id, List<RoomConnection> newConncection, RoomType newRoomtype, RoomElement newRoomElement,
-        List<ConnectionDir> newAllowedDoors, int owner, bool newfirstTimeSpawn, int territoryOwner)
+        List<ConnectionDir> newAllowedDoors, int owner, bool newfirstTimeSpawn, int territoryOwner,
+        SecondaryRoomType newsecondaryRoomType)
     {
         RoomID = id;
         Conncection = newConncection;
@@ -39,6 +43,7 @@ public class RoomInfo
         RoomOwner = owner;
         FirstTimeSpawn = newfirstTimeSpawn;
         TerritoryOwner = territoryOwner;
+        secondaryRoomType = newsecondaryRoomType;
     }
 
     public int RoomID { get; set; }
@@ -97,4 +102,11 @@ public enum RoomElement
     Fire,
     Water,
     Hole
+}
+
+public enum SecondaryRoomType
+{
+    Generic,
+    Loot,
+    Enemy,
 }
