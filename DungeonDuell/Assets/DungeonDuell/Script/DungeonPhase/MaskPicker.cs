@@ -25,6 +25,12 @@ namespace dungeonduell
 
                 Item.TargetInventoryName = collider.gameObject.GetComponent<CharacterInventory>().MainInventoryName;
                 Pick(collider.gameObject.GetComponent<CharacterInventory>().MainInventoryName, playerID);
+
+                //Tooltip ausblenden, falls vorhanden
+                var tooltip = FindObjectOfType<TooltipController>();
+                if (tooltip != null)
+                    tooltip.HideTooltip();
+
                 Destroy(gameObject);
             }
         }
