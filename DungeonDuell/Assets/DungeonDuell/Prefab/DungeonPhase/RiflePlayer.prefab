@@ -5203,7 +5203,8 @@ MonoBehaviour:
   MutualizeWaitingPools: 1
   NestWaitingPool: 1
   NestUnderThis: 0
-  GameObjectToPool: {fileID: 1486318089921324, guid: 6afd4e402a07abb459fc7ced942c6964, type: 3}
+  GameObjectToPool: {fileID: 1486318089921324, guid: 6afd4e402a07abb459fc7ced942c6964,
+    type: 3}
   PoolSize: 20
   PoolCanExpand: 1
 --- !u!114 &114345180357598506
@@ -20285,7 +20286,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 5375683744671434912, guid: 740ce72795682114e93191ae232da35d, type: 3}
+  m_Sprite: {fileID: 5375683744671434912, guid: 740ce72795682114e93191ae232da35d,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -20306,6 +20308,7 @@ GameObject:
   m_Component:
   - component: {fileID: 967536956088114629}
   - component: {fileID: 1710523558594538418}
+  - component: {fileID: 6221915061936306586}
   m_Layer: 24
   m_Name: WeaponUsedMMFeedback
   m_TagString: Untagged
@@ -20678,7 +20681,8 @@ MonoBehaviour:
         RemapThresholdZero: 0
         RemapThresholdOne: 0
     - rid: 2
-      type: {class: MMF_ChromaticAberration, ns: MoreMountains.FeedbacksForThirdParty, asm: MoreMountains.Tools}
+      type: {class: MMF_ChromaticAberration, ns: MoreMountains.FeedbacksForThirdParty,
+        asm: MoreMountains.Tools}
       data:
         Active: 1
         UniqueID: 1896230025
@@ -21153,7 +21157,19 @@ MonoBehaviour:
         DebugActive: 0
         PlayEvents:
           m_PersistentCalls:
-            m_Calls: []
+            m_Calls:
+            - m_Target: {fileID: 6221915061936306586}
+              m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+              m_MethodName: Play
+              m_Mode: 1
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 0
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
         StopEvents:
           m_PersistentCalls:
             m_Calls: []
@@ -21163,3 +21179,34 @@ MonoBehaviour:
         ResetEvents:
           m_PersistentCalls:
             m_Calls: []
+--- !u!114 &6221915061936306586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6782130154809320540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1728953763
+      Data2: 1318666303
+      Data3: -181661763
+      Data4: 1395806838
+    Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player-shot
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
