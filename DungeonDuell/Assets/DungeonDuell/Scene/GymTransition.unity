@@ -440,6 +440,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1728984703}
   - {fileID: 1115974612}
   - {fileID: 841616387}
   m_Father: {fileID: 0}
@@ -461,8 +462,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 609ceac29dcff0e41b31e3d040f0486b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1Cam: {fileID: 995282175}
-  player2Cam: {fileID: 1576373782}
+  player1Cam: {fileID: 2079280770}
+  player2Cam: {fileID: 431738126}
   fadeCanvasGroup: {fileID: 2035868858}
   targetZoom: 14
   zoomDuration: 2
@@ -1297,6 +1298,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4735123430991669194, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -78.600006
+      objectReference: {fileID: 0}
+    - target: {fileID: 4735384046044909858, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 105.399994
+      objectReference: {fileID: 0}
     - target: {fileID: 4804087224219151714, guid: e738a2ac7ae5bcc4894527f901d1007f,
         type: 3}
       propertyPath: m_Name
@@ -1306,6 +1317,11 @@ PrefabInstance:
         type: 3}
       propertyPath: PlayerID
       value: Player2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5119846010255214949, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 25.400002
       objectReference: {fileID: 0}
     - target: {fileID: 6416370639864613681, guid: e738a2ac7ae5bcc4894527f901d1007f,
         type: 3}
@@ -1336,6 +1352,11 @@ PrefabInstance:
         type: 3}
       propertyPath: LevelUpNowText
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7666759849946495254, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -11.349201
       objectReference: {fileID: 0}
     - target: {fileID: 7931388239999450466, guid: e738a2ac7ae5bcc4894527f901d1007f,
         type: 3}
@@ -1753,6 +1774,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GrasslandsHUD
       objectReference: {fileID: 0}
+    - target: {fileID: 5119846010255214949, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 25.400002
+      objectReference: {fileID: 0}
     - target: {fileID: 5537716069566428249, guid: e738a2ac7ae5bcc4894527f901d1007f,
         type: 3}
       propertyPath: WinnerScreen
@@ -1762,6 +1788,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -14.841202
+      objectReference: {fileID: 0}
+    - target: {fileID: 7666759849946495254, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -11.349201
       objectReference: {fileID: 0}
     - target: {fileID: 8386567535727704898, guid: e738a2ac7ae5bcc4894527f901d1007f,
         type: 3}
@@ -5451,6 +5482,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300016, guid: 082c310ac59e31e4886d543523aa015e,
         type: 3}
+    - target: {fileID: 5119846010255214949, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 25.400002
+      objectReference: {fileID: 0}
     - target: {fileID: 5537716069566428249, guid: e738a2ac7ae5bcc4894527f901d1007f,
         type: 3}
       propertyPath: PlayerID
@@ -5480,6 +5516,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.r
       value: 0.36921993
+      objectReference: {fileID: 0}
+    - target: {fileID: 7666759849946495254, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -11.349201
       objectReference: {fileID: 0}
     - target: {fileID: 8386567535727704898, guid: e738a2ac7ae5bcc4894527f901d1007f,
         type: 3}
@@ -5633,6 +5674,13 @@ MonoBehaviour:
   nextSceneName: CardPhase
   rotationSpeed: 50
   unscaledTime: 0
+  countdownGymEvent:
+    Guid:
+      Data1: 1717994450
+      Data2: 1172614899
+      Data3: -1593419873
+      Data4: -1269177009
+    Path: event:/Dungeon Duell Audio V1/Card Phase/CP_UI/CP_UI_countdown
 --- !u!1 &554711310
 GameObject:
   m_ObjectHideFlags: 0
@@ -11002,18 +11050,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 981547751}
   m_CullTransparentMesh: 0
---- !u!114 &995282175 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8019536725731882737, guid: d4d8335d9d79f8142a60155a765b9399,
-    type: 3}
-  m_PrefabInstance: {fileID: 1233655140}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1021735852
 GameObject:
   m_ObjectHideFlags: 0
@@ -12321,6 +12357,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300002, guid: 082c310ac59e31e4886d543523aa015e,
         type: 3}
+    - target: {fileID: 5119846010255214949, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 25.400002
+      objectReference: {fileID: 0}
     - target: {fileID: 5537716069566428249, guid: e738a2ac7ae5bcc4894527f901d1007f,
         type: 3}
       propertyPath: PlayerID
@@ -12340,6 +12381,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.g
       value: 0.6987091
+      objectReference: {fileID: 0}
+    - target: {fileID: 7666759849946495254, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -11.349201
       objectReference: {fileID: 0}
     - target: {fileID: 8386567535727704898, guid: e738a2ac7ae5bcc4894527f901d1007f,
         type: 3}
@@ -13471,6 +13517,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300014, guid: 082c310ac59e31e4886d543523aa015e,
         type: 3}
+    - target: {fileID: 5119846010255214949, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 25.400002
+      objectReference: {fileID: 0}
     - target: {fileID: 5537716069566428249, guid: e738a2ac7ae5bcc4894527f901d1007f,
         type: 3}
       propertyPath: PlayerID
@@ -13500,6 +13551,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.r
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7666759849946495254, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -11.349201
       objectReference: {fileID: 0}
     - target: {fileID: 8386567535727704898, guid: e738a2ac7ae5bcc4894527f901d1007f,
         type: 3}
@@ -15994,18 +16050,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1551519075}
   m_CullTransparentMesh: 0
---- !u!114 &1576373782 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4954732209658398120, guid: d4d8335d9d79f8142a60155a765b9399,
-    type: 3}
-  m_PrefabInstance: {fileID: 980161657}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1583009280
 GameObject:
   m_ObjectHideFlags: 0
@@ -16917,14 +16961,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1728984702}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 100}
+  m_LocalScale: {x: 1, y: 1, z: 0.018518519}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 53424344}
   - {fileID: 363718693}
-  m_Father: {fileID: 1842100931}
+  m_Father: {fileID: 56363149}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -17046,8 +17090,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c8bed5c901d2ca498412ab1c97c112e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1Cam: {fileID: 0}
-  player2Cam: {fileID: 0}
+  player1Cam: {fileID: 2079280770}
+  player2Cam: {fileID: 431738126}
   fadeCanvasGroup: {fileID: 0}
   targetZoom: 0
   zoomDuration: 1
@@ -17319,15 +17363,35 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4735123430991669194, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -78.600006
+      objectReference: {fileID: 0}
+    - target: {fileID: 4735384046044909858, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 105.399994
+      objectReference: {fileID: 0}
     - target: {fileID: 4804087224219151714, guid: e738a2ac7ae5bcc4894527f901d1007f,
         type: 3}
       propertyPath: m_Name
       value: GrasslandsHUD
       objectReference: {fileID: 0}
+    - target: {fileID: 5119846010255214949, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 25.400002
+      objectReference: {fileID: 0}
     - target: {fileID: 6416370639864613681, guid: e738a2ac7ae5bcc4894527f901d1007f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -14.841202
+      objectReference: {fileID: 0}
+    - target: {fileID: 7666759849946495254, guid: e738a2ac7ae5bcc4894527f901d1007f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -11.349201
       objectReference: {fileID: 0}
     - target: {fileID: 7931388239999450466, guid: e738a2ac7ae5bcc4894527f901d1007f,
         type: 3}
@@ -17502,7 +17566,6 @@ RectTransform:
   - {fileID: 396298607}
   - {fileID: 1829318692}
   - {fileID: 1021735853}
-  - {fileID: 1728984703}
   - {fileID: 228404000}
   - {fileID: 1528419053}
   - {fileID: 659331887}
