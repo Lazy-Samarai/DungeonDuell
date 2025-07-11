@@ -203,8 +203,46 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1110255222330070716}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9198191083504193589, guid: e1773865f062990429bba8e7678cc01e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6211276721765264845}
   m_SourcePrefab: {fileID: 100100000, guid: e1773865f062990429bba8e7678cc01e, type: 3}
+--- !u!1 &3212908775836021500 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9198191083504193589, guid: e1773865f062990429bba8e7678cc01e,
+    type: 3}
+  m_PrefabInstance: {fileID: 5994292805560574665}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6211276721765264845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3212908775836021500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bdfa8802b73b1e4ea727df9b175000a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onAllEnemyDead:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6225520509385832180}
+        m_TargetAssemblyTypeName: dungeonduell.PotentialMultipleSpawner, Assembly-CSharp
+        m_MethodName: SpawnRandomObject
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  enemyCount: 0
 --- !u!4 &3556006279381118845 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7091332485502455220, guid: e1773865f062990429bba8e7678cc01e,
