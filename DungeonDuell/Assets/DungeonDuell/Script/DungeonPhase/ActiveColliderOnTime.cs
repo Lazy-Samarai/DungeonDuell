@@ -7,17 +7,28 @@ namespace dungeonduell
     {
         [SerializeField] private float time = 3;
         private Collider2D _gameObjectCollider;
+        public bool on = true;
 
         private void Awake()
         {
-            _gameObjectCollider = GetComponent<Collider2D>();
-            _gameObjectCollider.enabled = false;
-            StartCoroutine(StartAfterSecounds());
+            if (on)
+            {
+                _gameObjectCollider = GetComponent<Collider2D>();
+                _gameObjectCollider.enabled = false;
+                StartCoroutine(StartAfterSecounds());
+            }
+           
         }
 
         private IEnumerator StartAfterSecounds()
         {
             yield return new WaitForSeconds(time);
+            _gameObjectCollider.enabled = true;
+        }
+
+        public void Interrupt()
+        {
+            on = false;
             _gameObjectCollider.enabled = true;
         }
     }
