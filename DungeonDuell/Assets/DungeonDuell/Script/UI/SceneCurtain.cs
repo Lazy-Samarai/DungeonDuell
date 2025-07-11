@@ -7,9 +7,9 @@ namespace dungeonduell
     public class SceneCurtain : MonoBehaviour
     {
         public RectTransform topPanel;
-        private float topPanelPosY = 540f;
+        private float topPanelPosY = 1240f;
         public RectTransform bottomPanel;
-        private float bottomPanelPosY = -540f;
+        private float bottomPanelPosY = -1240f;
         public float animationDuration = 1f;
         public bool openGym;
 
