@@ -5,58 +5,50 @@ namespace dungeonduell
 {
     public class TooltipController : MonoBehaviour
     {
-        public GameObject tooltipPrefab;
-        public GameObject cardCanvas;
-        private GameObject _tooltipInstance;
+        [SerializeField] private GameObject tooltipPanel;
+        [SerializeField] private TextMeshProUGUI tooltipText;
+
         private RectTransform _tooltipRectTransform;
-        private TextMeshProUGUI _tooltipText;
+        private Vector3? worldTargetPosition = null;
+        private Camera cam;
 
-        private void Start()
+        private void Awake()
         {
-            if (tooltipPrefab != null)
+            if (tooltipPanel == null || tooltipText == null)
             {
-                _tooltipInstance = Instantiate(tooltipPrefab, cardCanvas.transform);
-                _tooltipText = _tooltipInstance.GetComponentInChildren<TextMeshProUGUI>();
-                _tooltipRectTransform = _tooltipInstance.GetComponent<RectTransform>();
-                HideTooltip();
+                Debug.LogError("TooltipPanel oder Text nicht zugewiesen!");
+                return;
             }
-            else
+
+            _tooltipRectTransform = tooltipPanel.GetComponent<RectTransform>();
+            HideTooltip();
+        }
+
+        private void Update()
+        {
+            if (tooltipPanel.activeSelf && worldTargetPosition.HasValue && cam != null)
             {
-                Debug.LogError("Tooltip Prefab nicht zugewiesen!");
+                Vector3 screenPosition = cam.WorldToScreenPoint(worldTargetPosition.Value);
+                tooltipPanel.transform.position = screenPosition;
             }
         }
 
-
-        public void ShowTooltip(string text, Vector3 position)
+        public void ShowTooltip(string text, Vector3 worldPosition, Camera camera)
         {
-            if (_tooltipInstance != null)
-            {
-                if (_tooltipText == null || _tooltipRectTransform == null)
-                {
-                    Debug.LogError("Tooltip TextMeshProUGUI oder RectTransform nicht gefunden!");
-                    return;
-                }
+            if (tooltipText == null || tooltipPanel == null || camera == null) return;
 
-                _tooltipText.text = text;
-                _tooltipInstance.SetActive(true);
+            tooltipText.text = text;
+            cam = camera;
+            worldTargetPosition = worldPosition;
 
-                // Umwandlung der Weltposition in die Position des UI-Camvas
-                Vector2 localPosition;
-                RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                    (RectTransform)cardCanvas.transform,
-                    Camera.main.WorldToScreenPoint(position),
-                    Camera.main,
-                    out localPosition
-                );
-
-                _tooltipRectTransform.anchoredPosition = localPosition;
-            }
+            tooltipPanel.SetActive(true);
         }
-
 
         public void HideTooltip()
         {
-            if (_tooltipInstance != null) _tooltipInstance.SetActive(false);
+            tooltipPanel.SetActive(false);
+            worldTargetPosition = null;
+            cam = null;
         }
     }
 }

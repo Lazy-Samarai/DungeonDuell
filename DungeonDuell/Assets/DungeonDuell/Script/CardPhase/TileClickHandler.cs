@@ -66,6 +66,15 @@ namespace dungeonduell
 
         ShellTracker _shellTracker;
 
+        readonly Dictionary<RoomType, SecondaryRoomType> _convertMapShell = new Dictionary<RoomType, SecondaryRoomType>
+        {
+            { RoomType.Generic, SecondaryRoomType.Generic },
+            { RoomType.NormalLott, SecondaryRoomType.Loot },
+            { RoomType.Enemy, SecondaryRoomType.Enemy },
+        };
+
+        [SerializeField] private GameObject[] indiactorSub;
+
         private void Start()
         {
             connectCollector = FindFirstObjectByType<ConnectionsCollector>();
@@ -208,10 +217,20 @@ namespace dungeonduell
                 {
                     shelledTileCard.Item1.startDoorConcellation = card.startDoorConcellation;
 
-                    card = (Card)shelledTileCard.Item1.Clone();
+                    ShellCard cardToUse = (ShellCard)shelledTileCard.Item1.Clone();
+                    cardToUse.secondaryRoomType =
+                        _convertMapShell.GetValueOrDefault(card.roomtype, SecondaryRoomType.Generic);
+
+                    card = cardToUse;
                     card.tile = shelledTileCard.Item1.completeTile;
 
                     _shellTracker.RemoveMarker(cellPosition);
+
+
+                    GameObject marker = Instantiate(indiactorSub[(int)cardToUse.secondaryRoomType],
+                        tilemap.CellToWorld(cellPosition), Quaternion.identity);
+                    marker.transform.parent = _shellTracker.transform;
+
 
                     DdCodeEventHandler.Trigger_CardToShelled(card, isPlayer1Turn);
                 }
@@ -299,7 +318,7 @@ namespace dungeonduell
                 }
 
                 CreateRoom(cellPosition, card.roomtype, card.roomElement, currentDoorDir, owner, connectionForcing,
-                    clickedTile);
+                    clickedTile, card.secondaryRoomType);
 
                 if (playerMove)
                 {
@@ -453,7 +472,8 @@ namespace dungeonduell
         }
 
         private void CreateRoom(Vector3Int clickedTilePos, RoomType type, RoomElement element, bool[] allowedDoors,
-            int owner, bool forceOnRoom, TileBase clickedTile)
+            int owner, bool forceOnRoom, TileBase clickedTile,
+            SecondaryRoomType secondaryRoomType = SecondaryRoomType.Generic)
         {
             var aroundpos = GetSouroundCorr(clickedTilePos);
 
@@ -472,7 +492,7 @@ namespace dungeonduell
             }
 
             connectCollector.AddRoom(clickedTilePos, conncection, type, element, newConnectionDir, owner,
-                Array.IndexOf(setAbleTiles, clickedTile));
+                Array.IndexOf(setAbleTiles, clickedTile), secondaryRoomType);
         }
 
         private Vector3Int[] GetSouroundCorr(Vector3Int clickedTile)
