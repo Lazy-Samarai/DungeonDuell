@@ -188,6 +188,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6366069130710263772}
   - component: {fileID: 7800463926559506405}
+  - component: {fileID: 1053329354192570490}
   m_Layer: 13
   m_Name: 'IdleFeedback '
   m_TagString: Untagged
@@ -405,6 +406,18 @@ MonoBehaviour:
                 m_StringArgument: 
                 m_BoolArgument: 0
               m_CallState: 2
+            - m_Target: {fileID: 1053329354192570490}
+              m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+              m_MethodName: Play
+              m_Mode: 1
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 0
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
         StopEvents:
           m_PersistentCalls:
             m_Calls: []
@@ -414,6 +427,37 @@ MonoBehaviour:
         ResetEvents:
           m_PersistentCalls:
             m_Calls: []
+--- !u!114 &1053329354192570490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4097567306212570221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1835226150
+      Data2: 1241413695
+      Data3: -361010297
+      Data4: 1341266636
+    Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_enemy/DP_enemy_idle
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &5449526131236263110
 GameObject:
   m_ObjectHideFlags: 0
@@ -424,6 +468,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2428706132499516155}
   - component: {fileID: 6684619523486210224}
+  - component: {fileID: 5061817552458195773}
   m_Layer: 13
   m_Name: AttackFeedback
   m_TagString: Untagged
@@ -641,6 +686,18 @@ MonoBehaviour:
                 m_StringArgument: 
                 m_BoolArgument: 0
               m_CallState: 2
+            - m_Target: {fileID: 5061817552458195773}
+              m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+              m_MethodName: Play
+              m_Mode: 1
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 0
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
         StopEvents:
           m_PersistentCalls:
             m_Calls: []
@@ -650,6 +707,37 @@ MonoBehaviour:
         ResetEvents:
           m_PersistentCalls:
             m_Calls: []
+--- !u!114 &5061817552458195773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5449526131236263110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -259819749
+      Data2: 1315916129
+      Data3: 740880000
+      Data4: 694141906
+    Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_enemy/DP_enemy_attack
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &5656917058909203581
 GameObject:
   m_ObjectHideFlags: 0
@@ -899,6 +987,7 @@ GameObject:
   - component: {fileID: 1953680070063897988}
   - component: {fileID: 2513851389924758296}
   - component: {fileID: 8861289388303858873}
+  - component: {fileID: 3012436926974365599}
   m_Layer: 0
   m_Name: Spine GameObject (skeleton)
   m_TagString: Untagged
@@ -1036,6 +1125,51 @@ MonoBehaviour:
   baseMoving: run
   attack: Attack
   damage: Damage
+--- !u!114 &3012436926974365599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7003469143078263712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f88a7aecb5999445860b4f8215390e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spineEventName: 
+  normalWalk:
+    Guid:
+      Data1: -262963589
+      Data2: 1227005379
+      Data3: 1841587344
+      Data4: -1252357622
+    Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_enemy/DP_enemy_walk
+  normalRun:
+    Guid:
+      Data1: -262963589
+      Data2: 1227005379
+      Data3: 1841587344
+      Data4: -1252357622
+    Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_enemy/DP_enemy_walk
+  lootWalk:
+    Guid:
+      Data1: -262963589
+      Data2: 1227005379
+      Data3: 1841587344
+      Data4: -1252357622
+    Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_enemy/DP_enemy_walk
+  lootRun:
+    Guid:
+      Data1: -262963589
+      Data2: 1227005379
+      Data3: 1841587344
+      Data4: -1252357622
+    Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_enemy/DP_enemy_walk
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 134217728
+  raycastDistance: 1
 --- !u!1 &7827631794738488572
 GameObject:
   m_ObjectHideFlags: 0
@@ -5914,7 +6048,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 961700441
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
@@ -11659,6 +11793,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8746820812103584727}
   - component: {fileID: 561923020645415690}
+  - component: {fileID: 1268229786457286026}
   m_Layer: 13
   m_Name: DamageFeedback
   m_TagString: Untagged
@@ -12086,6 +12221,18 @@ MonoBehaviour:
                 m_StringArgument: 
                 m_BoolArgument: 0
               m_CallState: 2
+            - m_Target: {fileID: 1268229786457286026}
+              m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+              m_MethodName: Play
+              m_Mode: 1
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 0
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
         StopEvents:
           m_PersistentCalls:
             m_Calls: []
@@ -12095,6 +12242,37 @@ MonoBehaviour:
         ResetEvents:
           m_PersistentCalls:
             m_Calls: []
+--- !u!114 &1268229786457286026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7949007511867038776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 557351499
+      Data2: 1206879964
+      Data3: -161230680
+      Data4: 1735113248
+    Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_enemy/DP_enemy_dmg
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &9105006242565300944
 GameObject:
   m_ObjectHideFlags: 0
@@ -12105,6 +12283,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7889016501038362883}
   - component: {fileID: 503466047980644536}
+  - component: {fileID: 6206829578830582709}
   m_Layer: 13
   m_Name: DeathFeedback
   m_TagString: Untagged
@@ -12547,6 +12726,18 @@ MonoBehaviour:
                 m_StringArgument: 
                 m_BoolArgument: 0
               m_CallState: 2
+            - m_Target: {fileID: 6206829578830582709}
+              m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+              m_MethodName: Play
+              m_Mode: 1
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 0
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
         StopEvents:
           m_PersistentCalls:
             m_Calls: []
@@ -12556,3 +12747,34 @@ MonoBehaviour:
         ResetEvents:
           m_PersistentCalls:
             m_Calls: []
+--- !u!114 &6206829578830582709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9105006242565300944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -160267103
+      Data2: 1157422421
+      Data3: 394047934
+      Data4: -110462822
+    Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_enemy/DP_enemy_dead
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20

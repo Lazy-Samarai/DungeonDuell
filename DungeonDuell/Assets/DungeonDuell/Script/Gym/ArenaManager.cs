@@ -1,7 +1,8 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using TMPro;
 using DG.Tweening;
+using FMODUnity;
 
 namespace dungeonduell
 {
@@ -23,6 +24,10 @@ namespace dungeonduell
         public bool unscaledTime;
         private Tween player1Tween;
         private Tween player2Tween;
+
+        public EventReference countdownGymEvent;
+        private FMOD.Studio.EventInstance countdownInstance;
+        private bool countdownSoundPlaying = false;
 
 
         private void Start()
@@ -120,6 +125,14 @@ namespace dungeonduell
                 {
                     StopCoroutine(countdownCoroutine);
                     countdownCoroutine = null;
+
+                    if (countdownSoundPlaying)
+                    {
+                        countdownInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                        countdownInstance.release();
+                        countdownSoundPlaying = false;
+                    }
+
                     if (countdownText != null)
                     {
                         countdownText.text = "X";
@@ -131,6 +144,15 @@ namespace dungeonduell
         private IEnumerator StartGameCountdown()
         {
             float countdown = 3f;
+
+            // 🎵 Countdown-Sound starten (nur einmal)
+            if (!countdownSoundPlaying)
+            {
+                countdownInstance = RuntimeManager.CreateInstance(countdownGymEvent);
+                countdownInstance.start();
+                countdownSoundPlaying = true;
+            }
+
             while (countdown > 0f)
             {
                 if (countdownText != null)
@@ -145,6 +167,14 @@ namespace dungeonduell
                 bool player2StillInZone = player2Zone.bounds.Contains(player2Transform.transform.position);
                 if (!player1StillInZone || !player2StillInZone)
                 {
+                    // ❌ Countdown abgebrochen → Sound stoppen
+                    if (countdownSoundPlaying)
+                    {
+                        countdownInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                        countdownInstance.release();
+                        countdownSoundPlaying = false;
+                    }
+
                     if (countdownText != null)
                     {
                         countdownText.text = "X";
@@ -159,8 +189,17 @@ namespace dungeonduell
                 countdownText.text = "GO!";
             }
 
+            // 🎵 Sound beenden (falls noch aktiv)
+            if (countdownSoundPlaying)
+            {
+                countdownInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                countdownInstance.release();
+                countdownSoundPlaying = false;
+            }
+
             yield return new WaitForSeconds(1f);
             DdCodeEventHandler.Trigger_SceneTransition();
         }
+
     }
 }
