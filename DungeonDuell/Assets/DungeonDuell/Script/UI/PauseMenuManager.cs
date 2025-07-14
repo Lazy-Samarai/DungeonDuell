@@ -162,6 +162,7 @@ namespace dungeonduell
         public void GiveUpConfirmed()
         {
             Time.timeScale = 1f;
+            DdCodeEventHandler.Trigger_GameReset();
             SceneManager.LoadScene("Titlescreen");
         }
     }

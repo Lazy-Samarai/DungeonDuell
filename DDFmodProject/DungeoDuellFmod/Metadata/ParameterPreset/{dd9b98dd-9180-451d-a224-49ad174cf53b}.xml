@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="ParameterPreset" id="{dd9b98dd-9180-451d-a224-49ad174cf53b}">
+		<property name="name">
+			<value>impact material</value>
+		</property>
+		<relationship name="folder">
+			<destination>{15777f2b-f42d-4cdd-bb4a-9cc2cb920a3b}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{a9bfd999-9090-4bbe-b914-44cf68a019ea}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{a9bfd999-9090-4bbe-b914-44cf68a019ea}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>3</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>impact_wall</value>
+			<value>impact_enemy</value>
+			<value>impact_barriere</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="MixerGroup" id="{c279d059-0f10-4d04-b55a-02d2cc4b95ff}">
+		<property name="name">
+			<value>CP reverb</value>
+		</property>
+		<relationship name="effectChain">
+			<destination>{c151bf54-80b6-4a7b-991a-eceb19b99eba}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{1c10afc5-9f51-4f1c-bfc6-77d6384922c0}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{6c2b038f-2092-4bc7-bf4f-100013d1f643}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{c151bf54-80b6-4a7b-991a-eceb19b99eba}">
+		<relationship name="effects">
+			<destination>{2a36df68-8eb3-4911-8522-19407649482b}</destination>
+			<destination>{bbc7f9c5-c5fc-419b-93c1-2caccc6ce173}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{1c10afc5-9f51-4f1c-bfc6-77d6384922c0}" />
+	<object class="MixerSend" id="{2a36df68-8eb3-4911-8522-19407649482b}">
+		<property name="level">
+			<value>-20</value>
+		</property>
+		<property name="inputFormat">
+			<value>2</value>
+		</property>
+		<relationship name="mixerReturn">
+			<destination>{b3b32843-cfc4-4530-9e40-992707844567}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusFader" id="{bbc7f9c5-c5fc-419b-93c1-2caccc6ce173}" />
+</objects>
