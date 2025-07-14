@@ -103,7 +103,7 @@ namespace dungeonduell
 
         private void SetToWin()
         {
-            SkeletonAnimation.AnimationState.SetAnimation(0, preWin, false);
+            SkeletonAnimation.AnimationState.SetAnimation(0, preWin, true);
         }
 
         public void SetSkin(int indexOfSkin)
