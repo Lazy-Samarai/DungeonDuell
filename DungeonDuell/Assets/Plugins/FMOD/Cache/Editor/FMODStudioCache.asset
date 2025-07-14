@@ -54,6 +54,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-8377334124764933775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_enemy/DP_enemy_walk
+  m_EditorClassIdentifier: 
+  Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_enemy/DP_enemy_walk
+  Guid:
+    Data1: -262963589
+    Data2: 1227005379
+    Data3: 1841587344
+    Data4: -1252357622
+  Banks:
+  - {fileID: -311594417720840253}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-7376268707069141929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,6 +106,34 @@ MonoBehaviour:
   IsOneShot: 0
   Parameters:
   - {fileID: -1719883442083447725}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-6324985934129040081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player-shot
+  m_EditorClassIdentifier: 
+  Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player-shot
+  Guid:
+    Data1: 1728953763
+    Data2: 1318666303
+    Data3: -181661763
+    Data4: 1395806838
+  Banks:
+  - {fileID: -311594417720840253}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 4755135175786673616}
   MinDistance: 1
   MaxDistance: 20
   Length: 0
@@ -179,11 +234,38 @@ MonoBehaviour:
   Path: ../DDFmodProject/DungeoDuellFmod/Build/Desktop/Card Phase.bank
   Name: Card Phase
   StudioPath: bank:/Card Phase
-  lastModified: 638867055007268833
+  lastModified: 638876683169092076
   FileSizes:
   - Name: Desktop
-    Value: 122432
+    Value: 128384
   Exists: 1
+--- !u!114 &-4898395840425352690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Dungeon Duell Audio V1/Card Phase/CP_player/CP_player_place-card-on-hexgrid
+  m_EditorClassIdentifier: 
+  Path: event:/Dungeon Duell Audio V1/Card Phase/CP_player/CP_player_place-card-on-hexgrid
+  Guid:
+    Data1: 175814895
+    Data2: 1264259661
+    Data3: 2088876940
+    Data4: -1804597625
+  Banks:
+  - {fileID: -5026038177479864259}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-4138030320544568134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,10 +281,10 @@ MonoBehaviour:
   Path: ../DDFmodProject/DungeoDuellFmod/Build/Desktop/Titel Menu.bank
   Name: Titel Menu
   StudioPath: bank:/Titel Menu
-  lastModified: 638867087021978306
+  lastModified: 638851612819383474
   FileSizes:
   - Name: Desktop
-    Value: 1292
+    Value: 506
   Exists: 1
 --- !u!114 &-4092811167994052269
 MonoBehaviour:
@@ -231,6 +313,34 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-4080955117142927939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player_shot-impact
+  m_EditorClassIdentifier: 
+  Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player_shot-impact
+  Guid:
+    Data1: -944931524
+    Data2: 1280605724
+    Data3: -1361369465
+    Data4: 428259711
+  Banks:
+  - {fileID: -311594417720840253}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: -3970466428755719908}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-3990651666135260402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,11 +356,65 @@ MonoBehaviour:
   Path: ../DDFmodProject/DungeoDuellFmod/Build/Desktop/misc.bank
   Name: misc
   StudioPath: bank:/misc
-  lastModified: 638867078383309838
+  lastModified: 638876683175648333
   FileSizes:
   - Name: Desktop
-    Value: 9992384
+    Value: 10620544
   Exists: 1
+--- !u!114 &-3970466428755719908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/DP_player_shot-impact/impact material
+  m_EditorClassIdentifier: 
+  Name: impact material
+  StudioPath: 
+  Min: 0
+  Max: 2
+  Default: 0
+  ID:
+    data1: 1965819448
+    data2: 2310037873
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - impact_wall
+  - impact_enemy
+  - impact_barriere
+  Exists: 1
+--- !u!114 &-3685164770747076021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_enemy/DP_enemy_dmg
+  m_EditorClassIdentifier: 
+  Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_enemy/DP_enemy_dmg
+  Guid:
+    Data1: 557351499
+    Data2: 1206879964
+    Data3: -161230680
+    Data4: 1735113248
+  Banks:
+  - {fileID: -311594417720840253}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-3671385519818883705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,6 +442,60 @@ MonoBehaviour:
   - Atmo_concentrated
   - Atmo_action
   Exists: 1
+--- !u!114 &-3138151674775415100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player_lvlup
+  m_EditorClassIdentifier: 
+  Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player_lvlup
+  Guid:
+    Data1: 788889103
+    Data2: 1177151676
+    Data3: -1827464034
+    Data4: 252372317
+  Banks:
+  - {fileID: -311594417720840253}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-2954343245127107598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player_collect_Mask
+  m_EditorClassIdentifier: 
+  Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player_collect_Mask
+  Guid:
+    Data1: -1109001731
+    Data2: 1159785378
+    Data3: 594954943
+    Data4: -748835065
+  Banks:
+  - {fileID: -311594417720840253}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-2868751856020318480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -298,6 +516,95 @@ MonoBehaviour:
     Data4: -272984478
   Banks:
   - {fileID: -5026038177479864259}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-2708132050508131186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_enemy/DP_enemy_dead
+  m_EditorClassIdentifier: 
+  Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_enemy/DP_enemy_dead
+  Guid:
+    Data1: -160267103
+    Data2: 1157422421
+    Data3: 394047934
+    Data4: -110462822
+  Banks:
+  - {fileID: -311594417720840253}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-2585707709378178645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Dungeon Duell Audio V1/misc/Misc_mask
+  m_EditorClassIdentifier: 
+  Path: event:/Dungeon Duell Audio V1/misc/Misc_mask
+  Guid:
+    Data1: 89810815
+    Data2: 1283634207
+    Data3: -1612631379
+    Data4: -1298983226
+  Banks:
+  - {fileID: -3990651666135260402}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-2105184863800313681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: 
+  Guid:
+    Data1: -1109001731
+    Data2: 1159785378
+    Data3: 594954943
+    Data4: -748835065
+  Banks:
+  - {fileID: -311594417720840253}
+  - {fileID: -311594417720840253}
+  - {fileID: -311594417720840253}
+  - {fileID: -311594417720840253}
+  - {fileID: -311594417720840253}
+  - {fileID: -311594417720840253}
+  - {fileID: -311594417720840253}
+  - {fileID: -311594417720840253}
+  - {fileID: -311594417720840253}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -359,6 +666,33 @@ MonoBehaviour:
   - music_concentrated
   - music_action
   Exists: 1
+--- !u!114 &-1538147167951675508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_enemy/DP_enemy_idle
+  m_EditorClassIdentifier: 
+  Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_enemy/DP_enemy_idle
+  Guid:
+    Data1: -1835226150
+    Data2: 1241413695
+    Data3: -361010297
+    Data4: 1341266636
+  Banks:
+  - {fileID: -311594417720840253}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-1405512841764259611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -374,10 +708,10 @@ MonoBehaviour:
   Path: ../DDFmodProject/DungeoDuellFmod/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638867087021918286
+  lastModified: 638876684300203385
   FileSizes:
   - Name: Desktop
-    Value: 1910
+    Value: 2836
   Exists: 1
 --- !u!114 &-382770318705056648
 MonoBehaviour:
@@ -421,11 +755,38 @@ MonoBehaviour:
   Path: ../DDFmodProject/DungeoDuellFmod/Build/Desktop/Dungeon Phase.bank
   Name: Dungeon Phase
   StudioPath: bank:/Dungeon Phase
-  lastModified: 638867055350322922
+  lastModified: 638876684300153528
   FileSizes:
   - Name: Desktop
-    Value: 70208
+    Value: 187872
   Exists: 1
+--- !u!114 &-233504661153999474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_enemy/DP_enemy_attack
+  m_EditorClassIdentifier: 
+  Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_enemy/DP_enemy_attack
+  Guid:
+    Data1: -259819749
+    Data2: 1315916129
+    Data3: 740880000
+    Data4: 694141906
+  Banks:
+  - {fileID: -311594417720840253}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -466,14 +827,29 @@ MonoBehaviour:
   - {fileID: -7376268707069141929}
   - {fileID: -6265661387666663448}
   - {fileID: 4888935114736287384}
-  - {fileID: 7455845183591840199}
+  - {fileID: -4898395840425352690}
+  - {fileID: 1022857062444328629}
+  - {fileID: 8707902390997507996}
+  - {fileID: -6324985934129040081}
+  - {fileID: -2585707709378178645}
+  - {fileID: -2105184863800313681}
+  - {fileID: -3138151674775415100}
+  - {fileID: -233504661153999474}
+  - {fileID: -4080955117142927939}
+  - {fileID: 5734748153981194555}
+  - {fileID: -3685164770747076021}
+  - {fileID: -8377334124764933775}
+  - {fileID: -2708132050508131186}
+  - {fileID: 9215035021938786534}
+  - {fileID: -1538147167951675508}
+  - {fileID: -2954343245127107598}
   EditorParameters: []
   MasterBanks:
   - {fileID: -1405512841764259611}
   StringsBanks:
   - {fileID: 1276395289756070088}
   cacheVersion: 131847
-  cacheTime: 638867087021978306
+  cacheTime: 638876684300203385
   SerializableEventsDict:
   - key: event:/Dungeon Duell Audio V1/Card Phase/CP_player/CP_player_navigate-on-hexgrid
     index: 0
@@ -513,8 +889,38 @@ MonoBehaviour:
     index: 17
   - key: event:/Dungeon Duell Audio V1/misc/Misc_UI/misc_player_press-any-key
     index: 18
-  - key: event:/Dungeon Duell Audio V1/Titel Menu/TS_enter
+  - key: event:/Dungeon Duell Audio V1/Card Phase/CP_player/CP_player_place-card-on-hexgrid
     index: 19
+  - key: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player-dash
+    index: 20
+  - key: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player_collect-xp
+    index: 21
+  - key: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player-shot
+    index: 22
+  - key: event:/Dungeon Duell Audio V1/misc/Misc_mask
+    index: 23
+  - key: 
+    index: 24
+  - key: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player_lvlup
+    index: 25
+  - key: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_enemy/DP_enemy_attack
+    index: 26
+  - key: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player_shot-impact
+    index: 27
+  - key: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player_dmg
+    index: 28
+  - key: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_enemy/DP_enemy_dmg
+    index: 29
+  - key: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_enemy/DP_enemy_walk
+    index: 30
+  - key: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_enemy/DP_enemy_dead
+    index: 31
+  - key: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player_dead
+    index: 32
+  - key: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_enemy/DP_enemy_idle
+    index: 33
+  - key: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player_collect_Mask
+    index: 34
 --- !u!114 &225930445049737312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -569,6 +975,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &1022857062444328629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player-dash
+  m_EditorClassIdentifier: 
+  Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player-dash
+  Guid:
+    Data1: 260654878
+    Data2: 1229893439
+    Data3: -566086008
+    Data4: -1423405474
+  Banks:
+  - {fileID: -311594417720840253}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &1276395289756070088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -584,10 +1017,10 @@ MonoBehaviour:
   Path: ../DDFmodProject/DungeoDuellFmod/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638867087021928258
+  lastModified: 638876684300203385
   FileSizes:
   - Name: Desktop
-    Value: 2432
+    Value: 3518
   Exists: 1
 --- !u!114 &3486052223056188987
 MonoBehaviour:
@@ -670,6 +1103,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &4755135175786673616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/DP_player-shot/DP_player-shot-lvl
+  m_EditorClassIdentifier: 
+  Name: DP_player-shot-lvl
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1324979133
+    data2: 1960866818
+  Type: 1
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &4888935114736287384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -751,6 +1208,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &5734748153981194555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player_dmg
+  m_EditorClassIdentifier: 
+  Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player_dmg
+  Guid:
+    Data1: -588050370
+    Data2: 1231695094
+    Data3: 1762116285
+    Data4: -1604705096
+  Banks:
+  - {fileID: -311594417720840253}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &6533305081315705170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -766,7 +1250,7 @@ MonoBehaviour:
   Path: ../DDFmodProject/DungeoDuellFmod/Build/Desktop/Gym Phase.bank
   Name: Gym Phase
   StudioPath: bank:/Gym Phase
-  lastModified: 638867055227545385
+  lastModified: 638851612787252279
   FileSizes:
   - Name: Desktop
     Value: 506
@@ -798,7 +1282,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &7455845183591840199
+--- !u!114 &8707902390997507996
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -808,16 +1292,43 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Dungeon Duell Audio V1/Titel Menu/TS_enter
+  m_Name: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player_collect-xp
   m_EditorClassIdentifier: 
-  Path: event:/Dungeon Duell Audio V1/Titel Menu/TS_enter
+  Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player_collect-xp
   Guid:
-    Data1: -1821630540
-    Data2: 1286491059
-    Data3: 553900723
-    Data4: -813686010
+    Data1: 51546187
+    Data2: 1144964149
+    Data3: 1170704569
+    Data4: -701197332
   Banks:
-  - {fileID: -4138030320544568134}
+  - {fileID: -311594417720840253}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &9215035021938786534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player_dead
+  m_EditorClassIdentifier: 
+  Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player_dead
+  Guid:
+    Data1: -522674781
+    Data2: 1323363369
+    Data3: -975811140
+    Data4: 1881632044
+  Banks:
+  - {fileID: -311594417720840253}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
