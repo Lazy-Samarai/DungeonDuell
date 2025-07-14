@@ -176,6 +176,8 @@ namespace dungeonduell
                 tilemap.WorldToCell(new Vector3(mouseWorldPos.x, mouseWorldPos.y, cam.transform.position.z));
             var clickedTile = tilemap.GetTile(cellPosition);
 
+            int shellMarker = -1;
+
 
             if (playerMove)
             {
@@ -224,13 +226,7 @@ namespace dungeonduell
                     card = cardToUse;
                     card.tile = shelledTileCard.Item1.completeTile;
 
-                    _shellTracker.RemoveMarker(cellPosition);
-
-
-                    GameObject marker = Instantiate(indiactorSub[(int)cardToUse.secondaryRoomType],
-                        tilemap.CellToWorld(cellPosition), Quaternion.identity);
-                    marker.transform.parent = _shellTracker.transform;
-
+                    shellMarker = (int)cardToUse.secondaryRoomType;
 
                     DdCodeEventHandler.Trigger_CardToShelled(card, isPlayer1Turn);
                 }
@@ -240,7 +236,7 @@ namespace dungeonduell
                 if ((setAbleTiles.Contains(clickedTile) && currentCard != null) || !playerMove)
                 {
                     var wasHandled = CardUsingHandling(card, playerMove, spawnSourroundSetables, cellPosition,
-                        clickedTile, owner);
+                        clickedTile, owner, shellMarker);
 
                     if (wasHandled)
                     {
@@ -260,6 +256,15 @@ namespace dungeonduell
             return false;
         }
 
+        private void ReplaceAndSetShellMarker(Vector3Int cellPosition, Card cardToUse)
+        {
+            _shellTracker.RemoveMarker(cellPosition);
+
+            GameObject marker = Instantiate(indiactorSub[(int)cardToUse.secondaryRoomType],
+                tilemap.CellToWorld(cellPosition), Quaternion.identity);
+            marker.transform.parent = _shellTracker.transform;
+        }
+
         private void EnsureRefernces()
         {
             if (tilemap == null)
@@ -276,7 +281,7 @@ namespace dungeonduell
 
 
         private bool CardUsingHandling(Card card, bool playerMove, bool spawnSourroundSetables, Vector3Int cellPosition,
-            TileBase clickedTile, int owner)
+            TileBase clickedTile, int owner, int shellMarker)
         {
             var overriteCurrentDoorDir = new[] { false, false, false, false, false, false };
             var connectionForcing = false;
@@ -301,6 +306,11 @@ namespace dungeonduell
 
             if (CheckConnectAblity(sourroundCorr) || !playerMove)
             {
+                if (shellMarker >= 0)
+                {
+                    ReplaceAndSetShellMarker(cellPosition, card);
+                }
+
                 // --- HIER bleibt alles wie im Original ---
                 tilemap.SetTile(cellPosition, card.tile);
 
