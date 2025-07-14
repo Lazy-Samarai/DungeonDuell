@@ -29,11 +29,8 @@ namespace dungeonduell
 
         private void StopMove(string _)
         {
-            CharacterMovement cm = GetComponent<CharacterMovement>();
-            CharacterRun cr = GetComponent<CharacterRun>();
-            cr.AbilityPermitted = false;
-            cm.AbilityPermitted = false;
             GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
+            GetComponent<TopDownController2D>().enabled = false;
         }
     }
 }
