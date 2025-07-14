@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="ParameterPreset" id="{8788ca3b-0ff6-49bb-a924-b2fadb23ce1c}">
+		<property name="name">
+			<value>DP_player-shot-lvl</value>
+		</property>
+		<relationship name="folder">
+			<destination>{15777f2b-f42d-4cdd-bb4a-9cc2cb920a3b}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{e1a08001-79e5-47ba-96a5-449df12f0156}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{e1a08001-79e5-47ba-96a5-449df12f0156}">
+		<property name="parameterType">
+			<value>1</value>
+		</property>
+		<property name="maximum">
+			<value>2</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>
