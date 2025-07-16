@@ -7,9 +7,11 @@ namespace dungeonduell
 {
     public enum AtmoLevel
     {
-        Atmo_basic = 0,
-        Atmo_concentrated = 1,
-        Atmo_Action = 2
+        Atmo_title = 0,
+        Atmo_gym = 1,
+        Atmo_card = 2,
+        Atmo_dungeon = 3,
+        Atmo_win = 4
     }
 
     public enum GameScene
@@ -47,21 +49,22 @@ namespace dungeonduell
             switch (sceneEnum)
             {
                 case GameScene.TitleScreen:
-                    DdCodeEventHandler.Trigger_AtmosphereLevelChanged(AtmoLevel.Atmo_basic);
+                    DdCodeEventHandler.Trigger_AtmosphereLevelChanged(AtmoLevel.Atmo_title);
+                    break;
+
+                case GameScene.GymTranstitionSzene:
+                    DdCodeEventHandler.Trigger_AtmosphereLevelChanged(AtmoLevel.Atmo_gym);
                     break;
 
                 case GameScene.CardPhase:
-                    DdCodeEventHandler.Trigger_AtmosphereLevelChanged(AtmoLevel.Atmo_basic);
+                    DdCodeEventHandler.Trigger_AtmosphereLevelChanged(AtmoLevel.Atmo_card);
                     break;
 
                 case GameScene.DungeonPhase:
                     // Noch kein Duell → nur auf konzentriert stellen
-                    DdCodeEventHandler.Trigger_AtmosphereLevelChanged(AtmoLevel.Atmo_concentrated);
+                    DdCodeEventHandler.Trigger_AtmosphereLevelChanged(AtmoLevel.Atmo_dungeon);
                     break;
 
-                case GameScene.GymTranstitionSzene:
-                    DdCodeEventHandler.Trigger_AtmosphereLevelChanged(AtmoLevel.Atmo_Action);
-                    break;
             }
         }
 

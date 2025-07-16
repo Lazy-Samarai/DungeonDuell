@@ -234,7 +234,7 @@ MonoBehaviour:
   Path: ../DDFmodProject/DungeoDuellFmod/Build/Desktop/Card Phase.bank
   Name: Card Phase
   StudioPath: bank:/Card Phase
-  lastModified: 638876683169092076
+  lastModified: 638882855218724536
   FileSizes:
   - Name: Desktop
     Value: 128384
@@ -281,7 +281,7 @@ MonoBehaviour:
   Path: ../DDFmodProject/DungeoDuellFmod/Build/Desktop/Titel Menu.bank
   Name: Titel Menu
   StudioPath: bank:/Titel Menu
-  lastModified: 638851612819383474
+  lastModified: 638882855268849702
   FileSizes:
   - Name: Desktop
     Value: 506
@@ -356,10 +356,10 @@ MonoBehaviour:
   Path: ../DDFmodProject/DungeoDuellFmod/Build/Desktop/misc.bank
   Name: misc
   StudioPath: bank:/misc
-  lastModified: 638876683175648333
+  lastModified: 638882855265886929
   FileSizes:
   - Name: Desktop
-    Value: 10620544
+    Value: 10623712
   Exists: 1
 --- !u!114 &-3970466428755719908
 MonoBehaviour:
@@ -430,7 +430,7 @@ MonoBehaviour:
   Name: Atmo_sections
   StudioPath: 
   Min: 0
-  Max: 2
+  Max: 4
   Default: 0
   ID:
     data1: 3974815708
@@ -438,9 +438,11 @@ MonoBehaviour:
   Type: 2
   IsGlobal: 0
   Labels:
-  - Atmo_basic
-  - Atmo_concentrated
-  - Atmo_action
+  - Atmo_title-screen
+  - Atmo_gym-phase
+  - Atmo_card-phase
+  - Atmo_dungeon-phase
+  - Atmo_win-screen
   Exists: 1
 --- !u!114 &-3138151674775415100
 MonoBehaviour:
@@ -550,6 +552,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-2612398053866009934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Dungeon Duell Audio V1/Gym Phase/GP_hexaornament_player-ready
+  m_EditorClassIdentifier: 
+  Path: event:/Dungeon Duell Audio V1/Gym Phase/GP_hexaornament_player-ready
+  Guid:
+    Data1: 1281371295
+    Data2: 1333959477
+    Data3: -1777586514
+    Data4: -1173414678
+  Banks:
+  - {fileID: 6533305081315705170}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-2585707709378178645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -603,8 +632,6 @@ MonoBehaviour:
   - {fileID: -311594417720840253}
   - {fileID: -311594417720840253}
   - {fileID: -311594417720840253}
-  - {fileID: -311594417720840253}
-  - {fileID: -311594417720840253}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -649,12 +676,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Music/music_sections
+  m_Name: parameter:/Music/Music_sections
   m_EditorClassIdentifier: 
-  Name: music_sections
+  Name: Music_sections
   StudioPath: 
   Min: 0
-  Max: 2
+  Max: 4
   Default: 0
   ID:
     data1: 4032825595
@@ -662,9 +689,11 @@ MonoBehaviour:
   Type: 2
   IsGlobal: 0
   Labels:
-  - music_basic
-  - music_concentrated
-  - music_action
+  - Music_title-screen
+  - Music_gym-phase
+  - Music_card-phase
+  - Music_dungeon-phase
+  - Music_win-screen
   Exists: 1
 --- !u!114 &-1538147167951675508
 MonoBehaviour:
@@ -708,7 +737,7 @@ MonoBehaviour:
   Path: ../DDFmodProject/DungeoDuellFmod/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638876684300203385
+  lastModified: 638882855221282042
   FileSizes:
   - Name: Desktop
     Value: 2836
@@ -755,10 +784,10 @@ MonoBehaviour:
   Path: ../DDFmodProject/DungeoDuellFmod/Build/Desktop/Dungeon Phase.bank
   Name: Dungeon Phase
   StudioPath: bank:/Dungeon Phase
-  lastModified: 638876684300153528
+  lastModified: 638882855220940598
   FileSizes:
   - Name: Desktop
-    Value: 187872
+    Value: 223200
   Exists: 1
 --- !u!114 &-233504661153999474
 MonoBehaviour:
@@ -843,13 +872,15 @@ MonoBehaviour:
   - {fileID: 9215035021938786534}
   - {fileID: -1538147167951675508}
   - {fileID: -2954343245127107598}
+  - {fileID: -2612398053866009934}
+  - {fileID: 5227405351411202979}
   EditorParameters: []
   MasterBanks:
   - {fileID: -1405512841764259611}
   StringsBanks:
   - {fileID: 1276395289756070088}
   cacheVersion: 131847
-  cacheTime: 638876684300203385
+  cacheTime: 638882855268849702
   SerializableEventsDict:
   - key: event:/Dungeon Duell Audio V1/Card Phase/CP_player/CP_player_navigate-on-hexgrid
     index: 0
@@ -921,6 +952,10 @@ MonoBehaviour:
     index: 33
   - key: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player_collect_Mask
     index: 34
+  - key: event:/Dungeon Duell Audio V1/Gym Phase/GP_hexaornament_player-ready
+    index: 35
+  - key: event:/Dungeon Duell Audio V1/Gym Phase/GP_counter
+    index: 36
 --- !u!114 &225930445049737312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1017,7 +1052,7 @@ MonoBehaviour:
   Path: ../DDFmodProject/DungeoDuellFmod/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638876684300203385
+  lastModified: 638882855221312202
   FileSizes:
   - Name: Desktop
     Value: 3518
@@ -1181,6 +1216,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &5227405351411202979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Dungeon Duell Audio V1/Gym Phase/GP_counter
+  m_EditorClassIdentifier: 
+  Path: event:/Dungeon Duell Audio V1/Gym Phase/GP_counter
+  Guid:
+    Data1: -507414842
+    Data2: 1295935740
+    Data3: -1262530653
+    Data4: 687576991
+  Banks:
+  - {fileID: 6533305081315705170}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &5667924778821297101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1250,10 +1312,10 @@ MonoBehaviour:
   Path: ../DDFmodProject/DungeoDuellFmod/Build/Desktop/Gym Phase.bank
   Name: Gym Phase
   StudioPath: bank:/Gym Phase
-  lastModified: 638851612787252279
+  lastModified: 638882855221201617
   FileSizes:
   - Name: Desktop
-    Value: 506
+    Value: 1950
   Exists: 1
 --- !u!114 &6853963034532493644
 MonoBehaviour:
