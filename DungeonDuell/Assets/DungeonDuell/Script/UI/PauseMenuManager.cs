@@ -17,6 +17,7 @@ namespace dungeonduell
         public GameObject tutorialSelectedButton;
         public GameObject confirmationPopup;
         public GameObject confirmSelectedButton;
+        public GameObject controlPanel;
 
         [Header("Settings")] public float fadeDuration = 0.25f;
 
@@ -102,6 +103,45 @@ namespace dungeonduell
                 }
             });
         }
+
+        public void OpenControlPanel()
+        {
+            if (controlPanel == null) return;
+
+            controlPanel.SetActive(true);
+
+            var group = controlPanel.GetComponent<CanvasGroup>();
+            if (group == null) group = controlPanel.AddComponent<CanvasGroup>();
+
+            group.alpha = 0;
+            group.DOFade(1, fadeDuration).SetEase(Ease.OutCubic).SetUpdate(true);
+
+            if (EventSystem.current != null && tutorialSelectedButton != null)
+            {
+                EventSystem.current.SetSelectedGameObject(null);
+                EventSystem.current.SetSelectedGameObject(tutorialSelectedButton);
+            }
+        }
+
+        public void CloseControlPanel()
+        {
+            if (controlPanel == null) return;
+
+            var group = controlPanel.GetComponent<CanvasGroup>();
+            if (group == null) group = controlPanel.AddComponent<CanvasGroup>();
+
+            group.DOFade(0, fadeDuration).SetEase(Ease.InCubic).SetUpdate(true).OnComplete(() =>
+            {
+                controlPanel.SetActive(false);
+
+                if (EventSystem.current != null && defaultSelectedButton != null)
+                {
+                    EventSystem.current.SetSelectedGameObject(null);
+                    EventSystem.current.SetSelectedGameObject(tutorialSelectedButton);
+                }
+            });
+        }
+
 
         public void OpenTutorial()
         {
