@@ -725,6 +725,12 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
+--- !u!1 &439316601 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2237726643517328710, guid: f5f9b0291e139fa4e90645c9c9f80b64,
+    type: 3}
+  m_PrefabInstance: {fileID: 1672812463}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &490939096 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6153041913601509906, guid: 04e4d2f394825a14abf407fe31800c21,
@@ -3427,6 +3433,42 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2118469196}
     m_Modifications:
+    - target: {fileID: 2230085584930995074, guid: f5f9b0291e139fa4e90645c9c9f80b64,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 381542aa4efd41a42950353805566ce2,
+        type: 3}
+    - target: {fileID: 2230085584930995074, guid: f5f9b0291e139fa4e90645c9c9f80b64,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2230085584930995074, guid: f5f9b0291e139fa4e90645c9c9f80b64,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2230085584930995074, guid: f5f9b0291e139fa4e90645c9c9f80b64,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4955699918498632441, guid: f5f9b0291e139fa4e90645c9c9f80b64,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2118469197}
+    - target: {fileID: 4955699918498632441, guid: f5f9b0291e139fa4e90645c9c9f80b64,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ToggleCredits
+      objectReference: {fileID: 0}
+    - target: {fileID: 4955699918498632441, guid: f5f9b0291e139fa4e90645c9c9f80b64,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: dungeonduell.UIManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 5353728414486226670, guid: f5f9b0291e139fa4e90645c9c9f80b64,
         type: 3}
       propertyPath: m_Name
@@ -4103,6 +4145,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   creditsPanel: {fileID: 52437053}
+  creditsSelectedButton: {fileID: 439316601}
+  previousSelected: {fileID: 6153041913388584001}
   optionsPanel: {fileID: 1282732022}
   fadeCanvas: {fileID: 2118469200}
   fadeDuration: 1

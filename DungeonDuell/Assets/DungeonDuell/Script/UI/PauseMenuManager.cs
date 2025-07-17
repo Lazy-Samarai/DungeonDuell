@@ -102,6 +102,24 @@ namespace dungeonduell
                     if (_previousSelected != null) EventSystem.current.SetSelectedGameObject(_previousSelected);
                 }
             });
+
+            if (controlPanel.activeInHierarchy)
+            {
+                CloseControlPanel();
+            }
+            if (tutorialPanel.activeInHierarchy)
+            {
+                CloseTutorial();
+            }
+            if (confirmationPopup.activeInHierarchy)
+            {
+                CancelGiveUp();
+            }
+            if (optionsPanel.activeInHierarchy)
+            {
+                optionsPanel.SetActive(false);
+            }
+
         }
 
         public void OpenControlPanel()
@@ -176,7 +194,7 @@ namespace dungeonduell
         {
             confirmationPopup.SetActive(true);
             confirmationPopup.transform.localScale = Vector3.zero;
-            confirmationPopup.transform.DOScale(1, fadeDuration).SetEase(Ease.OutBack).SetUpdate(true).OnComplete(() =>
+            confirmationPopup.transform.DOScale(0.5f, fadeDuration).SetEase(Ease.OutBack).SetUpdate(true).OnComplete(() =>
             {
                 if (confirmSelectedButton != null && EventSystem.current != null)
                 {
