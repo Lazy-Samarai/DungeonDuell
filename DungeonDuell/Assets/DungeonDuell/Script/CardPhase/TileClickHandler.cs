@@ -579,6 +579,34 @@ namespace dungeonduell
             }
         }
 
+        private bool[] ShiftLeft(bool[] array)
+        {
+            bool[] coveredClockwise = { array[1], array[3], array[5], array[4], array[2], array[0] };
+
+            var shiftedArray = new bool[coveredClockwise.Length];
+            for (var i = 1; i < coveredClockwise.Length; i++) shiftedArray[i - 1] = coveredClockwise[i];
+            shiftedArray[^1] = coveredClockwise[0];
+
+            shiftedArray = new[]
+            {
+                 shiftedArray[5], shiftedArray[0], shiftedArray[4], shiftedArray[1], shiftedArray[3], shiftedArray[2]
+            };
+
+            return shiftedArray;
+        }
+
+        public void ShiftLeftInput(InputAction.CallbackContext context)
+        {
+            if (context.phase == InputActionPhase.Started)
+            {
+                currentDoorDir = ShiftLeft(currentDoorDir);
+                displayCardUi?.UpdateDirectionIndicator(currentDoorDir);
+                RuntimeManager.PlayOneShot(rotateSFXEvent);
+                DdCodeEventHandler.Trigger_CardRotating(currentDoorDir);
+            }
+        }
+
+
         private void FinalizePlacement()
         {
             if (_turnManager != null)
