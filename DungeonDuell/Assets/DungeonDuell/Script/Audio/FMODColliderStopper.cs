@@ -2,7 +2,6 @@ using FMODUnity;
 using UnityEngine;
 using FMOD.Studio;
 
-
 namespace dungeonduell
 {
     public class FMODColliderStopper : MonoBehaviour
@@ -14,26 +13,37 @@ namespace dungeonduell
 
         void Start()
         {
-            // Event erstellen und starten
             fmodInstance = RuntimeManager.CreateInstance(fmodShootEvent);
-            fmodInstance.set3DAttributes(RuntimeUtils.To3DAttributes(gameObject));
+
+            // Wichtig: verknüpft das Event mit diesem GameObject
+            RuntimeManager.AttachInstanceToGameObject(fmodInstance, gameObject, GetComponent<Rigidbody2D>());
+
+
+            // Optional: Wenn du Rigidbody2D nicht nutzt:
+            // RuntimeManager.AttachInstanceToGameObject(fmodInstance, transform, null);
         }
 
         public void startShootSFX()
         {
-            fmodInstance.start();
+            if (fmodInstance.isValid())
+                fmodInstance.start();
         }
+
         public void stopShootSFX()
         {
-            fmodInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-            fmodInstance.release();
+            if (fmodInstance.isValid())
+            {
+                fmodInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+                fmodInstance.release();
+            }
         }
+
         void OnDestroy()
         {
             if (fmodInstance.isValid())
             {
-                fmodInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-                //fmodInstance.release();
+                fmodInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+                fmodInstance.release(); // nicht auskommentieren
             }
         }
     }
