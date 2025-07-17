@@ -234,7 +234,7 @@ MonoBehaviour:
   Path: ../DDFmodProject/DungeoDuellFmod/Build/Desktop/Card Phase.bank
   Name: Card Phase
   StudioPath: bank:/Card Phase
-  lastModified: 638882855218724536
+  lastModified: 638883723676634675
   FileSizes:
   - Name: Desktop
     Value: 128384
@@ -281,7 +281,7 @@ MonoBehaviour:
   Path: ../DDFmodProject/DungeoDuellFmod/Build/Desktop/Titel Menu.bank
   Name: Titel Menu
   StudioPath: bank:/Titel Menu
-  lastModified: 638882855268849702
+  lastModified: 638851612819383474
   FileSizes:
   - Name: Desktop
     Value: 506
@@ -356,7 +356,7 @@ MonoBehaviour:
   Path: ../DDFmodProject/DungeoDuellFmod/Build/Desktop/misc.bank
   Name: misc
   StudioPath: bank:/misc
-  lastModified: 638882855265886929
+  lastModified: 638883723683712407
   FileSizes:
   - Name: Desktop
     Value: 10623712
@@ -376,7 +376,7 @@ MonoBehaviour:
   Name: impact material
   StudioPath: 
   Min: 0
-  Max: 2
+  Max: 1
   Default: 0
   ID:
     data1: 1965819448
@@ -386,7 +386,6 @@ MonoBehaviour:
   Labels:
   - impact_wall
   - impact_enemy
-  - impact_barriere
   Exists: 1
 --- !u!114 &-3685164770747076021
 MonoBehaviour:
@@ -552,33 +551,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-2612398053866009934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Dungeon Duell Audio V1/Gym Phase/GP_hexaornament_player-ready
-  m_EditorClassIdentifier: 
-  Path: event:/Dungeon Duell Audio V1/Gym Phase/GP_hexaornament_player-ready
-  Guid:
-    Data1: 1281371295
-    Data2: 1333959477
-    Data3: -1777586514
-    Data4: -1173414678
-  Banks:
-  - {fileID: 6533305081315705170}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
 --- !u!114 &-2585707709378178645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -625,8 +597,6 @@ MonoBehaviour:
     Data3: 594954943
     Data4: -748835065
   Banks:
-  - {fileID: -311594417720840253}
-  - {fileID: -311594417720840253}
   - {fileID: -311594417720840253}
   - {fileID: -311594417720840253}
   - {fileID: -311594417720840253}
@@ -737,7 +707,7 @@ MonoBehaviour:
   Path: ../DDFmodProject/DungeoDuellFmod/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638882855221282042
+  lastModified: 638876684300203385
   FileSizes:
   - Name: Desktop
     Value: 2836
@@ -784,10 +754,10 @@ MonoBehaviour:
   Path: ../DDFmodProject/DungeoDuellFmod/Build/Desktop/Dungeon Phase.bank
   Name: Dungeon Phase
   StudioPath: bank:/Dungeon Phase
-  lastModified: 638882855220940598
+  lastModified: 638883723679239376
   FileSizes:
   - Name: Desktop
-    Value: 223200
+    Value: 262688
   Exists: 1
 --- !u!114 &-233504661153999474
 MonoBehaviour:
@@ -872,15 +842,13 @@ MonoBehaviour:
   - {fileID: 9215035021938786534}
   - {fileID: -1538147167951675508}
   - {fileID: -2954343245127107598}
-  - {fileID: -2612398053866009934}
-  - {fileID: 5227405351411202979}
   EditorParameters: []
   MasterBanks:
   - {fileID: -1405512841764259611}
   StringsBanks:
   - {fileID: 1276395289756070088}
   cacheVersion: 131847
-  cacheTime: 638882855268849702
+  cacheTime: 638883723683712407
   SerializableEventsDict:
   - key: event:/Dungeon Duell Audio V1/Card Phase/CP_player/CP_player_navigate-on-hexgrid
     index: 0
@@ -952,10 +920,6 @@ MonoBehaviour:
     index: 33
   - key: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player_collect_Mask
     index: 34
-  - key: event:/Dungeon Duell Audio V1/Gym Phase/GP_hexaornament_player-ready
-    index: 35
-  - key: event:/Dungeon Duell Audio V1/Gym Phase/GP_counter
-    index: 36
 --- !u!114 &225930445049737312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1052,7 +1016,7 @@ MonoBehaviour:
   Path: ../DDFmodProject/DungeoDuellFmod/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638882855221312202
+  lastModified: 638876684300203385
   FileSizes:
   - Name: Desktop
     Value: 3518
@@ -1216,33 +1180,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &5227405351411202979
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Dungeon Duell Audio V1/Gym Phase/GP_counter
-  m_EditorClassIdentifier: 
-  Path: event:/Dungeon Duell Audio V1/Gym Phase/GP_counter
-  Guid:
-    Data1: -507414842
-    Data2: 1295935740
-    Data3: -1262530653
-    Data4: 687576991
-  Banks:
-  - {fileID: 6533305081315705170}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
 --- !u!114 &5667924778821297101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1312,10 +1249,10 @@ MonoBehaviour:
   Path: ../DDFmodProject/DungeoDuellFmod/Build/Desktop/Gym Phase.bank
   Name: Gym Phase
   StudioPath: bank:/Gym Phase
-  lastModified: 638882855221201617
+  lastModified: 638851612787252279
   FileSizes:
   - Name: Desktop
-    Value: 1950
+    Value: 506
   Exists: 1
 --- !u!114 &6853963034532493644
 MonoBehaviour:
