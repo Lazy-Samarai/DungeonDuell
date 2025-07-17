@@ -15,10 +15,7 @@ namespace dungeonduell
     public class TileClickHandler : MonoBehaviour, IObserver
     {
         public Camera cam;
-
-        [FormerlySerializedAs("TileMapTag")] [TagField] [SerializeField]
-        private string tileMapTag;
-
+        
         public Card currentCard;
         public bool[] currentDoorDir = { true, true, true, true, true, true };
         public DisplayCard displayCardUi;
@@ -78,8 +75,7 @@ namespace dungeonduell
         private void Start()
         {
             connectCollector = FindFirstObjectByType<ConnectionsCollector>();
-            tilemap = FindFirstObjectByType<Grid>().GetComponentsInChildren<Tilemap>()
-                .FirstOrDefault(tm => tm.gameObject.CompareTag(tileMapTag)); // Becuase there is also the hovermap
+            tilemap = FindFirstObjectByType<TileMapContainer>().tilemap; // Becuase there is also the hovermap
             _turnManager = FindFirstObjectByType<TurnManager>();
             _hexgridController = FindFirstObjectByType<HexgridController>();
 
@@ -176,6 +172,8 @@ namespace dungeonduell
                 tilemap.WorldToCell(new Vector3(mouseWorldPos.x, mouseWorldPos.y, cam.transform.position.z));
             var clickedTile = tilemap.GetTile(cellPosition);
 
+            int shellMarker = -1;
+
 
             if (playerMove)
             {
@@ -224,13 +222,7 @@ namespace dungeonduell
                     card = cardToUse;
                     card.tile = shelledTileCard.Item1.completeTile;
 
-                    _shellTracker.RemoveMarker(cellPosition);
-
-
-                    GameObject marker = Instantiate(indiactorSub[(int)cardToUse.secondaryRoomType],
-                        tilemap.CellToWorld(cellPosition), Quaternion.identity);
-                    marker.transform.parent = _shellTracker.transform;
-
+                    shellMarker = (int)cardToUse.secondaryRoomType;
 
                     DdCodeEventHandler.Trigger_CardToShelled(card, isPlayer1Turn);
                 }
@@ -240,7 +232,7 @@ namespace dungeonduell
                 if ((setAbleTiles.Contains(clickedTile) && currentCard != null) || !playerMove)
                 {
                     var wasHandled = CardUsingHandling(card, playerMove, spawnSourroundSetables, cellPosition,
-                        clickedTile, owner);
+                        clickedTile, owner, shellMarker);
 
                     if (wasHandled)
                     {
@@ -260,12 +252,20 @@ namespace dungeonduell
             return false;
         }
 
+        private void ReplaceAndSetShellMarker(Vector3Int cellPosition, Card cardToUse)
+        {
+            _shellTracker.RemoveMarker(cellPosition);
+
+            GameObject marker = Instantiate(indiactorSub[(int)cardToUse.secondaryRoomType],
+                tilemap.CellToWorld(cellPosition), Quaternion.identity);
+            marker.transform.parent = _shellTracker.transform;
+        }
+
         private void EnsureRefernces()
         {
             if (tilemap == null)
             {
-                tilemap = FindFirstObjectByType<Grid>().GetComponentsInChildren<Tilemap>()
-                    .FirstOrDefault(tm => tm.gameObject.CompareTag(tileMapTag));
+                tilemap = FindFirstObjectByType<TileMapContainer>().tilemap; 
             }
 
             if (_shellTracker == null)
@@ -276,7 +276,7 @@ namespace dungeonduell
 
 
         private bool CardUsingHandling(Card card, bool playerMove, bool spawnSourroundSetables, Vector3Int cellPosition,
-            TileBase clickedTile, int owner)
+            TileBase clickedTile, int owner, int shellMarker)
         {
             var overriteCurrentDoorDir = new[] { false, false, false, false, false, false };
             var connectionForcing = false;
@@ -301,6 +301,11 @@ namespace dungeonduell
 
             if (CheckConnectAblity(sourroundCorr) || !playerMove)
             {
+                if (shellMarker >= 0)
+                {
+                    ReplaceAndSetShellMarker(cellPosition, card);
+                }
+
                 // --- HIER bleibt alles wie im Original ---
                 tilemap.SetTile(cellPosition, card.tile);
 

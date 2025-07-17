@@ -5,24 +5,21 @@ using DG.Tweening;
 
 public class CountdownVisual : MonoBehaviour
 {
-    [Header("Element References")]
-    public TextMeshProUGUI timerText;                  
-    public Image TimeCounter_White;                    // Weißer Diamant
-    public Image VerticalSplitter_White;               // Weißer Strich
+    [Header("Element References")] public TextMeshProUGUI timerText;
+    public Image TimeCounter_White; // Weißer Diamant
+    public Image VerticalSplitter_White; // Weißer Strich
 
-    [Header("Settings")]
-    public bool popOnlyWhenRed = false;                // Nur Pop-Effekt, wenn Schwelle erreicht
-    public bool changeBackgroundColor = true;          // Hintergrund- & Linienfarbe ändern
+    [Header("Settings")] public bool popOnlyWhenRed = false; // Nur Pop-Effekt, wenn Schwelle erreicht
+    public bool changeBackgroundColor = true; // Hintergrund- & Linienfarbe ändern
 
-    [Header("Threshold")]
-    public int redThreshold = 10;                      // Ab dieser Sekunde wird’s rot
+    [Header("Threshold")] public int redThreshold = 10; // Ab dieser Sekunde wird’s rot
 
     private int lastSecond = -1;
 
-    public Color textRed = new Color(1f, 0.3f, 0.3f);      // Hellrot für Text
-    public Color bgRed = new Color(0.6f, 0f, 0f);          // Dunkelrot für UI
-    private Color defaultTextColor = Color.black;
-    private Color defaultBGColor = Color.white;
+    public Color textRed = new Color(1f, 0.3f, 0.3f); // Hellrot für Text
+    public Color bgRed = new Color(0.6f, 0f, 0f); // Dunkelrot für UI
+    private Color defaultTextColor = Color.white;
+    private Color defaultBGColor = Color.black;
 
     private void Start()
     {
@@ -60,7 +57,7 @@ public class CountdownVisual : MonoBehaviour
             if (TimeCounter_White != null)
                 TimeCounter_White.DOColor(isRedPhase ? bgRed : defaultBGColor, 0.2f);
             if (VerticalSplitter_White != null)
-                VerticalSplitter_White.DOColor(isRedPhase ? bgRed : defaultBGColor, 0.2f);
+                VerticalSplitter_White.DOColor(defaultBGColor, 0.2f);
         }
 
         // Pop-Effekt
