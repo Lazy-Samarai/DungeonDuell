@@ -101,7 +101,7 @@ namespace dungeonduell
                 Tuple<ShellCard, Vector3Int> shell = _shellTracker.TryGetShell(cellPosition);
                 if (shell != null)
                 {
-                    UpdateHoverTile(shell.Item1.completeTile);
+                    UpdateHoverTile(shell.Item1.GetCompleteTile(_currentDisplayCard.card.roomtype));
                 }
                 else
                 {

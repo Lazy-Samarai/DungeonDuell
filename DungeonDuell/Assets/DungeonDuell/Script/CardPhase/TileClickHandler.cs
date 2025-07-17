@@ -73,8 +73,6 @@ namespace dungeonduell
             { RoomType.Enemy, SecondaryRoomType.Enemy },
         };
 
-        [SerializeField] private GameObject[] indiactorSub;
-
         private void Start()
         {
             connectCollector = FindFirstObjectByType<ConnectionsCollector>();
@@ -218,13 +216,15 @@ namespace dungeonduell
                 if (shelledTileCard != null)
                 {
                     shelledTileCard.Item1.startDoorConcellation = card.startDoorConcellation;
+                    
+                    TileBase shelledTile = shelledTileCard.Item1.GetCompleteTile(card.roomtype);
 
                     ShellCard cardToUse = (ShellCard)shelledTileCard.Item1.Clone();
                     cardToUse.secondaryRoomType =
                         _convertMapShell.GetValueOrDefault(card.roomtype, SecondaryRoomType.Generic);
 
                     card = cardToUse;
-                    card.tile = shelledTileCard.Item1.completeTile;
+                    card.tile = shelledTile;
 
                     shellMarker = (int)cardToUse.secondaryRoomType;
 
@@ -259,10 +259,6 @@ namespace dungeonduell
         private void ReplaceAndSetShellMarker(Vector3Int cellPosition, Card cardToUse)
         {
             _shellTracker.RemoveMarker(cellPosition);
-
-            GameObject marker = Instantiate(indiactorSub[(int)cardToUse.secondaryRoomType],
-                tilemap.CellToWorld(cellPosition), Quaternion.identity);
-            marker.transform.parent = _shellTracker.transform;
         }
 
         private void EnsureRefernces()
