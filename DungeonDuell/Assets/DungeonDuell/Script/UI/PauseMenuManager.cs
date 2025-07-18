@@ -61,6 +61,8 @@ namespace dungeonduell
 
         public void OpenPauseMenu()
         {
+            GameManager.Instance.Paused = true;
+            Cursor.visible = true;
             pausePanel.SetActive(true);
             pausePanel.transform.localScale = Vector3.zero;
             _pauseGroup.alpha = 0;
@@ -83,6 +85,7 @@ namespace dungeonduell
 
         public void ResumeGame()
         {
+            GameManager.Instance.Paused = false;
             Time.timeScale = 1f;
             _isPaused = false;
             pausePanel.transform.DOScale(0, fadeDuration).SetEase(Ease.InBack).SetUpdate(true);
