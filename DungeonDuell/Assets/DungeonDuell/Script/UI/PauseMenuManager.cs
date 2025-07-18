@@ -26,6 +26,8 @@ namespace dungeonduell
         private CanvasGroup _pauseGroup;
         private GameObject _previousSelected;
 
+        private OptionsMenu optionsMenu;
+
         private void Awake()
         {
             _controls = new DungeonPhaseInput();
@@ -36,6 +38,7 @@ namespace dungeonduell
         {
             _pauseGroup = pausePanel.GetComponent<CanvasGroup>();
             if (_pauseGroup == null) _pauseGroup = pausePanel.AddComponent<CanvasGroup>();
+            optionsMenu = GetComponent<OptionsMenu>();
 
             pausePanel.SetActive(false);
             optionsPanel.SetActive(false);
@@ -95,7 +98,10 @@ namespace dungeonduell
                 Time.timeScale = 1f;
                 //pausePanel.SetActive(false);
                 DdCodeEventHandler.Trigger_TutorialDone();
-                //CloseTutorial();
+
+                CloseTutorial();
+                CancelGiveUp();
+                optionsMenu.CloseOptions();
 
 
                 if (EventSystem.current != null)
