@@ -7,12 +7,12 @@ namespace dungeonduell
 {
     public class ParticlesLevelupAvailable : MonoBehaviour, IObserver
     {
-        ParticleSystem _ps;
+        [SerializeField] ParticleSystem _ps;
+        [SerializeField] ParticleSystem _ps2;
         int _playerId;
 
         private void Start()
         {
-            _ps = gameObject.GetComponent<ParticleSystem>();
             _playerId =
                 int.Parse(GetComponentInParent<MoreMountains.TopDownEngine.Character>().PlayerID[^1].ToString()) - 1;
         }
@@ -30,11 +30,23 @@ namespace dungeonduell
         public void SubscribeToEvents()
         {
             DdCodeEventHandler.LevelUpAvailable += ParticleLevelUp;
+
+            DdCodeEventHandler.NewLevelUpPossible += ParticleLevelUpOnMoreLevel;
         }
 
         public void UnsubscribeToAllEvents()
         {
             DdCodeEventHandler.LevelUpAvailable -= ParticleLevelUp;
+
+            DdCodeEventHandler.NewLevelUpPossible -= ParticleLevelUpOnMoreLevel;
+        }
+
+        private void ParticleLevelUpOnMoreLevel(int player)
+        {
+            if (_playerId == player)
+            {
+                _ps2.Play();
+            }
         }
 
         private void ParticleLevelUp(int player, int amount)
