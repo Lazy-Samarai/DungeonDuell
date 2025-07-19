@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 using DG.Tweening;
 using Cinemachine;
 using MoreMountains.TopDownEngine;
+using System.Linq;
 
 namespace dungeonduell
 {
@@ -54,47 +55,47 @@ namespace dungeonduell
             if (transitionStarted) return;
             transitionStarted = true;
 
-            if (getCamSelf)
-            {
-                CinemachineCameraController[] cams =
-                    FindObjectsByType<CinemachineCameraController>(FindObjectsSortMode.None);
+            // Dynamisch aktive Kameras finden
+            var allCams = FindObjectsByType<CinemachineVirtualCamera>(FindObjectsSortMode.None);
+            var activeCams = allCams
+                .Where(cam => cam.enabled && cam.gameObject.activeInHierarchy)
+                .ToList();
 
-                player1Cam = cams[0].GetComponent<CinemachineVirtualCamera>();
-                player2Cam = cams[1].GetComponent<CinemachineVirtualCamera>();
-                Animator camAni1 = player1Cam.GetComponent<Animator>();
-                Animator camAni2 = player1Cam.GetComponent<Animator>();
-                if (camAni1 != null) camAni1.enabled = false;
-                if (camAni2 != null) camAni2.enabled = false;
-            }
+            // Spieler 1 Kamera suchen (z.B. nach Namensmuster)
+            player1Cam = activeCams.FirstOrDefault(c => c.name.Contains("P1"));
+            player2Cam = activeCams.FirstOrDefault(c => c.name.Contains("P2"));
 
-            // Zoom beide Kameras
+            Debug.Log($"Found Player1Cam: {player1Cam?.name}, Player2Cam: {player2Cam?.name}");
+
+            // Zoom Kameras (wenn gefunden)
             if (player1Cam != null)
             {
                 DOTween.To(() => player1Cam.m_Lens.OrthographicSize,
-                    x => player1Cam.m_Lens.OrthographicSize = x,
-                    targetZoom,
-                    zoomDuration).SetEase(Ease.InOutCubic);
+                           x => player1Cam.m_Lens.OrthographicSize = x,
+                           targetZoom,
+                           zoomDuration).SetEase(Ease.InOutCubic);
             }
 
             if (player2Cam != null)
             {
                 DOTween.To(() => player2Cam.m_Lens.OrthographicSize,
-                    x => player2Cam.m_Lens.OrthographicSize = x,
-                    targetZoom,
-                    zoomDuration).SetEase(Ease.InOutCubic);
+                           x => player2Cam.m_Lens.OrthographicSize = x,
+                           targetZoom,
+                           zoomDuration).SetEase(Ease.InOutCubic);
             }
 
-            // Fading
+            // Fading und Szenenwechsel
             if (fadeCanvasGroup != null)
             {
                 fadeCanvasGroup.DOFade(1f, fadeDuration)
                     .SetDelay(fadeDelay)
-                    .OnComplete(() => { SceneManager.LoadScene(targetSceneIndex); });
+                    .OnComplete(() => SceneManager.LoadScene(targetSceneIndex));
             }
             else
             {
                 SceneManager.LoadScene(targetSceneIndex);
             }
         }
+
     }
 }
