@@ -8,14 +8,12 @@ public class SpineStepSound : MonoBehaviour
 {
     [SpineEvent] public string spineEventName = "Step";
 
-    [Header("FMOD Events")]
-    public EventReference normalWalk;
+    [Header("FMOD Events")] public EventReference normalWalk;
     public EventReference normalRun;
     public EventReference lootWalk;
     public EventReference lootRun;
 
-    [Header("Bodenerkennung")]
-    public LayerMask groundLayerMask;
+    [Header("Bodenerkennung")] public LayerMask groundLayerMask;
     public float raycastDistance = 1f;
 
     private SkeletonAnimation skeletonAnimation;
@@ -35,7 +33,8 @@ public class SpineStepSound : MonoBehaviour
         if (e.Data.Name != spineEventName) return;
 
         // Prüfe: läuft oder geht
-        bool isRunning = _character != null && _character.MovementState.CurrentState == CharacterStates.MovementStates.Running;
+        bool isRunning = _character != null &&
+                         _character.MovementState.CurrentState == CharacterStates.MovementStates.Running;
 
         // Ermittle Untergrund
         string groundType = GetGroundType();
@@ -59,12 +58,12 @@ public class SpineStepSound : MonoBehaviour
         {
             return hit.collider.tag; // Boden-Tags wie "Grass", "Stone"
         }
+
         return "Default";
     }
 
     private EventReference SelectEvent(string groundType, bool isRunning)
     {
-        Debug.Log(groundType);
         switch (groundType)
         {
             case "Untagged":
