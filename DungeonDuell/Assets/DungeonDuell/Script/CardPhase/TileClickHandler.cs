@@ -15,10 +15,7 @@ namespace dungeonduell
     public class TileClickHandler : MonoBehaviour, IObserver
     {
         public Camera cam;
-
-        [FormerlySerializedAs("TileMapTag")] [TagField] [SerializeField]
-        private string tileMapTag;
-
+        
         public Card currentCard;
         public bool[] currentDoorDir = { true, true, true, true, true, true };
         public DisplayCard displayCardUi;
@@ -76,8 +73,7 @@ namespace dungeonduell
         private void Start()
         {
             connectCollector = FindFirstObjectByType<ConnectionsCollector>();
-            tilemap = FindFirstObjectByType<Grid>().GetComponentsInChildren<Tilemap>()
-                .FirstOrDefault(tm => tm.gameObject.CompareTag(tileMapTag)); // Becuase there is also the hovermap
+            tilemap = FindFirstObjectByType<TileMapContainer>().tilemap; // Becuase there is also the hovermap
             _turnManager = FindFirstObjectByType<TurnManager>();
             _hexgridController = FindFirstObjectByType<HexgridController>();
 
@@ -265,8 +261,7 @@ namespace dungeonduell
         {
             if (tilemap == null)
             {
-                tilemap = FindFirstObjectByType<Grid>().GetComponentsInChildren<Tilemap>()
-                    .FirstOrDefault(tm => tm.gameObject.CompareTag(tileMapTag));
+                tilemap = FindFirstObjectByType<TileMapContainer>().tilemap; 
             }
 
             if (_shellTracker == null)

@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Cinemachine;
 using MoreMountains.TopDownEngine;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 using FMODUnity;
 //using static UnityEditor.Profiling.RawFrameDataView;
@@ -25,10 +23,7 @@ namespace dungeonduell
             new Vector2(-0.5f, -0.866f).normalized,
             new Vector2(0.5f, -0.866f).normalized
         };
-
-        [FormerlySerializedAs("TileMapTag")] [Header("References")] [TagField] [SerializeField]
-        private string tileMapTag;
-
+        
         public Tilemap tilemap;
         public GameObject cursor;
         public TileClickHandler tileClickHandler;
@@ -49,8 +44,7 @@ namespace dungeonduell
                 turnManager = FindFirstObjectByType<TurnManager>();
 
             _playerInput = null;
-            tilemap = FindFirstObjectByType<Grid>().GetComponentsInChildren<Tilemap>()
-                .FirstOrDefault(tm => tm.gameObject.CompareTag(tileMapTag)); // Becuase there is also the hovermap
+            tilemap = tilemap = FindFirstObjectByType<TileMapContainer>().tilemap;
         }
 
         public void ActivateNavigation()

@@ -782,7 +782,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 1781931329}
-  tileMapTag: MainTileMap
   currentCard: {fileID: 0}
   currentDoorDir: 010101010101
   displayCardUi: {fileID: 0}
@@ -817,10 +816,6 @@ MonoBehaviour:
       Data3: 2088876940
       Data4: -1804597625
     Path: event:/Dungeon Duell Audio V1/Card Phase/CP_player/CP_player_place-card-on-hexgrid
-  indiactorSub:
-  - {fileID: 6352745881752174546, guid: 69a38c7e8f65b354fb65957ad819cdfc, type: 3}
-  - {fileID: 6352745881752174546, guid: a5567a0b9e383ae44b8b0941169c3591, type: 3}
-  - {fileID: 6352745881752174546, guid: 1a775b6589591a243b79bef8f9b17041, type: 3}
 --- !u!4 &481254718
 Transform:
   m_ObjectHideFlags: 0
@@ -849,7 +844,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 1781931329}
-  tileMapTag: MainTileMap
   tilemap: {fileID: 0}
   cursor: {fileID: 887889882}
   tileClickHandler: {fileID: 481254717}
@@ -2592,6 +2586,46 @@ PrefabInstance:
       propertyPath: m_Name
       value: Title Legend Text (TMP)
       objectReference: {fileID: 0}
+    - target: {fileID: 431598825197909085, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 431598825197909085, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 523320379187605738, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 523320379187605738, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 523320379187605738, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1395905989943736833, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1395905989943736833, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1395905989943736833, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1815897800137836435, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
         type: 3}
       propertyPath: m_Pivot.x
@@ -2697,6 +2731,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3031672899076406031, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3031672899076406031, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3455100789221983209, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
         type: 3}
       propertyPath: m_Sprite
@@ -2733,6 +2777,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 0.87303025
       objectReference: {fileID: 0}
+    - target: {fileID: 5775167715585374499, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5775167715585374499, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5998626118436239438, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
         type: 3}
       propertyPath: m_Name
@@ -2746,6 +2800,21 @@ PrefabInstance:
     - target: {fileID: 6739598370246715360, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
         type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6940163195986270057, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6940163195986270057, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6940163195986270057, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
+        type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8781711511381453681, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
@@ -3408,6 +3477,12 @@ PrefabInstance:
 --- !u!4 &1521964642 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5925310691940967161, guid: af14a35051cee7241acc6f7ce37547d8,
+    type: 3}
+  m_PrefabInstance: {fileID: 1521964641}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1839735485 &1521964643 stripped
+Tilemap:
+  m_CorrespondingSourceObject: {fileID: 7894183503884448684, guid: af14a35051cee7241acc6f7ce37547d8,
     type: 3}
   m_PrefabInstance: {fileID: 1521964641}
   m_PrefabAsset: {fileID: 0}
@@ -5175,6 +5250,8 @@ GameObject:
   - component: {fileID: 1945806930}
   - component: {fileID: 1945806931}
   - component: {fileID: 1945806932}
+  - component: {fileID: 1945806933}
+  - component: {fileID: 1945806934}
   m_Layer: 0
   m_Name: RoomConnectTracker
   m_TagString: Untagged
@@ -5236,6 +5313,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82332fb09497e21439e610bc1ec4e5c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1945806933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945806928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbd1fe6109df69f4ebb398b81e57256e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilemap: {fileID: 1521964643}
+--- !u!114 &1945806934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945806928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d9d3c1adbdc1a74d852b3fed7e47ad0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deck_P1: {fileID: 1494809202}
+  deck_P2: {fileID: 1010877895}
 --- !u!1 &1961649889
 GameObject:
   m_ObjectHideFlags: 0

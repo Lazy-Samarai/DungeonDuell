@@ -24,7 +24,6 @@ namespace dungeonduell
             {
                 if (chr.PlayerID == playerName)
                 {
-                    print("Assign");
                     _weapon = chr.GetComponent<CharacterHandleWeapon>().WeaponAttachment
                         .GetComponentInChildren<ProjectileWeapon>();
                 }
