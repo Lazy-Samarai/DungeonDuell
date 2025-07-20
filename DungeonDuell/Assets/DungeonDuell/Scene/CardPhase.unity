@@ -2648,6 +2648,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2790051231608372198, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3455100789221983209, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 561c242d32d1ccb4f9bed76b0ded40dc,
+        type: 3}
     - target: {fileID: 3824081700285593561, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
         type: 3}
       propertyPath: m_Name
@@ -2657,6 +2668,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4168616604632634508, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4168616604632634508, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
+        type: 3}
+      propertyPath: m_fontSizeMax
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4348045514557026979, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
+        type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 32329854027067392
+      objectReference: {fileID: 0}
+    - target: {fileID: 4499972633824668640, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.87303025
       objectReference: {fileID: 0}
     - target: {fileID: 5998626118436239438, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
         type: 3}
@@ -2678,7 +2709,8 @@ PrefabInstance:
       propertyPath: previousSelected
       value: 
       objectReference: {fileID: 1706345217}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4358456423527817777, guid: 43f99acd15d9f5e43a2e3332512fcbb6, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -5474,7 +5506,19 @@ MonoBehaviour:
     m_ActionId: d858d18f-1581-4499-88be-9325a3bb9b38
     m_ActionName: CardPhase/Back
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1961649891}
+        m_TargetAssemblyTypeName: MoreMountains.TopDownEngine.InputManager, MoreMountains.TopDownEngine
+        m_MethodName: PauseButtonPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: b0b637a1-f591-4af1-81bf-f5342742219f
     m_ActionName: 'CardPhase/Pause[/Keyboard/escape,/XInputControllerWindows/start,/XInputControllerWindows1/start]'
   - m_PersistentCalls:
