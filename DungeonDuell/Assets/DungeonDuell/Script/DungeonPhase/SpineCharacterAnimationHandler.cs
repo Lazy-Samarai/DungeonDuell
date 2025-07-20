@@ -17,6 +17,9 @@ namespace dungeonduell
         private CharacterMovement _characterMovement;
 
         protected SkeletonAnimation SkeletonAnimation;
+        
+        protected bool blocked = false;
+
 
         protected virtual void Awake()
         {
@@ -52,6 +55,7 @@ namespace dungeonduell
         public void SetToDeath()
         {
             SetAnimation(death, false);
+            blocked = true;
         }
 
         public virtual void SetToBaseMovement()
@@ -66,18 +70,23 @@ namespace dungeonduell
 
         protected void SetAnimation(string aniName)
         {
-            SkeletonAnimation.AnimationState.SetAnimation(0, aniName, true);
+           if (!blocked) SkeletonAnimation.AnimationState.SetAnimation(0, aniName, true);
         }
 
         protected void SetAnimation(string aniName, bool loop)
         {
-            SkeletonAnimation.AnimationState.SetAnimation(0, aniName, loop);
+            if (!blocked) SkeletonAnimation.AnimationState.SetAnimation(0, aniName, loop);
         }
 
         protected void SetAnimation(string aniName, float scale)
         {
-            var trackEntry = SkeletonAnimation.AnimationState.SetAnimation(0, aniName, true);
-            trackEntry.TimeScale = scale;
+            if (!blocked)
+            {
+                var trackEntry = SkeletonAnimation.AnimationState.SetAnimation(0, aniName, true);
+                trackEntry.TimeScale = scale;
+            }
+          
+           
         }
     }
 }

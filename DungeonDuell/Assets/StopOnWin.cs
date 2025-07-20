@@ -19,18 +19,23 @@ namespace dungeonduell
 
         public void SubscribeToEvents()
         {
-            DdCodeEventHandler.weHaveWinner += StopMove;
+            DdCodeEventHandler.weHaveWinner += StoppingOnWin;
         }
 
         public void UnsubscribeToAllEvents()
         {
-            DdCodeEventHandler.weHaveWinner -= StopMove;
+            DdCodeEventHandler.weHaveWinner -= StoppingOnWin;
         }
 
-        private void StopMove(string _)
+        protected virtual void StoppingOnWin(string _)
         {
+            CharacterMovement cm = GetComponent<CharacterMovement>();
+            CharacterRun cr = GetComponent<CharacterRun>();
+            TopDownController2D controller = GetComponent<TopDownController2D>();
+            controller.enabled = false;
+            cr.AbilityPermitted = false;
+            cm.AbilityPermitted = false;
             GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
-            GetComponent<TopDownController2D>().enabled = false;
         }
     }
 }
