@@ -1238,14 +1238,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 609ceac29dcff0e41b31e3d040f0486b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1Cam: {fileID: 1244061322}
-  player2Cam: {fileID: 52563425}
+  player1Cam: {fileID: 0}
+  player2Cam: {fileID: 0}
   fadeCanvasGroup: {fileID: 1689097413}
   targetZoom: 14
   zoomDuration: 2
   fadeDuration: 2
   fadeDelay: 0.1
   targetSceneIndex: 1
+  getCamSelf: 1
 --- !u!114 &212610690
 MonoBehaviour:
   m_ObjectHideFlags: 0
