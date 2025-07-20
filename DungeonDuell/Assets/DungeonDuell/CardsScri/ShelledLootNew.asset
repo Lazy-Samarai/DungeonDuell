@@ -18,7 +18,7 @@ MonoBehaviour:
   roomtype: 1
   secondaryRoomType: 0
   roomElement: 0
-  tile: {fileID: 11400000, guid: c79247c793aa6414dba0f5b117c96a83, type: 2}
+  tile: {fileID: 11400000, guid: 6b48975935765a24dbba92307635e66b, type: 2}
   startDoorConcellation:
     topLeft: 0
     topRight: 0
@@ -28,4 +28,7 @@ MonoBehaviour:
     bottonRight: 0
   isBridgeCard: 0
   marker: {fileID: 9030860857177964664, guid: 17099331d7c4e3e4793d1adafb7d4ce9, type: 3}
-  completeTile: {fileID: 11400000, guid: c79247c793aa6414dba0f5b117c96a83, type: 2}
+  completeTiles:
+  - {fileID: 11400000, guid: 6b48975935765a24dbba92307635e66b, type: 2}
+  - {fileID: 11400000, guid: 1177ea33d122d61419ed56b5ecc1490e, type: 2}
+  - {fileID: 11400000, guid: c3ee207f15117e74bb22d940b11fad71, type: 2}

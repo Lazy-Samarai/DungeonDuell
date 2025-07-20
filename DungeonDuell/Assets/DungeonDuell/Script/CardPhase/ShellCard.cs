@@ -10,6 +10,19 @@ namespace dungeonduell
         [FormerlySerializedAs("InPlayerRangeTile")]
         public GameObject marker;
 
-        [FormerlySerializedAs("CompleteTile")] public TileBase completeTile;
+        public TileBase[] completeTiles;
+
+        public TileBase GetCompleteTile(RoomType roomType)
+        {
+            switch (roomType)
+            {
+                case RoomType.Enemy:
+                    return completeTiles[1];
+                case RoomType.NormalLott:
+                    return completeTiles[2];
+                default:
+                    return completeTiles[0];
+            }
+        }
     }
 }
