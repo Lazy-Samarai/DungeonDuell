@@ -27,6 +27,8 @@ namespace dungeonduell
         private CanvasGroup _pauseGroup;
         private GameObject _previousSelected;
 
+        private OptionsMenu optionsMenu;
+
         private void Awake()
         {
             _controls = new DungeonPhaseInput();
@@ -37,6 +39,7 @@ namespace dungeonduell
         {
             _pauseGroup = pausePanel.GetComponent<CanvasGroup>();
             if (_pauseGroup == null) _pauseGroup = pausePanel.AddComponent<CanvasGroup>();
+            optionsMenu = GetComponent<OptionsMenu>();
 
             pausePanel.SetActive(false);
             optionsPanel.SetActive(false);
@@ -62,6 +65,8 @@ namespace dungeonduell
 
         public void OpenPauseMenu()
         {
+            GameManager.Instance.Paused = true;
+            Cursor.visible = true;
             pausePanel.SetActive(true);
             pausePanel.transform.localScale = Vector3.zero;
             _pauseGroup.alpha = 0;
@@ -84,6 +89,7 @@ namespace dungeonduell
 
         public void ResumeGame()
         {
+            GameManager.Instance.Paused = false;
             Time.timeScale = 1f;
             _isPaused = false;
             pausePanel.transform.DOScale(0, fadeDuration).SetEase(Ease.InBack).SetUpdate(true);
@@ -93,7 +99,10 @@ namespace dungeonduell
                 Time.timeScale = 1f;
                 //pausePanel.SetActive(false);
                 DdCodeEventHandler.Trigger_TutorialDone();
-                //CloseTutorial();
+
+                CloseTutorial();
+                CancelGiveUp();
+                optionsMenu.CloseOptions();
 
 
                 if (EventSystem.current != null)
