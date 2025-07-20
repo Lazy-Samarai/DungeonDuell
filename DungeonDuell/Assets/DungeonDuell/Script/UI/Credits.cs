@@ -12,7 +12,7 @@ namespace dungeonduell
         // L�sst den Text automatsich ablaufen
         void Update()
         {
-            floatingText.anchoredPosition += new Vector2(0f, speed);
+            floatingText.anchoredPosition += new Vector2(0f, speed * Time.deltaTime);
         }
     }
 }

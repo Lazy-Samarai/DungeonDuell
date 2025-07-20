@@ -1,5 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 namespace dungeonduell
@@ -7,6 +8,8 @@ namespace dungeonduell
     public class UIManager : MonoBehaviour
     {
         public GameObject creditsPanel;
+        public GameObject creditsSelectedButton;
+        public GameObject previousSelected;
         public GameObject optionsPanel;
         public CanvasGroup fadeCanvas;
 
@@ -68,7 +71,18 @@ namespace dungeonduell
                 creditsPanel.transform.localScale = Vector3.zero;
                 creditsPanel.transform.DOScale(isActive ? 0 : 1, fadeDuration).OnComplete(() =>
                 {
-                    if (isActive) creditsPanel.SetActive(false);
+                    if (isActive)
+                    {
+                        creditsPanel.SetActive(false);
+                        EventSystem.current.SetSelectedGameObject(null);
+                        if (previousSelected != null) EventSystem.current.SetSelectedGameObject(previousSelected);
+                    }
+                    else
+                    {
+                        if (creditsSelectedButton != null && EventSystem.current != null)
+                        EventSystem.current.SetSelectedGameObject(creditsSelectedButton);
+                    }
+                        
                 });
             }
         }
