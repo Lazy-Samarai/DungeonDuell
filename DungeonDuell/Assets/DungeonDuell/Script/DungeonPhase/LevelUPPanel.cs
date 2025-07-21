@@ -1,11 +1,13 @@
-﻿using MoreMountains.TopDownEngine;
+﻿using System;
+using MoreMountains.TopDownEngine;
 using UnityEngine;
 using UnityEngine.Serialization;
 using FMODUnity;
+using Unity.VisualScripting;
 
 namespace dungeonduell
 {
-    public class LevelUpPanel : MonoBehaviour
+    public class LevelUpPanel : MonoBehaviour, IObserver
     {
         private const int AmountPerUpgrade = 1;
         [FormerlySerializedAs("LevelUpMenu")] public GameObject levelUpMenu; // Das Panel für das Level-Up
@@ -62,6 +64,34 @@ namespace dungeonduell
 
                 RuntimeManager.PlayOneShot(optionSelectedEvent);
                 testHub.menuShowing = false;
+                ShowLevelUpMenu(false);
+            }
+        }
+
+        void OnEnable()
+        {
+            SubscribeToEvents();
+        }
+
+        private void OnDisable()
+        {
+            UnsubscribeToAllEvents();
+        }
+
+        public void SubscribeToEvents()
+        {
+            DdCodeEventHandler.PlayerGotDamaged += DamageClose;
+        }
+
+        public void UnsubscribeToAllEvents()
+        {
+            DdCodeEventHandler.PlayerGotDamaged -= DamageClose;
+        }
+
+        void DamageClose(bool isPlayer1)
+        {
+            if (_menuOpen && (player1 == isPlayer1))
+            {
                 ShowLevelUpMenu(false);
             }
         }
