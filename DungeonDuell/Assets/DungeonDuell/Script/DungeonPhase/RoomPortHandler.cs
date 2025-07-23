@@ -5,7 +5,7 @@ namespace dungeonduell
 {
     public class RoomPortHandler : MonoBehaviour
     {
-        [SerializeField] private List<GameObject>
+         public List<GameObject>
             availablePort; // for some unclear stupid reason getting in Sart per get Child doesnt work
 
         public List<ConnectionDir> usedPort;
@@ -18,7 +18,7 @@ namespace dungeonduell
             port.SetActive(false);
         }
 
-        private GameObject GetPort(ConnectionDir dir)
+        public GameObject GetPort(ConnectionDir dir)
         {
             return availablePort[(int)dir];
         }

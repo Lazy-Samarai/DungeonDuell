@@ -59,6 +59,18 @@ namespace dungeonduell
 
                     if (roomData != null && CheckIfMiniMapSystem())
                         roomData.SetMapWallsActive(true); // MapWalls AN im aktiven Raum
+                    
+                    if (roomData != null && CheckIfMiniMapSystem())
+                    {
+                        roomData.SetMapWallsActive(true);
+
+                        var portHandler = roomData.GetComponent<RoomPortHandler>();
+                        if (portHandler != null)
+                        {
+                            roomData.UpdateDoorTransparency(portHandler.usedPort);
+                        }
+                    }
+
                 }
             }
         }
