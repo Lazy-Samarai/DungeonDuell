@@ -81,33 +81,44 @@ namespace dungeonduell
         }
 
 
-        public void SetMasterVolume(float volume)
+        public void SetMasterVolume(float sliderValue)
         {
+            float dB = Mathf.Lerp(-80f, 0f, sliderValue); // logarithmisch skalieren
+            float volume = Mathf.Pow(10f, dB / 10f); // oder 2.5f je nach Feingefühl
+
             _masterVCA.setVolume(volume);
             if (_dataManager != null)
-                _dataManager.SetVolume(volume);
+                _dataManager.SetVolume(sliderValue);
         }
 
-        public void SetMusicVolume(float volume)
+        public void SetMusicVolume(float sliderValue)
         {
+            float dB = Mathf.Lerp(-80f, 0f, sliderValue); // logarithmisch skalieren
+            float volume = Mathf.Pow(10f, dB / 10f); // oder 2.5f je nach Feingefühl
             _musicVCA.setVolume(volume);
             if (_dataManager != null)
-                _dataManager.SetMusicVolume(volume);
+                _dataManager.SetMusicVolume(sliderValue);
         }
 
-        public void SetSfxVolume(float volume)
+        public void SetSfxVolume(float sliderValue)
         {
+            float dB = Mathf.Lerp(-80f, 0f, sliderValue); // logarithmisch skalieren
+            float volume = Mathf.Pow(10f, dB / 10f); // oder 2.5f je nach Feingefühl
             _sfxVCA.setVolume(volume);
             if (_dataManager != null)
-                _dataManager.SetSfxVolume(volume);
+                _dataManager.SetSfxVolume(sliderValue);
         }
 
         public void MuteToggle(bool muted)
         {
-            float volume = muted ? 0f : audioSlider.value;
+            float sliderValue = muted ? 0.0001f : audioSlider.value;
+            float dB = Mathf.Lerp(-80f, 0f, sliderValue);
+            float volume = Mathf.Pow(10f, dB / 20f);
             _masterVCA.setVolume(volume);
+
             if (_dataManager != null) _dataManager.MuteToggle(muted);
         }
+
 
         private void SetupResolutionDropdown()
         {
