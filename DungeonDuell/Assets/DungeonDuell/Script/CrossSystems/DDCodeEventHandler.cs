@@ -180,5 +180,12 @@ namespace dungeonduell
         {
             PlayerGotDamaged?.Invoke(player1);
         }
+
+        public static event Action<int> NewLevelUpPossible;
+
+        public static void Trigger_NewLevelUpPossible(int player)
+        {
+            NewLevelUpPossible?.Invoke(player);
+        }
     }
 }
