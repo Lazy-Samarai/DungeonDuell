@@ -64,9 +64,16 @@ namespace dungeonduell
                 nextroom.transform.localPosition = new Vector3(posX, posY, 0);
 
                 var roomPortHandler = nextroom.GetComponentInChildren<RoomPortHandler>();
+                var roomPortHandlerMiniMap = nextroom.GetComponentInChildren<MiniMapRoomPortHandler>();
 
                 foreach (var rc in roomInfo.Item2.Conncection)
+                {
                     roomPortHandler.OpenPort(rc.ConnectionDir);
+                    roomPortHandlerMiniMap.OpenPort(rc.ConnectionDir);
+                }
+
+                roomPortHandlerMiniMap.SetMapInvisble();
+
 
                 if (roomInfo.Item2.Roomtype == RoomType.SpawnPlayer1)
                     // Some Player Check required later for Mutiplayer here 

@@ -10,7 +10,7 @@ namespace dungeonduell
 
         public List<ConnectionDir> usedPort;
 
-        public void OpenPort(ConnectionDir dir)
+        public virtual void OpenPort(ConnectionDir dir)
         {
             usedPort.Add(dir);
             var port = GetPort(dir);
@@ -18,7 +18,7 @@ namespace dungeonduell
             port.SetActive(false);
         }
 
-        private GameObject GetPort(ConnectionDir dir)
+        protected GameObject GetPort(ConnectionDir dir)
         {
             return availablePort[(int)dir];
         }
