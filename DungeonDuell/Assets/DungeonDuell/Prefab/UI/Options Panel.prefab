@@ -1914,12 +1914,12 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 4308850056729412620}
-        m_TargetAssemblyTypeName: dungeonduell.OptionsMenu, Assembly-CSharp
-        m_MethodName: 
+        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+        m_MethodName: Play
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2000,11 +2000,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 1679452346
+      Data2: 1140901431
+      Data3: 880693951
+      Data4: 683229962
+    Path: event:/Dungeon Duell Audio V1/misc/Misc_UI/misc_vol-fader
   Event: 
   EventPlayTrigger: 0
   EventStopTrigger: 0
@@ -2014,8 +2014,8 @@ MonoBehaviour:
   NonRigidbodyVelocity: 0
   Params: []
   OverrideAttenuation: 0
-  OverrideMinDistance: -1
-  OverrideMaxDistance: -1
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &3091970760277308034
 GameObject:
   m_ObjectHideFlags: 0
@@ -2528,12 +2528,12 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 3504353065469428774}
-        m_TargetAssemblyTypeName: dungeonduell.OptionsMenu, Assembly-CSharp
-        m_MethodName: 
+        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+        m_MethodName: Play
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2614,11 +2614,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 1679452346
+      Data2: 1140901431
+      Data3: 880693951
+      Data4: 683229962
+    Path: event:/Dungeon Duell Audio V1/misc/Misc_UI/misc_vol-fader
   Event: 
   EventPlayTrigger: 0
   EventStopTrigger: 0
@@ -2628,8 +2628,8 @@ MonoBehaviour:
   NonRigidbodyVelocity: 0
   Params: []
   OverrideAttenuation: 0
-  OverrideMinDistance: -1
-  OverrideMaxDistance: -1
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &4618380918581891746
 GameObject:
   m_ObjectHideFlags: 0
@@ -3206,11 +3206,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 1679452346
+      Data2: 1140901431
+      Data3: 880693951
+      Data4: 683229962
+    Path: event:/Dungeon Duell Audio V1/misc/Misc_UI/misc_vol-fader
   Event: 
   EventPlayTrigger: 0
   EventStopTrigger: 0
@@ -3220,8 +3220,8 @@ MonoBehaviour:
   NonRigidbodyVelocity: 0
   Params: []
   OverrideAttenuation: 0
-  OverrideMinDistance: -1
-  OverrideMaxDistance: -1
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &4813783981407392097
 GameObject:
   m_ObjectHideFlags: 0
@@ -3769,7 +3769,7 @@ MonoBehaviour:
       Data2: 1141071997
       Data3: 454451635
       Data4: -2080471635
-    Path: event:/Dungeon Duell Audio V1/Titel Menu/TS_select
+    Path: event:/Dungeon Duell Audio V1/misc/Misc_UI/misc_select-newvalue
   Event: 
   EventPlayTrigger: 0
   EventStopTrigger: 0
@@ -3779,8 +3779,8 @@ MonoBehaviour:
   NonRigidbodyVelocity: 0
   Params: []
   OverrideAttenuation: 0
-  OverrideMinDistance: -1
-  OverrideMaxDistance: -1
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &5232582764593435615
 GameObject:
   m_ObjectHideFlags: 0
@@ -6461,7 +6461,7 @@ MonoBehaviour:
       Data2: 1141071997
       Data3: 454451635
       Data4: -2080471635
-    Path: event:/Dungeon Duell Audio V1/Titel Menu/TS_select
+    Path: event:/Dungeon Duell Audio V1/misc/Misc_UI/misc_select-newvalue
   Event: 
   EventPlayTrigger: 0
   EventStopTrigger: 0
@@ -6471,8 +6471,8 @@ MonoBehaviour:
   NonRigidbodyVelocity: 0
   Params: []
   OverrideAttenuation: 0
-  OverrideMinDistance: -1
-  OverrideMaxDistance: -1
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &9192782753588474539
 GameObject:
   m_ObjectHideFlags: 0

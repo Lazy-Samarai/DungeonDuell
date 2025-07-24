@@ -18,12 +18,6 @@ namespace dungeonduell
             DdCodeEventHandler.NewLevelUpPossible -= PlayLevelUpSound;
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
-
         void PlayLevelUpSound(int playerID)
         {
             RuntimeManager.PlayOneShot(openLevelUPEvent, transform.position);
