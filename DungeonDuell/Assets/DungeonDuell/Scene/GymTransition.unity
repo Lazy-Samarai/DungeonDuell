@@ -7011,6 +7011,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 67481b39-65a3-4432-ad85-2f9178693466
     m_ActionName: CardPhase/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 56b8c085-a1dd-4742-a5a0-69296b46b87c
+    m_ActionName: 'CardPhase/RotateL[/DualShock4GamepadHID/leftShoulder,/Keyboard/l]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard
   m_DefaultActionMap: DungeonPhase
@@ -8673,7 +8677,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 22884148}
         m_TargetAssemblyTypeName: dungeonduell.LevelUpPanel, Assembly-CSharp
-        m_MethodName: UpgradeAttackSpeed
+        m_MethodName: UpgradeSpeedd
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8785,6 +8789,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 67481b39-65a3-4432-ad85-2f9178693466
     m_ActionName: CardPhase/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 56b8c085-a1dd-4742-a5a0-69296b46b87c
+    m_ActionName: 'CardPhase/RotateL[/DualShock4GamepadHID/leftShoulder,/Keyboard/l]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: DungeonPhase
