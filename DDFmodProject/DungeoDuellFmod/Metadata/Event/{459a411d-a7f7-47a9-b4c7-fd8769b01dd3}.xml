@@ -5,7 +5,7 @@
 			<value>GP_Player_enter-GP</value>
 		</property>
 		<property name="outputFormat">
-			<value>0</value>
+			<value>1</value>
 		</property>
 		<relationship name="folder">
 			<destination>{c7f66671-4502-4d29-a270-f06d6b4aa1d9}</destination>
@@ -82,7 +82,11 @@
 			<destination>{1f4b7964-7eff-45d8-b726-b4cfbb71dbb0}</destination>
 		</relationship>
 	</object>
-	<object class="MultiSound" id="{71fda4d6-5192-46d5-813b-9b30a9792982}" />
+	<object class="MultiSound" id="{71fda4d6-5192-46d5-813b-9b30a9792982}">
+		<relationship name="sounds">
+			<destination>{9874f98e-28ef-485e-ac88-6318cbab8028}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusEffectChain" id="{1440eaf7-b6ed-427d-a9d4-f0c3aafd14e8}">
 		<relationship name="effects">
 			<destination>{07131e8c-8916-4461-a344-1fc61c111b94}</destination>
@@ -95,6 +99,11 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{bdc6a3ec-9a96-4e62-85c9-d3c98088c2ee}" />
+	<object class="SingleSound" id="{9874f98e-28ef-485e-ac88-6318cbab8028}">
+		<relationship name="audioFile">
+			<destination>{bb76a247-980a-460a-afef-0f7ee2886735}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusFader" id="{07131e8c-8916-4461-a344-1fc61c111b94}" />
 	<object class="MixerBusFader" id="{b336cc4f-9839-4aec-8e8d-20ab81954560}" />
 </objects>
