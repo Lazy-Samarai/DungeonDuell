@@ -878,6 +878,7 @@ GameObject:
   - component: {fileID: 105135217}
   - component: {fileID: 1392788253}
   - component: {fileID: 1392788255}
+  - component: {fileID: 1392788256}
   m_Layer: 14
   m_Name: LevelManager
   m_TagString: Untagged
@@ -9875,6 +9876,25 @@ MonoBehaviour:
   sequenceMang: {fileID: 839105398}
   coastMultiply: 2
   startCoast: 1
+--- !u!114 &1392788256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 105135216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06eee38c4b794574fa8a1fdc5b344e72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  openLevelUPEvent:
+    Guid:
+      Data1: 788889103
+      Data2: 1177151676
+      Data3: -1827464034
+      Data4: 252372317
+    Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player_lvlup-notification
 --- !u!1 &1406968496
 GameObject:
   m_ObjectHideFlags: 0
@@ -15752,6 +15772,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1918232351}
+  - component: {fileID: 1918232352}
   m_Layer: 0
   m_Name: Managers --------------------------------------------------------
   m_TagString: Untagged
@@ -15777,6 +15798,37 @@ Transform:
   - {fileID: 1746612115}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1918232352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1918232350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  Event: 
+  EventPlayTrigger: 1
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: -1
+  OverrideMaxDistance: -1
 --- !u!1 &1963455776
 GameObject:
   m_ObjectHideFlags: 0

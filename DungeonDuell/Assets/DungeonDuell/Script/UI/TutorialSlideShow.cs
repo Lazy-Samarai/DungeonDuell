@@ -9,6 +9,7 @@ using MoreMountains.TopDownEngine;
 using System;
 using System.Drawing.Printing;
 using UnityEngine.SceneManagement;
+using FMODUnity;
 
 namespace dungeonduell
 {
@@ -56,6 +57,8 @@ namespace dungeonduell
         private DungeonPhaseInput inputActions;
 
         private bool isTransitioning = false;
+
+        public EventReference flipPagesEvent;
 
         private void Awake()
         {
@@ -158,6 +161,7 @@ namespace dungeonduell
         {
             if (pages.Length == 0 || index >= pages.Length) return;
 
+            RuntimeManager.PlayOneShot(flipPagesEvent, transform.position);
             if (instant)
             {
                 ApplyPage(index);
