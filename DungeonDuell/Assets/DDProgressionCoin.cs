@@ -11,12 +11,12 @@ namespace dungeonduell
         public MMFeedbacks PickedFeedbacksPlayer2;
         private const String Player1 = "Player1";
 
-        protected override void Pick(GameObject picker)
+        public override void PickItem(GameObject picker)
         {
             var character = picker.GetComponent<Character>();
             bool player1 = character.PlayerID == Player1;
             PickedMMFeedbacks = player1 ? PickedFeedbacksPlayer1 : PickedFeedbacksPlayer2;
-            base.Pick(picker);
+            base.PickItem(picker);
         }
     }
 }
