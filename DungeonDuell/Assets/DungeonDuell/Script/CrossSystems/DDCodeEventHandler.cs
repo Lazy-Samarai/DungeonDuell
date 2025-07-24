@@ -180,5 +180,12 @@ namespace dungeonduell
         {
             PlayerGotDamaged?.Invoke(player1);
         }
+
+        public static event Action PlayersInSameRoom;
+
+        public static void Trigger_PlayersInSameRoom()
+        {
+            PlayersInSameRoom?.Invoke();
+        }
     }
 }
