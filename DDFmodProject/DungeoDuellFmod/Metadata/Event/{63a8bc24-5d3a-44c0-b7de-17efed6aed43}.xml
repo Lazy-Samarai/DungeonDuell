@@ -66,6 +66,8 @@
 			<destination>{32879148-a520-4f3e-b8d7-f27ddf4901a9}</destination>
 			<destination>{f4ec478f-8f74-4ae2-8b50-6bf0fbb01d2c}</destination>
 			<destination>{bfb226c9-d482-4f9d-a119-837c004b7044}</destination>
+			<destination>{1bef6d3c-62c7-481c-b165-c14d77f6925a}</destination>
+			<destination>{221ac388-e599-4812-8f76-9e6fba3dc4cb}</destination>
 		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{8b575036-f93a-4b31-8bee-03029070d8f9}</destination>
@@ -81,6 +83,8 @@
 			<destination>{32879148-a520-4f3e-b8d7-f27ddf4901a9}</destination>
 			<destination>{f4ec478f-8f74-4ae2-8b50-6bf0fbb01d2c}</destination>
 			<destination>{bfb226c9-d482-4f9d-a119-837c004b7044}</destination>
+			<destination>{1bef6d3c-62c7-481c-b165-c14d77f6925a}</destination>
+			<destination>{221ac388-e599-4812-8f76-9e6fba3dc4cb}</destination>
 		</relationship>
 		<relationship name="preset">
 			<destination>{f35fc6c1-5e57-4960-a2ef-15ca1da0fe88}</destination>
@@ -104,7 +108,6 @@
 	</object>
 	<object class="MixerBusPanner" id="{66ac0b75-aad7-4eda-be4c-5920ce3405f7}" />
 	<object class="EventSound" id="{32879148-a520-4f3e-b8d7-f27ddf4901a9}">
-		<property name="name" />
 		<relationship name="event">
 			<destination>{ceaf9ccd-f799-4fce-98c4-038a69c9535d}</destination>
 		</relationship>
@@ -123,6 +126,22 @@
 		</property>
 		<relationship name="event">
 			<destination>{04f68f96-8e2f-4b07-ad53-843dbb982f6b}</destination>
+		</relationship>
+	</object>
+	<object class="EventSound" id="{1bef6d3c-62c7-481c-b165-c14d77f6925a}">
+		<property name="start">
+			<value>1</value>
+		</property>
+		<relationship name="event">
+			<destination>{29adc253-4882-43cd-9953-7839928c74da}</destination>
+		</relationship>
+	</object>
+	<object class="EventSound" id="{221ac388-e599-4812-8f76-9e6fba3dc4cb}">
+		<property name="start">
+			<value>4</value>
+		</property>
+		<relationship name="event">
+			<destination>{b93761ac-75cb-4205-b268-653994400e57}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{8b575036-f93a-4b31-8bee-03029070d8f9}">
