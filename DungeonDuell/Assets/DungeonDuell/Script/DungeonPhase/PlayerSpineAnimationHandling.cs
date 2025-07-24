@@ -97,13 +97,17 @@ namespace dungeonduell
 
         public override void SetToAttacking()
         {
-            SkeletonAnimation.AnimationState.AddAnimation(1, attack, false, 0f);
-            SkeletonAnimation.AnimationState.AddEmptyAnimation(1, 0.25f, 0f);
+            if (!blocked)
+            {
+                SkeletonAnimation.AnimationState.AddAnimation(1, attack, false, 0f);
+                SkeletonAnimation.AnimationState.AddEmptyAnimation(1, 0.25f, 0f);
+            }
         }
 
         private void SetToWin()
         {
-            SkeletonAnimation.AnimationState.SetAnimation(0, preWin, true);
+            SkeletonAnimation.AnimationState.SetAnimation(0, preWin, false);
+            blocked = true;
         }
 
         public void SetSkin(int indexOfSkin)

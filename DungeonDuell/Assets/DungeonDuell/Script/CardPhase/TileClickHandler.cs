@@ -70,8 +70,6 @@ namespace dungeonduell
             { RoomType.Enemy, SecondaryRoomType.Enemy },
         };
 
-        [SerializeField] private GameObject[] indiactorSub;
-
         private void Start()
         {
             connectCollector = FindFirstObjectByType<ConnectionsCollector>();
@@ -214,13 +212,15 @@ namespace dungeonduell
                 if (shelledTileCard != null)
                 {
                     shelledTileCard.Item1.startDoorConcellation = card.startDoorConcellation;
+                    
+                    TileBase shelledTile = shelledTileCard.Item1.GetCompleteTile(card.roomtype);
 
                     ShellCard cardToUse = (ShellCard)shelledTileCard.Item1.Clone();
                     cardToUse.secondaryRoomType =
                         _convertMapShell.GetValueOrDefault(card.roomtype, SecondaryRoomType.Generic);
 
                     card = cardToUse;
-                    card.tile = shelledTileCard.Item1.completeTile;
+                    card.tile = shelledTile;
 
                     shellMarker = (int)cardToUse.secondaryRoomType;
 
@@ -255,10 +255,6 @@ namespace dungeonduell
         private void ReplaceAndSetShellMarker(Vector3Int cellPosition, Card cardToUse)
         {
             _shellTracker.RemoveMarker(cellPosition);
-
-            GameObject marker = Instantiate(indiactorSub[(int)cardToUse.secondaryRoomType],
-                tilemap.CellToWorld(cellPosition), Quaternion.identity);
-            marker.transform.parent = _shellTracker.transform;
         }
 
         private void EnsureRefernces()
@@ -573,6 +569,34 @@ namespace dungeonduell
                 DdCodeEventHandler.Trigger_CardRotating(currentDoorDir);
             }
         }
+
+        private bool[] ShiftLeft(bool[] array)
+        {
+            bool[] coveredClockwise = { array[1], array[3], array[5], array[4], array[2], array[0] };
+
+            var shiftedArray = new bool[coveredClockwise.Length];
+            for (var i = 1; i < coveredClockwise.Length; i++) shiftedArray[i - 1] = coveredClockwise[i];
+            shiftedArray[^1] = coveredClockwise[0];
+
+            shiftedArray = new[]
+            {
+                 shiftedArray[5], shiftedArray[0], shiftedArray[4], shiftedArray[1], shiftedArray[3], shiftedArray[2]
+            };
+
+            return shiftedArray;
+        }
+
+        public void ShiftLeftInput(InputAction.CallbackContext context)
+        {
+            if (context.phase == InputActionPhase.Started)
+            {
+                currentDoorDir = ShiftLeft(currentDoorDir);
+                displayCardUi?.UpdateDirectionIndicator(currentDoorDir);
+                RuntimeManager.PlayOneShot(rotateSFXEvent);
+                DdCodeEventHandler.Trigger_CardRotating(currentDoorDir);
+            }
+        }
+
 
         private void FinalizePlacement()
         {

@@ -64,8 +64,10 @@ namespace dungeonduell
         {
             if (playerDeck == null)
             {
-                Debug.LogWarning("Kein PlayerDeck zugewiesen!");
-                return;
+                Debug.LogWarning("Kein PlayerDeck zugewiesen! Try getting deck");
+                playerDeck = isPlayer1
+                    ? FindFirstObjectByType<PlayerDeckContainer>().deck_P1
+                    : FindFirstObjectByType<PlayerDeckContainer>().deck_P2;
             }
 
             handCards.Clear();

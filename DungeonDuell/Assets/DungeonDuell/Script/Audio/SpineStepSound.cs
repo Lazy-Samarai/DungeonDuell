@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using Spine.Unity;
 using FMODUnity;
 using FMOD.Studio;
@@ -8,8 +8,7 @@ public class SpineStepSound : MonoBehaviour
 {
     [SpineEvent] public string spineEventName = "Step";
 
-    [Header("FMOD Events")]
-    public EventReference normalWalk;
+    [Header("FMOD Events")] public EventReference normalWalk;
     public EventReference normalRun;
     public EventReference lootWalk;
     public EventReference lootRun;
@@ -59,12 +58,12 @@ public class SpineStepSound : MonoBehaviour
         {
             return hit.collider.tag; // Boden-Tags wie "Grass", "Stone"
         }
+
         return "Default";
     }
 
     private EventReference SelectEvent(string groundType, bool isRunning)
     {
-        Debug.Log(groundType);
         switch (groundType)
         {
             case "Untagged":

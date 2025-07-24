@@ -782,7 +782,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 1781931329}
-  tileMapTag: MainTileMap
   currentCard: {fileID: 0}
   currentDoorDir: 010101010101
   displayCardUi: {fileID: 0}
@@ -817,10 +816,6 @@ MonoBehaviour:
       Data3: 2088876940
       Data4: -1804597625
     Path: event:/Dungeon Duell Audio V1/Card Phase/CP_player/CP_player_place-card-on-hexgrid
-  indiactorSub:
-  - {fileID: 6352745881752174546, guid: 69a38c7e8f65b354fb65957ad819cdfc, type: 3}
-  - {fileID: 6352745881752174546, guid: a5567a0b9e383ae44b8b0941169c3591, type: 3}
-  - {fileID: 6352745881752174546, guid: 1a775b6589591a243b79bef8f9b17041, type: 3}
 --- !u!4 &481254718
 Transform:
   m_ObjectHideFlags: 0
@@ -849,7 +844,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 1781931329}
-  tileMapTag: MainTileMap
   tilemap: {fileID: 0}
   cursor: {fileID: 887889882}
   tileClickHandler: {fileID: 481254717}
@@ -1097,6 +1091,50 @@ Transform:
   - {fileID: 119405585}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &520290022
+GameObject:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 520290023}
+  - component: {fileID: 520290024}
+  m_Layer: 0
+  m_Name: cm
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &520290023
+Transform:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 520290022}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -3.5218134, z: 10.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1781931330}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &520290024
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 520290022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &545183251
 GameObject:
   m_ObjectHideFlags: 0
@@ -1700,7 +1738,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c8bed5c901d2ca498412ab1c97c112e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1Cam: {fileID: 0}
+  player1Cam: {fileID: 1781931331}
   player2Cam: {fileID: 0}
   fadeCanvasGroup: {fileID: 2098915889}
   targetZoom: 0
@@ -1720,7 +1758,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4613f2fdc24a26946846dd747995d925, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1Cam: {fileID: 0}
+  player1Cam: {fileID: 1781931331}
   player2Cam: {fileID: 0}
   fadeCanvasGroup: {fileID: 2098915889}
   startZoom: 0
@@ -2688,6 +2726,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2790051231608372198, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3031672899076406031, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -2698,6 +2741,12 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3455100789221983209, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 561c242d32d1ccb4f9bed76b0ded40dc,
+        type: 3}
     - target: {fileID: 3824081700285593561, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
         type: 3}
       propertyPath: m_Name
@@ -2707,6 +2756,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4168616604632634508, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4168616604632634508, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
+        type: 3}
+      propertyPath: m_fontSizeMax
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4348045514557026979, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
+        type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 32329854027067392
+      objectReference: {fileID: 0}
+    - target: {fileID: 4499972633824668640, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.87303025
       objectReference: {fileID: 0}
     - target: {fileID: 5775167715585374499, guid: 43f99acd15d9f5e43a2e3332512fcbb6,
         type: 3}
@@ -2753,7 +2822,8 @@ PrefabInstance:
       propertyPath: previousSelected
       value: 
       objectReference: {fileID: 1706345217}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4358456423527817777, guid: 43f99acd15d9f5e43a2e3332512fcbb6, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -4207,6 +4277,7 @@ GameObject:
   - component: {fileID: 1781931319}
   - component: {fileID: 1781931318}
   - component: {fileID: 1781931317}
+  - component: {fileID: 1781931331}
   m_Layer: 19
   m_Name: CardMainCamera
   m_TagString: MainCamera
@@ -4957,7 +5028,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 9
+  orthographic size: 10
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
@@ -4988,8 +5059,48 @@ Transform:
   m_Children:
   - {fileID: 1270329092}
   - {fileID: 1559104470}
+  - {fileID: 520290023}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1781931331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1781931316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ExcludedPropertiesInInspector:
+  - m_Script
+  m_LockStageInInspector: 
+  m_StreamingVersion: 20170927
+  m_Priority: 10
+  m_StandbyUpdate: 2
+  m_LookAt: {fileID: 0}
+  m_Follow: {fileID: 0}
+  m_Lens:
+    FieldOfView: 40
+    OrthographicSize: 10
+    NearClipPlane: 0.1
+    FarClipPlane: 5000
+    Dutch: 0
+    ModeOverride: 0
+    LensShift: {x: 0, y: 0}
+    GateFit: 2
+    FocusDistance: 10
+    m_SensorSize: {x: 1, y: 1}
+  m_Transitions:
+    m_BlendHint: 0
+    m_InheritPosition: 0
+    m_OnCameraLive:
+      m_PersistentCalls:
+        m_Calls: []
+  m_LegacyBlendHint: 0
+  m_ComponentOwner: {fileID: 520290023}
 --- !u!1 &1802524973
 GameObject:
   m_ObjectHideFlags: 0
@@ -5140,6 +5251,7 @@ GameObject:
   - component: {fileID: 1945806931}
   - component: {fileID: 1945806932}
   - component: {fileID: 1945806933}
+  - component: {fileID: 1945806934}
   m_Layer: 0
   m_Name: RoomConnectTracker
   m_TagString: Untagged
@@ -5214,6 +5326,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemap: {fileID: 1521964643}
+--- !u!114 &1945806934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945806928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d9d3c1adbdc1a74d852b3fed7e47ad0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deck_P1: {fileID: 1494809202}
+  deck_P2: {fileID: 1010877895}
 --- !u!1 &1961649889
 GameObject:
   m_ObjectHideFlags: 0
@@ -5569,7 +5695,19 @@ MonoBehaviour:
     m_ActionId: d858d18f-1581-4499-88be-9325a3bb9b38
     m_ActionName: CardPhase/Back
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1961649891}
+        m_TargetAssemblyTypeName: MoreMountains.TopDownEngine.InputManager, MoreMountains.TopDownEngine
+        m_MethodName: PauseButtonPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: b0b637a1-f591-4af1-81bf-f5342742219f
     m_ActionName: 'CardPhase/Pause[/Keyboard/escape,/XInputControllerWindows/start,/XInputControllerWindows1/start]'
   - m_PersistentCalls:

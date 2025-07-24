@@ -1,4 +1,5 @@
 using System.Collections;
+using Spine.Unity;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -8,9 +9,9 @@ namespace dungeonduell
     public class CentralWinnerScreenController : MonoBehaviour
     {
         [Header("Visual References")] [SerializeField]
-        private Image player1Visual;
+        private SkeletonGraphic player1Visual;
 
-        [SerializeField] private Image player2Visual;
+        [SerializeField] private SkeletonGraphic player2Visual;
 
         [Header("Winner Panel")] [SerializeField]
         private GameObject winnerPanel;
@@ -27,6 +28,8 @@ namespace dungeonduell
         [SerializeField] private Color normalColor = Color.white;
 
         [SerializeField] private SequenceMang sequenceMang;
+
+        const string WinnerAnimation = "WinIdle";
 
 
         private void Start()
@@ -61,22 +64,27 @@ namespace dungeonduell
             if (player1Won)
             {
                 Debug.Log("Animating Player 1 as winner");
-                StartCoroutine(AnimateVisual(player1Visual, winnerScale, normalColor));
-                StartCoroutine(AnimateVisual(player2Visual, loserScale, loserColor));
+                StartCoroutine(AnimateVisual(player1Visual, winnerScale, normalColor, true));
+                StartCoroutine(AnimateVisual(player2Visual, loserScale, loserColor, false));
             }
             else
             {
                 Debug.Log("Animating Player 2 as winner");
-                StartCoroutine(AnimateVisual(player2Visual, winnerScale, normalColor));
-                StartCoroutine(AnimateVisual(player1Visual, loserScale, loserColor));
+                StartCoroutine(AnimateVisual(player2Visual, winnerScale, normalColor, true));
+                StartCoroutine(AnimateVisual(player1Visual, loserScale, loserColor, false));
             }
 
             StartCoroutine(ShowButtonsDelayed());
         }
 
 
-        private IEnumerator AnimateVisual(Image visual, float targetScale, Color targetColor)
+        private IEnumerator AnimateVisual(SkeletonGraphic visual, float targetScale, Color targetColor, bool win)
         {
+            if (win)
+            {
+                visual.AnimationState.SetAnimation(0, WinnerAnimation, true);
+            }
+
             Vector3 initialScale = visual.rectTransform.localScale;
             Vector3 finalScale = Vector3.one * targetScale;
             Color initialColor = visual.color;
