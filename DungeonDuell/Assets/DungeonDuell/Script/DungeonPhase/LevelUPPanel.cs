@@ -12,26 +12,26 @@ namespace dungeonduell
     {
         private const int AmountPerUpgrade = 1;
 
-        [FormerlySerializedAs("LevelUpMenu")] 
-        public GameObject levelUpMenu; // Das Panel für das Level-Up
-        
-        [FormerlySerializedAs("TestHub")] 
-        public TestHub testHub;
+        [FormerlySerializedAs("LevelUpMenu")] public GameObject levelUpMenu; // Das Panel für das Level-Up
+
+        [FormerlySerializedAs("TestHub")] public TestHub testHub;
 
         public bool player1;
 
         private DungeonDuellMultiplayerLevelManager _levelManager;
-        [Header("UI Elements")] 
-        private bool _menuOpen;
+        [Header("UI Elements")] private bool _menuOpen;
 
         [SerializeField] private EventReference openLevelUPEvent;
         [SerializeField] private EventReference closeLevelUpEvent;
         [SerializeField] private EventReference optionSelectedEvent;
 
-        [Header("Upgrade Feedback Targets")]
-        [SerializeField] private UpgradeFeedback speedFeedback;
+        [Header("Upgrade Feedback Targets")] [SerializeField]
+        private UpgradeFeedback speedFeedback;
+
         [SerializeField] private UpgradeFeedback attackSpeedFeedback;
         [SerializeField] private UpgradeFeedback healFeedback;
+
+        private bool _levelUpDelay = false;
 
         private void Start()
         {
@@ -91,7 +91,10 @@ namespace dungeonduell
 
                 if (_levelManager != null)
                 {
-                    _levelManager.ApplyLevelUpPerCoins(option, AmountPerUpgrade, player1 ? 1 : 2);
+                    if (!_levelUpDelay)
+                    {
+                        _levelManager.ApplyLevelUpPerCoins(option, AmountPerUpgrade, player1 ? 1 : 2);
+                    }
                 }
 
                 RuntimeManager.PlayOneShot(optionSelectedEvent);
@@ -102,7 +105,9 @@ namespace dungeonduell
 
         private IEnumerator CloseMenuWithDelay(float delay)
         {
+            _levelUpDelay = true;
             yield return new WaitForSeconds(delay);
+            _levelUpDelay = false;
             ShowLevelUpMenu(false);
         }
 
