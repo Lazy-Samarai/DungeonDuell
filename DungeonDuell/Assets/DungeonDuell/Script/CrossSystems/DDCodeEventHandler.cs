@@ -187,5 +187,12 @@ namespace dungeonduell
         {
             PlayersInSameRoom?.Invoke();
         }
+
+        public static event Action<int> NewLevelUpPossible;
+
+        public static void Trigger_NewLevelUpPossible(int player)
+        {
+            NewLevelUpPossible?.Invoke(player);
+        }
     }
 }

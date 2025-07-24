@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using Spine.Unity;
 using FMODUnity;
 using FMOD.Studio;
@@ -13,7 +13,10 @@ public class SpineStepSound : MonoBehaviour
     public EventReference lootWalk;
     public EventReference lootRun;
 
-    [Header("Bodenerkennung")] public LayerMask groundLayerMask;
+    public float hearDistance = 12f;
+
+    [Header("Bodenerkennung")]
+    public LayerMask groundLayerMask;
     public float raycastDistance = 1f;
 
     private SkeletonAnimation skeletonAnimation;
@@ -32,17 +35,13 @@ public class SpineStepSound : MonoBehaviour
     {
         if (e.Data.Name != spineEventName) return;
 
-        // Prüfe: läuft oder geht
-        bool isRunning = _character != null &&
-                         _character.MovementState.CurrentState == CharacterStates.MovementStates.Running;
+        // Kein Sound, wenn kein Hörer in der Nähe ist
+        if (!IsPlayerInRange()) return;
 
-        // Ermittle Untergrund
+        bool isRunning = _character != null && _character.MovementState.CurrentState == CharacterStates.MovementStates.Running;
         string groundType = GetGroundType();
-
-        // Wähle EventReference
         EventReference stepEvent = SelectEvent(groundType, isRunning);
 
-        // Sound abspielen
         if (stepEvent.IsNull) return;
 
         var instance = RuntimeManager.CreateInstance(stepEvent);
@@ -50,6 +49,7 @@ public class SpineStepSound : MonoBehaviour
         instance.start();
         instance.release();
     }
+
 
     private string GetGroundType()
     {
@@ -73,6 +73,26 @@ public class SpineStepSound : MonoBehaviour
             default:
                 return isRunning ? normalWalk : normalRun;
         }
+    }
+
+    private bool IsPlayerInRange()
+    {
+        GameObject[] players1 = GameObject.FindGameObjectsWithTag("Player1");
+        GameObject[] players2 = GameObject.FindGameObjectsWithTag("Player2");
+
+        foreach (GameObject player in players1)
+        {
+            if (Vector3.Distance(transform.position, player.transform.position) <= hearDistance)
+                return true;
+        }
+
+        foreach (GameObject player in players2)
+        {
+            if (Vector3.Distance(transform.position, player.transform.position) <= hearDistance)
+                return true;
+        }
+
+        return false;
     }
 
     private void OnDestroy()
