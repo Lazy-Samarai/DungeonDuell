@@ -14,8 +14,12 @@ namespace dungeonduell
         public override void PickItem(GameObject picker)
         {
             var character = picker.GetComponent<Character>();
-            bool player1 = character.PlayerID == Player1;
-            PickedMMFeedbacks = player1 ? PickedFeedbacksPlayer1 : PickedFeedbacksPlayer2;
+            if (character != null)
+            {
+                bool player1 = character.PlayerID == Player1;
+                PickedMMFeedbacks = player1 ? PickedFeedbacksPlayer1 : PickedFeedbacksPlayer2;
+            }
+
             base.PickItem(picker);
         }
     }

@@ -42,7 +42,7 @@ namespace dungeonduell
         {
             OnOptionSelected(LevelUpOptions.AttackSpeed);
             // Hier soll das UpgradeFeedback hin
-            if (attackSpeedFeedback != null)
+            if (attackSpeedFeedback != null & _menuOpen)
             {
                 attackSpeedFeedback.PlayFeedback();
             }
@@ -52,7 +52,7 @@ namespace dungeonduell
         {
             OnOptionSelected(LevelUpOptions.Speed);
             // Hier soll das UpgradeFeedback hin
-            if (speedFeedback != null)
+            if (speedFeedback != null & _menuOpen)
             {
                 speedFeedback.PlayFeedback();
             }
@@ -62,7 +62,7 @@ namespace dungeonduell
         {
             OnOptionSelected(LevelUpOptions.HealingInstead);
             // Hier soll das UpgradeFeedback hin
-            if (healFeedback != null)
+            if (healFeedback != null & _menuOpen)
             {
                 healFeedback.PlayFeedback();
             }
