@@ -128,6 +128,13 @@ namespace MoreMountains.TopDownEngine
             for (var i = 0; i < Points.Length; i++)
                 if (Points[i].PlayerID == LevelUpid)
                 {
+                    int playerIndex = int.Parse(Points[i].PlayerID[^1].ToString()) - 1;
+                    if (CheckLevelAvailableIncrease(Points[i].Points, (Points[i].Points + coinEvent.PointsToAdd),
+                            playerIndex))
+                    {
+                        DdCodeEventHandler.Trigger_NewLevelUpPossible(playerIndex);
+                    }
+
                     Points[i].Points += coinEvent.PointsToAdd;
                     TopDownEngineEvent.Trigger(TopDownEngineEventTypes.Repaint, null);
                     if (Points[i].Points >= Points[i].CoinsForNextLevel) HandleUpgradable(i);
@@ -419,6 +426,27 @@ namespace MoreMountains.TopDownEngine
         private void HealingIncreased()
         {
             _healthOnUpgrade = HealingInFinal;
+        }
+
+        private bool CheckLevelAvailableIncrease(int oldCount, int newCount, int playerID)
+        {
+            var oldUpgradableCount = GetUpgradableCount(playerID, oldCount);
+            var newUpgradableCount = GetUpgradableCount(playerID, newCount);
+            print(oldUpgradableCount);
+            print(newUpgradableCount);
+            if (oldUpgradableCount < newUpgradableCount)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private int GetUpgradableCount(int playerID, int coinCount)
+        {
+            return (int)Math.Floor(Math.Log(
+                1 + (coastMultiply - 1) * coinCount / Points[playerID].CoinsForNextLevel,
+                coastMultiply));
         }
 
         public struct DdPoints

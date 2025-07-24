@@ -173,5 +173,12 @@ namespace dungeonduell
         {
             AtmosphereLevelChanged?.Invoke(level);
         }
+
+        public static event Action<int> NewLevelUpPossible;
+
+        public static void Trigger_NewLevelUpPossible(int player)
+        {
+            NewLevelUpPossible?.Invoke(player);
+        }
     }
 }
