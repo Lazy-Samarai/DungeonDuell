@@ -798,27 +798,27 @@ PrefabInstance:
     - target: {fileID: 4327382521235786302, guid: 180fe35b70adcf1408380a6df6160816,
         type: 3}
       propertyPath: flipPagesEvent.Path
-      value: event:/Dungeon Duell Audio V1/misc/Misc_UI/misc_player_press-any-key
+      value: event:/Dungeon Duell Audio V1/Titel Menu/TS_tutorial_flip-page
       objectReference: {fileID: 0}
     - target: {fileID: 4327382521235786302, guid: 180fe35b70adcf1408380a6df6160816,
         type: 3}
       propertyPath: flipPagesEvent.Guid.Data1
-      value: -1278315882
+      value: 368229475
       objectReference: {fileID: 0}
     - target: {fileID: 4327382521235786302, guid: 180fe35b70adcf1408380a6df6160816,
         type: 3}
       propertyPath: flipPagesEvent.Guid.Data2
-      value: 1112086667
+      value: 1299279493
       objectReference: {fileID: 0}
     - target: {fileID: 4327382521235786302, guid: 180fe35b70adcf1408380a6df6160816,
         type: 3}
       propertyPath: flipPagesEvent.Guid.Data3
-      value: 650726019
+      value: 709514626
       objectReference: {fileID: 0}
     - target: {fileID: 4327382521235786302, guid: 180fe35b70adcf1408380a6df6160816,
         type: 3}
       propertyPath: flipPagesEvent.Guid.Data4
-      value: -139876863
+      value: -36748913
       objectReference: {fileID: 0}
     - target: {fileID: 4327382521235786302, guid: 180fe35b70adcf1408380a6df6160816,
         type: 3}
@@ -1993,7 +1993,7 @@ PrefabInstance:
     - target: {fileID: 1690111847243631282, guid: 04e4d2f394825a14abf407fe31800c21,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: 
+      value: Play
       objectReference: {fileID: 0}
     - target: {fileID: 1690111847243631282, guid: 04e4d2f394825a14abf407fe31800c21,
         type: 3}
@@ -2003,7 +2003,7 @@ PrefabInstance:
     - target: {fileID: 1690111847243631282, guid: 04e4d2f394825a14abf407fe31800c21,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: dungeonduell.UIManager, Assembly-CSharp
+      value: FMODUnity.StudioEventEmitter, FMODUnity
       objectReference: {fileID: 0}
     - target: {fileID: 1690111847243631282, guid: 04e4d2f394825a14abf407fe31800c21,
         type: 3}
@@ -2013,7 +2013,7 @@ PrefabInstance:
     - target: {fileID: 1690111847243631282, guid: 04e4d2f394825a14abf407fe31800c21,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: 
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2679666399488519656, guid: 04e4d2f394825a14abf407fe31800c21,
         type: 3}
@@ -2808,8 +2808,8 @@ MonoBehaviour:
   NonRigidbodyVelocity: 0
   Params: []
   OverrideAttenuation: 0
-  OverrideMinDistance: -1
-  OverrideMaxDistance: -1
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!114 &1174040564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2839,8 +2839,8 @@ MonoBehaviour:
   NonRigidbodyVelocity: 0
   Params: []
   OverrideAttenuation: 0
-  OverrideMinDistance: -1
-  OverrideMaxDistance: -1
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &1223352684
 GameObject:
   m_ObjectHideFlags: 0
@@ -4395,6 +4395,13 @@ MonoBehaviour:
   animationDuration: 0.5
   openGym: 0
   tutorialSlideshow: {fileID: 962392693}
+  courtainOpenEvent:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   targetSceneIndex: 3
 --- !u!225 &2118469200
 CanvasGroup:
@@ -5012,7 +5019,7 @@ MonoBehaviour:
       Data2: 1286491059
       Data3: 553900723
       Data4: -813686010
-    Path: event:/Dungeon Duell Audio V1/Titel Menu/TS_enter
+    Path: event:/Dungeon Duell Audio V1/Titel Menu/TS_enter-game
   Event: 
   EventPlayTrigger: 0
   EventStopTrigger: 0
@@ -5326,11 +5333,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 1467734224
+      Data2: 1341643557
+      Data3: 1444504486
+      Data4: 618771473
+    Path: event:/Dungeon Duell Audio V1/Titel Menu/TS_Credits-popup
   Event: 
   EventPlayTrigger: 0
   EventStopTrigger: 0
@@ -5340,8 +5347,8 @@ MonoBehaviour:
   NonRigidbodyVelocity: 0
   Params: []
   OverrideAttenuation: 0
-  OverrideMinDistance: -1
-  OverrideMaxDistance: -1
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

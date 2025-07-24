@@ -8,6 +8,8 @@ using MoreMountains.InventoryEngine;
 using MoreMountains.Tools;
 using UnityEngine;
 using UnityEngine.Serialization;
+using FMODUnity;
+using FMOD.Studio;
 
 namespace MoreMountains.TopDownEngine
 {
@@ -66,6 +68,8 @@ namespace MoreMountains.TopDownEngine
 
         [SerializeField] private float coastMultiply = 2;
         [SerializeField] private int startCoast = 1;
+
+        [SerializeField] private EventReference thereIsWinnerEvent;
 
         private int _healthOnUpgrade = HealingPreFinal;
 
@@ -285,6 +289,7 @@ namespace MoreMountains.TopDownEngine
         /// <returns></returns>
         protected virtual IEnumerator GameOver()
         {
+            RuntimeManager.PlayOneShot(thereIsWinnerEvent, transform.position);
             if (WinnerID == "") WinnerID = "Player1";
             DdCodeEventHandler.Trigger_WeHaveWinner(WinnerID);
             yield return new WaitForSeconds(5f);

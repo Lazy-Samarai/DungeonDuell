@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
+using FMODUnity;
+using FMOD.Studio;
 
 namespace dungeonduell
 {
@@ -14,6 +16,8 @@ namespace dungeonduell
         public bool openGym;
 
         public GameObject tutorialSlideshow;
+
+        public EventReference courtainOpenEvent;
 
         [Tooltip("Index aus Build Settings")] public int targetSceneIndex = -1;
 
@@ -60,6 +64,7 @@ namespace dungeonduell
                         if (!open)
                         {
                             tutorialSlideshow.SetActive(true);
+                            RuntimeManager.PlayOneShot(courtainOpenEvent, transform.position);
                         }
                     });
             }
@@ -71,6 +76,7 @@ namespace dungeonduell
                         if (!open)
                         {
                             tutorialSlideshow.SetActive(true);
+                            RuntimeManager.PlayOneShot(courtainOpenEvent, transform.position);
                         }
                     });
                 ;

@@ -879,6 +879,7 @@ GameObject:
   - component: {fileID: 1392788253}
   - component: {fileID: 1392788255}
   - component: {fileID: 1392788256}
+  - component: {fileID: 1392788257}
   m_Layer: 14
   m_Name: LevelManager
   m_TagString: Untagged
@@ -1330,6 +1331,13 @@ MonoBehaviour:
   animationDuration: 2
   openGym: 1
   tutorialSlideshow: {fileID: 0}
+  courtainOpenEvent:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   targetSceneIndex: -1
 --- !u!114 &212610691
 MonoBehaviour:
@@ -9876,6 +9884,13 @@ MonoBehaviour:
   sequenceMang: {fileID: 839105398}
   coastMultiply: 2
   startCoast: 1
+  thereIsWinnerEvent:
+    Guid:
+      Data1: -2132149228
+      Data2: 1169930795
+      Data3: -32773237
+      Data4: 657936792
+    Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player_winning-animation
 --- !u!114 &1392788256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9895,6 +9910,18 @@ MonoBehaviour:
       Data3: -1827464034
       Data4: 252372317
     Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player_lvlup-notification
+--- !u!114 &1392788257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 105135216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7896c937e93ab54b90217321faeaf96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1406968496
 GameObject:
   m_ObjectHideFlags: 0
@@ -15813,11 +15840,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -382470932
+      Data2: 1301388788
+      Data3: 1727249315
+      Data4: 1382616582
+    Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_UI/DP_UI_enter-game
   Event: 
   EventPlayTrigger: 1
   EventStopTrigger: 0
@@ -15827,8 +15854,8 @@ MonoBehaviour:
   NonRigidbodyVelocity: 0
   Params: []
   OverrideAttenuation: 0
-  OverrideMinDistance: -1
-  OverrideMaxDistance: -1
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &1963455776
 GameObject:
   m_ObjectHideFlags: 0

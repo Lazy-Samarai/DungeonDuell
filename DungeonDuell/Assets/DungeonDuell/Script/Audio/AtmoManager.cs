@@ -11,7 +11,8 @@ namespace dungeonduell
         Atmo_gym = 1,
         Atmo_card = 2,
         Atmo_dungeon = 3,
-        Atmo_win = 4
+        Atmo_final = 4,
+        Atmo_win = 5
     }
 
     public enum GameScene
