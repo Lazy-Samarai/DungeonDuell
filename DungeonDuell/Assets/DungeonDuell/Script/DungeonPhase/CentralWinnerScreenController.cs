@@ -52,6 +52,7 @@ namespace dungeonduell
         {
             Time.timeScale = 1f;
 
+            DdCodeEventHandler.Trigger_AtmosphereLevelChanged(AtmoLevel.Atmo_win);
             winnerPanel.SetActive(true);
             buttonsContainer.SetActive(false);
 

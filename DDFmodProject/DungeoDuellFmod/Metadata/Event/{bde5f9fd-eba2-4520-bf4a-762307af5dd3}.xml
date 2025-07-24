@@ -5,7 +5,7 @@
 			<value>DP_player_collect_Mask</value>
 		</property>
 		<property name="outputFormat">
-			<value>0</value>
+			<value>1</value>
 		</property>
 		<relationship name="folder">
 			<destination>{ec79c8ae-50b2-4c5b-9069-faba99a5d64b}</destination>
@@ -72,6 +72,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{366db38d-c8d0-423e-b82f-cdfc76165e27}">
+		<property name="volume">
+			<value>-8</value>
+		</property>
 		<relationship name="effectChain">
 			<destination>{b549c1e4-360a-4b24-bb82-77c1260a4bea}</destination>
 		</relationship>
@@ -82,7 +85,11 @@
 			<destination>{71f3099e-43a7-449d-a312-cb9f322adee2}</destination>
 		</relationship>
 	</object>
-	<object class="MultiSound" id="{3fe452ad-fbd6-45ba-bea4-1d1a5d231252}" />
+	<object class="MultiSound" id="{3fe452ad-fbd6-45ba-bea4-1d1a5d231252}">
+		<relationship name="sounds">
+			<destination>{b234464b-4abf-4569-a4f7-c465b06bfffe}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusEffectChain" id="{7b762a99-d82e-4098-812b-c40039591574}">
 		<relationship name="effects">
 			<destination>{3485ed08-f0d1-45a9-b5b7-3b24f1c43840}</destination>
@@ -95,6 +102,22 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{b3c3f422-4dd9-404e-af13-67891c9da2c5}" />
+	<object class="SingleSound" id="{b234464b-4abf-4569-a4f7-c465b06bfffe}">
+		<relationship name="modulators">
+			<destination>{9273816e-05dc-4cf2-90b4-daa1e17e8297}</destination>
+		</relationship>
+		<relationship name="audioFile">
+			<destination>{a5692c71-c82c-4e4f-be4e-59832c231c27}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusFader" id="{3485ed08-f0d1-45a9-b5b7-3b24f1c43840}" />
 	<object class="MixerBusFader" id="{a0d60cbe-e2ac-4a4f-87c4-c43e0d59c0f3}" />
+	<object class="RandomizerModulator" id="{9273816e-05dc-4cf2-90b4-daa1e17e8297}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>pitch</value>
+		</property>
+		<property name="amount">
+			<value>0.5</value>
+		</property>
+	</object>
 </objects>

@@ -84,7 +84,7 @@ namespace dungeonduell
             finalRound = true;
             timeRunning = false;
             timerText.text = "X";
-            DdCodeEventHandler.Trigger_AtmosphereLevelChanged(AtmoLevel.Atmo_Action);
+            DdCodeEventHandler.Trigger_AtmosphereLevelChanged(AtmoLevel.Atmo_dungeon);
         }
 
         private void SetTimer(List<PlayerData> d, int currentRound)
