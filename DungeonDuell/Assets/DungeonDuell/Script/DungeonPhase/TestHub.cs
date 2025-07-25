@@ -2,6 +2,7 @@ using System.Text.RegularExpressions;
 using dungeonduell;
 using MoreMountains.Tools;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
@@ -124,16 +125,24 @@ namespace MoreMountains.TopDownEngine
             }
         }
 
-        public void ShowMenuTry()
+        public void ShowMenuTry(InputAction.CallbackContext context)
         {
-            if (canLevelUp)
+            if (context.started)
             {
-                if (!menuShowing)
-                    levelUpPanel.ShowLevelUpMenu(true);
-                else
-                    levelUpPanel.ShowLevelUpMenu(false);
-                menuShowing = !menuShowing;
+                if (canLevelUp)
+                {
+                    if (!menuShowing)
+                    {
+                        levelUpPanel.ShowLevelUpMenu(true);
+                    }
+                    else
+                    {
+                        levelUpPanel.ShowLevelUpMenu(false);
+                    }
+                    menuShowing = !menuShowing;
+                }
             }
+            
         }
     }
 }
