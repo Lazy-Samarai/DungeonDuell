@@ -878,6 +878,8 @@ GameObject:
   - component: {fileID: 105135217}
   - component: {fileID: 1392788253}
   - component: {fileID: 1392788255}
+  - component: {fileID: 1392788256}
+  - component: {fileID: 1392788257}
   m_Layer: 14
   m_Name: LevelManager
   m_TagString: Untagged
@@ -1329,6 +1331,13 @@ MonoBehaviour:
   animationDuration: 2
   openGym: 1
   tutorialSlideshow: {fileID: 0}
+  courtainOpenEvent:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   targetSceneIndex: -1
 --- !u!114 &212610691
 MonoBehaviour:
@@ -2100,7 +2109,7 @@ MonoBehaviour:
       - m_Target: {fileID: 840228103}
         m_TargetAssemblyTypeName: MoreMountains.TopDownEngine.TestHub, Assembly-CSharp
         m_MethodName: ShowMenuTry
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2215,6 +2224,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 67481b39-65a3-4432-ad85-2f9178693466
     m_ActionName: CardPhase/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 56b8c085-a1dd-4742-a5a0-69296b46b87c
+    m_ActionName: 'CardPhase/RotateL[/DualShock4GamepadHID/leftShoulder,/Keyboard/l]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: DungeonPhase
@@ -5468,7 +5481,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6153041913601509906, guid: 04e4d2f394825a14abf407fe31800c21,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 746327896}
   m_SourcePrefab: {fileID: 100100000, guid: 04e4d2f394825a14abf407fe31800c21, type: 3}
 --- !u!224 &746327893 stripped
 RectTransform:
@@ -5482,10 +5499,28 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 746327892}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 746327895}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &746327895 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6153041913601509906, guid: 04e4d2f394825a14abf407fe31800c21,
+    type: 3}
+  m_PrefabInstance: {fileID: 746327892}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &746327896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746327895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cff2415c4cce7ed43a568c4c93b15ea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &747842290
@@ -7286,7 +7321,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1654634608}
         m_TargetAssemblyTypeName: MoreMountains.TopDownEngine.TestHub, Assembly-CSharp
         m_MethodName: ShowMenuTry
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -7401,6 +7436,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 67481b39-65a3-4432-ad85-2f9178693466
     m_ActionName: CardPhase/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 56b8c085-a1dd-4742-a5a0-69296b46b87c
+    m_ActionName: 'CardPhase/RotateL[/DualShock4GamepadHID/leftShoulder,/Keyboard/l]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: DungeonPhase
@@ -9875,6 +9914,44 @@ MonoBehaviour:
   sequenceMang: {fileID: 839105398}
   coastMultiply: 2
   startCoast: 1
+  thereIsWinnerEvent:
+    Guid:
+      Data1: -2132149228
+      Data2: 1169930795
+      Data3: -32773237
+      Data4: 657936792
+    Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player_winning-animation
+--- !u!114 &1392788256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 105135216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06eee38c4b794574fa8a1fdc5b344e72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  openLevelUPEvent:
+    Guid:
+      Data1: 788889103
+      Data2: 1177151676
+      Data3: -1827464034
+      Data4: 252372317
+    Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player_lvlup-notification
+--- !u!114 &1392788257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 105135216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7896c937e93ab54b90217321faeaf96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1406968496
 GameObject:
   m_ObjectHideFlags: 0
@@ -15752,6 +15829,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1918232351}
+  - component: {fileID: 1918232352}
   m_Layer: 0
   m_Name: Managers --------------------------------------------------------
   m_TagString: Untagged
@@ -15777,6 +15855,37 @@ Transform:
   - {fileID: 1746612115}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1918232352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1918232350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -382470932
+      Data2: 1301388788
+      Data3: 1727249315
+      Data4: 1382616582
+    Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_UI/DP_UI_enter-game
+  Event: 
+  EventPlayTrigger: 1
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &1963455776
 GameObject:
   m_ObjectHideFlags: 0

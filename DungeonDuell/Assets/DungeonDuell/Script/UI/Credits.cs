@@ -8,11 +8,21 @@ namespace dungeonduell
     {
         public RectTransform floatingText;
         public float speed;
+        private bool up = true;
 
         // L�sst den Text automatsich ablaufen
         void Update()
         {
-            floatingText.anchoredPosition += new Vector2(0f, speed * Time.deltaTime);
+            if (floatingText.anchoredPosition.y <= -270)
+            {
+                up = true;
+            }
+            else if (floatingText.anchoredPosition.y >= 11)
+            {
+                up = false;
+            }
+            float speedScroll = speed * Time.deltaTime;
+            floatingText.anchoredPosition += new Vector2(0f, up ? speedScroll : -speedScroll);
         }
     }
 }

@@ -5,7 +5,7 @@
 			<value>TS_Tutorial_on-off</value>
 		</property>
 		<property name="outputFormat">
-			<value>0</value>
+			<value>1</value>
 		</property>
 		<relationship name="folder">
 			<destination>{ed4a2794-3dcd-4ef6-9409-f858ce80c6b0}</destination>
@@ -72,6 +72,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{e9d6dd9d-5448-4964-9703-ee869850b0ee}">
+		<property name="volume">
+			<value>-19.5</value>
+		</property>
 		<relationship name="effectChain">
 			<destination>{e6b8c1bc-41da-44dd-be16-42ec33de78e0}</destination>
 		</relationship>
@@ -82,7 +85,11 @@
 			<destination>{0d3f6357-919c-4e49-b1a3-518aac0a4a53}</destination>
 		</relationship>
 	</object>
-	<object class="MultiSound" id="{26698e36-5b5a-4a22-af03-00f4131981dc}" />
+	<object class="MultiSound" id="{26698e36-5b5a-4a22-af03-00f4131981dc}">
+		<relationship name="sounds">
+			<destination>{e94f0416-5230-4a87-be24-05d8c22b6b95}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusEffectChain" id="{6f5f9687-2425-4cb9-89bc-81c390484705}">
 		<relationship name="effects">
 			<destination>{8483c152-f91b-4e69-ba4e-9f419970e084}</destination>
@@ -95,6 +102,11 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{70f65dcd-4f5e-4b98-8eff-31c98f615032}" />
+	<object class="SingleSound" id="{e94f0416-5230-4a87-be24-05d8c22b6b95}">
+		<relationship name="audioFile">
+			<destination>{5ff5ecaf-cade-4f2a-b728-b9844430c53b}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusFader" id="{8483c152-f91b-4e69-ba4e-9f419970e084}" />
 	<object class="MixerBusFader" id="{7aaf0776-0dc3-43e7-adb8-95de6c7e41c4}" />
 </objects>

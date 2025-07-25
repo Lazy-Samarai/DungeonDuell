@@ -2,13 +2,13 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="Event" id="{1308e4c7-607d-4403-b361-161bad85fe83}">
 		<property name="name">
-			<value>TS_select</value>
+			<value>misc_select-newvalue</value>
 		</property>
 		<property name="outputFormat">
-			<value>0</value>
+			<value>1</value>
 		</property>
 		<relationship name="folder">
-			<destination>{ed4a2794-3dcd-4ef6-9409-f858ce80c6b0}</destination>
+			<destination>{4c968c32-3806-4ef5-a92a-ee614baa567b}</destination>
 		</relationship>
 		<relationship name="mixer">
 			<destination>{e23bcb56-8b9b-4735-aa52-bb9e746bac97}</destination>
@@ -82,7 +82,11 @@
 			<destination>{e23bcb56-8b9b-4735-aa52-bb9e746bac97}</destination>
 		</relationship>
 	</object>
-	<object class="MultiSound" id="{15ba562e-7ecf-4dc2-803b-b4b0d2e36f72}" />
+	<object class="MultiSound" id="{15ba562e-7ecf-4dc2-803b-b4b0d2e36f72}">
+		<relationship name="sounds">
+			<destination>{ff90e516-2804-4253-8144-e8dd1c6a93c9}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusEffectChain" id="{905b94e0-453e-42dd-8698-acb9eedd3e41}">
 		<relationship name="effects">
 			<destination>{56ac01d8-668d-4739-ab46-cc57f6ebceb1}</destination>
@@ -95,6 +99,14 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{72868cd5-a992-4abc-8cba-5840a7a3fb2d}" />
+	<object class="SingleSound" id="{ff90e516-2804-4253-8144-e8dd1c6a93c9}">
+		<property name="startOffset">
+			<value>21.5</value>
+		</property>
+		<relationship name="audioFile">
+			<destination>{94768faf-0162-46b8-91c1-021cea469dc3}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusFader" id="{56ac01d8-668d-4739-ab46-cc57f6ebceb1}" />
 	<object class="MixerBusFader" id="{b964238b-0aeb-497e-80fa-e546cedad82c}" />
 </objects>

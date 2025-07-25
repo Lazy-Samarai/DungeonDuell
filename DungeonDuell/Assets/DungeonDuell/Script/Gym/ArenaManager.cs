@@ -29,6 +29,11 @@ namespace dungeonduell
         private FMOD.Studio.EventInstance countdownInstance;
         private bool countdownSoundPlaying = false;
 
+        public EventReference arenaLoopEvent;
+        private FMOD.Studio.EventInstance arenaLoopInstance;
+        private bool arenaLoopPlaying = false;
+        private bool countdownCompleted = false;
+
 
         private void Start()
         {
@@ -139,6 +144,23 @@ namespace dungeonduell
                     }
                 }
             }
+
+            bool anyPlayerInZone = player1InZone || player2InZone;
+
+            if (anyPlayerInZone && !arenaLoopPlaying && !countdownCompleted)
+            {
+                arenaLoopInstance = RuntimeManager.CreateInstance(arenaLoopEvent);
+                arenaLoopInstance.start();
+                arenaLoopPlaying = true;
+            }
+            else if ((!anyPlayerInZone || countdownCompleted) && arenaLoopPlaying)
+            {
+                arenaLoopInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                arenaLoopInstance.release();
+                arenaLoopPlaying = false;
+            }
+
+
         }
 
         private IEnumerator StartGameCountdown()
@@ -187,6 +209,14 @@ namespace dungeonduell
             if (countdownText != null)
             {
                 countdownText.text = "GO!";
+                countdownCompleted = true;
+
+                if (arenaLoopPlaying)
+                {
+                    arenaLoopInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                    arenaLoopInstance.release();
+                    arenaLoopPlaying = false;
+                }
             }
 
             // 🎵 Sound beenden (falls noch aktiv)

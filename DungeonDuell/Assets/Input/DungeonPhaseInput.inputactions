@@ -74,14 +74,14 @@
                     "id": "5f531d69-3a23-4c4c-a114-620394e39f56",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "Press(behavior=1)",
+                    "interactions": "Press",
                     "initialStateCheck": false
                 },
                 {
                     "name": "DoUpgradeSpeed",
                     "type": "Button",
                     "id": "ccca69e4-51ba-415c-be90-1b1e6da5bc2b",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -90,7 +90,7 @@
                     "name": "DoUpgradeAtk",
                     "type": "Button",
                     "id": "eecdb8dd-ec6c-4d14-aaf0-47a89e42d6bf",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -199,6 +199,17 @@
                     "interactions": "Press(behavior=2)",
                     "processors": "",
                     "groups": "Gamepad;Keyboard",
+                    "action": "Run",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6d787773-9767-4359-9613-ae180b5cb05d",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad;Keyboard",
                     "action": "Run",
                     "isComposite": false,
                     "isPartOfComposite": false

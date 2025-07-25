@@ -17354,6 +17354,7 @@ GameObject:
   - component: {fileID: 7375390012173718480}
   - component: {fileID: 5423255612875023378}
   - component: {fileID: 1545227746416546501}
+  - component: {fileID: 3571292396373156991}
   m_Layer: 10
   m_Name: DamageFeedback
   m_TagString: Untagged
@@ -17774,8 +17775,8 @@ MonoBehaviour:
           ButtonText: Automatic Shaker Setup
         Owner: {fileID: 5423255612875023378}
         DebugActive: 0
-        FlashColor: {r: 0.68235296, g: 0.03137255, b: 0.03137255, a: 1}
-        FlashDuration: 0.2
+        FlashColor: {r: 0.8235294, g: 0.05882353, b: 0.21568628, a: 1}
+        FlashDuration: 0.3
         FlashAlpha: 0.3
         FlashID: 0
         TargetFlash: {fileID: 0}
@@ -18275,6 +18276,18 @@ MonoBehaviour:
                 m_StringArgument: 
                 m_BoolArgument: 0
               m_CallState: 2
+            - m_Target: {fileID: 3571292396373156991}
+              m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+              m_MethodName: Play
+              m_Mode: 1
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 0
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
         StopEvents:
           m_PersistentCalls:
             m_Calls: []
@@ -18415,6 +18428,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9c61627e08c5f44aa10dd4cc781a017, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3571292396373156991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3821486771870496674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 557351499
+      Data2: 1206879964
+      Data3: -161230680
+      Data4: 1735113248
+    Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_enemy/DP_enemy_dmg
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &4877077553008454246
 GameObject:
   m_ObjectHideFlags: 0
@@ -18889,6 +18933,7 @@ MonoBehaviour:
       Data3: 1422034111
       Data4: 1661999426
     Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player_run_treasure
+  hearDistance: 12
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 8388608

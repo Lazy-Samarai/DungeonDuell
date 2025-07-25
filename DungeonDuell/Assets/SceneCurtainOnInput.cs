@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using FMODUnity;
 
 namespace dungeonduell
 {
@@ -18,6 +19,7 @@ namespace dungeonduell
             {
                 _playerInput[player ? 1 : 0] = true;
                 ChangeCurtainSingle(player, true);
+                RuntimeManager.PlayOneShot(courtainOpenEvent, transform.position);
             }
         }
     }

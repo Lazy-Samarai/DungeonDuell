@@ -80,34 +80,59 @@ namespace dungeonduell
             });
         }
 
-
-        public void SetMasterVolume(float volume)
+        public void CloseOptions(bool forceClose)
         {
+            optionsPanel.transform.DOScale(0f, 0.3f).SetEase(Ease.InBack).SetUpdate(true);
+            _canvasGroup.DOFade(0, fadeDuration).SetUpdate(true).OnComplete(() =>
+            {
+                optionsPanel.SetActive(false);
+                if (EventSystem.current != null & !forceClose)
+                {
+                    EventSystem.current.SetSelectedGameObject(null);
+                    if (previousSelected != null) EventSystem.current.SetSelectedGameObject(previousSelected);
+                }
+            });
+        }
+
+
+        public void SetMasterVolume(float sliderValue)
+        {
+            float dB = Mathf.Lerp(-80f, 0f, sliderValue); // logarithmisch skalieren
+            float volume = Mathf.Pow(10f, dB / 10f); // oder 2.5f je nach Feingef�hl
+
             _masterVCA.setVolume(volume);
             if (_dataManager != null)
-                _dataManager.SetVolume(volume);
+                _dataManager.SetVolume(sliderValue);
         }
 
-        public void SetMusicVolume(float volume)
+        public void SetMusicVolume(float sliderValue)
         {
+            float dB = Mathf.Lerp(-80f, 0f, sliderValue); // logarithmisch skalieren
+            float volume = Mathf.Pow(10f, dB / 10f); // oder 2.5f je nach Feingef�hl
             _musicVCA.setVolume(volume);
             if (_dataManager != null)
-                _dataManager.SetMusicVolume(volume);
+                _dataManager.SetMusicVolume(sliderValue);
         }
 
-        public void SetSfxVolume(float volume)
+        public void SetSfxVolume(float sliderValue)
         {
+            float dB = Mathf.Lerp(-80f, 0f, sliderValue); // logarithmisch skalieren
+            float volume = Mathf.Pow(10f, dB / 10f); // oder 2.5f je nach Feingef�hl
             _sfxVCA.setVolume(volume);
             if (_dataManager != null)
-                _dataManager.SetSfxVolume(volume);
+                _dataManager.SetSfxVolume(sliderValue);
         }
 
         public void MuteToggle(bool muted)
         {
-            float volume = muted ? 0f : audioSlider.value;
+            float sliderValue = muted ? 0.0001f : audioSlider.value;
+            float dB = Mathf.Lerp(-80f, 0f, sliderValue);
+            float volume = Mathf.Pow(10f, dB / 20f);
             _masterVCA.setVolume(volume);
+
             if (_dataManager != null) _dataManager.MuteToggle(muted);
         }
+
 
         private void SetupResolutionDropdown()
         {
