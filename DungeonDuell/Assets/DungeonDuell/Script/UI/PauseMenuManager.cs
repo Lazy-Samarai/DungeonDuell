@@ -29,6 +29,8 @@ namespace dungeonduell
 
         private OptionsMenu optionsMenu;
 
+        private bool _allClosing = false;
+
         private void Awake()
         {
             _controls = new DungeonPhaseInput();
@@ -65,6 +67,7 @@ namespace dungeonduell
 
         public void OpenPauseMenu()
         {
+            _allClosing = false;
             GameManager.Instance.Paused = true;
             Cursor.visible = true;
             pausePanel.SetActive(true);
@@ -97,13 +100,27 @@ namespace dungeonduell
             {
                 _isPaused = false;
                 Time.timeScale = 1f;
-                //pausePanel.SetActive(false);
+                pausePanel.SetActive(false);
                 DdCodeEventHandler.Trigger_TutorialDone();
 
-                CloseTutorial();
-                CancelGiveUp();
-                optionsMenu.CloseOptions();
-
+                _allClosing = true;
+                
+                if (controlPanel.activeInHierarchy)
+                {
+                    CloseControlPanel();
+                }
+                if (tutorialPanel.activeInHierarchy)
+                {
+                    CloseTutorial();
+                }
+                if (confirmationPopup.activeInHierarchy)
+                {
+                    CancelGiveUp();
+                }
+                if (optionsPanel.activeInHierarchy)
+                {
+                    optionsMenu.CloseOptions(true);
+                }
 
                 if (EventSystem.current != null)
                 {
@@ -112,22 +129,6 @@ namespace dungeonduell
                 }
             });
 
-            if (controlPanel.activeInHierarchy)
-            {
-                CloseControlPanel();
-            }
-            if (tutorialPanel.activeInHierarchy)
-            {
-                CloseTutorial();
-            }
-            if (confirmationPopup.activeInHierarchy)
-            {
-                CancelGiveUp();
-            }
-            if (optionsPanel.activeInHierarchy)
-            {
-                optionsPanel.SetActive(false);
-            }
 
         }
 
@@ -161,7 +162,7 @@ namespace dungeonduell
             {
                 controlPanel.SetActive(false);
 
-                if (EventSystem.current != null && defaultSelectedButton != null)
+                if (EventSystem.current != null && defaultSelectedButton != null & !_allClosing)
                 {
                     EventSystem.current.SetSelectedGameObject(null);
                     EventSystem.current.SetSelectedGameObject(tutorialSelectedButton);
@@ -191,7 +192,7 @@ namespace dungeonduell
             rect.DOAnchorPosY(-800, fadeDuration).SetEase(Ease.InCubic).SetUpdate(true).OnComplete(() =>
             {
                 tutorialPanel.SetActive(false);
-                if (defaultSelectedButton != null && EventSystem.current != null)
+                if (defaultSelectedButton != null && EventSystem.current != null & !_allClosing)
                 {
                     EventSystem.current.SetSelectedGameObject(null);
                     EventSystem.current.SetSelectedGameObject(defaultSelectedButton);
@@ -218,7 +219,7 @@ namespace dungeonduell
             confirmationPopup.transform.DOScale(0, fadeDuration).SetEase(Ease.InBack).SetUpdate(true).OnComplete(() =>
             {
                 confirmationPopup.SetActive(false);
-                if (defaultSelectedButton != null && EventSystem.current != null)
+                if (defaultSelectedButton != null && EventSystem.current != null & !_allClosing)
                 {
                     EventSystem.current.SetSelectedGameObject(null);
                     EventSystem.current.SetSelectedGameObject(defaultSelectedButton);
