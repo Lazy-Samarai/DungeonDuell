@@ -86,11 +86,8 @@
 	</object>
 	<object class="EventMixerMaster" id="{ca531191-a55c-44c6-a0bc-c2091ed26f21}">
 		<property name="volume">
-			<value>-7.5</value>
+			<value>-11</value>
 		</property>
-		<relationship name="modulators">
-			<destination>{62e446bb-2090-4abd-aa9f-be214ebdc378}</destination>
-		</relationship>
 		<relationship name="effectChain">
 			<destination>{81b1bd22-518c-42c3-a9ce-edeb6cf23361}</destination>
 		</relationship>
@@ -154,6 +151,9 @@
 		<property name="name">
 			<value>Audio 2</value>
 		</property>
+		<relationship name="modulators">
+			<destination>{d7a98317-29f3-4261-85fa-702c221f39dd}</destination>
+		</relationship>
 		<relationship name="effectChain">
 			<destination>{f97403fc-561f-4cbc-a8cb-33e4404bdf44}</destination>
 		</relationship>
@@ -181,26 +181,13 @@
 			<destination>{5bfab9c6-c837-438c-847a-21e7defe96dc}</destination>
 		</relationship>
 	</object>
-	<object class="ADSRModulator" id="{62e446bb-2090-4abd-aa9f-be214ebdc378}">
-		<property name="nameOfPropertyBeingModulated">
-			<value>volume</value>
-		</property>
-		<property name="initialValue">
-			<value>-80</value>
-		</property>
-		<property name="attackTime">
-			<value>0</value>
-		</property>
-		<property name="releaseTime">
-			<value>2400</value>
-		</property>
-		<property name="finalValue">
-			<value>-80</value>
-		</property>
-	</object>
 	<object class="MixerBusEffectChain" id="{81b1bd22-518c-42c3-a9ce-edeb6cf23361}">
 		<relationship name="effects">
+			<destination>{d5dc28f7-b68e-486a-898a-28ca9760249c}</destination>
+			<destination>{9c9ecebf-add1-43f4-a8b1-9235b6f9ab44}</destination>
+			<destination>{ed5362f7-2a9f-4b8c-bbb3-acc42510410e}</destination>
 			<destination>{6b98043f-ea16-4702-a5f3-553765d6adb6}</destination>
+			<destination>{aff92670-3bf2-4e8a-9596-16755ddfdb5b}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{ed44ca02-854f-463e-9b06-24d6b9a31e1a}" />
@@ -227,6 +214,23 @@
 			<destination>{3c265b79-a3e6-4630-97d0-ff3796ed9fb2}</destination>
 		</relationship>
 	</object>
+	<object class="ADSRModulator" id="{d7a98317-29f3-4261-85fa-702c221f39dd}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>volume</value>
+		</property>
+		<property name="initialValue">
+			<value>-80</value>
+		</property>
+		<property name="attackTime">
+			<value>0</value>
+		</property>
+		<property name="releaseTime">
+			<value>2200</value>
+		</property>
+		<property name="finalValue">
+			<value>-80</value>
+		</property>
+	</object>
 	<object class="MixerBusEffectChain" id="{f97403fc-561f-4cbc-a8cb-33e4404bdf44}">
 		<relationship name="effects">
 			<destination>{8ed94e71-f1d3-45d0-8d28-c5badc98f167}</destination>
@@ -244,7 +248,48 @@
 			<destination>{0ca433e8-2664-4573-8aac-8d55791a9f7e}</destination>
 		</relationship>
 	</object>
+	<object class="ThreeEQEffect" id="{d5dc28f7-b68e-486a-898a-28ca9760249c}">
+		<property name="lowGain">
+			<value>-10.5</value>
+		</property>
+		<property name="highGain">
+			<value>10</value>
+		</property>
+		<property name="highCrossover">
+			<value>3000</value>
+		</property>
+	</object>
+	<object class="ThreeEQEffect" id="{9c9ecebf-add1-43f4-a8b1-9235b6f9ab44}">
+		<property name="highGain">
+			<value>5.5</value>
+		</property>
+	</object>
+	<object class="CompressorEffect" id="{ed5362f7-2a9f-4b8c-bbb3-acc42510410e}">
+		<property name="threshold">
+			<value>-33.5</value>
+		</property>
+		<property name="attackTime">
+			<value>12</value>
+		</property>
+		<property name="gain">
+			<value>3</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{6b98043f-ea16-4702-a5f3-553765d6adb6}" />
+	<object class="SFXReverbEffect" id="{aff92670-3bf2-4e8a-9596-16755ddfdb5b}">
+		<property name="decayTime">
+			<value>3900</value>
+		</property>
+		<property name="lateDelay">
+			<value>29</value>
+		</property>
+		<property name="HFDecayRatio">
+			<value>70</value>
+		</property>
+		<property name="highCut">
+			<value>5650</value>
+		</property>
+	</object>
 	<object class="AutomationPoint" id="{022d082f-0a64-4eb0-a88a-1b494686090c}">
 		<property name="position">
 			<value>5.5511151231257827e-17</value>

@@ -61,7 +61,7 @@
 	</object>
 	<object class="EventAutomatableProperties" id="{ae4ed711-5a5c-444b-8f34-e234b104b1e2}">
 		<property name="triggerCooldown">
-			<value>320</value>
+			<value>80</value>
 		</property>
 	</object>
 	<object class="MarkerTrack" id="{fa3b86ae-1e4c-43f5-af61-2f597c49a778}" />
@@ -76,6 +76,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{e46fdb96-b0d7-4fec-9bc5-e7ddf77f55b5}">
+		<property name="volume">
+			<value>-7</value>
+		</property>
 		<relationship name="effectChain">
 			<destination>{a4113dbe-ab96-4dd9-8dd4-8bf5060d9c31}</destination>
 		</relationship>
@@ -104,9 +107,6 @@
 	</object>
 	<object class="MixerBusPanner" id="{1f771444-b654-4239-aa74-9ac333ced3f2}" />
 	<object class="SingleSound" id="{66a5c6f5-0e9b-427f-b975-8e322e7c58d5}">
-		<property name="volume">
-			<value>-26</value>
-		</property>
 		<relationship name="audioFile">
 			<destination>{eb8de05a-eb6b-4031-ba7e-97c13ff47c39}</destination>
 		</relationship>
