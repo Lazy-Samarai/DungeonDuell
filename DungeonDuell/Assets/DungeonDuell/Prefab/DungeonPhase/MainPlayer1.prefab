@@ -4195,10 +4195,10 @@ MonoBehaviour:
         PlayEvents:
           m_PersistentCalls:
             m_Calls:
-            - m_Target: {fileID: 6463580015514565135}
-              m_TargetAssemblyTypeName: dungeonduell.CauseDamageEvent, Assembly-CSharp
-              m_MethodName: CausePlayerGotDamagedEvent
-              m_Mode: 6
+            - m_Target: {fileID: 4569145686172615282}
+              m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+              m_MethodName: Play
+              m_Mode: 1
               m_Arguments:
                 m_ObjectArgument: {fileID: 0}
                 m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4207,10 +4207,10 @@ MonoBehaviour:
                 m_StringArgument: 
                 m_BoolArgument: 1
               m_CallState: 2
-            - m_Target: {fileID: 4569145686172615282}
-              m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
-              m_MethodName: Play
-              m_Mode: 1
+            - m_Target: {fileID: 6463580015514565135}
+              m_TargetAssemblyTypeName: dungeonduell.CauseDamageEvent, Assembly-CSharp
+              m_MethodName: CausePlayerGotDamagedEvent
+              m_Mode: 6
               m_Arguments:
                 m_ObjectArgument: {fileID: 0}
                 m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

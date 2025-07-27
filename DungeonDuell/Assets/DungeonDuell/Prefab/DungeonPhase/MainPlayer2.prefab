@@ -18264,18 +18264,6 @@ MonoBehaviour:
         PlayEvents:
           m_PersistentCalls:
             m_Calls:
-            - m_Target: {fileID: 1545227746416546501}
-              m_TargetAssemblyTypeName: dungeonduell.CauseDamageEvent, Assembly-CSharp
-              m_MethodName: CausePlayerGotDamagedEvent
-              m_Mode: 6
-              m_Arguments:
-                m_ObjectArgument: {fileID: 0}
-                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-                m_IntArgument: 0
-                m_FloatArgument: 0
-                m_StringArgument: 
-                m_BoolArgument: 0
-              m_CallState: 2
             - m_Target: {fileID: 3571292396373156991}
               m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
               m_MethodName: Play
@@ -18288,9 +18276,33 @@ MonoBehaviour:
                 m_StringArgument: 
                 m_BoolArgument: 0
               m_CallState: 2
+            - m_Target: {fileID: 1545227746416546501}
+              m_TargetAssemblyTypeName: dungeonduell.CauseDamageEvent, Assembly-CSharp
+              m_MethodName: CausePlayerGotDamagedEvent
+              m_Mode: 6
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 0
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
         StopEvents:
           m_PersistentCalls:
-            m_Calls: []
+            m_Calls:
+            - m_Target: {fileID: 3571292396373156991}
+              m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+              m_MethodName: Play
+              m_Mode: 1
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 0
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
         InitializationEvents:
           m_PersistentCalls:
             m_Calls: []
@@ -18443,11 +18455,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: 557351499
-      Data2: 1206879964
-      Data3: -161230680
-      Data4: 1735113248
-    Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_enemy/DP_enemy_dmg
+      Data1: -588050370
+      Data2: 1231695094
+      Data3: 1762116285
+      Data4: -1604705096
+    Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_player/DP_player_dmg
   Event: 
   EventPlayTrigger: 0
   EventStopTrigger: 0
