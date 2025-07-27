@@ -93,11 +93,11 @@ namespace dungeonduell
                 {
                     if (!_levelUpDelay)
                     {
+                        RuntimeManager.PlayOneShot(optionSelectedEvent);
                         _levelManager.ApplyLevelUpPerCoins(option, AmountPerUpgrade, player1 ? 1 : 2);
                     }
                 }
 
-                RuntimeManager.PlayOneShot(optionSelectedEvent);
                 testHub.menuShowing = false;
                 StartCoroutine(CloseMenuWithDelay(0.5f));
             }
