@@ -201,7 +201,7 @@ namespace dungeonduell
                 _shellTracker.AddMarker(cellPosition, marker);
                 _shellTracker.AddShell(cellPosition, (ShellCard)card);
 
-                FinalizePlacement();
+                FinalizePlacement(playerMove);
                 return true;
             }
 
@@ -236,7 +236,7 @@ namespace dungeonduell
 
                     if (wasHandled)
                     {
-                        FinalizePlacement();
+                        FinalizePlacement(playerMove);
                         return true;
                     }
 
@@ -598,7 +598,7 @@ namespace dungeonduell
         }
 
 
-        private void FinalizePlacement()
+        private void FinalizePlacement(bool isPlayerAction)
         {
             if (_turnManager != null)
             {
@@ -608,7 +608,10 @@ namespace dungeonduell
                     //cardToHand.ReactivateHandCards();
                 }
 
+                if (isPlayerAction)
+                {
                 RuntimeManager.PlayOneShot(gridPlaceSFXEvent);
+                }
                 if (_hexgridController != null) _hexgridController.ResetNavigation();
             }
         }

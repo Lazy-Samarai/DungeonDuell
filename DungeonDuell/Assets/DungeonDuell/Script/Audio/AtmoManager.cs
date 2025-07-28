@@ -33,13 +33,24 @@ namespace dungeonduell
         private EventInstance _atmoInstance;
         private EventInstance _BGInstance;
 
-        void Awake()
+        void Start()
         {
+            IsPlaying(_atmoInstance);
+
+            if (!IsPlaying(_atmoInstance))
+            {
             _atmoInstance = RuntimeManager.CreateInstance(fmodAtmoEvent);
             _atmoInstance.start();
 
-            _BGInstance = RuntimeManager.CreateInstance(fmodBGMusicEvent);
-            _BGInstance.start();
+            }
+
+            IsPlaying(_BGInstance);
+
+            if (!IsPlaying(_BGInstance))
+            {
+                _BGInstance = RuntimeManager.CreateInstance(fmodBGMusicEvent);
+                _BGInstance.start();
+            }
 
             DdCodeEventHandler.AtmosphereLevelChanged += OnAtmosphereLevelChanged;
             SceneManager.sceneLoaded += OnSceneLoaded;
@@ -79,12 +90,19 @@ namespace dungeonduell
             Debug.Log($"[AtmoManager] Atmo_sections set to: {level} ({(int)level})");
         }
 
+        bool IsPlaying(FMOD.Studio.EventInstance instance)
+        {
+            FMOD.Studio.PLAYBACK_STATE state;
+            instance.getPlaybackState(out state);
+            return state != FMOD.Studio.PLAYBACK_STATE.STOPPED;
+        }
+
         void OnDestroy()
         {
             DdCodeEventHandler.AtmosphereLevelChanged -= OnAtmosphereLevelChanged;
             SceneManager.sceneLoaded -= OnSceneLoaded;
 
-            _atmoInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            _atmoInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             _atmoInstance.release();
         }
     }
