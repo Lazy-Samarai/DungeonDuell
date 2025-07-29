@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="EffectPreset" id="{7c7dee4b-c268-4bd9-bb5d-06921e673d87}">
+		<property name="name">
+			<value>3-EQ</value>
+		</property>
+		<relationship name="folder">
+			<destination>{4a5aa9fb-1eac-4113-824c-11406d76904b}</destination>
+		</relationship>
+		<relationship name="effect">
+			<destination>{f76e5b47-e0f4-47a2-b9ee-38b066ff39d6}</destination>
+		</relationship>
+	</object>
+	<object class="ThreeEQEffect" id="{f76e5b47-e0f4-47a2-b9ee-38b066ff39d6}">
+		<property name="highGain">
+			<value>5.5</value>
+		</property>
+	</object>
+</objects>

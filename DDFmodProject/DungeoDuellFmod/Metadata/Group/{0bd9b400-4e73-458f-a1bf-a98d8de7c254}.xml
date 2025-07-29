@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.03.00">
 	<object class="MixerGroup" id="{0bd9b400-4e73-458f-a1bf-a98d8de7c254}">
+		<property name="volume">
+			<value>4</value>
+		</property>
 		<property name="name">
 			<value>Music Grp</value>
 		</property>
@@ -33,7 +36,7 @@
 			<value>180</value>
 		</property>
 		<property name="releaseTime">
-			<value>5000</value>
+			<value>3000</value>
 		</property>
 		<relationship name="sidechains">
 			<destination>{d779a6e2-0509-46a9-9c7d-82c8249b66e8}</destination>

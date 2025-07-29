@@ -152,9 +152,6 @@
 		<property name="name">
 			<value>Audio 2</value>
 		</property>
-		<relationship name="modulators">
-			<destination>{1b5e9850-bb5c-42fa-af4e-dd140fda2149}</destination>
-		</relationship>
 		<relationship name="effectChain">
 			<destination>{47c77696-5a42-445a-b876-70a9a3c74750}</destination>
 		</relationship>
@@ -242,11 +239,6 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{3923b70a-d741-41c9-967b-7f2fbefd0c17}" />
-	<object class="RandomizerModulator" id="{1b5e9850-bb5c-42fa-af4e-dd140fda2149}">
-		<property name="nameOfPropertyBeingModulated">
-			<value>volume</value>
-		</property>
-	</object>
 	<object class="MixerBusEffectChain" id="{47c77696-5a42-445a-b876-70a9a3c74750}">
 		<relationship name="effects">
 			<destination>{23c9a9f7-dbc2-4b81-8b8b-ed7618b41abb}</destination>

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.03.00">
 	<object class="MixerGroup" id="{aa1dc2f0-1fb3-48b2-a368-f5c309aa76c2}">
+		<property name="overridingInputFormat">
+			<value>1</value>
+		</property>
 		<property name="name">
 			<value>DP reverb</value>
 		</property>
@@ -26,7 +29,7 @@
 			<value>-20</value>
 		</property>
 		<property name="inputFormat">
-			<value>2</value>
+			<value>1</value>
 		</property>
 		<relationship name="mixerReturn">
 			<destination>{8b2b5bc5-1c95-4be2-b326-3793c1d09f1c}</destination>

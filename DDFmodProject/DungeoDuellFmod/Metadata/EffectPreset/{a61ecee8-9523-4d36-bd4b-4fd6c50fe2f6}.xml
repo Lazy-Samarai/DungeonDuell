@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="EffectPreset" id="{a61ecee8-9523-4d36-bd4b-4fd6c50fe2f6}">
+		<property name="name">
+			<value>FMOD Reverb</value>
+		</property>
+		<relationship name="folder">
+			<destination>{4186eb1a-31f9-4936-9fc8-6da8b524ac1b}</destination>
+		</relationship>
+		<relationship name="effect">
+			<destination>{6bd505c3-20ae-445f-b2e2-66ec85edaf55}</destination>
+		</relationship>
+	</object>
+	<object class="SFXReverbEffect" id="{6bd505c3-20ae-445f-b2e2-66ec85edaf55}">
+		<property name="decayTime">
+			<value>2200</value>
+		</property>
+		<property name="earlyDelay">
+			<value>15</value>
+		</property>
+		<property name="lateDelay">
+			<value>22</value>
+		</property>
+		<property name="HFDecayRatio">
+			<value>100</value>
+		</property>
+		<property name="highCut">
+			<value>20000</value>
+		</property>
+		<property name="earlyLateMix">
+			<value>59</value>
+		</property>
+		<property name="wetLevel">
+			<value>-22.5</value>
+		</property>
+	</object>
+</objects>

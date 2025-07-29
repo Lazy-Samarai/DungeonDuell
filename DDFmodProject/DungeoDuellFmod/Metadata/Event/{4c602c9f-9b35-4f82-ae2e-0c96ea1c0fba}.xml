@@ -86,7 +86,7 @@
 	</object>
 	<object class="EventMixerMaster" id="{ca531191-a55c-44c6-a0bc-c2091ed26f21}">
 		<property name="volume">
-			<value>-11</value>
+			<value>-10</value>
 		</property>
 		<relationship name="effectChain">
 			<destination>{81b1bd22-518c-42c3-a9ce-edeb6cf23361}</destination>
@@ -261,7 +261,7 @@
 	</object>
 	<object class="ThreeEQEffect" id="{9c9ecebf-add1-43f4-a8b1-9235b6f9ab44}">
 		<property name="highGain">
-			<value>5.5</value>
+			<value>6.5</value>
 		</property>
 	</object>
 	<object class="CompressorEffect" id="{ed5362f7-2a9f-4b8c-bbb3-acc42510410e}">
@@ -272,7 +272,7 @@
 			<value>12</value>
 		</property>
 		<property name="gain">
-			<value>3</value>
+			<value>5</value>
 		</property>
 	</object>
 	<object class="MixerBusFader" id="{6b98043f-ea16-4702-a5f3-553765d6adb6}" />
@@ -284,10 +284,10 @@
 			<value>29</value>
 		</property>
 		<property name="HFDecayRatio">
-			<value>70</value>
+			<value>77.5</value>
 		</property>
 		<property name="highCut">
-			<value>5650</value>
+			<value>10500</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{022d082f-0a64-4eb0-a88a-1b494686090c}">
