@@ -85,9 +85,6 @@
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{2736d68d-9419-4827-b72c-5f9ab87ed0dd}">
-		<property name="volume">
-			<value>1</value>
-		</property>
 		<relationship name="effectChain">
 			<destination>{0ff11727-6ec4-4b93-ae67-37dde16d3d15}</destination>
 		</relationship>
@@ -134,6 +131,8 @@
 	<object class="MixerBusEffectChain" id="{0ff11727-6ec4-4b93-ae67-37dde16d3d15}">
 		<relationship name="effects">
 			<destination>{119b0e9b-6270-4035-a857-efa4e535e858}</destination>
+			<destination>{99906654-7d48-4e1e-aa06-f120cd43769d}</destination>
+			<destination>{7b51c001-548c-4b77-922e-c3ee4a059fa8}</destination>
 			<destination>{35902c5c-29c3-4335-aa4e-4ead0e1196c6}</destination>
 		</relationship>
 	</object>
@@ -147,7 +146,44 @@
 	<object class="MixerBusPanner" id="{d298c88c-50cf-4775-a495-94b45d091d38}" />
 	<object class="DistortionEffect" id="{119b0e9b-6270-4035-a857-efa4e535e858}">
 		<property name="level">
-			<value>0.24499999</value>
+			<value>0.275000006</value>
+		</property>
+	</object>
+	<object class="CompressorEffect" id="{99906654-7d48-4e1e-aa06-f120cd43769d}">
+		<property name="threshold">
+			<value>-21.5</value>
+		</property>
+		<property name="attackTime">
+			<value>38</value>
+		</property>
+		<property name="releaseTime">
+			<value>420</value>
+		</property>
+		<property name="gain">
+			<value>1.5</value>
+		</property>
+	</object>
+	<object class="SFXReverbEffect" id="{7b51c001-548c-4b77-922e-c3ee4a059fa8}">
+		<property name="decayTime">
+			<value>3400</value>
+		</property>
+		<property name="lateDelay">
+			<value>29</value>
+		</property>
+		<property name="HFDecayRatio">
+			<value>62</value>
+		</property>
+		<property name="diffusion">
+			<value>72</value>
+		</property>
+		<property name="highCut">
+			<value>5650</value>
+		</property>
+		<property name="earlyLateMix">
+			<value>80</value>
+		</property>
+		<property name="wetLevel">
+			<value>-28</value>
 		</property>
 	</object>
 	<object class="MixerBusFader" id="{35902c5c-29c3-4335-aa4e-4ead0e1196c6}" />

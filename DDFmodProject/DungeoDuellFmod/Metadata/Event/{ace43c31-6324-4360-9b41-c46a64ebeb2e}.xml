@@ -56,7 +56,7 @@
 			<destination>{4e2a3c52-3869-465c-95fc-cc6b0051433d}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{1ce79bb0-1b7a-4f0d-be39-afb136e206b6}</destination>
+			<destination>{aa1dc2f0-1fb3-48b2-a368-f5c309aa76c2}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{0336de73-9f3d-4ca6-b347-e21e93ae8c69}" />
@@ -72,6 +72,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{1ee8accd-80cd-401d-9962-77bc820a954f}">
+		<property name="volume">
+			<value>-0.5</value>
+		</property>
 		<relationship name="effectChain">
 			<destination>{981d1b35-7545-475e-8af4-d273515fcc23}</destination>
 		</relationship>
@@ -95,11 +98,16 @@
 	<object class="MixerBusPanner" id="{4e2a3c52-3869-465c-95fc-cc6b0051433d}" />
 	<object class="MixerBusEffectChain" id="{981d1b35-7545-475e-8af4-d273515fcc23}">
 		<relationship name="effects">
+			<destination>{85dee393-7f89-4a18-9035-e70eb7936223}</destination>
 			<destination>{7a180b8b-8807-4257-9a25-3609cd7a0ee9}</destination>
+			<destination>{a2b11807-0e21-46d4-8cd6-d94d840afe8a}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{6605acf7-67af-4e7e-b953-172e4820dff8}" />
 	<object class="SingleSound" id="{fb5cedf1-ef44-490a-9a2a-5c4cd3ead887}">
+		<property name="startOffset">
+			<value>2.79999995</value>
+		</property>
 		<property name="volume">
 			<value>-6.5</value>
 		</property>
@@ -108,5 +116,21 @@
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{d003f49f-a267-4373-bcef-fabaad4b4b95}" />
+	<object class="ThreeEQEffect" id="{85dee393-7f89-4a18-9035-e70eb7936223}">
+		<property name="midGain">
+			<value>1.5</value>
+		</property>
+		<property name="highGain">
+			<value>3</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{7a180b8b-8807-4257-9a25-3609cd7a0ee9}" />
+	<object class="ProxyEffect" id="{a2b11807-0e21-46d4-8cd6-d94d840afe8a}">
+		<property name="inputFormat">
+			<value>1</value>
+		</property>
+		<relationship name="preset">
+			<destination>{3dad5cec-68d8-4a38-b0d5-01781b57e649}</destination>
+		</relationship>
+	</object>
 </objects>

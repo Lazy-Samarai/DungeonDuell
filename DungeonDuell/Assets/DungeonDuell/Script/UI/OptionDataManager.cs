@@ -14,7 +14,7 @@ namespace dungeonduell
         [FormerlySerializedAs("ShowTutorial")]
         public bool showTutorial = true;
 
-        [FormerlySerializedAs("Volume")] public float volume = 1f;
+        [FormerlySerializedAs("Volume")] public float volume = 0.8f;
         [FormerlySerializedAs("IsFullscreen")] public bool isFullscreen = true;
         public bool isMuted = false;
 

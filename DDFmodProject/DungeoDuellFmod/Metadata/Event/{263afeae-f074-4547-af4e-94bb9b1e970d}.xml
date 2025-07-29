@@ -73,7 +73,7 @@
 	</object>
 	<object class="EventMixerMaster" id="{e9d6dd9d-5448-4964-9703-ee869850b0ee}">
 		<property name="volume">
-			<value>-19.5</value>
+			<value>-3</value>
 		</property>
 		<relationship name="effectChain">
 			<destination>{e6b8c1bc-41da-44dd-be16-42ec33de78e0}</destination>
@@ -87,7 +87,7 @@
 	</object>
 	<object class="MultiSound" id="{26698e36-5b5a-4a22-af03-00f4131981dc}">
 		<relationship name="sounds">
-			<destination>{e94f0416-5230-4a87-be24-05d8c22b6b95}</destination>
+			<destination>{bed8c7c7-27c0-4483-b535-d59f82fa9d3d}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusEffectChain" id="{6f5f9687-2425-4cb9-89bc-81c390484705}">
@@ -98,15 +98,36 @@
 	<object class="MixerBusPanner" id="{52e65fb5-4747-44fa-b7b6-c1949c06c1d1}" />
 	<object class="MixerBusEffectChain" id="{e6b8c1bc-41da-44dd-be16-42ec33de78e0}">
 		<relationship name="effects">
+			<destination>{39883d37-78c5-455f-b12b-21c487271abb}</destination>
+			<destination>{e9cb2680-50f5-444c-baa1-d09d799af7bb}</destination>
 			<destination>{7aaf0776-0dc3-43e7-adb8-95de6c7e41c4}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{70f65dcd-4f5e-4b98-8eff-31c98f615032}" />
-	<object class="SingleSound" id="{e94f0416-5230-4a87-be24-05d8c22b6b95}">
+	<object class="SingleSound" id="{bed8c7c7-27c0-4483-b535-d59f82fa9d3d}">
+		<property name="volume">
+			<value>3.5</value>
+		</property>
 		<relationship name="audioFile">
-			<destination>{5ff5ecaf-cade-4f2a-b728-b9844430c53b}</destination>
+			<destination>{5a18d6a1-e8e8-4b54-9079-76d6362dc695}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{8483c152-f91b-4e69-ba4e-9f419970e084}" />
+	<object class="ProxyEffect" id="{39883d37-78c5-455f-b12b-21c487271abb}">
+		<property name="inputFormat">
+			<value>1</value>
+		</property>
+		<relationship name="preset">
+			<destination>{7c7dee4b-c268-4bd9-bb5d-06921e673d87}</destination>
+		</relationship>
+	</object>
+	<object class="ProxyEffect" id="{e9cb2680-50f5-444c-baa1-d09d799af7bb}">
+		<property name="inputFormat">
+			<value>1</value>
+		</property>
+		<relationship name="preset">
+			<destination>{fbeb3449-e352-4ac7-960c-02a6cd486e79}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusFader" id="{7aaf0776-0dc3-43e7-adb8-95de6c7e41c4}" />
 </objects>

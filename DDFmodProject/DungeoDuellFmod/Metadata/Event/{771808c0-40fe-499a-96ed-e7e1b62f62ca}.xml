@@ -5,7 +5,7 @@
 			<value>WS_Win-Screen-popoup</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>0</value>
 		</property>
 		<relationship name="folder">
 			<destination>{dada3685-73fb-41c7-b73a-047ec76759b1}</destination>
@@ -82,11 +82,7 @@
 			<destination>{2200c2e2-7afb-405c-b301-75e7f5461a0b}</destination>
 		</relationship>
 	</object>
-	<object class="MultiSound" id="{23207fd0-7f27-4179-b16e-d68aebd4bdd2}">
-		<relationship name="sounds">
-			<destination>{a68345ac-6757-4257-a652-2e9596dd7794}</destination>
-		</relationship>
-	</object>
+	<object class="MultiSound" id="{23207fd0-7f27-4179-b16e-d68aebd4bdd2}" />
 	<object class="MixerBusEffectChain" id="{739c0546-1faa-41a8-b02b-bc55157a0460}">
 		<relationship name="effects">
 			<destination>{39b631c3-ef74-4c91-af41-1bfe496b8a65}</destination>
@@ -99,14 +95,6 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{a1c8ff26-fae2-4919-9716-c2c5f8a638d4}" />
-	<object class="SingleSound" id="{a68345ac-6757-4257-a652-2e9596dd7794}">
-		<property name="volume">
-			<value>-31</value>
-		</property>
-		<relationship name="audioFile">
-			<destination>{610abf12-b1f6-488c-85e3-462e65ef0b47}</destination>
-		</relationship>
-	</object>
 	<object class="MixerBusFader" id="{39b631c3-ef74-4c91-af41-1bfe496b8a65}" />
 	<object class="MixerBusFader" id="{6cf103f3-5138-4073-ada6-953fad3880b3}" />
 </objects>

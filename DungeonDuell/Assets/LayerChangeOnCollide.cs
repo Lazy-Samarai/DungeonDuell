@@ -16,12 +16,12 @@ namespace dungeonduell
 
         void OnTriggerEnter2D(Collider2D other)
         {
-            _sprite.sortingOrder = layerOnCollide;
+            if (_sprite != null) _sprite.sortingOrder = layerOnCollide;
         }
 
         void OnTriggerExit2D(Collider2D other)
         {
-            _sprite.sortingOrder = layerOffCollide;
+            if (_sprite != null) _sprite.sortingOrder = layerOffCollide;
         }
     }
 }

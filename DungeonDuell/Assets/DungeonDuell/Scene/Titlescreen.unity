@@ -1319,7 +1319,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &764663074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2590,6 +2590,7 @@ GameObject:
   - component: {fileID: 1174040562}
   - component: {fileID: 1174040564}
   - component: {fileID: 1174040563}
+  - component: {fileID: 1174040565}
   m_Layer: 5
   m_Name: TutorialToggle
   m_TagString: Untagged
@@ -2665,9 +2666,9 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1445213765}
-        m_TargetAssemblyTypeName: dungeonduell.OptionDataManager, Assembly-CSharp
-        m_MethodName: SetShowTutorial
+      - m_Target: {fileID: 1174040565}
+        m_TargetAssemblyTypeName: dungeonduell.SetShowTutorial, Assembly-CSharp
+        m_MethodName: SetShowsTutorial
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2800,7 +2801,7 @@ MonoBehaviour:
       Data4: 228007579
     Path: event:/Dungeon Duell Audio V1/Titel Menu/TS_Tutorial_on-off
   Event: 
-  EventPlayTrigger: 18
+  EventPlayTrigger: 0
   EventStopTrigger: 0
   AllowFadeout: 1
   TriggerOnce: 0
@@ -2841,6 +2842,19 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
+--- !u!114 &1174040565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1174040559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24d521a55996f524f8a5db5eefe3c488, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showTutorial: 1
 --- !u!1 &1223352684
 GameObject:
   m_ObjectHideFlags: 0
@@ -2898,7 +2912,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: V 0.8.9
+  m_text: V 1.0.1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 38995161939ff9748885e40667efa249, type: 2}
   m_sharedMaterial: {fileID: -6973804868841263877, guid: 38995161939ff9748885e40667efa249,
@@ -3155,6 +3169,7 @@ GameObject:
   - component: {fileID: 1445213764}
   - component: {fileID: 1445213765}
   - component: {fileID: 1445213767}
+  - component: {fileID: 1445213768}
   m_Layer: 0
   m_Name: OptionDataManager
   m_TagString: Untagged
@@ -3190,7 +3205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   showTutorial: 1
-  volume: 1
+  volume: 0.8
   isFullscreen: 1
   isMuted: 0
   resolutionIndex: 0
@@ -3222,6 +3237,18 @@ MonoBehaviour:
       Data3: -283648329
       Data4: 1139632877
     Path: event:/Dungeon Duell Audio V1/misc/Music
+--- !u!114 &1445213768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445213762}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d90547393724a37488f96afba6144351, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1455603094
 GameObject:
   m_ObjectHideFlags: 0
@@ -4055,6 +4082,50 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainMenu: {fileID: 2118469192}
+--- !u!1 &2072126561
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2072126563}
+  - component: {fileID: 2072126562}
+  m_Layer: 0
+  m_Name: EnsureDeviceConnect
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2072126562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2072126561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae2949c52eb4bf94f9764b37ffd2fb70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &2072126563
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2072126561}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 172.8181, y: 184.39035, z: -1.5097535}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2098895664
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5365,3 +5436,4 @@ SceneRoots:
   - {fileID: 622292816}
   - {fileID: 1445213764}
   - {fileID: 764663075}
+  - {fileID: 2072126563}

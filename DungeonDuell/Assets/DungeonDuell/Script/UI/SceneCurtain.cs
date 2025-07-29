@@ -35,7 +35,7 @@ namespace dungeonduell
             bottomPanel.DOAnchorPosY(topPanelPosY, animationDuration).SetUpdate(true).SetEase(Ease.InOutSine)
                 .OnComplete(() =>
                 {
-                    if (FindFirstObjectByType<OptionDataManager>().showTutorial)
+                    if (FindFirstObjectByType<SetShowTutorial>().showTutorial)
                     {
                         tutorialSlideshow.SetActive(true);
                         return;

@@ -5,7 +5,7 @@
 			<value>DP_player_dmg</value>
 		</property>
 		<property name="outputFormat">
-			<value>0</value>
+			<value>1</value>
 		</property>
 		<relationship name="folder">
 			<destination>{ec79c8ae-50b2-4c5b-9069-faba99a5d64b}</destination>
@@ -82,7 +82,11 @@
 			<destination>{1861d0fb-14bd-4e43-9e9a-0cfe49f5ac0f}</destination>
 		</relationship>
 	</object>
-	<object class="MultiSound" id="{58eef250-3ea2-4f5a-bafd-eb7183b171fa}" />
+	<object class="MultiSound" id="{58eef250-3ea2-4f5a-bafd-eb7183b171fa}">
+		<relationship name="sounds">
+			<destination>{81c4db9d-25a9-45f3-bdc8-d2cc7ae12d6f}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusEffectChain" id="{dd533fe8-26ed-43bd-99d5-9a388acc0948}">
 		<relationship name="effects">
 			<destination>{623360ce-fa40-430a-9695-e94ffe304570}</destination>
@@ -91,10 +95,39 @@
 	<object class="MixerBusPanner" id="{174a085a-8268-4ddd-9d36-48afcf5af0f7}" />
 	<object class="MixerBusEffectChain" id="{91eef252-1060-4ea6-8955-5525c6b5c847}">
 		<relationship name="effects">
+			<destination>{7e304de0-9679-4a93-9fa3-43175dc4578d}</destination>
+			<destination>{eada169c-e55f-4f87-8050-a8641eded6b6}</destination>
 			<destination>{7933657d-edff-40a4-b6e0-87f5da60bccc}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{85fa4014-7af6-4b4a-9e36-bb74e5d53070}" />
+	<object class="SingleSound" id="{81c4db9d-25a9-45f3-bdc8-d2cc7ae12d6f}">
+		<relationship name="audioFile">
+			<destination>{7c23c8e4-74dd-446a-a314-9309ffa8f3ac}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusFader" id="{623360ce-fa40-430a-9695-e94ffe304570}" />
+	<object class="ThreeEQEffect" id="{7e304de0-9679-4a93-9fa3-43175dc4578d}">
+		<property name="midGain">
+			<value>1.5</value>
+		</property>
+		<property name="highGain">
+			<value>2</value>
+		</property>
+	</object>
+	<object class="CompressorEffect" id="{eada169c-e55f-4f87-8050-a8641eded6b6}">
+		<property name="threshold">
+			<value>-28</value>
+		</property>
+		<property name="attackTime">
+			<value>16</value>
+		</property>
+		<property name="releaseTime">
+			<value>94</value>
+		</property>
+		<property name="gain">
+			<value>2.5</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{7933657d-edff-40a4-b6e0-87f5da60bccc}" />
 </objects>

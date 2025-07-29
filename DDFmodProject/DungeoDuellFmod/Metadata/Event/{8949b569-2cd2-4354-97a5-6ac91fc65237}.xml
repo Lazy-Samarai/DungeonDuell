@@ -158,6 +158,9 @@
 		<property name="name">
 			<value>Atmo_gym-phase</value>
 		</property>
+		<relationship name="modulators">
+			<destination>{de7dbe7f-9582-477a-bd97-99026ad7931d}</destination>
+		</relationship>
 		<relationship name="event">
 			<destination>{23077e30-dcb8-433a-af99-cdd42cbb4727}</destination>
 		</relationship>
@@ -166,6 +169,9 @@
 		<property name="start">
 			<value>5</value>
 		</property>
+		<relationship name="modulators">
+			<destination>{e2e1e908-4889-4ed8-b30d-4e24b7f95595}</destination>
+		</relationship>
 		<relationship name="event">
 			<destination>{3caf1616-69ae-438f-8d6c-6611f2d50cc8}</destination>
 		</relationship>
@@ -181,7 +187,7 @@
 			<value>Atmo_dungeon-phase</value>
 		</property>
 		<relationship name="modulators">
-			<destination>{086f76d9-bc64-42c9-8396-17554471ab5f}</destination>
+			<destination>{6d6bbd96-1b32-4e22-b646-9a685e04bae8}</destination>
 		</relationship>
 		<relationship name="event">
 			<destination>{508ebc3d-1c2f-4e7f-abea-75714b57c246}</destination>
@@ -241,7 +247,29 @@
 			<value>-80</value>
 		</property>
 	</object>
-	<object class="ADSRModulator" id="{086f76d9-bc64-42c9-8396-17554471ab5f}">
+	<object class="ADSRModulator" id="{de7dbe7f-9582-477a-bd97-99026ad7931d}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>volume</value>
+		</property>
+		<property name="initialValue">
+			<value>-80</value>
+		</property>
+		<property name="finalValue">
+			<value>-80</value>
+		</property>
+	</object>
+	<object class="ADSRModulator" id="{e2e1e908-4889-4ed8-b30d-4e24b7f95595}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>volume</value>
+		</property>
+		<property name="initialValue">
+			<value>-80</value>
+		</property>
+		<property name="finalValue">
+			<value>-80</value>
+		</property>
+	</object>
+	<object class="ADSRModulator" id="{6d6bbd96-1b32-4e22-b646-9a685e04bae8}">
 		<property name="nameOfPropertyBeingModulated">
 			<value>volume</value>
 		</property>
