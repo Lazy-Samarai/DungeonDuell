@@ -125,10 +125,15 @@ namespace dungeonduell
             }
         }
 
-
         public void OnMainMenuButton()
         {
+            StartCoroutine(LoadMainMenuWithDelay());
+        }
+
+        private IEnumerator LoadMainMenuWithDelay()
+        {
             DdCodeEventHandler.Trigger_GameReset();
+            yield return new WaitForSeconds(2.5f); // Delay zwischen 1–2 Sekunden
             SceneManager.LoadScene(0);
         }
     }

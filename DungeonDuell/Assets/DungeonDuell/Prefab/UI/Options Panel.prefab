@@ -3521,6 +3521,8 @@ GameObject:
   - component: {fileID: 9151894859050838600}
   - component: {fileID: 3534643113885839536}
   - component: {fileID: 7931810145234428290}
+  - component: {fileID: 8089793696147507981}
+  - component: {fileID: 6901002834297803365}
   m_Layer: 5
   m_Name: LanguageDropdown
   m_TagString: Untagged
@@ -3697,7 +3699,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5096489603110383320}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
   m_Name: 
@@ -3740,7 +3742,7 @@ MonoBehaviour:
       Data4: -139876863
     Path: event:/Dungeon Duell Audio V1/misc/Misc_UI/misc_player_press-any-key
   Event: 
-  EventPlayTrigger: 17
+  EventPlayTrigger: 0
   EventStopTrigger: 0
   AllowFadeout: 1
   TriggerOnce: 0
@@ -3781,6 +3783,34 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
+--- !u!114 &8089793696147507981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5096489603110383320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6d387bd90d518741857a853edc58268, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialSuppressSeconds: 0.5
+  selectEmitter: {fileID: 3534643113885839536}
+--- !u!114 &6901002834297803365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5096489603110383320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 667c44fb823f69a4a95b5df3b19b05d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropdown: {fileID: 7936939700135396833}
+  suppressAfterValueChangeSeconds: 0.2
 --- !u!1 &5232582764593435615
 GameObject:
   m_ObjectHideFlags: 0
