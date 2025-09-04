@@ -5,6 +5,8 @@ using DG.Tweening;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using MoreMountains.TopDownEngine;
+using FMODUnity;
+using FMOD.Studio;
 
 namespace dungeonduell
 {
@@ -31,6 +33,9 @@ namespace dungeonduell
 
         private bool _allClosing = false;
 
+        private VCA _vcaSfxNoUi;
+        private VCA _vcaSfx;
+
         private void Awake()
         {
             _controls = new DungeonPhaseInput();
@@ -47,6 +52,9 @@ namespace dungeonduell
             optionsPanel.SetActive(false);
             tutorialPanel.SetActive(false);
             confirmationPopup.SetActive(false);
+
+            _vcaSfxNoUi = RuntimeManager.GetVCA("vca:/SFX_NO_UI");
+            _vcaSfx = RuntimeManager.GetVCA("vca:/SFX");
         }
 
         private void OnEnable()
@@ -74,6 +82,11 @@ namespace dungeonduell
             pausePanel.transform.localScale = Vector3.zero;
             _pauseGroup.alpha = 0;
 
+            if (_vcaSfxNoUi.isValid())
+            {
+                _vcaSfxNoUi.setVolume(0f);
+            }
+
             if (EventSystem.current != null)
             {
                 _previousSelected = EventSystem.current.currentSelectedGameObject;
@@ -93,6 +106,17 @@ namespace dungeonduell
         public void ResumeGame()
         {
             GameManager.Instance.Paused = false;
+
+            float target = 1f;
+            if (_vcaSfx.isValid())
+            {
+                _vcaSfx.getVolume(out target);
+            }
+            if (_vcaSfxNoUi.isValid())
+            {
+                _vcaSfxNoUi.setVolume(target);
+            }
+
             Time.timeScale = 1f;
             _isPaused = false;
             pausePanel.transform.DOScale(0, fadeDuration).SetEase(Ease.InBack).SetUpdate(true);
