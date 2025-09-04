@@ -720,7 +720,7 @@ MonoBehaviour:
   Path: ../DDFmodProject/DungeoDuellFmod/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638926065282474300
+  lastModified: 638926078917927048
   FileSizes:
   - Name: Desktop
     Value: 4148
@@ -740,10 +740,10 @@ MonoBehaviour:
   Path: ../DDFmodProject/DungeoDuellFmod/Build/Desktop/Dungeon Phase.bank
   Name: Dungeon Phase
   StudioPath: bank:/Dungeon Phase
-  lastModified: 638926041403428273
+  lastModified: 638926078917635512
   FileSizes:
   - Name: Desktop
-    Value: 591520
+    Value: 612128
   Exists: 1
 --- !u!114 &-233504661153999474
 MonoBehaviour:
@@ -840,13 +840,14 @@ MonoBehaviour:
   - {fileID: -5864436839174185919}
   - {fileID: 3217301655876161511}
   - {fileID: -7674261590009396151}
+  - {fileID: 6461565351893377024}
   EditorParameters: []
   MasterBanks:
   - {fileID: -1405512841764259611}
   StringsBanks:
   - {fileID: 1276395289756070088}
   cacheVersion: 131847
-  cacheTime: 638926065282499435
+  cacheTime: 638926078917962234
   SerializableEventsDict:
   - key: event:/Dungeon Duell Audio V1/Card Phase/CP_player/CP_player_shuffle-cards
     index: 0
@@ -940,6 +941,8 @@ MonoBehaviour:
     index: 44
   - key: event:/Dungeon Duell Audio V1/Win Screen/WS_back-to-title-screen
     index: 45
+  - key: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_misc/DP_misc_mask_spawn
+    index: 46
 --- !u!114 &225930445049737312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1036,10 +1039,10 @@ MonoBehaviour:
   Path: ../DDFmodProject/DungeoDuellFmod/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638926065282499435
+  lastModified: 638926078917962234
   FileSizes:
   - Name: Desktop
-    Value: 4224
+    Value: 4278
   Exists: 1
 --- !u!114 &2559675042667163906
 MonoBehaviour:
@@ -1492,6 +1495,33 @@ MonoBehaviour:
     Data4: -1334705239
   Banks:
   - {fileID: -5026038177479864259}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &6461565351893377024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_misc/DP_misc_mask_spawn
+  m_EditorClassIdentifier: 
+  Path: event:/Dungeon Duell Audio V1/Dungeon Phase/DP_misc/DP_misc_mask_spawn
+  Guid:
+    Data1: 1996345166
+    Data2: 1197643137
+    Data3: -1842975592
+    Data4: -2072382029
+  Banks:
+  - {fileID: -311594417720840253}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
