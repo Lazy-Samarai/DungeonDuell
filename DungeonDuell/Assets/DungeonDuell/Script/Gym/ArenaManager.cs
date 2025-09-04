@@ -231,5 +231,40 @@ namespace dungeonduell
             DdCodeEventHandler.Trigger_SceneTransition();
         }
 
+        // ArenaManager.cs – Ergänzung
+        private void OnDisable()
+        {
+            StopAllArenaAudio(true); // beim Szenenwechsel hart stoppen
+        }
+
+        private void OnDestroy()
+        {
+            StopAllArenaAudio(true); // zusätzliche Sicherheit
+        }
+
+        private void StopAllArenaAudio(bool immediate)
+        {
+            var stopMode = immediate
+                ? FMOD.Studio.STOP_MODE.IMMEDIATE
+                : FMOD.Studio.STOP_MODE.ALLOWFADEOUT;
+
+            // Arena-Loop sicher stoppen + freigeben
+            if (arenaLoopPlaying || arenaLoopInstance.isValid())
+            {
+                arenaLoopInstance.stop(stopMode);
+                arenaLoopInstance.release();
+                arenaLoopPlaying = false;
+            }
+
+            // Countdown-Sound sicher stoppen + freigeben
+            if (countdownSoundPlaying || countdownInstance.isValid())
+            {
+                countdownInstance.stop(stopMode);
+                countdownInstance.release();
+                countdownSoundPlaying = false;
+            }
+        }
+
+
     }
 }

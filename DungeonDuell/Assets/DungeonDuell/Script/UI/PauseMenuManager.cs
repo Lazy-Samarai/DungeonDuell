@@ -253,6 +253,10 @@ namespace dungeonduell
 
         public void GiveUpConfirmed()
         {
+            float target = 1f;
+            if (_vcaSfx.isValid()) _vcaSfx.getVolume(out target);
+            if (_vcaSfxNoUi.isValid()) _vcaSfxNoUi.setVolume(target);
+
             Time.timeScale = 1f;
             DdCodeEventHandler.Trigger_GameReset();
             SceneManager.LoadScene("Titlescreen");

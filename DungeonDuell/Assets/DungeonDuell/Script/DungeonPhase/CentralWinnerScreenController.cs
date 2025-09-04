@@ -3,6 +3,8 @@ using Spine.Unity;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using FMODUnity;
+using FMOD.Studio;
 
 namespace dungeonduell
 {
@@ -30,7 +32,8 @@ namespace dungeonduell
         [SerializeField] private SequenceMang sequenceMang;
 
         const string WinnerAnimation = "WinIdle";
-
+        private VCA _vcaSfxNoUi;
+        private VCA _vcaSfx;
 
         private void Start()
         {
@@ -45,6 +48,9 @@ namespace dungeonduell
                     Debug.LogWarning("SequenceMang konnte nicht gefunden werden.");
                 }
             }
+
+            _vcaSfxNoUi = RuntimeManager.GetVCA("vca:/SFX_NO_UI");
+            _vcaSfx = RuntimeManager.GetVCA("vca:/SFX");
         }
 
 
@@ -55,6 +61,9 @@ namespace dungeonduell
             DdCodeEventHandler.Trigger_AtmosphereLevelChanged(AtmoLevel.Atmo_win);
             winnerPanel.SetActive(true);
             buttonsContainer.SetActive(false);
+
+            if (_vcaSfxNoUi.isValid())
+                _vcaSfxNoUi.setVolume(0f);
 
             if (player1Visual == null || player2Visual == null)
             {
@@ -112,8 +121,19 @@ namespace dungeonduell
             buttonsContainer.SetActive(true);
         }
 
+        private void RestoreSfxNoUiToCurrentSfx()
+        {
+            float target = 1f;
+            if (_vcaSfx.isValid())
+                _vcaSfx.getVolume(out target);      // aktuellen SFX-Level holen (Slider kann sich geändert haben)
+            if (_vcaSfxNoUi.isValid())
+                _vcaSfxNoUi.setVolume(target);      // SFX_NO_UI darauf setzen
+        }
+
         public void OnRestartButton()
         {
+            RestoreSfxNoUiToCurrentSfx();
+
             if (sequenceMang != null)
             {
                 DdCodeEventHandler.Trigger_GameReset();
@@ -127,6 +147,7 @@ namespace dungeonduell
 
         public void OnMainMenuButton()
         {
+            RestoreSfxNoUiToCurrentSfx();
             StartCoroutine(LoadMainMenuWithDelay());
         }
 
