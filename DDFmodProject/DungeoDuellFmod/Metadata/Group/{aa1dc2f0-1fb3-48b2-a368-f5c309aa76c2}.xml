@@ -7,6 +7,9 @@
 		<property name="name">
 			<value>DP reverb</value>
 		</property>
+		<relationship name="masters">
+			<destination>{f1d25bc7-2eb6-4a00-b831-c6576f1b575b}</destination>
+		</relationship>
 		<relationship name="effectChain">
 			<destination>{2db83c70-c138-484b-92b6-967b2d45aa1a}</destination>
 		</relationship>
