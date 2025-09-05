@@ -36,10 +36,13 @@ namespace dungeonduell
         private VCA _vcaSfxNoUi;
         private VCA _vcaSfx;
 
+        bool _notAKeyboard = false;
+        private OptionsMenu _optionsMenu;
+
         private void Awake()
         {
             _controls = new DungeonPhaseInput();
-            _controls.CardPhase.Pause.started += ctx => TogglePause();
+            _controls.CardPhase.Pause.started += ctx => TogglePause(ctx);
         }
 
         private void Start()
@@ -67,13 +70,13 @@ namespace dungeonduell
             _controls.CardPhase.Disable();
         }
 
-        private void TogglePause()
+        private void TogglePause(InputAction.CallbackContext context)
         {
-            if (!_isPaused) OpenPauseMenu();
+            if (!_isPaused) OpenPauseMenu(context);
             else ResumeGame();
         }
 
-        public void OpenPauseMenu()
+        public void OpenPauseMenu(InputAction.CallbackContext context)
         {
             _allClosing = false;
             GameManager.Instance.Paused = true;
@@ -81,6 +84,9 @@ namespace dungeonduell
             pausePanel.SetActive(true);
             pausePanel.transform.localScale = Vector3.zero;
             _pauseGroup.alpha = 0;
+
+            EventSystem.current.sendNavigationEvents = context.control.device is not Keyboard;
+            ;
 
             if (_vcaSfxNoUi.isValid())
             {
@@ -98,6 +104,8 @@ namespace dungeonduell
             {
                 if (defaultSelectedButton != null && EventSystem.current != null)
                     EventSystem.current.SetSelectedGameObject(defaultSelectedButton);
+                else
+                    EventSystem.current.SetSelectedGameObject(null);
             });
             _isPaused = true;
             Time.timeScale = 0f;
@@ -106,12 +114,14 @@ namespace dungeonduell
         public void ResumeGame()
         {
             GameManager.Instance.Paused = false;
+            EventSystem.current.sendNavigationEvents = true;
 
             float target = 1f;
             if (_vcaSfx.isValid())
             {
                 _vcaSfx.getVolume(out target);
             }
+
             if (_vcaSfxNoUi.isValid())
             {
                 _vcaSfxNoUi.setVolume(target);
@@ -128,19 +138,22 @@ namespace dungeonduell
                 DdCodeEventHandler.Trigger_TutorialDone();
 
                 _allClosing = true;
-                
+
                 if (controlPanel.activeInHierarchy)
                 {
                     CloseControlPanel();
                 }
+
                 if (tutorialPanel.activeInHierarchy)
                 {
                     CloseTutorial();
                 }
+
                 if (confirmationPopup.activeInHierarchy)
                 {
                     CancelGiveUp();
                 }
+
                 if (optionsPanel.activeInHierarchy)
                 {
                     optionsMenu.CloseOptions(true);
@@ -152,8 +165,6 @@ namespace dungeonduell
                     if (_previousSelected != null) EventSystem.current.SetSelectedGameObject(_previousSelected);
                 }
             });
-
-
         }
 
         public void OpenControlPanel()
@@ -228,14 +239,15 @@ namespace dungeonduell
         {
             confirmationPopup.SetActive(true);
             confirmationPopup.transform.localScale = Vector3.zero;
-            confirmationPopup.transform.DOScale(0.5f, fadeDuration).SetEase(Ease.OutBack).SetUpdate(true).OnComplete(() =>
-            {
-                if (confirmSelectedButton != null && EventSystem.current != null)
+            confirmationPopup.transform.DOScale(0.5f, fadeDuration).SetEase(Ease.OutBack).SetUpdate(true).OnComplete(
+                () =>
                 {
-                    EventSystem.current.SetSelectedGameObject(null);
-                    EventSystem.current.SetSelectedGameObject(confirmSelectedButton);
-                }
-            });
+                    if (confirmSelectedButton != null && EventSystem.current != null)
+                    {
+                        EventSystem.current.SetSelectedGameObject(null);
+                        EventSystem.current.SetSelectedGameObject(confirmSelectedButton);
+                    }
+                });
         }
 
         public void CancelGiveUp()
