@@ -80,6 +80,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{6add53e4-daf1-47cd-88ec-daea7496d9cf}">
+		<property name="volume">
+			<value>1</value>
+		</property>
 		<relationship name="effectChain">
 			<destination>{30694499-d885-4ae2-9292-93843681d008}</destination>
 		</relationship>
@@ -120,6 +123,7 @@
 			<destination>{319b1e20-d7e1-4170-a2c4-0c8c2689b7e1}</destination>
 			<destination>{941e1857-8b59-44d1-af15-f65e94e83504}</destination>
 			<destination>{8e20254c-2e6b-4e74-86a7-64a00c67a9ba}</destination>
+			<destination>{65f6400c-a0cc-41b6-938e-5ba5141e93db}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{2bc7ec7b-e967-4a09-9cb4-ebcfa2fa4f8c}" />
@@ -148,10 +152,10 @@
 	<object class="MixerBusPanner" id="{ddb4e566-acb2-4095-a719-547582fbe96e}" />
 	<object class="ThreeEQEffect" id="{319b1e20-d7e1-4170-a2c4-0c8c2689b7e1}">
 		<property name="lowGain">
-			<value>2.5</value>
+			<value>5.5</value>
 		</property>
 		<property name="highGain">
-			<value>-15</value>
+			<value>-10</value>
 		</property>
 		<property name="highCrossover">
 			<value>2900</value>
@@ -166,7 +170,21 @@
 			<value>8.5</value>
 		</property>
 		<property name="level">
-			<value>-20.5</value>
+			<value>-18.5</value>
+		</property>
+	</object>
+	<object class="CompressorEffect" id="{65f6400c-a0cc-41b6-938e-5ba5141e93db}">
+		<property name="threshold">
+			<value>-28</value>
+		</property>
+		<property name="attackTime">
+			<value>6.80000019</value>
+		</property>
+		<property name="releaseTime">
+			<value>260</value>
+		</property>
+		<property name="gain">
+			<value>6</value>
 		</property>
 	</object>
 	<object class="RandomizerModulator" id="{671b4892-24c6-4fe7-b72e-d01f1ff66de6}">
