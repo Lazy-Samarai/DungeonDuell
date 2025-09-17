@@ -72,6 +72,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{def15dfa-86b5-4931-97f2-1fad62d2958a}">
+		<property name="volume">
+			<value>-2</value>
+		</property>
 		<relationship name="effectChain">
 			<destination>{259ecd54-be40-45fc-b9d1-36f8aa704d58}</destination>
 		</relationship>
@@ -114,13 +117,13 @@
 	<object class="MixerBusFader" id="{eb722985-4001-4b80-9e15-7b26c767ba23}" />
 	<object class="ThreeEQEffect" id="{8367d34f-1c49-4838-ba3a-24d9dee2c4d1}">
 		<property name="lowGain">
-			<value>-5.5</value>
+			<value>-6.5</value>
 		</property>
 		<property name="midGain">
 			<value>-1</value>
 		</property>
 		<property name="highGain">
-			<value>6</value>
+			<value>5.5</value>
 		</property>
 		<property name="lowCrossover">
 			<value>260</value>
@@ -131,13 +134,13 @@
 	</object>
 	<object class="DistortionEffect" id="{4a528cec-6e0f-4fc6-a3c7-2d22e1fed490}">
 		<property name="level">
-			<value>0.699999988</value>
+			<value>0.659999967</value>
 		</property>
 	</object>
 	<object class="MixerBusFader" id="{9bac9e8b-837f-42e2-90c2-57206cf3e2b1}" />
 	<object class="SFXReverbEffect" id="{ad1aceb7-dae1-4e30-8837-ee94eb3680b5}">
 		<property name="decayTime">
-			<value>2900</value>
+			<value>2000</value>
 		</property>
 		<property name="earlyDelay">
 			<value>15</value>
@@ -152,7 +155,7 @@
 			<value>9000</value>
 		</property>
 		<property name="wetLevel">
-			<value>-23.5</value>
+			<value>-18</value>
 		</property>
 	</object>
 	<object class="CompressorEffect" id="{b234f70a-7dcd-4c83-b31a-233f35f068df}">

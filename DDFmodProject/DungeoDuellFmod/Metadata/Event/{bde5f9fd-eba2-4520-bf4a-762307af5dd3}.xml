@@ -73,7 +73,7 @@
 	</object>
 	<object class="EventMixerMaster" id="{366db38d-c8d0-423e-b82f-cdfc76165e27}">
 		<property name="volume">
-			<value>-8.5</value>
+			<value>-11</value>
 		</property>
 		<relationship name="effectChain">
 			<destination>{b549c1e4-360a-4b24-bb82-77c1260a4bea}</destination>
@@ -102,6 +102,7 @@
 			<destination>{86c3680c-7eb5-4a5f-83f8-aa337ddb00fb}</destination>
 			<destination>{487bfc29-9511-4548-91c2-dcf065f7a3e4}</destination>
 			<destination>{a0d60cbe-e2ac-4a4f-87c4-c43e0d59c0f3}</destination>
+			<destination>{25b4e932-0e12-41be-b9e2-92f1a8addecd}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{b3c3f422-4dd9-404e-af13-67891c9da2c5}" />
@@ -119,7 +120,7 @@
 			<value>-0.5</value>
 		</property>
 		<property name="highGain">
-			<value>10</value>
+			<value>8</value>
 		</property>
 		<property name="lowCrossover">
 			<value>140</value>
@@ -127,7 +128,7 @@
 	</object>
 	<object class="DistortionEffect" id="{86c3680c-7eb5-4a5f-83f8-aa337ddb00fb}">
 		<property name="level">
-			<value>0.234999999</value>
+			<value>0.199999988</value>
 		</property>
 	</object>
 	<object class="CompressorEffect" id="{487bfc29-9511-4548-91c2-dcf065f7a3e4}">
@@ -145,6 +146,29 @@
 		</property>
 	</object>
 	<object class="MixerBusFader" id="{a0d60cbe-e2ac-4a4f-87c4-c43e0d59c0f3}" />
+	<object class="SFXReverbEffect" id="{25b4e932-0e12-41be-b9e2-92f1a8addecd}">
+		<property name="decayTime">
+			<value>2500</value>
+		</property>
+		<property name="earlyDelay">
+			<value>15</value>
+		</property>
+		<property name="lateDelay">
+			<value>22</value>
+		</property>
+		<property name="HFDecayRatio">
+			<value>100</value>
+		</property>
+		<property name="highCut">
+			<value>20000</value>
+		</property>
+		<property name="earlyLateMix">
+			<value>59</value>
+		</property>
+		<property name="wetLevel">
+			<value>-13.5</value>
+		</property>
+	</object>
 	<object class="RandomizerModulator" id="{9273816e-05dc-4cf2-90b4-daa1e17e8297}">
 		<property name="nameOfPropertyBeingModulated">
 			<value>pitch</value>
