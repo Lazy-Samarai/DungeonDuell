@@ -4767,7 +4767,7 @@ PrefabInstance:
     - target: {fileID: 4846657986261587524, guid: 04e4d2f394825a14abf407fe31800c21,
         type: 3}
       propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4846657986261587524, guid: 04e4d2f394825a14abf407fe31800c21,
         type: 3}
@@ -5026,6 +5026,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4304895697386204778}
+    - targetCorrespondingSourceObject: {fileID: 6153041913601509906, guid: 04e4d2f394825a14abf407fe31800c21,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4304895697386204783}
   m_SourcePrefab: {fileID: 100100000, guid: 04e4d2f394825a14abf407fe31800c21, type: 3}
 --- !u!224 &4304895697386204769 stripped
 RectTransform:
@@ -5066,7 +5070,7 @@ MonoBehaviour:
       Data4: -139876863
     Path: event:/Dungeon Duell Audio V1/misc/Misc_UI/misc_player_press-any-key
   Event: 
-  EventPlayTrigger: 17
+  EventPlayTrigger: 0
   EventStopTrigger: 0
   AllowFadeout: 1
   TriggerOnce: 0
@@ -5107,6 +5111,26 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
+--- !u!114 &4304895697386204783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 490939096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adba29958e8861243b06497b8d2a2079, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxEvent:
+    Guid:
+      Data1: -1278315882
+      Data2: 1112086667
+      Data3: 650726019
+      Data4: -139876863
+    Path: event:/Dungeon Duell Audio V1/misc/Misc_UI/misc_player_press-any-key
+  playOnHover: 1
 --- !u!1 &6153041912908960349 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6153041913601509906, guid: 04e4d2f394825a14abf407fe31800c21,

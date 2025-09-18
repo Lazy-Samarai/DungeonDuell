@@ -70,17 +70,18 @@ namespace dungeonduell
 
         public void ShowLevelUpMenu(bool on)
         {
-            _menuOpen = on;
             levelUpMenu.SetActive(on);
 
             if (on)
             {
                 RuntimeManager.PlayOneShot(openLevelUPEvent);
             }
-            else
+            else if (_menuOpen)
             {
                 RuntimeManager.PlayOneShot(closeLevelUpEvent);
             }
+
+            _menuOpen = on;
         }
 
         private void OnOptionSelected(LevelUpOptions option)

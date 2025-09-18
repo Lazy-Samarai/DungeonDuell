@@ -5,7 +5,7 @@
 			<value>DP_UI_enter-game</value>
 		</property>
 		<property name="outputFormat">
-			<value>0</value>
+			<value>1</value>
 		</property>
 		<relationship name="folder">
 			<destination>{a34bc38e-c52d-4281-b559-eb83ecf05f12}</destination>
@@ -56,7 +56,7 @@
 			<destination>{2291f460-8efd-4226-aed7-6fa02cc79d55}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{1ce79bb0-1b7a-4f0d-be39-afb136e206b6}</destination>
+			<destination>{aa1dc2f0-1fb3-48b2-a368-f5c309aa76c2}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{4b7bb434-2a90-4972-a4fe-4e2ac979cc2d}" />
@@ -72,6 +72,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{3caaec54-6e24-442f-90b6-8846ba1245a7}">
+		<property name="volume">
+			<value>-2</value>
+		</property>
 		<relationship name="effectChain">
 			<destination>{a5b91745-9d4a-44ce-93a1-d7b2419b5ab6}</destination>
 		</relationship>
@@ -82,7 +85,11 @@
 			<destination>{5a57f409-fbd8-44d4-bf4e-e46ce960ac2b}</destination>
 		</relationship>
 	</object>
-	<object class="MultiSound" id="{7e78e7c2-c287-466f-a330-7b0c46a7fbf5}" />
+	<object class="MultiSound" id="{7e78e7c2-c287-466f-a330-7b0c46a7fbf5}">
+		<relationship name="sounds">
+			<destination>{62f872e7-3685-40ad-a1d7-a4a40b998fd1}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusEffectChain" id="{b73571ca-6c65-488d-ba95-4fdc0a708eb3}">
 		<relationship name="effects">
 			<destination>{087d7f97-c5a9-4858-a891-2952f3ac8693}</destination>
@@ -95,6 +102,11 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{2a55d7fd-1121-4141-8582-d8fd1e80b80e}" />
+	<object class="SingleSound" id="{62f872e7-3685-40ad-a1d7-a4a40b998fd1}">
+		<relationship name="audioFile">
+			<destination>{766331ad-6cca-4a90-b759-d76b376dc222}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusFader" id="{087d7f97-c5a9-4858-a891-2952f3ac8693}" />
 	<object class="MixerBusFader" id="{1a482407-1797-4be8-9505-465d4b83b587}" />
 </objects>
